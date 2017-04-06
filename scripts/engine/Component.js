@@ -9,7 +9,7 @@ class Component {
         this.active = true;
     }
 
-    update ( ) {
+    update (deltaTime) {
 
     }
 
