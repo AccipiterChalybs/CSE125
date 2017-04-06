@@ -4,14 +4,15 @@
 class Transform extends Component
 {
     constructor()
-    {
-        this.position = null;
-        this.rotation = null;
-        this.scaleFactor = null;
-        this.transformMatrixDirty = null;
+    {        
+        super();
+        this.position = vec3.create();
+        this.rotation = quat.create();
+        this.scaleFactor = vec3.create();
+        this.transformMatrixDirty = true;
         this.transformMatrix = null;
         this.cachedWorldPos = null;
-        this.worldPosDirty = null;
+        this.worldPosDirty = true;
         this.cachedWorldScale = null;
         this.worldScaleDirty = null;
         this.oldParent = null;
@@ -32,26 +33,27 @@ class Transform extends Component
 
     translate(diff)
     {
-        setDirty();
+        this.setDirty();
         vec3.add(this.position, this.position, diff);
     }
 
     rotate(diff)
     {
-        setDirty();
-        quat.multiply(let combinedQuat, this.rotation, diff);
+        this.setDirty();
+        let combinedQuat = quat.create();
+        quat.multiply(combinedQuat, this.rotation, diff);
         this.rotation = combinedQuat;
     }
 
     scale(s)
     {
-        setDirty();
+        this.setDirty();
         this.scaleFactor *= s;
     }
 
     getTransformMatrix()
     {
-        if(this.transformMatrixDirty || this.parent != this.oldParent)
+        if(this.transformMatrixDirty || this.parent !== this.oldParent)
         {
             this.transformMatrix = mat4.create();
 
@@ -59,13 +61,14 @@ class Transform extends Component
             mat4.translate(this.transformMatrix, this.transformMatrix, this.position);
 
             // Rotation
-            mat4.fromQuat(let rotationMat, this.rotation);
+            let rotationMat = mat4();
+            mat4.fromQuat(rotationMat, this.rotation);
             mat4.multiply(this.transformMatrix, this.transformMatrix, rotationMat);
 
             // Scale
             mat4.scale(this.transformMatrix, this.transformMatrix, this.scaleFactor);
 
-            let parMat = (this.parent == null) ? this.parent.getTransformMatrix() : mat4.create();
+            let parMat = (this.parent === null) ? this.parent.getTransformMatrix() : mat4.create();
             mat4.multiply(this.transformMatrix, parMat, this.transformMatrix);
             this.transformMatrixDirty = false;
             this.oldParent = this.parent;
@@ -74,25 +77,29 @@ class Transform extends Component
         return this.transformMatrix;
     }
 
-    get rotation(){}
+    get rotation(){
+        return this.rotation;
+    }
 
     set rotation(rot)
     {
         setDirty();
     }
 
-    get position(){}
+    get position(){
+        return this.position;
+    }
 
     set position(pos)
     {
-        setDirty();
+        this.setDirty();
     }
 
     get scale(){}
 
     set scale(s)
     {
-        setDirty();
+        this.setDirty();
     }
 
     getWorldPosition()

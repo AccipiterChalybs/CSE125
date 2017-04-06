@@ -1,0 +1,8 @@
+<component name="libraryTable">
+  <library name="glMatrix-2.3.2.min.js" type="javaScript">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/scripts/glMatrix-2.3.2.min.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

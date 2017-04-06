@@ -174,7 +174,7 @@ class ObjectLoader {
                 mat["colorTex"] = tex;
             }
             else {
-                let color = vec4(0,0.45,0.7,1);
+                let color = vec4.create(0,0.45,0.7,1);
                 mat["colorTex"] = Texture.makeColorTex(color);
             }
             mat["userTextures"] = true;
