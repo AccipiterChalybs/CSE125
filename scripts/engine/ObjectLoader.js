@@ -198,10 +198,11 @@ class ObjectLoader {
             compTypeName = name;
         }
 
+
         let components = this.componentMap[compTypeName];
         if (components) {
-            while (component){
-                //TODO add code here
+            for (let func of components){
+                func(nodeObject);
             }
         }
 
