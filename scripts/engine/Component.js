@@ -18,6 +18,7 @@ class Component {
     }
 
     set gameObject(go) {
+        this.gameObject = go;
     }
 
     onCollisionEnter (collision) {
