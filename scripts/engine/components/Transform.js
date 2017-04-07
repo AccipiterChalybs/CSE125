@@ -1,6 +1,7 @@
 /**
  * Created by Accipiter Chalybs on 4/5/2017.
  */
+
 class Transform extends Component
 {
     constructor()

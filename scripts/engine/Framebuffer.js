@@ -1,9 +1,12 @@
 /**
  * Created by Accipiter Chalybs on 4/5/2017.
  */
+
+//TODO convert ot webgl 2.0
+
 class Framebuffer {
 
-    constructor(w, h, numColorTexture, colorFormat, accessibleDepth, hdrEnabled) {
+    constructor(w, h, numColorTexture, accessibleDepth, hdrEnabled) {
         //this.id = 0;
         this.accessibleDepth = accessibleDepth;
         //this.colorTex = [];
@@ -11,7 +14,7 @@ class Framebuffer {
         this.depthTex = 0;
 
         this.hdrEnabled = hdrEnabled;
-        this.colorFormats = colorFormat;
+        this.colorFormats = [];
         this.width = w;
         this.height = h;
 
