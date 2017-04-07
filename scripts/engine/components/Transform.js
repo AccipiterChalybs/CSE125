@@ -77,29 +77,36 @@ class Transform extends Component
         return this.transformMatrix;
     }
 
-    get rotation(){
+    getRotation(){
         return this.rotation;
     }
 
-    set rotation(rot)
+    setRotation(rot)
     {
         this.setDirty();
+        this.rotation = rot;
     }
 
-    get position(){
+    getPosition()
+    {
         return this.position;
     }
 
-    set position(pos)
+    setPosition(pos)
     {
         this.setDirty();
+        this.position = pos;
     }
 
-    get scale(){}
+    getScale()
+    {
+        return this.scaleFactor;
+    }
 
-    set scale(s)
+    setScale(s)
     {
         this.setDirty();
+        this.scaleFactor = scale;
     }
 
     getWorldPosition()

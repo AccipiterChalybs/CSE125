@@ -1,28 +1,31 @@
 /**
  * Created by Accipiter Chalybs on 4/5/2017.
  */
-class Component {
+class Component
+{
 
-    constructor () {
+    constructor ()
+    {
         this.gameObject = null;
         this.visible = true;
         this.active = true;
     }
 
-    update (deltaTime) {
-
+    update (deltaTime)
+    {
     }
 
-    draw () {
-
+    draw ()
+    {
     }
 
-    set gameObject(go) {
+    setGameObject(go)
+    {
         this.gameObject = go;
     }
 
-    onCollisionEnter (collision) {
-
+    onCollisionEnter (collision)
+    {
     }
 
 }
