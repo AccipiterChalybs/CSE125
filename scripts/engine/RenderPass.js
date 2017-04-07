@@ -19,6 +19,7 @@ class ParticlePass extends RenderPass
 class DeferredPass extends RenderPass
 {
     constructor(){
+        super();
         this.fbo = null;
     }
 
@@ -28,6 +29,7 @@ class DeferredPass extends RenderPass
 class SkyboxPass extends RenderPass
 {
     constructor(skybox){
+        super();
         this.skybox = skybox;
     }
 
@@ -42,6 +44,7 @@ class ShadowPass extends ForwardPass
 class BloomPass extends RenderPass
 {
     constructor(deferred){
+        super();
         this._brightPass = null;
         this._blurBuffers = [];
         this._deferredPass = deferred;

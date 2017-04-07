@@ -17,7 +17,7 @@ class ObjectLoader {
     }
 
     static loadScene(filename) {
-        _loadJSON(filename, _finishLoadScene);
+        ObjectLoader._loadJSON(filename, ObjectLoader._finishLoadScene);
     }
 
     static _finishLoadScene(scene) {
@@ -46,24 +46,24 @@ class ObjectLoader {
 
         let loadingAcceleration = {};
 
-        let retScene = _parseNode(scene, scene.mRootNode, filename, loadingAcceleration, lights);
+        let retScene = ObjectLoader._parseNode(scene, scene.mRootNode, filename, loadingAcceleration, lights);
 
         //TODO this looks incorrect - might need to put inside the recursive parseNode?
         if (scene.HasAnimations()) {
             retScene.addComponent(new Animation(scene, loadingAcceleration));
-            linkRoot(retScene.getComponent("Animation"), retScene.transform);
+            ObjectLoader.linkRoot(retScene.getComponent("Animation"), retScene.transform);
         }
     }
 
     static _loadJSON(url, func) {
         //from http://stackoverflow.com/questions/12460378/how-to-get-json-from-url-in-javascript
-        var getJSON = function(url, callback) {
-            var xhr = new XMLHttpRequest();
+        let getJSON = function(url, callback) {
+            let xhr = new XMLHttpRequest();
             xhr.open('GET', url, true);
             xhr.responseType = 'json';
             xhr.onload = function() {
-                var status = xhr.status;
-                if (status == 200) {
+                let status = xhr.status;
+                if (status === 200) {
                     callback(null, xhr.response);
                 } else {
                     callback(status);
@@ -79,6 +79,7 @@ class ObjectLoader {
             });
     }
 
+    /*
     static _getMapping(mode) {
         switch (mode) {
             case ("aiTextureMapMode_Wrap") :
@@ -92,7 +93,7 @@ class ObjectLoader {
             default:
                 return GL_REPEAT;
         }
-    }
+    }*/
 
     static _getPath ( name ) {
 
@@ -126,11 +127,11 @@ class ObjectLoader {
                 Mesh.loadMesh(name, scene.mMeshes[meshIndex]);
             }
 
-            var mesh = new Mesh(name);
+            let mesh = new Mesh(name);
 
-            var aMat = scene.mMaterials[scene.mMeshes[currentNode.mMeshes].mMaterialIndex];
-            var foundForward = name.search("Forward") !== -1;
-            var foundEmit = name.search("Emit") !== -1;
+            let aMat = scene.mMaterials[scene.mMeshes[currentNode.mMeshes].mMaterialIndex];
+            let foundForward = name.search("Forward") !== -1;
+            let foundEmit = name.search("Emit") !== -1;
             let mat = null;
 
             if (foundForward) {
@@ -145,33 +146,30 @@ class ObjectLoader {
                 mat.transparent = false;
             }
 
-            if (aMat->GetTextureCount(aiTextureType_DIFFUSE) > 0) {
+            if (aMat.GetTextureCount("aiTextureType_DIFFUSE") > 0) {
                 let path = null;
                 aMath.GetTexture(aiTextureType_DIFFUSE, 0, path);
-                let tex = new Texture(getPath(filename) + path, true);
-                mat["colorTex"] = tex;
+                mat["colorTex"] = new Texture(getPath(filename) + path, true);
             }
             else {
-                let color = vec4(1,1,1,1);
+                let color = vec4.create(1,1,1,1);
                 mat["colorTex"] = Texture.makeColorTex(color);
             }
 
-            if (aMat.GetTextureCount(aiTextureType_NORMALS) > 0) {
+            if (aMat.GetTextureCount("aiTextureType_NORMALS") > 0) {
                 let path = null;
                 aMath.GetTexture(aiTextureType_NORMALS, 0, path);
-                let tex = new Texture(getPath(filename) + path, false);
-                mat["normalTex"] = tex;
+                mat["normalTex"] = new Texture(getPath(filename) + path, false);
             }
             else {
-                let color = vec4(0.5,0.5,1,1);
+                let color = vec4.create(0.5,0.5,1,1);
                 mat["normalTex"] = Texture.makeColorTex(color);
             }
 
-            if (aMat.GetTextureCount(aiTextureType_SPECULAR) > 0) {
+            if (aMat.GetTextureCount("aiTextureType_SPECULAR") > 0) {
                 let path = null;
                 aMath.GetTexture(aiTextureType_DIFFUSE, 0, path);
-                let tex = new Texture(getPath(filename) + path, true);
-                mat["colorTex"] = tex;
+                mat["colorTex"] = new Texture(getPath(filename) + path, true);
             }
             else {
                 let color = vec4.create(0,0.45,0.7,1);
@@ -217,7 +215,7 @@ class ObjectLoader {
             currentMesh.animationRoot = anim;
         }
         for (let child of currentTransform.children) {
-            linkRoot(anim, child);
+            ObjectLoader.linkRoot(anim, child);
         }
     }
 

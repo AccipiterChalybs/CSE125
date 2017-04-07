@@ -17,11 +17,10 @@ class Component {
 
     }
 
-    setGameObject(go) {
-
+    set gameObject(go) {
     }
 
-    onCollisionEnter () {
+    onCollisionEnter (collision) {
 
     }
 

@@ -9,6 +9,7 @@ class Animation extends Component
 {
 
     constructor(scene, boneTransformMap) {
+        super();
         this._animData = [];
         this._currentAnimationIndex = 0;
         this._currentTime = 0;
@@ -22,28 +23,28 @@ class Animation extends Component
 
             let longestTime = 0;
             //channels correspond to nodes, i.e. bones
-            for (let c = 0; c < animation->mNumChannels; ++c) {
-                let channel = animation->mChannels[c];
+            for (let c = 0; c < animation.mNumChannels; ++c) {
+                let channel = animation.mChannels[c];
 
-                let name = channel->mNodeName;
+                let name = channel.mNodeName;
 
                 let newData = {};
                 newData.name = name;
                 newData.object = boneTransformMap[name];
                 newData.keyframes = {position:[], rotation:[], scale:[]};
 
-                for (let keyframe = 0; keyframe < channel->mNumPositionKeys; ++keyframe) {
-                    let pair = {first: channel.mPositionKeys[keyframe].mTime,  second: convertVec(channel.mPositionKeys[keyframe].mValue};
+                for (let keyframe = 0; keyframe < channel.mNumPositionKeys; ++keyframe) {
+                    let pair = {first: channel.mPositionKeys[keyframe].mTime,  second:  Animation._convertVec(channel.mPositionKeys[keyframe].mValue};
                     newData.keyframes.position.push(pair);
                 }
 
-                for (let keyframe = 0; keyframe < channel->mNumRotationKeys; ++keyframe) {
-                    let pair = {first: channel->mRotationKeys[keyframe].mTime, second: convertQuat(channel->mRotationKeys[keyframe].mValue)};
+                for (let keyframe = 0; keyframe < channel.mNumRotationKeys; ++keyframe) {
+                    let pair = {first: channel.mRotationKeys[keyframe].mTime, second: Animation._convertQuat(channel.mRotationKeys[keyframe].mValue)};
                     newData.keyframes.rotation.push(pair);
                 }
 
-                for (let keyframe = 0; keyframe < channel->mNumScalingKeys; ++keyframe) {
-                    let pair = {first: channel->mScalingKeys[keyframe].mTime, second: convertVec(channel->mScalingKeys[keyframe].mValue)};
+                for (let keyframe = 0; keyframe < channel.mNumScalingKeys; ++keyframe) {
+                    let pair = {first: channel.mScalingKeys[keyframe].mTime, second: Animation._convertVec(channel.mScalingKeys[keyframe].mValue)};
                     newData.keyframes.scale.push(pair);
                 }
 
@@ -71,7 +72,7 @@ class Animation extends Component
     }
 
     getAnimationData() {
-        return this._animData[currentAnimationIndex].boneData;
+        return this._animData[this._currentAnimationIndex].boneData;
     }
 
     update() {
@@ -83,14 +84,14 @@ class Animation extends Component
                     this._currentTime -= currentAnim.animationTime;
                 }
                 else {
-                    stop();
+                    this.stop();
                 }
             }
         }
 
         for (let node of currentAnim.boneData) {
-            node.object.position = _interpolateKeyframes(node.keyframes.position, this._currentTime);
-            node.object.rotation = _interpolateQuaternions(node.keyframes.rotation, this._currentTime);
+            node.object.position = Animation._interpolateKeyframes(node.keyframes.position, this._currentTime);
+            node.object.rotation = Animation._interpolateQuaternions(node.keyframes.rotation, this._currentTime);
             //node.object->scaleFactor = node.keyframes.scale[scaleIndex].second;
         }
     }
@@ -98,7 +99,7 @@ class Animation extends Component
 
 
     //data = pair(float, vec3)[]
-    _interpolateKeyframes(data, time) {
+    static _interpolateKeyframes(data, time) {
         let positionIndex = 0;
         let numPositions = data.size();
         let currentPosition = null;
@@ -120,7 +121,7 @@ class Animation extends Component
         return currentPosition;
     }
 
-    _interpolateQuaternions(data, time) {
+    static _interpolateQuaternions(data, time) {
         let rotationIndex = 0;
         let numRotations = data.size();
         let currentRotation = null;
@@ -140,12 +141,12 @@ class Animation extends Component
         return currentRotation;
     }
 
-    _convertQuat(input) {
-        return quat(input.w, input.x, input.y, input.z);
+    static _convertQuat(input) {
+        return quat.create(input.w, input.x, input.y, input.z);
     }
 
-    _convertVec(input) {
-        return vec3(input.x, input.y, input.z);
+    static _convertVec(input) {
+        return vec3.create(input.x, input.y, input.z);
     }
 
 }

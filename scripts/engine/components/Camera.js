@@ -7,6 +7,7 @@ class Camera extends Component
 
     constructor ()
     {
+        super();
         this._shakeAmount=0;
         this._startShakeAmount=0;
         this._shakeDuration=0;
@@ -48,7 +49,8 @@ class Camera extends Component
         vec3.set(tmpMatrixRow, this._matrix[0][2], this._matrix[1][2], this._matrix[2][2]);
         scale[2] = 1 / vec3.length(tmpMatrixRow);
 
-        mat4.scale(let camScaledMatrix, this._matrix, scale);
+        let camScaledMatrix = mat4.create();
+        mat4.scale(camScaledMatrix, this._matrix, scale);
 
         let dummy = mat4.create();
         return mat4.invert(dummy, camScaledMatrix);
@@ -56,7 +58,7 @@ class Camera extends Component
 
     update(deltaTime)
     {
-        if(this.fov != this._prevFOV)
+        if(this.fov !== this._prevFOV)
         {
             // this._fovStartTime = Timer::time();
             this._prevFOV = this.fov;

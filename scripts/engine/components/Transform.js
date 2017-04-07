@@ -83,7 +83,7 @@ class Transform extends Component
 
     set rotation(rot)
     {
-        setDirty();
+        this.setDirty();
     }
 
     get position(){
@@ -109,7 +109,8 @@ class Transform extends Component
             let originPoint = vec4.create();
             vec4.set(originPoint, 0, 0, 0, 1);
 
-            vec4.transformMat4(var tmpWorldPos, originPoint, getTransformMatrix());
+            let tmpWorldPos = mat4.create();
+            vec4.transformMat4(tmpWorldPos, originPoint, getTransformMatrix());
             vec3.set(this.cachedWorldPos, tmpWorldPos[0], tmpWorldPos[1], tmpWorldPos[2]);
             this.worldPosDirty = false;
         }

@@ -4,6 +4,7 @@
 
 class Light extends Component{
     constructor(){
+        super();
         this.color = null;
         this.isShadowCaster = false;
         this.radius = 0.02;

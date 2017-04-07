@@ -3,9 +3,13 @@
  */
 class Texture
 {
-    constructor(filename, srgb, wrap, handle, color)
+    constructor(filename, srgb, wrap, handle)
     {
         this.handle = null;
+    }
+
+    static makeColorTex() {
+
     }
 
     bindTexture(slot){}

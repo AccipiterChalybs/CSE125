@@ -3,12 +3,12 @@
  */
 
 
-var GL;
+let GL;
 
 
 function initialize() {
     console.log("Hello.World");
-    var glCanvas = document.getElementsByTagName("canvas")[0];
+    let glCanvas = document.getElementsByTagName("canvas")[0];
     GL = glCanvas.getContext("webgl") || glCanvas.getContext("experimental-webgl");
 
     //Sound init
