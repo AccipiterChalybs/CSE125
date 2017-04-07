@@ -3,21 +3,6 @@
  */
 
 class GameObject {
-
-    //TODO is this how to do a static var?
-    static get _nameMap() {
-        if (!GameObject.nameMap) GameObject.nameMap = {};
-        return GameObject.nameMap;
-    }
-
-    static set SceneRoot(sr) {
-        GameObject.SceneRoot = sr;
-    }
-//How do?
-    static get SceneRoot() {
-        return GameObject.SceneRoot;
-    }
-
     static findByName(name) {
         return GameObject._nameMap[name];
     }
@@ -26,7 +11,6 @@ class GameObject {
         GameObject.SceneRoot.update();
         //TODO: do we need scene.loop?
     }
-
     constructor() {
         this.components = []; //NOTE: associative map, so use "in" for iteration
         this.name = '';
@@ -173,7 +157,7 @@ class GameObject {
             */
             let light = this.getComponent("Light");
             if (light !== null) {
-                Renderer::renderBuffer.light.push(light);
+                Renderer.renderBuffer.light.push(light);
             }
         }
 
@@ -198,3 +182,6 @@ class GameObject {
     }
 
 }
+
+GameObject.prototype._nameMap = {};
+GameObject.prototype.SceneRoot = null;
