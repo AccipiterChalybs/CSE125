@@ -34,7 +34,7 @@ class Animation extends Component
                 newData.keyframes = {position:[], rotation:[], scale:[]};
 
                 for (let keyframe = 0; keyframe < channel.mNumPositionKeys; ++keyframe) {
-                    let pair = {first: channel.mPositionKeys[keyframe].mTime,  second:  Animation._convertVec(channel.mPositionKeys[keyframe].mValue};
+                    let pair = {first: channel.mPositionKeys[keyframe].mTime,  second:  Animation._convertVec(channel.mPositionKeys[keyframe].mValue)};
                     newData.keyframes.position.push(pair);
                 }
 

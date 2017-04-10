@@ -9,9 +9,9 @@ class Transform extends Component
         super();
         this.position = vec3.create();
         this.rotation = quat.create();
-        this.scaleFactor = vec3.create();
+        this.scaleFactor = vec3.create(); vec3.set(this.scaleFactor,1,1,1);
         this.transformMatrixDirty = true;
-        this.transformMatrix = null;
+        this.transformMatrix = mat4.create();
         this.cachedWorldPos = null;
         this.worldPosDirty = true;
         this.cachedWorldScale = null;
@@ -62,14 +62,14 @@ class Transform extends Component
             mat4.translate(this.transformMatrix, this.transformMatrix, this.position);
 
             // Rotation
-            let rotationMat = mat4();
+            let rotationMat = mat4.create();
             mat4.fromQuat(rotationMat, this.rotation);
             mat4.multiply(this.transformMatrix, this.transformMatrix, rotationMat);
 
             // Scale
             mat4.scale(this.transformMatrix, this.transformMatrix, this.scaleFactor);
 
-            let parMat = (this.parent === null) ? this.parent.getTransformMatrix() : mat4.create();
+            let parMat = (this.parent !== null) ? this.parent.getTransformMatrix() : mat4.create();
             mat4.multiply(this.transformMatrix, parMat, this.transformMatrix);
             this.transformMatrixDirty = false;
             this.oldParent = this.parent;

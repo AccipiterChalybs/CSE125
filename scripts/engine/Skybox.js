@@ -11,24 +11,24 @@ class Skybox
     {
         this._skyboxTex = null;
         this._irradianceMatrix = [];
-        this._material = null;
+        this._material = new Material(Renderer.getShader(Renderer.SKYBOX_SHADER));
         this._mipmapLevels = null;
         this._imagesLoaded = 0;
 
         this._imageArray = [];
 
         for (let f = 0; f < CUBE_FACES; ++f) {
-            let callback = this._imageReady().bind(this, f);
+            let callback = this._imageReady.bind(this);
 
-            let image = new Image();
-            image.onload = callback;
-            image.src = imgFileNames[f];
-
-            this._imageArray[f] = image;
+            this._imageArray[f] = new Image();
+            this._imageArray[f].onload = function() {
+                callback();
+            };
+            this._imageArray[f].src = "assets/skybox/pngTest.png";//TODO: HDR: imgFileNames[f];
         }
     }
 
-    _imageReady(face) {
+    _imageReady() {
         this._imagesLoaded++;
         if (this._imagesLoaded === CUBE_FACES) {
             this._finishLoad();
@@ -39,21 +39,19 @@ class Skybox
         this._skyboxTex = Skybox._loadGLCube(this._imageArray);
         //this.loadIrradiance(this._irradianceMatrix);
 
-        this._imageArray = null;
-
-        this._material = new Material(Renderer::getShader(Renderer.SKYBOX_SHADER));
+        this._imageArray = [];
     }
 
     draw(){
 
         if (!Skybox.prototype._loaded) {
-            Skybox.load();
+            Skybox._load();
         }
 
         this._material.bind();
         GL.activeTexture(GL.TEXTURE0 + 5);
         GL.bindTexture(GL.TEXTURE_CUBE_MAP, this.getTexture());
-        Renderer.getShader(Renderer.SKYBOX_SHADER)["environment"] = 5;
+        Renderer.getShader(Renderer.SKYBOX_SHADER).setUniform("environment", 5, UniformTypes.u1i);
 
 
         if (Renderer.gpuData.vaoHandle !== Skybox.prototype._meshData.vaoHandle) {
@@ -61,7 +59,7 @@ class Skybox
             Renderer.gpuData.vaoHandle = Skybox.prototype._meshData.vaoHandle;
         }
 
-        GL.drawElements(GL.TRIANGLES, Skybox.prototype._meshData.indexSize, GL.UNSIGNED_INT, 0);
+        GL.drawElements(GL.TRIANGLES, Skybox.prototype._meshData.indexSize, GL.UNSIGNED_SHORT, 0);
 
     }
 
@@ -80,37 +78,44 @@ class Skybox
     }
 
     static _load(){
-        //TODO        let vao = GL.createVertexArray();
+
+        let vertices=[ -1, -1, 0,
+            1, -1, 0,
+            1,  1, 0,
+            -1,  1, 0 ];
+
+        let indices = [ 0, 1, 2, 0, 2, 3 ];
+
         let vao = GL.createVertexArray();
         GL.bindVertexArray(vao);
 
         GL.enableVertexAttribArray(Renderer.VERTEX_ATTRIB_LOCATION);
-
         
         let meshBuffer = GL.createBuffer();
         let indexBuffer = GL.createBuffer();
         GL.bindBuffer(GL.ARRAY_BUFFER, meshBuffer);
-        GL.bufferData(GL.ARRAY_BUFFER, VERTEX_COUNT * sizeof(float), vertices, GL.STATIC_DRAW);
+        GL.bufferData(GL.ARRAY_BUFFER, new Float32Array(vertices), GL.STATIC_DRAW);
 
 
         GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, indexBuffer);
-        GL.bufferData(GL.ELEMENT_ARRAY_BUFFER, INDEX_COUNT * sizeof(GLuint), indices, GL.STATIC_DRAW);
+        GL.bufferData(GL.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), GL.STATIC_DRAW);
 
 
-        let stride = FLOAT_SIZE * (POSITION_COUNT);
+        let POSITION_COUNT = 3;
+        let stride = 0;//4 * (POSITION_COUNT);
         GL.vertexAttribPointer(Renderer.VERTEX_ATTRIB_LOCATION, 3, GL.FLOAT, false, stride, 0);
 
-        Skybox.prototype.meshData.vaoHandle = vao;
-        Skybox.prototype.meshData.indexSize = INDEX_COUNT;
+        Skybox.prototype._meshData.vaoHandle = vao;
+        Skybox.prototype._meshData.indexSize = indices.length;
     }
 
     _loadGLCube(data){}
 
-    static _loadIrradiance(irradianceMatrix, data);
+    static _loadIrradiance(irradianceMatrix, data) {}
 
-    static _sampleTexture(environment, sampleDirection);
+    static _sampleTexture(environment, sampleDirection) {}
 
-    static _specularEnvMap(normal, a, environment);
+    static _specularEnvMap(normal, a, environment) {}
 
 
 /*
@@ -263,12 +268,13 @@ class Skybox
         GL.bindTexture(GL.TEXTURE_CUBE_MAP, cubeTextureHandle);
         GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MAG_FILTER, GL.LINEAR);
         GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MIN_FILTER, GL.LINEAR);
-        
+
         for (let m = 0; m < CUBE_FACES; ++m) {
-            GL.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_X + m, 0, GL.RGB, data.width[m], data.height[m], 0, GL.RGB, GL.FLOAT, data[m]);
+            //GL.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_X + m, 0, GL.RGB, data[m].width, data[m].height, 0, GL.RGB, GL.FLOAT, data[m]);
+            GL.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_X + m, 0, GL.RGB, data[m].width, data[m].height, 0, GL.RGB, GL.UNSIGNED_BYTE, data[m]);
         }
 
-        GL.bindTexture(GL.TEXTURE_CUBE_MAP, 0);
+        GL.bindTexture(GL.TEXTURE_CUBE_MAP, null);
         
         
         return cubeTextureHandle;

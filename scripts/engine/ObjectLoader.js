@@ -4,15 +4,11 @@
 
 class ObjectLoader {
 
-    componentMap = {};
-    counter = 0;
-
-
     static addComponentMap(name, func) {
-        if (this.componentMap[name]) {
-            this.componentMap[name].push(func);
+        if (ObjectLoader.prototype.componentMap[name]) {
+            ObjectLoader.prototype.componentMap[name].push(func);
         } else {
-            this.componentMap[name] = [func];
+            ObjectLoader.prototype.componentMap[name] = [func];
         }
     }
 
@@ -114,7 +110,7 @@ class ObjectLoader {
         nodeObject.transform.rotate(quat(rotate.w, rotate.x, rotate.y, rotate.z));
 
         let name = currentNode.mName;
-        if (name === "defaultobject") name = filename + this.counter;
+        if (name === "defaultobject") name = filename + ObjectLoader.prototype.counter;
         nodeObject.setName(name);
 
         if (lights.count(name)) {
@@ -135,14 +131,14 @@ class ObjectLoader {
             let mat = null;
 
             if (foundForward) {
-                mat = new Material(Renderer.getShader(scene.mMeshes[currentNode.mMeshes].HasBones() ? FORWARD_PBR_SHADER_ANIM : FORWARD_UNLIT));
+                mat = new Material(Renderer.getShader(scene.mMeshes[currentNode.mMeshes].HasBones() ? Renderer.FORWARD_PBR_SHADER_ANIM :  Renderer.FORWARD_UNLIT));
                 mat.transparent = true;
             }
             else if (foundEmit) {
-                mat = new Material(Renderer.getShader(FORWARD_EMISSIVE));
+                mat = new Material(Renderer.getShader(Renderer.FORWARD_EMISSIVE));
                 mat.transparent = true;
             } else {
-                mat = new Material(Renderer.getShader(scene.mMeshes[currentNode.mMeshes].HasBones() ? DEFERRED_PBR_SHADER_ANIM, DEFERRED_PBR_SHADER));
+                mat = new Material(Renderer.getShader(scene.mMeshes[currentNode.mMeshes].HasBones() ? Renderer.DEFERRED_PBR_SHADER_ANIM : Renderer.DEFERRED_PBR_SHADER));
                 mat.transparent = false;
             }
 
@@ -197,7 +193,7 @@ class ObjectLoader {
         }
 
 
-        let components = this.componentMap[compTypeName];
+        let components = ObjectLoader.prototype.componentMap[compTypeName];
         if (components) {
             for (let func of components){
                 func(nodeObject);
@@ -220,3 +216,7 @@ class ObjectLoader {
     }
 
 }
+
+
+ObjectLoader.prototype.componentMap = {};
+ObjectLoader.prototype.counter = 0;

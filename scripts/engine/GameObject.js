@@ -65,11 +65,11 @@ class GameObject {
             //TODO add if needed:
             // if (comp) comp.delete();
         }
-        removeName();
+        this._removeName();
     }
 
     addComponent(type, component) {
-        removeComponent(type);
+        this.removeComponent(type);
         component.gameObject = this;
         this.components[type] = component;
     }
@@ -106,13 +106,13 @@ class GameObject {
         }
     }
 
-    set name(name) {
-        removeName();
+    setName(name) {
+        this._removeName();
         //TODO ensure name isn't taken (or switch to array)
-        GameObject._nameMap[name] = this;
+        GameObject.prototype._nameMap[name] = this;
     }
 
-    get name() {
+    getName() {
         return this.name;
     }
 
@@ -140,7 +140,7 @@ class GameObject {
                 if (mesh.material && mesh.material.transparent) {
                     Renderer.renderBuffer.forward.push(mesh);
                 }
-                else if(mesh->material)
+                else if(mesh.material)
                 {
                     Renderer.renderBuffer.deferred.push(mesh);
                 }
@@ -161,7 +161,7 @@ class GameObject {
             }
         }
 
-        for (let child of transform.children) {
+        for (let child of this.transform.children) {
             child.gameObject.extract();
         }
     }
@@ -178,7 +178,7 @@ class GameObject {
     _removeName()
     {
         //TODO note, this currently means no duplicate names
-        delete GameObject._nameMap[this.name];
+        delete GameObject.prototype._nameMap[this.name];
     }
 
 }

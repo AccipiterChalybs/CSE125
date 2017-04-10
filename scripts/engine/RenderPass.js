@@ -54,7 +54,7 @@ class ShadowPass extends ForwardPass
             if (!caster || !caster.shadowCaster) continue;
             caster.bindShadowMap();
             GL.drawBuffer([GL.NONE]);
-            for (let mesh : Renderer.renderBuffer.deferred) {
+            for (let mesh of Renderer.renderBuffer.deferred) {
                 let mat = mesh.material;
                 let s = null;
                 if (mat.shader === Renderer.getShader(Renderer.DEFERRED_PBR_SHADER_ANIM)) s = Renderer.getShader(Renderer.SHADOW_SHADER_ANIM);
@@ -201,7 +201,7 @@ class SkyboxPass extends RenderPass
     }
 
     render(){
-        if (this.skybox && this.skybox !== null) this.skybox.draw();
+        if (this.skybox && this.skybox !== null) { this.skybox.draw(); }
     }
 }
 
@@ -258,7 +258,7 @@ class BloomPass extends RenderPass
             s2["direction"] = glm.vec2(1, 0);
             this.deferredPass.fbo.draw();
 
-            s2["level"] = 0.f;
+            s2["level"] = 0;
             this._blurBuffers[i].bindTexture(0, 0);
             this._blurBuffers[i].bind([GL.NONE, buffers[1]] );
             s2["direction"] = glm.vec2(0, 1);

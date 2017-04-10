@@ -21,33 +21,46 @@ class Camera extends Component
 
         this._forward = null;
         this._up = vec3.create();
-        vec3.set(up, 0, 1, 0);
+        vec3.set(this._up, 0, 1, 0);
         this._position = null;
         this._prevPosition = null;
         this._velocity=null;
 
-        this._matrix = null;
+        this._matrix = mat4.create();
 
 
         let initialOffsetPos = vec3.create();
         vec3.set(initialOffsetPos, 0, 0, 0);
         this.offset = new Transform();
-        this.offset.position = initalOffsetPos;
+        //TODO re-enable: this.offset.position = initalOffsetPos;
         this.fovDuration = 1;
     }
 
     getCameraMatrix()
     {
-        mat4.multiply(this._matrix,
-            this.gameObject.transform.getTransformMatrix(), this.offset.getTransformMatrix());
+        /*mat4.multiply(this._matrix,
+            this.gameObject.transform.getTransformMatrix(), this.offset.getTransformMatrix());*/
+        this._matrix = this.gameObject.transform.getTransformMatrix();
         let scale = vec3.create();
         let tmpMatrixRow = vec3.create();
-        vec3.set(tmpMatrixRow, this._matrix[0][0], this._matrix[1][0], this._matrix[2][0]);
+        /*
+        //TODO could definitely be wrong on this ordering (used to be [a][b])
+        vec3.set(tmpMatrixRow, this._matrix[0], this._matrix[1], this._matrix[2]);
         scale[0] = 1 / vec3.length(tmpMatrixRow);
-        vec3.set(tmpMatrixRow, this._matrix[0][1], this._matrix[1][1], this._matrix[2][1]);
+        vec3.set(tmpMatrixRow, this._matrix[4], this._matrix[5], this._matrix[6]);
         scale[1] = 1 / vec3.length(tmpMatrixRow);
-        vec3.set(tmpMatrixRow, this._matrix[0][2], this._matrix[1][2], this._matrix[2][2]);
+        vec3.set(tmpMatrixRow, this._matrix[8], this._matrix[9], this._matrix[10]);
         scale[2] = 1 / vec3.length(tmpMatrixRow);
+        console.log(scale);*/
+
+
+        vec3.set(tmpMatrixRow, this._matrix[0], this._matrix[4], this._matrix[8]);
+        scale[0] = 1 / vec3.length(tmpMatrixRow);
+        vec3.set(tmpMatrixRow, this._matrix[1], this._matrix[5], this._matrix[9]);
+        scale[1] = 1 / vec3.length(tmpMatrixRow);
+        vec3.set(tmpMatrixRow, this._matrix[2], this._matrix[6], this._matrix[10]);
+        scale[2] = 1 / vec3.length(tmpMatrixRow);
+        //console.log(scale);
 
         let camScaledMatrix = mat4.create();
         mat4.scale(camScaledMatrix, this._matrix, scale);

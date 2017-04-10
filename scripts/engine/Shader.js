@@ -4,7 +4,8 @@
 
 let UniformTypes = {};
 UniformTypes.u1i = 0;
-UniformTypes.u1f = 0;
+UniformTypes.u1f = 1;
+UniformTypes.mat4 = 2;
 
 class Shader {
 
@@ -18,6 +19,7 @@ class Shader {
     //Set uniforms:
 
     setUniform(name, value, type) {
+        if (this.id === -1) return;
         let location = GL.getUniformLocation(this.id, name);
         if (Renderer.getCurrentShader() !== this) this.use();
         switch (type) {
@@ -26,6 +28,9 @@ class Shader {
                 break;
             case UniformTypes.u1f:
                 GL.uniform1f(location, value);
+                break;
+            case UniformTypes.mat4:
+                GL.uniformMatrix4fv(location, false, value);
                 break;
         }
     }
@@ -42,26 +47,27 @@ class Shader {
 
     _getVertexCode() {
         let shader = this;
-        let nextFunction = shader._getFragmentCode;
+        let nextFunction = shader._getFragmentCode.bind(shader);
 
         let vCodeRequest = new XMLHttpRequest();
-        vCodeRequest.addEventListener("load", new function () {
-            shader.vertexCode = this.responseText;
+        vCodeRequest.onload = function () {
+            shader.vertexCode = vCodeRequest.responseText;
+            console.log(shader.vertexSource);
             nextFunction();
-        } );
+        };
         vCodeRequest.open("GET", this.vertexSource);
         vCodeRequest.send();
     }
 
     _getFragmentCode() {
         let shader = this;
-        let nextFunction = shader._compileShader;
+        let nextFunction = shader._compileShader.bind(shader);
 
         let fCodeRequest = new XMLHttpRequest();
-        fCodeRequest.addEventListener("load", new function () {
-            shader.fragmentCode = this.responseText;
+        fCodeRequest.onload = function () {
+            shader.fragmentCode = fCodeRequest.responseText;
             nextFunction();
-        } );
+        };
         fCodeRequest.open("GET", this.fragmentSource);
         fCodeRequest.send();
     }
@@ -83,6 +89,8 @@ class Shader {
         GL.deleteShader(vertexShader);
         GL.deleteShader(fragmentShader);
 
+        this.use();
+
         let status = GL.getProgramParameter(this.id, GL.LINK_STATUS);
         if (status === false) {
             console.error(GL.getProgramInfoLog(this.id));
@@ -97,6 +105,8 @@ class Shader {
         GL.compileShader(shader);
         let status = GL.getShaderParameter(shader, GL.COMPILE_STATUS);
         if (status !== true) {
+            console.error("Issue with shader code: " +shaderCode);
+            console.error(" ");
             console.error(GL.getShaderInfoLog(shader));
             return -1;
         }

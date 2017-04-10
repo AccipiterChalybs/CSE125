@@ -11,6 +11,8 @@ function initialize() {
     let glCanvas = document.getElementsByTagName("canvas")[0];
     GL = glCanvas.getContext("webgl2");//glCanvas.getContext("webgl") || glCanvas.getContext("experimental-webgl");
 
+    initRenderer(glCanvas);
+
     //Sound init
     //Renderer init
     //Input init

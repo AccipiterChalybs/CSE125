@@ -12,6 +12,7 @@ class Texture
 
         GL.bindTexture(GL.TEXTURE_2D, this.textureHandle);
 
+        //TODO use placeholder while its loading (e.g. single pixel texture with uint16() as data)
         let image = new Image();
         image.onload = function () {
             this.finishLoad(image, filename, srgb, wrap);
