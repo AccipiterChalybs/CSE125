@@ -79,80 +79,80 @@ class RendererEngine //static class
         //TODO this might come by default with WEBGL 2?
         //GL.enable(GL.TEXTURE_CUBE_MAP_SEAMLESS);
 
-        shaderList[FORWARD_PBR_SHADER_ANIM] = new Shader(
+        this.shaderList[this.FORWARD_PBR_SHADER_ANIM] = new Shader(
             "source/shaders/forward_pbr_skeletal.vert", "source/shaders/forward_pbr.frag"
         );
 
 
-        shaderList[FORWARD_PBR_SHADER] = new Shader(
+        this.shaderList[this.FORWARD_PBR_SHADER] = new Shader(
             "source/shaders/forward_pbr.vert", "source/shaders/forward_pbr.frag"
         );
 
-        shaderList[DEFERRED_PBR_SHADER_ANIM] = new Shader(
+        this.shaderList[this.DEFERRED_PBR_SHADER_ANIM] = new Shader(
             "source/shaders/forward_pbr_skeletal.vert", "source/shaders/deferred_gbuffer.frag"
         );
 
 
-        shaderList[DEFERRED_PBR_SHADER] = new Shader(
+        this.shaderList[this.DEFERRED_PBR_SHADER] = new Shader(
             "source/shaders/forward_pbr.vert", "source/shaders/deferred_gbuffer.frag"
         );
 
-        shaderList[DEFERRED_SHADER_LIGHTING] = new Shader(
+        this.shaderList[this.DEFERRED_SHADER_LIGHTING] = new Shader(
             "source/shaders/deferred_lighting.vert", "source/shaders/deferred_lighting.frag"
         );
 
-        shaderList[SKYBOX_SHADER] = new Shader(
+        this.shaderList[this.SKYBOX_SHADER] = new Shader(
             "source/shaders/skybox.vert", "source/shaders/skybox.frag"
         );
 
-        shaderList[FBO_HDR] = new Shader(
+        this.shaderList[this.FBO_HDR] = new Shader(
             "source/shaders/fbo.vert", "source/shaders/fbo_hdr.frag"
         );
 
-        shaderList[EMITTER_SHADER] = new Shader(
+        this.shaderList[this.EMITTER_SHADER] = new Shader(
             "source/shaders/gpu_particle.vert", "source/shaders/gpu_particle.frag"
         );
 
-        shaderList[EMITTER_BURST_SHADER] = new Shader(
+        this.shaderList[this.EMITTER_BURST_SHADER] = new Shader(
             "source/shaders/gpu_particle_burst.vert", "source/shaders/gpu_particle.frag"
         );
 
-        shaderList[PARTICLE_TRAIL_SHADER] = new Shader(
+        this.shaderList[this.PARTICLE_TRAIL_SHADER] = new Shader(
             "source/shaders/particle_trail.vert", "source/shaders/particle_trail.frag"
         );
 
-        shaderList[SHADOW_SHADER] = new Shader(
+        this.shaderList[this.SHADOW_SHADER] = new Shader(
             "source/shaders/forward_pbr.vert", "source/shaders/shadow.frag"
         );
 
-        shaderList[SHADOW_SHADER_ANIM] = new Shader(
+        this.shaderList[this.SHADOW_SHADER_ANIM] = new Shader(
             "source/shaders/forward_pbr_skeletal.vert", "source/shaders/shadow.frag"
         );
 
-        (*shaderList[SHADOW_SHADER])["uP_Matrix"] = DirectionalLight.shadowMatrix;
-        (*shaderList[SHADOW_SHADER_ANIM])["uP_Matrix"] = DirectionalLight.shadowMatrix;
+        this.shaderList[SHADOW_SHADER])["uP_Matrix"] = DirectionalLight.shadowMatrix;
+        this.shaderList[SHADOW_SHADER_ANIM])["uP_Matrix"] = DirectionalLight.shadowMatrix;
 
-        shaderList[BASIC_SHADER] = new Shader(
+        this.shaderList[BASIC_SHADER] = new Shader(
             "source/shaders/simple.vert", "source/shaders/simple.frag"
         );
 
-        shaderList[FORWARD_UNLIT] = new Shader(
+        this.shaderList[FORWARD_UNLIT] = new Shader(
             "source/shaders/forward_pbr.vert", "source/shaders/forward_unlit.frag"
         );
-        shaderList[FORWARD_EMISSIVE] = new Shader(
+        this.shaderList[FORWARD_EMISSIVE] = new Shader(
             "source/shaders/forward_pbr.vert", "source/shaders/emissive.frag"
         );
 
-        shaderList[FBO_BLUR] = new Shader(
+        this.shaderList[FBO_BLUR] = new Shader(
             "source/shaders/fbo.vert", "source/shaders/fbo_blur.frag"
         );
 
-        shaderList[FBO_PASS] = new Shader(
+        this.shaderList[FBO_PASS] = new Shader(
             "source/shaders/fbo.vert", "source/shaders/fbo_pass.frag"
         );
 
-        currentShader = shaderList[FORWARD_PBR_SHADER];
-        currentShader.use();
+        this.currentShader = this.shaderList[FORWARD_PBR_SHADER];
+        this.currentShader.use();
 
         let cubeFilenames = [
             "assets/skybox/right.hdr",
@@ -161,9 +161,9 @@ class RendererEngine //static class
             "assets/skybox/bottom.hdr",
             "assets/skybox/front.hdr",
             "assets/skybox/back.hdr"];
-        let skybox = new Skybox(cubeFilenames);
-        skybox.applyIrradiance();
-        skybox.applyTexture(5);
+        this.skybox = new Skybox(cubeFilenames);
+        this.skybox.applyIrradiance();
+        this.skybox.applyTexture(5);
 
         this.scene = new GameScene();
 
@@ -177,7 +177,7 @@ class RendererEngine //static class
         let shadowPass = new ShadowPass();
         let deferredPass = new DeferredPass();
         let bloomPass = new BloomPass(deferredPass);
-        let skyboxPass = new SkyboxPass(skybox);
+        let skyboxPass = new SkyboxPass(this.skybox);
 
         this.passes = [];
         this.passes.push(shadowPass);
@@ -187,7 +187,7 @@ class RendererEngine //static class
         this.passes.push(particlePass);
         this.passes.push(bloomPass);
 
-        lastTime = glfwGetTime();
+        lastTime = Time.time();
 
     }
 
@@ -199,23 +199,23 @@ class RendererEngine //static class
 
     loop () {
 
-        applyPerFrameData();
-        extractObjects();
+        this.applyPerFrameData();
+        this.extractObjects();
 
-        camera.update(Timer.deltaTime());
-        if (camera.getFOV() != prevFOV)
+        this.camera.update(Time.deltaTime());
+        if (this.camera.getFOV() != this.prevFOV)
         {
-            prevFOV = camera.getFOV();
+            this.prevFOV = camera.getFOV();
         }
 
-        (*shaderList[SHADOW_SHADER])["uP_Matrix"] = DirectionalLight.shadowMatrix;
-        (*shaderList[SHADOW_SHADER_ANIM])["uP_Matrix"] = DirectionalLight.shadowMatrix;
+        (*this.shaderList[SHADOW_SHADER])["uP_Matrix"] = DirectionalLight.shadowMatrix;
+        (*this.shaderList[SHADOW_SHADER_ANIM])["uP_Matrix"] = DirectionalLight.shadowMatrix;
         glClear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
 
 
-        for(auto pass : passes)
+        for(let pass of passes)
         {
-            if (pass == bloomPass) {
+            if (pass === bloomPass) {
                 auto job = workerPool.createJob(GameObject.UpdateScene).queue();
                 pass.render();
                 workerPool.wait(job);
@@ -226,11 +226,11 @@ class RendererEngine //static class
 
     //private
     _extractObjects() {
-        renderBuffer.deferred.clear();
-        renderBuffer.forward.clear();
-        renderBuffer.particle.clear();
-        renderBuffer.light.clear();
-        GameObject.SceneRoot.extract();
+        this.renderBuffer.deferred.clear();
+        this.renderBuffer.forward.clear();
+        this.renderBuffer.particle.clear();
+        this.renderBuffer.light.clear();
+        GameObject.prototype.SceneRoot.extract();
     }
 
     _applyPerFrameData() {
@@ -274,11 +274,11 @@ class RendererEngine //static class
     }
 
     _getShader(shaderId) {
-        return shaderList[shaderId];
+        return this.shaderList[shaderId];
     }
 
     switchShader(shaderId) {
-        currentShader = shaderList[shaderId];
+        currentShader = this.shaderList[shaderId];
         currentShader.use()
     }
 
@@ -300,7 +300,7 @@ class RendererEngine //static class
         this.width = width;
         this.height = height;
 
-        this.perspective = mat4.perspective(this.camera.getFOV(), width / eight, this.NEAR_DEPTH, this.FAR_DEPTH);
+        this.perspective = mat4.perspective(this.camera.getFOV(), width / height, this.NEAR_DEPTH, this.FAR_DEPTH);
         this._updatePerspective(this.perspective);
 
     }

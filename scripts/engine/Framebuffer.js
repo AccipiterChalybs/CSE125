@@ -114,13 +114,12 @@ class Framebuffer {
     }
 
     blitFramebuffer(index, x, y, dest_width, dest_height) {
-        //TODO (webgl 2)
-        /*
+        //Requires WebGL 2.0
         GL.bindFramebuffer(GL.READ_FRAMEBUFFER, this.id);
         GL.readBuffer(GL.COLOR_ATTACHMENT0 + index);
         GL.blitFramebuffer(0, 0, this.width, this.height, x, y, x+dest_width, y+dest_height, GL.COLOR_BUFFER_BIT, GL.LINEAR);
         GL.bindFramebuffer(GL.READ_FRAMEBUFFER, 0);
-        */
+
     }
 
     draw() {

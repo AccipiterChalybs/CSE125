@@ -15,7 +15,7 @@ class Texture
         let image = new Image();
         image.onload = function () {
             this.finishLoad(image, filename, srgb, wrap);
-        };
+        }.bind(this);
         image.src = filename;
     }
 

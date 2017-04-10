@@ -13,27 +13,40 @@ class Skybox
         this._irradianceMatrix = [];
         this._material = null;
         this._mipmapLevels = null;
-        this._loaded = null;
-        this._meshData = null;
+        this._imagesLoaded = 0;
 
-        let data = {imageArray: []};
+        this._imageArray = [];
+
         for (let f = 0; f < CUBE_FACES; ++f) {
-            //TODO load image;
-            //stbi_loadf(imageFiles[f].c_str(), &data.width[f], &data.height[f], &data.channels[f], 0);
-            data.imageArray[f] = null;
+            let callback = this._imageReady().bind(this, f);
+
+            let image = new Image();
+            image.onload = callback;
+            image.src = imgFileNames[f];
+
+            this._imageArray[f] = image;
         }
+    }
 
-        this._skyboxTex = this.loadGLCube(data);
-        //this.loadIrradiance(this._irradianceMatrix, data);
+    _imageReady(face) {
+        this._imagesLoaded++;
+        if (this._imagesLoaded === CUBE_FACES) {
+            this._finishLoad();
+        }
+    }
 
-        data.imageArray = null;
+    _finishLoad() {
+        this._skyboxTex = Skybox._loadGLCube(this._imageArray);
+        //this.loadIrradiance(this._irradianceMatrix);
+
+        this._imageArray = null;
 
         this._material = new Material(Renderer::getShader(Renderer.SKYBOX_SHADER));
     }
 
     draw(){
 
-        if (!Skybox.loaded) {
+        if (!Skybox.prototype._loaded) {
             Skybox.load();
         }
 
@@ -43,12 +56,12 @@ class Skybox
         Renderer.getShader(Renderer.SKYBOX_SHADER)["environment"] = 5;
 
 
-        if (Renderer.gpuData.vaoHandle !== meshData.vaoHandle) {
-            GL.bindVertexArray(meshData.vaoHandle);
-            Renderer.gpuData.vaoHandle = meshData.vaoHandle;
+        if (Renderer.gpuData.vaoHandle !== Skybox.prototype._meshData.vaoHandle) {
+            GL.bindVertexArray(Skybox.prototype._meshData.vaoHandle);
+            Renderer.gpuData.vaoHandle = Skybox.prototype._meshData.vaoHandle;
         }
 
-        GL.drawElements(GL.TRIANGLES, meshData.indexSize, GL.UNSIGNED_INT, 0);
+        GL.drawElements(GL.TRIANGLES, Skybox.prototype._meshData.indexSize, GL.UNSIGNED_INT, 0);
 
     }
 
@@ -68,7 +81,7 @@ class Skybox
 
     static _load(){
         //TODO        let vao = GL.createVertexArray();
-        glGenVertexArrays(1, &vao);
+        let vao = GL.createVertexArray();
         GL.bindVertexArray(vao);
 
         GL.enableVertexAttribArray(Renderer.VERTEX_ATTRIB_LOCATION);
@@ -87,8 +100,8 @@ class Skybox
         let stride = FLOAT_SIZE * (POSITION_COUNT);
         GL.vertexAttribPointer(Renderer.VERTEX_ATTRIB_LOCATION, 3, GL.FLOAT, false, stride, 0);
 
-        meshData.vaoHandle = vao;
-        meshData.indexSize = INDEX_COUNT;
+        Skybox.prototype.meshData.vaoHandle = vao;
+        Skybox.prototype.meshData.indexSize = INDEX_COUNT;
     }
 
     _loadGLCube(data){}
@@ -244,7 +257,7 @@ class Skybox
     */
 
     //TODO original code had different mipmap levels for roughness - don't know if we can do this in webgl - investigate later
-    loadGLCube(data) {
+    static _loadGLCube(data) {
         let cubeTextureHandle = GL.createTexture();
     
         GL.bindTexture(GL.TEXTURE_CUBE_MAP, cubeTextureHandle);
@@ -252,12 +265,15 @@ class Skybox
         GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MIN_FILTER, GL.LINEAR);
         
         for (let m = 0; m < CUBE_FACES; ++m) {
-            GL.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_X + m, 0, GL.RGB, data.width[m], data.height[m], 0, GL.RGB, GL.FLOAT, data.imageArray[m]);
+            GL.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_X + m, 0, GL.RGB, data.width[m], data.height[m], 0, GL.RGB, GL.FLOAT, data[m]);
         }
 
-        glBindTexture(GL.TEXTURE_CUBE_MAP, 0);
+        GL.bindTexture(GL.TEXTURE_CUBE_MAP, 0);
         
         
         return cubeTextureHandle;
     }
 }
+
+Skybox.prototype._loaded = false;
+Skybox.prototype._meshData = {};
