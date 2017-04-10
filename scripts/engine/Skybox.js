@@ -24,7 +24,7 @@ class Skybox
             this._imageArray[f].onload = function() {
                 callback();
             };
-            this._imageArray[f].src = "assets/skybox/pngTest.png";//TODO: HDR: imgFileNames[f];
+            this._imageArray[f].src = "assets/skybox/skybox.jpg";//TODO: HDR: imgFileNames[f];
         }
     }
 

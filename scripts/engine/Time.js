@@ -1,6 +1,11 @@
 /**
  * Created by Accipiter Chalybs on 4/5/2017.
  */
-class Time {
-
-}
+const Time = {
+	_previousTime: new Date(),
+	tick: function(){
+		Time.deltaTime = ((new Date()).getTime() - Time._previousTime.getTime())/1000;
+		Time._previousTime = new Date();
+	},
+	deltaTime: 0
+};

@@ -278,6 +278,7 @@ class RendererEngine //static class
         this.shaderList[this.SHADOW_SHADER_ANIM].setUniform(["uP_Matrix"], DirectionalLight.shadowMatrix, UniformTypes.mat4);*/
         GL.clearColor(0.25,0.5,0.81,1);
         GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
+		Time.tick();
 
         if (this.canvas.clientWidth  !== this.width ||
             this.canvas.clientHeight !== this.height) {
@@ -289,7 +290,7 @@ class RendererEngine //static class
 
         let dr = quat.create();
         let up = vec3.create(); vec3.set(up, 0, 1, 0);
-        quat.setAxisAngle(dr, up, 0.0145);
+        quat.setAxisAngle(dr, up, Time.deltaTime * 0.1);
         this.camera.gameObject.transform.rotate(dr);
 
         this.getShader(Renderer.SKYBOX_SHADER).setUniform("uV_Matrix", this.camera.getCameraMatrix(), UniformTypes.mat4);
