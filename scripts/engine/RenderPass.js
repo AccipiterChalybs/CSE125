@@ -77,7 +77,7 @@ class DeferredPass extends RenderPass
     constructor(){
         super();
         //TODO do we need to add a special Framebuffer thing here?
-        this.fbo = new Framebuffer(Renderer.getWindowWidth, Renderer.getWindowHeight, 4, false, true);
+        this.fbo = new Framebuffer(Renderer.width, Renderer.height, 4, false, true);
         //this.fbo = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), [GL.RGBA8, GL.RGBA16, GL.RGBA16F, GL.RGBA16F], true);
 
         Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING)["colorTex"] = 0;
