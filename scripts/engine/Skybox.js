@@ -102,7 +102,7 @@ class Skybox
 
 
         let POSITION_COUNT = 3;
-        let stride = 0;//4 * (POSITION_COUNT);
+        let stride = 4 * (POSITION_COUNT);
         GL.vertexAttribPointer(Renderer.VERTEX_ATTRIB_LOCATION, 3, GL.FLOAT, false, stride, 0);
 
         Skybox.prototype._meshData.vaoHandle = vao;

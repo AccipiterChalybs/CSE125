@@ -23,6 +23,7 @@ class RendererEngine //static class
         this.SKYBOX_SHADER=2;
         this.FORWARD_UNLIT=13;
         this.MODEL_MATRIX = "uM_Matrix";
+        this.VIEW_MATRIX = "uV_Matrix";
         this.NEAR_DEPTH=0.2;
         this.FAR_DEPTH=1500.;
 
@@ -104,6 +105,7 @@ class RendererEngine //static class
         this.NEAR_DEPTH=0.2;
         this.FAR_DEPTH=1500.;
         this.MODEL_MATRIX = "uM_Matrix";
+        this.VIEW_MATRIX = "uV_Matrix";
 
         this.SHADER_COUNT=17;
         this.FORWARD_PBR_SHADER_ANIM=0;
@@ -328,10 +330,10 @@ class RendererEngine //static class
         quat.setAxisAngle(dr, up, Time.deltaTime * 0.1);
         this.camera.gameObject.transform.rotate(dr);
 
-        this.getShader(Renderer.SKYBOX_SHADER).setUniform("uV_Matrix", this.camera.getCameraMatrix(), UniformTypes.mat4);
+        this.getShader(Renderer.SKYBOX_SHADER).setUniform(this.VIEW_MATRIX, this.camera.getCameraMatrix(), UniformTypes.mat4);
         this.getShader(Renderer.SKYBOX_SHADER).setUniform("uP_Matrix", this.perspective, UniformTypes.mat4);
 
-        this.getShader(Renderer.FORWARD_UNLIT).setUniform("uV_Matrix", this.camera.getCameraMatrix(), UniformTypes.mat4);
+        this.getShader(Renderer.FORWARD_UNLIT).setUniform(this.VIEW_MATRIX, this.camera.getCameraMatrix(), UniformTypes.mat4);
         this.getShader(Renderer.FORWARD_UNLIT).setUniform("uP_Matrix", this.perspective, UniformTypes.mat4);
 
         for(let pass of this.passes)

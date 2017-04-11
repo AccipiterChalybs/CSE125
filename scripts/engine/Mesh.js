@@ -200,9 +200,12 @@ class Mesh {
             GL.vertexAttribIPointer(6, 4, GL.UNSIGNED_BYTE, Mesh.prototype.INT_SIZE * 4, 0); //WebGL 2.0 yay!
         }
 
+        console.log(megaArray);
+        console.log(indexArray);
+
         let meshData = {};
         meshData.vaoHandle = vao;
-        meshData.indexSize = indexArray.size;
+        meshData.indexSize = indexArray.length;
 
         Mesh.prototype.meshMap[name] = meshData;
     }
