@@ -10,10 +10,12 @@ function initialize() {
 
   //glCanvas.getContext("webgl") || glCanvas.getContext("experimental-webgl");
 
+  //Renderer init
   initRenderer(glCanvas);
 
   //Sound init
-  //Renderer init
   //Input init
+  Input.init();
+
   //Network init
 }

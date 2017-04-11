@@ -8,13 +8,38 @@ const InputType = {
   mouseButton: 'mouseButton',
 };
 
+const InputDirection = {
+  x: 'x',
+  y: 'y',
+};
+
 const Input = {
   _options: {
-    axes: [],
+    axes: [
+      {
+        name: 'mouseHorizontal',
+        type: InputType.mouse,
+        direction: InputDirection.x,
+      },
+      {
+        name: 'mouseVertical',
+        type: InputType.mouse,
+        direction: InputDirection.y,
+      },
+    ],
   },
   getAxis: function (name) {
     var axis = Input._options.axes.filter((axis)=>axis.name === name)[0];
     return (axis) ? axis.value : null;
+  },
+
+  getMouse: function () {
+    var x = Input._options.axes.filter((axis)=>axis.name === 'mouseHorizontal')[0];
+    var y = Input._options.axes.filter((axis)=>axis.name === 'mouseVertical')[0];
+    return {
+      x: x.value,
+      y: y.value,
+    };
   },
 
   init: function (options) {
@@ -42,9 +67,9 @@ const Input = {
 
       function updateAxisFloat(axis, e) {
         axis.value = axis.value || 0;
-        if (axis.direction === 'x') {
+        if (axis.direction === InputDirection.x) {
           axis.value = (e.clientX + 0.0) / (window.innerWidth + 0.0);
-        } else {
+        } else if (axis.direction === InputDirection.y) {
           axis.value = (e.clientY + 0.0) / (window.innerHeight + 0.0);
         }
       }
