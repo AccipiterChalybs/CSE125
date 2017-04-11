@@ -11,10 +11,12 @@ class ForwardPass extends RenderPass
     render(){
         let lightIndex = 0;
         //TODO sort lights by importance?
+        /*TODO re-enable
         for (let l of Renderer.renderBuffer.light) {
             if (lightIndex > Renderer.FORWARD_SHADER_LIGHT_MAX) break;
             l.forwardPass(lightIndex++);
         }
+        */
         for (let mesh of Renderer.renderBuffer.forward) {
             if(mesh.material.shader === Renderer.getShader(Renderer.FORWARD_UNLIT) || mesh.material.shader === Renderer.getShader(Renderer.FORWARD_EMISSIVE))
                 GL.depthMask(false);

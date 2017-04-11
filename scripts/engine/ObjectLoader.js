@@ -13,16 +13,17 @@ class ObjectLoader {
     }
 
     static loadScene(filename) {
-        ObjectLoader._loadJSON(filename, ObjectLoader._finishLoadScene);
+        ObjectLoader._loadJSON(filename, ObjectLoader._finishLoadScene.bind(this, filename));
     }
 
-    static _finishLoadScene(scene) {
+    static _finishLoadScene(filename, scene) {
 
         if (scene === null) {
             return;
         }
 
         let lights = {};
+     /*TODO re-add
         for (let i=0; i<scene.mNumLights; ++i) {
             let l = scene.mLight[i];
 
@@ -38,14 +39,18 @@ class ObjectLoader {
             light.color = vec3(l.mColorDiffuse.r, l.mColorDiffuse.g, l.mColorDiffuse.b);
             //light.constantFalloff = l.mAttenuationConstant;
             lights[l.mName]=light;
-        }
+        }*/
 
         let loadingAcceleration = {};
 
-        let retScene = ObjectLoader._parseNode(scene, scene.mRootNode, filename, loadingAcceleration, lights);
+        let retScene = ObjectLoader._parseNode(scene, scene.rootnode, filename, loadingAcceleration, lights);
+
+        //TODO bad hack - REMOVE THIS!!!
+        GameObject.prototype.SceneRoot = retScene;
+
 
         //TODO this looks incorrect - might need to put inside the recursive parseNode?
-        if (scene.HasAnimations()) {
+        if ("animations" in scene) {
             retScene.addComponent(new Animation(scene, loadingAcceleration));
             ObjectLoader.linkRoot(retScene.getComponent("Animation"), retScene.transform);
         }
@@ -98,57 +103,73 @@ class ObjectLoader {
     static _parseNode(scene, currentNode, filename, loadingAcceleration, lights) {
         let nodeObject = new GameObject();
 
-        let pos = null;
-        let scale = null;
-        let rotate = null;
+        let pos = vec3.create();
+        let scale = 1;
+        let rotate = quat.create();
 
-        //TODO do we need to overwrite this function?
-        currentNode.mTransform.Decompose(scale, rotate, pos);
+        //TODO do we need to flip this matrix?
+        let transformMat = mat4.create();
+        mat4.set.apply(mat4, [transformMat].concat(currentNode.transformation));
 
-        nodeObject.transform.scale(scale.x);
-        nodeObject.transform.translate(pos.x, pos.y, pos.z);
-        nodeObject.transform.rotate(quat(rotate.w, rotate.x, rotate.y, rotate.z));
 
-        let name = currentNode.mName;
+        mat4.getTranslation(pos, transformMat);
+        mat4.getRotation(rotate, transformMat);
+
+        //TODO also might need to flip this
+        let row = vec3.create(); vec3.set(row, transformMat[0], transformMat[1], transformMat[2]);
+        scale = vec3.length(row);
+
+        nodeObject.transform.scale(scale); //TODO multiple scales?
+        nodeObject.transform.translate(pos);
+        nodeObject.transform.rotate(rotate);
+
+        let name = currentNode.name;
         if (name === "defaultobject") name = filename + ObjectLoader.prototype.counter;
         nodeObject.setName(name);
 
-        if (lights.count(name)) {
+        if (name in lights) {
             nodeObject.addComponent(lights[name]);
         }
 
-        if (currentNode.mNumMeshes > 0) {
-            if (!Mesh.meshMap.count(name)) {
-                let meshIndex = currentNode.mMeshes;
-                Mesh.loadMesh(name, scene.mMeshes[meshIndex]);
+        if ("meshes" in currentNode) {
+            if (currentNode.meshes.length > 1) { throw new Error(); } //ASSERTION
+            if (!(name in Mesh.prototype.meshMap)) {
+                let meshIndex = currentNode.meshes[0];
+                Mesh.loadMesh(name, scene.meshes[meshIndex]);
             }
 
             let mesh = new Mesh(name);
 
-            let aMat = scene.mMaterials[scene.mMeshes[currentNode.mMeshes].mMaterialIndex];
+            let aMat = scene.materials[scene.meshes[currentNode.meshes[0]].materialindex];
             let foundForward = name.search("Forward") !== -1;
             let foundEmit = name.search("Emit") !== -1;
             let mat = null;
 
+            //TODO either change material to accept an index, or pass in the shader object from Renderer
+            let hasBones = ("bones" in scene.meshes[currentNode.meshes[0]]);
             if (foundForward) {
-                mat = new Material(Renderer.getShader(scene.mMeshes[currentNode.mMeshes].HasBones() ? Renderer.FORWARD_PBR_SHADER_ANIM :  Renderer.FORWARD_UNLIT));
+                mat = new Material(Renderer.getShader(hasBones ? Renderer.FORWARD_PBR_SHADER_ANIM :  Renderer.FORWARD_UNLIT));
                 mat.transparent = true;
             }
             else if (foundEmit) {
                 mat = new Material(Renderer.getShader(Renderer.FORWARD_EMISSIVE));
                 mat.transparent = true;
             } else {
-                mat = new Material(Renderer.getShader(scene.mMeshes[currentNode.mMeshes].HasBones() ? Renderer.DEFERRED_PBR_SHADER_ANIM : Renderer.DEFERRED_PBR_SHADER));
+                mat = new Material(Renderer.getShader(hasBones ? Renderer.DEFERRED_PBR_SHADER_ANIM : Renderer.DEFERRED_PBR_SHADER));
                 mat.transparent = false;
             }
 
+            //TODO remove me!!!
+            mat = new Material(Renderer.getShader(Renderer.FORWARD_UNLIT));
+
+/*
             if (aMat.GetTextureCount("aiTextureType_DIFFUSE") > 0) {
                 let path = null;
                 aMath.GetTexture(aiTextureType_DIFFUSE, 0, path);
                 mat["colorTex"] = new Texture(getPath(filename) + path, true);
             }
             else {
-                let color = vec4.create(1,1,1,1);
+                let color = vec4.create(); vec4.set(color,1,1,1,1);
                 mat["colorTex"] = Texture.makeColorTex(color);
             }
 
@@ -158,7 +179,7 @@ class ObjectLoader {
                 mat["normalTex"] = new Texture(getPath(filename) + path, false);
             }
             else {
-                let color = vec4.create(0.5,0.5,1,1);
+                let color = vec4.create(); vec4.set(color,0.5,0.5,1,1);
                 mat["normalTex"] = Texture.makeColorTex(color);
             }
 
@@ -168,20 +189,22 @@ class ObjectLoader {
                 mat["colorTex"] = new Texture(getPath(filename) + path, true);
             }
             else {
-                let color = vec4.create(0,0.45,0.7,1);
+                let color = vec4.create(); vec4.set(color,0,0.45,0.7,1);
                 mat["colorTex"] = Texture.makeColorTex(color);
-            }
-            mat["userTextures"] = true;
+            }*/
+            mat["userTextures"] = false;//TODO re-enable//true;
             mesh.setMaterial(mat);
 
-            nodeObject.addComponent(mesh);
+            nodeObject.addComponent("Mesh", mesh);
 
         }
 
-        loadingAcceleration[current.mName] = nodeObject.transform;
+        loadingAcceleration[currentNode.name] = nodeObject.transform;
 
-        for (let c = 0; c < currentNode.mNumChildren; ++c) {
-            nodeObject.addChild(parseNode(scene, currentNode.mChildren[c], filename, loadingAcceleration, lights));
+        if ("children" in currentNode) {
+            for (let child of currentNode.children) {
+                nodeObject.addChild(ObjectLoader._parseNode(scene, child, filename, loadingAcceleration, lights));
+            }
         }
 
         let compTypeName;

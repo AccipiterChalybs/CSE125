@@ -17,7 +17,7 @@ class Shader {
     }
 
     //Set uniforms:
-
+    //TODO look at UBO (uniform buffer objects) - could perhaps do global sets (e.g. projection matrix, view matrix, etc.)
     setUniform(name, value, type) {
         if (this.id === -1) return;
         let location = GL.getUniformLocation(this.id, name);

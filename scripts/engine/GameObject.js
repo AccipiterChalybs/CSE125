@@ -134,10 +134,11 @@ class GameObject {
     }
 
     extract() {
-        if (visible) {
+        if (this.visible) {
             let mesh = this.getComponent("Mesh");
-            if (mesh !== null) {
-                if (mesh.material && mesh.material.transparent) {
+            if (mesh && mesh !== null) {
+                //TODO take out true, re-add deferred
+                if (true || mesh.material && mesh.material.transparent) {
                     Renderer.renderBuffer.forward.push(mesh);
                 }
                 else if(mesh.material)

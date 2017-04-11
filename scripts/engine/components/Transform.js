@@ -49,7 +49,7 @@ class Transform extends Component
     scale(s)
     {
         this.setDirty();
-        this.scaleFactor *= s;
+        vec3.scale(this.scaleFactor, this.scaleFactor, s);
     }
 
     getTransformMatrix()
@@ -57,6 +57,7 @@ class Transform extends Component
         if(this.transformMatrixDirty || this.parent !== this.oldParent)
         {
             this.transformMatrix = mat4.create();
+
 
             // Translation
             mat4.translate(this.transformMatrix, this.transformMatrix, this.position);
@@ -74,6 +75,7 @@ class Transform extends Component
             this.transformMatrixDirty = false;
             this.oldParent = this.parent;
         }
+
 
         return this.transformMatrix;
     }
@@ -107,7 +109,7 @@ class Transform extends Component
     setScale(s)
     {
         this.setDirty();
-        this.scaleFactor = scale;
+        vec3.set(this.scaleFactor,s,s,s);
     }
 
     getWorldPosition()

@@ -1,4 +1,4 @@
-#version 330 compatibility
+#version 300 es
 
 uniform mat4 uM_Matrix;
 uniform mat4 uV_Matrix;

@@ -19,7 +19,10 @@ class RendererEngine //static class
     init(window_width, window_height) {
 
         this.shaderPath = "scripts/shaders/";
+        this.FORWARD_PBR_SHADER=1; //NOTE *** need to also initialize useTexture
         this.SKYBOX_SHADER=2;
+        this.FORWARD_UNLIT=13;
+        this.MODEL_MATRIX = "uM_Matrix";
         this.NEAR_DEPTH=0.2;
         this.FAR_DEPTH=1500.;
 
@@ -31,15 +34,36 @@ class RendererEngine //static class
         GL.clearColor(0, 0, 0, 1);
         GL.depthFunc(GL.LEQUAL); //needed for skybox to overwrite blank z-buffer values
 
+
+
+        this.shaderForwardLightList = [ this.FORWARD_PBR_SHADER];//, this.FORWARD_PBR_SHADER_ANIM ];
+        this.shaderViewList = [ this.FORWARD_PBR_SHADER, this.FORWARD_UNLIT];/*, this.FORWARD_PBR_SHADER_ANIM, this.EMITTER_SHADER, this.EMITTER_BURST_SHADER,
+            this.PARTICLE_TRAIL_SHADER, this.DEFERRED_PBR_SHADER, this.DEFERRED_PBR_SHADER_ANIM, this.DEFERRED_SHADER_LIGHTING, this.SKYBOX_SHADER,
+            this.SHADOW_SHADER, this.SHADOW_SHADER_ANIM, this.BASIC_SHADER, this.FORWARD_UNLIT, this.FORWARD_EMISSIVE ];*/
+        this.shaderCameraPosList = [ this.FORWARD_PBR_SHADER];/*, this.FORWARD_PBR_SHADER_ANIM, this.DEFERRED_SHADER_LIGHTING ];*/
+        this.shaderEnvironmentList = [ this.FORWARD_PBR_SHADER];/*, this.FORWARD_PBR_SHADER_ANIM, this.DEFERRED_SHADER_LIGHTING ];*/
+        this.shaderPerspectiveList = [ this.FORWARD_PBR_SHADER, this.SKYBOX_SHADER, this.FORWARD_UNLIT];/*, this.FORWARD_PBR_SHADER_ANIM, this.SKYBOX_SHADER, this.EMITTER_SHADER,
+            this.EMITTER_BURST_SHADER, this.PARTICLE_TRAIL_SHADER, this.DEFERRED_PBR_SHADER, this.DEFERRED_PBR_SHADER_ANIM, this.DEFERRED_SHADER_LIGHTING,
+            this.BASIC_SHADER, this.FORWARD_UNLIT, this.FORWARD_EMISSIVE ];*/
+
         this.shaderList=[];
+        this.shaderList[this.FORWARD_PBR_SHADER] = new Shader(
+            this.shaderPath + "forward_pbr.vert", this.shaderPath + "forward_pbr.frag"
+        );
         this.shaderList[this.SKYBOX_SHADER] = new Shader(
             this.shaderPath + "skybox.vert", this.shaderPath + "skybox.frag"
         );
+        this.shaderList[this.FORWARD_UNLIT] = new Shader(
+            this.shaderPath + "forward_pbr.vert", this.shaderPath + "forward_unlit.frag"
+        );
+
         this.currentShader=null;
         this.gpuData = {}; this.gpuData.vaoHandle = -1;
 
         this.camera = new Camera();
         this.camera.gameObject = new GameObject();
+        let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 10);
+        this.camera.gameObject.transform.setPosition(newPosition); //TODO add transform to components
 
         this.perspective = mat4.create();
 
@@ -57,10 +81,18 @@ class RendererEngine //static class
         this.skybox.applyTexture(5);
 
 
+        let forwardPass = new ForwardPass();
         let skyboxPass = new SkyboxPass(this.skybox);
 
         this.passes = [];
+        this.passes.push(forwardPass);
         this.passes.push(skyboxPass);
+
+
+
+        this.renderBuffer = { forward: [], deferred: [], particle: [], light: [] };
+        ObjectLoader.loadScene("assets/scenes/teapots.json");
+
 
         //TODO think this should be requestAnimationFrame or something like that
         setInterval(this.loop.bind(this), 20);
@@ -71,6 +103,7 @@ class RendererEngine //static class
 
         this.NEAR_DEPTH=0.2;
         this.FAR_DEPTH=1500.;
+        this.MODEL_MATRIX = "uM_Matrix";
 
         this.SHADER_COUNT=17;
         this.FORWARD_PBR_SHADER_ANIM=0;
@@ -276,6 +309,8 @@ class RendererEngine //static class
 
         this.shaderList[this.SHADOW_SHADER].setUniform(["uP_Matrix"], DirectionalLight.shadowMatrix, UniformTypes.mat4);
         this.shaderList[this.SHADOW_SHADER_ANIM].setUniform(["uP_Matrix"], DirectionalLight.shadowMatrix, UniformTypes.mat4);*/
+        this._extractObjects();
+
         GL.clearColor(0.25,0.5,0.81,1);
         GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
 		Time.tick();
@@ -296,6 +331,9 @@ class RendererEngine //static class
         this.getShader(Renderer.SKYBOX_SHADER).setUniform("uV_Matrix", this.camera.getCameraMatrix(), UniformTypes.mat4);
         this.getShader(Renderer.SKYBOX_SHADER).setUniform("uP_Matrix", this.perspective, UniformTypes.mat4);
 
+        this.getShader(Renderer.FORWARD_UNLIT).setUniform("uV_Matrix", this.camera.getCameraMatrix(), UniformTypes.mat4);
+        this.getShader(Renderer.FORWARD_UNLIT).setUniform("uP_Matrix", this.perspective, UniformTypes.mat4);
+
         for(let pass of this.passes)
         {
             pass.render();
@@ -304,10 +342,10 @@ class RendererEngine //static class
 
     //private
     _extractObjects() {
-        this.renderBuffer.deferred.clear();
-        this.renderBuffer.forward.clear();
-        this.renderBuffer.particle.clear();
-        this.renderBuffer.light.clear();
+        this.renderBuffer.deferred = [];
+        this.renderBuffer.forward = [];
+        this.renderBuffer.particle = [];
+        this.renderBuffer.light = [];
         GameObject.prototype.SceneRoot.extract();
     }
 
@@ -337,12 +375,12 @@ class RendererEngine //static class
     }
 
     setEnvironment(slot, mipmapLevels) {
-       /* for (let shaderId of shaderEnvironmentList) {
+        for (let shaderId of this.shaderEnvironmentList) {
             this.getShader(shaderId).setUniform("environment", slot, UniformTypes.u1i);
 
             //TODO: can we use mipmaps like this in WebGL?
             //this.getShader(shaderId).setUniform("environment_mipmap", mipmapLevels, UniformTypes.u1i);
-        }*/
+        }
     }
 
     _setCurrentShader(shader) {
@@ -363,7 +401,7 @@ class RendererEngine //static class
     }
 
     setModelMatrix(transform) {
-        this.currentShader[this.MODEL_MATRIX] = transform;
+        this.currentShader.setUniform(this.MODEL_MATRIX, transform, UniformTypes.mat4);
     }
 
     get windowWidth() {
