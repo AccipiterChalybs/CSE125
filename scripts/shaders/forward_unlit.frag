@@ -11,5 +11,5 @@ layout(location = 0) out vec4 frag_color;
 void main() {
     //vec4 albedo = texture(colorTex, vTexCoord);
 
-    frag_color = vec4(1,1,1,0);
+    frag_color = vec4(1,0.63,0,1);
 }

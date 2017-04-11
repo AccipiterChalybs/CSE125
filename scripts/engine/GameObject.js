@@ -97,7 +97,7 @@ class GameObject {
 
   addChild(gameObject) {
     this.transform.children.push(gameObject.transform);
-    gameObject.transform.parent = this.transform;
+    gameObject.transform._parent = this.transform;
   }
 
   isChildOf(gameObject) {

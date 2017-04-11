@@ -9,13 +9,15 @@ initRenderer = function (canvas) {
 const Renderer  = {
   init: function (canvas, windowWidth, windowHeight) {
       Renderer.canvas = canvas;
-      Renderer.shaderPath = 'scripts/shaders/';
+      Renderer.shaderPath = "scripts/shaders/";
       Renderer.FORWARD_PBR_SHADER = 1; //NOTE *** need to also initialize useTexture
       Renderer.SKYBOX_SHADER = 2;
       Renderer.FORWARD_UNLIT = 13;
-      Renderer.MODEL_MATRIX = 'uM_Matrix';
+      Renderer.MODEL_MATRIX = "uM_Matrix";
+      Renderer.VIEW_MATRIX = "uV_Matrix";
+      Renderer.PERSPECTIVE_MATRIX = "uP_Matrix";
       Renderer.NEAR_DEPTH = 0.2;
-      Renderer.FAR_DEPTH = 1500.;
+      Renderer.FAR_DEPTH = 1500;
 
       Renderer.VERTEX_ATTRIB_LOCATION = 0;
 
@@ -28,7 +30,7 @@ const Renderer  = {
       Renderer.shaderForwardLightList = [Renderer.FORWARD_PBR_SHADER];
 
       //, Renderer.FORWARD_PBR_SHADER_ANIM ];
-      Renderer.shaderViewList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_UNLIT];
+      Renderer.shaderViewList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_UNLIT, Renderer.SKYBOX_SHADER];
 
       /*, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.EMITTER_SHADER, Renderer.EMITTER_BURST_SHADER,
             Renderer.PARTICLE_TRAIL_SHADER, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM,
@@ -52,7 +54,7 @@ const Renderer  = {
 
       Renderer.shaderList = [];
       Renderer.shaderList[Renderer.FORWARD_PBR_SHADER] = new Shader(
-            Renderer.shaderPath + 'forward_pbr.vert', Renderer.shaderPath + 'forward_pbr.frag'
+            Renderer.shaderPath + 'forward_pbr.vert', Renderer.shaderPath + 'forward_unlit.frag' //TODO switch me back
       );
       Renderer.shaderList[Renderer.SKYBOX_SHADER] = new Shader(
             Renderer.shaderPath + 'skybox.vert', Renderer.shaderPath + 'skybox.frag'
@@ -66,14 +68,13 @@ const Renderer  = {
 
       Renderer.camera = new Camera();
       Renderer.camera.gameObject = new GameObject();
-      let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 10);
+      let rootTest = new GameObject();
+      Renderer.camera.gameObject.transform.setParent(rootTest.transform);
+      let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 2.5);
 
       //TODO add transform to components
       Renderer.camera.gameObject.transform.setPosition(newPosition);
 
-      Renderer.perspective = mat4.create();
-
-      Renderer.resize(windowWidth, windowHeight);
 
       let cubeFilenames = [
             'assets/skybox/right.hdr',
@@ -90,11 +91,15 @@ const Renderer  = {
       let skyboxPass = new SkyboxPass(Renderer.skybox);
 
       Renderer.passes = [];
-      Renderer.passes.push(forwardPass);
+      Renderer.passes.push(forwardPass); //Note: This should usually go AFTER skybox, for transparent objects with no depth mask.
       Renderer.passes.push(skyboxPass);
 
       Renderer.renderBuffer = { forward: [], deferred: [], particle: [], light: [] };
       ObjectLoader.loadScene('assets/scenes/teapots.json');
+
+
+      Renderer.perspective = mat4.create();
+      Renderer.resize(windowWidth, windowHeight); //THIS ISN'T WORKING SINCE LOADING (SHADERS) IS ASYNCHRONOUS!!!
 
       //TODO think Renderer should be requestAnimationFrame or something like that
       setInterval(Renderer.loop.bind(Renderer), 20);
@@ -106,6 +111,7 @@ const Renderer  = {
         Renderer.NEAR_DEPTH=0.2;
         Renderer.FAR_DEPTH=1500.;
         Renderer.MODEL_MATRIX = "uM_Matrix";
+        Renderer.VIEW_MATRIX = "uV_Matrix";
 
         Renderer.SHADER_COUNT=17;
         Renderer.FORWARD_PBR_SHADER_ANIM=0;
@@ -298,11 +304,14 @@ const Renderer  = {
     },
 
   loop: function () {
-      /*
+
         Renderer._applyPerFrameData();
         Renderer._extractObjects();
 
-        Renderer.camera.update(Time.deltaTime());
+        //TODO replace this when we have loading phase for shaders (and meshes, etc.)
+        Renderer._updatePerspective(Renderer.perspective);
+
+      /*  Renderer.camera.update(Time.deltaTime());
         if (Renderer.camera.getFOV() !== Renderer.prevFOV)
         {
             Renderer.prevFOV = Renderer.camera.getFOV();
@@ -313,7 +322,6 @@ const Renderer  = {
         DirectionalLight.shadowMatrix, UniformTypes.mat4);
         Renderer.shaderList[Renderer.SHADOW_SHADER_ANIM].setUniform(["uP_Matrix"],
         DirectionalLight.shadowMatrix, UniformTypes.mat4);*/
-      Renderer._extractObjects();
 
       GL.clearColor(0.25, 0.5, 0.81, 1);
       GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
@@ -329,17 +337,8 @@ const Renderer  = {
       let dr = quat.create();
       let up = vec3.create(); vec3.set(up, 0, 1, 0);
       quat.setAxisAngle(dr, up, Time.deltaTime * 0.1);
-      Renderer.camera.gameObject.transform.rotate(dr);
+      Renderer.camera.gameObject.transform.getParent().rotate(dr);
 
-      Renderer.getShader(Renderer.SKYBOX_SHADER).setUniform('uV_Matrix',
-          Renderer.camera.getCameraMatrix(), UniformTypes.mat4);
-      Renderer.getShader(Renderer.SKYBOX_SHADER).setUniform('uP_Matrix',
-          Renderer.perspective, UniformTypes.mat4);
-
-      Renderer.getShader(Renderer.FORWARD_UNLIT).setUniform('uV_Matrix',
-          Renderer.camera.getCameraMatrix(), UniformTypes.mat4);
-      Renderer.getShader(Renderer.FORWARD_UNLIT).setUniform('uP_Matrix',
-          Renderer.perspective, UniformTypes.mat4);
 
       for (let pass of Renderer.passes) {
         pass.render();
@@ -360,17 +359,18 @@ const Renderer  = {
     for (let shaderId of Renderer.shaderViewList) {
       Renderer.getShader(shaderId).setUniform(Renderer.VIEW_MATRIX, view, UniformTypes.mat4);
     }
-
+/*
     for (let shaderId of Renderer.shaderCameraPosList) {
       Renderer.getShader(shaderId).setUniform('cameraPos',
           Renderer.camera.gameObject.transform.getWorldPosition(), UniformTypes.vec3);
     }
+    */
   },
 
   _updatePerspective: function (perspectiveMatrix) {
     Renderer.perspective = perspectiveMatrix;
     for (let shaderId of Renderer.shaderPerspectiveList) {
-      Renderer.getShader(shaderId).setUniform('uP_Matrix', Renderer.perspective, UniformTypes.mat4);
+      Renderer.getShader(shaderId).setUniform(Renderer.PERSPECTIVE_MATRIX, Renderer.perspective, UniformTypes.mat4);
     }
   },
 
@@ -417,7 +417,6 @@ const Renderer  = {
   },
 
   resize: function (width, height) {
-    console.log('W: ' + width);
     Renderer.canvas.width = width;
     Renderer.canvas.height = height;
 
@@ -430,6 +429,6 @@ const Renderer  = {
     mat4.perspective(Renderer.perspective, Renderer.camera.getFOV(), width / height,
         Renderer.NEAR_DEPTH, Renderer.FAR_DEPTH);
 
-    // Renderer._updatePerspective(Renderer.perspective);
+    Renderer._updatePerspective(Renderer.perspective);
   },
 };

@@ -19,6 +19,7 @@ class Mesh {
         //TODO move
         Renderer.setModelMatrix(this.gameObject.transform.getTransformMatrix());
 
+
         if ((Renderer.currentShader === Renderer.getShader(Renderer.FORWARD_PBR_SHADER_ANIM) ||
             Renderer.currentShader === Renderer.getShader(Renderer.DEFERRED_PBR_SHADER_ANIM) ||
             Renderer.currentShader === Renderer.getShader(Renderer.SHADOW_SHADER_ANIM)) && animationRoot) {
@@ -195,13 +196,11 @@ class Mesh {
             GL.vertexAttribPointer(5, 4, GL.FLOAT, false, stride, currentOffset);
             currentOffset += (Mesh.prototype.FLOAT_SIZE * 4);
 
-            GL.bindBuffer(GL.ARRAY_BUFFER, meshBuffer[2]);
+            let boneBuffer = GL.createBuffer();
+            GL.bindBuffer(GL.ARRAY_BUFFER, boneBuffer);
             GL.bufferData(GL.ARRAY_BUFFER, new Uint8Array(idArray), GL.STATIC_DRAW);
-            GL.vertexAttribIPointer(6, 4, GL.UNSIGNED_BYTE, Mesh.prototype.INT_SIZE * 4, 0); //WebGL 2.0 yay!
+            GL.vertexAttribIPointer(6, 4, GL.UNSIGNED_BYTE, Mesh.prototype.BYTE_SIZE * 4, 0); //WebGL 2.0 yay!
         }
-
-        console.log(megaArray);
-        console.log(indexArray);
 
         let meshData = {};
         meshData.vaoHandle = vao;
@@ -211,7 +210,7 @@ class Mesh {
     }
 }
 
-Mesh.prototype.INT_SIZE = 1; //Unsigned Byte
+Mesh.prototype.BYTE_SIZE = 1; //Unsigned Byte for Bones
 Mesh.prototype.FLOAT_SIZE = 4;
 
 Mesh.prototype.POSITION_COUNT = 3;

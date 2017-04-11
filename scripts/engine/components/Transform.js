@@ -12,12 +12,12 @@ class Transform extends Component
         this.scaleFactor = vec3.create(); vec3.set(this.scaleFactor,1,1,1);
         this.transformMatrixDirty = true;
         this.transformMatrix = mat4.create();
-        this.cachedWorldPos = null;
+        this.cachedWorldPos = vec3.create();
         this.worldPosDirty = true;
-        this.cachedWorldScale = null;
+        this.cachedWorldScale = vec3.create();
         this.worldScaleDirty = null;
         this.oldParent = null;
-        this.parent = null;
+        this._parent = null;
         this.children = [];
     }
 
@@ -30,6 +30,15 @@ class Transform extends Component
         {
             child.setDirty();
         }
+    }
+
+    setParent(par) {
+        this._parent = par;
+        par.children.push(this);
+    }
+
+    getParent() {
+        return this._parent;
     }
 
     translate(diff)
@@ -54,7 +63,7 @@ class Transform extends Component
 
     getTransformMatrix()
     {
-        if(this.transformMatrixDirty || this.parent !== this.oldParent)
+        if(this.transformMatrixDirty || this._parent !== this.oldParent)
         {
             this.transformMatrix = mat4.create();
 
@@ -70,10 +79,10 @@ class Transform extends Component
             // Scale
             mat4.scale(this.transformMatrix, this.transformMatrix, this.scaleFactor);
 
-            let parMat = (this.parent !== null) ? this.parent.getTransformMatrix() : mat4.create();
+            let parMat = (this._parent !== null) ? this._parent.getTransformMatrix() : mat4.create();
             mat4.multiply(this.transformMatrix, parMat, this.transformMatrix);
             this.transformMatrixDirty = false;
-            this.oldParent = this.parent;
+            this.oldParent = this._parent;
         }
 
 
@@ -120,7 +129,7 @@ class Transform extends Component
             vec4.set(originPoint, 0, 0, 0, 1);
 
             let tmpWorldPos = mat4.create();
-            vec4.transformMat4(tmpWorldPos, originPoint, getTransformMatrix());
+            vec4.transformMat4(tmpWorldPos, originPoint, this.getTransformMatrix());
             vec3.set(this.cachedWorldPos, tmpWorldPos[0], tmpWorldPos[1], tmpWorldPos[2]);
             this.worldPosDirty = false;
         }
@@ -133,7 +142,7 @@ class Transform extends Component
         if(this.worldScaleDirty)
         {
             var scaleVector = vec3.create();
-            var transformMatrix = getTransformMatrix();
+            var transformMatrix = this.getTransformMatrix();
             vec3.set(scaleVector, transformMatrix[0][0], transformMatrix[0][1], transformMatrix[0][2]);
             this.cachedWorldScale = vec3.length(scaleVector);
             this.worldScaleDirty = false;

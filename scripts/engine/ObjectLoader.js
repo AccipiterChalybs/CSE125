@@ -160,7 +160,7 @@ class ObjectLoader {
             }
 
             //TODO remove me!!!
-            mat = new Material(Renderer.getShader(Renderer.FORWARD_UNLIT));
+            mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER));
 
 /*
             if (aMat.GetTextureCount("aiTextureType_DIFFUSE") > 0) {
