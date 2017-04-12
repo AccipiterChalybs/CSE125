@@ -44,7 +44,7 @@ const Renderer  = {
 
       /*, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.DEFERRED_SHADER_LIGHTING ];*/
       Renderer.shaderPerspectiveList = [Renderer.FORWARD_PBR_SHADER, Renderer.SKYBOX_SHADER,
-          Renderer.FORWARD_UNLIT,
+          Renderer.FORWARD_UNLIT
       ];
 
       /*, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.SKYBOX_SHADER, Renderer.EMITTER_SHADER,
@@ -54,7 +54,7 @@ const Renderer  = {
 
       Renderer.shaderList = [];
       Renderer.shaderList[Renderer.FORWARD_PBR_SHADER] = new Shader(
-            Renderer.shaderPath + 'forward_pbr.vert', Renderer.shaderPath + 'forward_unlit.frag' //TODO switch me back
+            Renderer.shaderPath + 'forward_pbr.vert', Renderer.shaderPath + 'forward_pbr.frag'
       );
       Renderer.shaderList[Renderer.SKYBOX_SHADER] = new Shader(
             Renderer.shaderPath + 'skybox.vert', Renderer.shaderPath + 'skybox.frag'
@@ -310,6 +310,7 @@ const Renderer  = {
 
         //TODO replace this when we have loading phase for shaders (and meshes, etc.)
         Renderer._updatePerspective(Renderer.perspective);
+        Renderer.setEnvironment(5, 0);
 
       /*  Renderer.camera.update(Time.deltaTime());
         if (Renderer.camera.getFOV() !== Renderer.prevFOV)
@@ -359,12 +360,12 @@ const Renderer  = {
     for (let shaderId of Renderer.shaderViewList) {
       Renderer.getShader(shaderId).setUniform(Renderer.VIEW_MATRIX, view, UniformTypes.mat4);
     }
-/*
+
     for (let shaderId of Renderer.shaderCameraPosList) {
-      Renderer.getShader(shaderId).setUniform('cameraPos',
+      Renderer.getShader(shaderId).setUniform("cameraPos",
           Renderer.camera.gameObject.transform.getWorldPosition(), UniformTypes.vec3);
     }
-    */
+
   },
 
   _updatePerspective: function (perspectiveMatrix) {

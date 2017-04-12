@@ -5,7 +5,8 @@
 let UniformTypes = {};
 UniformTypes.u1i = 0;
 UniformTypes.u1f = 1;
-UniformTypes.mat4 = 2;
+UniformTypes.vec3 = 2;
+UniformTypes.mat4 = 3;
 
 class Shader {
 
@@ -30,8 +31,14 @@ class Shader {
             case UniformTypes.u1f:
                 GL.uniform1f(location, value);
                 break;
+            case UniformTypes.vec3:
+                GL.uniform3fv(location, value);
+                break;
             case UniformTypes.mat4:
                 GL.uniformMatrix4fv(location, false, value);
+                break;
+            default:
+                alert("SHADER TYPE NOT AVAILABLE for: " + name);
                 break;
         }
     }

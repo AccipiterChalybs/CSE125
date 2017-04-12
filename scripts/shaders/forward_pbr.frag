@@ -12,7 +12,7 @@ layout(location = 2) out vec4 frag_material;
 
 const float PI = 3.14159265359;
 
-const int sample_count = 1; //number of times to sample the cubemap for specular lighting
+const int sample_count = 20; //number of times to sample the cubemap for specular lighting
 
 uniform mat4 irradiance[3]; //matrices from the calculated SH corresponding to the env. diffuse lighting for r, g, and b.
 
@@ -39,14 +39,16 @@ uniform bool useTextures;
 vec2 Hammersley(int x, int N) {
 	 //if only we could use this :( //uint bits = bitfieldReverse(x);
 	 //alternative bit reverse from http://stackoverflow.com/questions/26288796/porting-desktop-glsl-shader-that-uses-bit-operations-to-gles
+	 int a = x;
 	 int bits=0;
      for (int i = 0; i < 8; i++)
      {
          bits *= 2;
-         bits += int(mod(float(x), 2.0)); //TODO figure out why the casts & 2.0 are needed
-         x /= 2;
+         bits += int(mod(float(a), 2.0)); //TODO figure out why the casts & 2.0 are needed
+         a /= 2;
      }
-     return vec2(float(x)/float(N),float(bits) * 2.3283064365386963e-10);
+     //"fun" fact: the old constant (diving by 0x1000 = 2e-10) doesn't work in webgl, so here's an approximation
+     return vec2(float(x)/float(N),float(bits) / 700.0);
  }
 
 //sampling angle calculations from http://blog.tobias-franke.eu/2014/03/30/notes_on_importance_sampling.html
@@ -72,7 +74,7 @@ vec3 GGX_Sample(vec2 xi,  vec3 normal, float a) {
 }
 
 float GGX_Visibility(float dotProduct, float k) {
-	//return 2.0 / (dotProduct + sqrt(k*k + (1 - k*k)*dotProduct*dotProduct)); //More accurate, but slower version
+	//return 2.0 / (dotProduct + sqrt(k*k + (1.0 - k*k)*dotProduct*dotProduct)); //More accurate, but slower version
 
 	k=k/2.0;
 	return 1.0 / (dotProduct * (1.0 - k) + k);
@@ -101,6 +103,7 @@ vec3 SpecularBRDF(vec3 lightColor, vec3 normal, vec3 view, vec3 lightDir, float 
 		return F * lightColor * (G * dotNL);
 }
 
+
 //generates sample directions, sets up the values, calls the BRDF, then accumulates resulting colors
 vec3 SpecularEnvMap(vec3 normal, vec3 view, float a, vec3 F0) {
 	vec3 color = vec3(0,0,0);
@@ -108,16 +111,17 @@ vec3 SpecularEnvMap(vec3 normal, vec3 view, float a, vec3 F0) {
 	for (int s=0; s<sample_count; ++s) {
 		vec2 xi = Hammersley(s, sample_count);
 		vec3 lightDir = GGX_Sample(xi, lightDir_Main, a);
-		vec3 lightColor = textureLod(environment, lightDir, a*environment_mipmap).xyz;
-		color += SpecularBRDF(lightColor, normal, view, lightDir, a, F0, 0.0);
+		vec3 lightColor = textureLod(environment, lightDir, 0.0).xyz;//a*environment_mipmap).xyz;
+		//TODO 1.0 or 0.0 for last param (G term)... might just be geometry in test?
+		color += SpecularBRDF(lightColor, normal, view, lightDir, a, F0, 1.0);
 	}
 	color /= float(sample_count);
 	return color;
 }
 
 
-
 void main () {
+  /* TODO re-enable
   vec4 albedo = texture(colorTex, vTexCoord);
   vec3 mat = texture(matTex, vTexCoord).rgb;
 
@@ -184,9 +188,37 @@ void main () {
 
   vec3 diffuseColor = ((1.0-mat.r) * albedo.rgb) * diffuseLight;
   vec3 color = diffuseColor + specColor;
-  
+  */
 
-  frag_color = vec4(color, albedo.a);
-  frag_normal = vec4(normal, 1.0);
-  frag_material = vec4(mat, 1.0);
+
+  vec4 albedo = vec4(.75, .32, 0.16, 1.0);
+  vec3 mat = vec3(0.0, 0.45, 0.05);
+  vec3 normal = normalize(vNormal);
+  vec3 view = normalize(cameraPos - vPosition.xyz);
+
+  float IOR = 1.45;
+  vec3 F0 = vec3(1,1,1) * pow((1.0 - IOR) / (1.0 + IOR), 2.0);
+    F0 = mix(F0, albedo.rgb, mat.r); //interpolate Fresnel with the color as metalness increases (with metalness=1, color => reflection color)
+    F0 = mix(vec3(1,1,1) * dot(vec3(.33,.33,.33),F0), F0, mat.r); //my own improvement - could be wrong : desaturates Fresnel as metalness decreases
+
+    mat.b += 0.01;
+    float a = (mat.b)*mat.b;
+
+
+  vec3 lightDir = reflect(-view, normal);
+  //vec3 specColor = texture(environment, lightDir, 0.0).xyz;
+  vec3 specColor = SpecularEnvMap(normal, view, a, F0);
+  vec3 diffuseColor = ((1.0-mat.r) * albedo.rgb) * dot(normal, vec3(0.707, 0.707, 0.707));
+    vec3 color = specColor + diffuseColor;
+
+  frag_color = vec4(color, 1.0);
+
+
+
+
+
+
+  //frag_color = vec4(color, albedo.a);
+  //frag_normal = vec4(normal, 1.0);
+  //frag_material = vec4(mat, 1.0);
 }

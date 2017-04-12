@@ -18,11 +18,10 @@ out vec3 vTangent;
 out vec3 vBitangent;
 
 void main () {
-//TODO re-enable
-	//vNormal = mat3(uM_Matrix) * aNormal;
-	//vTangent = mat3(uM_Matrix) * aTangent;
-	//vBitangent = mat3(uM_Matrix) * aBitangent;
-    //vTexCoord = aTexCoord;
-    vPosition = uV_Matrix * uM_Matrix * aPosition;
-	gl_Position = uP_Matrix * vPosition;
+	vNormal = mat3(uM_Matrix) * aNormal;
+	vTangent = mat3(uM_Matrix) * aTangent;
+	vBitangent = mat3(uM_Matrix) * aBitangent;
+    vTexCoord = aTexCoord;
+    vPosition = uM_Matrix * aPosition; //TODO should uV_Matrix go here? (if so, change cameraPos)
+	gl_Position = uP_Matrix * uV_Matrix * vPosition;
 }
