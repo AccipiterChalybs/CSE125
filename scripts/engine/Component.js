@@ -7,6 +7,7 @@ class Component
     constructor ()
     {
         this.gameObject = null;
+        this.transform = null;
         this.visible = true;
         this.active = true;
     }
@@ -22,6 +23,7 @@ class Component
     setGameObject(go)
     {
         this.gameObject = go;
+        this.transform = this.gameObject.transform;
     }
 
     onCollisionEnter (collision)

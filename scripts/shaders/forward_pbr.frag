@@ -48,7 +48,7 @@ vec2 Hammersley(int x, int N) {
          a /= 2;
      }
      //"fun" fact: the old constant (diving by 0x1000 = 2e-10) doesn't work in webgl, so here's an approximation
-     return vec2(float(x)/float(N),float(bits) / 700.0);
+     return vec2(float(x)/float(N),float(bits) / 700.0); //TODO better constant?
  }
 
 //sampling angle calculations from http://blog.tobias-franke.eu/2014/03/30/notes_on_importance_sampling.html
@@ -111,7 +111,7 @@ vec3 SpecularEnvMap(vec3 normal, vec3 view, float a, vec3 F0) {
 	for (int s=0; s<sample_count; ++s) {
 		vec2 xi = Hammersley(s, sample_count);
 		vec3 lightDir = GGX_Sample(xi, lightDir_Main, a);
-		vec3 lightColor = textureLod(environment, lightDir, 0.0).xyz;//a*environment_mipmap).xyz;
+		vec3 lightColor = texture(environment, lightDir).xyz;//textureLod(environment, lightDir, 0.0).xyz;//a*environment_mipmap).xyz;
 		//TODO 1.0 or 0.0 for last param (G term)... might just be geometry in test?
 		color += SpecularBRDF(lightColor, normal, view, lightDir, a, F0, 1.0);
 	}
@@ -191,8 +191,8 @@ void main () {
   */
 
 
-  vec4 albedo = vec4(.75, .32, 0.16, 1.0);
-  vec3 mat = vec3(0.0, 0.45, 0.05);
+  vec4 albedo = vec4(.75, .15, 0.05, 1.0);
+  vec3 mat = vec3(0.0, 0.45, 0.10);
   vec3 normal = normalize(vNormal);
   vec3 view = normalize(cameraPos - vPosition.xyz);
 
@@ -206,7 +206,6 @@ void main () {
 
 
   vec3 lightDir = reflect(-view, normal);
-  //vec3 specColor = texture(environment, lightDir, 0.0).xyz;
   vec3 specColor = SpecularEnvMap(normal, view, a, F0);
   vec3 diffuseColor = ((1.0-mat.r) * albedo.rgb) * dot(normal, vec3(0.707, 0.707, 0.707));
     vec3 color = specColor + diffuseColor;

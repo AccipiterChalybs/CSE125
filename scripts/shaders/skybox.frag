@@ -8,6 +8,7 @@ layout(location = 0) out vec4 fragColor;
 layout(location = 1) out vec4 eyeColor;
 
 void main() {
-    fragColor = textureLod(environment, normalize(eyeDir.xyz), 0.0);
+    vec4 color = texture(environment, normalize(eyeDir.xyz)).rgba;
+    fragColor = vec4(color);
     eyeColor = vec4(.5*(eyeDir) + vec3(.5, .5, .5), 1.0);
 }

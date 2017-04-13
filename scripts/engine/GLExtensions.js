@@ -3,24 +3,23 @@
  */
 
 const GLExtensions = {
-  init: function () {
-    //For floating point 16 bit textures
+    init: function () {
+        /* Extensions we're using that are already included in WebGL 2.0:
+         > OES_texture_float
+         > WEBGL_draw_buffers
+         > OES_vertex_array_object
+         */
 
-    // In WebGL2 //GLExtensions.texture_float = GL.getExtension('OES_texture_float');
-    GLExtensions.texture_float_linear = GL.getExtension('OES_texture_float_linear');
+        GLExtensions.texture_float_linear = GL.getExtension('OES_texture_float_linear');
 
-    /* In WebGL 2
-       GLExtensions.draw_buffers = GL.getExtension('WEBGL_draw_buffers');
-       if (!GLExtensions.draw_buffers) {
-       alert("No draw buffer support - this will not go well...");
-       }
-       */
+        //For Anisotropic Texture Filtering (Texture.js)
+        GLExtensions.anisotropic = (
+            GL.getExtension('EXT_texture_filter_anisotropic') ||
+            GL.getExtension('MOZ_EXT_texture_filter_anisotropic') ||
+            GL.getExtension('WEBKIT_EXT_texture_filter_anisotropic')
+        );
 
-    //For Anisotropic Texture Filtering (Texture.js)
-    GLExtensions.anisotropic = (
-    GL.getExtension('EXT_texture_filter_anisotropic') ||
-    GL.getExtension('MOZ_EXT_texture_filter_anisotropic') ||
-    GL.getExtension('WEBKIT_EXT_texture_filter_anisotropic')
-    );
-  },
+        //For Rendering to FrameBuffers in HDR
+        GLExtensions.colorBuffer = GL.getExtension('EXT_color_buffer_float');
+    },
 };

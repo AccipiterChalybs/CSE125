@@ -7,8 +7,9 @@ const CUBE_FACES = 6;
 class Skybox
 {
 
-    constructor(imgFileNames)
+    constructor(imgFileNames, hdr=true)
     {
+        this.hdr=hdr;
         this._skyboxTex = null;
         this._irradianceMatrix = [];
         this._material = new Material(Renderer.getShader(Renderer.SKYBOX_SHADER));
@@ -20,11 +21,16 @@ class Skybox
         for (let f = 0; f < CUBE_FACES; ++f) {
             let callback = this._imageReady.bind(this);
 
-            this._imageArray[f] = new Image();
-            this._imageArray[f].onload = function() {
-                callback();
-            };
-            this._imageArray[f].src = "assets/skybox/skybox.jpg";//TODO: HDR: imgFileNames[f];
+            if (this.hdr) {
+                this._imageArray[f] = {};
+                RGBE_LOADER.loadHDR(imgFileNames[f], this._imageArray[f], callback);
+            } else {
+                this._imageArray[f] = new Image();
+                this._imageArray[f].onload = function () {
+                    callback();
+                };
+                this._imageArray[f].src = imgFileNames[f];
+            }
         }
     }
 
@@ -36,7 +42,7 @@ class Skybox
     }
 
     _finishLoad() {
-        this._skyboxTex = Skybox._loadGLCube(this._imageArray);
+        this._skyboxTex = Skybox._loadGLCube(this.hdr, this._imageArray);
         //this.loadIrradiance(this._irradianceMatrix);
 
         this._imageArray = [];
@@ -262,16 +268,21 @@ class Skybox
     */
 
     //TODO original code had different mipmap levels for roughness - don't know if we can do this in webgl - investigate later
-    static _loadGLCube(data) {
+    static _loadGLCube(hdr, data) {
         let cubeTextureHandle = GL.createTexture();
+
+        let filterMode = (!hdr || GLExtensions.texture_float_linear) ? GL.LINEAR : GL.NEAREST;
     
         GL.bindTexture(GL.TEXTURE_CUBE_MAP, cubeTextureHandle);
-        GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MAG_FILTER, GL.LINEAR);
-        GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MIN_FILTER, GL.LINEAR);
+        GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MAG_FILTER, filterMode);//GL.LINEAR);
+        GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MIN_FILTER, filterMode);//GL.LINEAR);
 
         for (let m = 0; m < CUBE_FACES; ++m) {
-            //GL.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_X + m, 0, GL.RGB, data[m].width, data[m].height, 0, GL.RGB, GL.FLOAT, data[m]);
-            GL.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_X + m, 0, GL.RGB, data[m].width, data[m].height, 0, GL.RGB, GL.UNSIGNED_BYTE, data[m]);
+            if (hdr) {
+                GL.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_X + m, 0, GL.RGB16F, data[m].width, data[m].height, 0, GL.RGB, GL.FLOAT, data[m].data);
+            }else{
+                GL.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_X + m, 0, GL.RGB, data[m].width, data[m].height, 0, GL.RGB, GL.UNSIGNED_BYTE, data[m]);
+            }
         }
 
         GL.bindTexture(GL.TEXTURE_CUBE_MAP, null);

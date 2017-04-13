@@ -55,6 +55,21 @@ class Transform extends Component
         this.rotation = combinedQuat;
     }
 
+    rotateX(theta) {
+        this.setDirty();
+        quat.rotateX(this.rotation, this.rotation, theta);
+    }
+
+    rotateY(theta) {
+        this.setDirty();
+        quat.rotateX(this.rotation, this.rotation, theta);
+    }
+
+    rotateZ(theta) {
+        this.setDirty();
+        quat.rotateX(this.rotation, this.rotation, theta);
+    }
+
     scale(s)
     {
         this.setDirty();
@@ -141,8 +156,8 @@ class Transform extends Component
     {
         if(this.worldScaleDirty)
         {
-            var scaleVector = vec3.create();
-            var transformMatrix = this.getTransformMatrix();
+            let scaleVector = vec3.create();
+            let transformMatrix = this.getTransformMatrix();
             vec3.set(scaleVector, transformMatrix[0][0], transformMatrix[0][1], transformMatrix[0][2]);
             this.cachedWorldScale = vec3.length(scaleVector);
             this.worldScaleDirty = false;

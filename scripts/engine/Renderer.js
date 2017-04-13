@@ -8,6 +8,8 @@ initRenderer = function (canvas) {
 
 const Renderer  = {
   init: function (canvas, windowWidth, windowHeight) {
+      GLExtensions.init();
+
       Renderer.canvas = canvas;
       Renderer.shaderPath = "scripts/shaders/";
       Renderer.FORWARD_PBR_SHADER = 1; //NOTE *** need to also initialize useTexture
@@ -310,7 +312,17 @@ const Renderer  = {
 
         //TODO replace this when we have loading phase for shaders (and meshes, etc.)
         Renderer._updatePerspective(Renderer.perspective);
-        Renderer.setEnvironment(5, 0);
+        Renderer.skybox.applyTexture(5);
+
+
+        let rotation = quat.create();
+        quat.rotateX(rotation, rotation, -Math.PI/2);
+        GameObject.prototype.SceneRoot.transform.setRotation(rotation);
+        let move = vec3.create(); vec3.set(move, 0, 0, 64);
+        GameObject.prototype.SceneRoot.transform.children[1].setPosition(move);
+        move = vec3.create(); vec3.set(move, 0, 0, -64);
+        GameObject.prototype.SceneRoot.transform.children[0].setPosition(move);
+
 
       /*  Renderer.camera.update(Time.deltaTime());
         if (Renderer.camera.getFOV() !== Renderer.prevFOV)
