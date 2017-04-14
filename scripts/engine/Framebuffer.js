@@ -2,7 +2,7 @@
  * Created by Accipiter Chalybs on 4/5/2017.
  */
 
-//TODO convert ot webgl 2.0
+//TODO convert to webgl 2.0
 
 class Framebuffer {
 
@@ -72,18 +72,14 @@ class Framebuffer {
     //note buffersToDraw should be an array of COLOR_ATTACHMENTX_WEBGL
     bind(buffersToDraw) {
         GL.bindFramebuffer(GL.FRAMEBUFFER, this.id);
-        //GLExtension Hope that you can draw multiple render targets...
-        if (GLExtensions.draw_buffers) {
-            //TODO can use gl.drawBuffers in webgl2
-            GLExtensions.draw_buffers.drawBuffersWEBGL(buffersToDraw);
-        }
+        GL.drawBuffers(buffersToDraw);
         GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
 
         //TODO use Renderer.resize()?
         GL.viewport(0, 0, this.width, this.height);
         let perspective = mat4.create();
         mat4.perspective(perspective, Renderer.camera.getFOV(), this.width/this.height, NEAR_DEPTH, FAR_DEPTH);
-        Renderer.updatePerspective(perspective);
+        Renderer._updatePerspective(perspective);
     }
 
     unbind() {
@@ -91,7 +87,7 @@ class Framebuffer {
         GL.viewport(0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
         let perspective = mat4.create();
         mat4.perspective(perspective, Renderer.camera.getFOV(),Renderer.getWindowWidth()/Renderer.getWindowHeight(), NEAR_DEPTH, FAR_DEPTH);
-        Renderer.updatePerspective(perspective);
+        Renderer._updatePerspective(perspective);
     }
 
     bindTexture(slot, index) {
@@ -129,8 +125,7 @@ class Framebuffer {
         }
 
         if (Renderer.gpuData.vaoHandle !== Framebuffer.meshData.vaoHandle) {
-            //TODO change this since I don't think VAO are avaialable
-            GL.bindBuffer(Framebuffer.meshData.vaoHandle);
+            GL.bindVertexArray(Framebuffer.meshData.vaoHandle);
             Renderer.gpuData.vaoHandle = Framebuffer.meshData.vaoHandle;
         }
 

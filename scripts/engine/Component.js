@@ -10,6 +10,7 @@ class Component
         this.transform = null;
         this.visible = true;
         this.active = true;
+        this.componentType = null; //must override in subclass!
     }
 
     update (deltaTime)
@@ -20,7 +21,7 @@ class Component
     {
     }
 
-    setGameObject(go)
+    _setGameObject(go)
     {
         this.gameObject = go;
         if (go !== null) {

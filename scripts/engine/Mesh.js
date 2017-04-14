@@ -6,6 +6,7 @@ class Mesh extends Component {
 
     constructor(name) {
         super();
+        this.componentType = "Mesh";
         this.name = name;
         if (!Mesh.prototype.meshMap.hasOwnProperty(name)) throw new Error();
     }

@@ -7,6 +7,7 @@ class Transform extends Component
     constructor()
     {        
         super();
+        this.componentType = "Transform";
         this.position = vec3.create();
         this.rotation = quat.create();
         this.scaleFactor = vec3.create(); vec3.set(this.scaleFactor,1,1,1);

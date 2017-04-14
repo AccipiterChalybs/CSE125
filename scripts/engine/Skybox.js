@@ -2,7 +2,6 @@
  * Created by Accipiter Chalybs on 4/5/2017.
  */
 
-const CUBE_FACES = 6;
 
 class Skybox
 {
@@ -45,7 +44,7 @@ class Skybox
 
     _finishLoad() {
         this._skyboxTex = Skybox._loadGLCube(this.hdr, this._imageArray);
-        //this.loadIrradiance(this._irradianceMatrix);
+        //this.loadIrradiance(this._imageArray, this._irradianceMatrix);
 
         this._imageArray = [];
         GameEngine.completeLoading(this.loadId);
@@ -77,7 +76,7 @@ class Skybox
     }
 
     applyIrradiance(){
-        Renderer.setIrradiance(this._irradianceMatrix);
+        //Renderer.setIrradiance(this._irradianceMatrix);
     }
 
     applyTexture(slot){
@@ -127,31 +126,27 @@ class Skybox
     static _specularEnvMap(normal, a, environment) {}
 
 
-/*
-    loadIrradiance() {
+
+    loadIrradiance(data, irradianceMatrix) {
         //for each cube map
-        glm::vec3 irradiance[9];
-        const float* currentImage;
-        int currentWidth;
-        int currentHeight;
-        int channels;
-        static float shConst[9] = { 0.282095, 0.488603, 0.488603, 0.488603, 1.092548, 1.092548, 1.092548, 0.315392, 0.546274 };
+        let irradiance = [];
+        const shConst = [ 0.282095, 0.488603, 0.488603, 0.488603, 1.092548, 1.092548, 1.092548, 0.315392, 0.546274 ];
 
-        float xVal, yVal, zVal;
+        let xVal=0;
+        let yVal=0;
+        let zVal=0;
 
-        for (int m = 0; m < CUBE_FACES; ++m) {
-            //load image
-            //currentImage = SOIL_load_image(imageFiles[m].c_str(), &currentWidth, &currentHeight, &channels, SOIL_LOAD_AUTO);
-            currentImage = data.imageArray[m];
-            currentWidth = data.width[m];
-            currentHeight = data.height[m];
-            channels = data.channels[m];
+        for (let m = 0; m < CUBE_FACES; ++m) {
+            let currentImage = (this.hdr) ? data[m].data : data[m];
+            let currentWidth = data[m].width;
+            let currentHeight = data[m].height;
+            let channels = 3;
 
-            for (int y = 0; y < currentHeight; ++y) {
-                float yPercent = y / (float)currentHeight;
+            for (let y = 0; y < currentHeight; ++y) {
+                let yPercent = y / currentHeight;
 
-                for (int x = 0; x < currentWidth; ++x) {
-                    float xPercent = x / (float)currentWidth;
+                for (let x = 0; x < currentWidth; ++x) {
+                    let xPercent = x / currentWidth;
 
                     switch (m) {
                         case 0: //rt
@@ -186,15 +181,15 @@ class Skybox
                             break;
                     }
 
-                    float mag = sqrt(xVal*xVal + yVal*yVal + zVal * zVal);
+                    let mag = Math.sqrt(xVal*xVal + yVal*yVal + zVal * zVal);
                     xVal /= mag;
                     yVal /= mag;
                     zVal /= mag;
 
-                    float theta = acos(zVal / sqrt(xVal*xVal + yVal*yVal + zVal*zVal));
+                    let theta = Math.acos(zVal / Math.sqrt(xVal*xVal + yVal*yVal + zVal*zVal));
 
-                    float currentSH;
-                    for (int shIndex = 0; shIndex < SH_COUNT; ++shIndex) {
+                    let currentSH=0;
+                    for (let shIndex = 0; shIndex < Skybox.prototype.SH_COUNT; ++shIndex) {
                         switch (shIndex) {
                             case 0: //0,0
                                 currentSH = shConst[shIndex];
@@ -224,51 +219,30 @@ class Skybox
                                 currentSH = shConst[shIndex] * (xVal*xVal - yVal*yVal);
                                 break;
                         }
-                        for (int c = 0; c < 3; ++c) {
-                            irradiance[shIndex][c] += (currentSH * sin(theta) / (CUBE_FACES*currentWidth*currentHeight)) * (currentImage[(x + y*currentWidth)*channels + c]);
+                        irradiance[shIndex] = [];
+                        for (let c = 0; c < 3; ++c) {
+                            irradiance[shIndex][c] += (currentSH * Math.sin(theta) / (CUBE_FACES*currentWidth*currentHeight)) * (currentImage[(x + y*currentWidth)*channels + c]);
                         }
                     }
                 }
             }
         }
 
-        float c1 = 0.429043;
-        float c2 = 0.511664;
-        float c3 = 0.743125;
-        float c4 = 0.886227;
-        float c5 = 0.247708;
+        let c1 = 0.429043;
+        let c2 = 0.511664;
+        let c3 = 0.743125;
+        let c4 = 0.886227;
+        let c5 = 0.247708;
 
-        for (int c = 0; c < 3; ++c) {
-            irradianceMatrix[c] = glm::mat4(c1*irradiance[8][c], c1*irradiance[4][c], c1*irradiance[7][c], c2*irradiance[3][c],
+        for (let c = 0; c < 3; ++c) {
+            irradianceMatrix[c] = mat4.create();
+            mat4.set(irradianceMatrix[c], c1*irradiance[8][c], c1*irradiance[4][c], c1*irradiance[7][c], c2*irradiance[3][c],
                 c1*irradiance[4][c], -c1*irradiance[8][c], c1*irradiance[5][c], c2*irradiance[1][c],
                 c1*irradiance[7][c], c1*irradiance[5][c], c3*irradiance[6][c], c2*irradiance[2][c],
                 c2*irradiance[3][c], c2*irradiance[1][c], c2*irradiance[2][c], c4*irradiance[0][c] - c5*irradiance[6][c]);
         }
     }
 
-
-
-
-
-
-
-            float PI = atanf(1) * 4;
-
-        //prev algorithm from http://holger.dammertz.org/stuff/notes_HammersleyOnHemisphere.html
-        //new algorithm from http://cg.informatik.uni-freiburg.de/course_notes/graphics2_04_sampling.pdf slide 22 - old one had incorrect normalization constant
-            glm::vec2 Hammersley(unsigned int i, unsigned int N) {
-            float px = 2;
-            int k = i;
-            float theta = 0;
-            while (k > 0) {
-            int a = k % 2;
-            theta = theta + (a / px);
-            k = int(k / 2);
-            px = px * 2;
-        }
-        return glm::vec2(float(i) / float(N), theta);
-    }
-    */
 
     //TODO original code had different mipmap levels for roughness - don't know if we can do this in webgl - investigate later
     static _loadGLCube(hdr, data) {
@@ -297,3 +271,5 @@ class Skybox
 
 Skybox.prototype._loaded = false;
 Skybox.prototype._meshData = {};
+const CUBE_FACES = 6;
+Skybox.prototype.SH_COUNT = 9;

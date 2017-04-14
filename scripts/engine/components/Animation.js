@@ -10,6 +10,7 @@ class Animation extends Component
 
     constructor(scene, boneTransformMap) {
         super();
+        this.componentType = "Animation";
         this._animData = [];
         this._currentAnimationIndex = 0;
         this._currentTime = 0;

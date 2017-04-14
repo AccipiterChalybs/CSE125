@@ -11,8 +11,9 @@ class GameObject {
     return GameObject._nameMap[name];
   }
 
+  //probably shouldn't be calling this method though?
   static updateScene() {
-    GameObject.SceneRoot.update();
+    GameObject.prototype.SceneRoot.update();
 
     //TODO: do we need scene.loop?
   }
@@ -77,10 +78,13 @@ class GameObject {
     this._removeName();
   }
 
-  addComponent(type, component) {
-    this.removeComponent(type);
-    component.setGameObject(this);
-    this.components[type] = component;
+  addComponent(component) {
+    if (component.componentType === null) {
+        console.error("ERROR: this component has no type - make sure to override this in the constructor!");
+    }
+    this.removeComponent(component.componentType);
+    component._setGameObject(this);
+    this.components[component.componentType] = component;
   }
 
   //TODO look over this one
@@ -197,3 +201,5 @@ class GameObject {
 
 GameObject.prototype._nameMap = {};
 GameObject.prototype.SceneRoot = null;
+ComponentName = {};
+ComponentName.MESH_COMPONENT = "Mesh";

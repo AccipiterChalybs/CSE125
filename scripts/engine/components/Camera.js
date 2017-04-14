@@ -8,6 +8,7 @@ class Camera extends Component
     constructor ()
     {
         super();
+        this.componentType = "Camera";
 
         if (Renderer.camera === null) {
             Renderer.camera = this;
@@ -76,8 +77,9 @@ class Camera extends Component
         return mat4.invert(dummy, camScaledMatrix);
     }
 
-    update(deltaTime)
+    update()
     {
+        /* TODO update this
         if(this.fov !== this._prevFOV)
         {
             // this._fovStartTime = Timer::time();
@@ -115,6 +117,7 @@ class Camera extends Component
         this._prevPosition = this._position;
 
         // Original has update info for FMOD (not written here)
+        */
     }
 
     screenShake(amount, duration)

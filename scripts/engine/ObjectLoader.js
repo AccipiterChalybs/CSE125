@@ -199,7 +199,7 @@ class ObjectLoader {
             mat["userTextures"] = false;//TODO re-enable//true;
             mesh.setMaterial(mat);
 
-            nodeObject.addComponent("Mesh", mesh);
+            nodeObject.addComponent(mesh);
 
         }
 

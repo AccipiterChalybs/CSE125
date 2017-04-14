@@ -70,16 +70,6 @@ const Renderer  = {
 
       Renderer.camera = null;
 
-      //TODO - move this into GameScene or something -------------------
-      let camera = new Camera();
-      camera.setGameObject(new GameObject());
-      let rootTest = new GameObject();
-      camera.gameObject.transform.setParent(rootTest.transform);
-      let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 2.5);
-      //end of TODO block ----------------------------------------------
-
-      Renderer.camera.transform.setPosition(newPosition);
-
 
       let cubeFilenames = [
             'assets/skybox/right.hdr',
@@ -312,6 +302,7 @@ const Renderer  = {
   //Runs after everything is loaded, before loop
   start: function() {
       Renderer.skybox.applyTexture(5);
+      //Renderer.skybox.applyIrradiance();
 
       Renderer.perspective = mat4.create();
       Renderer.resize(Renderer.canvas.clientWidth, Renderer.canvas.clientHeight);
@@ -324,42 +315,27 @@ const Renderer  = {
         Renderer._extractObjects();
 
 
-      //TODO - move this into GameScene or something -------------------
-        let rotation = quat.create();
-        quat.rotateX(rotation, rotation, -Math.PI/2);
-        GameObject.prototype.SceneRoot.transform.setRotation(rotation);
-        let move = vec3.create(); vec3.set(move, 0, 0, 64);
-        GameObject.prototype.SceneRoot.transform.children[1].setPosition(move);
-        move = vec3.create(); vec3.set(move, 0, 0, -64);
-        GameObject.prototype.SceneRoot.transform.children[0].setPosition(move);
-      //------------------------------------------------------------
-
-      /*  Renderer.camera.update(Time.deltaTime());
+      //  Renderer.camera.update(Time.deltaTime());
         if (Renderer.camera.getFOV() !== Renderer.prevFOV)
         {
             Renderer.prevFOV = Renderer.camera.getFOV();
         }
 
-
+/*
         Renderer.shaderList[Renderer.SHADOW_SHADER].setUniform(["uP_Matrix"],
         DirectionalLight.shadowMatrix, UniformTypes.mat4);
         Renderer.shaderList[Renderer.SHADOW_SHADER_ANIM].setUniform(["uP_Matrix"],
-        DirectionalLight.shadowMatrix, UniformTypes.mat4);*/
+        DirectionalLight.shadowMatrix, UniformTypes.mat4);
+*/
 
       GL.clearColor(0.25, 0.5, 0.81, 1);
       GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
-      Time.tick(); //TODO move into Game Engine
 
       if (Renderer.canvas.clientWidth  !== Renderer.width ||
         Renderer.canvas.clientHeight !== Renderer.height) {
 
         Renderer.resize(Renderer.canvas.clientWidth, Renderer.canvas.clientHeight);
       }
-
-      let dr = quat.create();
-      let up = vec3.create(); vec3.set(up, 0, 1, 0);
-      quat.setAxisAngle(dr, up, Time.deltaTime * 0.1);
-      Renderer.camera.gameObject.transform.getParent().rotate(dr); //TODO move into game engine
 
 
       for (let pass of Renderer.passes) {
@@ -453,4 +429,12 @@ const Renderer  = {
 
     Renderer._updatePerspective(Renderer.perspective);
   },
+
+  getWindowWidth: function() {
+      return width;
+  },
+
+  getWindowHeight: function() {
+      return height;
+  }
 };
