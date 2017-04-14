@@ -18,7 +18,7 @@ class GameObject {
   }
 
   constructor() {
-    this.components = []; //NOTE: associative map, so use "in" for iteration
+    this.components = {}; //NOTE: associative map, so go over keys (in doesn't seem to work)
     this.name = '';
 
     this.transform = new Transform();
@@ -30,12 +30,13 @@ class GameObject {
 
   draw() {
     if (visible) {
-      for (let component in this.components) {
-        if (component.visible) {
-          component.draw();
-        }
-      }
 
+      for (let compName of Object.keys(this.components)) {
+          let component = this.components[compName];
+          if (component.visible) {
+              component.draw();
+          }
+      }
       for (let child of this.transform.children) {
         child.gameObject.draw();
       }
@@ -43,7 +44,7 @@ class GameObject {
   }
 
   update() {
-    for (let i = 0; i < this.transform.children.size(); ++i) {
+    for (let i = 0; i < this.transform.children.length; ++i) {
       let object = this.transform.children[i];
       if (object.gameObject.dead) {
         let collider = this.getComponent('BoxCollider');
@@ -58,9 +59,8 @@ class GameObject {
       }
     }
 
-    for (let component in  this.components)
-    {
-      component.update();
+    for (let compName of Object.keys(this.components)) {
+      this.components[compName].update();
     }
   }
 
@@ -79,7 +79,7 @@ class GameObject {
 
   addComponent(type, component) {
     this.removeComponent(type);
-    component.gameObject = this;
+    component.setGameObject(this);
     this.components[type] = component;
   }
 
@@ -111,8 +111,10 @@ class GameObject {
   }
 
   onCollisionEnter(other) {
-    for (let comp in this.components) {
-      comp.onCollisionEnter(other);
+
+    for (let compName of Object.keys(this.components)) {
+        let component = this.components[compName];
+        component.onCollisionEnter(other);
     }
   }
 

@@ -5,6 +5,7 @@
 const Time = {
   _previousTime: new Date(),
   tick: function () {
+    //TODO add threshold
     Time.deltaTime = ((new Date()).getTime() - Time._previousTime.getTime()) / 1000;
     Time._previousTime = new Date();
   },

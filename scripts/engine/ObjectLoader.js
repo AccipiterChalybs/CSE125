@@ -13,10 +13,11 @@ class ObjectLoader {
     }
 
     static loadScene(filename) {
-        ObjectLoader._loadJSON(filename, ObjectLoader._finishLoadScene.bind(this, filename));
+        let loadId = GameEngine.registerLoading();
+        ObjectLoader._loadJSON(filename, ObjectLoader._finishLoadScene.bind(this, loadId, filename));
     }
 
-    static _finishLoadScene(filename, scene) {
+    static _finishLoadScene(loadId, filename, scene) {
 
         if (scene === null) {
             return;
@@ -54,6 +55,9 @@ class ObjectLoader {
             retScene.addComponent(new Animation(scene, loadingAcceleration));
             ObjectLoader.linkRoot(retScene.getComponent("Animation"), retScene.transform);
         }
+
+        GameEngine.completeLoading(loadId);
+        return retScene;
     }
 
     static _loadJSON(url, func) {

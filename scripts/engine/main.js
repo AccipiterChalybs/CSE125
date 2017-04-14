@@ -12,6 +12,7 @@ function initialize() {
 
   //Renderer init
   initRenderer(glCanvas);
+  GameEngine.init();
 
   //Sound init
   //Input init

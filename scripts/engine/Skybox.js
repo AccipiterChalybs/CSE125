@@ -9,6 +9,8 @@ class Skybox
 
     constructor(imgFileNames, hdr=true)
     {
+        this.loadId = GameEngine.registerLoading();
+
         this.hdr=hdr;
         this._skyboxTex = null;
         this._irradianceMatrix = [];
@@ -46,6 +48,7 @@ class Skybox
         //this.loadIrradiance(this._irradianceMatrix);
 
         this._imageArray = [];
+        GameEngine.completeLoading(this.loadId);
     }
 
     draw(){

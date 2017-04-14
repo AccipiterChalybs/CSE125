@@ -220,8 +220,8 @@ RGBE_LOADER.ReadPixels_RLE = function( output, byteData,scanline_width, num_scan
 
     let oi =0; // output index
     let index = 0;
-    let arr = new Uint8Array(4*scanline_width);
-    let rgb = new Float32Array(3);
+    let exponents = new Float32Array(scanline_width);
+    let ZERO_VAL = -1;
 
     if ((scanline_width < 8)||(scanline_width > 0x7fff)) {
         /* run length encoding is not allowed so read flat*/
@@ -229,8 +229,12 @@ RGBE_LOADER.ReadPixels_RLE = function( output, byteData,scanline_width, num_scan
         return RGBE_LOADER.ReadPixels(output, byteData);
     }
 
+    let height = num_scanlines;
+
     /* read in each successive scanline */
     while(num_scanlines > 0) {
+        let offset = (height - num_scanlines) * scanline_width * 3;
+
         if ((byteData[index+0] !== 2)||(byteData[index+1] !== 2)||(byteData[index+2] & 0x80)) {
             /* this file is not run length encoded */
             console.log("Not run length encoded (most likely an error");
@@ -245,7 +249,8 @@ RGBE_LOADER.ReadPixels_RLE = function( output, byteData,scanline_width, num_scan
         let ptr = 0;
         /* read each of the four channels for the scanline into the buffer */
         for(let i=0;i<4;i++) {
-            let ptr_end = (i+1)*scanline_width;
+            ptr = 0;
+            let ptr_end = scanline_width;
             while(ptr < ptr_end) {
                 if (byteData[index+0] > 128) {
                     /* a run of the same value */
@@ -255,7 +260,15 @@ RGBE_LOADER.ReadPixels_RLE = function( output, byteData,scanline_width, num_scan
                         return rgbe_error(rgbe_format_error, "bad scanline data");
                     }
                     while (count-- > 0) {
-                        arr[ptr++] = byteData[index + 1];
+                        if (i !== 3) {
+                            output[offset + 3*ptr++ + i] = byteData[index + 1];
+                        } else {
+                            if (byteData[index + 1] !== 0) {
+                                exponents[ptr++] = Math.pow(2.0,byteData[index + 1]-(128+8));
+                            } else {
+                                exponents[ptr++] = ZERO_VAL;
+                            }
+                        }
                     }
                     index+=2;
                 }
@@ -266,31 +279,46 @@ RGBE_LOADER.ReadPixels_RLE = function( output, byteData,scanline_width, num_scan
                         alert("bad scanline data2");
                         return rgbe_error(rgbe_format_error,"bad scanline data");
                     }
-                    arr[ptr++] = byteData[index+1];
+                    if (i !== 3) {
+                        output[3*ptr++ + i + offset] = byteData[index+1];
+                    } else {
+                        if (byteData[index + 1] !== 0) {
+                            exponents[ptr++] = Math.pow(2.0,byteData[index + 1]-(128+8));
+                        } else {
+                            exponents[ptr++] = ZERO_VAL;
+                        }
+                    }
                     index+=2;
                     if (--count > 0) {
                         while (count-- > 0) {
-                            arr[ptr++] = byteData[index++];
+                            if (i !== 3) {
+                                output[3*ptr++ + i + offset] = byteData[index++];
+                            } else {
+                                if (byteData[index] !== 0) {
+                                    exponents[ptr++] = Math.pow(2.0,byteData[index++]-(128+8));
+                                } else {
+                                    exponents[ptr++] = ZERO_VAL; index++;
+                                }
+                            }
                         }
                     }
                 }
             }
         }
+
         /* now convert data from buffer into floats */
-        for(let i=0;i<scanline_width;i++) {
-
-            if (arr[i+3*scanline_width] !== 0) {   /*nonzero pixel*/
-                let f = Math.pow(2.0,arr[i+3*scanline_width]-(128+8));
-                rgb[0] = arr[i+scanline_width] * f;
-                rgb[1] = arr[i+1*scanline_width] * f;
-                rgb[2] = arr[i+2*scanline_width] * f;
-            } else {
-                rgb[0] = rgb[1] = rgb[2] = 0;
+        let i=0;
+        while (i<scanline_width) {
+            if (exponents[i] === ZERO_VAL) {
+                ++i; oi+=3; continue;
             }
-            output[oi++] = rgb[0];
-            output[oi++] = rgb[1];
-            output[oi++] = rgb[2];
 
+            output[oi] *= exponents[i];
+            output[oi+1] *= exponents[i];
+            output[oi+2] *= exponents[i];
+
+            ++i;
+            oi+=3;
         }
         num_scanlines--;
     }

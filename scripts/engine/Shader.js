@@ -14,6 +14,7 @@ class Shader {
         this.id = -1;
         this.vertexSource = vertex;
         this.fragmentSource = fragment;
+        this.loadId = GameEngine.registerLoading();
         this.reload();
     }
 
@@ -103,6 +104,11 @@ class Shader {
         if (status === false) {
             console.error(GL.getProgramInfoLog(this.id));
             throw new Error();
+        }
+
+        if (this.loadId !== -1) {
+            GameEngine.completeLoading(this.loadId);
+            this.loadId = -1;
         }
     }
 

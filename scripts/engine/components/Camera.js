@@ -8,6 +8,13 @@ class Camera extends Component
     constructor ()
     {
         super();
+
+        if (Renderer.camera === null) {
+            Renderer.camera = this;
+        } else {
+            console.error("Camera already exists!");
+        }
+
         this._shakeAmount=0;
         this._startShakeAmount=0;
         this._shakeDuration=0;

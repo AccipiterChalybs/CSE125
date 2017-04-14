@@ -23,7 +23,11 @@ class Component
     setGameObject(go)
     {
         this.gameObject = go;
-        this.transform = this.gameObject.transform;
+        if (go !== null) {
+            this.transform = go.transform;
+        } else {
+            this.transform = null;
+        }
     }
 
     onCollisionEnter (collision)

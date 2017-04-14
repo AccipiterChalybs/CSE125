@@ -2,9 +2,10 @@
  * Created by Accipiter Chalybs on 4/10/2017.
  */
 
-class Mesh {
+class Mesh extends Component {
 
     constructor(name) {
+        super();
         this.name = name;
         if (!Mesh.prototype.meshMap.hasOwnProperty(name)) throw new Error();
     }

@@ -68,14 +68,17 @@ const Renderer  = {
       Renderer.currentShader = null;
       Renderer.gpuData = {}; Renderer.gpuData.vaoHandle = -1;
 
-      Renderer.camera = new Camera();
-      Renderer.camera.gameObject = new GameObject();
-      let rootTest = new GameObject();
-      Renderer.camera.gameObject.transform.setParent(rootTest.transform);
-      let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 2.5);
+      Renderer.camera = null;
 
-      //TODO add transform to components
-      Renderer.camera.gameObject.transform.setPosition(newPosition);
+      //TODO - move this into GameScene or something -------------------
+      let camera = new Camera();
+      camera.setGameObject(new GameObject());
+      let rootTest = new GameObject();
+      camera.gameObject.transform.setParent(rootTest.transform);
+      let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 2.5);
+      //end of TODO block ----------------------------------------------
+
+      Renderer.camera.transform.setPosition(newPosition);
 
 
       let cubeFilenames = [
@@ -86,8 +89,15 @@ const Renderer  = {
             'assets/skybox/front.hdr',
             'assets/skybox/back.hdr',
       ];
+      cubeFilenames = [
+          'assets/skybox/lowres/right.hdr',
+          'assets/skybox/lowres/left.hdr',
+          'assets/skybox/lowres/top.hdr',
+          'assets/skybox/lowres/bottom.hdr',
+          'assets/skybox/lowres/front.hdr',
+          'assets/skybox/lowres/back.hdr',
+      ];
       Renderer.skybox = new Skybox(cubeFilenames);
-      Renderer.skybox.applyTexture(5);
 
       let forwardPass = new ForwardPass();
       let skyboxPass = new SkyboxPass(Renderer.skybox);
@@ -97,15 +107,8 @@ const Renderer  = {
       Renderer.passes.push(skyboxPass);
 
       Renderer.renderBuffer = { forward: [], deferred: [], particle: [], light: [] };
-      ObjectLoader.loadScene('assets/scenes/teapots.json');
 
-
-      Renderer.perspective = mat4.create();
-      Renderer.resize(windowWidth, windowHeight); //THIS ISN'T WORKING SINCE LOADING (SHADERS) IS ASYNCHRONOUS!!!
-
-      //TODO think Renderer should be requestAnimationFrame or something like that
-      setInterval(Renderer.loop.bind(Renderer), 20);
-
+      GameEngine.finishLoadRequests();
       /*
 
         Renderer.shaderPath = "source/shaders/";
@@ -305,16 +308,23 @@ const Renderer  = {
 */
     },
 
+
+  //Runs after everything is loaded, before loop
+  start: function() {
+      Renderer.skybox.applyTexture(5);
+
+      Renderer.perspective = mat4.create();
+      Renderer.resize(Renderer.canvas.clientWidth, Renderer.canvas.clientHeight);
+
+  },
+
   loop: function () {
 
         Renderer._applyPerFrameData();
         Renderer._extractObjects();
 
-        //TODO replace this when we have loading phase for shaders (and meshes, etc.)
-        Renderer._updatePerspective(Renderer.perspective);
-        Renderer.skybox.applyTexture(5);
 
-
+      //TODO - move this into GameScene or something -------------------
         let rotation = quat.create();
         quat.rotateX(rotation, rotation, -Math.PI/2);
         GameObject.prototype.SceneRoot.transform.setRotation(rotation);
@@ -322,7 +332,7 @@ const Renderer  = {
         GameObject.prototype.SceneRoot.transform.children[1].setPosition(move);
         move = vec3.create(); vec3.set(move, 0, 0, -64);
         GameObject.prototype.SceneRoot.transform.children[0].setPosition(move);
-
+      //------------------------------------------------------------
 
       /*  Renderer.camera.update(Time.deltaTime());
         if (Renderer.camera.getFOV() !== Renderer.prevFOV)
@@ -338,19 +348,18 @@ const Renderer  = {
 
       GL.clearColor(0.25, 0.5, 0.81, 1);
       GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
-      Time.tick();
+      Time.tick(); //TODO move into Game Engine
 
       if (Renderer.canvas.clientWidth  !== Renderer.width ||
         Renderer.canvas.clientHeight !== Renderer.height) {
 
-        console.log(Renderer.width);
         Renderer.resize(Renderer.canvas.clientWidth, Renderer.canvas.clientHeight);
       }
 
       let dr = quat.create();
       let up = vec3.create(); vec3.set(up, 0, 1, 0);
       quat.setAxisAngle(dr, up, Time.deltaTime * 0.1);
-      Renderer.camera.gameObject.transform.getParent().rotate(dr);
+      Renderer.camera.gameObject.transform.getParent().rotate(dr); //TODO move into game engine
 
 
       for (let pass of Renderer.passes) {
