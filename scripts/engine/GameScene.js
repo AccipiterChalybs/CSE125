@@ -24,12 +24,13 @@ class GameScene {
         GameObject.prototype.SceneRoot.transform.setRotation(rotation);
         let move = vec3.create(); vec3.set(move, 0, 0, 64);
         GameObject.prototype.SceneRoot.transform.children[1].setPosition(move);
+        GameObject.prototype.SceneRoot.transform.children[1].gameObject.addComponent(new PlayerController());
         move = vec3.create(); vec3.set(move, 0, 0, -64);
         GameObject.prototype.SceneRoot.transform.children[0].setPosition(move);
 
         GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new RotateOverTime(-1));
 
-        Renderer.camera.transform.getParent().gameObject.addComponent(new RotateArrowKey(1));
+        Renderer.camera.transform.getParent().gameObject.addComponent(new RotateMouse());
     }
 
     update() {

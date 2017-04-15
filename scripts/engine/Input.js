@@ -20,24 +20,26 @@ const Input = {
         name: 'mouseHorizontal',
         type: InputType.mouse,
         direction: InputDirection.x,
+        value: 0
       },
       {
         name: 'mouseVertical',
         type: InputType.mouse,
         direction: InputDirection.y,
+        value: 0
       },
 	  {
 		  name: 'horizontal',
 		  type: InputType.keyboard,
-		  positiveButton: 39,
-		  negativeButton: 37,
+		  positiveButton: 68,
+		  negativeButton: 65,
 		  value: 0
 	  },
 	  {
 		  name: 'vertical',
 		  type: InputType.keyboard,
-		  positiveButton: 38,
-		  negativeButton: 40,
+		  positiveButton: 87,
+		  negativeButton: 83,
 		  value: 0
 	  }
     ],
@@ -88,6 +90,39 @@ const Input = {
         }
       }
 
+    // Pointer lock
+    document.body.requestPointerLock = document.body.requestPointerLock ||
+                                        document.body.mozRequestPointerLock;
+
+    document.exitPointerLock = document.exitPointerLock || document.mozExitPointerLock;
+
+    document.body.onclick =  function() {
+      document.body.requestPointerLock();
+    }
+
+    // Hook pointer lock state change events for different browsers
+    document.addEventListener('pointerlockchange', lockChangeAlert, false);
+    document.addEventListener('mozpointerlockchange', lockChangeAlert, false);
+
+    function lockChangeAlert() {
+      if (document.pointerLockElement === document.body ||
+        document.mozPointerLockElement === document.body) {
+        console.log('The pointer lock status is now locked');
+        document.addEventListener("mousemove", updatePosition, false);
+      } else {
+        console.log('The pointer lock status is now unlocked');
+        document.removeEventListener("mousemove", updatePosition, false);
+        Input._options.axes.filter((axis)=>axis.name === 'mouseHorizontal')[0].value = 0;
+        Input._options.axes.filter((axis)=>axis.name === 'mouseVertical')[0].value = 0;
+      }
+    }
+
+    function updatePosition(e) {
+      Input._options.axes.filter((axis)=>axis.name === 'mouseHorizontal')[0].value = e.movementX;
+      Input._options.axes.filter((axis)=>axis.name === 'mouseVertical')[0].value = e.movementY;
+    }
+    // End pointer lock
+
       // Mouse buttons
       document.body.onmouseup = (e)=> Input._options.axes.filter(
           (axis)=>axis.type === InputType.mouseButton)
@@ -108,8 +143,8 @@ const Input = {
           .forEach((axis)=>updateAxisInt(axis, e.which));
 
       // Mouse Movement
-      document.body.onmousemove = (e)=> Input._options.axes.filter(
-          (axis)=>axis.type === InputType.mouse)
-          .forEach((axis)=>updateAxisFloat(axis, e));
+      //document.body.onmousemove = (e)=> Input._options.axes.filter(
+      //    (axis)=>axis.type === InputType.mouse)
+      //    .forEach((axis)=>updateAxisFloat(axis, e));
     },
 };
