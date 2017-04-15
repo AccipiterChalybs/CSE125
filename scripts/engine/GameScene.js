@@ -29,7 +29,7 @@ class GameScene {
 
         GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new RotateOverTime(-1));
 
-        Renderer.camera.transform.getParent().gameObject.addComponent(new RotateOverTime(1));
+        Renderer.camera.transform.getParent().gameObject.addComponent(new RotateArrowKey(1));
     }
 
     update() {

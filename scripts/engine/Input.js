@@ -26,6 +26,20 @@ const Input = {
         type: InputType.mouse,
         direction: InputDirection.y,
       },
+	  {
+		  name: 'horizontal',
+		  type: InputType.keyboard,
+		  positiveButton: 39,
+		  negativeButton: 37,
+		  value: 0
+	  },
+	  {
+		  name: 'vertical',
+		  type: InputType.keyboard,
+		  positiveButton: 38,
+		  negativeButton: 40,
+		  value: 0
+	  }
     ],
   },
   getAxis: function (name) {
@@ -88,10 +102,10 @@ const Input = {
       // Keyboard buttons
       document.body.onkeyup = (e)=> Input._options.axes.filter(
           (axis)=>axis.type === InputType.keyboard)
-          .forEach((axis)=>updateAxisInt(axis, e.key, true));
+          .forEach((axis)=>updateAxisInt(axis, e.which, true));
       document.body.onkeydown = (e)=> Input._options.axes.filter(
           (axis)=>axis.type === InputType.keyboard)
-          .forEach((axis)=>updateAxisInt(axis, e.key));
+          .forEach((axis)=>updateAxisInt(axis, e.which));
 
       // Mouse Movement
       document.body.onmousemove = (e)=> Input._options.axes.filter(
