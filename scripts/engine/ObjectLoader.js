@@ -166,37 +166,36 @@ class ObjectLoader {
             //TODO remove me!!!
             mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER));
 
-/*
-            if (aMat.GetTextureCount("aiTextureType_DIFFUSE") > 0) {
+            //TODO make it load textures!
+            if (false && aMat.GetTextureCount("aiTextureType_DIFFUSE") > 0) {
                 let path = null;
                 aMath.GetTexture(aiTextureType_DIFFUSE, 0, path);
-                mat["colorTex"] = new Texture(getPath(filename) + path, true);
+                mat.setTexture(MaterialTexture.COLOR, new Texture(getPath(filename) + path, true))
             }
             else {
                 let color = vec4.create(); vec4.set(color,1,1,1,1);
-                mat["colorTex"] = Texture.makeColorTex(color);
+                mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color))
             }
 
-            if (aMat.GetTextureCount("aiTextureType_NORMALS") > 0) {
+            if (false && aMat.GetTextureCount("aiTextureType_NORMALS") > 0) {
                 let path = null;
                 aMath.GetTexture(aiTextureType_NORMALS, 0, path);
-                mat["normalTex"] = new Texture(getPath(filename) + path, false);
+                mat.setTexture(MaterialTexture.NORMAL, new Texture(getPath(filename) + path, false))
             }
             else {
                 let color = vec4.create(); vec4.set(color,0.5,0.5,1,1);
-                mat["normalTex"] = Texture.makeColorTex(color);
+                mat.setTexture(MaterialTexture.NORMAL, Texture.makeColorTex(color))
             }
 
-            if (aMat.GetTextureCount("aiTextureType_SPECULAR") > 0) {
+            if (false && aMat.GetTextureCount("aiTextureType_SPECULAR") > 0) {
                 let path = null;
                 aMath.GetTexture(aiTextureType_DIFFUSE, 0, path);
-                mat["colorTex"] = new Texture(getPath(filename) + path, true);
+                mat.setTexture(MaterialTexture.MAT, new Texture(getPath(filename) + path, true));
             }
             else {
-                let color = vec4.create(); vec4.set(color,0,0.45,0.7,1);
-                mat["colorTex"] = Texture.makeColorTex(color);
-            }*/
-            mat["userTextures"] = false;//TODO re-enable//true;
+                let color = vec4.create(); vec4.set(color,0,0,0.1,1); //metalness, blank, roughness
+                mat.setTexture(MaterialTexture.MAT, Texture.makeColorTex(color))
+            }
             mesh.setMaterial(mat);
 
             nodeObject.addComponent(mesh);

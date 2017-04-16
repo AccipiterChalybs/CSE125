@@ -57,15 +57,12 @@ RGBE_LOADER.loadHDR = function(filename, output, callback) {
                     break;
                 }
             }
-            Debug.startTimer();
-            Debug.getTimerDuration("EDIT LOOP: ");
             /*for (let x=0; x<output.data.length; ++x) {
                 output.data[x] = Math.random();//byteArray[x%100];
                 //output.data[x] = output.data[x] / output.data[(x+1)%100]
             }*/
+            //TODO speed this up if possible / needed
             RGBE_LOADER.ReadPixels_RLE(output.data, byteArray.slice(startIndex, byteArray.length), imgSize[0], imgSize[1]);
-            console.log(output.data.length);
-            Debug.getTimerDuration("DONE: ");
             callback();
         }
     };

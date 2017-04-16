@@ -19,6 +19,8 @@ class GameScene {
         let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 2.5);
         Renderer.camera.transform.setPosition(newPosition);
 
+        Renderer.camera.transform.getParent().gameObject.addComponent(new RotateMouse());
+
         let rotation = quat.create();
         quat.rotateX(rotation, rotation, -Math.PI/2);
         GameObject.prototype.SceneRoot.transform.setRotation(rotation);
@@ -30,11 +32,21 @@ class GameScene {
 
         GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new RotateOverTime(-1));
 
-        Renderer.camera.transform.getParent().gameObject.addComponent(new RotateMouse());
+        GameObject.prototype.SceneRoot.transform.children[2].gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.COLOR,
+            new Texture('assets/skybox/skybox.jpg'));
+
+        let mat = vec4.create(); vec4.set(mat, 1, 0, 0.15, 1);
+        GameObject.prototype.SceneRoot.transform.children[2].gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.MAT,
+            Texture.makeColorTex(mat));
+
+
+
     }
 
     update() {
-        Renderer.camera.transform.getParent().gameObject.update();
+        // -- Physics update call will likely go here --
+
+        Renderer.camera.transform.getParent().gameObject.update(); //TODO remove this one when SceneRoot contains all objects
     }
 }
 

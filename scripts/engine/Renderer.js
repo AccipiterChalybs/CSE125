@@ -71,22 +71,16 @@ const Renderer  = {
       Renderer.camera = null;
 
 
+      let skyboxName = 'grace/';
       let cubeFilenames = [
-            'assets/skybox/right.hdr',
-            'assets/skybox/left.hdr',
-            'assets/skybox/top.hdr',
-            'assets/skybox/bottom.hdr',
-            'assets/skybox/front.hdr',
-            'assets/skybox/back.hdr',
+          'assets/skybox/' + skyboxName + 'right.hdr',
+          'assets/skybox/' + skyboxName + 'left.hdr',
+          'assets/skybox/' + skyboxName + 'top.hdr',
+          'assets/skybox/' + skyboxName + 'bottom.hdr',
+          'assets/skybox/' + skyboxName + 'front.hdr',
+          'assets/skybox/' + skyboxName + 'back.hdr',
       ];
-      cubeFilenames = [
-          'assets/skybox/lowres/right.hdr',
-          'assets/skybox/lowres/left.hdr',
-          'assets/skybox/lowres/top.hdr',
-          'assets/skybox/lowres/bottom.hdr',
-          'assets/skybox/lowres/front.hdr',
-          'assets/skybox/lowres/back.hdr',
-      ];
+      //TODO should make a json file to load this with, and have exposure variable
       Renderer.skybox = new Skybox(cubeFilenames);
 
       let forwardPass = new ForwardPass();
@@ -302,7 +296,7 @@ const Renderer  = {
   //Runs after everything is loaded, before loop
   start: function() {
       Renderer.skybox.applyTexture(5);
-      //Renderer.skybox.applyIrradiance();
+      Renderer.skybox.applyIrradiance();
 
       Renderer.perspective = mat4.create();
       Renderer.resize(Renderer.canvas.clientWidth, Renderer.canvas.clientHeight);
@@ -388,8 +382,7 @@ const Renderer  = {
       Renderer.getShader(shaderId).setUniform('environment', slot, UniformTypes.u1i);
 
       //TODO: can we use mipmaps like Renderer in WebGL?
-      //Renderer.getShader(shaderId).setUniform("environment_mipmap",
-      // mipmapLevels, UniformTypes.u1i);
+      Renderer.getShader(shaderId).setUniform("environment_mipmap", mipmapLevels, UniformTypes.u1i);
     }
   },
 

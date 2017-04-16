@@ -44,7 +44,7 @@ class Skybox
 
     _finishLoad() {
         this._skyboxTex = Skybox._loadGLCube(this.hdr, this._imageArray);
-        //this.loadIrradiance(this._imageArray, this._irradianceMatrix);
+        this.loadIrradiance(this._imageArray, this._irradianceMatrix);
 
         this._imageArray = [];
         GameEngine.completeLoading(this.loadId);
@@ -76,7 +76,7 @@ class Skybox
     }
 
     applyIrradiance(){
-        //Renderer.setIrradiance(this._irradianceMatrix);
+        Renderer._setIrradiance(this._irradianceMatrix);
     }
 
     applyTexture(slot){
@@ -130,6 +130,9 @@ class Skybox
     loadIrradiance(data, irradianceMatrix) {
         //for each cube map
         let irradiance = [];
+        for (let shIndex = 0; shIndex < Skybox.prototype.SH_COUNT; ++shIndex) {
+            irradiance[shIndex] = new Float32Array(3);
+        }
         const shConst = [ 0.282095, 0.488603, 0.488603, 0.488603, 1.092548, 1.092548, 1.092548, 0.315392, 0.546274 ];
 
         let xVal=0;
@@ -219,7 +222,6 @@ class Skybox
                                 currentSH = shConst[shIndex] * (xVal*xVal - yVal*yVal);
                                 break;
                         }
-                        irradiance[shIndex] = [];
                         for (let c = 0; c < 3; ++c) {
                             irradiance[shIndex][c] += (currentSH * Math.sin(theta) / (CUBE_FACES*currentWidth*currentHeight)) * (currentImage[(x + y*currentWidth)*channels + c]);
                         }

@@ -121,24 +121,17 @@ vec3 SpecularEnvMap(vec3 normal, vec3 view, float a, vec3 F0) {
 
 
 void main () {
-  /*vec4 albedo = texture(colorTex, vTexCoord);
+  vec4 albedo = texture(colorTex, vTexCoord);
   vec3 mat = texture(matTex, vTexCoord).rgb;
 
-  //Test values - remove these for objects with textures
-  if (!useTextures) {
-	  mat.r = testMetal;
-	  mat.g = 0.45;
-	  mat.b = testRough;
-	  albedo = vec4(0.1, 0.1, 0.75, 1);
-  }
-  //end test values-------------------------------------
-
   vec3 normal_tangent = 2.0*texture(normalTex, vTexCoord).rgb - 1.0;
-  vec3 normal = normalize(vTangent * normal_tangent.x + vBitangent * normal_tangent.y + vNormal * normal_tangent.z);*/
+  vec3 normal = normalize(vTangent * normal_tangent.x + vBitangent * normal_tangent.y + vNormal * normal_tangent.z);
 
-  vec4 albedo = vec4(0.2,0.42,0.81,1);
-  vec3 mat = vec3(0,0,0.5);
-  vec3 normal = normalize(vNormal);
+  /* For Testing Shader ---
+  albedo = vec4(1,1,1,1);
+  mat = vec3(0,0,0.1);
+  normal = normalize(vNormal);
+  */
 
   vec3 view = normalize(cameraPos - vPosition.xyz);
 
@@ -159,10 +152,10 @@ void main () {
 
   vec4 normal4 = vec4(normal, 1.0);
 
-  vec3 diffuseLight = vec3(1,1,1) * dot(normal, vec3(1,0,0));/*vec3(dot(normal4, (irradiance[0] * normal4)),
+  vec3 diffuseLight = vec3(dot(normal4, (irradiance[0] * normal4)),
                            dot(normal4, (irradiance[1] * normal4)),
 						   dot(normal4, (irradiance[2] * normal4)) );
-*/
+
   vec3 specColor = SpecularEnvMap(normal, view, a, F0);
 
   /*

@@ -2,6 +2,11 @@
  * Created by Accipiter Chalybs on 4/5/2017.
  */
 
+MaterialTexture = {};
+MaterialTexture.COLOR = "colorTex";
+MaterialTexture.NORMAL = "normalTex";
+MaterialTexture.MAT = "matTex";
+
 class Material{
     constructor(shader, transparent) {
         this.shader = shader;
@@ -21,8 +26,7 @@ class Material{
 
         let i=0;
         for (let textureName of Object.keys(this.textures)) {
-            this.textures[textureName].bindTexture(i);
-            this.shader[textureName] = i; //use glUniform1i for samplers
+            this._useTexture(textureName,i);
             ++i;
         }
     }
@@ -34,5 +38,10 @@ class Material{
     //TODO do we also need to store value's type?
     setUniform(name, value) {
         this.uniforms[name] = value;
+    }
+
+    _useTexture(textureName, slot) {
+        this.textures[textureName].bindTexture(slot);
+        this.shader.setUniform(textureName, slot, UniformTypes.u1i); //use glUniform1i for samplers
     }
 }

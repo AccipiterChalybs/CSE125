@@ -6,6 +6,7 @@ let GameEngine = {};
 
 GameEngine.loadingTextId = "loadProgress";
 GameEngine._ready = false;      //if true, all requests have been made, and can start when they finish
+GameEngine._started = false;    //don't restart if we happen to load something at runtime;
 GameEngine._numLoads=0;         //total number of loads (for UI)
 GameEngine._loadHandles = [];   //handles of currently loading objects
 GameEngine._nextLoadHandle = 0; //next load handle to return
@@ -20,6 +21,7 @@ GameEngine.init = function() {
 
 /** Start: setup everything after loading is complete, then start loop */
 GameEngine.start = function() {
+    GameEngine._started = true;
     GameEngine.currentScene.start();
     Renderer.start();
     window.requestAnimationFrame(GameEngine.loop.bind(GameEngine));
@@ -44,7 +46,7 @@ GameEngine.loop = function() {
 /** Signal that no more requests are likely to be made (and so can start after all current tasks are loaded */
 GameEngine.finishLoadRequests = function() {
     GameEngine._ready = true;
-    if (GameEngine._loadHandles.length === 0) {
+    if (GameEngine._loadHandles.length === 0 && !GameEngine._started) {
         GameEngine.start();
     }
 };
@@ -56,6 +58,8 @@ GameEngine.registerLoading = function() {
     let loadHandle = GameEngine._nextLoadHandle;
     GameEngine._nextLoadHandle++;
     GameEngine._numLoads++;
+
+    if (GameEngine._started) { console.log("Loaded something at runtime after load, was this supposed to happen?"); }
 
     GameEngine._loadHandles.push(loadHandle);
 
@@ -69,7 +73,7 @@ GameEngine.completeLoading = function(loadHandle) {
     if (index > -1) {
         GameEngine._loadHandles.splice(index, 1);
         GameEngine.updateLoadingBar();
-        if (GameEngine._loadHandles.length === 0 && GameEngine._ready) {
+        if (GameEngine._loadHandles.length === 0 && GameEngine._ready && !GameEngine._started) {
             GameEngine.start();
         }
     } else {
