@@ -56,6 +56,7 @@ class Animation extends Component
 
             }
             currentAnimData.animationTime = longestTime;
+            currentAnimData.tickrate = animation.tickspersecond;
             this._animData.push(currentAnimData);
         }
     }
@@ -79,10 +80,9 @@ class Animation extends Component
         this._playing = true;//TODO remove
         this._looping = true;
 
-
         let currentAnim = this._animData[this._currentAnimationIndex];
         if (this._playing) {
-            this._currentTime += 4800*Time.deltaTime; //TODO update constant (maybe from JSON file's tickrate?)
+            this._currentTime += currentAnim.tickrate*Time.deltaTime; //TODO update constant (maybe from JSON file's tickrate?)
             if (this._currentTime > currentAnim.animationTime) {
                 if (this._looping) {
                     this._currentTime -= currentAnim.animationTime;
@@ -94,8 +94,8 @@ class Animation extends Component
         }
 
         for (let node of currentAnim.boneData) {
-    //        node.object.setPosition(Animation._interpolateKeyframes(node.keyframes.position, this._currentTime));
-    //        node.object.setRotation(Animation._interpolateQuaternions(node.keyframes.rotation, this._currentTime));
+            node.object.setPosition(Animation._interpolateKeyframes(node.keyframes.position, this._currentTime));
+            node.object.setRotation(Animation._interpolateQuaternions(node.keyframes.rotation, this._currentTime));
             // node.object.scale = node.keyframes.scale[scaleIndex].second;
         }
 
@@ -149,7 +149,7 @@ class Animation extends Component
     }
 
     static _convertQuat(input) {
-        let retVal = quat.create(); quat.set(retVal, input[0], input[1], input[2], input[3]);
+        let retVal = quat.create(); quat.set(retVal, input[1], input[2], input[3], input[0]);
         return retVal;
     }
 

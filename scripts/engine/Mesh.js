@@ -32,7 +32,7 @@ class Mesh extends Component {
                 let id = meshBoneData.boneMap[node.name];
 
                 let transformMatrix = mat4.create();
-                //TODO mat4.multiply(transformMatrix, node.object.getTransformMatrix(), meshBoneData.boneBindArray[id]);
+                mat4.multiply(transformMatrix, node.object.getTransformMatrix(), meshBoneData.boneBindArray[id]);
 
                 Renderer.currentShader.setUniform("bone_Matrix[" + id + "]", transformMatrix, UniformTypes.mat4);
             }
@@ -81,14 +81,10 @@ class Mesh extends Component {
                 Mesh.prototype.boneIdMap[name].boneMap[mesh.bones[b].name] = b;
                 Mesh.prototype.boneIdMap[name].boneBindArray[b] = mat4.create();
                 for (let matIndex = 0; matIndex < 16; ++matIndex) {
-                    //Assimp matrices are row major, glm & opengl are column major, so we need to convert here
-                    //TODO fix matrix indexing
-                    //Mesh.prototype.boneIdMap[name].boneBindArray[b][matIndex % 4][matIndex / 4] = mesh.bones[b].offsetMatrix[matIndex / 4][matIndex % 4];
-                    //TODO this might work? Might need to transpose matrix?
                     Mesh.prototype.boneIdMap[name].boneBindArray[b][matIndex] = mesh.bones[b].offsetmatrix[matIndex];
-                    mat4.transpose(Mesh.prototype.boneIdMap[name].boneBindArray[b], Mesh.prototype.boneIdMap[name].boneBindArray[b])
-
                 }
+                //Assimp matrices are row major, glm & opengl are column major, so we need to convert here
+                mat4.transpose(Mesh.prototype.boneIdMap[name].boneBindArray[b], Mesh.prototype.boneIdMap[name].boneBindArray[b])
 
                 //I think weights is formatted as [vertexId, weight]
                 for (let w = 0; w < mesh.bones[b].weights.length; ++w) {

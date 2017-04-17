@@ -20,7 +20,7 @@ class GameScene {
         new GameObject().addComponent(camera);
         let rootTest = new GameObject();
         camera.gameObject.transform.setParent(rootTest.transform);
-        let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 2.5);
+        let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 5);
         Renderer.camera.transform.setPosition(newPosition);
 
         Renderer.camera.transform.getParent().gameObject.addComponent(new RotateMouse());

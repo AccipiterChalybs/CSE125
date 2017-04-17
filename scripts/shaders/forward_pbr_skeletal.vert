@@ -24,9 +24,9 @@ out vec3 vBitangent;
 void main () {
 	mat4 transformMatrix;
 	transformMatrix = bone_Matrix[aBoneId.x] * aBoneWeight.x;
-	/*transformMatrix += bone_Matrix[aBoneId.y] * aBoneWeight.y;
+	transformMatrix += bone_Matrix[aBoneId.y] * aBoneWeight.y;
 	transformMatrix += bone_Matrix[aBoneId.z] * aBoneWeight.z;
-	transformMatrix += bone_Matrix[aBoneId.w] * aBoneWeight.w;*/
+	transformMatrix += bone_Matrix[aBoneId.w] * aBoneWeight.w;
 
 	transformMatrix = uM_Matrix * transformMatrix; //TODO should uV_Matrix go here?
 		  

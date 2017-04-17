@@ -111,10 +111,9 @@ class ObjectLoader {
         let scale = 1;
         let rotate = quat.create();
 
-        //TODO do we need to flip this matrix?
         let transformMat = mat4.create();
         mat4.set.apply(mat4, [transformMat].concat(currentNode.transformation));
-
+        mat4.transpose(transformMat, transformMat); //need to transpose when loading from ASSIMP file format
 
         mat4.getTranslation(pos, transformMat);
         mat4.getRotation(rotate, transformMat);
@@ -198,7 +197,7 @@ class ObjectLoader {
                 mat.setTexture(MaterialTexture.MAT, new Texture(getPath(filename) + path, true));
             }
             else {
-                let color = vec4.create(); vec4.set(color,0,0,0.1,1); //metalness, blank, roughness
+                let color = vec4.create(); vec4.set(color,0,0,0.25,1); //metalness, blank, roughness
                 mat.setTexture(MaterialTexture.MAT, Texture.makeColorTex(color))
             }
             mesh.setMaterial(mat);
