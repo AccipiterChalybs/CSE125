@@ -24,19 +24,17 @@ class Mesh extends Component {
 
         if ((Renderer.currentShader === Renderer.getShader(Renderer.FORWARD_PBR_SHADER_ANIM) ||
             Renderer.currentShader === Renderer.getShader(Renderer.DEFERRED_PBR_SHADER_ANIM) ||
-            Renderer.currentShader === Renderer.getShader(Renderer.SHADOW_SHADER_ANIM)) && animationRoot) {
+            Renderer.currentShader === Renderer.getShader(Renderer.SHADOW_SHADER_ANIM)) && this.animationRoot) {
             let meshBoneData = Mesh.prototype.boneIdMap[this.name];
 
-            for (let node of animationRoot.getAnimationData()) {
-                let bone = meshBoneData.boneMap[node.name];
-                if (!bone) continue; //TODO right way to check miss?
-                let id = bone.second;
+            for (let node of this.animationRoot.getAnimationData()) {
+                if (!meshBoneData.boneMap.hasOwnProperty(node.name)) { continue; }
+                let id = meshBoneData.boneMap[node.name];
 
+                let transformMatrix = mat4.create();
+                //TODO mat4.multiply(transformMatrix, node.object.getTransformMatrix(), meshBoneData.boneBindArray[id]);
 
-                let transformMatrix = node.object.getTransformMatrix() * meshBoneData.boneBindArray[id];
-
-
-                Renderer.currentShader.set("bone_Matrix[" + id + "]", transformMatrix, UniformTypes.mat4);
+                Renderer.currentShader.setUniform("bone_Matrix[" + id + "]", transformMatrix, UniformTypes.mat4);
             }
         }
 
@@ -67,42 +65,49 @@ class Mesh extends Component {
 
         let boneResults = null;
 
-        if (hasBones) { //TODO get actual name of this
-
-
-            Mesh.prototype.boneIdMap[name] = {}; //TODO need to initialize BoneData() ?
+        if (hasBones) {
+            Mesh.prototype.boneIdMap[name] = {boneMap: {}};
             Mesh.prototype.boneIdMap[name].boneBindArray = [];//(mesh.mNumBones);
 
 
             boneResults = [];
             let boneData = [];
 
-            for (let b = 0; b < mesh.mNumBones; ++b) {
-                Mesh.prototype.boneIdMap[name].boneMap[mesh.mBones[b].mName] = b;
+            for (let i = 0; i < mesh.vertices.length; ++i) {
+                boneData[i]=[];
+            }
+
+            for (let b = 0; b < mesh.bones.length; ++b) {
+                Mesh.prototype.boneIdMap[name].boneMap[mesh.bones[b].name] = b;
+                Mesh.prototype.boneIdMap[name].boneBindArray[b] = mat4.create();
                 for (let matIndex = 0; matIndex < 16; ++matIndex) {
                     //Assimp matrices are row major, glm & opengl are column major, so we need to convert here
                     //TODO fix matrix indexing
-                    Mesh.prototype.boneIdMap[name].boneBindArray[b][matIndex % 4][matIndex / 4] = mesh.bones[b].offsetMatrix[matIndex / 4][matIndex % 4];
+                    //Mesh.prototype.boneIdMap[name].boneBindArray[b][matIndex % 4][matIndex / 4] = mesh.bones[b].offsetMatrix[matIndex / 4][matIndex % 4];
+                    //TODO this might work? Might need to transpose matrix?
+                    Mesh.prototype.boneIdMap[name].boneBindArray[b][matIndex] = mesh.bones[b].offsetmatrix[matIndex];
+                    mat4.transpose(Mesh.prototype.boneIdMap[name].boneBindArray[b], Mesh.prototype.boneIdMap[name].boneBindArray[b])
+
                 }
 
                 //I think weights is formatted as [vertexId, weight]
                 for (let w = 0; w < mesh.bones[b].weights.length; ++w) {
                     boneData[mesh.bones[b].weights[w][0]].push({
                         first: b,
-                        second: mesh.mBones[b].mWeights[w][1]
+                        second: mesh.bones[b].weights[w][1]
                     });
                 }
             }
 
-            for (let i = 0; i < mesh.mNumVertices; ++i) {
+            for (let i = 0; i < mesh.vertices.length; ++i) {
                 boneData[i].sort(Mesh.boneWeightSort);
                 let bones = []; //NOTE: this needs to be ints - convert before using in WebGL!
                 let weights = vec4.create();
-                for (let d = 0; d < 4 && d < boneData[i].size(); ++d) {
+                for (let d = 0; d < 4 && d < boneData[i].length; ++d) {
                     bones[d] = boneData[i][d].first;
                     weights[d] = boneData[i][d].second;
                 }
-                weights = weights / (weights[0] + weights[1] + weights[2] + weights[3]);
+                vec4.scale(weights, weights, 1 / (weights[0] + weights[1] + weights[2] + weights[3]));
                 boneResults[i] = {first: bones, second: weights};
             }
         }

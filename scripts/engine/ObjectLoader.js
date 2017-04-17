@@ -149,6 +149,10 @@ class ObjectLoader {
             let foundEmit = name.search("Emit") !== -1;
             let mat = null;
 
+
+            //TODO remove me after deferred shading is ready
+            foundForward = true;
+
             //TODO either change material to accept an index, or pass in the shader object from Renderer
             let hasBones = ("bones" in scene.meshes[currentNode.meshes[0]]);
             if (foundForward) {
@@ -163,8 +167,9 @@ class ObjectLoader {
                 mat.transparent = false;
             }
 
-            //TODO remove me!!!
-            mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER));
+            //TODO remove me after deferred shading is ready
+            if (!hasBones) mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER));
+
 
             //TODO make it load textures!
             if (false && aMat.GetTextureCount("aiTextureType_DIFFUSE") > 0) {
@@ -233,7 +238,7 @@ class ObjectLoader {
         if (!currentTransform) return;
 
         let currentMesh = currentTransform.gameObject.getComponent("Mesh");
-        if (currentMesh !== null) {
+        if (currentMesh && currentMesh !== null) {
             currentMesh.animationRoot = anim;
         }
         for (let child of currentTransform.children) {
