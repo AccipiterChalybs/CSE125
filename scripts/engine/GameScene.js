@@ -2,6 +2,7 @@
  * Created by Accipiter Chalybs on 4/14/2017.
  */
 
+var albedo, mat, normal;
 
 class GameScene {
     constructor(filenameList) {
@@ -9,6 +10,9 @@ class GameScene {
         for (let filename of filenameList) {
             ObjectLoader.loadScene(filename); //TODO add callback to group these together
         }
+        albedo = new Texture('assets/texture/dungeon-stone1-albedo2.png');
+        mat = new Texture('assets/texture/dungeon-stone1-mat.png');
+        normal = new Texture('assets/texture/dungeon-stone1-normal.png');
     }
 
     start() {
@@ -20,8 +24,9 @@ class GameScene {
         Renderer.camera.transform.setPosition(newPosition);
 
         Renderer.camera.transform.getParent().gameObject.addComponent(new RotateMouse());
+        Renderer.camera.transform.getParent().gameObject.addComponent(new PlayerController());
 
-        let rotation = quat.create();
+        /*let rotation = quat.create();
         quat.rotateX(rotation, rotation, -Math.PI/2);
         GameObject.prototype.SceneRoot.transform.setRotation(rotation);
         let move = vec3.create(); vec3.set(move, 0, 0, 64);
@@ -38,8 +43,13 @@ class GameScene {
         let mat = vec4.create(); vec4.set(mat, 1, 0, 0.15, 1);
         GameObject.prototype.SceneRoot.transform.children[2].gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.MAT,
             Texture.makeColorTex(mat));
+            */
 
-
+        GameObject.prototype.SceneRoot.transform.children.forEach(function(child){
+          child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.COLOR, albedo);
+          child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.MAT, mat);
+          child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.NORMAL, normal);
+        });
 
     }
 
@@ -49,4 +59,3 @@ class GameScene {
         Renderer.camera.transform.getParent().gameObject.update(); //TODO remove this one when SceneRoot contains all objects
     }
 }
-
