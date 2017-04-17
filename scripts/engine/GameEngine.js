@@ -30,6 +30,7 @@ GameEngine.start = function() {
 /** Loop: called every frame */
 GameEngine.loop = function() {
     Time.tick();
+    Input.update();
 
     GameEngine.currentScene.update();
     GameObject.prototype.SceneRoot.update();

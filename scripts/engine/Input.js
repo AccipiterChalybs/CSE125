@@ -13,6 +13,11 @@ const InputDirection = {
   y: 'y',
 };
 
+let currentMouseX = 0;
+let currentMouseY = 0;
+let lastMouseX = 0;
+let lastMouseY = 0;
+
 const Input = {
   _options: {
     axes: [
@@ -20,12 +25,14 @@ const Input = {
         name: 'mouseHorizontal',
         type: InputType.mouse,
         direction: InputDirection.x,
+        sensitivity: 50,
         value: 0
       },
       {
         name: 'mouseVertical',
         type: InputType.mouse,
         direction: InputDirection.y,
+        sensitivity: 50,
         value: 0
       },
 	  {
@@ -56,6 +63,16 @@ const Input = {
       x: x.value,
       y: y.value,
     };
+  },
+
+  update: function(){
+    Input._options.axes.filter((axis) => axis.name === 'mouseHorizontal')[0].value =
+          currentMouseX - lastMouseX;
+    Input._options.axes.filter((axis) => axis.name === 'mouseVertical')[0].value =
+          currentMouseY - lastMouseY;
+
+    currentMouseX = lastMouseX;
+    currentMouseY = lastMouseY;
   },
 
   init: function (options) {
@@ -118,8 +135,9 @@ const Input = {
     }
 
     function updatePosition(e) {
-      Input._options.axes.filter((axis)=>axis.name === 'mouseHorizontal')[0].value = e.movementX;
-      Input._options.axes.filter((axis)=>axis.name === 'mouseVertical')[0].value = e.movementY;
+      console.log("new");
+      currentMouseX += e.movementX;
+      currentMouseY += e.movementY;
     }
     // End pointer lock
 
