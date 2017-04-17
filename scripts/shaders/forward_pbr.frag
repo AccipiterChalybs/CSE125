@@ -58,17 +58,17 @@ vec3 GGX_Sample(vec2 xi,  vec3 normal, float a) {
 	float cosTheta = sqrt((1.0 - xi.y) / ((a*a - 1.0) * xi.y + 1.0));
 	float sinTheta = sqrt(1.0 - cosTheta * cosTheta);
 
-	
+
 	vec3 H;
 	H.x = sinTheta * cos( phi );
 	H.y = sinTheta * sin( phi );
 	H.z = cosTheta;
 
-	
+
 	vec3 UpVector = abs(normal.z) < 0.999 ? vec3(0,0,1) : vec3(1,0,0);
 	vec3 TangentX = normalize( cross( UpVector, normal ) );
 	vec3 TangentY = cross( normal, TangentX );
-	
+
 	// Tangent to world space
 	return TangentX * H.x + TangentY * H.y + normal * H.z;
 }
@@ -89,7 +89,7 @@ float GGX_D(float dotNH, float a) {
 
 vec3 SpecularBRDF(vec3 lightColor, vec3 normal, vec3 view, vec3 lightDir, float a, vec3 F0, float d) {
 		vec3 halfVec = normalize(view + lightDir);
-		
+
 		float dotNL = clamp(dot(normal, lightDir), 0.0, 1.0);
 
 		float dotNV = clamp(dot(normal, view), 0.0, 1.0);
@@ -148,7 +148,7 @@ void main () {
   F0 = mix(vec3(1,1,1) * dot(vec3(.33,.33,.33),F0), F0, mat.r); //my own improvement - could be wrong : desaturates Fresnel as metalness decreases
 
 
-  
+
 
   vec4 normal4 = vec4(normal, 1.0);
 
@@ -177,7 +177,7 @@ void main () {
 	}
 
     diffuseLight = diffuseLight + (uLightData[3*i+1].xyz * (clamp(dot(lightDir, normal) * power, 0.0, 1.0)));
-	
+
 	vec3 halfVec = normalize(view + lightDir);
 	float dotNH = clamp(dot(normal, halfVec), 0.0, 1.0);
 
