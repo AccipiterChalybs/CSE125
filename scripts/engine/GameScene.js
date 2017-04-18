@@ -51,11 +51,14 @@ class GameScene {
           child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.NORMAL, normal);
         });
            */
+        //add sound to a GameObject
+        GameObject.prototype.SceneRoot.transform.children[1].gameObject.addComponent(new AudioSource("spacejam"))
     }
 
     update() {
         // -- Physics update call will likely go here --
-
         Renderer.camera.transform.getParent().gameObject.update(); //TODO remove this one when SceneRoot contains all objects
+        let cameraAPos = Renderer.camera.transform.getWorldPosition();
+        Howler.pos(cameraAPos[0],cameraAPos[1],-0.5);
     }
 }
