@@ -14,6 +14,7 @@ const Renderer  = {
       Renderer.shaderPath = "scripts/shaders/";
       Renderer.FORWARD_PBR_SHADER = 1; //NOTE *** need to also initialize useTexture
       Renderer.SKYBOX_SHADER = 2;
+      Renderer.FBO_HDR=3;
       Renderer.FORWARD_UNLIT = 13;
       Renderer.MODEL_MATRIX = "uM_Matrix";
       Renderer.VIEW_MATRIX = "uV_Matrix";
@@ -65,6 +66,10 @@ const Renderer  = {
             Renderer.shaderPath + 'forward_pbr.vert', Renderer.shaderPath + 'forward_unlit.frag'
       );
 
+      Renderer.shaderList[Renderer.FBO_HDR] = new Shader(
+          Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_hdr.frag"
+      );
+
       Renderer.currentShader = null;
       Renderer.gpuData = {}; Renderer.gpuData.vaoHandle = -1;
 
@@ -93,6 +98,9 @@ const Renderer  = {
       Renderer.renderBuffer = { forward: [], deferred: [], particle: [], light: [] };
 
       GameEngine.finishLoadRequests();
+
+
+      this.fbo_Test = new Framebuffer(1920, 1080, 1, false, true);
       /*
 
         Renderer.shaderPath = "source/shaders/";
@@ -332,9 +340,14 @@ const Renderer  = {
       }
 
 
+      this.fbo_Test.bind([GL.COLOR_ATTACHMENT0]);
       for (let pass of Renderer.passes) {
         pass.render();
       }
+      this.fbo_Test.unbind();
+      Renderer.getShader(Renderer.FBO_HDR).use();
+      this.fbo_Test.bindTexture(0, 0);
+      this.fbo_Test.draw();
     },
 
   //private
@@ -424,10 +437,10 @@ const Renderer  = {
   },
 
   getWindowWidth: function() {
-      return width;
+      return Renderer.width;
   },
 
   getWindowHeight: function() {
-      return height;
+      return Renderer.height;
   }
 };

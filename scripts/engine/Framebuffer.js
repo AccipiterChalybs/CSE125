@@ -6,7 +6,7 @@
 
 class Framebuffer {
 
-    constructor(w, h, numColorTexture, accessibleDepth, hdrEnabled) {
+    constructor(w, h, numColorTexture, accessibleDepth, hdrEnabled, colorFormats = null) {
         //this.id = 0;
         this.accessibleDepth = accessibleDepth;
         //this.colorTex = [];
@@ -25,8 +25,13 @@ class Framebuffer {
         GL.bindFramebuffer(GL.FRAMEBUFFER, this.id);
 
         this.colorTex = [];
-        for (let x=0; x<this.numColorTex; ++x) {
-            this.colorFormats[x] = GL.RGBA;
+        if (colorFormats === null) {
+            for (let x = 0; x < this.numColorTex; ++x) {
+                this.colorFormats[x] = (this.hdrEnabled) ? GL.RGBA16F : GL.RGBA;
+            }
+        }
+
+        for (let x = 0; x < this.numColorTex; ++x) {
             this._addColorTexture(x);
         }
 
@@ -36,7 +41,7 @@ class Framebuffer {
             this._addDepthBuffer();
         }
 
-        GL.bindFramebuffer(GL.FRAMEBUFFER, 0);
+        GL.bindFramebuffer(GL.FRAMEBUFFER, null);
     }
 
     deleteTextures() {
@@ -66,10 +71,10 @@ class Framebuffer {
         } else {
             this._addDepthBuffer();
         }
-        GL.bindFramebuffer(GL.FRAMEBUFFER, 0);
+        GL.bindFramebuffer(GL.FRAMEBUFFER, null);
     }
 
-    //note buffersToDraw should be an array of COLOR_ATTACHMENTX_WEBGL
+    //note buffersToDraw should be an array of COLOR_ATTACHMENTX
     bind(buffersToDraw) {
         GL.bindFramebuffer(GL.FRAMEBUFFER, this.id);
         GL.drawBuffers(buffersToDraw);
@@ -78,15 +83,15 @@ class Framebuffer {
         //TODO use Renderer.resize()?
         GL.viewport(0, 0, this.width, this.height);
         let perspective = mat4.create();
-        mat4.perspective(perspective, Renderer.camera.getFOV(), this.width/this.height, NEAR_DEPTH, FAR_DEPTH);
+        mat4.perspective(perspective, Renderer.camera.getFOV(), this.width/this.height, Renderer.NEAR_DEPTH, Renderer.FAR_DEPTH);
         Renderer._updatePerspective(perspective);
     }
 
     unbind() {
-        GL.bindFramebuffer(GL.FRAMEBUFFER, 0);
+        GL.bindFramebuffer(GL.FRAMEBUFFER, null);
         GL.viewport(0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
         let perspective = mat4.create();
-        mat4.perspective(perspective, Renderer.camera.getFOV(),Renderer.getWindowWidth()/Renderer.getWindowHeight(), NEAR_DEPTH, FAR_DEPTH);
+        mat4.perspective(perspective, Renderer.camera.getFOV(),Renderer.getWindowWidth()/Renderer.getWindowHeight(), Renderer.NEAR_DEPTH, Renderer.FAR_DEPTH);
         Renderer._updatePerspective(perspective);
     }
 
@@ -119,33 +124,38 @@ class Framebuffer {
     }
 
     draw() {
-        //TODO static variable I think?
-        if (!Framebuffer.loaded) {
+        if (!Framebuffer.prototype.loaded) {
             Framebuffer.load();
         }
 
-        if (Renderer.gpuData.vaoHandle !== Framebuffer.meshData.vaoHandle) {
-            GL.bindVertexArray(Framebuffer.meshData.vaoHandle);
-            Renderer.gpuData.vaoHandle = Framebuffer.meshData.vaoHandle;
+        if (Renderer.gpuData.vaoHandle !== Framebuffer.prototype.meshData.vaoHandle) {
+            GL.bindVertexArray(Framebuffer.prototype.meshData.vaoHandle);
+            Renderer.gpuData.vaoHandle = Framebuffer.prototype.meshData.vaoHandle;
         }
 
-        GL.drawElements(GL.TRIANGLES, Framebuffer.meshData.indexSize, GL.UNSIGNED_INT, 0);
+        GL.drawElements(GL.TRIANGLES, Framebuffer.prototype.meshData.indexSize, GL.UNSIGNED_SHORT, 0);
     }
 
     _addColorTexture(index) {
         this.colorTex[index] = GL.createTexture();
-        GL.bindTexture(1, this.colorTex[index]);
+        GL.bindTexture(GL.TEXTURE_2D, this.colorTex[index]);
 
-        let type = (this.hdrEnabled && GLExtensions.texture_float && GLExtensions.texture_float_linear) ? GL.FLOAT : GL.UNSIGNED_BYTE
-        GL.texImage2D(GL.TEXTURE_2D, 0, this.colorFormats[index], this.width, this.height, 0, GL.RGBA, type, 0);
-        GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.LINEAR);
-        GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.LINEAR);
+        if (!GLExtensions.colorBuffer) {
+            this.hdrEnabled = false;
+        }
+
+
+        let type = (this.hdrEnabled) ? GL.HALF_FLOAT: GL.UNSIGNED_BYTE; //TODO should it be always unsigned byte?
+        let wrap = (!this.hdrEnabled || GLExtensions.texture_float_linear) ? GL.LINEAR : GL.NEAREST;
+        GL.texImage2D(GL.TEXTURE_2D, 0, this.colorFormats[index], this.width, this.height, 0, GL.RGBA, type, null);
+        GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, wrap);
+        GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, wrap);
 
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_WRAP_S, GL.CLAMP_TO_EDGE);
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_WRAP_T, GL.CLAMP_TO_EDGE);
 
         //TODO make sure the addition works ok with the extension
-        GL.framebufferTexture2D(GL.FRAMEBUFFER, GLExtensions.draw_buffers.COLOR_ATTACHMENT0_WEBGL + index, GL.TEXTURE_2D, this.colorTex[index], 0 );
+        GL.framebufferTexture2D(GL.FRAMEBUFFER, GL.COLOR_ATTACHMENT0 + index, GL.TEXTURE_2D, this.colorTex[index], 0 );
     }
 
     _addDepthTexture() {
@@ -171,13 +181,12 @@ class Framebuffer {
     _addDepthBuffer() {
         this.depthTex = GL.createRenderbuffer();
         GL.bindRenderbuffer(GL.RENDERBUFFER, this.depthTex);
-        GL.renderbufferStorage(GL.RENDERBUFFER, GL.DEPTH_COMPONENT, this.width, this.height);
+        GL.renderbufferStorage(GL.RENDERBUFFER, GL.DEPTH_COMPONENT16, this.width, this.height);
         GL.framebufferRenderbuffer(GL.FRAMEBUFFER, GL.DEPTH_ATTACHMENT, GL.RENDERBUFFER, this.depthTex);
     }
 
 
 static load() {
-    let VERTEX_COUNT = ((3+2) * 4);
     let fbo_vertices = [ -1, -1, 0, 0, 0,
         1, -1, 0, 1, 0,
         1,  1, 0, 1, 1,
@@ -194,36 +203,31 @@ static load() {
     let VERTEX_ATTRIB_LOCATION =0;
     let TEX_COORD_0_ATTRIB_LOCATION = 2;
 
-    Framebuffer.meshData = {};
+    Framebuffer.prototype.meshData = {};
 
-    //TODO check sizes
-    intSize = 4;
+    let vao = GL.createVertexArray();
+    GL.bindVertexArray(vao);
 
-    //let vao = GL.createBuffer();
-    //glBindVertexArray(vao);
-
-    //glEnableVertexAttribArray(VERTEX_ATTRIB_LOCATION);
-    //glEnableVertexAttribArray(TEX_COORD_0_ATTRIB_LOCATION);
+    GL.enableVertexAttribArray(VERTEX_ATTRIB_LOCATION);
+    GL.enableVertexAttribArray(TEX_COORD_0_ATTRIB_LOCATION);
 
     //TODO use new Float32Array etc. for passing in data
     let meshBuffer = GL.createBuffer();
     let indBuffer = GL.createBuffer();
     GL.bindBuffer(GL.ARRAY_BUFFER, meshBuffer);
-    GL.bufferData(GL.ARRAY_BUFFER, VERTEX_COUNT * FLOAT_SIZE, fbo_vertices, GL.STATIC_DRAW);
-
+    GL.bufferData(GL.ARRAY_BUFFER, new Float32Array(fbo_vertices), GL.STATIC_DRAW);
 
     GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, indBuffer);
-    GL.bufferData(GL.ELEMENT_ARRAY_BUFFER, INDEX_COUNT * 4, fbo_indices, GL_STATIC_DRAW);
-
+    GL.bufferData(GL.ELEMENT_ARRAY_BUFFER, new Uint16Array(fbo_indices), GL.STATIC_DRAW);
 
     let stride = FLOAT_SIZE * (POSITION_COUNT + TEX_COORD_COUNT);
     GL.vertexAttribPointer(VERTEX_ATTRIB_LOCATION, 3, GL.FLOAT, false, stride, 0);
     GL.vertexAttribPointer(TEX_COORD_0_ATTRIB_LOCATION, 2, GL.FLOAT, false, stride, (FLOAT_SIZE * 3));
 
-    Framebuffer.meshData.vaoHandle = vao;
-    Framebuffer.meshData.indexSize = INDEX_COUNT;
+    Framebuffer.prototype.meshData.vaoHandle = vao;
+    Framebuffer.prototype.meshData.indexSize = INDEX_COUNT;
 
-    Framebuffer.loaded = true;
+    Framebuffer.prototype.loaded = true;
 }
 
 }

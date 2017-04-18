@@ -11,8 +11,8 @@ class GameScene {
             ObjectLoader.loadScene(filename); //TODO add callback to group these together
         }
         albedo = new Texture('assets/texture/dungeon-stone1-albedo2.png');
-        mat = new Texture('assets/texture/dungeon-stone1-mat.png');
-        normal = new Texture('assets/texture/dungeon-stone1-normal.png');
+        mat = new Texture('assets/texture/dungeon-stone1-mat.png', false);
+        normal = new Texture('assets/texture/dungeon-stone1-normal.png', false);
     }
 
     start() {
@@ -20,7 +20,7 @@ class GameScene {
         new GameObject().addComponent(camera);
         let rootTest = new GameObject();
         camera.gameObject.transform.setParent(rootTest.transform);
-        let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 2.5);
+        let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 7.5);
         Renderer.camera.transform.setPosition(newPosition);
 
         Renderer.camera.transform.getParent().gameObject.addComponent(new RotateMouse());

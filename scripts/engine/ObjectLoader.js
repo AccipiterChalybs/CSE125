@@ -190,7 +190,7 @@ class ObjectLoader {
             if (false && aMat.GetTextureCount("aiTextureType_SPECULAR") > 0) {
                 let path = null;
                 aMath.GetTexture(aiTextureType_DIFFUSE, 0, path);
-                mat.setTexture(MaterialTexture.MAT, new Texture(getPath(filename) + path, true));
+                mat.setTexture(MaterialTexture.MAT, new Texture(getPath(filename) + path, false));
             }
             else {
                 let color = vec4.create(); vec4.set(color,0,0,0.1,1); //metalness, blank, roughness
