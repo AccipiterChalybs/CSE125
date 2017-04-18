@@ -24,9 +24,9 @@ class GameScene {
         Renderer.camera.transform.setPosition(newPosition);
 
         Renderer.camera.transform.getParent().gameObject.addComponent(new RotateMouse());
-        Renderer.camera.transform.getParent().gameObject.addComponent(new PlayerController());
+        //Renderer.camera.transform.getParent().gameObject.addComponent(new PlayerController());
 
-        /*let rotation = quat.create();
+        let rotation = quat.create();
         quat.rotateX(rotation, rotation, -Math.PI/2);
         GameObject.prototype.SceneRoot.transform.setRotation(rotation);
         let move = vec3.create(); vec3.set(move, 0, 0, 64);
@@ -43,14 +43,14 @@ class GameScene {
         let mat = vec4.create(); vec4.set(mat, 1, 0, 0.15, 1);
         GameObject.prototype.SceneRoot.transform.children[2].gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.MAT,
             Texture.makeColorTex(mat));
-            */
 
+        /*
         GameObject.prototype.SceneRoot.transform.children.forEach(function(child){
           child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.COLOR, albedo);
           child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.MAT, mat);
           child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.NORMAL, normal);
         });
-
+           */
     }
 
     update() {
