@@ -12,6 +12,7 @@ function initialize() {
 
   Input.init();
 
+  PhysicsEngine.init();
   GameEngine.init();
   initRenderer(glCanvas);
 }
