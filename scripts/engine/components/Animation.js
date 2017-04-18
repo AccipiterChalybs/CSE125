@@ -77,9 +77,6 @@ class Animation extends Component
     }
 
     update() {
-        this._playing = true;//TODO remove
-        this._looping = true;
-
         let currentAnim = this._animData[this._currentAnimationIndex];
         if (this._playing) {
             this._currentTime += currentAnim.tickrate*Time.deltaTime; //TODO update constant (maybe from JSON file's tickrate?)
