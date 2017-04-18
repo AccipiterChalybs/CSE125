@@ -124,10 +124,10 @@ const Input = {
     function lockChangeAlert() {
       if (document.pointerLockElement === document.body ||
         document.mozPointerLockElement === document.body) {
-        console.log('The pointer lock status is now locked');
+        //console.log('The pointer lock status is now locked');
         document.addEventListener("mousemove", updatePosition, false);
       } else {
-        console.log('The pointer lock status is now unlocked');
+        //console.log('The pointer lock status is now unlocked');
         document.removeEventListener("mousemove", updatePosition, false);
         Input._options.axes.filter((axis)=>axis.name === 'mouseHorizontal')[0].value = 0;
         Input._options.axes.filter((axis)=>axis.name === 'mouseVertical')[0].value = 0;

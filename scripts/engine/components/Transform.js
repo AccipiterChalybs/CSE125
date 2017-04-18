@@ -180,7 +180,6 @@ class Transform extends Component
         let tmpForwardVec = vec4.create();
         vec4.transformMat4(tmpForwardVec, forwardVector, this.getTransformMatrix());
         vec3.set(this.cachedForwardVec, tmpForwardVec[0], tmpForwardVec[1], tmpForwardVec[2]);
-        console.log(this.cachedForwardVec);
         this.worldForwardDirty = false;
       }
 
