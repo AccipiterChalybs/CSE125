@@ -18,12 +18,17 @@ class PlayerController extends Component{
     let y = Input.getAxis('vertical');
 
     if(x !== 0 || y !== 0) {
-      console.log("moving");
+      //console.log("moving");
+      let up = vec3.create(); vec3.set(up, 0, 1, 0);
 
       let move = vec3.create();
-      vec3.set(move, x, y, 0);
-      vec3.scale(move, move, this.movementSpeed);
-
+      let moveX = vec3.create(); vec3.cross(moveX, Renderer.camera.transform.getForward(), up);
+      let moveY = vec3.create(); vec3.cross(moveY, up, moveX);
+      vec3.normalize(moveX, moveX);
+      vec3.normalize(moveY, moveY);
+      vec3.scale(moveX, moveX, x*this.movementSpeed);
+      vec3.scale(moveY, moveY, y*this.movementSpeed);
+      vec3.add(move, moveX, moveY);
       this.transform.translate(move);
     }
   }

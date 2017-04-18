@@ -28,7 +28,7 @@ class GameScene {
 
         let rotation = quat.create();
         quat.rotateX(rotation, rotation, -Math.PI/2);
-        GameObject.prototype.SceneRoot.transform.setRotation(rotation);
+        //GameObject.prototype.SceneRoot.transform.setRotation(rotation);
         let move = vec3.create(); vec3.set(move, 0, 0, 64);
         GameObject.prototype.SceneRoot.transform.children[1].setPosition(move);
         GameObject.prototype.SceneRoot.transform.children[1].gameObject.addComponent(new PlayerController());

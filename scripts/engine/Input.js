@@ -135,7 +135,6 @@ const Input = {
     }
 
     function updatePosition(e) {
-      console.log("new");
       currentMouseX += e.movementX;
       currentMouseY += e.movementY;
     }
