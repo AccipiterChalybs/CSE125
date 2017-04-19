@@ -10,12 +10,18 @@ const Renderer  = {
   init: function (canvas, windowWidth, windowHeight) {
       GLExtensions.init();
 
+      Renderer.width = windowWidth;
+      Renderer.height = windowHeight;
+
       Renderer.canvas = canvas;
       Renderer.shaderPath = "scripts/shaders/";
       Renderer.FORWARD_PBR_SHADER_ANIM = 0;
       Renderer.FORWARD_PBR_SHADER = 1;
       Renderer.SKYBOX_SHADER = 2;
+      Renderer.FBO_HDR=3;
       Renderer.FORWARD_UNLIT = 13;
+      Renderer.FBO_BLUR=15;
+      Renderer.FBO_PASS=16;
       Renderer.MODEL_MATRIX = "uM_Matrix";
       Renderer.VIEW_MATRIX = "uV_Matrix";
       Renderer.PERSPECTIVE_MATRIX = "uP_Matrix";
@@ -68,6 +74,18 @@ const Renderer  = {
             Renderer.shaderPath + 'forward_pbr.vert', Renderer.shaderPath + 'forward_unlit.frag'
       );
 
+      Renderer.shaderList[Renderer.FBO_HDR] = new Shader(
+          Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_hdr.frag"
+      );
+
+      Renderer.shaderList[Renderer.FBO_BLUR] = new Shader(
+          Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_blur.frag"
+      );
+
+      Renderer.shaderList[Renderer.FBO_PASS] = new Shader(
+          Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_pass.frag"
+      );
+
       Renderer.currentShader = null;
       Renderer.gpuData = {}; Renderer.gpuData.vaoHandle = -1;
 
@@ -89,13 +107,19 @@ const Renderer  = {
       let forwardPass = new ForwardPass();
       let skyboxPass = new SkyboxPass(Renderer.skybox);
 
+      Renderer.deferredPass = new DeferredPass();
+      let bloomPass = new BloomPass(Renderer.deferredPass);
+
       Renderer.passes = [];
       Renderer.passes.push(forwardPass); //Note: This should usually go AFTER skybox, for transparent objects with no depth mask.
       Renderer.passes.push(skyboxPass);
+      Renderer.passes.push(bloomPass);
 
       Renderer.renderBuffer = { forward: [], deferred: [], particle: [], light: [] };
 
       GameEngine.finishLoadRequests();
+
+
       /*
 
         Renderer.shaderPath = "source/shaders/";
@@ -335,6 +359,7 @@ const Renderer  = {
       }
 
 
+      Renderer.deferredPass.fbo.bind([GL.COLOR_ATTACHMENT0]);
       for (let pass of Renderer.passes) {
         pass.render();
       }
@@ -427,10 +452,10 @@ const Renderer  = {
   },
 
   getWindowWidth: function() {
-      return width;
+      return Renderer.width;
   },
 
   getWindowHeight: function() {
-      return height;
+      return Renderer.height;
   }
 };

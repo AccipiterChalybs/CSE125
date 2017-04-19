@@ -28,7 +28,8 @@ void main () {
 	transformMatrix += bone_Matrix[aBoneId.z] * aBoneWeight.z;
 	transformMatrix += bone_Matrix[aBoneId.w] * aBoneWeight.w;
 
-	transformMatrix = uM_Matrix * transformMatrix; //TODO should uV_Matrix go here?
+    //I think uM_Matrix should *not* be multiplied, as I think it doubles it then
+	//transformMatrix = uM_Matrix * transformMatrix;
 		  
 	vNormal = mat3(transformMatrix) * aNormal;
 	vTangent = mat3(transformMatrix) * aTangent;
