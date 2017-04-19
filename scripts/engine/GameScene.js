@@ -58,7 +58,12 @@ class GameScene {
                 let mesh = new Mesh("Teapot02");
                 let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
 
-                if (x===5 && y===5) teapot.addComponent(new PlayerController());
+                if (x===5 && y===5) {
+                    //add sound to a GameObject
+                    teapot.addComponent(new AudioSource());
+                    teapot.getComponent("AudioSource").playSound3d("cruelangel");
+                    teapot.addComponent(new PlayerController());
+                }
 
                 let mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER));
 
@@ -106,7 +111,10 @@ class GameScene {
 
     update() {
         // -- Physics update call will likely go here --
-
         Renderer.camera.transform.getParent().gameObject.update(); //TODO remove this one when SceneRoot contains all objects
+
+        //Move to listener component in future updates
+        let cameraAPos = Renderer.camera.transform.getWorldPosition();
+        Howler.pos(cameraAPos[0],cameraAPos[1],cameraAPos[2]);
     }
 }
