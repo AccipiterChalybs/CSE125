@@ -10,9 +10,13 @@ class GameScene {
         for (let filename of filenameList) {
             ObjectLoader.loadScene(filename); //TODO add callback to group these together
         }
-        albedo = new Texture('assets/texture/dungeon-stone1-albedo2.png');
-        mat = new Texture('assets/texture/dungeon-stone1-mat.png', false);
-        normal = new Texture('assets/texture/dungeon-stone1-normal.png', false);
+
+        //TODO this will be moved into the JSON files
+        if (IS_SERVER) {
+            albedo = new Texture('assets/texture/dungeon-stone1-albedo2.png');
+            mat = new Texture('assets/texture/dungeon-stone1-mat.png', false);
+            normal = new Texture('assets/texture/dungeon-stone1-normal.png', false);
+        }
     }
 
     start() {
@@ -55,7 +59,25 @@ class GameScene {
         for (let x=0; x<metalNum; ++x) {
             for (let y=0; y<roughNum; ++y) {
                 let teapot = new GameObject();
-                let mesh = new Mesh("Teapot02");
+
+                if (!IS_SERVER) {
+                    let mesh = new Mesh("Teapot02");
+                    let mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER));
+
+                    let color = vec4.create();
+                    vec4.set(color,1,0.5,0.1,1);
+                    mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
+
+                    vec4.set(color,0.5,0.5,1,1);
+                    mat.setTexture(MaterialTexture.NORMAL, Texture.makeColorTex(color));
+
+                    vec4.set(color,x/(metalNum-1),0,y/(roughNum-1),1); //metalness, blank, roughness
+                    mat.setTexture(MaterialTexture.MAT, Texture.makeColorTex(color));
+
+                    mesh.setMaterial(mat);
+                    teapot.addComponent(mesh);
+                }
+
                 let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
 
                 if (x===5 && y===5) {
@@ -64,22 +86,6 @@ class GameScene {
                     teapot.getComponent("AudioSource").playSound3d("cruelangel");
                     teapot.addComponent(new PlayerController());
                 }
-
-                let mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER));
-
-                let color = vec4.create();
-                vec4.set(color,1,0.5,0.1,1);
-                mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
-
-                vec4.set(color,0.5,0.5,1,1);
-                mat.setTexture(MaterialTexture.NORMAL, Texture.makeColorTex(color));
-
-                vec4.set(color,x/(metalNum-1),0,y/(roughNum-1),1); //metalness, blank, roughness
-                mat.setTexture(MaterialTexture.MAT, Texture.makeColorTex(color));
-
-                mesh.setMaterial(mat);
-
-                teapot.addComponent(mesh);
 
                 teapot.transform.setPosition(pos);
                 teapot.transform.setRotation(rotation);

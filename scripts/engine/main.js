@@ -3,6 +3,7 @@
  */
 
 var GL;
+var IS_SERVER = false;
 
 function initialize() {
   let glCanvas = document.getElementsByTagName('canvas')[0];

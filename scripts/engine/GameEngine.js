@@ -26,9 +26,13 @@ GameEngine.init = function() {
 GameEngine.start = function() {
     GameEngine._started = true;
     GameEngine.currentScene.start();
-    Renderer.start();
-    window.requestAnimationFrame(GameEngine.loop.bind(GameEngine));
+
+    if (!IS_SERVER) {
+        Renderer.start();
+        window.requestAnimationFrame(GameEngine.loop.bind(GameEngine));
+    }
 };
+GameEngine.startMethod = GameEngine.start;
 
 /** Loop: called every frame */
 GameEngine.loop = function() {
@@ -37,9 +41,11 @@ GameEngine.loop = function() {
 
     GameEngine.currentScene.update();
     GameObject.prototype.SceneRoot.update();
-    Renderer.loop();
 
-    window.requestAnimationFrame(GameEngine.loop.bind(GameEngine));
+    if (!IS_SERVER) {
+        Renderer.loop();
+        window.requestAnimationFrame(GameEngine.loop.bind(GameEngine));
+    }
 };
 
 
@@ -76,9 +82,9 @@ GameEngine.completeLoading = function(loadHandle) {
     let index = GameEngine._loadHandles.indexOf(loadHandle);
     if (index > -1) {
         GameEngine._loadHandles.splice(index, 1);
-        GameEngine.updateLoadingBar();
+        if (!IS_SERVER) GameEngine.updateLoadingBar();
         if (GameEngine._loadHandles.length === 0 && GameEngine._ready && !GameEngine._started) {
-            GameEngine.start();
+            GameEngine.startMethod();
         }
     } else {
         console.error("Trying to complete load on already loaded object: " + loadHandle);
@@ -89,5 +95,5 @@ GameEngine.completeLoading = function(loadHandle) {
 GameEngine.updateLoadingBar = function() {
     let loadText = document.getElementById(GameEngine.loadingTextId);
     loadText.innerText = "Loading Progress: (" +
-        (GameEngine._numLoads-GameEngine._loadHandles.length) + " / " + GameEngine._numLoads + ")";
+        (GameEngine._numLoads - GameEngine._loadHandles.length) + " / " + GameEngine._numLoads + ")";
 };

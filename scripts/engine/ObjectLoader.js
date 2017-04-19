@@ -62,43 +62,33 @@ class ObjectLoader {
 
     static _loadJSON(url, func) {
         //from http://stackoverflow.com/questions/12460378/how-to-get-json-from-url-in-javascript
-        let getJSON = function(url, callback) {
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', url, true);
-            xhr.responseType = 'json';
-            xhr.onload = function() {
-                let status = xhr.status;
-                if (status === 200) {
-                    callback(null, xhr.response);
-                } else {
-                    callback(status);
-                }
+        if (IS_SERVER) {
+            //call server method;
+
+
+        } else {
+            let getJSON = function(url, callback) {
+                let xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.responseType = 'json';
+                xhr.onload = function() {
+                    let status = xhr.status;
+                    if (status === 200) {
+                        callback(null, xhr.response);
+                    } else {
+                        callback(status);
+                    }
+                };
+                xhr.send();
             };
-            xhr.send();
-        };
 
-        getJSON(url,
-            function(err, data) {
-                if (err !== null) alert("ERROR loading level: " + err);
-                else func(data);
-            });
-    }
-
-    /*
-    static _getMapping(mode) {
-        switch (mode) {
-            case ("aiTextureMapMode_Wrap") :
-                return GL_REPEAT;
-            case("aiTextureMapMode_Clamp") :
-                return GL_CLAMP_TO_EDGE;
-            case("aiTextureMapMode_Mirror") :
-                return GL_MIRRORED_REPEAT;
-            case("aiTextureMapMode_Decal") :
-                return GL_CLAMP_TO_BORDER;
-            default:
-                return GL_REPEAT;
+            getJSON(url,
+                function(err, data) {
+                    if (err !== null) alert("ERROR loading level: " + err);
+                    else func(data);
+                });
         }
-    }*/
+    }
 
     static _getPath ( name ) {
 
@@ -130,80 +120,87 @@ class ObjectLoader {
         if (name === "defaultobject") name = filename + ObjectLoader.prototype.counter;
         nodeObject.setName(name);
 
-        if (name in lights) {
-            nodeObject.addComponent(lights[name]);
-        }
-
-        if ("meshes" in currentNode) {
-            if (currentNode.meshes.length > 1) { throw new Error(); } //ASSERTION
-            if (!(name in Mesh.prototype.meshMap)) {
-                let meshIndex = currentNode.meshes[0];
-                Mesh.loadMesh(name, scene.meshes[meshIndex]);
+        if (!IS_SERVER) {
+            if (name in lights) {
+                nodeObject.addComponent(lights[name]);
             }
 
-            let mesh = new Mesh(name);
+            if ("meshes" in currentNode) {
+                if (currentNode.meshes.length > 1) {
+                    throw new Error();
+                } //ASSERTION
+                if (!(name in Mesh.prototype.meshMap)) {
+                    let meshIndex = currentNode.meshes[0];
+                    Mesh.loadMesh(name, scene.meshes[meshIndex]);
+                }
 
-            let aMat = scene.materials[scene.meshes[currentNode.meshes[0]].materialindex];
-            let foundForward = name.search("Forward") !== -1;
-            let foundEmit = name.search("Emit") !== -1;
-            let mat = null;
+                let mesh = new Mesh(name);
+
+                let aMat = scene.materials[scene.meshes[currentNode.meshes[0]].materialindex];
+                let foundForward = name.search("Forward") !== -1;
+                let foundEmit = name.search("Emit") !== -1;
+                let mat = null;
 
 
-            //TODO remove me after deferred shading is ready
-            foundForward = true;
+                //TODO remove me after deferred shading is ready
+                foundForward = true;
 
-            //TODO either change material to accept an index, or pass in the shader object from Renderer
-            let hasBones = ("bones" in scene.meshes[currentNode.meshes[0]]);
-            if (foundForward) {
-                mat = new Material(Renderer.getShader(hasBones ? Renderer.FORWARD_PBR_SHADER_ANIM :  Renderer.FORWARD_UNLIT));
-                mat.transparent = true;
+                //TODO either change material to accept an index, or pass in the shader object from Renderer
+                let hasBones = ("bones" in scene.meshes[currentNode.meshes[0]]);
+                if (foundForward) {
+                    mat = new Material(Renderer.getShader(hasBones ? Renderer.FORWARD_PBR_SHADER_ANIM : Renderer.FORWARD_UNLIT));
+                    mat.transparent = true;
+                }
+                else if (foundEmit) {
+                    mat = new Material(Renderer.getShader(Renderer.FORWARD_EMISSIVE));
+                    mat.transparent = true;
+                } else {
+                    mat = new Material(Renderer.getShader(hasBones ? Renderer.DEFERRED_PBR_SHADER_ANIM : Renderer.DEFERRED_PBR_SHADER));
+                    mat.transparent = false;
+                }
+
+                //TODO remove me after deferred shading is ready
+                if (!hasBones) mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER));
+
+
+                //TODO make it load textures!
+                if (false && aMat.GetTextureCount("aiTextureType_DIFFUSE") > 0) {
+                    let path = null;
+                    aMath.GetTexture(aiTextureType_DIFFUSE, 0, path);
+                    mat.setTexture(MaterialTexture.COLOR, new Texture(getPath(filename) + path, true))
+                }
+                else {
+                    let color = vec4.create();
+                    vec4.set(color, 1, 1, 1, 1);
+                    mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color))
+                }
+
+                if (false && aMat.GetTextureCount("aiTextureType_NORMALS") > 0) {
+                    let path = null;
+                    aMath.GetTexture(aiTextureType_NORMALS, 0, path);
+                    mat.setTexture(MaterialTexture.NORMAL, new Texture(getPath(filename) + path, false))
+                }
+                else {
+                    let color = vec4.create();
+                    vec4.set(color, 0.5, 0.5, 1, 1);
+                    mat.setTexture(MaterialTexture.NORMAL, Texture.makeColorTex(color))
+                }
+
+                if (false && aMat.GetTextureCount("aiTextureType_SPECULAR") > 0) {
+                    let path = null;
+                    aMath.GetTexture(aiTextureType_DIFFUSE, 0, path);
+                    mat.setTexture(MaterialTexture.MAT, new Texture(getPath(filename) + path, false));
+                }
+                else {
+                    let color = vec4.create();
+                    vec4.set(color, 0, 0, 0.25, 1); //metalness, blank, roughness
+                    mat.setTexture(MaterialTexture.MAT, Texture.makeColorTex(color))
+                }
+                mesh.setMaterial(mat);
+
+                nodeObject.addComponent(mesh);
+
             }
-            else if (foundEmit) {
-                mat = new Material(Renderer.getShader(Renderer.FORWARD_EMISSIVE));
-                mat.transparent = true;
-            } else {
-                mat = new Material(Renderer.getShader(hasBones ? Renderer.DEFERRED_PBR_SHADER_ANIM : Renderer.DEFERRED_PBR_SHADER));
-                mat.transparent = false;
-            }
-
-            //TODO remove me after deferred shading is ready
-            if (!hasBones) mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER));
-
-
-            //TODO make it load textures!
-            if (false && aMat.GetTextureCount("aiTextureType_DIFFUSE") > 0) {
-                let path = null;
-                aMath.GetTexture(aiTextureType_DIFFUSE, 0, path);
-                mat.setTexture(MaterialTexture.COLOR, new Texture(getPath(filename) + path, true))
-            }
-            else {
-                let color = vec4.create(); vec4.set(color,1,1,1,1);
-                mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color))
-            }
-
-            if (false && aMat.GetTextureCount("aiTextureType_NORMALS") > 0) {
-                let path = null;
-                aMath.GetTexture(aiTextureType_NORMALS, 0, path);
-                mat.setTexture(MaterialTexture.NORMAL, new Texture(getPath(filename) + path, false))
-            }
-            else {
-                let color = vec4.create(); vec4.set(color,0.5,0.5,1,1);
-                mat.setTexture(MaterialTexture.NORMAL, Texture.makeColorTex(color))
-            }
-
-            if (false && aMat.GetTextureCount("aiTextureType_SPECULAR") > 0) {
-                let path = null;
-                aMath.GetTexture(aiTextureType_DIFFUSE, 0, path);
-                mat.setTexture(MaterialTexture.MAT, new Texture(getPath(filename) + path, false));
-            }
-            else {
-                let color = vec4.create(); vec4.set(color,0,0,0.25,1); //metalness, blank, roughness
-                mat.setTexture(MaterialTexture.MAT, Texture.makeColorTex(color))
-            }
-            mesh.setMaterial(mat);
-
-            nodeObject.addComponent(mesh);
-
         }
 
         loadingAcceleration[currentNode.name] = nodeObject.transform;
