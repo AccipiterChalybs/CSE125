@@ -15,7 +15,7 @@ GameEngine.currentScene = null;
 
 /** Init: starts loading objects */
 GameEngine.init = function() {
-    GameEngine.currentScene = new GameScene(['assets/scenes/Scene1.json']);
+    GameEngine.currentScene = new GameScene(['assets/scenes/teapots.json']);
 };
 
 

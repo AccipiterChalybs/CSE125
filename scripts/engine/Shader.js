@@ -5,8 +5,9 @@
 let UniformTypes = {};
 UniformTypes.u1i = 0;
 UniformTypes.u1f = 1;
-UniformTypes.vec3 = 2;
-UniformTypes.mat4 = 3;
+UniformTypes.vec2 = 2;
+UniformTypes.vec3 = 3;
+UniformTypes.mat4 = 4;
 
 class Shader {
 
@@ -31,6 +32,9 @@ class Shader {
                 break;
             case UniformTypes.u1f:
                 GL.uniform1f(location, value);
+                break;
+            case UniformTypes.vec2:
+                GL.uniform2fv(location, value);
                 break;
             case UniformTypes.vec3:
                 GL.uniform3fv(location, value);

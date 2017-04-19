@@ -119,7 +119,7 @@ class Framebuffer {
         GL.bindFramebuffer(GL.READ_FRAMEBUFFER, this.id);
         GL.readBuffer(GL.COLOR_ATTACHMENT0 + index);
         GL.blitFramebuffer(0, 0, this.width, this.height, x, y, x+dest_width, y+dest_height, GL.COLOR_BUFFER_BIT, GL.LINEAR);
-        GL.bindFramebuffer(GL.READ_FRAMEBUFFER, 0);
+        GL.bindFramebuffer(GL.READ_FRAMEBUFFER, null);
 
     }
 
@@ -147,6 +147,7 @@ class Framebuffer {
 
         let type = (this.hdrEnabled) ? GL.HALF_FLOAT: GL.UNSIGNED_BYTE; //TODO should it be always unsigned byte?
         let wrap = (!this.hdrEnabled || GLExtensions.texture_float_linear) ? GL.LINEAR : GL.NEAREST;
+        if (wrap === GL.NEAREST) console.error("WARNING!!! LINEAR TEXTURE FILTER ON FRAMEBUFFER!");
         GL.texImage2D(GL.TEXTURE_2D, 0, this.colorFormats[index], this.width, this.height, 0, GL.RGBA, type, null);
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, wrap);
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, wrap);
