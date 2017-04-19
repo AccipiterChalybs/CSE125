@@ -77,7 +77,6 @@ class DeferredPass extends RenderPass
     constructor(){
         super();
         //TODO do we need to add a special Framebuffer thing here?
-        //TODO don't have width or height correctly set here!
         this.fbo = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 1, false, true);
             //TODO use this one: new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 4, false, true, [GL.RGBA8, GL.RGBA16, GL.RGBA16F, GL.RGBA16F]);
         //this.fbo = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), [GL.RGBA8, GL.RGBA16, GL.RGBA16F, GL.RGBA16F], true);
@@ -252,7 +251,8 @@ class BloomPass extends RenderPass
         this._brightPass.bind([buffers[0]]);
         s1.use();
         this._deferredPass.fbo.draw();
-        //CHECK_ERROR();
+
+
         this._brightPass.unbind();
         s2.use();
         this._brightPass.bindTexture(0, 0);
@@ -294,10 +294,12 @@ class BloomPass extends RenderPass
         this._deferredPass.fbo.draw();
 
 
+        /* Debug code - enable and disable anti-aliasing to see results of intermediate blur buffers.
         let abc=0;
         for (let i = 0; i < 5; i++) {
             this._blurBuffers[i][1].blitFramebuffer(0, abc, 0, (Renderer.getWindowWidth() / Math.pow(2, i + 1)), (Renderer.getWindowHeight() / Math.pow(2, i + 1)));
             abc += (Renderer.getWindowWidth() / Math.pow(2, i + 1));
         }
+        */
     }
 }

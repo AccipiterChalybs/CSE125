@@ -26,12 +26,10 @@ class GameScene {
         Renderer.camera.transform.getParent().gameObject.addComponent(new RotateMouse());
         //Renderer.camera.transform.getParent().gameObject.addComponent(new PlayerController());
 
-        let rotation = quat.create();
-        quat.rotateX(rotation, rotation, -Math.PI/2);
-        GameObject.prototype.SceneRoot.transform.setRotation(rotation);
-
         GameObject.prototype.SceneRoot.transform.children = [];
 
+        let rotation = quat.create();
+        quat.rotateX(rotation, rotation, -Math.PI/2);
         let metalNum = 10;
         let roughNum = 10;
         let separation = 27;
@@ -39,7 +37,7 @@ class GameScene {
             for (let y=0; y<roughNum; ++y) {
                 let teapot = new GameObject();
                 let mesh = new Mesh("Teapot02");
-                let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, (y - roughNum/2.0)*separation, 0);
+                let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, 0, -1 * (y - roughNum/2.0)*separation);
 
                 if (x===5 && y===5) teapot.addComponent(new PlayerController());
 
@@ -60,6 +58,7 @@ class GameScene {
                 teapot.addComponent(mesh);
 
                 teapot.transform.setPosition(pos);
+                teapot.transform.setRotation(rotation);
                 GameObject.prototype.SceneRoot.addChild(teapot);
             }
         }

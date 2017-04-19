@@ -104,13 +104,13 @@ const Renderer  = {
       let forwardPass = new ForwardPass();
       let skyboxPass = new SkyboxPass(Renderer.skybox);
 
-      Renderer.TdeferredPass = new DeferredPass();
-      Renderer.TbloomPass = new BloomPass(Renderer.TdeferredPass);
+      Renderer.deferredPass = new DeferredPass();
+      let bloomPass = new BloomPass(Renderer.deferredPass);
 
       Renderer.passes = [];
       Renderer.passes.push(forwardPass); //Note: This should usually go AFTER skybox, for transparent objects with no depth mask.
       Renderer.passes.push(skyboxPass);
-      Renderer.passes.push(Renderer.TbloomPass);
+      Renderer.passes.push(bloomPass);
 
       Renderer.renderBuffer = { forward: [], deferred: [], particle: [], light: [] };
 
@@ -356,14 +356,10 @@ const Renderer  = {
       }
 
 
-      Renderer.TdeferredPass.fbo.bind([GL.COLOR_ATTACHMENT0]);
+      Renderer.deferredPass.fbo.bind([GL.COLOR_ATTACHMENT0]);
       for (let pass of Renderer.passes) {
         pass.render();
       }
-      /*Renderer.TdeferredPass.fbo.unbind();
-      Renderer.getShader(Renderer.FBO_HDR).use();
-      Renderer.TdeferredPass.fbo.bindTexture(0, 0);
-      Renderer.TdeferredPass.fbo.draw();*/
     },
 
   //private

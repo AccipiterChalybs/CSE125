@@ -146,11 +146,11 @@ class Framebuffer {
 
 
         let type = (this.hdrEnabled) ? GL.HALF_FLOAT: GL.UNSIGNED_BYTE; //TODO should it be always unsigned byte?
-        let wrap = (!this.hdrEnabled || GLExtensions.texture_float_linear) ? GL.LINEAR : GL.NEAREST;
-        if (wrap === GL.NEAREST) console.error("WARNING!!! LINEAR TEXTURE FILTER ON FRAMEBUFFER!");
+        let filter = (!this.hdrEnabled || GLExtensions.texture_float_linear) ? GL.LINEAR : GL.NEAREST;
+        if (filter === GL.NEAREST) console.error("WARNING!!! LINEAR TEXTURE FILTER ON FRAMEBUFFER!");
         GL.texImage2D(GL.TEXTURE_2D, 0, this.colorFormats[index], this.width, this.height, 0, GL.RGBA, type, null);
-        GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, wrap);
-        GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, wrap);
+        GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, filter);
+        GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, filter);
 
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_WRAP_S, GL.CLAMP_TO_EDGE);
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_WRAP_T, GL.CLAMP_TO_EDGE);
