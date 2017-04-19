@@ -20,24 +20,43 @@ class GameScene {
         new GameObject().addComponent(camera);
         let rootTest = new GameObject();
         camera.gameObject.transform.setParent(rootTest.transform);
-        let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 2.5);
+        let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 5);
         Renderer.camera.transform.setPosition(newPosition);
 
         Renderer.camera.transform.getParent().gameObject.addComponent(new RotateMouse());
         //Renderer.camera.transform.getParent().gameObject.addComponent(new PlayerController());
 
-        GameObject.prototype.SceneRoot.transform.children = [];
+        GameObject.prototype.SceneRoot.getComponent('Animation').play(0, true);
+
+/*
+        let moveBack = vec3.create(); vec3.set(moveBack, 3, 0, 0);
+         GameObject.prototype.SceneRoot.transform.translate(moveBack);
+
+         GameObject.prototype.SceneRoot.transform.children.forEach(function(child){
+         child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.COLOR, albedo);
+         child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.MAT, mat);
+         child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.NORMAL, normal);
+         });*/
+
+
+
 
         let rotation = quat.create();
         quat.rotateX(rotation, rotation, -Math.PI/2);
+
+        let container = new GameObject();
+        container.transform.scale(0.02);
+        GameObject.prototype.SceneRoot.addChild(container);
+
         let metalNum = 10;
         let roughNum = 10;
         let separation = 27;
+        let yHeight = -25;
         for (let x=0; x<metalNum; ++x) {
             for (let y=0; y<roughNum; ++y) {
                 let teapot = new GameObject();
                 let mesh = new Mesh("Teapot02");
-                let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, 0, -1 * (y - roughNum/2.0)*separation);
+                let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
 
                 if (x===5 && y===5) teapot.addComponent(new PlayerController());
 
@@ -59,7 +78,7 @@ class GameScene {
 
                 teapot.transform.setPosition(pos);
                 teapot.transform.setRotation(rotation);
-                GameObject.prototype.SceneRoot.addChild(teapot);
+                container.addChild(teapot);
             }
         }
 
@@ -80,16 +99,9 @@ class GameScene {
         let mat = vec4.create(); vec4.set(mat, 1, 0, 0.15, 1);
         GameObject.prototype.SceneRoot.transform.children[2].gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.MAT,
 
+            Texture.makeColorTex(mat));
             Texture.makeColorTex(mat));*/
 
-
-        /*
-        GameObject.prototype.SceneRoot.transform.children.forEach(function(child){
-          child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.COLOR, albedo);
-          child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.MAT, mat);
-          child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.NORMAL, normal);
-        });
-        */
     }
 
     update() {

@@ -294,12 +294,13 @@ class BloomPass extends RenderPass
         this._deferredPass.fbo.draw();
 
 
-        /* Debug code - enable and disable anti-aliasing to see results of intermediate blur buffers.
-        let abc=0;
-        for (let i = 0; i < 5; i++) {
-            this._blurBuffers[i][1].blitFramebuffer(0, abc, 0, (Renderer.getWindowWidth() / Math.pow(2, i + 1)), (Renderer.getWindowHeight() / Math.pow(2, i + 1)));
-            abc += (Renderer.getWindowWidth() / Math.pow(2, i + 1));
+        // Debug code - enable and disable anti-aliasing to see results of intermediate blur buffers.
+        if (Debug.bufferDebugMode) {
+            let abc = 0;
+            for (let i = 0; i < 5; i++) {
+                this._blurBuffers[i][1].blitFramebuffer(0, abc, 0, (Renderer.getWindowWidth() / Math.pow(2, i + 1)), (Renderer.getWindowHeight() / Math.pow(2, i + 1)));
+                abc += (Renderer.getWindowWidth() / Math.pow(2, i + 1));
+            }
         }
-        */
     }
 }
