@@ -77,12 +77,14 @@ class DeferredPass extends RenderPass
     constructor(){
         super();
         //TODO do we need to add a special Framebuffer thing here?
-        this.fbo = new Framebuffer(Renderer.width, Renderer.height, 4, false, true);
+        this.fbo = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 1, false, true);
+            //TODO use this one: new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 4, false, true, [GL.RGBA8, GL.RGBA16, GL.RGBA16F, GL.RGBA16F]);
         //this.fbo = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), [GL.RGBA8, GL.RGBA16, GL.RGBA16F, GL.RGBA16F], true);
 
+      /* TODO add this
         Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING)["colorTex"] = 0;
         Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING)["normalTex"] = 1;
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING)["posTex"] = 2;
+        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING)["posTex"] = 2;*/
     }
 
     render(){
@@ -218,30 +220,38 @@ class BloomPass extends RenderPass
         super();
         this._deferredPass = deferred;
 
-        this._brightPass = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 1, false, true);
+        let screenWidth = Renderer.getWindowWidth();
+        let screenHeight = Renderer.getWindowHeight();
+
+        this._brightPass = new Framebuffer(screenWidth, screenHeight, 1, false, true);
         this._blurBuffers = [];
-        this._blurBuffers[0] = new Framebuffer(Renderer.getWindowWidth()  / 2, Renderer.getWindowHeight() / 2, 2, false, true);
-        this._blurBuffers[1] = new Framebuffer(Renderer.getWindowWidth() / 4, Renderer.getWindowHeight() / 4, 2, false, true);
-        this._blurBuffers[2] = new Framebuffer(Renderer.getWindowWidth()/ 8, Renderer.getWindowHeight() / 8, 2, false, true);
-        this._blurBuffers[3] = new Framebuffer(Renderer.getWindowWidth() / 16, Renderer.getWindowHeight() / 16, 2, false, true);
-        this._blurBuffers[4] = new Framebuffer(Renderer.getWindowWidth() / 32, Renderer.getWindowHeight() / 32, 2, false, true);
+        this._blurBuffers[0] = [new Framebuffer(screenWidth  / 2, screenHeight / 2, 1, false, true),
+                                 new Framebuffer(screenWidth  / 2, screenHeight / 2, 1, false, true)];
+        this._blurBuffers[1] = [new Framebuffer(screenWidth / 4, screenHeight / 4, 1, false, true),
+                                 new Framebuffer(screenWidth / 4, screenHeight / 4, 1, false, true)];
+        this._blurBuffers[2] = [new Framebuffer(screenWidth/ 8, screenHeight / 8, 1, false, true),
+                                 new Framebuffer(screenWidth/ 8, screenHeight / 8, 1, false, true)];
+        this._blurBuffers[3] = [new Framebuffer(screenWidth / 16, screenHeight / 16, 1, false, true),
+                                 new Framebuffer(screenWidth / 16, screenHeight / 16, 1, false, true)];
+        this._blurBuffers[4] = [new Framebuffer(screenWidth / 32, screenHeight / 32, 1, false, true),
+                                 new Framebuffer(screenWidth / 32, screenHeight / 32, 1, false, true)];
     }
     
     render() {
         let s1 = Renderer.getShader(Renderer.FBO_PASS);
         let s2 = Renderer.getShader(Renderer.FBO_BLUR);
         let s3 = Renderer.getShader(Renderer.FBO_HDR);
-        this.deferredPass.fbo.unbind();
+        this._deferredPass.fbo.unbind();
 
         let buffers = [ GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2, GL.COLOR_ATTACHMENT3 ];
 
-        this.deferredPass.fbo.bindTexture(0, 3);
+        this._deferredPass.fbo.bindTexture(0, 0); //TODO use (0, 3)
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.LINEAR_MIPMAP_NEAREST);
         GL.generateMipmap(GL.TEXTURE_2D);
-        this._brightPass.bind(1, buffers[0]);
+        this._brightPass.bind([buffers[0]]);
         s1.use();
-        this.deferredPass.fbo.draw();
-        //CHECK_ERROR();
+        this._deferredPass.fbo.draw();
+
 
         this._brightPass.unbind();
         s2.use();
@@ -249,41 +259,47 @@ class BloomPass extends RenderPass
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.LINEAR_MIPMAP_NEAREST);
         GL.generateMipmap(GL.TEXTURE_2D);
 
-        //TODO work on this!
+
         for (let i = 0; i < 5; i++)
         {
-            s2["level"] = (float)(i + 1);
-            s2["width"] = (float)(Renderer.getWindowWidth() / pow(2, i + 1));
-            s2["height"] = (float)(Renderer.getWindowHeight() / pow(2, i + 1));
-            brightPass.bindTexture(0, 0);
-            this._blurBuffers[i].bind( buffers[0]);
-            s2["direction"] = glm.vec2(1, 0);
-            this.deferredPass.fbo.draw();
+            s2.setUniform("level", i + 1, UniformTypes.u1f);
+            s2.setUniform("width", (Renderer.getWindowWidth() / Math.pow(2, i + 1)), UniformTypes.u1f);
+            s2.setUniform("height", (Renderer.getWindowHeight() / Math.pow(2, i + 1)), UniformTypes.u1f);
+            this._brightPass.bindTexture(0, 0);
+            this._blurBuffers[i][0].bind([buffers[0]]);
+            s2.setUniform("direction", new Float32Array([1, 0]), UniformTypes.vec2);
+            this._deferredPass.fbo.draw();
 
-            s2["level"] = 0;
-            this._blurBuffers[i].bindTexture(0, 0);
-            this._blurBuffers[i].bind([GL.NONE, buffers[1]] );
-            s2["direction"] = glm.vec2(0, 1);
-            this.deferredPass.fbo.draw();
+            s2.setUniform("level", 0, UniformTypes.u1f);
+            this._blurBuffers[i][0].bindTexture(0, 0);
+            this._blurBuffers[i][1].bind([buffers[0]] );
+            s2.setUniform("direction", new Float32Array([0, 1]), UniformTypes.vec2);
+            this._deferredPass.fbo.draw();
         }
-
-        this._blurBuffers[4].unbind();
+        this._blurBuffers[4][1].unbind();
         s3.use();
-        //CHECK_ERROR();
 
-        this.deferredPass.fbo.bindTexture(0, 3);
-        this._blurBuffers[0].bindTexture(1, 1);
-        this._blurBuffers[1].bindTexture(2, 1);
-        this._blurBuffers[2].bindTexture(3, 1);
-        this._blurBuffers[3].bindTexture(4, 1);
-        this._blurBuffers[4].bindTexture(5, 1);
-        s3["inputTex"] = 0;
-        s3["addTex1"] = 1;
-        s3["addTex2"] = 2;
-        s3["addTex3"] = 3;
-        s3["addTex4"] = 4;
-        s3["addTex5"] = 5;
-        this.deferredPass.fbo.draw();
-        //CHECK_ERROR();
+        this._deferredPass.fbo.bindTexture(0, 0); //TODO switch to (0, 3)
+        this._blurBuffers[0][1].bindTexture(1, 0);
+        this._blurBuffers[1][1].bindTexture(2, 0);
+        this._blurBuffers[2][1].bindTexture(3, 0);
+        this._blurBuffers[3][1].bindTexture(4, 0);
+        this._blurBuffers[4][1].bindTexture(5, 0);
+        s3.setUniform("inputTex", 0, UniformTypes.u1i);
+        s3.setUniform("addTex1", 1, UniformTypes.u1i);
+        s3.setUniform("addTex2", 2, UniformTypes.u1i);
+        s3.setUniform("addTex3", 3, UniformTypes.u1i);
+        s3.setUniform("addTex4", 4, UniformTypes.u1i);
+        s3.setUniform("addTex5", 5, UniformTypes.u1i);
+        this._deferredPass.fbo.draw();
+
+
+        /* Debug code - enable and disable anti-aliasing to see results of intermediate blur buffers.
+        let abc=0;
+        for (let i = 0; i < 5; i++) {
+            this._blurBuffers[i][1].blitFramebuffer(0, abc, 0, (Renderer.getWindowWidth() / Math.pow(2, i + 1)), (Renderer.getWindowHeight() / Math.pow(2, i + 1)));
+            abc += (Renderer.getWindowWidth() / Math.pow(2, i + 1));
+        }
+        */
     }
 }
