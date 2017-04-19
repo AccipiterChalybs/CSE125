@@ -34,7 +34,8 @@ GameEngine.start = function() {
 GameEngine.loop = function() {
     Time.tick();
     Input.update();
-
+    // send data
+    Networking.update();
     GameEngine.currentScene.update();
     GameObject.prototype.SceneRoot.update();
     Renderer.loop();
