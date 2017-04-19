@@ -17,7 +17,9 @@ class Transform extends Component
         this.worldPosDirty = true;
         this.cachedWorldScale = vec3.create();
         this.worldScaleDirty = null;
-        this.oldParent = null;
+        this.cachedForwardVec = vec3.create();
+        this.worldForwardDirty = true;
+      this.oldParent = null;
         this._parent = null;
         this.children = [];
     }
@@ -27,6 +29,7 @@ class Transform extends Component
         this.transformMatrixDirty = true;
         this.worldPosDirty = true;
         this.worldScaleDirty = true;
+        this.worldForwardDirty = true;
         for(let child of this.children)
         {
             child.setDirty();
@@ -144,7 +147,7 @@ class Transform extends Component
             let originPoint = vec4.create();
             vec4.set(originPoint, 0, 0, 0, 1);
 
-            let tmpWorldPos = mat4.create();
+            let tmpWorldPos = vec4.create();
             vec4.transformMat4(tmpWorldPos, originPoint, this.getTransformMatrix());
             vec3.set(this.cachedWorldPos, tmpWorldPos[0], tmpWorldPos[1], tmpWorldPos[2]);
             this.worldPosDirty = false;
@@ -165,5 +168,21 @@ class Transform extends Component
         }
 
         return this.cachedWorldScale;
+    }
+
+    getForward()
+    {
+      if(this.worldForwardDirty)
+      {
+        let forwardVector = vec4.create();
+        vec4.set(forwardVector, 0, 0, -1, 0);
+
+        let tmpForwardVec = vec4.create();
+        vec4.transformMat4(tmpForwardVec, forwardVector, this.getTransformMatrix());
+        vec3.set(this.cachedForwardVec, tmpForwardVec[0], tmpForwardVec[1], tmpForwardVec[2]);
+        this.worldForwardDirty = false;
+      }
+
+      return this.cachedForwardVec;
     }
 }

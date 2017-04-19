@@ -19,6 +19,7 @@ let lastMouseX = 0;
 let lastMouseY = 0;
 
 const Input = {
+  enabled: false,
   _options: {
     axes: [
       {
@@ -79,6 +80,9 @@ const Input = {
       Input._options = options || Input._options;
 
       function updateAxisInt(axis, button, up) {
+        if(Input.enabled === false)
+          return;
+
         axis.value = (axis.value === undefined) ? 0 : axis.value;
         if (axis.positiveButton === button) {
           if (up) {
@@ -99,6 +103,9 @@ const Input = {
       }
 
       function updateAxisFloat(axis, e) {
+        if(Input.enabled === false)
+          return;
+        
         axis.value = axis.value || 0;
         if (axis.direction === InputDirection.x) {
           axis.value = (e.clientX + 0.0) / (window.innerWidth + 0.0);
@@ -124,18 +131,19 @@ const Input = {
     function lockChangeAlert() {
       if (document.pointerLockElement === document.body ||
         document.mozPointerLockElement === document.body) {
-        console.log('The pointer lock status is now locked');
+        //console.log('The pointer lock status is now locked');
         document.addEventListener("mousemove", updatePosition, false);
+        Input.enabled = true;
       } else {
-        console.log('The pointer lock status is now unlocked');
+        //console.log('The pointer lock status is now unlocked');
         document.removeEventListener("mousemove", updatePosition, false);
         Input._options.axes.filter((axis)=>axis.name === 'mouseHorizontal')[0].value = 0;
         Input._options.axes.filter((axis)=>axis.name === 'mouseVertical')[0].value = 0;
+        Input.enabled = false;
       }
     }
 
     function updatePosition(e) {
-      console.log("new");
       currentMouseX += e.movementX;
       currentMouseY += e.movementY;
     }
