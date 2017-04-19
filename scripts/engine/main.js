@@ -13,5 +13,6 @@ function initialize() {
   Input.init();
 
   GameEngine.init();
+  Networking.init();
   initRenderer(glCanvas);
 }
