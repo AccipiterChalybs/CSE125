@@ -2,7 +2,7 @@
  * Created by Accipiter Chalybs on 4/5/2017.
  */
 
-var GL;
+var GL, AudioEngine;
 
 function initialize() {
   let glCanvas = document.getElementsByTagName('canvas')[0];
@@ -11,7 +11,7 @@ function initialize() {
   //glCanvas.getContext("webgl") || glCanvas.getContext("experimental-webgl");
 
   Input.init();
-
+  AudioEngine = new SoundEngine();
   GameEngine.init();
   initRenderer(glCanvas);
 }
