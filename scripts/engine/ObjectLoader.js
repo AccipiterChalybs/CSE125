@@ -111,10 +111,9 @@ class ObjectLoader {
         let scale = 1;
         let rotate = quat.create();
 
-        //TODO do we need to flip this matrix?
         let transformMat = mat4.create();
         mat4.set.apply(mat4, [transformMat].concat(currentNode.transformation));
-
+        mat4.transpose(transformMat, transformMat); //need to transpose when loading from ASSIMP file format
 
         mat4.getTranslation(pos, transformMat);
         mat4.getRotation(rotate, transformMat);
@@ -149,6 +148,10 @@ class ObjectLoader {
             let foundEmit = name.search("Emit") !== -1;
             let mat = null;
 
+
+            //TODO remove me after deferred shading is ready
+            foundForward = true;
+
             //TODO either change material to accept an index, or pass in the shader object from Renderer
             let hasBones = ("bones" in scene.meshes[currentNode.meshes[0]]);
             if (foundForward) {
@@ -163,8 +166,9 @@ class ObjectLoader {
                 mat.transparent = false;
             }
 
-            //TODO remove me!!!
-            mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER));
+            //TODO remove me after deferred shading is ready
+            if (!hasBones) mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER));
+
 
             //TODO make it load textures!
             if (false && aMat.GetTextureCount("aiTextureType_DIFFUSE") > 0) {
@@ -190,10 +194,10 @@ class ObjectLoader {
             if (false && aMat.GetTextureCount("aiTextureType_SPECULAR") > 0) {
                 let path = null;
                 aMath.GetTexture(aiTextureType_DIFFUSE, 0, path);
-                mat.setTexture(MaterialTexture.MAT, new Texture(getPath(filename) + path, true));
+                mat.setTexture(MaterialTexture.MAT, new Texture(getPath(filename) + path, false));
             }
             else {
-                let color = vec4.create(); vec4.set(color,0,0,0.1,1); //metalness, blank, roughness
+                let color = vec4.create(); vec4.set(color,0,0,0.25,1); //metalness, blank, roughness
                 mat.setTexture(MaterialTexture.MAT, Texture.makeColorTex(color))
             }
             mesh.setMaterial(mat);
@@ -233,7 +237,7 @@ class ObjectLoader {
         if (!currentTransform) return;
 
         let currentMesh = currentTransform.gameObject.getComponent("Mesh");
-        if (currentMesh !== null) {
+        if (currentMesh && currentMesh !== null) {
             currentMesh.animationRoot = anim;
         }
         for (let child of currentTransform.children) {
