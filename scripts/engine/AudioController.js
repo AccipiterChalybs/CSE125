@@ -1,20 +1,21 @@
-var SoundEngine = function () {
-    'use strict';
-    this.spacejam=new Howl({
-        src:['assets/audio/SJTheme.wav'],
-        volume: 0
-    });
-    this.ruready=new Howl({
-        src:['assets/audio/RUReady.wav'],
-        volume: 0
-    });
-    this.cruelangel=new Howl({
-        src:['assets/audio/cruelangel.mp3'],
-        volume: 0
-    });
-};
+const SoundEngine = {
 
-SoundEngine.prototype = {
+    init: function() {
+
+        'use strict';
+        SoundEngine.spacejam=new Howl({
+            src:['assets/audio/SJTheme.wav'],
+            volume: 0
+        });
+        SoundEngine.ruready=new Howl({
+            src:['assets/audio/RUReady.wav'],
+            volume: 0
+        });
+        SoundEngine.cruelangel=new Howl({
+            src:['assets/audio/cruelangel.mp3'],
+            volume: 0
+        });
+    },
     playSound2d: function (sound, volume=1) {
         let soundId=sound.play();
         sound.volume(volume,soundId);
@@ -37,7 +38,7 @@ SoundEngine.prototype = {
         sound.pos(x,y,z,soundId);
         //sound roll off
         sound.pannerAttr(panObj,soundId);
-        test=[sound,soundId];
+        //let test=[sound,soundId];
         return [sound,soundId];
     },
     //the level has to be between 0.0. and 1.0
@@ -48,10 +49,10 @@ SoundEngine.prototype = {
     changeRate: function (sound,soundId, rate) {
         sound.rate(rate,soundId);
     },
-    //0 0 0 is the fucking middle
+    //0 0 0 is the middle
     //-1 is to the left on X
     //-1 is to the bottom on Y
-    //-1 on Z who fucking knows
+    //-1 on Z not sure
     updatePosition: function (sound, soundId,x=1,y=1,z=1) {
         sound.pos(x,y,z,soundId);
 

@@ -52,12 +52,15 @@ class GameScene {
         });
            */
         //add sound to a GameObject
-        GameObject.prototype.SceneRoot.transform.children[1].gameObject.addComponent(new AudioSource("ruready"))
+        GameObject.prototype.SceneRoot.transform.children[1].gameObject.addComponent(new AudioSource());
+        GameObject.prototype.SceneRoot.transform.children[1].gameObject.getComponent("AudioSource").playSound3d("cruelangel");
     }
 
     update() {
         // -- Physics update call will likely go here --
         Renderer.camera.transform.getParent().gameObject.update(); //TODO remove this one when SceneRoot contains all objects
+
+        //Move to listener component in future updates
         let cameraAPos = Renderer.camera.transform.getWorldPosition();
         Howler.pos(cameraAPos[0],cameraAPos[1],cameraAPos[2]);
     }
