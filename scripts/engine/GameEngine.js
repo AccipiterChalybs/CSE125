@@ -57,7 +57,7 @@ GameEngine.loop = function() {
 GameEngine.finishLoadRequests = function() {
     GameEngine._ready = true;
     if (GameEngine._loadHandles.length === 0 && !GameEngine._started) {
-        GameEngine.start();
+        GameEngine.startMethod();
     }
 };
 

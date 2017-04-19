@@ -64,7 +64,8 @@ class ObjectLoader {
         //from http://stackoverflow.com/questions/12460378/how-to-get-json-from-url-in-javascript
         if (IS_SERVER) {
             //call server method;
-
+            let data=global.readScene(url);
+            func(data);
 
         } else {
             let getJSON = function(url, callback) {

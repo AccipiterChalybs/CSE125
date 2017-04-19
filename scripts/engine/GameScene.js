@@ -12,7 +12,7 @@ class GameScene {
         }
 
         //TODO this will be moved into the JSON files
-        if (IS_SERVER) {
+        if (!IS_SERVER) {
             albedo = new Texture('assets/texture/dungeon-stone1-albedo2.png');
             mat = new Texture('assets/texture/dungeon-stone1-mat.png', false);
             normal = new Texture('assets/texture/dungeon-stone1-normal.png', false);
@@ -25,11 +25,13 @@ class GameScene {
         let rootTest = new GameObject();
         camera.gameObject.transform.setParent(rootTest.transform);
         let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 5);
-        Renderer.camera.transform.setPosition(newPosition);
+        if(!IS_SERVER){
+            Renderer.camera.transform.setPosition(newPosition);
+
 
         Renderer.camera.transform.getParent().gameObject.addComponent(new RotateMouse());
         //Renderer.camera.transform.getParent().gameObject.addComponent(new PlayerController());
-
+        }
         GameObject.prototype.SceneRoot.getComponent('Animation').play(0, true);
 
 /*
@@ -76,16 +78,18 @@ class GameScene {
 
                     mesh.setMaterial(mat);
                     teapot.addComponent(mesh);
+
+
+                  if (x===5 && y===5) {
+                      //add sound to a GameObject
+                      teapot.addComponent(new AudioSource());
+                      teapot.getComponent("AudioSource").playSound3d("cruelangel");
+                      teapot.addComponent(new PlayerController());
+                  }
                 }
 
                 let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
 
-                if (x===5 && y===5) {
-                    //add sound to a GameObject
-                    teapot.addComponent(new AudioSource());
-                    teapot.getComponent("AudioSource").playSound3d("cruelangel");
-                    teapot.addComponent(new PlayerController());
-                }
 
                 teapot.transform.setPosition(pos);
                 teapot.transform.setRotation(rotation);
