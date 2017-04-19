@@ -52,7 +52,7 @@ class GameScene {
         });
            */
         //add sound to a GameObject
-        GameObject.prototype.SceneRoot.transform.children[1].gameObject.addComponent(new AudioSource("spacejam"))
+        GameObject.prototype.SceneRoot.transform.children[1].gameObject.addComponent(new AudioSource("ruready"))
     }
 
     update() {

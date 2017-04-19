@@ -37,6 +37,7 @@ SoundEngine.prototype = {
         sound.pos(x,y,z,soundId);
         //sound roll off
         sound.pannerAttr(panObj,soundId);
+        test=[sound,soundId];
         return [sound,soundId];
     },
     //the level has to be between 0.0. and 1.0
@@ -54,5 +55,18 @@ SoundEngine.prototype = {
     updatePosition: function (sound, soundId,x=1,y=1,z=1) {
         sound.pos(x,y,z,soundId);
 
+    },
+    pauseSound:function (sound,soundId) {
+        sound.pause(soundId);
+    },
+    resumeSound:function(sound,soundId){
+        sound.play(soundId);
+    },
+    stopSound:function (sound,soundId) {
+        sound.stop(soundId);
+    },
+    //loop boolean
+    loopSound:function (sound,soundId,loop) {
+        sound.loop(soundId,loop);
     }
 };
