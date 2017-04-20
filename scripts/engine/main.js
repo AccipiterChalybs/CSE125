@@ -3,16 +3,22 @@
  */
 
 var GL;
+var IS_SERVER = false;
 
 function initialize() {
   let glCanvas = document.getElementsByTagName('canvas')[0];
-  GL = glCanvas.getContext('webgl2');
+  if (Debug.bufferDebugMode) {
+      GL = glCanvas.getContext('webgl2', {antialias: false});
+  } else {
+      GL = glCanvas.getContext('webgl2');
+  }
 
   //glCanvas.getContext("webgl") || glCanvas.getContext("experimental-webgl");
 
   Input.init();
 
   PhysicsEngine.init();
+  SoundEngine.init();
   GameEngine.init();
   initRenderer(glCanvas);
 }

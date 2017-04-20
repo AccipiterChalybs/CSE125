@@ -113,7 +113,7 @@ vec3 SpecularEnvMap(vec3 normal, vec3 view, float a, vec3 F0) {
 		vec3 lightDir = GGX_Sample(xi, lightDir_Main, a);
 		vec3 lightColor = texture(environment, lightDir).xyz;//textureLod(environment, lightDir, 0.0).xyz;//a*environment_mipmap).xyz;
 		//TODO 1.0 or 0.0 for last param (G term)... might just be geometry in test?
-		color += SpecularBRDF(lightColor, normal, view, lightDir, a, F0, 1.0);
+		color += SpecularBRDF(lightColor, normal, view, lightDir, a, F0, 0.0);
 	}
 	color /= float(sample_count);
 	return color;
@@ -138,12 +138,13 @@ void main () {
 
   mat.b += 0.01; //there seem to be issues with roughness = 0 due to visibility
 
-  float a = mat.b * mat.b;
-  //TODO should this be sqrt? float a = sqrt(mat.b);// squaring it makes everything shiny, sqrting it looks like linear roughness
+  //TODO should this be sqrt? or squared?
+  float a = mat.b;
+  //float a = sqrt(mat.b);// squaring it makes everything shiny, sqrting it looks like linear roughness
 
   float IOR = 1.4; //just going to use a nice default for now
   //F0 is essentially specular color, as well as Fresnel term
-  vec3 F0 = vec3(1,1,1) * pow((1.0 - IOR) / (1.0 + IOR), 2.0);
+  vec3 F0 = vec3(1,1,1) * 0.02777777777;//pow((1.0 - IOR) / (1.0 + IOR), 2.0);
   F0 = mix(F0, albedo.rgb, mat.r); //interpolate Fresnel with the color as metalness increases (with metalness=1, color => reflection color)
   F0 = mix(vec3(1,1,1) * dot(vec3(.33,.33,.33),F0), F0, mat.r); //my own improvement - could be wrong : desaturates Fresnel as metalness decreases
 

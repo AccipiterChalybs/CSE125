@@ -127,6 +127,7 @@ class GameObject {
 
     //TODO ensure name isn't taken (or switch to array)
     GameObject.prototype._nameMap[name] = this;
+    this.name = name;
   }
 
   getName() {

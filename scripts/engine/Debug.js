@@ -5,6 +5,7 @@
 let Debug = {};
 
 Debug._timer = 0;
+Debug.bufferDebugMode = false;
 Debug.startTimer = function () {
     Debug._timer = new Date().getTime();
 };
