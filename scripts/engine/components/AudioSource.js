@@ -60,4 +60,18 @@ class AudioSource extends Component{
         }
         SoundEngine.loopSound(this.sound[0],this.sound[1]);
     }
+    updateOrientation(x,y,z){
+        if(this.sound===null){
+            console.error("no sound has been set");
+            return;
+        }
+        SoundEngine.updateOrientation(this.sound[0],this.sound[1],x,y,z);
+    }
+    setRate(rate){
+        if(this.sound===null){
+            console.error("no sound has been set");
+            return;
+        }
+        SoundEngine.changeRate(this.sound[0],this.sound[1],rate)
+    }
 }

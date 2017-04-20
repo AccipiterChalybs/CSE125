@@ -84,8 +84,16 @@ class GameScene {
                       //add sound to a GameObject
                       teapot.addComponent(new AudioSource());
                       teapot.getComponent("AudioSource").playSound3d("cruelangel");
+                      //teapot.getComponent("AudioSource").setRate(2);
                       teapot.addComponent(new PlayerController());
                   }
+                    if (x===5 && y===6) {
+                        //add sound to a GameObject
+                        teapot.addComponent(new AudioSource());
+                        teapot.getComponent("AudioSource").playSound3d("ruready");
+                        //teapot.getComponent("AudioSource").setRate(2);
+                        teapot.addComponent(new PlayerController());
+                    }
                 }
 
                 let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
@@ -125,6 +133,8 @@ class GameScene {
 
         //Move to listener component in future updates
         let cameraAPos = Renderer.camera.transform.getWorldPosition();
+        let cameraOrientation = Renderer.camera.transform.getForward();
         Howler.pos(cameraAPos[0],cameraAPos[1],cameraAPos[2]);
+        Howler.orientation(cameraOrientation[0],cameraOrientation[1],cameraOrientation[2]);
     }
 }
