@@ -69,5 +69,8 @@ const SoundEngine = {
     //loop boolean
     loopSound:function (sound,soundId,loop) {
         sound.loop(soundId,loop);
+    },
+    updateOrientation:function (sound, soundId, x=1,y=1,z=1) {
+        sound.orientation(x,y,z,soundId);
     }
 };

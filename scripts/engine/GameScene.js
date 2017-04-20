@@ -24,6 +24,7 @@ class GameScene {
         new GameObject().addComponent(camera);
         let rootTest = new GameObject();
         camera.gameObject.transform.setParent(rootTest.transform);
+        camera.gameObject.addComponent(new AudioListener());
         let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 5);
         if(!IS_SERVER){
             Renderer.camera.transform.setPosition(newPosition);
@@ -84,6 +85,7 @@ class GameScene {
                       //add sound to a GameObject
                       teapot.addComponent(new AudioSource());
                       teapot.getComponent("AudioSource").playSound3d("cruelangel");
+                      //teapot.getComponent("AudioSource").setRate(2);
                       teapot.addComponent(new PlayerController());
                   }
                 }
@@ -122,9 +124,5 @@ class GameScene {
     update() {
         // -- Physics update call will likely go here --
         Renderer.camera.transform.getParent().gameObject.update(); //TODO remove this one when SceneRoot contains all objects
-
-        //Move to listener component in future updates
-        let cameraAPos = Renderer.camera.transform.getWorldPosition();
-        Howler.pos(cameraAPos[0],cameraAPos[1],cameraAPos[2]);
     }
 }
