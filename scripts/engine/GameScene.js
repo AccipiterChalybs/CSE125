@@ -110,10 +110,11 @@ class GameScene {
         GameObject.prototype.SceneRoot.transform.children[0].setPosition(move);
 
         GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new RotateOverTime(-1));
+        //GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new BoxCollider(0, false, 20, 20, 20));
 
-        move = vec3.create(); vec3.set(move, 0, 500, 0);
+        move = vec3.create(); vec3.set(move, 0, 0, 0);
         GameObject.prototype.SceneRoot.transform.children[2].setPosition(move);
-        GameObject.prototype.SceneRoot.transform.children[2].gameObject.addComponent(new BoxCollider(250, 10, 10, 10));
+        GameObject.prototype.SceneRoot.transform.children[2].gameObject.addComponent(new BoxCollider(0, true, 10, 10, 10));
         GameObject.prototype.SceneRoot.transform.children[2].gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.COLOR,
             new Texture('assets/skybox/skybox.jpg'));
 

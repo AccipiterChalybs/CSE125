@@ -27,7 +27,7 @@ class PlayerController extends Component{
     vec3.normalize(moveX, moveX);
     vec3.normalize(moveZ, moveZ);
     vec3.scale(moveX, moveX, x*this.movementSpeed);
-    vec3.scale(moveZ, moveZ, z*this.movementSpeed);
+    vec3.scale(moveZ, moveZ, z* this.movementSpeed);
     vec3.add(move, moveX, moveZ);
     //this.transform.translate(move);
 
