@@ -3,36 +3,41 @@
  */
 class Component
 {
+  constructor(){
+    this.gameObject = null;
+    this.transform = null;
+    this.visible = true;
+    this.active = true;
+    this.componentType = null; //must override in subclass!
+  }
 
-    constructor ()
-    {
-        this.gameObject = null;
+  start(){
+  }
+
+  update(deltaTime){
+    this.start();
+
+    // Use updateComponent if you want access to start
+    if (this.updateComponent){
+      this.update = this.updateComponent;
+    }
+  }
+
+  draw(){
+  }
+
+  _setGameObject(go){
+    this.gameObject = go;
+    if (go !== null) {
+        this.transform = go.transform;
+    } else {
         this.transform = null;
-        this.visible = true;
-        this.active = true;
-        this.componentType = null; //must override in subclass!
     }
+  }
 
-    update (deltaTime)
-    {
-    }
+  onCollisionEnter(collision){
+  }
 
-    draw ()
-    {
-    }
-
-    _setGameObject(go)
-    {
-        this.gameObject = go;
-        if (go !== null) {
-            this.transform = go.transform;
-        } else {
-            this.transform = null;
-        }
-    }
-
-    onCollisionEnter (collision)
-    {
-    }
-
+  onTriggerEnter(collider){
+  }
 }

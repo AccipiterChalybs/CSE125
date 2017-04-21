@@ -2,6 +2,8 @@
  * Created by Stephen on 4/15/2017.
  */
 
+
+// Requires a collider
 class PlayerController extends Component{
   constructor(){
     super();
@@ -9,7 +11,11 @@ class PlayerController extends Component{
     this.movementSpeed = 30;
   }
 
-  update(){
+  start(){
+    this.transform.gameObject.getComponent("Collider").setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
+  }
+
+  updateComponent(){
     this.movement();
   }
 
@@ -29,17 +35,9 @@ class PlayerController extends Component{
     vec3.scale(moveX, moveX, x*this.movementSpeed);
     vec3.scale(moveZ, moveZ, z* this.movementSpeed);
     vec3.add(move, moveX, moveZ);
-    //this.transform.translate(move);
 
-    //console.log(move);
-    let body = this.transform.gameObject.getComponent("SphereCollider").body;
-    // boxBody.position.set(move[0] + boxBody.position.x, boxBody.position.y, move[2] + boxBody.position.z);
+    let body = this.transform.gameObject.getComponent("Collider").body;
     body.velocity.x = move[0];
     body.velocity.z = move[2];
-
-    //}
-
-    //let boxBody = this.transform.gameObject.getComponent("BoxCollider").boxBody;
-    //console.log(boxBody.position);
   }
 }
