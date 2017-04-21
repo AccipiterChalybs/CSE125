@@ -264,7 +264,6 @@ class BloomPass extends RenderPass
         GL.readPixels(0, 0, 1, 1, GL.RGBA, GL.FLOAT, currentRGB);
         let lumen = Math.sqrt(currentRGB[0]*currentRGB[0] + currentRGB[1]*currentRGB[1] + currentRGB[2]*currentRGB[2]);
         this.averageExposure = this.averageExposure * (1-newDataWeight) + lumen * (newDataWeight);
-        console.log(this.averageExposure);
         //-----------------------------------------------------
 
         this._brightPass.bind([buffers[0]]);
