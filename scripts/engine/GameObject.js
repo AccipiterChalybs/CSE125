@@ -198,6 +198,14 @@ class GameObject {
     delete GameObject.prototype._nameMap[this.name];
   }
 
+  serialize() {
+    return this.transform.serialize();
+  }
+
+  applySerializedData(data) {
+    this.transform.applySerializedData(data);
+  }
+
 }
 
 GameObject.prototype._nameMap = {};

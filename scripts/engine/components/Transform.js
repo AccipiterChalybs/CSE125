@@ -185,4 +185,27 @@ class Transform extends Component
 
       return this.cachedForwardVec;
     }
+
+    serialize() {
+        let retVal = {};
+        retVal.position = this.position;
+        retVal.rotation = this.rotation;
+        retVal.scaleVal = this.scaleFactor[0];
+        retVal.children = [];
+        for (let child of this.children) {
+            retVal.children.push(child.serialize());
+        }
+        return retVal;
+    }
+
+    applySerializedData(data) {
+        this.position = data.position;
+        this.rotation = data.rotation;
+        this.scaleFactor[0] = this.scaleFactor[1] = this.scaleFactor[2] = data.scaleVal;
+        let index=0;
+        for (let child of this.children) {
+            child.applySerializedData(data.children[index]);
+            ++index;
+        }
+    }
 }
