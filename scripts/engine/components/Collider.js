@@ -34,8 +34,8 @@ class Collider extends Component{
       this.body.addEventListener("collide", this._onCollisionEnter.bind(this));
     }
 
-    console.log("Created a collider (game object name, id): (" + this.gameObject.name + ", " +
-      this.body.id + ")");
+    // console.log("Created a collider (game object name, id): (" + this.gameObject.name + ", " +
+    //   this.body.id + ")");
 
     PhysicsEngine.world.addBody(this.body);
   }
@@ -47,16 +47,16 @@ class Collider extends Component{
   }
 
   _onTriggerEnter(e){
-    console.log("TRIGGER event. (" + this.gameObject.name + ")");
-    console.log("\tCollided with body:",e.body);
-    console.log("\tContact between bodies:",e.contact);
+    // console.log("TRIGGER event. (" + this.gameObject.name + ")");
+    // console.log("\tCollided with body:",e.body);
+    // console.log("\tContact between bodies:",e.contact);
     this.gameObject.onTriggerEnter(e);
   }
 
   _onCollisionEnter(e){
-    console.log("COLLISION event. (" + this.gameObject.name + ")");
-    console.log("\tCollided with body:",e.body);
-    console.log("\tContact between bodies:",e.contact);
+    // console.log("COLLISION event. (" + this.gameObject.name + ")");
+    // console.log("\tCollided with body:",e.body);
+    // console.log("\tContact between bodies:",e.contact);
     this.gameObject.onCollisionEnter(e);
   }
 
