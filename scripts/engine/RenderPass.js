@@ -220,8 +220,12 @@ class BloomPass extends RenderPass
         super();
         this._deferredPass = deferred;
 
+        this.averageExposure = 1;
+
         let screenWidth = Renderer.getWindowWidth();
         let screenHeight = Renderer.getWindowHeight();
+
+        this._averagePass = new Framebuffer(1, 1, 1, false, true);
 
         this._brightPass = new Framebuffer(screenWidth, screenHeight, 1, false, true);
         this._blurBuffers = [];
@@ -241,6 +245,7 @@ class BloomPass extends RenderPass
         let s1 = Renderer.getShader(Renderer.FBO_PASS);
         let s2 = Renderer.getShader(Renderer.FBO_BLUR);
         let s3 = Renderer.getShader(Renderer.FBO_HDR);
+        let s4 = Renderer.getShader(Renderer.FBO_AVERAGE);
         this._deferredPass.fbo.unbind();
 
         let buffers = [ GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2, GL.COLOR_ATTACHMENT3 ];
@@ -248,6 +253,20 @@ class BloomPass extends RenderPass
         this._deferredPass.fbo.bindTexture(0, 0); //TODO use (0, 3)
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.LINEAR_MIPMAP_NEAREST);
         GL.generateMipmap(GL.TEXTURE_2D);
+
+        //Calculate Average Exposure for Eye Adjustment
+        //(Have to render again to get highest mipmap since WebGL doesn't have getTexImage)
+        const newDataWeight = 0.05;
+        this._averagePass.bind([buffers[0]]);
+        s4.use();
+        this._deferredPass.fbo.draw();
+        let currentRGB = new Float32Array(4);
+        GL.readPixels(0, 0, 1, 1, GL.RGBA, GL.FLOAT, currentRGB);
+        let lumen = Math.sqrt(currentRGB[0]*currentRGB[0] + currentRGB[1]*currentRGB[1] + currentRGB[2]*currentRGB[2]);
+        this.averageExposure = this.averageExposure * (1-newDataWeight) + lumen * (newDataWeight);
+        console.log(this.averageExposure);
+        //-----------------------------------------------------
+
         this._brightPass.bind([buffers[0]]);
         s1.use();
         this._deferredPass.fbo.draw();
@@ -291,6 +310,9 @@ class BloomPass extends RenderPass
         s3.setUniform("addTex3", 3, UniformTypes.u1i);
         s3.setUniform("addTex4", 4, UniformTypes.u1i);
         s3.setUniform("addTex5", 5, UniformTypes.u1i);
+
+        s3.setUniform("exposure", this.averageExposure, UniformTypes.u1f);
+
         this._deferredPass.fbo.draw();
 
 
