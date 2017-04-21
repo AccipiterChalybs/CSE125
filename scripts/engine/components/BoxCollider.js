@@ -23,37 +23,42 @@ class BoxCollider extends Component{
     let halfExtents = new CANNON.Vec3(this.transform.getScale()[0] * this.scaleX,
                                         this.transform.getScale()[1] * this.scaleY,
                                         this.transform.getScale()[2] * this.scaleZ);
-    let boxShape = new CANNON.Sphere(2);
-    this.boxBody = new CANNON.Body({mass: this.mass, shape: boxShape});
-    this.boxBody.position.set(this.transform.getPosition()[0], this.transform.getPosition()[1],
+    let boxShape = new CANNON.Box(halfExtents);
+    this.body = new CANNON.Body({mass: this.mass, shape: boxShape});
+    this.body.position.set(this.transform.getPosition()[0], this.transform.getPosition()[1],
                                 this.transform.getPosition()[2]);
-    this.boxBody.quaternion.set(this.transform.getRotation()[0], this.transform.getRotation()[1],
-                                this.transform.getRotation()[2], this.transform.getRotation()[3]);
+    //this.boxBody.quaternion.set(this.transform.getRotation()[0], this.transform.getRotation()[1],
+    //                            this.transform.getRotation()[2], this.transform.getRotation()[3]);
 
     if(this.trigger) {
-      this.boxBody.collisionResponse = 0;
-      //this.boxBody.addEventListener("collide", this.onTriggerEnter, false);
+      this.body.collisionResponse = 0;
+      this.body.addEventListener("collide", this.onTriggerEnter.bind(this));
+    } else {
+      this.body.addEventListener("collide", this.onCollision.bind(this));
     }
-    this.boxBody.addEventListener("collide", this.onTriggerEnter.bind(this));
 
-    console.log("TEST");
-
-    PhysicsEngine.world.add(this.boxBody);
+    PhysicsEngine.world.addBody(this.body);
   }
 
   update(){
     let newPos = vec3.create();
-    vec3.set(newPos, this.boxBody.position.x, this.boxBody.position.y, this.boxBody.position.z);
+    vec3.set(newPos, this.body.position.x, this.body.position.y, this.body.position.z);
     this.transform.setPosition(newPos);
 
-    //console.log("box collider: " + this.boxBody.position);
+    //console.log("box collider: " + this.boxBody.quaternion);
   }
 
   onTriggerEnter(e){
-    console.log(e);
     console.log("triggered by: " + this.gameObject.name);
-    console.log("Collided with body:",e.body);
-    console.log("Contact between bodies:",e.contact)
+    console.log("\tCollided with body:",e.body);
+    console.log("\tContact between bodies:",e.contact)
+  }
+
+  onCollision(e){
+    console.log("collision event");
+    console.log("\ttriggered by: " + this.gameObject.name);
+    console.log("\tCollided with body:",e.body);
+    console.log("\tContact between bodies:",e.contact)
   }
 
   setTrigger(isTrigger){

@@ -2,7 +2,7 @@
  * Created by Stephen on 4/15/2017.
  */
 
-let MAX_ANGLE = Math.PI/2;
+let MAX_ANGLE = (81)*Math.PI/180;
 
 class RotateMouse extends Component{
   constructor(){
