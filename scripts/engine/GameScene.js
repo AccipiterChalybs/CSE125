@@ -107,13 +107,14 @@ class GameScene {
     GameObject.prototype.SceneRoot.transform.children[1].setPosition(move);
     GameObject.prototype.SceneRoot.transform.children[1].gameObject.addComponent(new PlayerController());
     GameObject.prototype.SceneRoot.transform.children[1].gameObject.addComponent(new SphereCollider(200));
-    move = vec3.create(); vec3.set(move, 0, 0, -64);
+    move = vec3.create(); vec3.set(move, 0, 40, -64);
     GameObject.prototype.SceneRoot.transform.children[0].setPosition(move);
 
-    GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new RotateOverTime(-1));
-    //GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new BoxCollider(0, false, 20, 20, 20));
+    //GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new RotateOverTime(-1));
+    GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new BoxCollider(500, false, 20, 20, 20));
+    GameObject.prototype.SceneRoot.transform.children[0].gameObject.getComponent("Collider").setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
 
-    move = vec3.create(); vec3.set(move, 0, -5, 0);
+    move = vec3.create(); vec3.set(move, -100, -5, -100);
     let ground = new GameObject();
     ground.setName("ground");
     ground.addComponent(new BoxCollider(0, false, 100, 1, 100));
