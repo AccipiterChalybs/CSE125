@@ -33,7 +33,7 @@ class GameScene {
         Renderer.camera.transform.getParent().gameObject.addComponent(new RotateMouse());
         //Renderer.camera.transform.getParent().gameObject.addComponent(new PlayerController());
         }
-        GameObject.prototype.SceneRoot.getComponent('Animation').play(0, true);
+        //GameObject.prototype.SceneRoot.getComponent('Animation').play(0, true);
 
 /*
         let moveBack = vec3.create(); vec3.set(moveBack, 3, 0, 0);
@@ -43,7 +43,7 @@ class GameScene {
          child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.COLOR, albedo);
          child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.MAT, mat);
          child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.NORMAL, normal);
-         });*/
+         });
 
 
 
@@ -98,23 +98,24 @@ class GameScene {
                 container.addChild(teapot);
             }
         }
+        */
 
-        /*
         //GameObject.prototype.SceneRoot.transform.setRotation(rotation);
+        //let move = vec3.create(); vec3.set(move, 0, 500, 64);
 
-        let move = vec3.create(); vec3.set(move, 0, 500, 64);
+        let move = vec3.create(); vec3.set(move, 0, 20, 64);
         GameObject.prototype.SceneRoot.transform.children[1].setPosition(move);
         GameObject.prototype.SceneRoot.transform.children[1].gameObject.addComponent(new PlayerController());
-        GameObject.prototype.SceneRoot.transform.children[1].gameObject.addComponent(new BoxCollider(200));
+        GameObject.prototype.SceneRoot.transform.children[1].gameObject.addComponent(new SphereCollider(200));
         move = vec3.create(); vec3.set(move, 0, 0, -64);
         GameObject.prototype.SceneRoot.transform.children[0].setPosition(move);
 
         GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new RotateOverTime(-1));
         //GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new BoxCollider(0, false, 20, 20, 20));
 
-        move = vec3.create(); vec3.set(move, 0, 0, 0);
+        move = vec3.create(); vec3.set(move, 0, 20, 0);
         GameObject.prototype.SceneRoot.transform.children[2].setPosition(move);
-        GameObject.prototype.SceneRoot.transform.children[2].gameObject.addComponent(new BoxCollider(0, true, 10, 10, 10));
+        GameObject.prototype.SceneRoot.transform.children[2].gameObject.addComponent(new BoxCollider(0, true, 20, 20, 20));
         GameObject.prototype.SceneRoot.transform.children[2].gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.COLOR,
             new Texture('assets/skybox/skybox.jpg'));
 
@@ -122,7 +123,7 @@ class GameScene {
         GameObject.prototype.SceneRoot.transform.children[2].gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.MAT,
 
             Texture.makeColorTex(mat));
-            Texture.makeColorTex(mat));*/
+            Texture.makeColorTex(mat);
 
     }
 

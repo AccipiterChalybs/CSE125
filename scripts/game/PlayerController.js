@@ -32,10 +32,11 @@ class PlayerController extends Component{
     //this.transform.translate(move);
 
     //console.log(move);
-    let boxBody = this.transform.gameObject.getComponent("BoxCollider").boxBody;
+    let body = this.transform.gameObject.getComponent("SphereCollider").body;
     // boxBody.position.set(move[0] + boxBody.position.x, boxBody.position.y, move[2] + boxBody.position.z);
-    boxBody.velocity.x = move[0];
-    boxBody.velocity.z = move[2];
+    body.velocity.x = move[0];
+    body.velocity.z = move[2];
+
     //}
 
     //let boxBody = this.transform.gameObject.getComponent("BoxCollider").boxBody;
