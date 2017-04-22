@@ -22,6 +22,7 @@ const Renderer  = {
       Renderer.FORWARD_UNLIT = 13;
       Renderer.FBO_BLUR=15;
       Renderer.FBO_PASS=16;
+      Renderer.FBO_AVERAGE=17;
       Renderer.MODEL_MATRIX = "uM_Matrix";
       Renderer.VIEW_MATRIX = "uV_Matrix";
       Renderer.PERSPECTIVE_MATRIX = "uP_Matrix";
@@ -84,6 +85,10 @@ const Renderer  = {
 
       Renderer.shaderList[Renderer.FBO_PASS] = new Shader(
           Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_pass.frag"
+      );
+
+      Renderer.shaderList[Renderer.FBO_AVERAGE] = new Shader(
+          Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_average.frag"
       );
 
       Renderer.currentShader = null;
