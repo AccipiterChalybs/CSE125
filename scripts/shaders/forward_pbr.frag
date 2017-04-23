@@ -80,13 +80,12 @@ vec3 SpecularBRDF(vec3 lightColor, vec3 normal, vec3 view, vec3 lightDir, float 
 		float dotNV = clamp(dot(normal, view), 0.0, 1.0);
 		float dotLH = clamp(dot(lightDir, halfVec), 0.0, 1.0);
 
-        //Fresnel roughness approximation from https://seblagarde.wordpress.com/2011/08/17/hello-world/
-		vec3 F = F0 + (max(vec3(1.0-a, 1.0-a, 1.0-a), F0)-F0) * pow(1.0-dotLH, 5.0);
+		vec3 F = F0 + (vec3(1.0, 1.0, 1.0)-F0) * pow(1.0-dotLH, 5.0);
 
-		float k = clamp(a+.36, 0.0, 1.0);
-		float G = (2.0*GGX_Visibility(dotLH, k) * dotNL) * d + (1.0-d);
+		float k = clamp(a+0.36, 0.0, 1.0);
+		float G = GGX_Visibility(dotNV, k)*GGX_Visibility(dotNL, k);
 
-		return lightColor * F * G;
+		return lightColor * F * G * dotNL;
 }
 
 
@@ -95,7 +94,13 @@ vec3 SpecularEnvMap(vec3 normal, vec3 view, float a, vec3 F0) {
 
     vec3 lightDir = reflect(-view, normal);
     vec3 lightColor = textureLod(environment, lightDir, a*environment_mipmap).xyz;
-	return SpecularBRDF(lightColor, normal, view, lightDir, a, F0, 0.0);
+
+    float dotNL = clamp(dot(normal,lightDir), 0.0, 1.0); //For environment map, we can use NL for Fresnel since using reflect vector
+
+    //Fresnel roughness approximation from https://seblagarde.wordpress.com/2011/08/17/hello-world/
+    vec3 F = F0 + (max(vec3(1.0-a, 1.0-a, 1.0-a), F0)-F0) * pow(1.0-dotNL, 5.0);
+
+	return lightColor * F;
 }
 
 
@@ -107,7 +112,7 @@ void main () {
   vec3 normal = normalize(vTangent * normal_tangent.x + vBitangent * normal_tangent.y + vNormal * normal_tangent.z);
 
   /* For Testing Shader ---
-  albedo = vec4(1,1,1,1);
+  albedo = vec4(.81,.32,.15,1);
   mat = vec3(0,0,0.1);
   normal = normalize(vNormal);
   */
@@ -128,7 +133,6 @@ void main () {
 
 
 
-
   vec4 normal4 = vec4(normal, 1.0);
 
   vec3 diffuseLight = vec3(dot(normal4, (irradiance[0] * normal4)),
@@ -137,7 +141,7 @@ void main () {
 
   vec3 specColor = SpecularEnvMap(normal, view, a, F0);
 
-  /*
+
   for (int i=0; i < lightCount; ++i) {
 	float lightType = uLightData[3*i+1].w;
 	float power = 1.0;
@@ -161,12 +165,12 @@ void main () {
 	float dotNH = clamp(dot(normal, halfVec), 0.0, 1.0);
 
 	float a2 = a*a;
-	specColor += GGX_D(dotNH, a2*a2) * SpecularBRDF(uLightData[3*i+1].xyz, normal, view, lightDir, a, F0, 1.0) * power;
+	specColor += clamp(SpecularBRDF(uLightData[3*i+1].xyz, normal, view, lightDir, a, F0, 1.0) * GGX_D(dotNH, a2*a2) * power, 0.0, 10.0);
   }
-  */
+
 
   vec3 diffuseColor = ((1.0-mat.r) * albedo.rgb) * diffuseLight;
-  vec3 color = diffuseColor + specColor;
+  vec3 color = specColor + diffuseColor;
 
 
   frag_color = vec4(color, albedo.a);

@@ -29,6 +29,8 @@ const Renderer  = {
       Renderer.NEAR_DEPTH = 0.2;
       Renderer.FAR_DEPTH = 1500;
 
+      Renderer.FORWARD_SHADER_LIGHT_MAX = 5;
+
       Renderer.VERTEX_ATTRIB_LOCATION = 0;
 
       GL.enable(GL.DEPTH_TEST);

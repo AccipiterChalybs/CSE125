@@ -7,7 +7,8 @@ UniformTypes.u1i = 0;
 UniformTypes.u1f = 1;
 UniformTypes.vec2 = 2;
 UniformTypes.vec3 = 3;
-UniformTypes.mat4 = 4;
+UniformTypes.vec4 = 4;
+UniformTypes.mat4 = 44;
 
 class Shader {
 
@@ -38,6 +39,9 @@ class Shader {
                 break;
             case UniformTypes.vec3:
                 GL.uniform3fv(location, value);
+                break;
+            case UniformTypes.vec4:
+                GL.uniform4fv(location, value);
                 break;
             case UniformTypes.mat4:
                 GL.uniformMatrix4fv(location, false, value);

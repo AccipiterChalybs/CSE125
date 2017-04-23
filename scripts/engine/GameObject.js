@@ -173,7 +173,7 @@ class GameObject {
         }
         */
       let light = this.getComponent('Light');
-      if (light !== null) {
+      if (light && light !== null) {
         Renderer.renderBuffer.light.push(light);
       }
     }
