@@ -8,7 +8,7 @@ class Light extends Component{
         this.componentType = "Light";
         this.color = vec3.create(); /*TODO remove */ vec3.set(this.color, 1, 1, 1);
         this.isShadowCaster = false;
-        this.radius = 0.02;
+        this.radius = 0.25;
         this.shadowMatrix = null;
         this.constantFalloff = 1.0;
         this.linearFalloff = 0.0;
@@ -22,10 +22,9 @@ class Light extends Component{
 
 class PointLight extends Light{
     forwardPass(index){
-        this.size = 0.1;
         for (let shaderId of Renderer.shaderForwardLightList) {
             let posData = vec4.create(); vec4.set(posData, this.gameObject.transform.getWorldPosition()[0],
-                this.gameObject.transform.getWorldPosition()[1], this.gameObject.transform.getWorldPosition()[2], this.size);
+                this.gameObject.transform.getWorldPosition()[1], this.gameObject.transform.getWorldPosition()[2], this.radius);
             let colourData = vec4.create(); vec4.set(colourData, this.color[0], this.color[1], this.color[2], 1.0);
             let metaData = vec4.create(); vec4.set(metaData, this.constantFalloff, this.linearFalloff, this.exponentialFalloff, 1);
 
