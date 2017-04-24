@@ -47,16 +47,16 @@ class Collider extends Component{
   }
 
   _onTriggerEnter(e){
-     console.log("TRIGGER event. (" + this.gameObject.name + ")");
-     console.log("\tCollided with body:",e.body);
-     console.log("\tContact between bodies:",e.contact);
+    if(Debug.collision.printInfo) {
+      Debug.printCollisionInfo(e, this.gameObject, true);
+    }
     this.gameObject.onTriggerEnter(e);
   }
 
   _onCollisionEnter(e){
-     console.log("COLLISION event. (" + this.gameObject.name + ")");
-     console.log("\tCollided with body:",e.body);
-     console.log("\tContact between bodies:",e.contact);
+    if(Debug.collision.printInfo) {
+      Debug.printCollisionInfo(e, this.gameObject, false);
+    }
     this.gameObject.onCollisionEnter(e);
   }
 

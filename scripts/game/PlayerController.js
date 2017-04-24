@@ -2,13 +2,14 @@
  * Created by Stephen on 4/15/2017.
  */
 
+const MOVEMENTSPEED = 30;
 
 // Requires a collider
 class PlayerController extends Component{
   constructor(){
     super();
     this.componentType = "PlayerController";
-    this.movementSpeed = 30;
+    this.movementSpeed = MOVEMENTSPEED;
   }
 
   start(){

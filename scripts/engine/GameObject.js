@@ -118,7 +118,6 @@ class GameObject {
     for (let compName of Object.keys(this.components)) {
       let component = this.components[compName];
       component.onCollisionEnter(other);
-      //console.log("\t\tcalling onCollisionEnter for " + compName);
     }
   }
 
@@ -126,7 +125,6 @@ class GameObject {
     for (let compName of Object.keys(this.components)) {
       let component = this.components[compName];
       component.onTriggerEnter(other);
-      //console.log("\t\tcalling onTriggerEnter for " + compName);
     }
   }
 

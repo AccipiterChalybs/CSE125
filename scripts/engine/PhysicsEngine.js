@@ -5,11 +5,12 @@
 const PhysicsEngine = {};
 
 const TIME_STEP = 1.0/60.0;
+const GRAVITY = -20;
 
 PhysicsEngine.world = new CANNON.World();
 
 PhysicsEngine.init = function(){
-  PhysicsEngine.world.gravity.set(0, -20, 0);
+  PhysicsEngine.world.gravity.set(0, GRAVITY, 0);
   PhysicsEngine.world.broadphase = new CANNON.NaiveBroadphase();
 
   // temporary testing stuff

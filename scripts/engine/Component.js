@@ -20,6 +20,7 @@ class Component
     // Use updateComponent if you want access to start
     if (this.updateComponent){
       this.update = this.updateComponent;
+      this.updateComponent();
     }
   }
 
@@ -35,9 +36,11 @@ class Component
     }
   }
 
+  // This gets called if the game object's collision IS NOT a trigger (even with colliding with a trigger)
   onCollisionEnter(collision){
   }
 
+  // This gets called if the game object's collision IS a trigger (even with colliding with a normal one)
   onTriggerEnter(collider){
   }
 }
