@@ -17,7 +17,9 @@ GameEngine.currentScene = null;
 GameEngine.init = function() {
     //['assets/scenes/teapots.json']
     //['assets/scenes/Scene1.json']
-    GameEngine.currentScene = new GameScene(['assets/scenes/teapots.json','assets/scenes/AnimatedX.json']); //['assets/scenes/teapots.json']
+  PhysicsEngine.init();
+
+  GameEngine.currentScene = new GameScene(['assets/scenes/teapots.json']); //['assets/scenes/teapots.json']
 
 };
 

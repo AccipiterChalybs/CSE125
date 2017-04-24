@@ -115,10 +115,16 @@ class GameObject {
   }
 
   onCollisionEnter(other) {
-
     for (let compName of Object.keys(this.components)) {
-        let component = this.components[compName];
-        component.onCollisionEnter(other);
+      let component = this.components[compName];
+      component.onCollisionEnter(other);
+    }
+  }
+
+  onTriggerEnter(other) {
+    for (let compName of Object.keys(this.components)) {
+      let component = this.components[compName];
+      component.onTriggerEnter(other);
     }
   }
 
