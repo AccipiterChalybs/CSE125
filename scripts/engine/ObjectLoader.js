@@ -14,7 +14,7 @@ class ObjectLoader {
 
     static loadScene(filename) {
         let loadId = GameEngine.registerLoading();
-        ObjectLoader._loadJSON(filename, ObjectLoader._finishLoadScene.bind(this, loadId, filename));
+        JsonLoader.loadJSON(filename, ObjectLoader._finishLoadScene.bind(this, loadId, filename));
     }
 
     static _finishLoadScene(loadId, filename, scene) {
