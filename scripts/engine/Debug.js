@@ -159,4 +159,61 @@ Debug.printCollisionInfo = function(collisionEvent, gameObject, isTrigger){
 
 Debug.printOverlapSphereInfo = function(checkingObj, distance, radius){
   console.log("TestingObj [distance^2, radius^2]: ", checkingObj, " [" + distance + ", " + radius + "]");
+
+// Debugging for NavMesh
+Debug.navMesh = {};
+Debug.navMesh.printPointTriangle = false; Debug.navMesh._printPointTriangleDetailed = false;
+Debug.navMesh.printRaySegment = false; Debug.navMesh._printRaySegmentDetailed = false;
+Debug.navMesh.printLoadFinished = true;
+
+Debug.navMesh.printPointTriangleInfo = function(result, pt, v0, v1, v2, b0, b1, b2){
+  let resultString = result ? "INSIDE" : "OUTSIDE";
+  if(Debug.navMesh._printPointTriangleDetailed){
+    console.log("NavMesh (Point in triangle) DETAILED:");
+  }else{
+    console.log("NavMesh (Point in triangle):");
+  }
+  console.log("\tRESULT: " + resultString);
+  console.log("\tpoint: (" + pt[0] + ", " + pt[1] + ")");
+  console.log("\ttriangle:");
+  console.log("\t\tv0: (" + v0[0] + ", " + v0[1] + ")");
+  console.log("\t\tv1: (" + v1[0] + ", " + v1[1] + ")");
+  console.log("\t\tv2: (" + v2[0] + ", " + v2[1] + ")");
+
+  if(Debug.navMesh._printPointTriangleDetailed){
+    console.log("\tbooleans:");
+    console.log("\t\tb0: " + b0);
+    console.log("\t\tb0: " + b1);
+    console.log("\t\tb0: " + b2);
+  }
+};
+
+// s must be between 0 and 1 to lie on the line segment
+Debug.navMesh.printRaySegmentInfo = function(hitResult, ray2D, segment, maxDistance, hitDistance, s){
+  let hitResultString = hitResult ? "HIT" : "MISS";
+  if(Debug.navMesh._printRaySegmentDetailed){
+    console.log("NavMesh (Ray, segment intersection) DETAILED:");
+  }else{
+    console.log("NavMesh (Ray, segment intersection):");
+  }
+  console.log("\tRESULT: " + hitResultString)
+  console.log("\tray2D: ");
+  console.log("\t\torigin: (" + ray2D.origin[0] + ", " + ray2D.origin[1] + ")");
+  console.log("\t\tdirection: (" + ray2D.direction[0] + ", " + ray2D.direction[1] + ")");
+  console.log("\tsegment: ");
+  console.log("\t\tpt0: (" + segment[0][0] + ", " + segment[0][1] + ")");
+  console.log("\t\tpt1: (" + segment[1][0] + ", " + segment[1][1] +  ")");
+
+  if(Debug.navMesh._printRaySegmentDetailed){
+    console.log("\thitDistance: " + hitDistance.dist);
+    console.log("\tmaxDistance: " + maxDistance);
+    console.log("\ttimeHitOnSegment: " + s);
+  }
+};
+
+Debug.navMesh.printLoadFinishedInfo = function(jsonObj){
+  console.log("NavMesh (Loading Completed):");
+  console.log("\tmeta: ", jsonObj.meta);
+  console.log("\tfaceList: ", jsonObj.faceList);
+  console.log("\tboundary: ", jsonObj.boundary);
 };
