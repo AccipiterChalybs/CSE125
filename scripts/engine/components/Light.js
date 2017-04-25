@@ -37,7 +37,18 @@ class PointLight extends Light{
 }
 
 class DirectionalLight extends Light{
-    forwardPass(index){}
+    forwardPass(index){
+        for (let shaderId of Renderer.shaderForwardLightList) {
+            let posData = vec4.create(); vec4.set(posData, this.gameObject.transform.getForward()[0],
+                this.gameObject.transform.getForward()[1], this.gameObject.transform.getForward()[2], this.radius);
+            let colourData = vec4.create(); vec4.set(colourData, this.color[0], this.color[1], this.color[2], 0.0);
+            let metaData = vec4.create(); vec4.set(metaData, this.constantFalloff, 0,0, 1);
+
+            Renderer.getShader(shaderId).setUniform("uLightData[" + (3*index) + "]", posData, UniformTypes.vec4);
+            Renderer.getShader(shaderId).setUniform("uLightData[" + (3*index+1) + "]", colourData, UniformTypes.vec4);
+            Renderer.getShader(shaderId).setUniform("uLightData[" + (3*index+2) + "]", metaData, UniformTypes.vec4);
+        }
+    }
     deferredPass(bind){}
     update(){}
 }
