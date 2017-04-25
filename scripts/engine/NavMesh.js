@@ -9,7 +9,7 @@ class NavMesh{
 
     // point in triangle test either declaration works
     //let pt = vec3.create(); vec3.set(pt, 0.1, 0.01, 0);
-    let pt = [-0.3, 0.3, 0];
+    let pt = [0, -0.01, 0];
     //let v0 = vec3.create(); vec3.set(v0, 0, 0, 0);
     let v0 = [0, 0, 0];
     //let v1 = vec3.create(); vec3.set(v1, 0, 1, 0);
@@ -25,11 +25,11 @@ class NavMesh{
     console.log(this.isPointInTriangle2D(pt, v0, v1, v2));
   }
 
-  // If the pt is on the line, the pt is considered to be OUTSIDE the triangle
+  // If the pt is on the line, the pt is considered to be INSIDE the triangle
   isPointInTriangle2D(pt, v0, v1, v2){
-    let b0 = this.sign(pt, v0, v1) < 0.0;
-    let b1 = this.sign(pt, v1, v2) < 0.0;
-    let b2 = this.sign(pt, v2, v0) < 0.0;
+    let b0 = this.sign(pt, v0, v1) <= 0.0;
+    let b1 = this.sign(pt, v1, v2) <= 0.0;
+    let b2 = this.sign(pt, v2, v0) <= 0.0;
 
     return ((b0 === b1) && (b1 === b2));
   }
@@ -49,21 +49,21 @@ class NavMesh{
     console.log(segPerp);
   }
 
-  public static bool RayIntersectsSegment(Ray ray, Vector2 pt0, Vector2 pt1, float tmax, out float t) {
-  Vector2 seg = pt1 - pt0;
-  Vector2 segPerp = LeftPerp(seg);
-  float perpDotd = Vector2.Dot(ray.Direction, segPerp);
-  if (Equals(perpDotd, 0.0f, float.Epsilon))
-{
-  t = float.MaxValue;
-  return false;
-}
-
-Vector2 d = pt0 - ray.Origin;
-
-t = Vector2.Dot(segPerp, d) / perpDotd;
-float s = Vector2.Dot(LeftPerp(ray.Direction), d) / perpDotd;
-
-return t >= 0.0f && t <= tmax && s >= 0.0f && s <= 1.0f;
-}
+//   public static bool RayIntersectsSegment(Ray ray, Vector2 pt0, Vector2 pt1, float tmax, out float t) {
+//   Vector2 seg = pt1 - pt0;
+//   Vector2 segPerp = LeftPerp(seg);
+//   float perpDotd = Vector2.Dot(ray.Direction, segPerp);
+//   if (Equals(perpDotd, 0.0f, float.Epsilon))
+// {
+//   t = float.MaxValue;
+//   return false;
+// }
+//
+// Vector2 d = pt0 - ray.Origin;
+//
+// t = Vector2.Dot(segPerp, d) / perpDotd;
+// float s = Vector2.Dot(LeftPerp(ray.Direction), d) / perpDotd;
+//
+// return t >= 0.0f && t <= tmax && s >= 0.0f && s <= 1.0f;
+// }
 }
