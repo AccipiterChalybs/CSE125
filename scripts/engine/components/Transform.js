@@ -19,7 +19,7 @@ class Transform extends Component
         this.worldScaleDirty = null;
         this.cachedForwardVec = vec3.create();
         this.worldForwardDirty = true;
-      this.oldParent = null;
+        this.oldParent = null;
         this._parent = null;
         this.children = [];
     }
