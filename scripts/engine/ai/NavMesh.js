@@ -31,13 +31,13 @@ class NavMesh{
     JsonLoader.loadJSON(filename, finishLoadNavMesh.bind(this, loadID));
   }
 
-  _finishLoadNavMesh(loadID){
+  _finishLoadNavMesh(loadID, data){
     if(Debug.navMesh.printLoadFinished){
-      Debug.navMesh.printLoadFinishedInfo(arguments[1]);
+      Debug.navMesh.printLoadFinishedInfo(data);
     }
 
-    this.boundaryList = arguments[1].boundary;
-    this.faceList = arguments[1].faceList;
+    this.boundaryList = data.boundary;
+    this.faceList = data.faceList;
 
     GameEngine.completeLoading(loadID);
   }
