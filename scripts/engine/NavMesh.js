@@ -6,6 +6,7 @@ class NavMesh{
   constructor(){
 
     // test/debugging zone
+    // raycast on line segments
 
     // point in triangle test either declaration works
     //let pt = vec3.create(); vec3.set(pt, 0.1, 0.01, 0);
@@ -38,35 +39,4 @@ class NavMesh{
   _sign(pt0, pt1, pt2){
     return (pt0[0] - pt2[0]) * (pt1[1] - pt2[1]) - (pt1[0] - pt2[0]) * (pt0[1] - pt2[1]);
   }
-
-  rayIntersectsSegment(ray, pt0, pt1, tmax){
-    let seg = [0, 0, 0];
-    seg[0] = pt1[0] - pt0[0];
-    seg[1] = pt1[1] - pt0[1];
-    seg[2] = pt1[2] - pt0[2];
-
-    let segPerp = [seg[2], -seg[0]];
-    let perpDotd = vec3.create() ; vec3.dot(perpDotd, ray.direction, segPerp);
-    if(perpDotd <= Number.EPSILON && perpDotd >= Number.EPSILON){
-      return false;
-    }
-  }
-
-//   public static bool RayIntersectsSegment(Ray ray, Vector2 pt0, Vector2 pt1, float tmax, out float t) {
-//   Vector2 seg = pt1 - pt0;
-//   Vector2 segPerp = LeftPerp(seg);
-//   float perpDotd = Vector2.Dot(ray.Direction, segPerp);
-//   if (Equals(perpDotd, 0.0f, float.Epsilon))
-// {
-//   t = float.MaxValue;
-//   return false;
-// }
-//
-// Vector2 d = pt0 - ray.Origin;
-//
-// t = Vector2.Dot(segPerp, d) / perpDotd;
-// float s = Vector2.Dot(LeftPerp(ray.Direction), d) / perpDotd;
-//
-// return t >= 0.0f && t <= tmax && s >= 0.0f && s <= 1.0f;
-// }
 }
