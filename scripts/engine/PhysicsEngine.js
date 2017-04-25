@@ -66,6 +66,30 @@ PhysicsEngine.overlapSphere = function(position, radius){
   return hitObjects;
 };
 
+PhysicsEngine.rayIntersectsSegment = function(ray2D, lineSegment, maxDistance = Number.POSITIVE_INFINITY, hitDistance){
+  let seg = [0, 0];
+  seg[0] = lineSegment[1][0] - lineSegment[0][0];
+  seg[1] = lineSegment[1][1] - lineSegment[0][1];
+
+  let segPerp = [seg[1], -seg[0]];
+  let perpDotd = this.dot2D(ray2D.direction, segPerp);
+  if(perpDotd <= Number.EPSILON && perpDotd >= Number.EPSILON){
+    hitDistance.dist = Number.POSITIVE_INFINITY;
+    return false;
+  }
+
+  let d = [lineSegment[0][0] - ray2D.origin[0], lineSegment[0][1] - ray2D.origin[1]];
+
+  hitDistance.dist = this.dot2D(segPerp, d) / perpDotd;
+  let s = this.dot2D([ray2D.direction[1], -ray2D.direction[0]], d) / perpDotd;
+
+  return hitDistance.dist >= 0.0 && hitDistance.dist <= maxDistance && s >= 0.0 && s <= 1.0;
+};
+
+PhysicsEngine.dot2D = function(v0, v1){
+  return v0[0] * v1[0] + v0[1] * v1[1];
+};
+
 // 'PM' is short for 'physics material'
 PhysicsEngine.createMaterials = function(){
   let basicPM = new CANNON.Material("basicMaterial");
