@@ -6,7 +6,7 @@ let Debug = {};
 
 Debug._timer = 0;
 Debug.bufferDebugMode = false;
-
+Debug.clientUpdate = false;
 Debug.startTimer = function () {
   Debug._timer = new Date().getTime();
 };

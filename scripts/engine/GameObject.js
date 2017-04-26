@@ -45,6 +45,7 @@ class GameObject {
   }
 
   update() {
+
     for (let i = 0; i < this.transform.children.length; ++i) {
       let object = this.transform.children[i];
       if (object.gameObject.dead) {
@@ -63,6 +64,21 @@ class GameObject {
     for (let compName of Object.keys(this.components)) {
       this.components[compName].update();
     }
+  }
+
+  updateClient(){
+
+    for (let compName of Object.keys(this.components)) {
+      if (this.components[compName].updateClient && this.components[compName].updateClient !== null) {
+        this.components[compName].updateClient();
+      }
+    }
+
+    for (let i = 0; i < this.transform.children.length; ++i) {
+      let object = this.transform.children[i];
+      object.gameObject.updateClient();
+    }
+
   }
 
   delete() {
