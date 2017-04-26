@@ -7,6 +7,11 @@ let Debug = {};
 Debug.clientUpdate = true; //Run the client in standalone mode, so it doesn't need a server - good for testing!
 Debug.bufferDebugMode = false; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
 
+
+//Go through Debug, so easier to find and remove;
+Debug.log = console.log;
+Debug.error = console.error;
+
 Debug.assert = function(shouldBeTrue) {
   if (shouldBeTrue === false) {
     throw new Error("Assertion Failed");
