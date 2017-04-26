@@ -1,26 +1,27 @@
 const SoundEngine = {
 
-    init: function() {
+    init: function () {
 
         'use strict';
-        SoundEngine.spacejam=new Howl({
-            src:['assets/audio/SJTheme.wav'],
-            volume: 0
-        });
-        SoundEngine.ruready=new Howl({
-            src:['assets/audio/RUReady.wav'],
-            volume: 0
-        });
-        SoundEngine.cruelangel=new Howl({
-            src:['assets/audio/cruelangel.mp3'],
-            volume: 0
-        });
-    },
+        SoundEngine.spacejam = new Howl({
+            src: ['assets/audio/SJTheme.wav'],
+            volume: 0,
+          });
+        SoundEngine.ruready = new Howl({
+            src: ['assets/audio/RUReady.wav'],
+            volume: 0,
+          });
+        SoundEngine.cruelangel = new Howl({
+            src: ['assets/audio/cruelangel.mp3'],
+            volume: 0,
+          });
+      },
+
     playSound2d: function (sound, volume=1) {
-        let soundId=sound.play();
-        sound.volume(volume,soundId);
-        return [sound,soundId];
-    },
+        let soundId = sound.play();
+        sound.volume(volume, soundId);
+        return [sound, soundId];
+      },
     /*
      pannerObj is the object needed for the sound attenuation it has these parameters
      coneInnerAngle 360 There will be no volume reduction inside this angle.
@@ -32,45 +33,49 @@ const SoundEngine = {
      refDistance 1 A reference distance for reducing volume as the source moves away from the listener.
      rolloffFactor 1 How quickly the volume reduces as source moves from listener.
      */
-    playSound3d: function (sound,panObj={panningModel:'HRTF',refDistance:0.8,rolloffFactor:2.5,distanceModel:'exponential'},x=0,y=0,z=0,volume=1) {
-        let soundId=sound.play();
-        sound.volume(volume,soundId);
-        sound.pos(x,y,z,soundId);
+    playSound3d: function (sound, panObj={ panningModel: 'HRTF', refDistance: 0.8, rolloffFactor: 2.5, distanceModel: 'exponential' }, x=0, y=0, z=0, volume=1) {
+        let soundId = sound.play();
+        sound.volume(volume, soundId);
+        sound.pos(x, y, z, soundId);
         //sound roll off
-        sound.pannerAttr(panObj,soundId);
+        sound.pannerAttr(panObj, soundId);
         //let test=[sound,soundId];
-        return [sound,soundId];
-    },
+        return [sound, soundId];
+      },
     //the level has to be between 0.0. and 1.0
-    changeVolume: function (soundId,level) {
-        Howler.volume(level,soundId);
-    },
+    changeVolume: function (soundId, level) {
+        Howler.volume(level, soundId);
+      },
     //rate is between 0.5 to 4.0 with 1 being the default speed
-    changeRate: function (sound,soundId, rate) {
-        sound.rate(rate,soundId);
-    },
+    changeRate: function (sound, soundId, rate) {
+        sound.rate(rate, soundId);
+      },
     //0 0 0 is the middle
     //-1 is to the left on X
     //-1 is to the bottom on Y
     //-1 on Z not sure
-    updatePosition: function (sound, soundId,x=1,y=1,z=1) {
-        sound.pos(x,y,z,soundId);
+    updatePosition: function (sound, soundId, x=1, y=1, z=1) {
+        sound.pos(x, y, z, soundId);
 
-    },
-    pauseSound:function (sound,soundId) {
+      },
+
+    pauseSound: function (sound, soundId) {
         sound.pause(soundId);
-    },
-    resumeSound:function(sound,soundId){
+      },
+
+    resumeSound: function (sound, soundId) {
         sound.play(soundId);
-    },
-    stopSound:function (sound,soundId) {
+      },
+
+    stopSound: function (sound, soundId) {
         sound.stop(soundId);
-    },
+      },
     //loop boolean
-    loopSound:function (sound,soundId,loop) {
-        sound.loop(soundId,loop);
-    },
-    updateOrientation:function (sound, soundId, x=1,y=1,z=1) {
-        sound.orientation(x,y,z,soundId);
-    }
-};
+    loopSound: function (sound, soundId, loop) {
+        sound.loop(soundId, loop);
+      },
+
+    updateOrientation: function (sound, soundId, x=1, y=1, z=1) {
+        sound.orientation(x, y, z, soundId);
+      },
+  };

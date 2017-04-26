@@ -14,7 +14,7 @@ class ObjectLoader {
 
     static loadScene(filename) {
         let loadId = GameEngine.registerLoading();
-        ObjectLoader._loadJSON(filename, ObjectLoader._finishLoadScene.bind(this, loadId, filename));
+        JsonLoader.loadJSON(filename, ObjectLoader._finishLoadScene.bind(this, loadId, filename));
     }
 
     static _finishLoadScene(loadId, filename, scene) {
@@ -47,7 +47,8 @@ class ObjectLoader {
         let retScene = ObjectLoader._parseNode(scene, scene.rootnode, filename, loadingAcceleration, lights);
 
         //TODO bad hack - REMOVE THIS!!!
-        GameObject.prototype.SceneRoot = retScene;
+        if (filename !== "assets/scenes/teapots.json")
+            GameObject.prototype.SceneRoot.addChild(retScene);
 
 
         //TODO this looks incorrect - might need to put inside the recursive parseNode?
@@ -56,39 +57,11 @@ class ObjectLoader {
             ObjectLoader.linkRoot(retScene.getComponent("Animation"), retScene.transform);
         }
 
+        //TODO REMOVE THIS!! (When proper scene loading is in)
+        ObjectLoader.loadCollision(GameObject.prototype.SceneRoot, "assets/scenes/ExampleLevel_Colliders.json")
+
         GameEngine.completeLoading(loadId);
         return retScene;
-    }
-
-    static _loadJSON(url, func) {
-        //from http://stackoverflow.com/questions/12460378/how-to-get-json-from-url-in-javascript
-        if (IS_SERVER) {
-            //call server method;
-            let data=global.readScene(url);
-            func(data);
-
-        } else {
-            let getJSON = function(url, callback) {
-                let xhr = new XMLHttpRequest();
-                xhr.open('GET', url, true);
-                xhr.responseType = 'json';
-                xhr.onload = function() {
-                    let status = xhr.status;
-                    if (status === 200) {
-                        callback(null, xhr.response);
-                    } else {
-                        callback(status);
-                    }
-                };
-                xhr.send();
-            };
-
-            getJSON(url,
-                function(err, data) {
-                    if (err !== null) alert("ERROR loading level: " + err);
-                    else func(data);
-                });
-        }
     }
 
     static _getPath ( name ) {
@@ -241,6 +214,22 @@ class ObjectLoader {
         for (let child of currentTransform.children) {
             ObjectLoader.linkRoot(anim, child);
         }
+    }
+
+
+    static loadCollision(gameObject, filename) {
+        let loadId = GameEngine.registerLoading();
+        JsonLoader.loadJSON(filename, ObjectLoader._finishLoadCollision.bind(this, loadId, gameObject));
+    }
+
+    static _finishLoadCollision(loadId, gameObject, data) {
+        let collider = new CompoundCollider();
+        gameObject.addComponent(collider);
+        for (let colShape of data) {
+          collider.addShape(colShape.type, colShape.size, colShape.pos);
+        }
+
+        GameEngine.completeLoading(loadId);
     }
 
 }
