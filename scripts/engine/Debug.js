@@ -164,7 +164,7 @@ Debug.printOverlapSphereInfo = function(checkingObj, distance, radius){
 Debug.navMesh = {};
 Debug.navMesh.printPointTriangle = false; Debug.navMesh._printPointTriangleDetailed = false;
 Debug.navMesh.printRaySegment = false; Debug.navMesh._printRaySegmentDetailed = false;
-Debug.navMesh.printLoadFinished = true;
+Debug.navMesh.printLoadFinished = false;
 
 Debug.navMesh.printPointTriangleInfo = function(result, pt, v0, v1, v2, b0, b1, b2){
   let resultString = result ? "INSIDE" : "OUTSIDE";
@@ -217,3 +217,13 @@ Debug.navMesh.printLoadFinishedInfo = function(jsonObj){
   console.log("\tfaceList: ", jsonObj.faceList);
   console.log("\tboundary: ", jsonObj.boundary);
 };
+
+
+// Debugging for BehaviorTrees
+Debug.behaviorTree = {};
+Debug.behaviorTree.printAll = false;
+Debug.behaviorTree.printStates = false;
+Debug.behaviorTree.printErrors = false;
+Debug.behaviorTree.printUniques = false;
+Debug.behaviorTree.printFailures = false;
+Debug.behaviorTree.printSuccesses = false;

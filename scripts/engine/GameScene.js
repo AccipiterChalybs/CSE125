@@ -172,6 +172,10 @@ class GameScene {
 
       GameObject.prototype.SceneRoot.addChild(lightCenter);
     }
+    //GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new RotateOverTime(-1));
+    GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new BoxCollider(500, false, 20, 20, 20));
+    GameObject.prototype.SceneRoot.transform.children[0].gameObject.getComponent("Collider").setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
+    GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new EvilController());
 
     //let move = vec3.create(); vec3.set(move, 0, 500, 64);
     let move = vec3.create(); vec3.set(move, 0,-1,0);
