@@ -11,17 +11,17 @@ class NavMesh{
 
     // test/debugging zone
     // raycast on line segments
-    let ray = {origin: [0, 0.75], direction: [20, 1]};
-    let lineSeg = [[-1, 1], [1, 1]];
-    let hitDistance = {dist: null};
-    let hitResult = this.rayIntersectsSegment(ray, lineSeg, 1, hitDistance);
+    // let ray = {origin: [0, 0.75], direction: [20, 1]};
+    // let lineSeg = [[-1, 1], [1, 1]];
+    // let hitDistance = {dist: null};
+    // let hitResult = this.rayIntersectsSegment(ray, lineSeg, 1, hitDistance);
 
     // point in triangle test either declaration works
-    let pt = [0, 0];
-    let v0 = [0, 0];
-    let v1 = [0, 2];
-    let v2 = [2, 0];
-    let result = this.isPointInTriangle2D(pt, v0, v1, v2);
+    // let pt = [0, 0];
+    // let v0 = [0, 0];
+    // let v1 = [0, 2];
+    // let v2 = [2, 0];
+    // let result = this.isPointInTriangle2D(pt, v0, v1, v2);
   }
 
   loadNavMesh(filename){
@@ -39,17 +39,22 @@ class NavMesh{
     this.boundaryList = data.boundary;
     this.faceList = data.faceList;
 
+    // test/debugging zone
+    let pt = [20, 0, -13];
+    let faceIndex = this.findFace(pt);
+
     GameEngine.completeLoading(loadID);
   }
 
-  // If the pt is on the line, the pt is considered to be INSIDE the triangle
+  // If the pt is on the line, the pt is considered to be INSIDE the triangle.
+  // 2D is on the x and z plane NOT x and y
   isPointInTriangle2D(pt, v0, v1, v2){
     // code from http://stackoverflow.com/questions/2049582/how-to-determine-if-a-point-is-in-a-2d-triangle
     let b0 = this._sign(pt, v0, v1) <= 0.0;
     let b1 = this._sign(pt, v1, v2) <= 0.0;
     let b2 = this._sign(pt, v2, v0) <= 0.0;
 
-    let result = ((b0 === b1) && (b1 === b2))
+    let result = ((b0 === b1) && (b1 === b2));
 
     if(Debug.navMesh.printPointTriangle){
       Debug.navMesh.printPointTriangleInfo(result, pt, v0, v1, v2, b0, b1, b2);
@@ -60,7 +65,30 @@ class NavMesh{
 
   // Appears to be some sort of cross product
   _sign(pt0, pt1, pt2){
-    return (pt0[0] - pt2[0]) * (pt1[1] - pt2[1]) - (pt1[0] - pt2[0]) * (pt0[1] - pt2[1]);
+    return (pt0[0] - pt2[0]) * (pt1[2] - pt2[2]) - (pt1[0] - pt2[0]) * (pt0[2] - pt2[2]);
+  }
+
+  findFace(pt){
+    for(let i = 0; i < this.faceList.length; ++i){
+      let face = this.faceList[i].vert;
+
+      if(this.isPointInTriangle2D(pt, face[0], face[1], face[2])){
+        if(Debug.navMesh.printFindFace) {
+          Debug.navMesh.printFindFaceInfo(pt, i, face);
+          let teapot = new GameObject();
+          let mesh = new Mesh("Teapot02");
+          teapot.addComponent(mesh);
+          teapot.transform.setPosition(pt);
+        }
+
+        return i;
+      }
+    }
+
+    if(Debug.navMesh.printFindFace)
+      Debug.navMesh.printFindFaceInfo(pt, -1);
+
+    return -1;
   }
 
   // If collinear: ray does NOT intersect and distance = NaN

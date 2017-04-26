@@ -164,6 +164,7 @@ Debug.printOverlapSphereInfo = function(checkingObj, distance, radius){
 Debug.navMesh = {};
 Debug.navMesh.printPointTriangle = false; Debug.navMesh._printPointTriangleDetailed = false;
 Debug.navMesh.printRaySegment = false; Debug.navMesh._printRaySegmentDetailed = false;
+Debug.navMesh.printFindFace = true; Debug.navMesh._printFindFaceDetailed = true;
 Debug.navMesh.printLoadFinished = false;
 
 Debug.navMesh.printPointTriangleInfo = function(result, pt, v0, v1, v2, b0, b1, b2){
@@ -196,7 +197,7 @@ Debug.navMesh.printRaySegmentInfo = function(hitResult, ray2D, segment, maxDista
   }else{
     console.log("NavMesh (Ray, segment intersection):");
   }
-  console.log("\tRESULT: " + hitResultString)
+  console.log("\tRESULT: " + hitResultString);
   console.log("\tray2D: ");
   console.log("\t\torigin: (" + ray2D.origin[0] + ", " + ray2D.origin[1] + ")");
   console.log("\t\tdirection: (" + ray2D.direction[0] + ", " + ray2D.direction[1] + ")");
@@ -208,6 +209,18 @@ Debug.navMesh.printRaySegmentInfo = function(hitResult, ray2D, segment, maxDista
     console.log("\thitDistance: " + hitDistance.dist);
     console.log("\tmaxDistance: " + maxDistance);
     console.log("\ttimeHitOnSegment: " + s);
+  }
+};
+
+Debug.navMesh.printFindFaceInfo = function(pt, faceIndex, face){
+  if(faceIndex !== -1) {
+    console.log("Point (" + pt[0] + ", " + pt[1] + ", " + pt[2] + ") lies on face (" + faceIndex + ").");
+    if(Debug.navMesh._printFindFaceDetailed){
+      console.log("\tFace vertices: ", face[0], ", ", face[1], ", ", face[2]);
+
+    }
+  } else{
+    console.log("Point (" + pt[0] + ", " + pt[1] + ", " + pt[2] + ") does NOT lie on a face.");
   }
 };
 

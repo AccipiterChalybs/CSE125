@@ -34,7 +34,7 @@ class EvilController extends AIController{
   }
 
   _buildBehaviorTree(){
-    console.log(this);
+    //console.log(this);
     let root = new PrioritySelector("root");
     let sel0 = new ConcurrentSelector("to say hello");
     let proximityCheck = new ProximityCheck(this.transform, GameObject.prototype.SceneRoot.transform.children[1],60);
@@ -45,8 +45,8 @@ class EvilController extends AIController{
 
     let sayGoodbye = new SayGoodbye(this);
 
-    root.addNode(sel0);
-    root.addNode(sayGoodbye);
+    //root.addNode(sel0);
+    //root.addNode(sayGoodbye);
     return root;
   }
 }
