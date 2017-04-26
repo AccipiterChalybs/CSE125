@@ -6,6 +6,7 @@ var albedo, mat, normal;
 
 class GameScene {
   constructor(filenameList) {
+    GameObject.prototype.SceneRoot = new GameObject();
     //Start loads here, do stuff with created objects in start()
     for (let filename of filenameList) {
         ObjectLoader.loadScene(filename); //TODO add callback to group these together
@@ -44,11 +45,13 @@ class GameScene {
 
 
 */
- GameObject.prototype.SceneRoot.transform.setScale(1);
- GameObject.prototype.SceneRoot.transform.children= [];
 
     let rotation = quat.create();
     quat.rotateX(rotation, rotation, -Math.PI/2);
+
+
+    GameObject.prototype.SceneRoot.transform.setScale(1);
+
 
     let container = new GameObject();
     GameObject.prototype.SceneRoot.addChild(container);
@@ -101,12 +104,12 @@ class GameScene {
     }
 
     //let move = vec3.create(); vec3.set(move, 0, 500, 64);
-    let move = vec3.create(); vec3.set(move, 0,-2,0);
+    let move = vec3.create(); vec3.set(move, 0,-1,0);
     let ground = new GameObject();
     ground.setName("ground");
+    ground.transform.setPosition(move);
     ground.addComponent(new BoxCollider(0, false, 10000, 1, 10000));
     ground.getComponent("Collider").setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
-    ground.transform.setPosition(move);
   }
 
   update() {
@@ -115,7 +118,5 @@ class GameScene {
     {
       PhysicsEngine.update();
     }
-
-    Renderer.camera.transform.getParent().gameObject.update(); //TODO remove this one when SceneRoot contains all objects
   }
 }

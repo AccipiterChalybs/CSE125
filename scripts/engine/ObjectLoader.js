@@ -47,7 +47,8 @@ class ObjectLoader {
         let retScene = ObjectLoader._parseNode(scene, scene.rootnode, filename, loadingAcceleration, lights);
 
         //TODO bad hack - REMOVE THIS!!!
-        GameObject.prototype.SceneRoot = retScene;
+        if (filename !== "assets/scenes/teapots.json")
+            GameObject.prototype.SceneRoot.addChild(retScene);
 
 
         //TODO this looks incorrect - might need to put inside the recursive parseNode?
@@ -57,7 +58,7 @@ class ObjectLoader {
         }
 
         //TODO REMOVE THIS!! (When proper scene loading is in)
-        ObjectLoader.loadCollision(GameObject.prototype.SceneRoot, "assets/scenes/ExampleScene_Colliders.json")
+        ObjectLoader.loadCollision(GameObject.prototype.SceneRoot, "assets/scenes/ExampleLevel_Colliders.json")
 
         GameEngine.completeLoading(loadId);
         return retScene;
