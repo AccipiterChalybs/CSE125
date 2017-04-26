@@ -7,6 +7,13 @@ let Debug = {};
 Debug._timer = 0;
 Debug.bufferDebugMode = false;
 
+
+Debug.assert = function(shouldBeTrue) {
+  if (shouldBeTrue === false) {
+    throw new Error("Assertion Failed");
+  }
+};
+
 Debug.startTimer = function () {
   Debug._timer = new Date().getTime();
 };
