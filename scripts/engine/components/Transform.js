@@ -188,23 +188,24 @@ class Transform extends Component
 
     serialize() {
         let retVal = {};
-        retVal.position = this.position;
-        retVal.rotation = this.rotation;
-        retVal.scaleVal = this.scaleFactor[0];
-        retVal.children = [];
+        retVal.p = this.position;
+        retVal.r = this.rotation;
+        retVal.s = this.scaleFactor[0];
+        retVal.c = [];
         for (let child of this.children) {
-            retVal.children.push(child.serialize());
+            retVal.c.push(child.serialize());
         }
         return retVal;
     }
 
     applySerializedData(data) {
-        this.position = data.position;
-        this.rotation = data.rotation;
-        this.scaleFactor[0] = this.scaleFactor[1] = this.scaleFactor[2] = data.scaleVal;
+        this.setDirty();
+        this.position = data.p;
+        this.rotation = data.r;
+        this.scaleFactor[0] = this.scaleFactor[1] = this.scaleFactor[2] = data.s;
         let index=0;
         for (let child of this.children) {
-            child.applySerializedData(data.children[index]);
+            child.applySerializedData(data.c[index]);
             ++index;
         }
     }

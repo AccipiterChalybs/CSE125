@@ -57,6 +57,11 @@ const Input = {
     return (axis) ? axis.value : null;
   },
 
+  setAxis: function (name,val) {
+    let axis = Input._options.axes.filter((axis)=>axis.name === name)[0];
+    axis.value=val;
+  },
+
   getMouse: function () {
     var x = Input._options.axes.filter((axis)=>axis.name === 'mouseHorizontal')[0];
     var y = Input._options.axes.filter((axis)=>axis.name === 'mouseVertical')[0];

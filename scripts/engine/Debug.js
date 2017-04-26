@@ -4,9 +4,8 @@
 
 let Debug = {};
 
-Debug._timer = 0;
+Debug.clientUpdate = false;
 Debug.bufferDebugMode = false;
-
 
 Debug.assert = function(shouldBeTrue) {
   if (shouldBeTrue === false) {
@@ -14,6 +13,7 @@ Debug.assert = function(shouldBeTrue) {
   }
 };
 
+Debug._timer = 0;
 Debug.startTimer = function () {
   Debug._timer = new Date().getTime();
 };

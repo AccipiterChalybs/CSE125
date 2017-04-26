@@ -3,16 +3,18 @@
  */
 class Component
 {
-  constructor(){
+
+  constructor ()
+  {
     this.gameObject = null;
     this.transform = null;
     this.visible = true;
     this.active = true;
     this.componentType = null; //must override in subclass!
+    this.updateClient = null; //null function unless needed
   }
 
-  start(){
-  }
+  start(){}
 
   update(deltaTime){
     this.start();
