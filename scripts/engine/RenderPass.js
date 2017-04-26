@@ -76,14 +76,11 @@ class DeferredPass extends RenderPass
     constructor(){
         super();
         //TODO do we need to add a special Framebuffer thing here?
-        this.fbo = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 1, false, true);
-            //TODO use this one: new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 4, false, true, [GL.RGBA8, GL.RGBA16, GL.RGBA16F, GL.RGBA16F]);
-        //this.fbo = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), [GL.RGBA8, GL.RGBA16, GL.RGBA16F, GL.RGBA16F], true);
+        this.fbo = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 4, false, true, [GL.RGBA16F, GL.RGBA8, GL.RGBA16, GL.RGBA16F]);
 
-      /* TODO add this
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING)["colorTex"] = 0;
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING)["normalTex"] = 1;
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING)["posTex"] = 2;*/
+        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("colorTex", 0, UniformTypes.u1i);
+        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("normalTex", 1, UniformTypes.u1i);
+        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("posTex", 2, UniformTypes.u1i);
     }
 
     render(){
@@ -94,7 +91,7 @@ class DeferredPass extends RenderPass
         GL.cullFace(GL.BACK);
         GL.disable(GL.STENCIL_TEST);
 
-        let buffers = [ GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2 ];
+        let buffers = [ GL.NONE, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2, GL.COLOR_ATTACHMENT3 ];
         this.fbo.bind(buffers);
         for(let mesh of Renderer.renderBuffer.deferred)
         {
@@ -108,17 +105,19 @@ class DeferredPass extends RenderPass
         GL.depthMask(false);
         GL.stencilOpSeparate(GL.BACK, GL.KEEP, GL.INCR_WRAP, GL.KEEP);
         GL.stencilOpSeparate(GL.FRONT, GL.KEEP, GL.DECR_WRAP, GL.KEEP);
-        GL.drawBuffer([GL.NONE, GL.NONE, GL.NONE, GL.COLOR_ATTACHMENT3]);
+        GL.drawBuffers([GL.COLOR_ATTACHMENT0]); //switch to rendering output, but keep depth from earlier
         GL.clear(GL.COLOR_BUFFER_BIT);
 
-        this.fbo.bindTexture(0, 0);
-        this.fbo.bindTexture(1, 1);
-        this.fbo.bindTexture(2, 2);
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING)["colorTex"] = 0;
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING)["normalTex"] = 1;
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING)["posTex"] = 2;
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING)["shadowTex"] = 3;
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING)["uIV_Matrix"] = Renderer.camera.gameObject.transform.getTransformMatrix();
+        this.fbo.bindTexture(0, 1);
+        this.fbo.bindTexture(1, 2);
+        this.fbo.bindTexture(2, 3);
+        //TODO do we need these?
+        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("colorTex", 0, UniformTypes.u1i);
+        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("normalTex", 1, UniformTypes.u1i);
+        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("posTex", 2, UniformTypes.u1i);
+        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("shadowTex", 3, UniformTypes.u1i);
+
+        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("uIV_Matrix", Renderer.camera.gameObject.transform.getTransformMatrix(), UniformTypes.mat4);
         //CHECK_ERROR();
 
         for(let light of Renderer.renderBuffer.light) {
@@ -155,7 +154,7 @@ class DeferredPass extends RenderPass
             GL.blendFunc(GL.ONE, GL.ONE);
             GL.enable(GL.CULL_FACE);
             GL.disable(GL.DEPTH_TEST);
-            GL.drawBuffers([GL.NONE, GL.NONE, GL.NONE, GL.COLOR_ATTACHMENT3]);
+            GL.drawBuffers([GL.COLOR_ATTACHMENT0]); //switch back to main image
 
             light.deferredPass(false);
         }

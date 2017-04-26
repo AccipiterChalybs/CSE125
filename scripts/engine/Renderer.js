@@ -118,6 +118,7 @@ const Renderer  = {
       let bloomPass = new BloomPass(Renderer.deferredPass);
 
       Renderer.passes = [];
+      Renderer.passes.push(Renderer.deferredPass);
       Renderer.passes.push(forwardPass); //Note: This should usually go AFTER skybox, for transparent objects with no depth mask.
       Renderer.passes.push(skyboxPass);
       Renderer.passes.push(bloomPass);
