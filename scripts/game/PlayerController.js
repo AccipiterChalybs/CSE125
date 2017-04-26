@@ -13,6 +13,7 @@ class PlayerController extends Component{
     this.x = 0;
     this.y = 0;
     this.z = 0;
+    this.forward = vec3.create(); vec3.set(this.forward,0,0,-1);
   }
 
   start(){
@@ -29,16 +30,15 @@ class PlayerController extends Component{
     {
       this.x = Input.getAxis('horizontal');
       this.z = Input.getAxis('vertical');
+      this.forward = Renderer.camera.transform.getForward();
     }
 
     // if(x !== 0 || z !== 0) {
     //   console.log("moving");
     // }
     let up = vec3.create(); vec3.set(up, 0, 1, 0);
-    let camera = vec3.create(); vec3.set(camera, 0, 0, -1);
-
     let move = vec3.create();
-    let moveX = vec3.create(); vec3.cross(moveX, camera, up);
+    let moveX = vec3.create(); vec3.cross(moveX, this.forward, up);
     let moveZ = vec3.create(); vec3.cross(moveZ, up, moveX);
     vec3.normalize(moveX, moveX);
     vec3.normalize(moveZ, moveZ);

@@ -11,7 +11,7 @@ class Component
     this.visible = true;
     this.active = true;
     this.componentType = null; //must override in subclass!
-    this.updateClient = null; //null function unless needed
+    if (!this.updateClient) this.updateClient = null; //null function unless needed
   }
 
   start(){}
