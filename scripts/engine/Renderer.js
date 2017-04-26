@@ -29,6 +29,8 @@ const Renderer  = {
       Renderer.NEAR_DEPTH = 0.2;
       Renderer.FAR_DEPTH = 1500;
 
+      Renderer.FORWARD_SHADER_LIGHT_MAX = 5;
+
       Renderer.VERTEX_ATTRIB_LOCATION = 0;
 
       GL.enable(GL.DEPTH_TEST);
@@ -97,7 +99,7 @@ const Renderer  = {
       Renderer.camera = null;
 
 
-      let skyboxName = 'grace/';
+      let skyboxName = 'assets/skybox/field/';
       let cubeFilenames = [
           'assets/skybox/' + skyboxName + 'right.hdr',
           'assets/skybox/' + skyboxName + 'left.hdr',
@@ -107,7 +109,7 @@ const Renderer  = {
           'assets/skybox/' + skyboxName + 'back.hdr',
       ];
       //TODO should make a json file to load this with, and have exposure variable
-      Renderer.skybox = new Skybox(cubeFilenames);
+      Renderer.skybox = new Skybox(skyboxName, 10);
 
       let forwardPass = new ForwardPass();
       let skyboxPass = new SkyboxPass(Renderer.skybox);
@@ -414,8 +416,7 @@ const Renderer  = {
     for (let shaderId of Renderer.shaderEnvironmentList) {
       Renderer.getShader(shaderId).setUniform('environment', slot, UniformTypes.u1i);
 
-      //TODO: can we use mipmaps like Renderer in WebGL?
-      Renderer.getShader(shaderId).setUniform("environment_mipmap", mipmapLevels, UniformTypes.u1i);
+      Renderer.getShader(shaderId).setUniform("environment_mipmap", mipmapLevels, UniformTypes.u1f);
     }
   },
 

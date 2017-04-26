@@ -189,6 +189,7 @@ RGBE_LOADER.ReadHeader = function(byteData)
 /* simple read routine.  will not correctly handle run length encoding */
 RGBE_LOADER.ReadPixels = function(output, byteData)
 {
+    let oi = 0;
     for (let index=0; index < byteData.length; index+=4)
     {
 
@@ -203,7 +204,9 @@ RGBE_LOADER.ReadPixels = function(output, byteData)
             b = byteData[index+2] * f;
         }
 
-        output.push(r, g, b);
+        output[oi] = r; ++oi;
+        output[oi] = g; ++oi;
+        output[oi] = b; ++oi;
     }
     return output;
 };

@@ -15,12 +15,9 @@ GameEngine.currentScene = null;
 
 /** Init: starts loading objects */
 GameEngine.init = function () {
-    //['assets/scenes/teapots.json']
-    //['assets/scenes/Scene1.json']
   PhysicsEngine.init();
 
-  GameEngine.currentScene = new GameScene(['assets/scenes/teapots.json', 'assets/scenes/ExampleLevel.json']); //['assets/scenes/teapots.json']
-
+  GameEngine.currentScene = new GameScene(['assets/scenes/teapots.json', 'assets/scenes/ExampleLevel.json']);
 };
 
 

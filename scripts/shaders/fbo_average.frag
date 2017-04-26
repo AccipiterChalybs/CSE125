@@ -7,5 +7,5 @@ uniform sampler2D inputTex;
 layout(location = 0) out vec4 fragColor;
 
 void main() {
-    fragColor = textureLod(inputTex, vTexCoord, 10.f);
+    fragColor = clamp(textureLod(inputTex, vTexCoord, 6.0), 0.0, 100.0);
 }

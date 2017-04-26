@@ -33,25 +33,22 @@ class GameScene {
     }
     //GameObject.prototype.SceneRoot.getComponent('Animation').play(0, true);
 
-/*
-    let moveBack = vec3.create(); vec3.set(moveBack, 3, 0, 0);
-     GameObject.prototype.SceneRoot.transform.translate(moveBack);
-
-     GameObject.prototype.SceneRoot.transform.children.forEach(function(child){
-     child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.COLOR, albedo);
-     child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.MAT, mat);
-     child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.NORMAL, normal);
-     });
-
-
-*/
-
-    let rotation = quat.create();
-    quat.rotateX(rotation, rotation, -Math.PI/2);
-
 
     GameObject.prototype.SceneRoot.transform.setScale(1);
 
+    let moveBack = vec3.create(); vec3.set(moveBack, 3, 0, 0);
+    GameObject.prototype.SceneRoot.transform.translate(moveBack);
+
+    GameObject.prototype.SceneRoot.transform.children.forEach(function(child){
+      if (child.gameObject.getComponent('Mesh')) {
+        child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.COLOR, albedo);
+        child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.MAT, mat);
+        child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.NORMAL, normal);
+      }
+    });
+
+    let rotation = quat.create();
+    quat.rotateX(rotation, rotation, -Math.PI/2);
 
     let container = new GameObject();
     GameObject.prototype.SceneRoot.addChild(container);
@@ -102,6 +99,19 @@ class GameScene {
             container.addChild(teapot);
         }
     }
+
+
+    let light = new GameObject();
+    let lightComp = new PointLight();
+    light.addComponent(lightComp);
+    let lightPos = vec3.create(); vec3.set(lightPos, 5, 2, 0);
+    light.transform.setPosition(lightPos);
+
+    let lightCenter = new GameObject();
+    lightCenter.addChild(light);
+    lightCenter.addComponent(new RotateOverTime(5));
+
+    GameObject.prototype.SceneRoot.addChild(lightCenter);
 
     //let move = vec3.create(); vec3.set(move, 0, 500, 64);
     let move = vec3.create(); vec3.set(move, 0,-1,0);
