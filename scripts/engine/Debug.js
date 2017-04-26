@@ -4,9 +4,16 @@
 
 let Debug = {};
 
+Debug.clientUpdate = true; //Run the client in standalone mode, so it doesn't need a server - good for testing!
+Debug.bufferDebugMode = false; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
+
+Debug.assert = function(shouldBeTrue) {
+  if (shouldBeTrue === false) {
+    throw new Error("Assertion Failed");
+  }
+};
+
 Debug._timer = 0;
-Debug.bufferDebugMode = false;
-Debug.clientUpdate = false;
 Debug.startTimer = function () {
   Debug._timer = new Date().getTime();
 };

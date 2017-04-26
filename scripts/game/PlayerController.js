@@ -2,7 +2,7 @@
  * Created by Stephen on 4/15/2017.
  */
 
-const MOVEMENTSPEED = 30;
+const MOVEMENTSPEED = 2;
 
 // Requires a collider
 class PlayerController extends Component{
