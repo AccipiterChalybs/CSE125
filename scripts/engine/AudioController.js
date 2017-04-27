@@ -4,15 +4,15 @@ const SoundEngine = {
 
         'use strict';
         SoundEngine.spacejam = new Howl({
-            src: ['assets/audio/SJTheme.wav'],
+            src: ['assets/audio/TestTheme.mp3'],
             volume: 0,
           });
         SoundEngine.ruready = new Howl({
-            src: ['assets/audio/RUReady.wav'],
+            src: ['assets/audio/orch_horror.wav'],
             volume: 0,
           });
         SoundEngine.cruelangel = new Howl({
-            src: ['assets/audio/cruelangel.mp3'],
+            src: ['assets/audio/cine_ambience.wav'],
             volume: 0,
           });
       },
