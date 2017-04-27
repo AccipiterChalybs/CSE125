@@ -11,12 +11,11 @@ class ForwardPass extends RenderPass
     render(){
         let lightIndex = 0;
         //TODO sort lights by importance?
-        /*TODO re-enable
         for (let l of Renderer.renderBuffer.light) {
             if (lightIndex > Renderer.FORWARD_SHADER_LIGHT_MAX) break;
             l.forwardPass(lightIndex++);
         }
-        */
+
         for (let mesh of Renderer.renderBuffer.forward) {
             if(mesh.material.shader === Renderer.getShader(Renderer.FORWARD_UNLIT) || mesh.material.shader === Renderer.getShader(Renderer.FORWARD_EMISSIVE))
                 GL.depthMask(false);
@@ -220,8 +219,14 @@ class BloomPass extends RenderPass
         super();
         this._deferredPass = deferred;
 
+        this.averageExposure = 1;
+        this._averageSize = 16;
+
         let screenWidth = Renderer.getWindowWidth();
         let screenHeight = Renderer.getWindowHeight();
+        console.log(Renderer.getWindowWidth() + " " + Renderer.getWindowHeight());
+
+        this._averagePass = new Framebuffer(this._averageSize, this._averageSize, 1, false, true);
 
         this._brightPass = new Framebuffer(screenWidth, screenHeight, 1, false, true);
         this._blurBuffers = [];
@@ -241,6 +246,7 @@ class BloomPass extends RenderPass
         let s1 = Renderer.getShader(Renderer.FBO_PASS);
         let s2 = Renderer.getShader(Renderer.FBO_BLUR);
         let s3 = Renderer.getShader(Renderer.FBO_HDR);
+        let s4 = Renderer.getShader(Renderer.FBO_AVERAGE);
         this._deferredPass.fbo.unbind();
 
         let buffers = [ GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2, GL.COLOR_ATTACHMENT3 ];
@@ -248,6 +254,34 @@ class BloomPass extends RenderPass
         this._deferredPass.fbo.bindTexture(0, 0); //TODO use (0, 3)
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.LINEAR_MIPMAP_NEAREST);
         GL.generateMipmap(GL.TEXTURE_2D);
+
+        //Calculate Average Exposure for Eye Adjustment
+        //(Have to render again to get highest mipmap since WebGL doesn't have getTexImage)
+        const newDataWeight = 0.05;
+        this._averagePass.bind([buffers[0]]);
+        s4.use();
+        this._deferredPass.fbo.draw();
+        let currentRGB = new Float32Array(this._averageSize * this._averageSize * 4);
+        GL.readPixels(0, 0, this._averageSize, this._averageSize, GL.RGBA, GL.FLOAT, currentRGB);
+        let lumen = 0;
+
+        for (let x=0; x<currentRGB.length; ++x) {
+            if (isNaN(currentRGB[x])) {
+                Debug.error("err" + x);
+                currentRGB[x] = 1;
+            }
+        }
+
+        for (let i=0; i<this._averageSize * this._averageSize; ++i) {
+            lumen+=Math.sqrt(currentRGB[4*i]*currentRGB[4*i] + currentRGB[4*i+1]*currentRGB[4*i+1] + currentRGB[4*i+2]*currentRGB[4*i+2]);
+        }
+        lumen /= this._averageSize*this._averageSize;
+
+        if (!isNaN(lumen)) {
+            this.averageExposure = this.averageExposure * (1 - newDataWeight) + lumen * (newDataWeight);
+        }
+        //-----------------------------------------------------
+
         this._brightPass.bind([buffers[0]]);
         s1.use();
         this._deferredPass.fbo.draw();
@@ -291,6 +325,9 @@ class BloomPass extends RenderPass
         s3.setUniform("addTex3", 3, UniformTypes.u1i);
         s3.setUniform("addTex4", 4, UniformTypes.u1i);
         s3.setUniform("addTex5", 5, UniformTypes.u1i);
+
+        s3.setUniform("exposure", this.averageExposure, UniformTypes.u1f);
+
         this._deferredPass.fbo.draw();
 
 
@@ -301,6 +338,7 @@ class BloomPass extends RenderPass
                 this._blurBuffers[i][1].blitFramebuffer(0, abc, 0, (Renderer.getWindowWidth() / Math.pow(2, i + 1)), (Renderer.getWindowHeight() / Math.pow(2, i + 1)));
                 abc += (Renderer.getWindowWidth() / Math.pow(2, i + 1));
             }
+            this._averagePass.blitFramebuffer(0, 0, 450, 50, 50);
         }
     }
 }

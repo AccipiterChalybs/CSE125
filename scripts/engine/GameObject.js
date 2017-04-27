@@ -45,6 +45,7 @@ class GameObject {
   }
 
   update() {
+
     for (let i = 0; i < this.transform.children.length; ++i) {
       let object = this.transform.children[i];
       if (object.gameObject.dead) {
@@ -63,6 +64,21 @@ class GameObject {
     for (let compName of Object.keys(this.components)) {
       this.components[compName].update();
     }
+  }
+
+  updateClient(){
+
+    for (let compName of Object.keys(this.components)) {
+      if (this.components[compName].updateClient && this.components[compName].updateClient !== null) {
+        this.components[compName].updateClient();
+      }
+    }
+
+    for (let i = 0; i < this.transform.children.length; ++i) {
+      let object = this.transform.children[i];
+      object.gameObject.updateClient();
+    }
+
   }
 
   delete() {
@@ -115,10 +131,16 @@ class GameObject {
   }
 
   onCollisionEnter(other) {
-
     for (let compName of Object.keys(this.components)) {
-        let component = this.components[compName];
-        component.onCollisionEnter(other);
+      let component = this.components[compName];
+      component.onCollisionEnter(other);
+    }
+  }
+
+  onTriggerEnter(other) {
+    for (let compName of Object.keys(this.components)) {
+      let component = this.components[compName];
+      component.onTriggerEnter(other);
     }
   }
 
@@ -173,7 +195,7 @@ class GameObject {
         }
         */
       let light = this.getComponent('Light');
-      if (light !== null) {
+      if (light && light !== null) {
         Renderer.renderBuffer.light.push(light);
       }
     }
@@ -196,6 +218,14 @@ class GameObject {
   {
     //TODO note, this currently means no duplicate names
     delete GameObject.prototype._nameMap[this.name];
+  }
+
+  serialize() {
+    return this.transform.serialize();
+  }
+
+  applySerializedData(data) {
+    this.transform.applySerializedData(data);
   }
 
 }

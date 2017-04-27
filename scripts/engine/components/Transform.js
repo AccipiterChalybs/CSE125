@@ -19,7 +19,7 @@ class Transform extends Component
         this.worldScaleDirty = null;
         this.cachedForwardVec = vec3.create();
         this.worldForwardDirty = true;
-      this.oldParent = null;
+        this.oldParent = null;
         this._parent = null;
         this.children = [];
     }
@@ -184,5 +184,29 @@ class Transform extends Component
       }
 
       return this.cachedForwardVec;
+    }
+
+    serialize() {
+        let retVal = {};
+        retVal.p = this.position;
+        retVal.r = this.rotation;
+        retVal.s = this.scaleFactor[0];
+        retVal.c = [];
+        for (let child of this.children) {
+            retVal.c.push(child.serialize());
+        }
+        return retVal;
+    }
+
+    applySerializedData(data) {
+        this.setDirty();
+        this.position = data.p;
+        this.rotation = data.r;
+        this.scaleFactor[0] = this.scaleFactor[1] = this.scaleFactor[2] = data.s;
+        let index=0;
+        for (let child of this.children) {
+            child.applySerializedData(data.c[index]);
+            ++index;
+        }
     }
 }

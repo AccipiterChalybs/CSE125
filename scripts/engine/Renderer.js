@@ -22,11 +22,14 @@ const Renderer  = {
       Renderer.FORWARD_UNLIT = 13;
       Renderer.FBO_BLUR=15;
       Renderer.FBO_PASS=16;
+      Renderer.FBO_AVERAGE=17;
       Renderer.MODEL_MATRIX = "uM_Matrix";
       Renderer.VIEW_MATRIX = "uV_Matrix";
       Renderer.PERSPECTIVE_MATRIX = "uP_Matrix";
       Renderer.NEAR_DEPTH = 0.2;
       Renderer.FAR_DEPTH = 1500;
+
+      Renderer.FORWARD_SHADER_LIGHT_MAX = 5;
 
       Renderer.VERTEX_ATTRIB_LOCATION = 0;
 
@@ -86,13 +89,17 @@ const Renderer  = {
           Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_pass.frag"
       );
 
+      Renderer.shaderList[Renderer.FBO_AVERAGE] = new Shader(
+          Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_average.frag"
+      );
+
       Renderer.currentShader = null;
       Renderer.gpuData = {}; Renderer.gpuData.vaoHandle = -1;
 
       Renderer.camera = null;
 
 
-      let skyboxName = 'grace/';
+      let skyboxName = 'assets/skybox/field/';
       let cubeFilenames = [
           'assets/skybox/' + skyboxName + 'right.hdr',
           'assets/skybox/' + skyboxName + 'left.hdr',
@@ -102,7 +109,7 @@ const Renderer  = {
           'assets/skybox/' + skyboxName + 'back.hdr',
       ];
       //TODO should make a json file to load this with, and have exposure variable
-      Renderer.skybox = new Skybox(cubeFilenames);
+      Renderer.skybox = new Skybox(skyboxName, 10);
 
       let forwardPass = new ForwardPass();
       let skyboxPass = new SkyboxPass(Renderer.skybox);
@@ -409,8 +416,7 @@ const Renderer  = {
     for (let shaderId of Renderer.shaderEnvironmentList) {
       Renderer.getShader(shaderId).setUniform('environment', slot, UniformTypes.u1i);
 
-      //TODO: can we use mipmaps like Renderer in WebGL?
-      Renderer.getShader(shaderId).setUniform("environment_mipmap", mipmapLevels, UniformTypes.u1i);
+      Renderer.getShader(shaderId).setUniform("environment_mipmap", mipmapLevels, UniformTypes.u1f);
     }
   },
 

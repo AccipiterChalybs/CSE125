@@ -6,44 +6,53 @@
 class Skybox
 {
 
-    constructor(imgFileNames, hdr=true)
+    constructor(imgFileName, mipmaps)
     {
+        const hdr = true; //TODO readd support for non-hdr images if needed
+        const powersOfTwo = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512];
+        const ending = ["_posx", "_negx", "_posy", "_negy", "_posz", "_negz"];
+        const extension = ".hdr";
+
         this.loadId = GameEngine.registerLoading();
 
         this.hdr=hdr;
         this._skyboxTex = null;
         this._irradianceMatrix = [];
         this._material = new Material(Renderer.getShader(Renderer.SKYBOX_SHADER));
-        this._mipmapLevels = null;
+        this._mipmapLevels = mipmaps;
         this._imagesLoaded = 0;
 
         this._imageArray = [];
 
-        for (let f = 0; f < CUBE_FACES; ++f) {
-            let callback = this._imageReady.bind(this);
+        for (let mip = 0; mip < this._mipmapLevels; ++mip) {
+            for (let f = 0; f < CUBE_FACES; ++f) {
+                let filename = imgFileName + powersOfTwo[(this._mipmapLevels-1)-mip] + ending[f] + extension;
+                let callback = this._imageReady.bind(this);
 
-            if (this.hdr) {
-                this._imageArray[f] = {};
-                RGBE_LOADER.loadHDR(imgFileNames[f], this._imageArray[f], callback);
-            } else {
-                this._imageArray[f] = new Image();
-                this._imageArray[f].onload = function () {
-                    callback();
-                };
-                this._imageArray[f].src = imgFileNames[f];
+                if (this.hdr) {
+                    this._imageArray[mip*CUBE_FACES + f] = {};
+                    RGBE_LOADER.loadHDR(filename, this._imageArray[mip*CUBE_FACES + f], callback);
+                } else {
+                    console.error("Skybox must be HDR");
+                   /* this._imageArray[f] = new Image();
+                    this._imageArray[f].onload = function () {
+                        callback();
+                    };
+                    this._imageArray[f].src = filename;*/
+                }
             }
         }
     }
 
     _imageReady() {
         this._imagesLoaded++;
-        if (this._imagesLoaded === CUBE_FACES) {
+        if (this._imagesLoaded === CUBE_FACES * this._mipmapLevels) {
             this._finishLoad();
         }
     }
 
     _finishLoad() {
-        this._skyboxTex = Skybox._loadGLCube(this.hdr, this._imageArray);
+        this._skyboxTex = Skybox._loadGLCube(this.hdr, this._imageArray, this._mipmapLevels);
         this.loadIrradiance(this._imageArray, this._irradianceMatrix);
 
         this._imageArray = [];
@@ -82,7 +91,7 @@ class Skybox
     applyTexture(slot){
         GL.activeTexture(GL.TEXTURE0 + slot);
         GL.bindTexture(GL.TEXTURE_CUBE_MAP, this.getTexture());
-        Renderer.setEnvironment(slot, this._mipmapLevels);
+        Renderer.setEnvironment(slot, this._mipmapLevels - 1);
     }
 
     static _load(){
@@ -129,6 +138,7 @@ class Skybox
 
     loadIrradiance(data, irradianceMatrix) {
         //for each cube map
+        const coeff = 1;
         let irradiance = [];
         for (let shIndex = 0; shIndex < Skybox.prototype.SH_COUNT; ++shIndex) {
             irradiance[shIndex] = new Float32Array(3);
@@ -223,7 +233,7 @@ class Skybox
                                 break;
                         }
                         for (let c = 0; c < 3; ++c) {
-                            irradiance[shIndex][c] += (currentSH * Math.sin(theta) / (CUBE_FACES*currentWidth*currentHeight)) * (currentImage[(x + y*currentWidth)*channels + c]);
+                            irradiance[shIndex][c] += coeff*(currentSH * Math.sin(theta) / (CUBE_FACES*currentWidth*currentHeight)) * (currentImage[(x + y*currentWidth)*channels + c]);
                         }
                     }
                 }
@@ -247,20 +257,25 @@ class Skybox
 
 
     //TODO original code had different mipmap levels for roughness - don't know if we can do this in webgl - investigate later
-    static _loadGLCube(hdr, data) {
+    static _loadGLCube(hdr, data, mipmapLevels) {
         let cubeTextureHandle = GL.createTexture();
 
-        let filterMode = (!hdr || GLExtensions.texture_float_linear) ? GL.LINEAR : GL.NEAREST;
+        let filterMode1 = (!hdr || GLExtensions.texture_float_linear) ? GL.LINEAR : GL.NEAREST;
+        let filterMode2 = (!hdr || GLExtensions.texture_float_linear) ? GL.LINEAR_MIPMAP_LINEAR : GL.NEAREST;
     
         GL.bindTexture(GL.TEXTURE_CUBE_MAP, cubeTextureHandle);
-        GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MAG_FILTER, filterMode);//GL.LINEAR);
-        GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MIN_FILTER, filterMode);//GL.LINEAR);
+        GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MAG_FILTER, filterMode1);
+        GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MIN_FILTER, filterMode2);
 
-        for (let m = 0; m < CUBE_FACES; ++m) {
-            if (hdr) {
-                GL.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_X + m, 0, GL.RGB16F, data[m].width, data[m].height, 0, GL.RGB, GL.FLOAT, data[m].data);
-            }else{
-                GL.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_X + m, 0, GL.RGB, data[m].width, data[m].height, 0, GL.RGB, GL.UNSIGNED_BYTE, data[m]);
+        let mip = 0;
+        for (let mip=0; mip < mipmapLevels; ++mip) {
+            for (let f = 0; f < CUBE_FACES; ++f) {
+                let m = mip*CUBE_FACES + f;
+                if (hdr) {
+                    GL.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_X + f, mip, GL.RGB16F, data[m].width, data[m].height, 0, GL.RGB, GL.FLOAT, data[m].data);
+                } else {
+                    GL.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_X + f, mip, GL.RGB, data[m].width, data[m].height, 0, GL.RGB, GL.UNSIGNED_BYTE, data[m]);
+                }
             }
         }
 
