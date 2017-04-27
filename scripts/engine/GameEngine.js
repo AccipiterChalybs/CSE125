@@ -28,6 +28,7 @@ GameEngine.start = function () {
 
     if (!IS_SERVER) {
       Renderer.start();
+      Debug.start();
       window.requestAnimationFrame(GameEngine.loop.bind(GameEngine));
     }
   };
@@ -51,6 +52,7 @@ GameEngine.loop = function () {
 
   if (!IS_SERVER) {
     Renderer.loop();
+    Debug.update();
     window.requestAnimationFrame(GameEngine.loop.bind(GameEngine));
   }
 };
