@@ -35,6 +35,7 @@ class PlayerController extends Component{
     this._singingSrc = this.transform.gameObject.getComponent("AudioSource");
 
     this._collider.setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
+    this._collider.setFreezeRotation(true);
   }
 
   updateComponent(){
@@ -89,5 +90,10 @@ class PlayerController extends Component{
     let body = this._collider.body;
     body.velocity.x = move[0];
     body.velocity.z = move[2];
+    //col.setRotation(this.forward);
+  }
+
+  sing(){
+    // console.log("singing!");
   }
 }

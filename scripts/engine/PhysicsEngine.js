@@ -6,6 +6,7 @@ const PhysicsEngine = {};
 
 const TIME_STEP = 1.0/60.0;
 const GRAVITY = -20;
+const DEFAULT_ANGULAR_DAMPING = 0.9; // How fast things will stop rotating
 
 PhysicsEngine.world = new CANNON.World();
 PhysicsEngine.bodyMap = {};
@@ -57,21 +58,18 @@ PhysicsEngine.overlapSphere = function(position, radius){
 // 'PM' is short for 'physics material'
 PhysicsEngine.createMaterials = function(){
   let basicPM = new CANNON.Material("basicMaterial");
-  // basicPM.friction = 0.3;
-  // basicPM.restitution = 0.0;
   let playerPM = new CANNON.Material("playerMaterial");
-  // playerPM.friction = 0.3;
-  // playerPM.restitution = 0.0;
 
   PhysicsEngine.world.addMaterial(basicPM);
   PhysicsEngine.world.addMaterial(playerPM);
 
   let physicsContactMaterial = new CANNON.ContactMaterial(
     basicPM, basicPM,
-    {friction: 0.3,
-    restitution: 1.0}
+    {friction: 0.8,
+    restitution: 0.3}
   );
   PhysicsEngine.world.addContactMaterial(physicsContactMaterial);
+  PhysicsEngine.world.defaultContactMaterial = physicsContactMaterial;
 
   physicsContactMaterial = new CANNON.ContactMaterial(
     playerPM, playerPM,

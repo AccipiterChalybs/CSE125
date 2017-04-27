@@ -10,6 +10,7 @@ class Collider extends Component{
 
     this.mass = mass;
     this.trigger = trigger;
+    this.freezeRotation = false;
   }
 
   _setGameObject(go){
@@ -24,8 +25,8 @@ class Collider extends Component{
       this.transform.getPosition()[2]);
 
     // TODO: may be a problem in the future if the objects start with a weird rotation
-    //this.body.quaternion.set(this.transform.getRotation()[0], this.transform.getRotation()[1],
-    //                            this.transform.getRotation()[2], this.transform.getRotation()[3]);
+    this.body.quaternion.set(this.transform.getRotation()[0], this.transform.getRotation()[1],
+                                this.transform.getRotation()[2], this.transform.getRotation()[3]);
 
     if(this.trigger) {
       this.body.collisionResponse = 0;
@@ -34,6 +35,8 @@ class Collider extends Component{
       this.body.addEventListener("collide", this._onCollisionEnter.bind(this));
     }
 
+    this.body.angularDamping = DEFAULT_ANGULAR_DAMPING;
+
     // console.log("Created a collider (game object name, id): (" + this.gameObject.name + ", " +
     //   this.body.id + ")");
 
@@ -41,9 +44,17 @@ class Collider extends Component{
   }
 
   updateComponent(){
+    //this.body.angularVelocity.set(this.body.angularVelocity.x / 2, this.body.angularVelocity.y / 2, this.body.angularVelocity.z / 2);
     let newPos = vec3.create();
     vec3.set(newPos, this.body.position.x, this.body.position.y, this.body.position.z);
     this.transform.setPosition(newPos);
+
+    if(!this.freezeRotation){
+      let newRot = quat.fromValues(this.body.quaternion.x, this.body.quaternion.y,
+        this.body.quaternion.z, this.body.quaternion.w);
+
+      this.transform.setRotation(newRot);
+    }
   }
 
   _onTriggerEnter(e){
@@ -66,6 +77,18 @@ class Collider extends Component{
 
   setTrigger(isTrigger){
     this.trigger = isTrigger;
+  }
+
+  setFreezeRotation(freezeRot){
+    this.freezeRotation = freezeRot;
+  }
+
+  setRotation(newRot){
+    this.body.quaternion.set(newRot[0], newRot[1], newRot[2], newRot[3]);
+  }
+
+  setAngularDamping(angularDamp){
+    this.body.angularDamping = angularDamp;
   }
 
   setPhysicsMaterial(material){
