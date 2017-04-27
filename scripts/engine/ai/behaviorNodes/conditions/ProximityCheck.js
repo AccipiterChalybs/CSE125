@@ -4,7 +4,7 @@
 
 class ProximityCheck extends BehaviorTreeLeaf{
   constructor(ai, target, maxDistance){
-    super("BehaviorTreeLeaf", "ProximityCheck", ai);
+    super("CondtionalLeaf", "ProximityCheck", ai);
     this.target = target;
     this.maxDistance = maxDistance;
   }

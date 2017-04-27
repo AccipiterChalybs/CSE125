@@ -4,7 +4,7 @@
 
 class SayGoodbye extends BehaviorTreeLeaf{
   constructor(ai){
-    super("BehaviorTreeLeaf", "SayGoodbye", ai);
+    super("ActionLeaf", "SayGoodbye", ai);
   }
 
   updateNode(){

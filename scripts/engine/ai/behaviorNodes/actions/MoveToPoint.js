@@ -4,7 +4,7 @@
 
 class MoveToPoint extends BehaviorTreeLeaf{
   constructor(ai, destination, moveSpeed){
-    super("BehaviorTreeLeaf", "MoveToPoint", ai);
+    super("ActionLeaf", "MoveToPoint", ai);
     this.destination = destination;
     this.moveSpeed = moveSpeed;
   }
