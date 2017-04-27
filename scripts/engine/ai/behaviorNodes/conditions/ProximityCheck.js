@@ -7,18 +7,12 @@ class ProximityCheck extends BehaviorTreeLeaf{
     super("BehaviorTreeLeaf", "ProximityCheck", ai);
     this.target = target;
     this.maxDistance = maxDistance;
-
-    this._debug = false;
   }
 
   updateNode(){
-    let distance = vec3.distance(this.ai.position, this.target.position);
+    let distance = vec3.distance(this.ai.transform.getPosition(), this.target);
 
-    if(this._debug){
-      //console.log(this.ai.position);
-      //console.log(this.target.position);
-      console.log("current distance away: " + distance);
-    }
+    //console.log(distance);
 
     if(distance < this.maxDistance){
       this._currentState = BehaviorState.success;

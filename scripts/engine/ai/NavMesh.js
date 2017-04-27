@@ -7,7 +7,7 @@ class NavMesh{
     this.faceList = null;
     this.boundaryList = null;
 
-    this.loadNavMesh("assets/scenes/NavMesh.json");
+    this.loadNavMesh("assets/scenes/ExampleLevel_Nav.json");
 
     // test/debugging zone
     // raycast on line segments
@@ -69,6 +69,11 @@ class NavMesh{
   }
 
   findFace(pt){
+    if(Debug.navMesh.printFindFace) {
+      let color = vec4.create(); vec4.set(color, 0, 0, 1, 1);
+      Debug.drawTeapot(pt, color);
+    }
+
     for(let i = 0; i < this.faceList.length; ++i){
       let face = this.faceList[i].vert;
 
@@ -79,6 +84,9 @@ class NavMesh{
           let mesh = new Mesh("Teapot02");
           teapot.addComponent(mesh);
           teapot.transform.setPosition(pt);
+          Debug.drawTeapot(face[0]);
+          Debug.drawTeapot(face[1]);
+          Debug.drawTeapot(face[2]);
         }
 
         return i;

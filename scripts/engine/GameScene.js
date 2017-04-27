@@ -173,9 +173,24 @@ class GameScene {
       GameObject.prototype.SceneRoot.addChild(lightCenter);
     }
     //GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new RotateOverTime(-1));
-    GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new BoxCollider(500, false, 20, 20, 20));
-    GameObject.prototype.SceneRoot.transform.children[0].gameObject.getComponent("Collider").setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
-    GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new EvilController());
+    // GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new BoxCollider(500, false, 20, 20, 20));
+    // GameObject.prototype.SceneRoot.transform.children[0].gameObject.getComponent("Collider").setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
+    // GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new EvilController());
+    GameObject.prototype.SceneRoot.addChild(lightCenter);
+
+    //TODO REMOVE ME!!!!!!!!!1!
+    GameObject.prototype.SceneRoot.transform.children[1].children = [];
+    GameObject.prototype.SceneRoot.transform.children[2].children = [];
+    rootTest.transform.setScale(1);
+    GameObject.prototype.SceneRoot.transform.setScale(0.05);
+    let pos = vec3.create(); vec3.set(pos, -27, 0, -9);
+    let color = vec4.create(); vec4.set(color, 1, 0, 0, 1);
+    let evilTeapot = Debug.drawTeapot(pos, color);
+    evilTeapot.addComponent(new EvilController(this.nav));
+
+    rootTest.addComponent(new BoxCollider(10));
+    rootTest.addComponent(new PlayerController());
+    GameObject.prototype.SceneRoot.addChild(rootTest);
 
     //let move = vec3.create(); vec3.set(move, 0, 500, 64);
     let move = vec3.create(); vec3.set(move, 0,-1,0);
@@ -189,6 +204,10 @@ class GameScene {
 
     GameObject.prototype.SceneRoot.findComponents("Interactable", PhysicsEngine.sphereChecks);
 
+    // NAVMESH
+    // test/debugging zone
+    let pt = [24,0, 10];
+    let faceIndex = this.nav.findFace(pt);
   }
 
   update() {

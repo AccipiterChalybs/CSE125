@@ -2,13 +2,31 @@
  * Created by Stephen on 4/25/2017.
  */
 
-const EVIL_MOVEMENTSPEED = 20;
+const EVIL_MOVEMENTSPEED = 5;
 
 class EvilController extends AIController{
-  constructor(){
+  constructor(navMesh){
     super();
     this.componentType = "EvilController";
     this.movementSpeed = EVIL_MOVEMENTSPEED;
+
+    // TODO Extract later
+    this.navMesh = navMesh;
+    this.lastFaceIndex = -1;
+    this.oldTeapot = [];
+    this.oldTeapot[0] = Debug.drawTeapot([0,0,0]);
+    this.oldTeapot[1] = Debug.drawTeapot([0,0,0]);
+    this.oldTeapot[2] = Debug.drawTeapot([0,0,0]);
+
+    let pt0 = vec3.create(); vec3.set(pt0, -27, 0, -9);
+    this.patrolPath = [[-27,0,-9],
+      [-6.5, 0, -9],
+      [-6.5, 0, 9],
+      [0, 0, 9],
+      [-6.5, 0, 9],
+      [-6.5, 0, -5],
+      [22, 0, -5],
+      [22, 0, 15]];
 
     this._aiStates = {IDLE: "idle", CHASING: "chasing"};
     this._currentState = this._aiStates.IDLE;
@@ -20,6 +38,20 @@ class EvilController extends AIController{
 
   updateComponent(){
     super.updateComponent();
+
+    let currFaceIndex = this.navMesh.findFace(this.transform.getPosition());
+
+    if(currFaceIndex !== this.lastFaceIndex){
+      this.oldTeapot[0].removeComponent("Mesh");
+      this.oldTeapot[1].removeComponent("Mesh");
+      this.oldTeapot[2].removeComponent("Mesh");
+      this.oldTeapot[0] = Debug.drawTeapot(this.navMesh.faceList[currFaceIndex].vert[0]);
+      this.oldTeapot[1] = Debug.drawTeapot(this.navMesh.faceList[currFaceIndex].vert[1]);
+      this.oldTeapot[2] = Debug.drawTeapot(this.navMesh.faceList[currFaceIndex].vert[2]);
+      this.lastFaceIndex = currFaceIndex;
+      console.log("heeey.");
+    }
+
 
     if(this._currentState === this._aiStates.IDLE) {
       this.chase();
@@ -35,18 +67,20 @@ class EvilController extends AIController{
 
   _buildBehaviorTree(){
     //console.log(this);
-    let root = new PrioritySelector("root");
-    let sel0 = new ConcurrentSelector("to say hello");
-    let proximityCheck = new ProximityCheck(this.transform, GameObject.prototype.SceneRoot.transform.children[1],60);
-    let sayHello = new SayHello(this);
+    let root = new SequenceSelector("root");
 
-    sel0.addNode(proximityCheck);
-    sel0.addNode(sayHello);
+    for(let i = 0; i < this.patrolPath.length; ++i){
+      let goToPt = new PrioritySelector("goToPt" + i);
+      let proximityCheck = new ProximityCheck(this, this.patrolPath[i], 0.1);
+      let moveTo = new MoveToPoint(this, this.patrolPath[i], EVIL_MOVEMENTSPEED);
 
-    let sayGoodbye = new SayGoodbye(this);
+      goToPt.addNode(proximityCheck);
+      goToPt.addNode(moveTo);
+      root.addNode(goToPt);
+    }
 
-    //root.addNode(sel0);
-    //root.addNode(sayGoodbye);
+    //console.log(root);
+
     return root;
   }
 }
