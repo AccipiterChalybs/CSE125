@@ -86,6 +86,8 @@ class PlayerController extends Component{
     vec3.scale(moveX, moveX, this.x * this.movementSpeed);
     vec3.scale(moveZ, moveZ, this.z * this.movementSpeed);
     vec3.add(move, moveX, moveZ);
+    vec3.normalize(move, move);
+    vec3.scale(move, move, this.movementSpeed);
 
     let body = this._collider.body;
     body.velocity.x = move[0];
