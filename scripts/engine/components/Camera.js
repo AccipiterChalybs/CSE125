@@ -130,12 +130,6 @@ class Camera extends Component
         }
     }
 
-    getForward()
-    {
-        let dummy = mat4.create();
-        return vec3.negate(dummy, this._forward);
-    }
-
     getVelocity()
     {
         return this._velocity;

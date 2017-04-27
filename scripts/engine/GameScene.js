@@ -84,8 +84,6 @@ class GameScene {
                 teapot.addComponent(new AudioSource());
                 if(!IS_SERVER) teapot.getComponent("AudioSource").playSound3d("cruelangel");
                 teapot.addComponent(new PlayerController());
-                rootTest.transform.scale(50);
-                teapot.addChild(rootTest);
             }
             let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
 
@@ -94,13 +92,22 @@ class GameScene {
             teapot.transform.scale((0.02));
             teapot.addComponent(new SphereCollider(100, false, 10)); //set Transform BEFORE collider
 
-            if (x===5 && y===5) teapot.transform.setRotation(quat.create()); //TODO make it so rotation isn't needed
-
             container.addChild(teapot);
         }
     }
 
+    PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject);
+    PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject);
+    GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new PlayerController())
+    PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject);
+    GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new PlayerController())
+    PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject);
+    GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new PlayerController())
 
+    if(!IS_SERVER){
+      //TODO account for possibility of currentPlayer not set yet
+      Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo(PlayerTable.players[PlayerTable.currentPlayer]));
+    }
     let light = new GameObject();
     let lightComp = new PointLight();
     light.addComponent(lightComp);
@@ -128,5 +135,7 @@ class GameScene {
     {
       PhysicsEngine.update();
     }
+
+    if (!IS_SERVER) Renderer.camera.transform.getParent().gameObject.updateClient();
   }
 }

@@ -22,7 +22,11 @@ Networking.createClientSocket = function (namespace) {
 
 Networking.listeners = {
   client_updated_scene: (socket, data)=> {
+    // console.log(data.transformTree.c[1].c[58].p);
     GameObject.prototype.SceneRoot.applySerializedData(data.transformTree);
+  },
+  client_get_playerId: (socket, data)=> {
+    PlayerTable.currentPlayer = data.playerId;
   },
 };
 
@@ -33,8 +37,9 @@ Networking.init = function () {
 
 Networking.update = function () {
   let data = {};
-  data.horizontal = Input.getAxis('horizontal');
-  data.vertical = Input.getAxis('vertical');
+  data.h = Input.getAxis('horizontal');
+  data.v = Input.getAxis('vertical');
+  data.f = Renderer.camera.transform.getForward();
   Networking.socket.emit('server_input_data', data);
 };
 

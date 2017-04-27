@@ -13,7 +13,7 @@ class RotateMouse extends Component{
     this.sensitivity = 0.08;
   }
 
-  update() {
+  updateClient() {
     let dr = quat.create();
     this.xAngle += Time.deltaTime * Input.getAxis('mouseVertical') * this.sensitivity * -1;
     this.yAngle += Time.deltaTime * Input.getAxis('mouseHorizontal') * this.sensitivity * -1;
