@@ -19,6 +19,9 @@ function initialize() {
 
   SoundEngine.init();
   GameEngine.init();
-  Networking.init();
+  if (!Debug.clientUpdate)
+  {
+    Networking.init();
+  }
   initRenderer(glCanvas);
 }
