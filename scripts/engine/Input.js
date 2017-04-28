@@ -36,20 +36,20 @@ const Input = {
         sensitivity: 50,
         value: 0
       },
-	  {
-		  name: 'horizontal',
-		  type: InputType.keyboard,
-		  positiveButton: 68,
-		  negativeButton: 65,
-		  value: 0
-	  },
-	  {
-		  name: 'vertical',
-		  type: InputType.keyboard,
-		  positiveButton: 87,
-		  negativeButton: 83,
-		  value: 0
-	  }
+      {
+        name: 'horizontal',
+        type: InputType.keyboard,
+        positiveButton: 68,
+        negativeButton: 65,
+        value: 0
+      },
+      {
+        name: 'vertical',
+        type: InputType.keyboard,
+        positiveButton: 87,
+        negativeButton: 83,
+        value: 0
+      }
     ],
   },
   getAxis: function (name) {
@@ -82,42 +82,42 @@ const Input = {
   },
 
   init: function (options) {
-      Input._options = options || Input._options;
+    Input._options = options || Input._options;
 
-      function updateAxisInt(axis, button, up) {
-        if(Input.enabled === false)
-          return;
+    function updateAxisInt(axis, button, up) {
+      if(Input.enabled === false)
+        return;
 
-        axis.value = (axis.value === undefined) ? 0 : axis.value;
-        if (axis.positiveButton === button) {
-          if (up) {
-            axis.value -= 1;
-          } else {
-            axis.value += 1;
-          }
-        } else if (axis.negativeButton === button) {
-          if (up) {
-            axis.value += 1;
-          } else {
-            axis.value -= 1;
-          }
+      axis.value = (axis.value === undefined) ? 0 : axis.value;
+      if (axis.positiveButton === button) {
+        if (up) {
+          axis.value -= 1;
+        } else {
+          axis.value += 1;
         }
-
-        // Clamp
-        axis.value = Math.min(Math.max(axis.value, -1), 1);
-      }
-
-      function updateAxisFloat(axis, e) {
-        if(Input.enabled === false)
-          return;
-        
-        axis.value = axis.value || 0;
-        if (axis.direction === InputDirection.x) {
-          axis.value = (e.clientX + 0.0) / (window.innerWidth + 0.0);
-        } else if (axis.direction === InputDirection.y) {
-          axis.value = (e.clientY + 0.0) / (window.innerHeight + 0.0);
+      } else if (axis.negativeButton === button) {
+        if (up) {
+          axis.value += 1;
+        } else {
+          axis.value -= 1;
         }
       }
+
+      // Clamp
+      axis.value = Math.min(Math.max(axis.value, -1), 1);
+    }
+
+    function updateAxisFloat(axis, e) {
+      if(Input.enabled === false)
+        return;
+
+      axis.value = axis.value || 0;
+      if (axis.direction === InputDirection.x) {
+        axis.value = (e.clientX + 0.0) / (window.innerWidth + 0.0);
+      } else if (axis.direction === InputDirection.y) {
+        axis.value = (e.clientY + 0.0) / (window.innerHeight + 0.0);
+      }
+    }
 
     // Pointer lock
     document.body.requestPointerLock = document.body.requestPointerLock ||
@@ -127,7 +127,7 @@ const Input = {
 
     document.body.onclick =  function() {
       document.body.requestPointerLock();
-    }
+    };
 
     // Hook pointer lock state change events for different browsers
     document.addEventListener('pointerlockchange', lockChangeAlert, false);
