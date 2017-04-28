@@ -78,7 +78,6 @@ class PlayerController extends Component{
     }
 
     let up = vec3.create(); vec3.set(up, 0, 1, 0);
-    let move = vec3.create();
     let moveX = vec3.create(); vec3.cross(moveX, this.forward, up);
     let moveZ = vec3.create(); vec3.cross(moveZ, up, moveX);
     vec3.normalize(moveX, moveX);
