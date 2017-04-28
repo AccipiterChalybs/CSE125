@@ -266,7 +266,7 @@ class BloomPass extends RenderPass
 
         for (let x=0; x<currentRGB.length; ++x) {
             if (isNaN(currentRGB[x])) {
-                console.error("err" + x);
+                Debug.error("err" + x);
                 currentRGB[x] = 1;
             }
         }
@@ -276,9 +276,7 @@ class BloomPass extends RenderPass
         }
         lumen /= this._averageSize*this._averageSize;
 
-        if (isNaN(lumen)) {
-            console.error("NAN!!!");
-        } else {
+        if (!isNaN(lumen)) {
             this.averageExposure = this.averageExposure * (1 - newDataWeight) + lumen * (newDataWeight);
         }
         //-----------------------------------------------------
