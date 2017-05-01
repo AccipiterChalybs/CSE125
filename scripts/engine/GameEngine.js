@@ -17,7 +17,7 @@ GameEngine.currentScene = null;
 GameEngine.init = function () {
   PhysicsEngine.init();
 
-  GameEngine.currentScene = new GameScene(['assets/scenes/teapots.json', 'assets/scenes/ExampleLevel.json']);
+  GameEngine.currentScene = new GameScene(['assets/scenes/Primatives.json','assets/scenes/teapots.json', 'assets/scenes/ExampleLevel.json']);
 };
 
 

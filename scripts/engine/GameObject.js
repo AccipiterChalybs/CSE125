@@ -177,7 +177,7 @@ class GameObject {
       if (mesh && mesh !== null) {
 
         //TODO take out true, re-add deferred
-        if (true || mesh.material && mesh.material.transparent) {
+        if (mesh.material && mesh.material.transparent) {
           Renderer.renderBuffer.forward.push(mesh);
         } else if (mesh.material) {
           Renderer.renderBuffer.deferred.push(mesh);

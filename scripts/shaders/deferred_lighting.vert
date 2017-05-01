@@ -1,4 +1,5 @@
-#version 330
+#version 300 es
+precision mediump float;
 layout(location = 0) in vec4 aPosition;
 layout(location = 1) in vec3 aNormal;
 layout(location = 2) in vec2 aTexCoord;
@@ -13,6 +14,6 @@ uniform mat4 uP_Matrix;
 out vec4 vPosition;
 
 void main () {
-    vPosition = uV_Matrix * vec4(aPosition.xyz * uScale + uLightPosition, 1);
+    vPosition = uV_Matrix * vec4(aPosition.xyz * uScale + uLightPosition, 1.0);
 	gl_Position = uP_Matrix * vPosition;
 }

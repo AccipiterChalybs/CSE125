@@ -5,7 +5,7 @@
 let Debug = {};
 
 Debug.clientUpdate = false; //Run the client in standalone mode, so it doesn't need a server - good for testing!
-Debug.bufferDebugMode = false; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
+Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
 Debug.debugDisplay = false;
 
 
@@ -20,7 +20,23 @@ Debug.update = function() {
   if (Debug.debugDisplay) {
     Debug.logFPS();
   }
+
+  if (Debug.bufferDebugMode) {
+    if (Input.getAxis("debugButtonBuffer")) {
+      Debug.currentBuffer =(Debug.currentBuffer + 1) % Debug.bufferTypeCount;
+    }
+  }
 };
+
+Debug.bufferTypeCount = 6;
+Debug.BUFFERTYPE_NONE = 0;
+Debug.BUFFERTYPE_PRE = 1;
+Debug.BUFFERTYPE_COLOUR = 2;
+Debug.BUFFERTYPE_NORMAL = 3;
+Debug.BUFFERTYPE_POS = 4;
+Debug.BUFFERTYPE_BLOOM = 5;
+Debug.currentBuffer = Debug.BUFFERTYPE_PRE;
+
 
 Debug.fpsElement = null;
 Debug.lastTime=-1;

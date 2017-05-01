@@ -22,20 +22,21 @@ class Light extends Component{
     deferredHelper(meshName, bind){
         let currentEntry = Mesh.prototype.meshMap[meshName];
 
-        if (bind) {
-            if (Renderer.gpuData.vaoHandle !== currentEntry.vaoHandle) {
-                GL.bindVertexArray(currentEntry.vaoHandle);
-                Renderer.gpuData.vaoHandle = currentEntry.vaoHandle;
-            }
+        //TODO should this be out here? It wasn't originally
+          if (Renderer.gpuData.vaoHandle !== currentEntry.vaoHandle) {
+            GL.bindVertexArray(currentEntry.vaoHandle);
+            Renderer.gpuData.vaoHandle = currentEntry.vaoHandle;
+          }
 
-            let lightMetaData = vec3.create(); vec3.set(lightMetaData, constantFalloff, linearFalloff, exponentialFalloff);
+        if (bind) {
+            let lightMetaData = vec3.create(); vec3.set(lightMetaData, this.constantFalloff, this.linearFalloff, this.exponentialFalloff);
             Renderer.currentShader.setUniform("uLightFalloff",lightMetaData,UniformTypes.vec3);
-            Renderer.currentShader.setUniform("uLightPosition",gameObject.transform.getWorldPosition(),UniformTypes.vec3);
+            Renderer.currentShader.setUniform("uLightPosition",this.gameObject.transform.getWorldPosition(),UniformTypes.vec3);
             Renderer.currentShader.setUniform("uLightColor",this.color,UniformTypes.vec3);
-            Renderer.currentShader.setUniform("uLightSize",this.radius,UniformTypes.vec3);
-            Renderer.currentShader.setUniform("uLightDirection",gameObject.transform.getForward(),UniformTypes.vec3);
+            Renderer.currentShader.setUniform("uLightSize",this.radius,UniformTypes.u1f);
+            Renderer.currentShader.setUniform("uLightDirection",this.gameObject.transform.getForward(),UniformTypes.vec3);
         }
-        GL.drawElements(GL.TRIANGLES, currentEntry.indexSize, GL.UNSIGNED_INT, 0);
+        GL.drawElements(GL.TRIANGLES, currentEntry.indexSize, GL.UNSIGNED_SHORT, 0);
 
     }
     bindShadowMap(){
@@ -64,13 +65,14 @@ class PointLight extends Light{
     }
     deferredPass(bind){
         if (bind) {
-            Renderer.currentShader.setUniform("uLightType",0,UniformTypes.);
-            let max = std.max(std.max(color.r, color.g), color.b);
-            let scale = (-linearFalloff + sqrtf(linearFalloff * linearFalloff - 4.0 * (constantFalloff - 256.0 * max) * exponentialFalloff))
-        / (2.0 * exponentialFalloff);
-            Renderer.currentShader.setUniform("uScale",scale,UniformTypes.);
+            Renderer.currentShader.setUniform("uLightType",0,UniformTypes.u1i);
+            let max = (this.color.r > this.color.g) ? this.color.r : this.color.g;
+            max = (max > this.color.b) ? max : this.color.b;
+            let scale = (-this.linearFalloff + Math.sqrt(this.linearFalloff * this.linearFalloff - 4.0 * (this.constantFalloff - 256.0 * max) * this.exponentialFalloff))
+        / (2.0 * this.exponentialFalloff);
+            Renderer.currentShader.setUniform("uScale",scale,UniformTypes.u1f);
         }
-        this.deferredHelper("Sphere", bind);
+        this.deferredHelper("Sphere_Icosphere", bind);
     }
 }
 

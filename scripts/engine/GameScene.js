@@ -63,7 +63,7 @@ class GameScene {
 
             if (!IS_SERVER) {
               let mesh = new Mesh("Teapot02");
-              let mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER));
+              let mat = new Material(Renderer.getShader(Renderer.DEFERRED_PBR_SHADER));
 
               let color = vec4.create();
               vec4.set(color, 1, 0.5, 0.1, 1);

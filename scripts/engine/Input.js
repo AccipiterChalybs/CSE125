@@ -49,7 +49,14 @@ const Input = {
 		  positiveButton: 87,
 		  negativeButton: 83,
 		  value: 0
-	  }
+	  },
+    {
+      name: 'debugButtonBuffer',
+      type: InputType.keyboard,
+      positiveButton: ('K'.charCodeAt(0)),
+      negativeButton: ('L'.charCodeAt(0)),
+      value: 0
+    }
     ],
   },
   getAxis: function (name) {

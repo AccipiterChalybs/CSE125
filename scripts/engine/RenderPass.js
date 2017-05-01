@@ -76,7 +76,7 @@ class DeferredPass extends RenderPass
     constructor(){
         super();
         //TODO do we need to add a special Framebuffer thing here?
-        this.fbo = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 4, false, true, [GL.RGBA16F, GL.RGBA8, GL.RGBA16, GL.RGBA16F]);
+        this.fbo = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 4, false, true, [GL.RGBA16F, GL.RGBA8, GL.RGBA16F/*TODO should be RGBA16 - is this ok*/, GL.RGBA16F]);
 
         Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("colorTex", 0, UniformTypes.u1i);
         Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("normalTex", 1, UniformTypes.u1i);
@@ -101,30 +101,33 @@ class DeferredPass extends RenderPass
         //CHECK_ERROR();
 
         Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).use();
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING)["uScreenSize"] = vec2.create(Renderer.getWindowWidth(), Renderer.getWindowHeight());
+        let screenSize = vec2.create(); vec2.set(screenSize, Renderer.getWindowWidth(), Renderer.getWindowHeight());
+        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("uScreenSize", screenSize, UniformTypes.vec2);
         GL.depthMask(false);
         GL.stencilOpSeparate(GL.BACK, GL.KEEP, GL.INCR_WRAP, GL.KEEP);
         GL.stencilOpSeparate(GL.FRONT, GL.KEEP, GL.DECR_WRAP, GL.KEEP);
         GL.drawBuffers([GL.COLOR_ATTACHMENT0]); //switch to rendering output, but keep depth from earlier
         GL.clear(GL.COLOR_BUFFER_BIT);
 
+
         this.fbo.bindTexture(0, 1);
         this.fbo.bindTexture(1, 2);
         this.fbo.bindTexture(2, 3);
+
         //TODO do we need these?
         Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("colorTex", 0, UniformTypes.u1i);
         Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("normalTex", 1, UniformTypes.u1i);
         Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("posTex", 2, UniformTypes.u1i);
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("shadowTex", 3, UniformTypes.u1i);
+        //Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("shadowTex", 3, UniformTypes.u1i);
 
         Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("uIV_Matrix", Renderer.camera.gameObject.transform.getTransformMatrix(), UniformTypes.mat4);
         //CHECK_ERROR();
 
-        for(let light of Renderer.renderBuffer.light) {
+      /*  for(let light of Renderer.renderBuffer.light) {
             let d = light; //TODO check if directional light
-            if (!d)
+            if (!d || true)
             {
-                GL.drawBuffers(GL.NONE);
+                GL.drawBuffers([GL.NONE]);
                 GL.disable(GL.CULL_FACE);
                 GL.enable(GL.STENCIL_TEST);
                 GL.enable(GL.DEPTH_TEST);
@@ -145,7 +148,7 @@ class DeferredPass extends RenderPass
                 {
                     d.fbo.bindDepthTexture(3);
                     //TODO is this the right inverse?
-                    Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING)["uShadow_Matrix"] = DeferredPass.bias * DirectionalLight.shadowMatrix * mat4.inverse(d.gameObject.transform.getTransformMatrix());
+                    //TODO change to our js method of assigning uniforms Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING)["uShadow_Matrix"] = DeferredPass.bias * DirectionalLight.shadowMatrix * mat4.inverse(d.gameObject.transform.getTransformMatrix());
                 }
             }
 
@@ -157,27 +160,27 @@ class DeferredPass extends RenderPass
             GL.drawBuffers([GL.COLOR_ATTACHMENT0]); //switch back to main image
 
             light.deferredPass(false);
-        }
+        }*/
         //CHECK_ERROR();
         GL.disable(GL.STENCIL_TEST);
         GL.disable(GL.DEPTH_TEST);
         GL.disable(GL.CULL_FACE);
 
-        let currentEntry = Mesh.meshMap["Plane"];
+        let currentEntry = Mesh.prototype.meshMap["Plane"];
 
         if (Renderer.gpuData.vaoHandle !== currentEntry.vaoHandle) {
             GL.bindVertexArray(currentEntry.vaoHandle);
             Renderer.gpuData.vaoHandle = currentEntry.vaoHandle;
         }
 
-        Renderer.currentShader["uLightType"] = 3;
-        Renderer.currentShader["uScale"] = 1;
-        Renderer.currentShader["uLightPosition"] = vec3.create();
-        Renderer.currentShader["uV_Matrix"] = mat4.create();
-        Renderer.currentShader["uP_Matrix"] = mat4.create();
-        GL.drawElements(GL.TRIANGLES, currentEntry.indexSize, GL.UNSIGNED_INT, 0);
-        Renderer.currentShader["uV_Matrix"] = Renderer.view;
-        Renderer.currentShader["uP_Matrix"] = Renderer.perspective;
+        Renderer.currentShader.setUniform("uLightType", 3, UniformTypes.u1i);
+        Renderer.currentShader.setUniform("uScale", 1, UniformTypes.u1f);
+        Renderer.currentShader.setUniform("uLightPosition", vec3.create(), UniformTypes.vec3);
+        Renderer.currentShader.setUniform("uV_Matrix", mat4.create(), UniformTypes.mat4);
+        Renderer.currentShader.setUniform("uP_Matrix", mat4.create(), UniformTypes.mat4);
+        GL.drawElements(GL.TRIANGLES, currentEntry.indexSize, GL.UNSIGNED_SHORT, 0);
+        Renderer.currentShader.setUniform("uV_Matrix", Renderer.camera.getCameraMatrix(), UniformTypes.mat4); //TODO is this one needed?
+        Renderer.currentShader.setUniform("uP_Matrix", Renderer.perspective, UniformTypes.mat4);
         //CHECK_ERROR();
 
         // TODO : Render Ambient
@@ -330,14 +333,38 @@ class BloomPass extends RenderPass
         this._deferredPass.fbo.draw();
 
 
-        // Debug code - enable and disable anti-aliasing to see results of intermediate blur buffers.
-        if (Debug.bufferDebugMode) {
+      if (Debug.bufferDebugMode) {
+        switch (Debug.currentBuffer) {
+          case Debug.BUFFERTYPE_PRE:
+            this._deferredPass.fbo.blitFramebuffer(0, 0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
+            break;
+          case Debug.BUFFERTYPE_COLOUR:
+            this._deferredPass.fbo.blitFramebuffer(1, 0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
+            break;
+          case Debug.BUFFERTYPE_NORMAL:
+            this._deferredPass.fbo.blitFramebuffer(2, 0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
+            break;
+          case Debug.BUFFERTYPE_POS:
+            this._deferredPass.fbo.blitFramebuffer(3, 0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
+            break;
+          case Debug.BUFFERTYPE_BLOOM:
             let abc = 0;
             for (let i = 0; i < 5; i++) {
-                this._blurBuffers[i][1].blitFramebuffer(0, abc, 0, (Renderer.getWindowWidth() / Math.pow(2, i + 1)), (Renderer.getWindowHeight() / Math.pow(2, i + 1)));
-                abc += (Renderer.getWindowWidth() / Math.pow(2, i + 1));
+              this._blurBuffers[i][1].blitFramebuffer(0, abc, 0, (Renderer.getWindowWidth() / Math.pow(2, i + 1)), (Renderer.getWindowHeight() / Math.pow(2, i + 1)));
+              abc += (Renderer.getWindowWidth() / Math.pow(2, i + 1));
             }
             this._averagePass.blitFramebuffer(0, 0, 450, 50, 50);
+            break;
+          default:
+            break;
+        }
+      }
+
+
+        // Debug code - enable and disable anti-aliasing to see results of intermediate blur buffers.
+        if (Debug.bufferDebugMode) {
+            if (Debug.currentBuffer === Debug.BUFFERTYPE_BLOOM) {
+            }
         }
     }
 }

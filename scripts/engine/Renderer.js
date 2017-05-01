@@ -19,6 +19,11 @@ const Renderer  = {
       Renderer.FORWARD_PBR_SHADER = 1;
       Renderer.SKYBOX_SHADER = 2;
       Renderer.FBO_HDR=3;
+      Renderer.DEFERRED_PBR_SHADER_ANIM=6;
+      Renderer.DEFERRED_PBR_SHADER=7;
+      Renderer.DEFERRED_SHADER_LIGHTING=8;
+      Renderer.SHADOW_SHADER=10;
+      Renderer.SHADOW_SHADER_ANIM=11;
       Renderer.FORWARD_UNLIT = 13;
       Renderer.FBO_BLUR=15;
       Renderer.FBO_PASS=16;
@@ -41,26 +46,22 @@ const Renderer  = {
 
       Renderer.shaderForwardLightList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM];
 
-      Renderer.shaderViewList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_UNLIT, Renderer.SKYBOX_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM];
-
+      Renderer.shaderViewList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_UNLIT, Renderer.SKYBOX_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM,
+        Renderer.DEFERRED_SHADER_LIGHTING];
       /* Renderer.EMITTER_SHADER, Renderer.EMITTER_BURST_SHADER,
-            Renderer.PARTICLE_TRAIL_SHADER, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM,
-            Renderer.DEFERRED_SHADER_LIGHTING, Renderer.SKYBOX_SHADER,
+            Renderer.PARTICLE_TRAIL_SHADER, Renderer.SKYBOX_SHADER,
             Renderer.SHADOW_SHADER, Renderer.SHADOW_SHADER_ANIM, Renderer.BASIC_SHADER,
             Renderer.FORWARD_UNLIT, Renderer.FORWARD_EMISSIVE ];*/
-      Renderer.shaderCameraPosList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM];
 
-      /*,, Renderer.DEFERRED_SHADER_LIGHTING ];*/
-      Renderer.shaderEnvironmentList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM];
+      Renderer.shaderCameraPosList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.DEFERRED_SHADER_LIGHTING];
 
-      /*, , Renderer.DEFERRED_SHADER_LIGHTING ];*/
+      Renderer.shaderEnvironmentList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.DEFERRED_SHADER_LIGHTING];
+
       Renderer.shaderPerspectiveList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.SKYBOX_SHADER,
-          Renderer.FORWARD_UNLIT
+          Renderer.FORWARD_UNLIT, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM, Renderer.DEFERRED_SHADER_LIGHTING
       ];
-
       /*, , Renderer.SKYBOX_SHADER, Renderer.EMITTER_SHADER,
-            Renderer.EMITTER_BURST_SHADER, Renderer.PARTICLE_TRAIL_SHADER, Renderer.DEFERRED_PBR_SHADER,
-            Renderer.DEFERRED_PBR_SHADER_ANIM, Renderer.DEFERRED_SHADER_LIGHTING,
+            Renderer.EMITTER_BURST_SHADER, Renderer.PARTICLE_TRAIL_SHADER,
             Renderer.BASIC_SHADER, Renderer.FORWARD_UNLIT, Renderer.FORWARD_EMISSIVE ];*/
 
       Renderer.shaderList = [];
@@ -76,6 +77,31 @@ const Renderer  = {
       Renderer.shaderList[Renderer.FORWARD_UNLIT] = new Shader(
             Renderer.shaderPath + 'forward_pbr.vert', Renderer.shaderPath + 'forward_unlit.frag'
       );
+
+
+
+      Renderer.shaderList[Renderer.DEFERRED_PBR_SHADER_ANIM] = new Shader(
+        Renderer.shaderPath + "forward_pbr_skeletal.vert", Renderer.shaderPath + "deferred_gbuffer.frag"
+      );
+
+
+      Renderer.shaderList[Renderer.DEFERRED_PBR_SHADER] = new Shader(
+        Renderer.shaderPath + "forward_pbr.vert", Renderer.shaderPath + "deferred_gbuffer.frag"
+      );
+
+      Renderer.shaderList[Renderer.DEFERRED_SHADER_LIGHTING] = new Shader(
+        Renderer.shaderPath + "deferred_lighting.vert", Renderer.shaderPath + "deferred_lighting.frag"
+      );
+
+      Renderer.shaderList[Renderer.SHADOW_SHADER] = new Shader(
+        Renderer.shaderPath + "forward_pbr.vert", Renderer.shaderPath + "shadow.frag"
+      );
+
+      Renderer.shaderList[Renderer.SHADOW_SHADER_ANIM] = new Shader(
+        Renderer.shaderPath + "forward_pbr_skeletal.vert", Renderer.shaderPath + "shadow.frag"
+      );
+
+
 
       Renderer.shaderList[Renderer.FBO_HDR] = new Shader(
           Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_hdr.frag"
@@ -109,7 +135,7 @@ const Renderer  = {
           'assets/skybox/' + skyboxName + 'back.hdr',
       ];
       //TODO should make a json file to load this with, and have exposure variable
-      Renderer.skybox = new Skybox(skyboxName, 10);
+      Renderer.skybox = new Skybox(skyboxName, 3);//TODO revert
 
       let forwardPass = new ForwardPass();
       let skyboxPass = new SkyboxPass(Renderer.skybox);
