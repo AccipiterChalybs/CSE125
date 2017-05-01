@@ -28,6 +28,7 @@ const Renderer  = {
       Renderer.FBO_BLUR=15;
       Renderer.FBO_PASS=16;
       Renderer.FBO_AVERAGE=17;
+      Renderer.FBO_DEBUG_CHANNEL=18;
       Renderer.MODEL_MATRIX = "uM_Matrix";
       Renderer.VIEW_MATRIX = "uV_Matrix";
       Renderer.PERSPECTIVE_MATRIX = "uP_Matrix";
@@ -119,6 +120,10 @@ const Renderer  = {
           Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_average.frag"
       );
 
+      Renderer.shaderList[Renderer.FBO_DEBUG_CHANNEL] = new Shader(
+        Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_debug_channels.frag"
+      );
+
       Renderer.currentShader = null;
       Renderer.gpuData = {}; Renderer.gpuData.vaoHandle = -1;
 
@@ -141,13 +146,13 @@ const Renderer  = {
       let skyboxPass = new SkyboxPass(Renderer.skybox);
 
       Renderer.deferredPass = new DeferredPass();
-      let bloomPass = new BloomPass(Renderer.deferredPass);
+      Renderer.postPass = new BloomPass(Renderer.deferredPass);
 
       Renderer.passes = [];
       Renderer.passes.push(Renderer.deferredPass);
       Renderer.passes.push(forwardPass); //Note: This should usually go AFTER skybox, for transparent objects with no depth mask.
       Renderer.passes.push(skyboxPass);
-      Renderer.passes.push(bloomPass);
+      Renderer.passes.push(Renderer.postPass);
 
       Renderer.renderBuffer = { forward: [], deferred: [], particle: [], light: [] };
 
@@ -182,7 +187,7 @@ const Renderer  = {
         Renderer.FBO_BLUR=15;
         Renderer.FBO_PASS=16;
 
-        Renderer.VERTEX_ATTRIB_LOCATIOB = 0;
+        Renderer.VERTEX_ATTRIB_LOCATION = 0;
 
 
 

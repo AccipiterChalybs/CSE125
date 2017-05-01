@@ -6,19 +6,25 @@ let Debug = {};
 
 Debug.clientUpdate = false; //Run the client in standalone mode, so it doesn't need a server - good for testing!
 Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
-Debug.debugDisplay = false;
+Debug.debugDisplay = true;
 Debug.quickLoad = false;
 
 Debug.start = function() {
   if (Debug.debugDisplay) {
-    document.getElementById("debugContainer").style.display = "block";
-    if (Debug.fpsElement === null) Debug.fpsElement = document.getElementById("fpsCounter");
+    if (Debug.fpsElement === null) Debug.fpsElement = document.getElementById("fpsLog");
+    if (Debug.exposureElement === null) Debug.exposureElement = document.getElementById("exposureLog");
   }
 };
 
 Debug.update = function() {
-  if (Debug.debugDisplay) {
+  if (Input.getAxis("debugButton_Menu")) {
+    Debug.displayOpen = !Debug.displayOpen;
+    document.getElementById("debugContainer").style.display = (Debug.displayOpen) ? "block" : "none";
+  }
+
+  if (Debug.displayOpen) {
     Debug.logFPS();
+    Debug.logExposure();
   }
 
   if (Debug.bufferDebugMode) {
@@ -35,25 +41,31 @@ Debug.update = function() {
       Debug.currentBuffer = Debug.BUFFERTYPE_NORMAL;
     }
     if (Input.getAxis("debugButton_Buffer5")) {
-      Debug.currentBuffer = Debug.BUFFERTYPE_POS;
+      Debug.currentBuffer = Debug.BUFFERTYPE_ROUGH;
     }
     if (Input.getAxis("debugButton_Buffer6")) {
+      Debug.currentBuffer = Debug.BUFFERTYPE_METAL;
+    }
+    if (Input.getAxis("debugButton_Buffer7")) {
       Debug.currentBuffer = Debug.BUFFERTYPE_BLOOM;
     }
   }
 };
 
-Debug.bufferTypeCount = 6;
+Debug.bufferTypeCount = 7;
 Debug.BUFFERTYPE_NONE = 0;
 Debug.BUFFERTYPE_PRE = 1;
 Debug.BUFFERTYPE_COLOUR = 2;
 Debug.BUFFERTYPE_NORMAL = 3;
-Debug.BUFFERTYPE_POS = 4;
-Debug.BUFFERTYPE_BLOOM = 5;
+Debug.BUFFERTYPE_ROUGH = 4;
+Debug.BUFFERTYPE_METAL = 5;
+Debug.BUFFERTYPE_BLOOM = 6;
 Debug.currentBuffer = Debug.BUFFERTYPE_NONE;
 
 
+Debug.displayOpen = false;
 Debug.fpsElement = null;
+Debug.exposureElement = null;
 Debug.lastTime=-1;
 Debug.frames=0;
 Debug.logFPS = function() {
@@ -69,6 +81,11 @@ Debug.logFPS = function() {
     Debug.frames = 0;
     Debug.lastTime = current;
   }
+};
+
+
+Debug.logExposure = function() {
+  Debug.exposureElement.innerText = "Exposure: " + Renderer.postPass.averageExposure;
 };
 
 

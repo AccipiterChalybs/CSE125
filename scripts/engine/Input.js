@@ -93,6 +93,20 @@ const Input = {
       negativeButton: -1,
       value: 0
     },
+    {
+      name: 'debugButton_Buffer7',
+      type: InputType.keyboard,
+      positiveButton: ('7'.charCodeAt(0)),
+      negativeButton: -1,
+      value: 0
+    },
+    {
+      name: 'debugButton_Menu',
+      type: InputType.keyboard,
+      positiveButton: ('Q'.charCodeAt(0)),
+      negativeButton: -1,
+      value: 0
+    }
     ],
   },
   getAxis: function (name) {

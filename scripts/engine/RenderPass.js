@@ -332,18 +332,34 @@ class BloomPass extends RenderPass
 
 
       if (Debug.bufferDebugMode) {
+        let s5 = Renderer.getShader(Renderer.FBO_DEBUG_CHANNEL);
         switch (Debug.currentBuffer) {
           case Debug.BUFFERTYPE_PRE:
             this._deferredPass.fbo.blitFramebuffer(0, 0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
             break;
           case Debug.BUFFERTYPE_COLOUR:
-            this._deferredPass.buffers.blitFramebuffer(0, 0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
+            this._deferredPass.buffers.bindTexture(0, 0);
+            s5.setUniform("inputTex", 0, UniformTypes.u1i);
+            s5.setUniform("rgbOutput", 1, UniformTypes.u1i);
+            this._deferredPass.buffers.draw();
             break;
           case Debug.BUFFERTYPE_NORMAL:
-            this._deferredPass.buffers.blitFramebuffer(1, 0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
+            this._deferredPass.buffers.bindTexture(0, 1);
+            s5.setUniform("inputTex", 0, UniformTypes.u1i);
+            s5.setUniform("rgbOutput", 1, UniformTypes.u1i);
+            this._deferredPass.buffers.draw();
             break;
-          case Debug.BUFFERTYPE_POS:
-            this._deferredPass.buffers.blitFramebuffer(2, 0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
+          case Debug.BUFFERTYPE_ROUGH:
+            this._deferredPass.buffers.bindTexture(0, 2);
+            s5.setUniform("inputTex", 0, UniformTypes.u1i);
+            s5.setUniform("rgbOutput", 0, UniformTypes.u1i);
+            this._deferredPass.buffers.draw();
+            break;
+          case Debug.BUFFERTYPE_METAL:
+            this._deferredPass.buffers.bindTexture(0, 0);
+            s5.setUniform("inputTex", 0, UniformTypes.u1i);
+            s5.setUniform("rgbOutput", 0, UniformTypes.u1i);
+            this._deferredPass.buffers.draw();
             break;
           case Debug.BUFFERTYPE_BLOOM:
             let abc = 0;
