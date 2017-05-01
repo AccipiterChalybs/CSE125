@@ -64,7 +64,7 @@ Debug.getTimerDuration = function(name) {
 
 // Debugging bools for collision
 Debug.collision = {};
-Debug.collision.printInfo = true;
+Debug.collision.printInfo = false;
 Debug.collision._infoTypes = {all: "all", triggerOnly: "triggerOnly", nonTriggerOnly: "nonTriggerOnly"}; // 'all' is default
 Debug.collision._currInfoType = Debug.collision._infoTypes.triggerOnly;
 
