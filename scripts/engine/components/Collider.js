@@ -37,7 +37,7 @@ class Collider extends Component{
     // console.log("Created a collider (game object name, id): (" + this.gameObject.name + ", " +
     //   this.body.id + ")");
 
-    PhysicsEngine.world.addBody(this.body);
+    PhysicsEngine.addBody(this, this.body);
   }
 
   updateComponent(){
@@ -47,17 +47,21 @@ class Collider extends Component{
   }
 
   _onTriggerEnter(e){
+    let collider = PhysicsEngine.getCollider(e.body.id);
+
     if(Debug.collision.printInfo) {
       Debug.printCollisionInfo(e, this.gameObject, true);
     }
-    this.gameObject.onTriggerEnter(e);
+    this.gameObject.onTriggerEnter(collider);
   }
 
   _onCollisionEnter(e){
+    let collider = PhysicsEngine.getCollider(e.body.id);
+
     if(Debug.collision.printInfo) {
       Debug.printCollisionInfo(e, this.gameObject, false);
     }
-    this.gameObject.onCollisionEnter(e);
+    this.gameObject.onCollisionEnter(collider);
   }
 
   setTrigger(isTrigger){

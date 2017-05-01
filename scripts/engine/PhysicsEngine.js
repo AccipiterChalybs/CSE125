@@ -8,6 +8,7 @@ const TIME_STEP = 1.0/60.0;
 const GRAVITY = -20;
 
 PhysicsEngine.world = new CANNON.World();
+PhysicsEngine.bodyMap = {};
 
 PhysicsEngine.init = function(){
   PhysicsEngine.world.gravity.set(0, GRAVITY, 0);
@@ -23,6 +24,15 @@ PhysicsEngine.update = function(){
     PhysicsEngine.world.step(TIME_STEP);
 };
 
+PhysicsEngine.addBody = function(collider, body){
+  PhysicsEngine.world.addBody(body);
+
+  PhysicsEngine.bodyMap[body.id] = collider;
+};
+
+PhysicsEngine.getCollider = function(bodyID){
+  return PhysicsEngine.bodyMap[bodyID];
+};
 
 // 'PM' is short for 'physics material'
 PhysicsEngine.createMaterials = function(){
@@ -56,6 +66,6 @@ PhysicsEngine.createMaterials = function(){
     restitution: 0.0}
   );
   PhysicsEngine.world.addContactMaterial(physicsContactMaterial);
-}
+};
 
 PhysicsEngine.materials = {basicMaterial: 0, playerMaterial: 1};

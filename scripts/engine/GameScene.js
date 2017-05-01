@@ -75,6 +75,11 @@ class GameScene {
               vec4.set(color, x / (metalNum - 1), 0, y / (roughNum - 1), 1); //metalness, blank, roughness
               mat.setTexture(MaterialTexture.MAT, Texture.makeColorTex(color));
 
+              if (x===1 && y===1){
+                vec4.set(color, 1, 0, 0, 1);
+                mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
+              }
+
               mesh.setMaterial(mat);
               teapot.addComponent(mesh);
             }
@@ -87,10 +92,18 @@ class GameScene {
             }
             let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
 
+            if(x===1 && y===1){
+              pos[1] = 0;
+            }
             teapot.transform.setPosition(pos);
             teapot.transform.setRotation(rotation);
             teapot.transform.scale((0.02));
-            teapot.addComponent(new SphereCollider(100, false, 10)); //set Transform BEFORE collider
+
+            if (x===1 && y===1){
+              teapot.addComponent(new SphereCollider(0, true));
+              teapot.addComponent(new TriggerTest());
+            }else
+              teapot.addComponent(new SphereCollider(100, false, 10)); //set Transform BEFORE collider
 
             container.addChild(teapot);
         }

@@ -4,7 +4,7 @@
 
 let Debug = {};
 
-Debug.clientUpdate = false; //Run the client in standalone mode, so it doesn't need a server - good for testing!
+Debug.clientUpdate = true; //Run the client in standalone mode, so it doesn't need a server - good for testing!
 Debug.bufferDebugMode = false; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
 Debug.debugDisplay = false;
 
@@ -64,9 +64,9 @@ Debug.getTimerDuration = function(name) {
 
 // Debugging bools for collision
 Debug.collision = {};
-Debug.collision.printInfo = false;
+Debug.collision.printInfo = true;
 Debug.collision._infoTypes = {all: "all", triggerOnly: "triggerOnly", nonTriggerOnly: "nonTriggerOnly"}; // 'all' is default
-Debug.collision._currInfoType = Debug.collision._infoTypes.all;
+Debug.collision._currInfoType = Debug.collision._infoTypes.triggerOnly;
 
 Debug.printCollisionInfo = function(collisionEvent, gameObject, isTrigger){
   switch(Debug.collision._currInfoType){

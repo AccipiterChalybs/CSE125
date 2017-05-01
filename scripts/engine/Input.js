@@ -37,6 +37,11 @@ const Input = {
         value: 0
       },
       {
+        name: 'mouseDown',
+        type: InputType.mouseButton,
+        value: 0
+      },
+      {
         name: 'horizontal',
         type: InputType.keyboard,
         positiveButton: 68,
@@ -138,10 +143,14 @@ const Input = {
         document.mozPointerLockElement === document.body) {
         //console.log('The pointer lock status is now locked');
         document.addEventListener("mousemove", updatePosition, false);
+        document.addEventListener("mousedown", clickedMouse, false);
+        document.addEventListener("mouseup", releasedMouse, false);
         Input.enabled = true;
       } else {
         //console.log('The pointer lock status is now unlocked');
         document.removeEventListener("mousemove", updatePosition, false);
+        document.removeEventListener("mousedown", clickedMouse, false);
+        document.removeEventListener("mouseup", releasedMouse, false);
         Input._options.axes.filter((axis)=>axis.name === 'mouseHorizontal')[0].value = 0;
         Input._options.axes.filter((axis)=>axis.name === 'mouseVertical')[0].value = 0;
         Input.enabled = false;
@@ -152,15 +161,25 @@ const Input = {
       currentMouseX += e.movementX;
       currentMouseY += e.movementY;
     }
+
+    function clickedMouse(e){
+      // console.log("clickedMouse!", e);
+      Input._options.axes.filter((axis) => axis.name === 'mouseDown')[0].value = 1;
+    }
+
+    function releasedMouse(e){
+      // console.log("releasedMouse!", e);
+      Input._options.axes.filter((axis) => axis.name === 'mouseDown')[0].value = 0;
+    }
     // End pointer lock
 
       // Mouse buttons
-      document.body.onmouseup = (e)=> Input._options.axes.filter(
-          (axis)=>axis.type === InputType.mouseButton)
-          .forEach((axis)=>updateAxisInt(axis, e.button, true));
-      document.body.onmousedown = (e)=> Input._options.axes.filter(
-          (axis)=>axis.type === InputType.mouseButton)
-          .forEach((axis)=>updateAxisInt(axis, e.button));
+      // document.body.onmouseup = (e)=> Input._options.axes.filter(
+      //     (axis)=>axis.type === InputType.mouseButton)
+      //     .forEach((axis)=>updateAxisInt(axis, e.button, true));
+      // document.body.onmousedown = (e)=> Input._options.axes.filter(
+      //     (axis)=>axis.type === InputType.mouseButton)
+      //     .forEach((axis)=>updateAxisInt(axis, e.button));
 
       // Prevent default Right-click menu
       document.body.oncontextmenu = ()=>false;

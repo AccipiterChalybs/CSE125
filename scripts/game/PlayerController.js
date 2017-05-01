@@ -3,6 +3,7 @@
  */
 
 const MOVEMENTSPEED = 2;
+const COOLDOWN_SINGING = 3.0;   // In seconds
 
 // Requires a collider
 class PlayerController extends Component{
@@ -13,6 +14,7 @@ class PlayerController extends Component{
     this.x = 0;
     this.y = 0;
     this.z = 0;
+    this.mouseDown = 0;
     this.forward = vec3.create(); vec3.set(this.forward,0,0,-1);
   }
 
@@ -21,18 +23,24 @@ class PlayerController extends Component{
   }
 
   updateComponent(){
-    this.movement();
-  }
-
-  movement(){
     // Add if loop to enable client side testing w/o server
     if(Debug.clientUpdate && !IS_SERVER)
     {
       this.x = Input.getAxis('horizontal');
       this.z = Input.getAxis('vertical');
+      this.mouseDown = Input.getAxis('mouseDown');
+
       this.forward = Renderer.camera.transform.getForward();
     }
 
+    this.movement();
+
+    if(this.mouseDown === 1) {
+      this.sing();
+    }
+  }
+
+  movement(){
     // if(x !== 0 || z !== 0) {
     //   console.log("moving");
     // }
@@ -50,5 +58,9 @@ class PlayerController extends Component{
     body.velocity.x = move[0];
     body.velocity.z = move[2];
 
+  }
+
+  sing(){
+    console.log("singing!");
   }
 }
