@@ -11,6 +11,7 @@ class Collider extends Component{
     this.mass = mass;
     this.trigger = trigger;
     this.freezeRotation = false;
+    this.layer = FILTER_DEFAULT;
   }
 
   _setGameObject(go){
@@ -40,7 +41,7 @@ class Collider extends Component{
     // console.log("Created a collider (game object name, id): (" + this.gameObject.name + ", " +
     //   this.body.id + ")");
 
-    PhysicsEngine.addBody(this, this.body);
+    PhysicsEngine.addBody(this, this.body, this.layer);
   }
 
   updateComponent(){
@@ -95,5 +96,9 @@ class Collider extends Component{
     this.body.material = PhysicsEngine.world.materials[material];
 
     //console.log(this.body.material);
+  }
+
+  setLayer(layer){
+    this.layer = layer;
   }
 }
