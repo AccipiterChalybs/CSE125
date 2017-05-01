@@ -135,7 +135,7 @@ const Renderer  = {
           'assets/skybox/' + skyboxName + 'back.hdr',
       ];
       //TODO should make a json file to load this with, and have exposure variable
-      Renderer.skybox = new Skybox(skyboxName, 3);//TODO revert
+      Renderer.skybox = new Skybox(skyboxName, (Debug.quickLoad)? 3 : 10);//TODO revert
 
       let forwardPass = new ForwardPass();
       let skyboxPass = new SkyboxPass(Renderer.skybox);
@@ -362,6 +362,10 @@ const Renderer  = {
       Renderer.perspective = mat4.create();
       Renderer.resize(Renderer.canvas.clientWidth, Renderer.canvas.clientHeight);
 
+      Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("colorTex", 0, UniformTypes.u1i);
+      Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("normalTex", 1, UniformTypes.u1i);
+      Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("posTex", 2, UniformTypes.u1i);
+      Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("shadowTex", 3, UniformTypes.u1i);
   },
 
   loop: function () {
@@ -383,7 +387,7 @@ const Renderer  = {
         DirectionalLight.shadowMatrix, UniformTypes.mat4);
 */
 
-      GL.clearColor(0.25, 0.5, 0.81, 1);
+      //GL.clearColor(0.25, 0.5, 0.81, 1);
       GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
 
       if (Renderer.canvas.clientWidth  !== Renderer.width ||

@@ -75,12 +75,8 @@ class DeferredPass extends RenderPass
 {
     constructor(){
         super();
-        //TODO do we need to add a special Framebuffer thing here?
-        this.fbo = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 4, false, true, [GL.RGBA16F, GL.RGBA8, GL.RGBA16F/*TODO should be RGBA16 - is this ok*/, GL.RGBA16F]);
-
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("colorTex", 0, UniformTypes.u1i);
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("normalTex", 1, UniformTypes.u1i);
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("posTex", 2, UniformTypes.u1i);
+        this.buffers = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 3, false, true, [GL.RGBA8, GL.RGBA16F/*TODO should be RGBA16 - is this ok*/, GL.RGBA16F]);
+        this.fbo = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 1, false, true, [GL.RGBA16F]);
     }
 
     render(){
@@ -91,14 +87,15 @@ class DeferredPass extends RenderPass
         GL.cullFace(GL.BACK);
         GL.disable(GL.STENCIL_TEST);
 
-        let buffers = [ GL.NONE, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2, GL.COLOR_ATTACHMENT3 ];
-        this.fbo.bind(buffers);
+        let buffers = [ GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2 ];
+        this.buffers.bind(buffers);
         for(let mesh of Renderer.renderBuffer.deferred)
         {
             mesh.material.bind();
             mesh.draw();
         }
-        //CHECK_ERROR();
+
+
 
         Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).use();
         let screenSize = vec2.create(); vec2.set(screenSize, Renderer.getWindowWidth(), Renderer.getWindowHeight());
@@ -106,24 +103,26 @@ class DeferredPass extends RenderPass
         GL.depthMask(false);
         GL.stencilOpSeparate(GL.BACK, GL.KEEP, GL.INCR_WRAP, GL.KEEP);
         GL.stencilOpSeparate(GL.FRONT, GL.KEEP, GL.DECR_WRAP, GL.KEEP);
+
+
+        GL.bindFramebuffer(GL.FRAMEBUFFER, this.fbo.id);
         GL.drawBuffers([GL.COLOR_ATTACHMENT0]); //switch to rendering output, but keep depth from earlier
         GL.clear(GL.COLOR_BUFFER_BIT);
+        GL.bindFramebuffer(GL.READ_FRAMEBUFFER, this.buffers.id);
+        GL.blitFramebuffer(0, 0, this.fbo.width, this.fbo.height,
+          0, 0, this.fbo.width, this.fbo.height,
+                            GL.DEPTH_BUFFER_BIT,
+                            GL.NEAREST);
+        GL.bindFramebuffer(GL.READ_FRAMEBUFFER, null);
 
 
-        this.fbo.bindTexture(0, 1);
-        this.fbo.bindTexture(1, 2);
-        this.fbo.bindTexture(2, 3);
-
-        //TODO do we need these?
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("colorTex", 0, UniformTypes.u1i);
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("normalTex", 1, UniformTypes.u1i);
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("posTex", 2, UniformTypes.u1i);
-        //Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("shadowTex", 3, UniformTypes.u1i);
+        this.buffers.bindTexture(0, 0);
+        this.buffers.bindTexture(1, 1);
+        this.buffers.bindTexture(2, 2);
 
         Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("uIV_Matrix", Renderer.camera.gameObject.transform.getTransformMatrix(), UniformTypes.mat4);
-        //CHECK_ERROR();
 
-      /*  for(let light of Renderer.renderBuffer.light) {
+        for(let light of Renderer.renderBuffer.light) {
             let d = light; //TODO check if directional light
             if (!d || true)
             {
@@ -160,11 +159,11 @@ class DeferredPass extends RenderPass
             GL.drawBuffers([GL.COLOR_ATTACHMENT0]); //switch back to main image
 
             light.deferredPass(false);
-        }*/
-        //CHECK_ERROR();
+        }
         GL.disable(GL.STENCIL_TEST);
         GL.disable(GL.DEPTH_TEST);
         GL.disable(GL.CULL_FACE);
+
 
         let currentEntry = Mesh.prototype.meshMap["Plane"];
 
@@ -181,7 +180,7 @@ class DeferredPass extends RenderPass
         GL.drawElements(GL.TRIANGLES, currentEntry.indexSize, GL.UNSIGNED_SHORT, 0);
         Renderer.currentShader.setUniform("uV_Matrix", Renderer.camera.getCameraMatrix(), UniformTypes.mat4); //TODO is this one needed?
         Renderer.currentShader.setUniform("uP_Matrix", Renderer.perspective, UniformTypes.mat4);
-        //CHECK_ERROR();
+
 
         // TODO : Render Ambient
         GL.enable(GL.DEPTH_TEST);
@@ -226,7 +225,6 @@ class BloomPass extends RenderPass
 
         let screenWidth = Renderer.getWindowWidth();
         let screenHeight = Renderer.getWindowHeight();
-        console.log(Renderer.getWindowWidth() + " " + Renderer.getWindowHeight());
 
         this._averagePass = new Framebuffer(this._averageSize, this._averageSize, 1, false, true);
 
@@ -339,13 +337,13 @@ class BloomPass extends RenderPass
             this._deferredPass.fbo.blitFramebuffer(0, 0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
             break;
           case Debug.BUFFERTYPE_COLOUR:
-            this._deferredPass.fbo.blitFramebuffer(1, 0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
+            this._deferredPass.buffers.blitFramebuffer(0, 0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
             break;
           case Debug.BUFFERTYPE_NORMAL:
-            this._deferredPass.fbo.blitFramebuffer(2, 0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
+            this._deferredPass.buffers.blitFramebuffer(1, 0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
             break;
           case Debug.BUFFERTYPE_POS:
-            this._deferredPass.fbo.blitFramebuffer(3, 0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
+            this._deferredPass.buffers.blitFramebuffer(2, 0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
             break;
           case Debug.BUFFERTYPE_BLOOM:
             let abc = 0;

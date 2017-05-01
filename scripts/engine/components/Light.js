@@ -66,8 +66,8 @@ class PointLight extends Light{
     deferredPass(bind){
         if (bind) {
             Renderer.currentShader.setUniform("uLightType",0,UniformTypes.u1i);
-            let max = (this.color.r > this.color.g) ? this.color.r : this.color.g;
-            max = (max > this.color.b) ? max : this.color.b;
+            let max = (this.color[0] > this.color[1]) ? this.color[0] : this.color[1];
+            max = (max > this.color[2]) ? max : this.color[2];
             let scale = (-this.linearFalloff + Math.sqrt(this.linearFalloff * this.linearFalloff - 4.0 * (this.constantFalloff - 256.0 * max) * this.exponentialFalloff))
         / (2.0 * this.exponentialFalloff);
             Renderer.currentShader.setUniform("uScale",scale,UniformTypes.u1f);

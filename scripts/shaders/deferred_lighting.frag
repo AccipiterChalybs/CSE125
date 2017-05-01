@@ -81,17 +81,14 @@ const vec2 poissonDisk[4] = vec2[](
 
 void main () {
   vec2 screenTexCoord = gl_FragCoord.xy / uScreenSize;
-	  frag_color = texture(colorTex, screenTexCoord);
-
-return;
-  vec4 albedo = texture(colorTex, gl_FragCoord.xy / uScreenSize);
+  vec4 albedo = texture(colorTex, screenTexCoord);
   if(albedo.xyz == vec3(0.0)) discard; //TODO does this actually provide a performance boost?
-  vec4 pos = texture(posTex, gl_FragCoord.xy / uScreenSize);
-  vec4 normal = texture(normalTex, gl_FragCoord.xy / uScreenSize);
+  vec4 pos = texture(posTex, screenTexCoord);
+  vec4 normal = texture(normalTex, screenTexCoord);
   vec3 mat = vec3(albedo.a, pos.w, normal.w);
-  pos = uIV_Matrix * vec4(pos.xyz, 1.0);
-  pos /= pos.w;
-  //TODO normal.xyz = normal.xyz * 2.0 - 1.0;
+  //pos = uIV_Matrix * vec4(pos.xyz, 1.0); //TODO do we need these two lines?
+  //pos /= pos.w;
+  normal.xyz = normal.xyz * 2.0 - 1.0;
 
   vec3 view = normalize(cameraPos - pos.xyz);
 
@@ -115,7 +112,7 @@ return;
 	  vec3 specColor = SpecularEnvMap(normal.xyz, view, a, F0);
 	  vec3 color = diffuseColor + specColor;
   
-	  frag_color = vec4(1.0, 0.25, 0.0, 1.0);
+	  frag_color = vec4(color, 1.0);
   }
   else {
 	  vec3 lightDir;
