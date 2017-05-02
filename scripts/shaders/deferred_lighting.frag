@@ -131,17 +131,24 @@ void main () {
 	  }
 	  else {
 		  vec3 shadowPos = (uShadow_Matrix * vec4(pos.xyz, 1.0)).xyz / (uShadow_Matrix * vec4(pos.xyz, 1.0)).w;
-		  lightDir = uLightDirection;
+		  lightDir = -uLightDirection;
 		  lightDist = 0.0;
-  
-		  shadowPos.z -= max(0.05 * (1.0 - dot(normal.xyz, lightDir)), 0.005);
+
+          //TODO might want to change settings later
+          shadowPos.z -= max(0.005 * (1.0 - clamp(dot(normal.xyz, lightDir), 1.0, 0.0)), 0.005);
 		  shadowPos.z = min(shadowPos.z, 0.9999);
 		  vec2 texelSize = 1.0 / vec2(textureSize(shadowTex, 0));
+
+		  shadow = step(shadowPos.z, texture(shadowTex, shadowPos.xy).r );
+
+		  /*
+		  shadow=0.0;
 		  for(int i = 0; i < 4; i++) {
 			vec3 offset = vec3(poissonDisk[i] * texelSize, 0);
-			shadow += texture(shadowTex, shadowPos.xy + offset.xy).r; //TODO fix for no shadow sampler
+			shadow = texture(shadowTex, shadowPos.xy + offset.xy).r; //TODO fix for no shadow sampler
 		  }
 		  shadow /= 4.0;
+		  */
 	  }
 
 
@@ -156,7 +163,6 @@ void main () {
 
 	  vec3 diffuseColor = ((1.0-mat.r) * albedo.rgb) * diffuseLight;
 	  vec3 color = diffuseColor + specColor;
-
 	  frag_color = vec4(color * shadow, 1.0);
   }
 }

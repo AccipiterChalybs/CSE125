@@ -101,6 +101,27 @@ const Input = {
       value: 0
     },
     {
+      name: 'debugButton_Buffer8',
+      type: InputType.keyboard,
+      positiveButton: ('8'.charCodeAt(0)),
+      negativeButton: -1,
+      value: 0
+    },
+    {
+      name: 'debugButton_Buffer9',
+      type: InputType.keyboard,
+      positiveButton: ('9'.charCodeAt(0)),
+      negativeButton: -1,
+      value: 0
+    },
+    {
+      name: 'debugButton_Buffer0',
+      type: InputType.keyboard,
+      positiveButton: ('0'.charCodeAt(0)),
+      negativeButton: -1,
+      value: 0
+    },
+    {
       name: 'debugButton_Menu',
       type: InputType.keyboard,
       positiveButton: ('Q'.charCodeAt(0)),

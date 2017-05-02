@@ -109,14 +109,15 @@ class GameScene {
       Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo(PlayerTable.players[PlayerTable.currentPlayer]));
     }
     let light = new GameObject();
-    let lightComp = new PointLight();
+    let lightComp = new DirectionalLight(true);
     light.addComponent(lightComp);
-    let lightPos = vec3.create(); vec3.set(lightPos, 5, 2, 0);
+    let lightPos = vec3.create(); vec3.set(lightPos, 0, 0, 0);
     light.transform.setPosition(lightPos);
+    light.transform.rotateX(-Math.PI/4.0);
 
     let lightCenter = new GameObject();
     lightCenter.addChild(light);
-    lightCenter.addComponent(new RotateOverTime(5));
+    lightCenter.addComponent(new RotateOverTime(2.5));
 
     GameObject.prototype.SceneRoot.addChild(lightCenter);
 

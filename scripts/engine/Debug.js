@@ -9,6 +9,8 @@ Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that
 Debug.debugDisplay = true;
 Debug.quickLoad = false;
 
+Debug.tmp_shadowTwoSideRender = true; //Var to remind me to remove this when we get in new level geometry
+
 Debug.start = function() {
   if (Debug.debugDisplay) {
     if (Debug.fpsElement === null) Debug.fpsElement = document.getElementById("fpsLog");
@@ -49,10 +51,19 @@ Debug.update = function() {
     if (Input.getAxis("debugButton_Buffer7")) {
       Debug.currentBuffer = Debug.BUFFERTYPE_BLOOM;
     }
+    if (Input.getAxis("debugButton_Buffer8")) {
+      Debug.currentBuffer = Debug.BUFFERTYPE_SHADOW;
+    }
+    if (Input.getAxis("debugButton_Buffer9")) {
+      Debug.currentBuffer = 0;
+    }
+    if (Input.getAxis("debugButton_Buffer0")) {
+      Debug.currentBuffer = 0;
+    }
   }
 };
 
-Debug.bufferTypeCount = 7;
+Debug.bufferTypeCount = 8;
 Debug.BUFFERTYPE_NONE = 0;
 Debug.BUFFERTYPE_PRE = 1;
 Debug.BUFFERTYPE_COLOUR = 2;
@@ -60,6 +71,7 @@ Debug.BUFFERTYPE_NORMAL = 3;
 Debug.BUFFERTYPE_ROUGH = 4;
 Debug.BUFFERTYPE_METAL = 5;
 Debug.BUFFERTYPE_BLOOM = 6;
+Debug.BUFFERTYPE_SHADOW = 7;
 Debug.currentBuffer = Debug.BUFFERTYPE_NONE;
 
 

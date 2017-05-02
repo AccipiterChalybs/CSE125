@@ -178,9 +178,10 @@ class Framebuffer {
         this.depthTex = GL.createTexture();
         GL.bindTexture(GL.TEXTURE_2D, this.depthTex);
 
-        GL.texImage2D(Gl.TEXTURE_2D, 0, GL.DEPTH_COMPONENT16, this.width, this.height, 0, GL.DEPTH_COMPONENT, GL.UNSIGNED_SHORT, 0);
-        GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.LINEAR);
-        GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.LINEAR);
+        GL.texImage2D(GL.TEXTURE_2D, 0, GL.DEPTH_COMPONENT16, this.width, this.height, 0, GL.DEPTH_COMPONENT, GL.UNSIGNED_SHORT, null);
+
+        GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.NEAREST);
+        GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.NEAREST);
 
         //CLAMP_TO_BORDER would have been better... but that is not supported.
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_WRAP_S, GL.CLAMP_TO_EDGE);
@@ -191,7 +192,7 @@ class Framebuffer {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
         */
 
-        GL.framebufferTexture2D(GL.FRAMEBUFFER, GL.DEPTH_ATTACHMENT, this.depthTex, 0);
+        GL.framebufferTexture2D(GL.FRAMEBUFFER, GL.DEPTH_ATTACHMENT, GL.TEXTURE_2D, this.depthTex, 0);
     }
 
     _addDepthBuffer() {

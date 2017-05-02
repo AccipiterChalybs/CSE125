@@ -10,9 +10,11 @@ layout(location = 0) out vec4 fragColor;
 
 void main() {
     vec4 color = texture(inputTex, vTexCoord);
-    if (rgbOutput == 1) {
-        fragColor = vec4(color.rgb, 1.0);
-    } else {
+    if (rgbOutput == 0) {
         fragColor = vec4(color.aaa, 1.0);
-    }
+    } else if (rgbOutput == 1) {
+        fragColor = vec4(color.rgb, 1.0);
+    } else if (rgbOutput == 2) {
+         fragColor = vec4(vec3(color.r), 1.0);
+     }
 }

@@ -47,20 +47,23 @@ class ShadowPass extends ForwardPass
         GL.depthMask(true);
         GL.disable(GL.BLEND);
         GL.enable(GL.CULL_FACE);
+        //TODO remove this later when we have new level geometry
+        if (Debug.tmp_shadowTwoSideRender) {
+          GL.disable(GL.CULL_FACE);
+        }
         GL.cullFace(GL.BACK);
         GL.disable(GL.STENCIL_TEST);
 
         for (let l of Renderer.renderBuffer.light) {
-            let caster = l; //TODO check if right type of light (this was supposed to check = directional)
-            if (!caster || !caster.shadowCaster) continue;
+            let caster = l;
+            if (!caster || !caster.isShadowCaster) continue;
             caster.bindShadowMap();
-            GL.drawBuffer([GL.NONE]);
             for (let mesh of Renderer.renderBuffer.deferred) {
                 let mat = mesh.material;
                 let s = null;
                 if (mat.shader === Renderer.getShader(Renderer.DEFERRED_PBR_SHADER_ANIM)) s = Renderer.getShader(Renderer.SHADOW_SHADER_ANIM);
                 else s = Renderer.getShader(Renderer.SHADOW_SHADER);
-                if (s !== Renderer.currentShader) s.use();
+                if (s !== Renderer.currentShader) { s.use(); }
                 mesh.draw();
             }
         }
@@ -124,7 +127,7 @@ class DeferredPass extends RenderPass
 
         for(let light of Renderer.renderBuffer.light) {
             let d = light; //TODO check if directional light
-            if (!d || true)
+            if (!d.isShadowCaster)
             {
                 GL.drawBuffers([GL.NONE]);
                 GL.disable(GL.CULL_FACE);
@@ -143,11 +146,16 @@ class DeferredPass extends RenderPass
             {
                 GL.cullFace(GL.BACK);
                 GL.disable(GL.STENCIL_TEST);
-                if(d.shadowCaster && d.fbo)
+                if(d.isShadowCaster && d.fbo)
                 {
                     d.fbo.bindDepthTexture(3);
+                    let shadowMat = mat4.create();
                     //TODO is this the right inverse?
-                    //TODO change to our js method of assigning uniforms Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING)["uShadow_Matrix"] = DeferredPass.bias * DirectionalLight.shadowMatrix * mat4.inverse(d.gameObject.transform.getTransformMatrix());
+                    mat4.invert(shadowMat, d.gameObject.transform.getTransformMatrix());
+                    mat4.multiply(shadowMat, DirectionalLight.prototype.shadowMatrix, shadowMat);
+                    mat4.multiply(shadowMat, DeferredPass.prototype.bias, shadowMat);
+
+                    Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("uShadow_Matrix", shadowMat, UniformTypes.mat4);
                 }
             }
 
@@ -191,11 +199,11 @@ class DeferredPass extends RenderPass
     }
 }
 
-DeferredPass.prototype.bias = mat4.create(
+DeferredPass.prototype.bias = new Float32Array([
     0.5, 0.0, 0.0, 0.0,
     0.0, 0.5, 0.0, 0.0,
     0.0, 0.0, 0.5, 0.0,
-    0.5, 0.5, 0.5, 1.0);
+    0.5, 0.5, 0.5, 1.0]);
 
 class SkyboxPass extends RenderPass
 {
@@ -368,6 +376,12 @@ class BloomPass extends RenderPass
               abc += (Renderer.getWindowWidth() / Math.pow(2, i + 1));
             }
             this._averagePass.blitFramebuffer(0, 0, 450, 50, 50);
+            break;
+          case Debug.BUFFERTYPE_SHADOW:
+            Renderer.renderBuffer.light[0].fbo.bindDepthTexture(0);
+            s5.setUniform("inputTex", 0, UniformTypes.u1i);
+            s5.setUniform("rgbOutput", 2, UniformTypes.u1i);
+            this._deferredPass.buffers.draw();
             break;
           default:
             break;

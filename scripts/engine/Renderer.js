@@ -48,11 +48,10 @@ const Renderer  = {
       Renderer.shaderForwardLightList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM];
 
       Renderer.shaderViewList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_UNLIT, Renderer.SKYBOX_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM,
-        Renderer.DEFERRED_SHADER_LIGHTING];
+        Renderer.DEFERRED_SHADER_LIGHTING, Renderer.SHADOW_SHADER, Renderer.SHADOW_SHADER_ANIM];
       /* Renderer.EMITTER_SHADER, Renderer.EMITTER_BURST_SHADER,
-            Renderer.PARTICLE_TRAIL_SHADER, Renderer.SKYBOX_SHADER,
-            Renderer.SHADOW_SHADER, Renderer.SHADOW_SHADER_ANIM, Renderer.BASIC_SHADER,
-            Renderer.FORWARD_UNLIT, Renderer.FORWARD_EMISSIVE ];*/
+            Renderer.PARTICLE_TRAIL_SHADERRenderer.BASIC_SHADER,
+            Renderer.FORWARD_EMISSIVE ];*/
 
       Renderer.shaderCameraPosList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.DEFERRED_SHADER_LIGHTING];
 
@@ -142,6 +141,7 @@ const Renderer  = {
       //TODO should make a json file to load this with, and have exposure variable
       Renderer.skybox = new Skybox(skyboxName, (Debug.quickLoad)? 3 : 10);//TODO revert
 
+      let shadowPass = new ShadowPass();
       let forwardPass = new ForwardPass();
       let skyboxPass = new SkyboxPass(Renderer.skybox);
 
@@ -149,6 +149,7 @@ const Renderer  = {
       Renderer.postPass = new BloomPass(Renderer.deferredPass);
 
       Renderer.passes = [];
+      Renderer.passes.push(shadowPass);
       Renderer.passes.push(Renderer.deferredPass);
       Renderer.passes.push(forwardPass); //Note: This should usually go AFTER skybox, for transparent objects with no depth mask.
       Renderer.passes.push(skyboxPass);
@@ -296,9 +297,6 @@ const Renderer  = {
             Renderer.shaderPath + "forward_pbr_skeletal.vert", Renderer.shaderPath + "shadow.frag"
         );
 
-        Renderer.shaderList[Renderer.SHADOW_SHADER].setUniform("uP_Matrix", DirectionalLight.shadowMatrix, UniformTypes.mat4);
-        Renderer.shaderList[Renderer.SHADOW_SHADER_ANIM].setUniform("uP_Matrix", DirectionalLight.shadowMatrix, UniformTypes.mat4);
-
         Renderer.shaderList[Renderer.BASIC_SHADER] = new Shader(
             Renderer.shaderPath + "simple.vert", Renderer.shaderPath + "simple.frag"
         );
@@ -367,6 +365,10 @@ const Renderer  = {
       Renderer.perspective = mat4.create();
       Renderer.resize(Renderer.canvas.clientWidth, Renderer.canvas.clientHeight);
 
+      Renderer.shaderList[Renderer.SHADOW_SHADER].setUniform("uP_Matrix", DirectionalLight.prototype.shadowMatrix, UniformTypes.mat4);
+      Renderer.shaderList[Renderer.SHADOW_SHADER_ANIM].setUniform("uP_Matrix", DirectionalLight.prototype.shadowMatrix, UniformTypes.mat4);
+
+
       Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("colorTex", 0, UniformTypes.u1i);
       Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("normalTex", 1, UniformTypes.u1i);
       Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("posTex", 2, UniformTypes.u1i);
@@ -387,9 +389,9 @@ const Renderer  = {
 
 /*
         Renderer.shaderList[Renderer.SHADOW_SHADER].setUniform(["uP_Matrix"],
-        DirectionalLight.shadowMatrix, UniformTypes.mat4);
+        DirectionalLight.prototype.shadowMatrix, UniformTypes.mat4);
         Renderer.shaderList[Renderer.SHADOW_SHADER_ANIM].setUniform(["uP_Matrix"],
-        DirectionalLight.shadowMatrix, UniformTypes.mat4);
+        DirectionalLight.prototype.shadowMatrix, UniformTypes.mat4);
 */
 
       //GL.clearColor(0.25, 0.5, 0.81, 1);
@@ -401,8 +403,6 @@ const Renderer  = {
         Renderer.resize(Renderer.canvas.clientWidth, Renderer.canvas.clientHeight);
       }
 
-
-      Renderer.deferredPass.fbo.bind([GL.COLOR_ATTACHMENT0]);
       for (let pass of Renderer.passes) {
         pass.render();
       }
