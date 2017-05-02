@@ -65,6 +65,7 @@ Debug.getTimerDuration = function(name) {
 // Debugging bools for collision
 Debug.collision = {};
 Debug.collision.printInfo = true;
+Debug.collision.printOverlapSphere = false;
 Debug.collision._infoTypes = {all: "all", triggerOnly: "triggerOnly", nonTriggerOnly: "nonTriggerOnly"}; // 'all' is default
 Debug.collision._currInfoType = Debug.collision._infoTypes.triggerOnly;
 
@@ -94,4 +95,8 @@ Debug.printCollisionInfo = function(collisionEvent, gameObject, isTrigger){
       console.log("\tContact between bodies:", collisionEvent.contact);
       break;
   }
+};
+
+Debug.printOverlapSphereInfo = function(checkingObj, distance, radius){
+  console.log("TestingObj [distance^2, radius^2]: ", checkingObj, " [" + distance + ", " + radius + "]");
 };

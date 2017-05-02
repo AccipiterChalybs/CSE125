@@ -111,12 +111,13 @@ class GameScene {
     }
 
     PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject);
+    GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new Sing(1));
     PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject);
-    GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new PlayerController())
+    // GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new PlayerController())
     PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject);
-    GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new PlayerController())
+    // GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new PlayerController())
     PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject);
-    GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new PlayerController())
+    // GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new PlayerController())
 
     if(!IS_SERVER){
       //TODO account for possibility of currentPlayer not set yet
@@ -141,6 +142,8 @@ class GameScene {
     ground.transform.setPosition(move);
     ground.addComponent(new BoxCollider(0, false, 10000, 1, 10000));
     ground.getComponent("Collider").setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
+
+    GameObject.prototype.SceneRoot.findComponents("Interactable", PhysicsEngine.sphereChecks);
   }
 
   update() {

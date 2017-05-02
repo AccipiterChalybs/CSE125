@@ -9,6 +9,7 @@ const GRAVITY = -20;
 
 PhysicsEngine.world = new CANNON.World();
 PhysicsEngine.bodyMap = {};
+PhysicsEngine.sphereChecks = [];
 
 PhysicsEngine.init = function(){
   PhysicsEngine.world.gravity.set(0, GRAVITY, 0);
@@ -32,6 +33,25 @@ PhysicsEngine.addBody = function(collider, body){
 
 PhysicsEngine.getCollider = function(bodyID){
   return PhysicsEngine.bodyMap[bodyID];
+};
+
+// Returns an array of gameObjects that were hit
+PhysicsEngine.overlapSphere = function(position, radius){
+  let hitObjects = [];
+  let radiusSqrd = radius * radius;
+
+  for(let i = 0; i < PhysicsEngine.sphereChecks.length; ++i){
+    let dist = vec3.squaredDistance(position, PhysicsEngine.sphereChecks[i].transform.getPosition());
+
+    if(Debug.collision.printOverlapSphere) {
+      Debug.printOverlapSphereInfo(PhysicsEngine.sphereChecks[i], dist, radiusSqrd);
+    }
+    if(dist !== 0 && dist <= radiusSqrd){
+      hitObjects.push(PhysicsEngine.sphereChecks[i]);
+    }
+  }
+
+  return hitObjects;
 };
 
 // 'PM' is short for 'physics material'

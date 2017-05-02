@@ -20,10 +20,18 @@ class PlayerController extends Component{
     this.walking = 0;
     this.forward = vec3.create(); vec3.set(this.forward,0,0,-1);
     this.canMove = true;
+
+    this._collider = null;
+    this._singer = null;
   }
 
   start(){
-    this.transform.gameObject.getComponent("Collider").setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
+    // TODO: Remove this line later
+
+    this._collider = this.transform.gameObject.getComponent("Collider");
+    this._singer = this.transform.gameObject.getComponent("Sing", 1);
+
+    this._collider.setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
   }
 
   updateComponent(){
@@ -43,7 +51,7 @@ class PlayerController extends Component{
     }
 
     if(this.singing === 1) {
-      this.sing();
+      this._singer.sing();
     }
   }
 
@@ -66,13 +74,9 @@ class PlayerController extends Component{
     vec3.scale(moveZ, moveZ, this.z * this.movementSpeed);
     vec3.add(move, moveX, moveZ);
 
-    let body = this.transform.gameObject.getComponent("Collider").body;
+    let body = this._collider.body;
     body.velocity.x = move[0];
     body.velocity.z = move[2];
 
-  }
-
-  sing(){
-    console.log("singing!");
   }
 }
