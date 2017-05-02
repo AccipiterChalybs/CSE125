@@ -1,0 +1,7 @@
+{
+	"esversion": 6,	// sets js version
+	"devel": true,	// lets console.log() stay
+	"globals": {
+		"$": false	// lets $ be a proper variable
+	}
+}
