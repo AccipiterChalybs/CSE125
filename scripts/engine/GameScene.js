@@ -120,6 +120,12 @@ class GameScene {
 
     PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject);
     GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new Sing());
+    GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new AudioSource());
+    if(!IS_SERVER) {
+      GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.getComponent("AudioSource").playSound2d("singTone00");
+      GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.getComponent("AudioSource").pauseSound();
+    }
+
     PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject);
     // GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new PlayerController())
     PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject);

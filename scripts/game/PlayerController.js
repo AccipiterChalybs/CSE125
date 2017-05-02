@@ -7,7 +7,7 @@ const WALK_SPEED = 1;
 const SING_SPEED = 0.4;
 const COOLDOWN_SINGING = 3.0;   // In seconds
 
-// Requires a collider
+// Requires a collider, sing
 class PlayerController extends Component{
   constructor(){
     super();
@@ -29,7 +29,8 @@ class PlayerController extends Component{
     // TODO: Remove this line later
 
     this._collider = this.transform.gameObject.getComponent("Collider");
-    this._singer = this.transform.gameObject.getComponent("Sing", 1);
+    this._singer = this.transform.gameObject.getComponent("Sing");
+    this._audioSrc = this.transform.gameObject.getComponent("AudioSource");
 
     this._collider.setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
   }
@@ -52,6 +53,9 @@ class PlayerController extends Component{
 
     if(this.singing === 1) {
       this._singer.sing();
+      this._audioSrc.resumeSound();
+    }else{
+      this._audioSrc.pauseSound();
     }
   }
 
