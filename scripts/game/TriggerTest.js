@@ -2,16 +2,19 @@
  * Created by Stephen on 4/28/2017.
  */
 
-class TriggerTest extends Interactable{
+class TriggerTest extends Component{
   constructor(){
     super();
-
-    this._currentChargeTime = 0;
+    this.componentType = "TriggerTest";
   }
 
-  interact(interactingObj){
-    let player = interactingObj.getComponent("PlayerController");
-
-    console.log(player, " is interacting with me. ", this.gameObject);
+  onTriggerEnter(other){
+    let player = other.transform.gameObject.getComponent("PlayerController");
+    if(player && player !== null) {
+      Debug.log("hit a player ", other);
+    }else{
+      Debug.log("hit something else ", other);
+    }
   }
+
 }

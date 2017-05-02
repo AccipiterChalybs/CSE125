@@ -3,7 +3,7 @@
  */
 
 class Sing extends Component{
-  constructor(range){
+  constructor(range = 2){
     super();
     this.componentType = "Sing";
 
@@ -11,7 +11,7 @@ class Sing extends Component{
   }
 
   start(){
-    console.log(PhysicsEngine.sphereChecks);
+    //console.log(PhysicsEngine.sphereChecks);
   }
 
   updateComponent(){
@@ -19,7 +19,7 @@ class Sing extends Component{
   }
 
   sing(){
-    Debug.log("singing");
+    // Debug.log("singing");
     let hitColliders = [];
     hitColliders = PhysicsEngine.overlapSphere(this.transform.getPosition(), this.range);
 

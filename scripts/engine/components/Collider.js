@@ -51,7 +51,6 @@ class Collider extends Component{
 
     if(Debug.collision.printInfo) {
       Debug.printCollisionInfo(e, this.gameObject, true);
-      console.log(PhysicsEngine.world.collisionMatrix);
     }
     this.gameObject.onTriggerEnter(collider);
   }

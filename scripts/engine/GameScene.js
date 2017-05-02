@@ -79,6 +79,9 @@ class GameScene {
               if (x===1 && y===1){
                 vec4.set(color, 1, 0, 0, 1);
                 mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
+              } else if( x===2 && y ===2){
+                vec4.set(color, 0, 0, 1, 1);
+                mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
               }
 
               mesh.setMaterial(mat);
@@ -95,6 +98,8 @@ class GameScene {
 
             if(x===1 && y===1){
               pos[1] = 0;
+            } else if(x===2 && y===2){
+              pos[1] = 0;
             }
             teapot.transform.setPosition(pos);
             teapot.transform.setRotation(rotation);
@@ -102,8 +107,11 @@ class GameScene {
 
             if (x===1 && y===1){
               teapot.addComponent(new SphereCollider(0, true));
+              teapot.addComponent(new SingingSwitch(5));
+            }else if(x===2 && y===2){
+              teapot.addComponent(new SphereCollider(0, true));
               teapot.addComponent(new TriggerTest());
-            }else
+            } else
               teapot.addComponent(new SphereCollider(100, false, 10)); //set Transform BEFORE collider
 
             container.addChild(teapot);
@@ -111,7 +119,7 @@ class GameScene {
     }
 
     PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject);
-    GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new Sing(1));
+    GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new Sing());
     PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject);
     // GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new PlayerController())
     PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject);
