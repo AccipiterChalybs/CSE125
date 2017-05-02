@@ -15,8 +15,10 @@ const InputDirection = {
 
 let currentMouseX = 0;
 let currentMouseY = 0;
+let currentMouseWheel = 0;
 let lastMouseX = 0;
 let lastMouseY = 0;
+let lastMouseWheel = 0;
 
 const Input = {
   enabled: false,
@@ -26,19 +28,25 @@ const Input = {
         name: 'mouseHorizontal',
         type: InputType.mouse,
         direction: InputDirection.x,
-        sensitivity: 50,
+        sensitivity: 1,
         value: 0
       },
       {
         name: 'mouseVertical',
         type: InputType.mouse,
         direction: InputDirection.y,
-        sensitivity: 50,
+        sensitivity: 1,
         value: 0
       },
       {
         name: 'mouseDown',
         type: InputType.mouseButton,
+        value: 0
+      },
+      {
+        name: 'zoom',
+        type: InputType.mouse,
+        sensitivity: 3,
         value: 0
       },
       {
@@ -53,6 +61,12 @@ const Input = {
         type: InputType.keyboard,
         positiveButton: 87,
         negativeButton: 83,
+        value: 0
+      },
+      {
+        name: 'walk',
+        type: InputType.keyboard,
+        positiveButton: 16,
         value: 0
       }
     ],
@@ -82,8 +96,12 @@ const Input = {
     Input._options.axes.filter((axis) => axis.name === 'mouseVertical')[0].value =
           currentMouseY - lastMouseY;
 
+    Input._options.axes.filter((axis) => axis.name === 'zoom')[0].value =
+          currentMouseWheel - lastMouseWheel;
+
     currentMouseX = lastMouseX;
     currentMouseY = lastMouseY;
+    currentMouseWheel = lastMouseWheel;
   },
 
   init: function (options) {
@@ -145,12 +163,14 @@ const Input = {
         document.addEventListener("mousemove", updatePosition, false);
         document.addEventListener("mousedown", clickedMouse, false);
         document.addEventListener("mouseup", releasedMouse, false);
+        document.addEventListener("wheel", mouseWheel, false);
         Input.enabled = true;
       } else {
         //console.log('The pointer lock status is now unlocked');
         document.removeEventListener("mousemove", updatePosition, false);
         document.removeEventListener("mousedown", clickedMouse, false);
         document.removeEventListener("mouseup", releasedMouse, false);
+        document.removeEventListener("wheel", mouseWheel, false);
         Input._options.axes.filter((axis)=>axis.name === 'mouseHorizontal')[0].value = 0;
         Input._options.axes.filter((axis)=>axis.name === 'mouseVertical')[0].value = 0;
         Input.enabled = false;
@@ -158,8 +178,10 @@ const Input = {
     }
 
     function updatePosition(e) {
-      currentMouseX += e.movementX;
-      currentMouseY += e.movementY;
+      currentMouseX += (e.movementX *
+        Input._options.axes.filter((axis) => axis.name === 'mouseHorizontal')[0].sensitivity);
+      currentMouseY += (e.movementY *
+        Input._options.axes.filter((axis) => axis.name === 'mouseVertical')[0].sensitivity);
     }
 
     function clickedMouse(e){
@@ -170,6 +192,10 @@ const Input = {
     function releasedMouse(e){
       // console.log("releasedMouse!", e);
       Input._options.axes.filter((axis) => axis.name === 'mouseDown')[0].value = 0;
+    }
+
+    function mouseWheel(e){
+      currentMouseWheel += (e.deltaY / -200 * Input._options.axes.filter((axis) => axis.name === 'zoom')[0].sensitivity);
     }
     // End pointer lock
 

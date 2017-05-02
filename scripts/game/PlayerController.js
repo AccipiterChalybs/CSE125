@@ -61,6 +61,6 @@ class PlayerController extends Component{
   }
 
   sing(){
-    // console.log("singing!");
+    console.log("singing!");
   }
 }

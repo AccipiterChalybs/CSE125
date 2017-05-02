@@ -26,6 +26,7 @@ class GameScene {
     let rootTest = new GameObject();
     camera.gameObject.transform.setParent(rootTest.transform);
     camera.gameObject.addComponent(new AudioListener());
+    camera.gameObject.addComponent(new ZoomMouse());
     let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 5);
     if(!IS_SERVER){
       Renderer.camera.transform.setPosition(newPosition);
