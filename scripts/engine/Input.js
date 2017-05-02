@@ -39,7 +39,7 @@ const Input = {
         value: 0
       },
       {
-        name: 'mouseDown',
+        name: 'sing',
         type: InputType.mouseButton,
         value: 0
       },
@@ -186,12 +186,12 @@ const Input = {
 
     function clickedMouse(e){
       // console.log("clickedMouse!", e);
-      Input._options.axes.filter((axis) => axis.name === 'mouseDown')[0].value = 1;
+      Input._options.axes.filter((axis) => axis.name === 'sing')[0].value = 1;
     }
 
     function releasedMouse(e){
       // console.log("releasedMouse!", e);
-      Input._options.axes.filter((axis) => axis.name === 'mouseDown')[0].value = 0;
+      Input._options.axes.filter((axis) => axis.name === 'sing')[0].value = 0;
     }
 
     function mouseWheel(e){
