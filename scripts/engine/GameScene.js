@@ -89,10 +89,12 @@ class GameScene {
             }
 
             if (x===5 && y===5) {
-                //add sound to a GameObject
-                teapot.addComponent(new AudioSource());
-                if(!IS_SERVER) teapot.getComponent("AudioSource").playSound3d("cruelangel");
-                teapot.addComponent(new PlayerController());
+              //add sound to a GameObject
+              teapot.addComponent(new AudioSource());
+              if(!IS_SERVER) teapot.getComponent("AudioSource").playSound3d("cruelangel");
+              teapot.addComponent(new PlayerController());
+
+
             }
             let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
 
@@ -111,27 +113,46 @@ class GameScene {
             }else if(x===2 && y===2){
               teapot.addComponent(new SphereCollider(0, true));
               teapot.addComponent(new TriggerTest());
-            } else
+            }else{
               teapot.addComponent(new SphereCollider(100, false, 10)); //set Transform BEFORE collider
+            }
 
             container.addChild(teapot);
         }
     }
 
+    GameObject.prototype.SceneRoot.transform.gameObject.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);
+    // GameObject.prototype.SceneRoot.transform.children[0].children[1].gameObject.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);
+    GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.getComponent("Collider").setLayer(FILTER_PLAYER);
+
     PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject);
     GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new Sing());
     GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new AudioSource());
+    GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new Sing());
+    GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new AudioSource());
+    GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new Sing());
+    GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new AudioSource());
+    GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new Sing());
+    GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new AudioSource());
+
+
+    PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject);
+    GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new PlayerController());
+    PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject);
+    GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new PlayerController());
+    PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject);
+    GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new PlayerController());
+
     if(!IS_SERVER) {
       GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.getComponent("AudioSource").playSound2d("singTone00");
       GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.getComponent("AudioSource").pauseSound();
+      GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.getComponent("AudioSource").playSound2d("singTone00");
+      GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.getComponent("AudioSource").pauseSound();
+      GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.getComponent("AudioSource").playSound2d("singTone00");
+      GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.getComponent("AudioSource").pauseSound();
+      GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.getComponent("AudioSource").playSound2d("singTone00");
+      GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.getComponent("AudioSource").pauseSound();
     }
-
-    PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject);
-    // GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new PlayerController())
-    PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject);
-    // GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new PlayerController())
-    PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject);
-    // GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new PlayerController())
 
     if(!IS_SERVER){
       //TODO account for possibility of currentPlayer not set yet
@@ -154,10 +175,13 @@ class GameScene {
     let ground = new GameObject();
     ground.setName("ground");
     ground.transform.setPosition(move);
-    ground.addComponent(new BoxCollider(0, false, 10000, 1, 10000));
+    let box = new BoxCollider(0, false, 10000, 1, 10000);
+    ground.addComponent(box);
     ground.getComponent("Collider").setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
+    ground.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);
 
     GameObject.prototype.SceneRoot.findComponents("Interactable", PhysicsEngine.sphereChecks);
+
   }
 
   update() {

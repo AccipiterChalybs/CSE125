@@ -46,7 +46,7 @@ const Input = {
       {
         name: 'zoom',
         type: InputType.mouse,
-        sensitivity: 3,
+        sensitivity: 15,
         value: 0
       },
       {

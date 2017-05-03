@@ -32,9 +32,20 @@ class PlayerController extends Component{
   start(){
     this._collider = this.transform.gameObject.getComponent("Collider");
     this._singer = this.transform.gameObject.getComponent("Sing");
-    this._singingSrc = this.transform.gameObject.getComponent("AudioSource");
-
     this._collider.setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
+    this._collider.setFreezeRotation(true);
+  }
+
+  startClient(){
+    this._singingSrc = this.transform.gameObject.getComponent("AudioSource");
+  }
+
+  updateComponentClient(){
+    if(this.singing === 1 && Time.time >= this._nextSingTime) {
+      this._singingSrc.resumeSound();
+    }else{
+      this._singingSrc.pauseSound();
+    }
   }
 
   updateComponent(){
@@ -57,9 +68,7 @@ class PlayerController extends Component{
 
     if(this.singing === 1 && Time.time >= this._nextSingTime) {
       this._singer.sing();
-      this._singingSrc.resumeSound();
     }else{
-      this._singingSrc.pauseSound();
     }
 
     if(this.canMove) {
@@ -85,9 +94,16 @@ class PlayerController extends Component{
     vec3.scale(moveX, moveX, this.x * this.movementSpeed);
     vec3.scale(moveZ, moveZ, this.z * this.movementSpeed);
     vec3.add(move, moveX, moveZ);
+    vec3.normalize(move, move);
+    vec3.scale(move, move, this.movementSpeed);
 
     let body = this._collider.body;
     body.velocity.x = move[0];
     body.velocity.z = move[2];
+    //col.setRotation(this.forward);
+  }
+
+  sing(){
+    // console.log("singing!");
   }
 }

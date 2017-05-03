@@ -205,6 +205,7 @@ class Transform extends Component
         this.scaleFactor[0] = this.scaleFactor[1] = this.scaleFactor[2] = data.s;
         let index=0;
         for (let child of this.children) {
+            Debug.assert(index < data.c.length);
             child.applySerializedData(data.c[index]);
             ++index;
         }
