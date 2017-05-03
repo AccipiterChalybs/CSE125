@@ -109,7 +109,8 @@ const Renderer  = {
           'assets/skybox/' + skyboxName + 'back.hdr',
       ];
       //TODO should make a json file to load this with, and have exposure variable
-      Renderer.skybox = new Skybox(skyboxName, 10);
+      // TODO CHANGE 1 BACK TO 10
+      Renderer.skybox = new Skybox(skyboxName, 1);
 
       let forwardPass = new ForwardPass();
       let skyboxPass = new SkyboxPass(Renderer.skybox);

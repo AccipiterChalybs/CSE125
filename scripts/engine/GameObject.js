@@ -115,6 +115,16 @@ class GameObject {
     return this.components[type];
   }
 
+  findComponents(type, componentList){
+    if(this.components[type] && this.components[type] !== null) {
+      componentList.push(this.components[type]);
+    }
+
+    for(let i = 0; i < this.transform.children.length; ++i) {
+      this.transform.children[i].gameObject.findComponents(type, componentList);
+    }
+  }
+
   addChild(gameObject) {
     this.transform.children.push(gameObject.transform);
     gameObject.transform._parent = this.transform;

@@ -15,6 +15,11 @@ const SoundEngine = {
             src: ['assets/audio/cine_ambience.wav'],
             volume: 0,
           });
+        SoundEngine.singTone00 = new Howl({
+          src: ['assets/audio/tone.wav'],
+          volume: 0,
+          loop: true
+        });
       },
 
     playSound2d: function (sound, volume=1) {

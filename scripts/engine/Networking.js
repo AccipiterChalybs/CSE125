@@ -40,6 +40,7 @@ Networking.update = function () {
   data.h = Input.getAxis('horizontal');
   data.v = Input.getAxis('vertical');
   data.f = Renderer.camera.transform.getForward();
+  data.m = Input.getAxis('mouseDown');
   Networking.socket.emit('server_input_data', data);
 };
 
