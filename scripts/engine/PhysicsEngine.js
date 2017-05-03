@@ -128,9 +128,7 @@ PhysicsEngine.raycastClosest = function(origin,direction,maxDistance,mask,hit){
   let layers = PhysicsEngine.getLayers(mask);
   let closest = maxDistance;
   PhysicsEngine.world.raycastAll(cannonOrigin,cannonTo, {},function(result){
-    Debug.log(result);
     if(result.body.id in layers && result.hasHit && result.distance<closest) {
-      Debug.log("wooo");
       closest = result.distance;
       closestResult = result;
     }
