@@ -3,7 +3,7 @@
  */
 
 const SWITCH_CHARGE_RATE = 5; // per second
-const SWITCH_LOSS_RATE = -0.5; // per second
+const SWITCH_LOSS_RATE = 0.5; // per second
 const TIME_BEFORE_LOSS = 3;
 
 class SingingSwitch extends Interactable{

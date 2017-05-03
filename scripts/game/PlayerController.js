@@ -2,9 +2,10 @@
  * Created by Stephen on 4/15/2017.
  */
 
-const REGULAR_SPEED = 2;
-const WALK_SPEED = 1;
-const SING_SPEED = 0.4;
+const REGULAR_SPEED = 4;
+const WALK_SPEED = 2;
+const SING_SPEED = 0.8;
+const PLAYER_ACCELERATION = 4;
 const COOLDOWN_SINGING = 3.0;   // In seconds
 
 // Requires a collider, sing
@@ -26,8 +27,6 @@ class PlayerController extends Component{
   }
 
   start(){
-    // TODO: Remove this line later
-
     this._collider = this.transform.gameObject.getComponent("Collider");
     this._singer = this.transform.gameObject.getComponent("Sing");
     this._audioSrc = this.transform.gameObject.getComponent("AudioSource");
@@ -61,12 +60,14 @@ class PlayerController extends Component{
 
   movement(){
     if(this.singing === 1){
-      this.movementSpeed = SING_SPEED;
+      this.movementSpeed = Utility.moveTowards(this.movementSpeed, SING_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
     } else if(this.walking === 1){
-      this.movementSpeed = WALK_SPEED;
+      this.movementSpeed = Utility.moveTowards(this.movementSpeed, WALK_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
     } else{
-      this.movementSpeed = REGULAR_SPEED;
+      this.movementSpeed = Utility.moveTowards(this.movementSpeed, REGULAR_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
     }
+
+    Debug.log(this.movementSpeed);
 
     let up = vec3.create(); vec3.set(up, 0, 1, 0);
     let move = vec3.create();

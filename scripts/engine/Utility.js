@@ -16,10 +16,13 @@ Utility.lerpUnclamped = function(a, b, t){
 Utility.moveTowards = function(a, b, delta){
   if(a === b) return a;
 
-  let val = a + delta;
-  if(delta > 0){
+  let val = 0;
+
+  if(a < b){
+    val = a + delta;
     if(val > b) return b;
-  }else if(delta < 0){
+  }else{
+    val = a - delta;
     if(val < b) return b;
   }
 
