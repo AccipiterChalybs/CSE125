@@ -99,6 +99,10 @@ class Collider extends Component{
   }
 
   setLayer(layer){
+    let idx = PhysicsEngine.layers[this.layer].indexOf(this.body.id);
+    PhysicsEngine.layers[this.layer].splice(idx, 1);
     this.layer = layer;
+    PhysicsEngine.layers[this.layer].push(this.body.id);
+
   }
 }

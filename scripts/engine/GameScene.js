@@ -113,10 +113,6 @@ class GameScene {
             }else if(x===2 && y===2){
               teapot.addComponent(new SphereCollider(0, true));
               teapot.addComponent(new TriggerTest());
-            }else if(x===5 && y===5) {
-              let sphereCollider = new SphereCollider(100, false, 10);
-              sphereCollider.setLayer(FILTER_PLAYER);
-              teapot.addComponent(sphereCollider); //set Transform BEFORE collider
             }else{
               teapot.addComponent(new SphereCollider(100, false, 10)); //set Transform BEFORE collider
             }
@@ -124,6 +120,10 @@ class GameScene {
             container.addChild(teapot);
         }
     }
+
+    GameObject.prototype.SceneRoot.transform.gameObject.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);
+    // GameObject.prototype.SceneRoot.transform.children[0].children[1].gameObject.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);
+    GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.getComponent("Collider").setLayer(FILTER_PLAYER);
 
     PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject);
     GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new Sing());
@@ -176,13 +176,12 @@ class GameScene {
     ground.setName("ground");
     ground.transform.setPosition(move);
     let box = new BoxCollider(0, false, 10000, 1, 10000);
-    box.setLayer(FILTER_LEVEL_GEOMETRY);
     ground.addComponent(box);
     ground.getComponent("Collider").setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
+    ground.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);
 
     GameObject.prototype.SceneRoot.findComponents("Interactable", PhysicsEngine.sphereChecks);
 
-    Debug.log("WE FINISHED");
   }
 
   update() {

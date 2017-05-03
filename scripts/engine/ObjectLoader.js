@@ -224,7 +224,6 @@ class ObjectLoader {
 
     static _finishLoadCollision(loadId, gameObject, data) {
         let collider = new CompoundCollider();
-        collider.setLayer(FILTER_LEVEL_GEOMETRY);
         gameObject.addComponent(collider);
         for (let colShape of data) {
           collider.addShape(colShape.type, colShape.size, colShape.pos);

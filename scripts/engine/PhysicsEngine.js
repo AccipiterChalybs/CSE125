@@ -24,11 +24,11 @@ PhysicsEngine.init = function(){
   // temporary testing stuff
   PhysicsEngine.createMaterials();
   PhysicsEngine.layers = {"name":"layers"};
-  PhysicsEngine.layers[FILTER_DEFAULT] = {};
-  PhysicsEngine.layers[FILTER_LEVEL_GEOMETRY] = {};
-  PhysicsEngine.layers[FILTER_TRIGGER] = {};
-  PhysicsEngine.layers[FILTER_PLAYER] = {};
-  PhysicsEngine.layers[FILTER_ENEMY] = {};
+  PhysicsEngine.layers[FILTER_DEFAULT] = [];
+  PhysicsEngine.layers[FILTER_LEVEL_GEOMETRY] = [];
+  PhysicsEngine.layers[FILTER_TRIGGER] = [];
+  PhysicsEngine.layers[FILTER_PLAYER] = [];
+  PhysicsEngine.layers[FILTER_ENEMY] = [];
 
   //PhysicsEngine.world.addEventListener("beginContact", function(e){console.log("begin contact")});
 };
@@ -39,7 +39,7 @@ PhysicsEngine.update = function(){
 
 PhysicsEngine.addBody = function(collider, body, type=FILTER_DEFAULT){
   PhysicsEngine.world.addBody(body);
-  PhysicsEngine.layers[type][body.id] = collider;
+  PhysicsEngine.layers[type].push(body.id);
   PhysicsEngine.bodyMap[body.id] = collider;
 };
 
@@ -100,21 +100,21 @@ PhysicsEngine.createMaterials = function(){
 PhysicsEngine.materials = {basicMaterial: 0, playerMaterial: 1};
 
 PhysicsEngine.getLayers = function(mask){
-  bodies = {"name":"bodies"};
+  bodies = [];
   if((mask&FILTER_DEFAULT)!==0){
-    Object.assign(bodies,PhysicsEngine.layers[FILTER_DEFAULT]);
+    bodies = bodies.concat(PhysicsEngine.layers[FILTER_DEFAULT]);
   }
   if((mask&FILTER_LEVEL_GEOMETRY)!==0){
-    Object.assign(bodies,PhysicsEngine.layers[FILTER_LEVEL_GEOMETRY]);
+    bodies = bodies.concat(PhysicsEngine.layers[FILTER_LEVEL_GEOMETRY]);
   }
   if((mask&FILTER_TRIGGER)!==0){
-    Object.assign(bodies,PhysicsEngine.layers[FILTER_TRIGGER]);
+    bodies = bodies.concat(PhysicsEngine.layers[FILTER_TRIGGER]);
   }
   if((mask&FILTER_PLAYER)!==0){
-    Object.assign(bodies,PhysicsEngine.layers[FILTER_PLAYER]);
+    bodies = bodies.concat(PhysicsEngine.layers[FILTER_PLAYER]);
   }
   if((mask&FILTER_ENEMY)!==0){
-    Object.assign(bodies,PhysicsEngine.layers[FILTER_ENEMY]);
+    bodies = bodies.concat(PhysicsEngine.layers[FILTER_ENEMY]);
   }
   return bodies;
 };
@@ -128,7 +128,7 @@ PhysicsEngine.raycastClosest = function(origin,direction,maxDistance,mask,hit){
   let layers = PhysicsEngine.getLayers(mask);
   let closest = maxDistance;
   PhysicsEngine.world.raycastAll(cannonOrigin,cannonTo, {},function(result){
-    if(result.body.id in layers && result.hasHit && result.distance<closest) {
+    if(layers.indexOf(result.body.id)>-1 && result.hasHit && result.distance<closest) {
       closest = result.distance;
       closestResult = result;
     }
