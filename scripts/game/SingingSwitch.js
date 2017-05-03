@@ -18,9 +18,10 @@ class SingingSwitch extends Interactable{
   }
 
   updateComponent(){
-    if(Time.time - this._lastSingTime >= TIME_BEFORE_LOSS){
+    if(this.charged === false || Time.time - this._lastSingTime >= TIME_BEFORE_LOSS){
       this._currentCharge = Utility.moveTowards(this._currentCharge, 0, SWITCH_LOSS_RATE * Time.deltaTime);
-    } else if(Time.time <= this._lastSingTime + 0.1){
+    }
+    if(Time.time <= this._lastSingTime + 0.1){
       this._currentCharge = Utility.moveTowards(this._currentCharge, this.activationLevel, SWITCH_CHARGE_RATE * Time.deltaTime);
     }
 

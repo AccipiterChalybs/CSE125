@@ -6,7 +6,7 @@ const REGULAR_SPEED = 4;
 const WALK_SPEED = 2;
 const SING_SPEED = 0.8;
 const PLAYER_ACCELERATION = 4;
-const COOLDOWN_SINGING = 3.0;   // In seconds
+const COOLDOWN_SINGING = 0.1;   // In seconds
 
 // Requires a collider, sing
 class PlayerController extends Component{
@@ -24,12 +24,15 @@ class PlayerController extends Component{
 
     this._collider = null;
     this._singer = null;
+    this._singingSrc = null;
+    this._nextSingTime = 0;
+    this._lastSingInput = 0;
   }
 
   start(){
     this._collider = this.transform.gameObject.getComponent("Collider");
     this._singer = this.transform.gameObject.getComponent("Sing");
-    this._audioSrc = this.transform.gameObject.getComponent("AudioSource");
+    this._singingSrc = this.transform.gameObject.getComponent("AudioSource");
 
     this._collider.setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
   }
@@ -46,21 +49,27 @@ class PlayerController extends Component{
       this.forward = Renderer.camera.transform.getForward();
     }
 
-    if(this.canMove) {
-      this.movement();
+    if(this.singing === 0 && this._lastSingInput === 1){
+      this._nextSingTime = Time.time + COOLDOWN_SINGING;
     }
 
-    if(this.singing === 1) {
+    this._lastSingInput = this.singing;
+
+    if(this.singing === 1 && Time.time >= this._nextSingTime) {
       this._singer.sing();
-      this._audioSrc.resumeSound();
+      this._singingSrc.resumeSound();
     }else{
-      this._audioSrc.pauseSound();
+      this._singingSrc.pauseSound();
+    }
+
+    if(this.canMove) {
+      this.movement();
     }
   }
 
   movement(){
-    if(this.singing === 1){
-      this.movementSpeed = Utility.moveTowards(this.movementSpeed, SING_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
+    if(this.singing === 1 && Time.time >= this._nextSingTime){
+      this.movementSpeed = Utility.moveTowards(this.movementSpeed, SING_SPEED, 4 * PLAYER_ACCELERATION * Time.deltaTime);
     } else if(this.walking === 1){
       this.movementSpeed = Utility.moveTowards(this.movementSpeed, WALK_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
     } else{
@@ -80,6 +89,5 @@ class PlayerController extends Component{
     let body = this._collider.body;
     body.velocity.x = move[0];
     body.velocity.z = move[2];
-
   }
 }
