@@ -32,9 +32,20 @@ class PlayerController extends Component{
   start(){
     this._collider = this.transform.gameObject.getComponent("Collider");
     this._singer = this.transform.gameObject.getComponent("Sing");
-    if(!IS_SERVER) this._singingSrc = this.transform.gameObject.getComponent("AudioSource");
     this._collider.setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
     this._collider.setFreezeRotation(true);
+  }
+
+  startClient(){
+    this._singingSrc = this.transform.gameObject.getComponent("AudioSource");
+  }
+
+  updateComponentClient(){
+    if(this.singing === 1 && Time.time >= this._nextSingTime) {
+      this._singingSrc.resumeSound();
+    }else{
+      this._singingSrc.pauseSound();
+    }
   }
 
   updateComponent(){
@@ -62,14 +73,6 @@ class PlayerController extends Component{
 
     if(this.canMove) {
       this.movement();
-    }
-  }
-
-  updateClient(){
-    if(this.singing === 1 && Time.time >= this._nextSingTime) {
-      if(!IS_SERVER) this._singingSrc.resumeSound();
-    }else{
-      if(!IS_SERVER) this._singingSrc.pauseSound();
     }
   }
 

@@ -11,10 +11,11 @@ class Component
     this.visible = true;
     this.active = true;
     this.componentType = null; //must override in subclass!
-    if (!this.updateClient) this.updateClient = null; //null function unless needed
+    // if (!this.updateClient) this.updateClient = null; //null function unless needed
   }
 
   start(){}
+  startClient(){}
 
   update(deltaTime){
     this.start();
@@ -25,6 +26,15 @@ class Component
       this.updateComponent();
     }
   }
+
+  updateClient(){
+    this.startClient();
+    if(this.updateComponentClient){
+      this.updateClient = this.updateComponentClient;
+      this.updateComponentClient();
+    }
+  }
+
 
   draw(){
   }

@@ -35,7 +35,7 @@ class Camera extends Component
         this._velocity=null;
 
         this._matrix = mat4.create();
-
+        this._zoom = null;
 
         let initialOffsetPos = vec3.create();
         vec3.set(initialOffsetPos, 0, 0, 0);
@@ -44,7 +44,9 @@ class Camera extends Component
         this.fovDuration = 1;
     }
 
-    start(){
+    startClient(){
+      this._zoom = this.transform.gameObject.getComponent("ZoomMouse");
+
     }
     getCameraMatrix()
     {
@@ -123,12 +125,11 @@ class Camera extends Component
         */
     }
 
-    updateClient(){
-      let zoom =  this.transform.gameObject.getComponent("ZoomMouse");
+    updateComponentClient(){
 
-      let pos = Renderer.camera.transform.getParent().getWorldPosition();
+        let pos = Renderer.camera.transform.getParent().getWorldPosition();
         let forward = vec3.create();vec3.negate(forward, Renderer.camera.transform.getForward());
-        let distance = zoom.currentZoom;
+        let distance = this._zoom.currentZoom;
         let result = {};
         if(PhysicsEngine.raycastClosest(pos,forward,distance,2,result)){
             distance = result.distance-0.1;
