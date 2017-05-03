@@ -39,7 +39,7 @@ class GameScene {
     let moveBack = vec3.create(); vec3.set(moveBack, 3, 0, 0);
     GameObject.prototype.SceneRoot.transform.translate(moveBack);
 
-    GameObject.prototype.SceneRoot.transform.children.forEach(function(child){
+    GameObject.prototype.SceneRoot.transform.children[0].children.forEach(function(child){
       if (child.gameObject.getComponent('Mesh')) {
         child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.COLOR, albedo);
         child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.MAT, mat);

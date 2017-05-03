@@ -379,9 +379,11 @@ class BloomPass extends RenderPass
             break;
           case Debug.BUFFERTYPE_SHADOW:
             Renderer.renderBuffer.light[0].fbo.bindDepthTexture(0);
+            GL.viewport(0,0,512, 512); //render shadow map to a square-sized portion of the screen
             s5.setUniform("inputTex", 0, UniformTypes.u1i);
             s5.setUniform("rgbOutput", 2, UniformTypes.u1i);
             this._deferredPass.buffers.draw();
+            GL.viewport(0,0,Renderer.getWindowWidth(), Renderer.getWindowHeight()); //reset viewport
             break;
           default:
             break;

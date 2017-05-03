@@ -79,6 +79,11 @@ const vec2 poissonDisk[4] = vec2[](
    vec2( 0.34495938, 0.29387760 )
  );
 
+
+float textureShadow(float posZ, vec2 uv) {
+    return step(posZ, texture(shadowTex, uv).r);
+}
+
 void main () {
   vec2 screenTexCoord = gl_FragCoord.xy / uScreenSize;
   vec4 albedo = texture(colorTex, screenTexCoord);
@@ -138,17 +143,30 @@ void main () {
           shadowPos.z -= max(0.005 * (1.0 - clamp(dot(normal.xyz, lightDir), 1.0, 0.0)), 0.005);
 		  shadowPos.z = min(shadowPos.z, 0.9999);
 		  vec2 texelSize = 1.0 / vec2(textureSize(shadowTex, 0));
+		  vec2 size = vec2(textureSize(shadowTex, 0));
 
-		  shadow = step(shadowPos.z, texture(shadowTex, shadowPos.xy).r );
-
-		  /*
 		  shadow=0.0;
 		  for(int i = 0; i < 4; i++) {
 			vec3 offset = vec3(poissonDisk[i] * texelSize, 0);
-			shadow = texture(shadowTex, shadowPos.xy + offset.xy).r; //TODO fix for no shadow sampler
+			vec2 uv = shadowPos.xy + offset.xy;
+
+            //software bilinear + pcf shadow idea from http://codeflow.org/entries/2013/feb/15/soft-shadow-mapping/
+			vec2 t = fract(uv*size - (0.5));
+			uv = floor(uv*size - (0.5))/size;
+
+			float a = textureShadow(shadowPos.z,  uv + vec2(0, 0) * texelSize);
+			float b = textureShadow(shadowPos.z,  uv + vec2(1, 0) * texelSize);
+			float c = textureShadow(shadowPos.z,  uv + vec2(0, 1) * texelSize);
+			float d = textureShadow(shadowPos.z,  uv + vec2(1, 1) * texelSize);
+
+			float e = mix(a, b, t.x);
+			float f = mix(c, d, t.x);
+
+
+
+			shadow += mix(e, f, t.y);
 		  }
 		  shadow /= 4.0;
-		  */
 	  }
 
 
