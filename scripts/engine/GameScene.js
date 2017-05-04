@@ -154,22 +154,24 @@ class GameScene {
       GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.getComponent("AudioSource").pauseSound();
     }
 
-    if(!IS_SERVER){
+    if(!IS_SERVER) {
       //TODO account for possibility of currentPlayer not set yet
       Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo(PlayerTable.players[PlayerTable.currentPlayer]));
+
+      let light = new GameObject();
+      let lightComp = new DirectionalLight(true);
+      light.addComponent(lightComp);
+      let lightPos = vec3.create();
+      vec3.set(lightPos, 0, 0, 0);
+      light.transform.setPosition(lightPos);
+      light.transform.rotateX(-Math.PI / 4.0);
+
+      let lightCenter = new GameObject();
+      lightCenter.addChild(light);
+      lightCenter.addComponent(new RotateOverTime(2.5));
+
+      GameObject.prototype.SceneRoot.addChild(lightCenter);
     }
-    let light = new GameObject();
-    let lightComp = new DirectionalLight(true);
-    light.addComponent(lightComp);
-    let lightPos = vec3.create(); vec3.set(lightPos, 0, 0, 0);
-    light.transform.setPosition(lightPos);
-    light.transform.rotateX(-Math.PI/4.0);
-
-    let lightCenter = new GameObject();
-    lightCenter.addChild(light);
-    lightCenter.addComponent(new RotateOverTime(2.5));
-
-    GameObject.prototype.SceneRoot.addChild(lightCenter);
 
     //let move = vec3.create(); vec3.set(move, 0, 500, 64);
     let move = vec3.create(); vec3.set(move, 0,-1,0);
