@@ -41,7 +41,10 @@ GameEngine.loop = function () {
   Input.update();
 
   // send data
-  Networking.update();
+  if (!Debug.clientUpdate){
+    Networking.update();
+  }
+
   GameEngine.currentScene.update();
 
   if (Debug.clientUpdate) {

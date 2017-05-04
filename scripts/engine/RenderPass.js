@@ -126,7 +126,7 @@ class DeferredPass extends RenderPass
         Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("uIV_Matrix", Renderer.camera.gameObject.transform.getTransformMatrix(), UniformTypes.mat4);
 
         for(let light of Renderer.renderBuffer.light) {
-            let d = light; //TODO check if directional light
+            let d = light;
             if (!d.isShadowCaster)
             {
                 GL.drawBuffers([GL.NONE]);
@@ -142,7 +142,7 @@ class DeferredPass extends RenderPass
                 GL.stencilFunc(GL.NOTEQUAL, 0, 0xFF);
                 GL.cullFace(GL.FRONT);
             }
-            else
+            else //if directional light
             {
                 GL.cullFace(GL.BACK);
                 GL.disable(GL.STENCIL_TEST);
@@ -150,7 +150,6 @@ class DeferredPass extends RenderPass
                 {
                     d.fbo.bindDepthTexture(3);
                     let shadowMat = mat4.create();
-                    //TODO is this the right inverse?
                     mat4.invert(shadowMat, d.gameObject.transform.getTransformMatrix());
                     mat4.multiply(shadowMat, DirectionalLight.prototype.shadowMatrix, shadowMat);
                     mat4.multiply(shadowMat, DeferredPass.prototype.bias, shadowMat);
@@ -186,7 +185,6 @@ class DeferredPass extends RenderPass
         Renderer.currentShader.setUniform("uV_Matrix", mat4.create(), UniformTypes.mat4);
         Renderer.currentShader.setUniform("uP_Matrix", mat4.create(), UniformTypes.mat4);
         GL.drawElements(GL.TRIANGLES, currentEntry.indexSize, GL.UNSIGNED_SHORT, 0);
-        Renderer.currentShader.setUniform("uV_Matrix", Renderer.camera.getCameraMatrix(), UniformTypes.mat4); //TODO is this one needed?
         Renderer.currentShader.setUniform("uP_Matrix", Renderer.perspective, UniformTypes.mat4);
 
 
@@ -199,11 +197,11 @@ class DeferredPass extends RenderPass
     }
 }
 
-DeferredPass.prototype.bias = new Float32Array([
+DeferredPass.prototype.bias = mat4.fromValues(
     0.5, 0.0, 0.0, 0.0,
     0.0, 0.5, 0.0, 0.0,
     0.0, 0.0, 0.5, 0.0,
-    0.5, 0.5, 0.5, 1.0]);
+    0.5, 0.5, 0.5, 1.0);
 
 class SkyboxPass extends RenderPass
 {

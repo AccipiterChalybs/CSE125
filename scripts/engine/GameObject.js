@@ -115,6 +115,16 @@ class GameObject {
     return this.components[type];
   }
 
+  findComponents(type, componentList){
+    if(this.components[type] && this.components[type] !== null) {
+      componentList.push(this.components[type]);
+    }
+
+    for(let i = 0; i < this.transform.children.length; ++i) {
+      this.transform.children[i].gameObject.findComponents(type, componentList);
+    }
+  }
+
   addChild(gameObject) {
     this.transform.children.push(gameObject.transform);
     gameObject.transform._parent = this.transform;
@@ -176,7 +186,6 @@ class GameObject {
       let mesh = this.getComponent('Mesh');
       if (mesh && mesh !== null) {
 
-        //TODO take out true, re-add deferred
         if (mesh.material && mesh.material.transparent) {
           Renderer.renderBuffer.forward.push(mesh);
         } else if (mesh.material) {
