@@ -32,7 +32,7 @@ class GameScene {
       Renderer.camera.transform.setPosition(newPosition);
       Renderer.camera.transform.getParent().gameObject.addComponent(new RotateMouse());
     }
-    //GameObject.prototype.SceneRoot.getComponent('Animation').play(0, true);
+    //GameObject.prototype.SceneRoot.transform.children[0].gameObject.getComponent('Animation').play(0, true);
 
 
     GameObject.prototype.SceneRoot.transform.setScale(1);
@@ -40,7 +40,7 @@ class GameScene {
     let moveBack = vec3.create(); vec3.set(moveBack, 3, 0, 0);
     GameObject.prototype.SceneRoot.transform.translate(moveBack);
 
-    GameObject.prototype.SceneRoot.transform.children.forEach(function(child){
+    GameObject.prototype.SceneRoot.transform.children[0].children.forEach(function(child){
       if (child.gameObject.getComponent('Mesh')) {
         child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.COLOR, albedo);
         child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.MAT, mat);
@@ -64,7 +64,7 @@ class GameScene {
 
             if (!IS_SERVER) {
               let mesh = new Mesh("Teapot02");
-              let mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER));
+              let mat = new Material(Renderer.getShader(Renderer.DEFERRED_PBR_SHADER));
 
               let color = vec4.create();
               vec4.set(color, 1, 0.5, 0.1, 1);
@@ -159,14 +159,15 @@ class GameScene {
       Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo(PlayerTable.players[PlayerTable.currentPlayer]));
     }
     let light = new GameObject();
-    let lightComp = new PointLight();
+    let lightComp = new DirectionalLight(true);
     light.addComponent(lightComp);
-    let lightPos = vec3.create(); vec3.set(lightPos, 5, 2, 0);
+    let lightPos = vec3.create(); vec3.set(lightPos, 0, 0, 0);
     light.transform.setPosition(lightPos);
+    light.transform.rotateX(-Math.PI/4.0);
 
     let lightCenter = new GameObject();
     lightCenter.addChild(light);
-    lightCenter.addComponent(new RotateOverTime(5));
+    lightCenter.addComponent(new RotateOverTime(2.5));
 
     GameObject.prototype.SceneRoot.addChild(lightCenter);
 

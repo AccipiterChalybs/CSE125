@@ -68,6 +68,84 @@ const Input = {
         type: InputType.keyboard,
         positiveButton: 16,
         value: 0
+      },
+        //TODO these should be buttons, not axes
+      {
+        name: 'debugButton_Buffer1',
+        type: InputType.keyboard,
+        positiveButton: ('1'.charCodeAt(0)),
+        negativeButton: -1,
+        value: 0
+      },
+      {
+        name: 'debugButton_Buffer2',
+        type: InputType.keyboard,
+        positiveButton: ('2'.charCodeAt(0)),
+        negativeButton: -1,
+        value: 0
+      },
+      {
+        name: 'debugButton_Buffer3',
+        type: InputType.keyboard,
+        positiveButton: ('3'.charCodeAt(0)),
+        negativeButton: -1,
+        value: 0
+      },
+      {
+        name: 'debugButton_Buffer4',
+        type: InputType.keyboard,
+        positiveButton: ('4'.charCodeAt(0)),
+        negativeButton: -1,
+        value: 0
+      },
+      {
+        name: 'debugButton_Buffer5',
+        type: InputType.keyboard,
+        positiveButton: ('5'.charCodeAt(0)),
+        negativeButton: -1,
+        value: 0
+      },
+      {
+        name: 'debugButton_Buffer6',
+        type: InputType.keyboard,
+        positiveButton: ('6'.charCodeAt(0)),
+        negativeButton: -1,
+        value: 0
+      },
+      {
+        name: 'debugButton_Buffer7',
+        type: InputType.keyboard,
+        positiveButton: ('7'.charCodeAt(0)),
+        negativeButton: -1,
+        value: 0
+      },
+      {
+        name: 'debugButton_Buffer8',
+        type: InputType.keyboard,
+        positiveButton: ('8'.charCodeAt(0)),
+        negativeButton: -1,
+        value: 0
+      },
+      {
+        name: 'debugButton_Buffer9',
+        type: InputType.keyboard,
+        positiveButton: ('9'.charCodeAt(0)),
+        negativeButton: -1,
+        value: 0
+      },
+      {
+        name: 'debugButton_Buffer0',
+        type: InputType.keyboard,
+        positiveButton: ('0'.charCodeAt(0)),
+        negativeButton: -1,
+        value: 0
+      },
+      {
+        name: 'debugButton_Menu',
+        type: InputType.keyboard,
+        positiveButton: ('Q'.charCodeAt(0)),
+        negativeButton: -1,
+        value: 0
       }
     ],
   },
