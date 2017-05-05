@@ -8,6 +8,14 @@ const SING_SPEED = 0.8;
 const PLAYER_ACCELERATION = 4;
 const COOLDOWN_SINGING = 0.1;   // In seconds
 
+const PlayerState = {
+  default: "default",
+  walking: "walking",
+  singing: "singing",
+  noControl: "noControl",
+  cantMove: "cantMove"
+};
+
 // Requires a collider, sing
 class PlayerController extends Component{
   constructor(){
@@ -20,13 +28,13 @@ class PlayerController extends Component{
     this.singing = 0;
     this.walking = 0;
     this.forward = vec3.create(); vec3.set(this.forward,0,0,-1);
-    this.canMove = true;
 
     this._collider = null;
     this._singer = null;
     this._singingSrc = null;
     this._nextSingTime = 0;
     this._lastSingInput = 0;
+    this._currentState = PlayerState.default;
   }
 
   start(){
@@ -49,6 +57,9 @@ class PlayerController extends Component{
   }
 
   updateComponent(){
+    if(this._currentState === PlayerState.noControl)
+      return;
+
     // Add if loop to enable client side testing w/o server
     if(Debug.clientUpdate && !IS_SERVER)
     {
@@ -62,26 +73,34 @@ class PlayerController extends Component{
 
     if(this.singing === 0 && this._lastSingInput === 1){
       this._nextSingTime = Time.time + COOLDOWN_SINGING;
+      this._singingSrc.pauseSound();
     }
 
     this._lastSingInput = this.singing;
 
-    if(this.singing === 1 && Time.time >= this._nextSingTime) {
+    if(this._currentState === PlayerState.cantMove){
+
+    }else if(this.singing === 1 && Time.time >= this._nextSingTime) {
+      this._currentState = PlayerState.singing;
       this._singer.sing();
+      this._singingSrc.resumeSound();
+    }else if(this.walking === 1){
+      this._currentState = PlayerState.walking;
     }else{
+      this._currentState = PlayerState.default;
     }
 
-    if(this.canMove) {
+    if(this._currentState !== PlayerState.cantMove) {
       this.movement();
     }
   }
 
   movement(){
-    if(this.singing === 1 && Time.time >= this._nextSingTime){
+    if(this._currentState === PlayerState.singing){
       this.movementSpeed = Utility.moveTowards(this.movementSpeed, SING_SPEED, 4 * PLAYER_ACCELERATION * Time.deltaTime);
-    } else if(this.walking === 1){
+    } else if(this._currentState === PlayerState.walking){
       this.movementSpeed = Utility.moveTowards(this.movementSpeed, WALK_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
-    } else{
+    } else if(this._currentState === PlayerState.default){
       this.movementSpeed = Utility.moveTowards(this.movementSpeed, REGULAR_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
     }
 
@@ -105,5 +124,13 @@ class PlayerController extends Component{
 
   sing(){
     // console.log("singing!");
+  }
+
+  getCurrentState(){
+    return this._currentState;
+  }
+
+  setCurrentState(newState){
+    this._currentState = newState;
   }
 }
