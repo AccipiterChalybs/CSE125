@@ -17,7 +17,7 @@ GameEngine.currentScene = null;
 GameEngine.init = function () {
   PhysicsEngine.init();
 
-  GameEngine.currentScene = new GameScene(['assets/scenes/teapots.json', 'assets/scenes/ExampleLevel.json']);
+  GameEngine.currentScene = new GameScene(['assets/scenes/Primatives.json','assets/scenes/teapots.json', 'assets/scenes/ExampleLevel.json']);
 };
 
 
@@ -28,6 +28,7 @@ GameEngine.start = function () {
 
     if (!IS_SERVER) {
       Renderer.start();
+      Debug.start();
       window.requestAnimationFrame(GameEngine.loop.bind(GameEngine));
     }
   };
@@ -40,7 +41,10 @@ GameEngine.loop = function () {
   Input.update();
 
   // send data
-  Networking.update();
+  if (!Debug.clientUpdate){
+    Networking.update();
+  }
+
   GameEngine.currentScene.update();
 
   if (Debug.clientUpdate) {
@@ -51,6 +55,7 @@ GameEngine.loop = function () {
 
   if (!IS_SERVER) {
     Renderer.loop();
+    Debug.update();
     window.requestAnimationFrame(GameEngine.loop.bind(GameEngine));
   }
 };

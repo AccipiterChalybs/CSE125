@@ -14,7 +14,6 @@ class Framebuffer {
         this.depthTex = 0;
 
         this.hdrEnabled = hdrEnabled;
-        this.colorFormats = [];
         this.width = w;
         this.height = h;
 
@@ -25,7 +24,9 @@ class Framebuffer {
         GL.bindFramebuffer(GL.FRAMEBUFFER, this.id);
 
         this.colorTex = [];
+        this.colorFormats = colorFormats;
         if (colorFormats === null) {
+            this.colorFormats = [];
             for (let x = 0; x < this.numColorTex; ++x) {
                 this.colorFormats[x] = (this.hdrEnabled) ? GL.RGBA16F : GL.RGBA;
             }
@@ -145,9 +146,20 @@ class Framebuffer {
         }
 
 
-        let type = (this.hdrEnabled) ? GL.HALF_FLOAT: GL.UNSIGNED_BYTE; //TODO should it be always unsigned byte?
-        let filter = (!this.hdrEnabled || GLExtensions.texture_float_linear) ? GL.LINEAR : GL.NEAREST;
-        if (filter === GL.NEAREST) console.error("WARNING!!! LINEAR TEXTURE FILTER ON FRAMEBUFFER!");
+        let type = -1;
+        let isHDR = false;
+        switch (this.colorFormats[index]) {
+          case GL.RGBA8:
+          case GL.RGBA:
+              type = GL.UNSIGNED_BYTE;
+              break;
+          case GL.RGBA16F:
+              type = GL.HALF_FLOAT;
+              isHDR = true;
+              break;
+        }
+        let filter = (!isHDR || GLExtensions.texture_float_linear) ? GL.LINEAR : GL.NEAREST;
+        if (filter === GL.NEAREST) console.error("WARNING!!! NEAREST TEXTURE FILTER ON FRAMEBUFFER!");
         GL.texImage2D(GL.TEXTURE_2D, 0, this.colorFormats[index], this.width, this.height, 0, GL.RGBA, type, null);
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, filter);
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, filter);
@@ -157,15 +169,19 @@ class Framebuffer {
 
         //TODO make sure the addition works ok with the extension
         GL.framebufferTexture2D(GL.FRAMEBUFFER, GL.COLOR_ATTACHMENT0 + index, GL.TEXTURE_2D, this.colorTex[index], 0 );
+
+
+        GL.bindTexture(GL.TEXTURE_2D, null);
     }
 
     _addDepthTexture() {
         this.depthTex = GL.createTexture();
         GL.bindTexture(GL.TEXTURE_2D, this.depthTex);
 
-        GL.texImage2D(Gl.TEXTURE_2D, 0, GL.DEPTH_COMPONENT16, this.width, this.height, 0, GL.DEPTH_COMPONENT, GL.UNSIGNED_SHORT, 0);
-        GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.LINEAR);
-        GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.LINEAR);
+        GL.texImage2D(GL.TEXTURE_2D, 0, GL.DEPTH_COMPONENT16, this.width, this.height, 0, GL.DEPTH_COMPONENT, GL.UNSIGNED_SHORT, null);
+
+        GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.NEAREST);
+        GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.NEAREST);
 
         //CLAMP_TO_BORDER would have been better... but that is not supported.
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_WRAP_S, GL.CLAMP_TO_EDGE);
@@ -176,7 +192,7 @@ class Framebuffer {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
         */
 
-        GL.framebufferTexture2D(GL.FRAMEBUFFER, GL.DEPTH_ATTACHMENT, this.depthTex, 0);
+        GL.framebufferTexture2D(GL.FRAMEBUFFER, GL.DEPTH_ATTACHMENT, GL.TEXTURE_2D, this.depthTex, 0);
     }
 
     _addDepthBuffer() {

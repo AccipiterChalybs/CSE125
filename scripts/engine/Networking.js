@@ -40,6 +40,8 @@ Networking.update = function () {
   data.h = Input.getAxis('horizontal');
   data.v = Input.getAxis('vertical');
   data.f = Renderer.camera.transform.getForward();
+  data.s = Input.getAxis('sing');
+  data.w = Input.getAxis('walk');
   Networking.socket.emit('server_input_data', data);
 };
 

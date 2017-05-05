@@ -47,8 +47,9 @@ class ObjectLoader {
         let retScene = ObjectLoader._parseNode(scene, scene.rootnode, filename, loadingAcceleration, lights);
 
         //TODO bad hack - REMOVE THIS!!!
-        if (filename !== "assets/scenes/teapots.json")
-            GameObject.prototype.SceneRoot.addChild(retScene);
+        if (filename !== "assets/scenes/teapots.json" && filename !== "assets/scenes/Primatives.json") {
+          GameObject.prototype.SceneRoot.addChild(retScene);
+        }
 
 
         //TODO this looks incorrect - might need to put inside the recursive parseNode?
@@ -115,10 +116,6 @@ class ObjectLoader {
                 let foundEmit = name.search("Emit") !== -1;
                 let mat = null;
 
-
-                //TODO remove me after deferred shading is ready
-                foundForward = true;
-
                 //TODO either change material to accept an index, or pass in the shader object from Renderer
                 let hasBones = ("bones" in scene.meshes[currentNode.meshes[0]]);
                 if (foundForward) {
@@ -132,9 +129,6 @@ class ObjectLoader {
                     mat = new Material(Renderer.getShader(hasBones ? Renderer.DEFERRED_PBR_SHADER_ANIM : Renderer.DEFERRED_PBR_SHADER));
                     mat.transparent = false;
                 }
-
-                //TODO remove me after deferred shading is ready
-                if (!hasBones) mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER));
 
 
                 //TODO make it load textures!
