@@ -158,20 +158,33 @@ class GameScene {
       //TODO account for possibility of currentPlayer not set yet
       Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo(PlayerTable.players[PlayerTable.currentPlayer]));
 
-      let light = new GameObject();
-      let lightComp = new DirectionalLight(true);
-      light.addComponent(lightComp);
-      let lightPos = vec3.create();
-      vec3.set(lightPos, 0, 0, 0);
-      light.transform.setPosition(lightPos);
-      light.transform.rotateX(-Math.PI / 4.0);
-
-      let lightCenter = new GameObject();
-      lightCenter.addChild(light);
-      lightCenter.addComponent(new RotateOverTime(2.5));
-
-      GameObject.prototype.SceneRoot.addChild(lightCenter);
+      Renderer.directionalLight = new GameObject();
+      Renderer.directionalLight.setName("DirectionalLight");
+      Renderer.directionalLight.addComponent(new DirectionalLight(true));
+      Renderer.directionalLight.addComponent(new ClientStickTo(Renderer.camera.transform.getParent().gameObject));
+      Renderer.directionalLight.transform.rotateY(-Math.PI / 3.0);
+      Renderer.directionalLight.transform.rotateX(-Math.PI / 4.0);
     }
+
+    let light = new GameObject();
+    let lightComp = new PointLight(true);
+    lightComp.color = vec3.fromValues(2.5, 1, 0);
+    light.addComponent(lightComp);
+    let lightPos = vec3.create();
+    vec3.set(lightPos, 10, 2.5, 0);
+
+    //For testing purposes
+    light.addComponent(new Mesh("Sphere_Icosphere"));
+    light.getComponent("Mesh").setMaterial(Debug.makeDefaultMaterial());
+    //light.transform.scale(0.25);
+
+    light.transform.setPosition(lightPos);
+
+    let lightCenter = new GameObject();
+    lightCenter.addChild(light);
+    lightCenter.addComponent(new RotateOverTime(2.5));
+
+    GameObject.prototype.SceneRoot.addChild(lightCenter);
 
     //let move = vec3.create(); vec3.set(move, 0, 500, 64);
     let move = vec3.create(); vec3.set(move, 0,-1,0);
@@ -195,5 +208,6 @@ class GameScene {
     }
 
     if (!IS_SERVER) Renderer.camera.transform.getParent().gameObject.updateClient();
+    if (!IS_SERVER) if (Renderer.directionalLight) Renderer.directionalLight.updateClient();
   }
 }

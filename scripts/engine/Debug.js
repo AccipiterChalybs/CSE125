@@ -74,6 +74,8 @@ Debug.BUFFERTYPE_BLOOM = 6;
 Debug.BUFFERTYPE_SHADOW = 7;
 Debug.currentBuffer = Debug.BUFFERTYPE_NONE;
 
+Debug.currentLightIndex = 0;
+
 
 Debug.displayOpen = false;
 Debug.fpsElement = null;
@@ -159,4 +161,20 @@ Debug.printCollisionInfo = function(collisionEvent, gameObject, isTrigger){
 
 Debug.printOverlapSphereInfo = function(checkingObj, distance, radius){
   console.log("TestingObj [distance^2, radius^2]: ", checkingObj, " [" + distance + ", " + radius + "]");
+};
+
+Debug.makeDefaultMaterial = function() {
+  let mat = new Material(Renderer.getShader(Renderer.DEFERRED_PBR_SHADER));
+
+  let color = vec4.create();
+  vec4.set(color, 0.5, 0.5, 0.5, 1);
+  mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
+
+  vec4.set(color, 0.5, 0.5, 1, 1);
+  mat.setTexture(MaterialTexture.NORMAL, Texture.makeColorTex(color));
+
+  vec4.set(color, 1, 0, 0.05, 1); //metalness, blank, roughness
+  mat.setTexture(MaterialTexture.MAT, Texture.makeColorTex(color));
+
+  return mat;
 };

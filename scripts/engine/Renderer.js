@@ -414,6 +414,7 @@ const Renderer  = {
     Renderer.renderBuffer.forward = [];
     Renderer.renderBuffer.particle = [];
     Renderer.renderBuffer.light = [];
+    if (Renderer.directionalLight) Renderer.renderBuffer.light.push(Renderer.directionalLight.getComponent("Light"));
     GameObject.prototype.SceneRoot.extract();
   },
 

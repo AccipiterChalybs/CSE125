@@ -376,12 +376,15 @@ class BloomPass extends RenderPass
             this._averagePass.blitFramebuffer(0, 0, 450, 50, 50);
             break;
           case Debug.BUFFERTYPE_SHADOW:
-            Renderer.renderBuffer.light[0].fbo.bindDepthTexture(0);
-            GL.viewport(0,0,512, 512); //render shadow map to a square-sized portion of the screen
-            s5.setUniform("inputTex", 0, UniformTypes.u1i);
-            s5.setUniform("rgbOutput", 2, UniformTypes.u1i);
-            this._deferredPass.buffers.draw();
-            GL.viewport(0,0,Renderer.getWindowWidth(), Renderer.getWindowHeight()); //reset viewport
+            let light = Renderer.renderBuffer.light[Debug.currentLightIndex];
+            if (light.isShadowCaster) {
+              light.fbo.bindDepthTexture(0);
+              GL.viewport(0, 0, 512, 512); //render shadow map to a square-sized portion of the screen
+              s5.setUniform("inputTex", 0, UniformTypes.u1i);
+              s5.setUniform("rgbOutput", 2, UniformTypes.u1i);
+              this._deferredPass.buffers.draw();
+              GL.viewport(0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight()); //reset viewport
+            }
             break;
           default:
             break;

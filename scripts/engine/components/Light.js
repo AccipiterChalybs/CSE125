@@ -82,13 +82,16 @@ class DirectionalLight extends Light{
 
   constructor(shadow) {
     super();
+    this.isShadowCaster = shadow;
+  }
+
+  startClient() {
     if (DirectionalLight.prototype.shadowMatrix === null){
       DirectionalLight.prototype.shadowMatrix = mat4.create();
       mat4.ortho(DirectionalLight.prototype.shadowMatrix, -25, 25, -25, 25, -25, 25);
     }
-    if(shadow)
+    if(this.isShadowCaster)
     {
-      this.isShadowCaster = true;
       this.fbo = new Framebuffer(2048, 2048, 0, true, false);
     }
   }
@@ -127,11 +130,11 @@ class DirectionalLight extends Light{
     }
     
     //TODO right method?
-    updateClient(){
+    updateComponentClient(){
         this.gameObject.transform.setPosition(Renderer.camera.gameObject.transform.getWorldPosition());//,this.gameObject.transform.getWorldPosition()));
     }
 }
-DirectionalLight.prototype.shadowMatrix = null;
+DirectionalLight.prototype.shadowMatrix = mat4.ortho(mat4.create(), -25, 25, -25, 25, -25, 25);
 
 class SpotLight extends Light{
     constructor(){
