@@ -39,18 +39,24 @@ class Light extends Component{
         GL.drawElements(GL.TRIANGLES, currentEntry.indexSize, GL.UNSIGNED_SHORT, 0);
 
     }
-    bindShadowMap(){
-        if(this.fbo && this.fbo !== null && this.isShadowCaster)
-        {
-            this.fbo.bind([]);
-            let mat = mat4.invert(mat4.create(), this.gameObject.transform.getTransformMatrix());
-            Renderer.getShader(Renderer.SHADOW_SHADER_ANIM).setUniform("uV_Matrix",mat,UniformTypes.mat4);
-            Renderer.getShader(Renderer.SHADOW_SHADER).setUniform("uV_Matrix",mat,UniformTypes.mat4);
-        }
+    bindShadowMap(pass){
     }
 }
 
 class PointLight extends Light{
+
+    constructor(shadow) {
+      super();
+      this.isShadowCaster = shadow;
+    }
+
+    startClient() {
+      if(this.isShadowCaster)
+      {
+        this.cubeShadow = true;
+        this.fbo = Framebuffer.generateCubeMapArray(512, 512, true);
+      }
+    }
 
     forwardPass(index){
         for (let shaderId of Renderer.shaderForwardLightList) {
@@ -76,7 +82,37 @@ class PointLight extends Light{
         }
         this.deferredHelper("Sphere_Icosphere", bind);
     }
+
+  prepShadowMap() {
+    Renderer.shaderList[Renderer.SHADOW_SHADER].setUniform("uP_Matrix", PointLight.prototype.shadowMatrix, UniformTypes.mat4);
+    Renderer.shaderList[Renderer.SHADOW_SHADER_ANIM].setUniform("uP_Matrix", PointLight.prototype.shadowMatrix, UniformTypes.mat4);
+  }
+
+
+  bindShadowMap(pass){
+    if(this.fbo && this.fbo !== null && this.isShadowCaster)
+    {
+      this.fbo[pass].bind([]);
+
+      let mat = mat4.invert(mat4.create(), this.gameObject.transform.getTransformMatrix());
+      mat4.multiply(mat, PointLight.prototype.viewMatrixArray[pass], mat);
+      Renderer.getShader(Renderer.SHADOW_SHADER_ANIM).setUniform("uV_Matrix",mat,UniformTypes.mat4);
+      Renderer.getShader(Renderer.SHADOW_SHADER).setUniform("uV_Matrix",mat,UniformTypes.mat4);
+    }
+  }
 }
+
+PointLight.prototype.shadowMatrix = mat4.perspective(mat4.create(), Math.PI/2, 1, 0.25, 25);
+PointLight.prototype.viewMatrixArray = [
+  mat4.lookAt(mat4.create(), vec3.create(), vec3.fromValues(1,0,0), vec3.fromValues(0,-1,0)),
+  mat4.lookAt(mat4.create(), vec3.create(), vec3.fromValues(-1,0,0), vec3.fromValues(0,-1,0)),
+  mat4.lookAt(mat4.create(), vec3.create(), vec3.fromValues(0,1,0), vec3.fromValues(0,0,1)),
+  mat4.lookAt(mat4.create(), vec3.create(), vec3.fromValues(0,-1,0), vec3.fromValues(0,0,-1)),
+  mat4.lookAt(mat4.create(), vec3.create(), vec3.fromValues(0,0,1), vec3.fromValues(0,-1,0)),
+  mat4.lookAt(mat4.create(), vec3.create(), vec3.fromValues(0,0,-1), vec3.fromValues(0,-1,0)),
+];
+
+
 
 class DirectionalLight extends Light{
 
@@ -86,12 +122,9 @@ class DirectionalLight extends Light{
   }
 
   startClient() {
-    if (DirectionalLight.prototype.shadowMatrix === null){
-      DirectionalLight.prototype.shadowMatrix = mat4.create();
-      mat4.ortho(DirectionalLight.prototype.shadowMatrix, -25, 25, -25, 25, -25, 25);
-    }
     if(this.isShadowCaster)
     {
+      this.cubeShadow = false;
       this.fbo = new Framebuffer(2048, 2048, 0, true, false);
     }
   }
@@ -128,11 +161,22 @@ class DirectionalLight extends Light{
         Renderer.currentShader.setUniform("uV_Matrix",Renderer.camera.getCameraMatrix(),UniformTypes.mat4);
         Renderer.currentShader.setUniform("uP_Matrix",Renderer.perspective,UniformTypes.mat4);
     }
-    
-    //TODO right method?
+
     updateComponentClient(){
-        this.gameObject.transform.setPosition(Renderer.camera.gameObject.transform.getWorldPosition());//,this.gameObject.transform.getWorldPosition()));
     }
+
+  bindShadowMap(pass){
+    if(this.fbo && this.fbo !== null && this.isShadowCaster)
+    {
+      this.fbo.bind([]);
+      Renderer.shaderList[Renderer.SHADOW_SHADER].setUniform("uP_Matrix", DirectionalLight.prototype.shadowMatrix, UniformTypes.mat4);
+      Renderer.shaderList[Renderer.SHADOW_SHADER_ANIM].setUniform("uP_Matrix", DirectionalLight.prototype.shadowMatrix, UniformTypes.mat4);
+
+      let mat = mat4.invert(mat4.create(), this.gameObject.transform.getTransformMatrix());
+      Renderer.getShader(Renderer.SHADOW_SHADER_ANIM).setUniform("uV_Matrix",mat,UniformTypes.mat4);
+      Renderer.getShader(Renderer.SHADOW_SHADER).setUniform("uV_Matrix",mat,UniformTypes.mat4);
+    }
+  }
 }
 DirectionalLight.prototype.shadowMatrix = mat4.ortho(mat4.create(), -25, 25, -25, 25, -25, 25);
 

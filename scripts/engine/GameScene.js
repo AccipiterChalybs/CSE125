@@ -168,14 +168,14 @@ class GameScene {
 
     let light = new GameObject();
     let lightComp = new PointLight(true);
-    lightComp.color = vec3.fromValues(2.5, 1, 0);
+    lightComp.color = vec3.fromValues(5, 2.5, 0);
     light.addComponent(lightComp);
     let lightPos = vec3.create();
     vec3.set(lightPos, 10, 2.5, 0);
 
     //For testing purposes
-    light.addComponent(new Mesh("Sphere_Icosphere"));
-    light.getComponent("Mesh").setMaterial(Debug.makeDefaultMaterial());
+    /*light.addComponent(new Mesh("Sphere_Icosphere"));
+    light.getComponent("Mesh").setMaterial(Debug.makeDefaultMaterial());*/
     //light.transform.scale(0.25);
 
     light.transform.setPosition(lightPos);

@@ -369,6 +369,12 @@ const Renderer  = {
       Renderer.shaderList[Renderer.SHADOW_SHADER_ANIM].setUniform("uP_Matrix", DirectionalLight.prototype.shadowMatrix, UniformTypes.mat4);
 
 
+
+      let s5 = Renderer.getShader(Renderer.FBO_DEBUG_CHANNEL);
+      s5.setUniform("inputTex", 0, UniformTypes.u1i);
+      s5.setUniform("cubeTex", 1, UniformTypes.u1i);
+      s5.setUniform("face", 0, UniformTypes.u1i);
+
       Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("colorTex", 0, UniformTypes.u1i);
       Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("normalTex", 1, UniformTypes.u1i);
       Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("posTex", 2, UniformTypes.u1i);
