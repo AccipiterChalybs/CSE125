@@ -38,6 +38,7 @@ class NavMesh{
 
     this.boundaryList = data.boundary;
     this.faceList = data.faceList;
+    this.vertList = data.vertList;
 
     // test/debugging zone
     let pt = [20, 0, -13];
@@ -128,3 +129,4 @@ class NavMesh{
     return hitResult;
   }
 }
+NavMesh.prototype.currentNavMesh= null;

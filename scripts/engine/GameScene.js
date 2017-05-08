@@ -12,7 +12,14 @@ class GameScene {
         ObjectLoader.loadScene(filename); //TODO add callback to group these together
     }
 
+<<<<<<< HEAD
     //TODO this will be moved into the JSON files
+=======
+    // TODO REMOVE ME LATER
+    NavMesh.prototype.currentNavMesh= new NavMesh();
+
+      //TODO this will be moved into the JSON files
+>>>>>>> 6679d90... a star done
     if (!IS_SERVER) {
       albedo = new Texture('assets/texture/dungeon-stone1-albedo2.png');
       mat = new Texture('assets/texture/dungeon-stone1-mat.png', false);
@@ -89,12 +96,10 @@ class GameScene {
             }
 
             if (x===5 && y===5) {
-              //add sound to a GameObject
-              teapot.addComponent(new AudioSource());
-              if(!IS_SERVER) teapot.getComponent("AudioSource").playSound3d("cruelangel");
-              teapot.addComponent(new PlayerController());
-
-
+                //add sound to a GameObject
+                teapot.addComponent(new AudioSource());
+                if(!IS_SERVER) teapot.getComponent("AudioSource").playSound2d("cruelangel");
+                teapot.addComponent(new PlayerController());
             }
             let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
 
@@ -186,7 +191,7 @@ class GameScene {
     let pos = vec3.create(); vec3.set(pos, -27, 0, -9);
     let color = vec4.create(); vec4.set(color, 1, 0, 0, 1);
     let evilTeapot = Debug.drawTeapot(pos, color);
-    evilTeapot.addComponent(new EvilController(this.nav));
+    evilTeapot.addComponent(new EvilController(NavMesh.prototype.currentNavMesh));
 
     rootTest.addComponent(new BoxCollider(10));
     rootTest.addComponent(new PlayerController());
@@ -207,7 +212,12 @@ class GameScene {
     // NAVMESH
     // test/debugging zone
     let pt = [24,0, 10];
-    let faceIndex = this.nav.findFace(pt);
+    let faceIndex = NavMesh.prototype.currentNavMesh.findFace(pt);
+
+    //Remove Later Testing ASTAR
+    let testStar = new aStar();
+    testStar.search(0,26,[-18.60881996154785,0,
+        -7.947876930236816],[24.61385726928711,0,-8.037052154541016]);
   }
 
   update() {

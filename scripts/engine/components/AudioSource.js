@@ -25,7 +25,7 @@ class AudioSource extends Component{
     this.sound = SoundEngine.playSound2d(SoundEngine[name]);
   }
 
-  playSound3d(name, panObj={ panningModel: 'HRTF', refDistance: 0.8, rolloffFactor: 2.5, distanceModel: 'exponential' }) {
+  playSound3d(name,panObj={ panningModel: 'HRTF', refDistance: 0.8, rolloffFactor: 2.5, distanceModel: 'exponential' }) {
     this.sound = SoundEngine.playSound3d(SoundEngine[name], panObj);
     this.sound3D = true;
   }
