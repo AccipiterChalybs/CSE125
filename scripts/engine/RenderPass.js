@@ -58,23 +58,26 @@ class ShadowPass extends ForwardPass
             let caster = l;
             if (!caster || !caster.isShadowCaster) continue;
             if (caster.cubeShadow) {
+              caster.prepShadowMap();
               for (let f=0; f<6; ++f) {
                 caster.bindShadowMap(f);
-                this._drawMeshes();
+                this._drawMeshes(true);
               }
             } else {
               caster.bindShadowMap(0);
-              this._drawMeshes();
+              this._drawMeshes(false);
             }
         }
     }
 
-    _drawMeshes() {
+    _drawMeshes(isPoint) {
+      let animShader = (isPoint) ? Renderer.POINT_SHADOW_SHADER_ANIM : Renderer.SHADOW_SHADER_ANIM;
+      let regShader = (isPoint) ? Renderer.POINT_SHADOW_SHADER : Renderer.SHADOW_SHADER;
       for (let mesh of Renderer.renderBuffer.deferred) {
         let mat = mesh.material;
         let s = null;
-        if (mat.shader === Renderer.getShader(Renderer.DEFERRED_PBR_SHADER_ANIM)) s = Renderer.getShader(Renderer.SHADOW_SHADER_ANIM);
-        else s = Renderer.getShader(Renderer.SHADOW_SHADER);
+        if (mat.shader === Renderer.getShader(Renderer.DEFERRED_PBR_SHADER_ANIM)) s = Renderer.getShader(animShader);
+        else s = Renderer.getShader(regShader);
         if (s !== Renderer.currentShader) {
           s.use();
         }
@@ -154,6 +157,10 @@ class DeferredPass extends RenderPass
 
                 GL.stencilFunc(GL.NOTEQUAL, 0, 0xFF);
                 GL.cullFace(GL.FRONT);
+
+                if (d.isShadowCaster) {
+                  d.fbo[0].bindCubeMapTexture(4);
+                }
             }
             else //if directional light
             {
@@ -389,10 +396,11 @@ class BloomPass extends RenderPass
             if (light.isShadowCaster) {
               if (light.cubeShadow) {
                 let pos=0;
-                for (let f of [1, 5, 0, 3, 2, 4]) {
+                light.fbo[0].bindCubeMapTexture(1);
+                for (let f of [-1, -1, 3, -1, 4, 1, 5, 0, -1, -1, 2]) {
+                  if (f===-1) { ++pos; continue; }
                   const displaySize = 256;
-                  light.fbo[f].bindCubeMapTexture(1);
-                  GL.viewport(displaySize*(pos%3), displaySize*Math.floor(pos/3), displaySize, displaySize); //render shadow map to a square-sized portion of the screen
+                  GL.viewport(displaySize*(pos%4), displaySize*Math.floor(pos/4), displaySize, displaySize); //render shadow map to a square-sized portion of the screen
                   s5.setUniform("cubeTex", 1, UniformTypes.u1i);
                   s5.setUniform("rgbOutput", 3, UniformTypes.u1i);
                   s5.setUniform("face", f, UniformTypes.u1i);

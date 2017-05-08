@@ -67,7 +67,7 @@ class GameScene {
               let mat = new Material(Renderer.getShader(Renderer.DEFERRED_PBR_SHADER));
 
               let color = vec4.create();
-              vec4.set(color, 1, 0.5, 0.1, 1);
+              vec4.set(color, 0.81, 0.81, 0.81, 1);
               mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
 
               vec4.set(color, 0.5, 0.5, 1, 1);
@@ -164,11 +164,14 @@ class GameScene {
       Renderer.directionalLight.addComponent(new ClientStickTo(Renderer.camera.transform.getParent().gameObject));
       Renderer.directionalLight.transform.rotateY(-Math.PI / 3.0);
       Renderer.directionalLight.transform.rotateX(-Math.PI / 4.0);
+
+      Renderer.directionalLight.getComponent("Light").color = vec3.fromValues(0.16, 0.32, 0.64);
     }
 
     let light = new GameObject();
     let lightComp = new PointLight(true);
     lightComp.color = vec3.fromValues(5, 2.5, 0);
+    lightComp.exponentialFalloff = 0.25;
     light.addComponent(lightComp);
     let lightPos = vec3.create();
     vec3.set(lightPos, 10, 2.5, 0);

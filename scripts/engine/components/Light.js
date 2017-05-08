@@ -79,13 +79,21 @@ class PointLight extends Light{
             let scale = (-this.linearFalloff + Math.sqrt(this.linearFalloff * this.linearFalloff - 4.0 * (this.constantFalloff - 256.0 * max) * this.exponentialFalloff))
         / (2.0 * this.exponentialFalloff);
             Renderer.currentShader.setUniform("uScale",scale,UniformTypes.u1f);
+
+            Renderer.currentShader.setUniform("uFarDepth", PointLight.prototype.FAR_DEPTH, UniformTypes.u1f);
         }
         this.deferredHelper("Sphere_Icosphere", bind);
     }
 
   prepShadowMap() {
-    Renderer.shaderList[Renderer.SHADOW_SHADER].setUniform("uP_Matrix", PointLight.prototype.shadowMatrix, UniformTypes.mat4);
-    Renderer.shaderList[Renderer.SHADOW_SHADER_ANIM].setUniform("uP_Matrix", PointLight.prototype.shadowMatrix, UniformTypes.mat4);
+    Renderer.shaderList[Renderer.POINT_SHADOW_SHADER].setUniform("uP_Matrix", PointLight.prototype.shadowMatrix, UniformTypes.mat4);
+    Renderer.shaderList[Renderer.POINT_SHADOW_SHADER_ANIM].setUniform("uP_Matrix", PointLight.prototype.shadowMatrix, UniformTypes.mat4);
+
+    Renderer.shaderList[Renderer.POINT_SHADOW_SHADER].setUniform("uLightPosition",this.gameObject.transform.getWorldPosition(),UniformTypes.vec3);
+    Renderer.shaderList[Renderer.POINT_SHADOW_SHADER_ANIM].setUniform("uLightPosition",this.gameObject.transform.getWorldPosition(),UniformTypes.vec3);
+
+    Renderer.shaderList[Renderer.POINT_SHADOW_SHADER].setUniform("uFarDepth", PointLight.prototype.FAR_DEPTH, UniformTypes.u1f);
+    Renderer.shaderList[Renderer.POINT_SHADOW_SHADER_ANIM].setUniform("uFarDepth", PointLight.prototype.FAR_DEPTH, UniformTypes.u1f);
   }
 
 
@@ -94,15 +102,16 @@ class PointLight extends Light{
     {
       this.fbo[pass].bind([]);
 
-      let mat = mat4.invert(mat4.create(), this.gameObject.transform.getTransformMatrix());
+      let mat = mat4.fromTranslation(mat4.create(), vec3.scale(vec3.create(), this.gameObject.transform.getWorldPosition(), -1));
       mat4.multiply(mat, PointLight.prototype.viewMatrixArray[pass], mat);
-      Renderer.getShader(Renderer.SHADOW_SHADER_ANIM).setUniform("uV_Matrix",mat,UniformTypes.mat4);
-      Renderer.getShader(Renderer.SHADOW_SHADER).setUniform("uV_Matrix",mat,UniformTypes.mat4);
+      Renderer.getShader(Renderer.POINT_SHADOW_SHADER_ANIM).setUniform("uV_Matrix",mat,UniformTypes.mat4);
+      Renderer.getShader(Renderer.POINT_SHADOW_SHADER).setUniform("uV_Matrix",mat,UniformTypes.mat4);
     }
   }
 }
 
-PointLight.prototype.shadowMatrix = mat4.perspective(mat4.create(), Math.PI/2, 1, 0.25, 25);
+PointLight.prototype.FAR_DEPTH = 25;
+PointLight.prototype.shadowMatrix = mat4.perspective(mat4.create(), Math.PI/2, 1, 0.1, PointLight.prototype.FAR_DEPTH);
 PointLight.prototype.viewMatrixArray = [
   mat4.lookAt(mat4.create(), vec3.create(), vec3.fromValues(1,0,0), vec3.fromValues(0,-1,0)),
   mat4.lookAt(mat4.create(), vec3.create(), vec3.fromValues(-1,0,0), vec3.fromValues(0,-1,0)),

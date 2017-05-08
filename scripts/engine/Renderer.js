@@ -22,8 +22,10 @@ const Renderer  = {
       Renderer.DEFERRED_PBR_SHADER_ANIM=6;
       Renderer.DEFERRED_PBR_SHADER=7;
       Renderer.DEFERRED_SHADER_LIGHTING=8;
-      Renderer.SHADOW_SHADER=10;
-      Renderer.SHADOW_SHADER_ANIM=11;
+      Renderer.SHADOW_SHADER=9;
+      Renderer.SHADOW_SHADER_ANIM=10;
+      Renderer.POINT_SHADOW_SHADER=11;
+      Renderer.POINT_SHADOW_SHADER_ANIM=12;
       Renderer.FORWARD_UNLIT = 13;
       Renderer.FBO_BLUR=15;
       Renderer.FBO_PASS=16;
@@ -99,6 +101,15 @@ const Renderer  = {
 
       Renderer.shaderList[Renderer.SHADOW_SHADER_ANIM] = new Shader(
         Renderer.shaderPath + "forward_pbr_skeletal.vert", Renderer.shaderPath + "shadow.frag"
+      );
+
+
+      Renderer.shaderList[Renderer.POINT_SHADOW_SHADER] = new Shader(
+        Renderer.shaderPath + "forward_pbr.vert", Renderer.shaderPath + "shadowPoint.frag"
+      );
+
+      Renderer.shaderList[Renderer.POINT_SHADOW_SHADER_ANIM] = new Shader(
+        Renderer.shaderPath + "forward_pbr_skeletal.vert", Renderer.shaderPath + "shadowPoint.frag"
       );
 
 
@@ -379,6 +390,7 @@ const Renderer  = {
       Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("normalTex", 1, UniformTypes.u1i);
       Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("posTex", 2, UniformTypes.u1i);
       Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("shadowTex", 3, UniformTypes.u1i);
+      Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("shadowCube", 4, UniformTypes.u1i);
   },
 
   loop: function () {

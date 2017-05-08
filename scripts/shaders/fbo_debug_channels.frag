@@ -29,9 +29,9 @@ void main() {
         if (face==2)
             color = texture(cubeTex, vec3((vTexCoord*2.0 - 1.0).x, 1, (vTexCoord*2.0 - 1.0).y));
         if (face==3)
-            color = texture(cubeTex, vec3((vTexCoord*2.0 - 1.0).x, -1, (vTexCoord*2.0 - 1.0).y));
+            color = texture(cubeTex, vec3((vTexCoord*2.0 - 1.0).x, -1, -(vTexCoord*2.0 - 1.0).y));
         if (face==4)
-            color = texture(cubeTex, vec3((vTexCoord*2.0 - 1.0), 1));
+            color = texture(cubeTex, vec3(-(vTexCoord*2.0 - 1.0).x,(vTexCoord*2.0 - 1.0).y, 1));
         if (face==5)
             color = texture(cubeTex, vec3((vTexCoord*2.0 - 1.0), -1));
         fragColor = vec4(vec3(color.r), 1.0);
