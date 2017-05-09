@@ -30,6 +30,9 @@ class SequenceSelector extends BehaviorTreeNode{
     if(Debug.behaviorTree.printUniques || Debug.behaviorTree.printAll)
       console.log(this.toString() + " is at: " + this._children[this._currentChild]);
 
+    if(this._currentChild >= this._children.length)
+      return this._currentState;
+
     this._currentState = this._children[this._currentChild].updateNode();
 
     switch(this._currentState){
@@ -40,9 +43,6 @@ class SequenceSelector extends BehaviorTreeNode{
           console.log(this.toString() + " succeeded.");
 
         this._currentChild++;
-
-        if(this._currentChild >= this._children.length)
-          this.reset();
 
         break;
       case BehaviorState.failure:

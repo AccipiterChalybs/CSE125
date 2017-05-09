@@ -24,17 +24,15 @@ class pQueue{
     }
 }
 
-class aStar{
-    constructor(){
-        this.path;
-    }
-    distance(pos0,pos1){
+const aStar = {
+    distance: function(pos0,pos1){
         let dist1=Math.abs(pos1.x-pos0.x);
         let dist2=Math.abs(pos1.y-pos0.y);
         let dist3=Math.abs(pos1.z-pos0.z);
         return dist1+dist2+dist3;
-    }
-    search(faceIndex,endingFace, startPos, endPos){
+    },
+
+    search: function(faceIndex,endingFace, startPos, endPos, path){
         //initialize the open and close list
         //console.log("aster started");
         let totalList = [];
@@ -62,14 +60,14 @@ class aStar{
             for(let i=0;i<successor.length;i++){
                 let child=successor[i];
                 if(child===finish[0] || child===finish[1] || child===finish[2]){
-                    let path=[];
+                    // let path=[];
                     let parent=currNode.parent;
                     path.unshift(currNode.index,child);
                     while(parent!==-1){
                         path.unshift(totalList[parent].index);
                         parent=totalList[parent].parent;
                     }
-                    console.log("path",path);
+                    // console.log("path",path);
                     return true;
                 }
                 //make child node with values
@@ -100,10 +98,10 @@ class aStar{
             //closeList.push(currNode,currNode.fValue);
             totalList[currNode.index]=currNode;
         }
-        console.log("false");
+        // console.log("false");
         return false;
     }
-}
+};
 
 class starNode{
     constructor(){

@@ -12,14 +12,9 @@ class GameScene {
         ObjectLoader.loadScene(filename); //TODO add callback to group these together
     }
 
-<<<<<<< HEAD
-    //TODO this will be moved into the JSON files
-=======
     // TODO REMOVE ME LATER
     NavMesh.prototype.currentNavMesh= new NavMesh();
 
-      //TODO this will be moved into the JSON files
->>>>>>> 6679d90... a star done
     if (!IS_SERVER) {
       albedo = new Texture('assets/texture/dungeon-stone1-albedo2.png');
       mat = new Texture('assets/texture/dungeon-stone1-mat.png', false);
@@ -34,7 +29,7 @@ class GameScene {
     camera.gameObject.transform.setParent(rootTest.transform);
     camera.gameObject.addComponent(new AudioListener());
     camera.gameObject.addComponent(new ZoomMouse());
-    let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 5);
+    let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 30);
     if(!IS_SERVER){
       Renderer.camera.transform.setPosition(newPosition);
       Renderer.camera.transform.getParent().gameObject.addComponent(new RotateMouse());
@@ -98,8 +93,8 @@ class GameScene {
             if (x===5 && y===5) {
                 //add sound to a GameObject
                 teapot.addComponent(new AudioSource());
-                if(!IS_SERVER) teapot.getComponent("AudioSource").playSound2d("cruelangel");
-                teapot.addComponent(new PlayerController());
+                //if(!IS_SERVER) teapot.getComponent("AudioSource").playSound2d("cruelangel");
+                // teapot.addComponent(new PlayerController());
             }
             let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
 
@@ -159,6 +154,7 @@ class GameScene {
       GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.getComponent("AudioSource").pauseSound();
     }
 
+
     if(!IS_SERVER) {
       //TODO account for possibility of currentPlayer not set yet
       Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo(PlayerTable.players[PlayerTable.currentPlayer]));
@@ -191,13 +187,12 @@ class GameScene {
     let pos = vec3.create(); vec3.set(pos, -27, 0, -9);
     let color = vec4.create(); vec4.set(color, 1, 0, 0, 1);
     let evilTeapot = Debug.drawTeapot(pos, color);
-    evilTeapot.addComponent(new EvilController(NavMesh.prototype.currentNavMesh));
+    evilTeapot.addComponent(new EvilController());
 
     rootTest.addComponent(new BoxCollider(10));
     rootTest.addComponent(new PlayerController());
     GameObject.prototype.SceneRoot.addChild(rootTest);
 
-    //let move = vec3.create(); vec3.set(move, 0, 500, 64);
     let move = vec3.create(); vec3.set(move, 0,-1,0);
     let ground = new GameObject();
     ground.setName("ground");

@@ -5,13 +5,13 @@
 const EVIL_MOVEMENTSPEED = 5;
 
 class EvilController extends AIController{
-  constructor(navMesh){
+  constructor(){
     super();
     this.componentType = "EvilController";
     this.movementSpeed = EVIL_MOVEMENTSPEED;
 
-    // TODO Extract later
-    this.navMesh = navMesh;
+    this.tmp_path = [];
+
     // this.lastFaceIndex = -1;
     // this.oldTeapot = [];
     // this.oldTeapot[0] = Debug.drawTeapot([0,0,0]);
@@ -36,9 +36,9 @@ class EvilController extends AIController{
   updateComponent(){
     super.updateComponent();
 
-    let currFaceIndex = this.navMesh.findFace(this.transform.getPosition());
+    // NAVMESH
+    // test/debugging zone
 
-    console.log(currFaceIndex);
 
     // if(currFaceIndex !== this.lastFaceIndex && currFaceIndex !== -1){
     //   this.oldTeapot[0].removeComponent("Mesh");
@@ -49,7 +49,6 @@ class EvilController extends AIController{
     //   this.oldTeapot[2] = Debug.drawTeapot(this.navMesh.faceList[currFaceIndex].vert[2]);
     //   this.lastFaceIndex = currFaceIndex;
     // }
-    //}
   }
 
   chase(){
@@ -59,18 +58,16 @@ class EvilController extends AIController{
   }
 
   _buildBehaviorTree(){
-    //console.log(this);
-    let root = new SequenceSelector("patrol");
+    let root = new ConcurrentSelector("chase");
 
-    for(let i = 0; i < this.patrolPath.length; ++i){
-      let goToPt = new PrioritySelector("goToPt" + i);
-      let proximityCheck = new ProximityCheck(this, this.patrolPath[i], 0.1);
-      let moveTo = new MoveToPoint(this, this.patrolPath[i], EVIL_MOVEMENTSPEED);
+    let pathToPt = new PathToPoint(this, EVIL_MOVEMENTSPEED);
+    let findPath = new FindPath(this, pathToPt);
+    // determine dest
+    findPath.setDestination([22,0,15]);
 
-      goToPt.addNode(proximityCheck);
-      goToPt.addNode(moveTo);
-      root.addNode(goToPt);
-    }
+    // add determine dest
+    root.addNode(findPath);
+    root.addNode(pathToPt);
 
     //console.log(root);
 
