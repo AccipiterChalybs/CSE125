@@ -12,10 +12,10 @@ class NavMesh{
 
     // test/debugging zone
     // raycast on line segments
-    // let ray = {origin: [0, 0.75], direction: [20, 1]};
-    // let lineSeg = [[-1, 1], [1, 1]];
+    // let ray = {origin: [0, 0, 1], direction: [0, 0, 1]};
+    // let lineSeg = [[-1, 0, 1], [1, 0, 1]];
     // let hitDistance = {dist: null};
-    // let hitResult = this.rayIntersectsSegment(ray, lineSeg, 1, hitDistance);
+    // let hitResult = this.rayIntersectsSegment(ray, lineSeg, Number.POSITIVE_INFINITY, hitDistance);
 
     // point in triangle test either declaration works
     // let pt = [0, 0];
@@ -74,26 +74,26 @@ class NavMesh{
   }
 
   cleanPath(path){
-    Debug.log(path);
+    Debug.log([].concat(path));
 
     for(let i = 0; i < path.length; ++i){
       for(let j = i+2; j < path.length; ){
-        Debug.log("i: ", this.vertList[path[i]].pos, "\tj: ", this.vertList[path[j]].pos);
-        Debug.log(vec3.subtract(vec3.create(), this.vertList[path[j]].pos, this.vertList[path[i]].pos));
-        let ray2D = {origin:path[i], direction: vec3.subtract(vec3.create(), this.vertList[path[j]].pos, this.vertList[path[i]].pos)};
-
+        // Debug.log("i: ", this.vertList[path[i]].pos, "\tj: ", this.vertList[path[j]].pos);
+        // Debug.log(vec3.subtract(vec3.create(), this.vertList[path[j]].pos, this.vertList[path[i]].pos));
+        let ray2D = {origin:this.vertList[path[i]].pos, direction: vec3.subtract(vec3.create(), this.vertList[path[j]].pos, this.vertList[path[i]].pos)};
+        let distance = vec3.length(ray2D.direction) - 0.1;
+        vec3.normalize(ray2D.direction, ray2D.direction);
         let raycastResult = false;
 
         for(let k = 0; k < this.boundaryList.length; ++k) {
-          if(this.rayIntersectsSegment(ray2D, this.boundaryList[k])){
-            Debug.log("hello");
+          if(this.rayIntersectsSegment(ray2D, this.boundaryList[k], distance)){
+            Debug.log("(i, j): (" + i + ", " + j + ")");
             raycastResult = true;
             break;
           }
         }
 
         if(raycastResult === true){
-          ++j;
           break;
         }else{
           path.splice(j - 1, 1);
@@ -159,21 +159,21 @@ class NavMesh{
   // If ray starts on line but points elsewhere: ray does NOT intersect and distance = 0
   rayIntersectsSegment(ray2D, lineSegment, maxDistance = Number.POSITIVE_INFINITY, hitDistance = {}){
     // code from http://afloatingpoint.blogspot.com/2011/04/2d-polygon-raycasting.html
-    let seg = [0, 0];
+    let seg = [0, 0, 0];
     seg[0] = lineSegment[1][0] - lineSegment[0][0];
-    seg[1] = lineSegment[1][2] - lineSegment[0][2];
+    seg[2] = lineSegment[1][2] - lineSegment[0][2];
 
-    let segPerp = [seg[2], -seg[0]];
+    let segPerp = [seg[2], 0, -seg[0]];
     let perpDotd = PhysicsEngine.dot2D(ray2D.direction, segPerp);
-    if(perpDotd <= Number.EPSILON && perpDotd >= Number.EPSILON){
+    if(perpDotd <= Number.EPSILON && perpDotd >= 0){
       hitDistance.dist = Number.POSITIVE_INFINITY;
       return false;
     }
 
-    let d = [lineSegment[0][0] - ray2D.origin[0], lineSegment[0][2] - ray2D.origin[2]];
+    let d = [lineSegment[0][0] - ray2D.origin[0], 0, lineSegment[0][2] - ray2D.origin[2]];
 
     hitDistance.dist = PhysicsEngine.dot2D(segPerp, d) / perpDotd;
-    let s = PhysicsEngine.dot2D([ray2D.direction[2], -ray2D.direction[0]], d) / perpDotd;
+    let s = PhysicsEngine.dot2D([ray2D.direction[2], 0, -ray2D.direction[0]], d) / perpDotd;
 
     let hitResult = hitDistance.dist >= Number.EPSILON && hitDistance.dist <= maxDistance && s >= 0.0 && s <= 1.0;
 

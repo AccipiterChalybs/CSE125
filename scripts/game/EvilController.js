@@ -60,13 +60,16 @@ class EvilController extends AIController{
   _buildBehaviorTree(){
     let root = new ConcurrentSelector("chase");
 
+    let dest = this.patrolPath[7];
+    let reachedDest = new Inverter(new ProximityCheck(this, dest, 0.11));
     let pathToPt = new PathToPoint(this, EVIL_MOVEMENTSPEED);
     let findPath = new FindPath(this, pathToPt);
     // determine dest
-    findPath.setDestination([22,0,15]);
+    findPath.setDestination(dest);
 
     // add determine dest
     root.addNode(findPath);
+    root.addNode(reachedDest);
     root.addNode(pathToPt);
 
     //console.log(root);

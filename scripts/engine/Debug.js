@@ -163,7 +163,7 @@ Debug.printOverlapSphereInfo = function(checkingObj, distance, radius){
 // Debugging for NavMesh
 Debug.navMesh = {};
 Debug.navMesh.printPointTriangle = false; Debug.navMesh._printPointTriangleDetailed = false;
-Debug.navMesh.printRaySegment = false; Debug.navMesh._printRaySegmentDetailed = false;
+Debug.navMesh.printRaySegment = false; Debug.navMesh._printRaySegmentDetailed = true;
 Debug.navMesh.printFindFace = false; Debug.navMesh._printFindFaceDetailed = true;
 Debug.navMesh.printLoadFinished = false;
 
@@ -199,11 +199,11 @@ Debug.navMesh.printRaySegmentInfo = function(hitResult, ray2D, segment, maxDista
   }
   console.log("\tRESULT: " + hitResultString);
   console.log("\tray2D: ");
-  console.log("\t\torigin: (" + ray2D.origin[0] + ", " + ray2D.origin[1] + ")");
-  console.log("\t\tdirection: (" + ray2D.direction[0] + ", " + ray2D.direction[1] + ")");
+  console.log("\t\torigin: (" + ray2D.origin[0] + ", " + ray2D.origin[1] + ", " + ray2D.origin[2] + ")");
+  console.log("\t\tdirection: (" + ray2D.direction[0] + ", " + ray2D.direction[1] + ", " + ray2D.direction[2] + ")");
   console.log("\tsegment: ");
-  console.log("\t\tpt0: (" + segment[0][0] + ", " + segment[0][1] + ")");
-  console.log("\t\tpt1: (" + segment[1][0] + ", " + segment[1][1] +  ")");
+  console.log("\t\tpt0: (" + segment[0][0] + ", " + segment[0][1] + ", " + segment[0][2] + ")");
+  console.log("\t\tpt1: (" + segment[1][0] + ", " + segment[1][1] + ", " + segment[1][2] + ")");
 
   if(Debug.navMesh._printRaySegmentDetailed){
     console.log("\thitDistance: " + hitDistance.dist);

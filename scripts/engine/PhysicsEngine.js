@@ -87,7 +87,7 @@ PhysicsEngine.rayIntersectsSegment = function(ray2D, lineSegment, maxDistance = 
 };
 
 PhysicsEngine.dot2D = function(v0, v1){
-  return v0[0] * v1[0] + v0[1] * v1[1];
+  return v0[0] * v1[0] + v0[2] * v1[2];
 };
 
 // 'PM' is short for 'physics material'
