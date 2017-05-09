@@ -61,7 +61,7 @@ class EvilController extends AIController{
     let root = new ConcurrentSelector("chase");
 
     let dest = vec3.fromValues(this.patrolPath[7][0], this.patrolPath[7][1], this.patrolPath[7][2]);
-    let reachedDest = new Inverter(new ProximityCheck(this, dest, 0.11));
+    let reachedDest = new Inverter(new ProximityCheck(this, dest, 0.1));
     let pathToPt = new PathToPoint(this, EVIL_MOVEMENTSPEED);
     let findPath = new FindPath(this, pathToPt);
     // determine dest

@@ -56,25 +56,23 @@ class NavMesh{
       return false;
     }
 
-    Debug.log("startFace: " + startFace);
-    Debug.log("endFace: " + endFace);
+    // Debug.log("startFace: " + startFace);
+    // Debug.log("endFace: " + endFace);
 
     let searchResult = aStar.search(startFace, endFace, startPos, endPos, path);
     if(!searchResult){
       return false;
     }
 
-    // Debug.log(this.boundaryList);
-
     this.cleanPath(path);
 
-    Debug.log(path);
+    // Debug.log(path);
 
     return path;
   }
 
   cleanPath(path){
-    Debug.log([].concat(path));
+    // Debug.log([].concat(path));
 
     for(let i = 0; i < path.length; ++i){
       for(let j = i+2; j < path.length; ){
@@ -87,7 +85,7 @@ class NavMesh{
 
         for(let k = 0; k < this.boundaryList.length; ++k) {
           if(this.rayIntersectsSegment(ray2D, this.boundaryList[k], distance)){
-            Debug.log("(i, j): (" + i + ", " + j + ")");
+            // Debug.log("(i, j): (" + i + ", " + j + ")");
             raycastResult = true;
             break;
           }

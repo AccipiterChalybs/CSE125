@@ -72,7 +72,7 @@ const aStar = {
                         parent=totalList[parent].parent;
                     }
                     path.unshift(startPos);
-                    console.log("path",path);
+                    // console.log("path",path);
                     //console.log(vertList);
                     return true;
                 }

@@ -14,11 +14,9 @@ class Inverter extends BehaviorTreeNode{
 
     switch(childState){
       case BehaviorState.success:
-        Debug.log("close");
         this._currentState = BehaviorState.failure;
         break;
       case BehaviorState.failure:
-        Debug.log("far");
         this._currentState = BehaviorState.success;
         break;
       default:
