@@ -94,6 +94,8 @@ class GameScene {
               if(!IS_SERVER) teapot.getComponent("AudioSource").playSound3d("cruelangel");
               teapot.addComponent(new PlayerController());
 
+              teapot.addComponent(new ParticleSystem(true, {}));
+
 
             }
             let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);

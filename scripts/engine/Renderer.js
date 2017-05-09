@@ -19,6 +19,7 @@ const Renderer  = {
       Renderer.FORWARD_PBR_SHADER = 1;
       Renderer.SKYBOX_SHADER = 2;
       Renderer.FBO_HDR=3;
+      Renderer.PARTICLE_SHADER=4;
       Renderer.DEFERRED_PBR_SHADER_ANIM=6;
       Renderer.DEFERRED_PBR_SHADER=7;
       Renderer.DEFERRED_SHADER_LIGHTING=8;
@@ -49,21 +50,19 @@ const Renderer  = {
 
       Renderer.shaderForwardLightList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM];
 
-      Renderer.shaderViewList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_UNLIT, Renderer.SKYBOX_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM,
+      Renderer.shaderViewList = [Renderer.FORWARD_PBR_SHADER, Renderer.PARTICLE_SHADER, Renderer.FORWARD_UNLIT, Renderer.SKYBOX_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM,
         Renderer.DEFERRED_SHADER_LIGHTING, Renderer.SHADOW_SHADER, Renderer.SHADOW_SHADER_ANIM];
-      /* Renderer.EMITTER_SHADER, Renderer.EMITTER_BURST_SHADER,
-            Renderer.PARTICLE_TRAIL_SHADERRenderer.BASIC_SHADER,
+      /* Renderer.PARTICLE_TRAIL_SHADER, Renderer.BASIC_SHADER,
             Renderer.FORWARD_EMISSIVE ];*/
 
       Renderer.shaderCameraPosList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.DEFERRED_SHADER_LIGHTING];
 
       Renderer.shaderEnvironmentList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.DEFERRED_SHADER_LIGHTING];
 
-      Renderer.shaderPerspectiveList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.SKYBOX_SHADER,
+      Renderer.shaderPerspectiveList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.PARTICLE_SHADER, Renderer.SKYBOX_SHADER,
           Renderer.FORWARD_UNLIT, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM, Renderer.DEFERRED_SHADER_LIGHTING
       ];
-      /*, , Renderer.SKYBOX_SHADER, Renderer.EMITTER_SHADER,
-            Renderer.EMITTER_BURST_SHADER, Renderer.PARTICLE_TRAIL_SHADER,
+      /* Renderer.EMITTER_BURST_SHADER, Renderer.PARTICLE_TRAIL_SHADER,
             Renderer.BASIC_SHADER, Renderer.FORWARD_UNLIT, Renderer.FORWARD_EMISSIVE ];*/
 
       Renderer.shaderList = [];
@@ -80,6 +79,10 @@ const Renderer  = {
             Renderer.shaderPath + 'forward_pbr.vert', Renderer.shaderPath + 'forward_unlit.frag'
       );
 
+
+      Renderer.shaderList[Renderer.PARTICLE_SHADER] = new Shader(
+        Renderer.shaderPath + 'particle.vert', Renderer.shaderPath + 'particle.frag'
+      );
 
 
       Renderer.shaderList[Renderer.DEFERRED_PBR_SHADER_ANIM] = new Shader(
@@ -155,6 +158,7 @@ const Renderer  = {
       let shadowPass = new ShadowPass();
       let forwardPass = new ForwardPass();
       let skyboxPass = new SkyboxPass(Renderer.skybox);
+      let particlePass = new ParticlePass();
 
       Renderer.deferredPass = new DeferredPass();
       Renderer.postPass = new BloomPass(Renderer.deferredPass);
@@ -164,6 +168,7 @@ const Renderer  = {
       Renderer.passes.push(Renderer.deferredPass);
       Renderer.passes.push(forwardPass); //Note: This should usually go AFTER skybox, for transparent objects with no depth mask.
       Renderer.passes.push(skyboxPass);
+      Renderer.passes.push(particlePass);
       Renderer.passes.push(Renderer.postPass);
 
       Renderer.renderBuffer = { forward: [], deferred: [], particle: [], light: [] };
