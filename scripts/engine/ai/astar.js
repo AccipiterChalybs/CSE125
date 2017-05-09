@@ -62,12 +62,18 @@ const aStar = {
                 if(child===finish[0] || child===finish[1] || child===finish[2]){
                     // let path=[];
                     let parent=currNode.parent;
-                    path.unshift(currNode.index,child);
+                    let tmp1Vec3=vec3.fromValues(vertList[child].pos[0],vertList[child].pos[1],vertList[child].pos[2]);
+                    let tmp2Vec3=vec3.fromValues(vertList[currNode.index].pos[0],vertList[currNode.index].pos[1],vertList[currNode.index].pos[2]);
+                    path.unshift(tmp2Vec3,tmp1Vec3,endPos);
                     while(parent!==-1){
-                        path.unshift(totalList[parent].index);
+                        let ind =totalList[parent].index;
+                        let tmpVec3 = vec3.fromValues(vertList[ind].pos[0],vertList[ind].pos[1],vertList[ind].pos[2]);
+                        path.unshift(tmpVec3);
                         parent=totalList[parent].parent;
                     }
-                    // console.log("path",path);
+                    path.unshift(startPos);
+                    console.log("path",path);
+                    //console.log(vertList);
                     return true;
                 }
                 //make child node with values
@@ -115,27 +121,6 @@ class starNode{
 }
 
 /*
- // A*
- initialize the open list
- initialize the closed list
- put the starting node on the open list (you can leave its f at zero)
-
- while the open list is not empty
- find the node with the least f on the open list, call it "q"
- pop q off the open list
- generate q's 8 successors and set their parents to q
- for each successor
- if successor is the goal, stop the search
- successor.g = q.g + distance between successor and q
- successor.h = distance from goal to successor
- successor.f = successor.g + successor.h
-
- if a node with the same position as successor is in the OPEN list \
- which has a lower f than successor, skip this successor
- if a node with the same position as successor is in the CLOSED list \
- which has a lower f than successor, skip this successor
- otherwise, add the node to the open list
- end
- push q on the closed list
- end
+ let myvec3 = vec3.fromValues(x,y,z);
+ let altvec3 = vec3.create(); vec3.set(altvec3,x,y,z);
  */
