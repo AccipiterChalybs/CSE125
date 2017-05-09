@@ -384,6 +384,7 @@ const Renderer  = {
       Renderer.shaderList[Renderer.SHADOW_SHADER].setUniform("uP_Matrix", DirectionalLight.prototype.shadowMatrix, UniformTypes.mat4);
       Renderer.shaderList[Renderer.SHADOW_SHADER_ANIM].setUniform("uP_Matrix", DirectionalLight.prototype.shadowMatrix, UniformTypes.mat4);
 
+      Renderer.getShader(Renderer.PARTICLE_SHADER).setUniform("tex", 0, UniformTypes.u1i);
 
 
       let s5 = Renderer.getShader(Renderer.FBO_DEBUG_CHANNEL);

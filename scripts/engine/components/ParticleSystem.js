@@ -10,6 +10,7 @@ class ParticleSystem extends Component {
     this.additive = additive;
 
     if (parameters === undefined) parameters = {};
+    this.texture = (parameters.texture !== undefined) ? parameters.texture : Texture.makeColorTex(vec4.fromValues(1,1,1,1));
     this.numParticles = (parameters.number !== undefined) ? parameters.number : 1000;
     this.duration = (parameters.duration !== undefined) ? parameters.duration : [0.5, 2.5];
 
@@ -46,6 +47,7 @@ class ParticleSystem extends Component {
       Renderer.gpuData.vaoHandle = this._meshData.vaoHandle;
     }
 
+    this.texture.bindTexture(0);
     this.setUniforms();
 
     GL.drawElements(GL.TRIANGLES, this._meshData.indexSize, GL.UNSIGNED_SHORT, 0);

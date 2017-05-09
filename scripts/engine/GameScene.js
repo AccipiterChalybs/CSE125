@@ -3,6 +3,7 @@
  */
 
 var albedo, mat, normal;
+var particleTex;
 
 class GameScene {
   constructor(filenameList) {
@@ -17,6 +18,7 @@ class GameScene {
       albedo = new Texture('assets/texture/dungeon-stone1-albedo2.png');
       mat = new Texture('assets/texture/dungeon-stone1-mat.png', false);
       normal = new Texture('assets/texture/dungeon-stone1-normal.png', false);
+      particleTex = new Texture('assets/texture/particle_fire_test.png');
     }
   }
 
@@ -94,7 +96,7 @@ class GameScene {
               if(!IS_SERVER) teapot.getComponent("AudioSource").playSound3d("cruelangel");
               teapot.addComponent(new PlayerController());
 
-              teapot.addComponent(new ParticleSystem(true, {}));
+              teapot.addComponent(new ParticleSystem(true, {texture: particleTex}));
 
 
             }
