@@ -80,7 +80,7 @@ class NavMesh{
       for(let j = i+2; j < path.length; ){
         // Debug.log("i: ", this.vertList[path[i]].pos, "\tj: ", this.vertList[path[j]].pos);
         // Debug.log(vec3.subtract(vec3.create(), this.vertList[path[j]].pos, this.vertList[path[i]].pos));
-        let ray2D = {origin:this.vertList[path[i]].pos, direction: vec3.subtract(vec3.create(), this.vertList[path[j]].pos, this.vertList[path[i]].pos)};
+        let ray2D = {origin:path[i], direction: vec3.subtract(vec3.create(), path[j], path[i])};
         let distance = vec3.length(ray2D.direction) - 0.1;
         vec3.normalize(ray2D.direction, ray2D.direction);
         let raycastResult = false;

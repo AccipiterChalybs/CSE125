@@ -14,8 +14,8 @@ class PathToPoint extends SequenceSelector{
 
     for(let i = 0; i < newPath.length; ++i){
       let goToPt = new PrioritySelector("goToPt" + i);
-      let proximityCheck = new ProximityCheck(this.ai, NavMesh.prototype.currentNavMesh.vertList[newPath[i]].pos, 0.1);
-      let moveTo = new MoveToPoint(this.ai, NavMesh.prototype.currentNavMesh.vertList[newPath[i]].pos, this.moveSpeed);
+      let proximityCheck = new ProximityCheck(this.ai, newPath[i], 0.1);
+      let moveTo = new MoveToPoint(this.ai, newPath[i], this.moveSpeed);
 
       goToPt.addNode(proximityCheck);
       goToPt.addNode(moveTo);
