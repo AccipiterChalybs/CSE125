@@ -7,3 +7,9 @@ function startGame() {
     document.getElementById("mainMenu").style.visibility="hidden";
     initialize();
 }
+
+function menuStart() {
+    if(Debug.autoStart){
+        startGame();
+    }
+}
