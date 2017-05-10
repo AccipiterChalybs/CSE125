@@ -59,9 +59,9 @@ class DecalPass extends RenderPass
     Renderer.switchShader(Renderer.FBO_COPY);
     Renderer.deferredPass.fbo.draw();
 
-    this.copyBuffers.bindTexture(1, 0); //colour
-    this.copyBuffers.bindTexture(2, 1); //normal
-    this.copyBuffers.bindTexture(3, 2); //position
+    this.copyBuffers.bindTexture(0, 0); //colour
+    this.copyBuffers.bindTexture(1, 1); //normal
+    this.copyBuffers.bindTexture(2, 2); //position
 
     Renderer.switchShader(Renderer.DEFERRED_DECAL);
 

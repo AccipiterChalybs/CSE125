@@ -3,12 +3,14 @@
  */
 
 class Decal extends Component {
-  constructor(texture, scale = 1){
+  constructor(scale = 1, color, texture, normal){
     super();
     this.componentType = "Decal";
 
-    this.texture = texture;
     this.scale = vec3.fromValues(scale, scale, scale);
+    this.color = color;
+    this.texture = texture;
+    this.normalTexture = normal;
   }
 
   startClient() {
@@ -26,7 +28,8 @@ class Decal extends Component {
       Renderer.gpuData.vaoHandle = Decal.prototype._meshData.vaoHandle;
     }
 
-    this.texture.bindTexture(0);
+    this.texture.bindTexture(3);
+    this.normalTexture.bindTexture(4);
 
     let forward = vec3.create();
     vec3.scale(forward,this.transform.getForward(),-1);
@@ -38,6 +41,8 @@ class Decal extends Component {
     Renderer.setModelMatrix(transformMatrix);
     Renderer.currentShader.setUniform('uInvM_Matrix', mat4.invert(transformMatrix, transformMatrix), UniformTypes.mat4);
     Renderer.currentShader.setUniform('uForwardNormal', forward, UniformTypes.vec3);
+
+    Renderer.currentShader.setUniform('uDecalColor', this.color, UniformTypes.vec4);
 
     GL.drawElements(GL.TRIANGLES, Decal.prototype._meshData.indexSize, GL.UNSIGNED_SHORT, 0);
   }

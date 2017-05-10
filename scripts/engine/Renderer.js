@@ -392,10 +392,11 @@ const Renderer  = {
       Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("posTex", 2, UniformTypes.u1i);
       Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("shadowTex", 3, UniformTypes.u1i);
 
-      Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("inputTex", 0, UniformTypes.u1i);
-      Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("colourBuffer", 1, UniformTypes.u1i);
-      Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("normalBuffer", 2, UniformTypes.u1i);
-      Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("positionBuffer", 3, UniformTypes.u1i);
+      Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("colourBuffer", 0, UniformTypes.u1i);
+      Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("normalBuffer", 1, UniformTypes.u1i);
+      Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("positionBuffer", 2, UniformTypes.u1i);
+      Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("inputColorTex", 3, UniformTypes.u1i);
+      Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("inputNormalTex", 4, UniformTypes.u1i);
 
 
       Renderer.getShader(Renderer.FBO_COPY).setUniform("inputTex1", 0, UniformTypes.u1i);

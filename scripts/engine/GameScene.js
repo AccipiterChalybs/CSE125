@@ -1,7 +1,7 @@
 /**
  * Created by Accipiter Chalybs on 4/14/2017.
  */
-var cat;
+var decalTex, decalNormal;
 
 var albedo, mat, normal;
 
@@ -18,7 +18,8 @@ class GameScene {
       albedo = new Texture('assets/texture/dungeon-stone1-albedo2.png');
       mat = new Texture('assets/texture/dungeon-stone1-mat.png', false);
       normal = new Texture('assets/texture/dungeon-stone1-normal.png', false);
-      cat = new Texture('assets/texture/test_decal.png');
+      decalTex = new Texture('assets/texture/test_decal2.png');
+      decalNormal = new Texture('assets/texture/test_decal_normal.png', false);
     }
   }
 
@@ -100,7 +101,7 @@ class GameScene {
               let decal = new GameObject();
               teapot.addChild(decal);
               teapot.addComponent(new RotateOverTime(5.0));
-              decal.addComponent(new Decal(cat, 200));
+              decal.addComponent(new Decal(200, vec4.fromValues(0.5,25,0.5,1),decalTex, decalNormal));
               decal.transform.setPosition(vec3.fromValues(0, 30, 60));
               decal.transform.rotateX(Math.PI/2);
             }
