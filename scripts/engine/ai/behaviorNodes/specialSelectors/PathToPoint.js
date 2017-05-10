@@ -9,7 +9,8 @@ class PathToPoint extends SequenceSelector{
     this.moveSpeed = moveSpeed;
   }
 
-  createNewPath(newPath){
+  handleNewPath(newPath){
+    // Debug.log(newPath);
     this._children = [];
 
     for(let i = 0; i < newPath.length; ++i){

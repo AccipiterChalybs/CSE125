@@ -71,7 +71,7 @@ const aStar = {
                         path.unshift(tmpVec3);
                         parent=totalList[parent].parent;
                     }
-                    path.unshift(startPos);
+                    path.unshift(vec3.copy(vec3.create(),startPos));
                     // console.log("path",path);
                     //console.log(vertList);
                     return true;

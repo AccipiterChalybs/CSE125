@@ -17,17 +17,24 @@ class FindPath extends BehaviorTreeLeaf{
   }
 
   updateNode(){
+    if(this._destination !== BehaviorTreeNode.prototype.data["destination"]){
+      // Debug.log(this._destination, BehaviorTreeNode.prototype.data["destination"]);
+      this.setDestination(BehaviorTreeNode.prototype.data["destination"]);
+    }
+
     if(this._destinationDirty){
       this._destinationDirty = false;
 
       let path = [];
       let foundPath = NavMesh.prototype.currentNavMesh.findPath(this.ai.transform.getPosition(), this._destination, path);
+      // Debug.log(path);
 
       if(!foundPath) {
         this._currentState = BehaviorState.failure;
       }else{
         this._currentState = BehaviorState.success;
-        this._toRecvPath.createNewPath(path);
+        this._toRecvPath.handleNewPath(path);
+        this._toRecvPath.reset();
       }
     }
 

@@ -94,10 +94,12 @@ class NavMesh{
         if(raycastResult === true){
           break;
         }else{
-          path.splice(j - 1, 1);
+           path.splice(j - 1, 1);
         }
       }
     }
+
+    // Debug.log("cleaned");
   }
 
   // If the pt is on the line, the pt is considered to be INSIDE the triangle.
