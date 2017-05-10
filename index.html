@@ -16,26 +16,14 @@
     </script>
     <link href="styles/menu.css" rel="stylesheet">
 </head>
-<!--<body onload="initialize()">-->
-<body>
-<div class="container" style="margin-top: 20%">
+<!--<body onload="initialize()" style="background-image: url('assets/images/concept_environment_chamber_medival-spikes-statues.jpg');background-size: cover">-->
+<body style="background-image: url('assets/images/concept_environment_chamber_medival-spikes-statues.jpg');background-size: cover">
+<div id="mainMenu" class="container" style="margin-top: 40vh">
     <div class="row">
         <div class=".col-md-4">
-            <button>Start</button>
-        </div>
-        <div class=".col-md-4"></div>
-        <div class=".col-md-4"></div>
-    </div>
-    <div class="row">
-        <div class=".col-md-4">
-            <button>Options</button>
-        </div>
-        <div class=".col-md-4"></div>
-        <div class=".col-md-4"></div>
-    </div>
-    <div class="row">
-        <div class=".col-md-4">
-            <button>Quit</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block" style="width: 30vh" onclick="startGame()">Start</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block" style="width: 30vh" onclick="$('#lose').modal('show');">Options</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block" style="width: 30vh" onclick="quit()">Quit</button>
         </div>
         <div class=".col-md-4"></div>
         <div class=".col-md-4"></div>
@@ -46,7 +34,7 @@
     <div id="fpsLog"></div>
     <div id="exposureLog"></div>
 </div>
-<div class="container" style="margin-top: 15%;">
+<div id="progress" class="container" style="margin-top: 30vh;visibility: hidden">
     <div class="progress">
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" class="progress-bar progress-bar-success" id="progressBar" role="progressbar" style="width: 0%">
             <span id="progressBarText">Loading Progress: (0/0)</span>
@@ -63,6 +51,38 @@
                 </div>
                 <div class="modal-body">
                     <button class="btn btn-default btn-lg btn-block" type="button">Resume</button> <button class="btn btn-default btn-lg btn-block" type="button">Controls</button> <button class="btn btn-default btn-lg btn-block" type="button">Settings</button> <button class="btn btn-default btn-lg btn-block" type="button">Quit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Win Screen-->
+<div class="container">
+    <div aria-labelledby="pauseLabel" class="modal fade" id="win" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                    <h1 class="modal-title" id="winModalLabel" style="text-align: center">YOU ARE THE WINNER</h1>
+                </div>
+                <div class="modal-body">
+                    <h1>You Win</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Lost Screen -->
+<div class="container">
+    <div aria-labelledby="pauseLabel" class="modal fade" id="lose" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                    <h1 class="modal-title" id="loseLabel" style="text-align: center">LOOOOOOOOOÒSER</h1>
+                </div>
+                <div class="modal-body">
+                    <h1>You Lose</h1>
                 </div>
             </div>
         </div>
@@ -165,10 +185,7 @@
 </script>
 <script src="scripts/engine/main.js">
 </script>
-<script>
-    function quit() {
-        window.open('', '_self', ''); window.close();
-    }
+<script src="scripts/UI/mainpage.js">
 </script>
 </body>
 </html>

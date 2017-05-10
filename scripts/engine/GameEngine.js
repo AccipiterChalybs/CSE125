@@ -20,9 +20,10 @@ GameEngine.init = function () {
 };
 
 GameEngine.ready= function () {
-  if(GameEngine._StartGame){
-    GameEngine.start;
-  }
+
+    document.getElementById("progress").style.visibility="hidden";
+    GameEngine.start();
+
 };
 
 /** Start: setup everything after loading is complete, then start loop */
