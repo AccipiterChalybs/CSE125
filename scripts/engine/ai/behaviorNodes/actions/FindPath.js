@@ -17,9 +17,9 @@ class FindPath extends BehaviorTreeLeaf{
   }
 
   updateNode(){
-    if(this._destination !== BehaviorTreeNode.prototype.data["destination"]){
+    if(this._destination !== this.ai.data["destination"]){
       // Debug.log(this._destination, BehaviorTreeNode.prototype.data["destination"]);
-      this.setDestination(BehaviorTreeNode.prototype.data["destination"]);
+      this.setDestination(this.ai.data["destination"]);
     }
 
     if(this._destinationDirty){
@@ -27,7 +27,7 @@ class FindPath extends BehaviorTreeLeaf{
 
       let path = [];
       let foundPath = NavMesh.prototype.currentNavMesh.findPath(this.ai.transform.getPosition(), this._destination, path);
-      // Debug.log(path);
+      Debug.log(foundPath, path);
 
       if(!foundPath) {
         this._currentState = BehaviorState.failure;

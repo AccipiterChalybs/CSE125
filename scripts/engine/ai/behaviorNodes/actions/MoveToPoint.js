@@ -4,22 +4,23 @@
 
 class MoveToPoint extends BehaviorTreeLeaf{
   constructor(ai, destination, moveSpeed){
-    super("ActionLeaf", "MoveToPoint", ai);
+    super("Action", "MoveToPoint", ai);
     this.destination = destination;
     this.moveSpeed = moveSpeed;
+
+    this._currentState = BehaviorState.running;
   }
 
   updateNode(){
     let currPos = this.ai.transform.getPosition();
-    let newPos = vec3.create(); vec3.subtract(newPos, this.destination, currPos);
-    this.ai.transform.translate(vec3.scale(newPos, vec3.normalize(newPos, newPos), Time.deltaTime * this.moveSpeed));
-    this._currentState = BehaviorState.running;
+    let newPos = Utility.vec3.moveTowards(currPos, this.destination, Time.deltaTime * this.moveSpeed);
+    this.ai.transform.setPosition(newPos);
 
     // console.log(this.ai);
     // console.log("currPos: ", currPos);
     // console.log("dest: ", this.destination);
     // console.log("newPos: ", newPos);
-    // console.log("maths: ", vec3.scale(newPos, vec3.normalize(newPos, newPos), Time.deltaTime * this.moveSpeed));
+    // console.log("delta: ", Time.deltaTime * this.moveSpeed);
     //
     // throw new Error();
 

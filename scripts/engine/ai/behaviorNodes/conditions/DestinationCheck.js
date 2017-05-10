@@ -8,7 +8,7 @@ class DestinationCheck extends BehaviorTreeLeaf{
   }
 
   updateNode(){
-    let distance = vec3.distance(this.ai.transform.getPosition(), BehaviorTreeNode.prototype.data["destination"]);
+    let distance = vec3.distance(this.ai.transform.getPosition(), this.ai.data["destination"]);
 
     //console.log(distance);
 

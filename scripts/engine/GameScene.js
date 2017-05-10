@@ -29,7 +29,7 @@ class GameScene {
     camera.gameObject.transform.setParent(rootTest.transform);
     camera.gameObject.addComponent(new AudioListener());
     camera.gameObject.addComponent(new ZoomMouse());
-    let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 30);
+    let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 5);
     if(!IS_SERVER){
       Renderer.camera.transform.setPosition(newPosition);
       Renderer.camera.transform.getParent().gameObject.addComponent(new RotateMouse());
@@ -94,7 +94,7 @@ class GameScene {
                 //add sound to a GameObject
                 teapot.addComponent(new AudioSource());
                 //if(!IS_SERVER) teapot.getComponent("AudioSource").playSound2d("cruelangel");
-                // teapot.addComponent(new PlayerController());
+                teapot.addComponent(new PlayerController());
             }
             let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
 
@@ -173,25 +173,16 @@ class GameScene {
 
       GameObject.prototype.SceneRoot.addChild(lightCenter);
     }
-    //GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new RotateOverTime(-1));
-    // GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new BoxCollider(500, false, 20, 20, 20));
-    // GameObject.prototype.SceneRoot.transform.children[0].gameObject.getComponent("Collider").setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
-    // GameObject.prototype.SceneRoot.transform.children[0].gameObject.addComponent(new EvilController());
-    GameObject.prototype.SceneRoot.addChild(lightCenter);
 
     //TODO REMOVE ME!!!!!!!!!1!
-    GameObject.prototype.SceneRoot.transform.children[1].children = [];
-    GameObject.prototype.SceneRoot.transform.children[2].children = [];
-    rootTest.transform.setScale(1);
-    GameObject.prototype.SceneRoot.transform.setScale(0.05);
+    // GameObject.prototype.SceneRoot.transform.children[1].children = [];
+    // GameObject.prototype.SceneRoot.transform.children[2].children = [];
+    // rootTest.transform.setScale(1);
+    // GameObject.prototype.SceneRoot.transform.setScale(0.05);
     let pos = vec3.create(); vec3.set(pos, -27, 0, -9);
     let color = vec4.create(); vec4.set(color, 1, 0, 0, 1);
     let evilTeapot = Debug.drawTeapot(pos, color);
     evilTeapot.addComponent(new EvilController());
-
-    rootTest.addComponent(new BoxCollider(10));
-    rootTest.addComponent(new PlayerController());
-    GameObject.prototype.SceneRoot.addChild(rootTest);
 
     let move = vec3.create(); vec3.set(move, 0,-1,0);
     let ground = new GameObject();
@@ -203,16 +194,6 @@ class GameScene {
     ground.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);
 
     GameObject.prototype.SceneRoot.findComponents("Interactable", PhysicsEngine.sphereChecks);
-
-    // NAVMESH
-    // test/debugging zone
-    let pt = [24,0, 10];
-    let faceIndex = NavMesh.prototype.currentNavMesh.findFace(pt);
-
-    //Remove Later Testing ASTAR
-    let testStar = new aStar();
-    testStar.search(0,26,[-18.60881996154785,0,
-        -7.947876930236816],[24.61385726928711,0,-8.037052154541016]);
   }
 
   update() {

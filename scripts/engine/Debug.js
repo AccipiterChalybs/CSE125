@@ -4,10 +4,10 @@
 
 let Debug = {};
 
-Debug.clientUpdate = false; //Run the client in standalone mode, so it doesn't need a server - good for testing!
+Debug.clientUpdate = true; //Run the client in standalone mode, so it doesn't need a server - good for testing!
 Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
 Debug.debugDisplay = true;
-Debug.quickLoad = false;
+Debug.quickLoad = true;
 
 Debug.tmp_shadowTwoSideRender = true; //Var to remind me to remove this when we get in new level geometry
 
@@ -157,8 +157,9 @@ Debug.printCollisionInfo = function(collisionEvent, gameObject, isTrigger){
   }
 };
 
-Debug.printOverlapSphereInfo = function(checkingObj, distance, radius){
+Debug.printOverlapSphereInfo = function(checkingObj, distance, radius) {
   console.log("TestingObj [distance^2, radius^2]: ", checkingObj, " [" + distance + ", " + radius + "]");
+};
 
 // Debugging for NavMesh
 Debug.navMesh = {};
@@ -245,8 +246,6 @@ Debug.drawTeapot = function(pos, color = null) {
     if (color === null) {
       color = vec4.create();
       vec4.set(color, 1, 0.5, 0.1, 1);
-    }else{
-      color = color;
     }
     mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
 
@@ -273,7 +272,7 @@ Debug.drawTeapot = function(pos, color = null) {
 // Debugging for BehaviorTrees
 Debug.behaviorTree = {};
 Debug.behaviorTree.printAll = false;
-Debug.behaviorTree.printStates = false;
+Debug.behaviorTree.printStates = true;
 Debug.behaviorTree.printErrors = false;
 Debug.behaviorTree.printUniques = false;
 Debug.behaviorTree.printFailures = false;

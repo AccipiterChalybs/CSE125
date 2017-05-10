@@ -2,7 +2,7 @@
  * Created by Stephen on 4/25/2017.
  */
 
-const EVIL_MOVEMENTSPEED = 10;
+const EVIL_MOVEMENTSPEED = 4.1;
 
 class EvilController extends AIController{
   constructor(){
@@ -10,7 +10,10 @@ class EvilController extends AIController{
     this.componentType = "EvilController";
     this.movementSpeed = EVIL_MOVEMENTSPEED;
 
-    this.tmp_path = [];
+    this.data = {
+      "destination": vec3.create(),
+      "player": null
+    };
 
     // this.lastFaceIndex = -1;
     // this.oldTeapot = [];
@@ -36,6 +39,8 @@ class EvilController extends AIController{
   updateComponent(){
     super.updateComponent();
 
+    Debug.log("\n");
+
     // NAVMESH
     // test/debugging zone
 
@@ -58,38 +63,70 @@ class EvilController extends AIController{
   }
 
   _buildBehaviorTree(){
-    let root = new ConcurrentSelector("chase");
+    let root = new PrioritySelector("chase");
 
-    let dest2 = vec3.fromValues(this.patrolPath[7][0], this.patrolPath[7][1], this.patrolPath[7][2]);
-    let dest1 = vec3.fromValues(this.patrolPath[3][0], this.patrolPath[3][1], this.patrolPath[3][2]);
-    let dest0 = vec3.fromValues(this.patrolPath[0][0], this.patrolPath[0][1], this.patrolPath[0][2]);
+    let pickPlayer = new ConcurrentSelector("pickPlayer");
+    pickPlayer.addNode(new CountdownTimer(this, 5));
+    pickPlayer.addNode(new PickRandomPlayer(this));
 
-    let determineDest = new PrioritySelector("DetermineDestination");
-    let goToDest = new ConcurrentSelector("goToDest");
-    goToDest.addNode(new ProximityCheck(this, dest0, 0.1));
-    goToDest.addNode(new SetDestination(dest2));
-    let goToDest1 = new ConcurrentSelector("goToDest1");
-    goToDest1.addNode(new ProximityCheck(this, dest2, 0.1));
-    goToDest1.addNode(new SetDestination(dest1));
-    let goToDest2 = new ConcurrentSelector("goToDes2");
-    goToDest2.addNode(new ProximityCheck(this, dest1, 0.1));
-    goToDest2.addNode(new SetDestination(dest0));
-    determineDest.addNode(goToDest);
-    determineDest.addNode(goToDest1);
-    determineDest.addNode(goToDest2);
-    determineDest.addNode(new ReturnTrue());
+    let goGo = new PrioritySelector("goGo");
 
-    let pathToPt = new PathToPoint(this, EVIL_MOVEMENTSPEED);
-    let findPath = new FindPath(this, pathToPt);
+    let setPlayerDest = new ConcurrentSelector("setPlayerDest");
+    setPlayerDest.addNode(new CountdownTimer(this, 0.25));
+    setPlayerDest.addNode(new SetDestinationPlayer(this));
 
-    // add determine dest
-    root.addNode(determineDest);
-    root.addNode(findPath);
-    root.addNode(new Inverter(new DestinationCheck(this)));
-    root.addNode(pathToPt);
+    let pathToPlayer = new PathToPoint(this, EVIL_MOVEMENTSPEED);
+    let findPath = new FindPath(this, pathToPlayer);
 
-    //console.log(root);
+    let moveToPlayer = new ConcurrentSelector("moveToPlayer");
+    moveToPlayer.addNode(findPath);
+    moveToPlayer.addNode(new Inverter(new DestinationCheck(this)));
+    moveToPlayer.addNode(pathToPlayer);
+
+    goGo.addNode(setPlayerDest);
+    goGo.addNode(moveToPlayer);
+
+    root.addNode(pickPlayer);
+    root.addNode(goGo);
+
+    Debug.log(root);
 
     return root;
   }
+
+  // _buildBehaviorTree(){
+  //   let root = new ConcurrentSelector("patrol");
+  //
+  //   let dest2 = vec3.fromValues(this.patrolPath[7][0], this.patrolPath[7][1], this.patrolPath[7][2]);
+  //   let dest1 = vec3.fromValues(this.patrolPath[3][0], this.patrolPath[3][1], this.patrolPath[3][2]);
+  //   let dest0 = vec3.fromValues(this.patrolPath[0][0], this.patrolPath[0][1], this.patrolPath[0][2]);
+  //
+  //   let determineDest = new PrioritySelector("DetermineDestination");
+  //   let goToDest = new ConcurrentSelector("goToDest");
+  //   goToDest.addNode(new ProximityCheck(this, dest0, 0.1));
+  //   goToDest.addNode(new SetDestination(this, dest2));
+  //   let goToDest1 = new ConcurrentSelector("goToDest1");
+  //   goToDest1.addNode(new ProximityCheck(this, dest2, 0.1));
+  //   goToDest1.addNode(new SetDestination(this, dest1));
+  //   let goToDest2 = new ConcurrentSelector("goToDes2");
+  //   goToDest2.addNode(new ProximityCheck(this, dest1, 0.1));
+  //   goToDest2.addNode(new SetDestination(this, dest0));
+  //   determineDest.addNode(goToDest);
+  //   determineDest.addNode(goToDest1);
+  //   determineDest.addNode(goToDest2);
+  //   determineDest.addNode(new ReturnTrue());
+  //
+  //   let pathToPt = new PathToPoint(this, EVIL_MOVEMENTSPEED);
+  //   let findPath = new FindPath(this, pathToPt);
+  //
+  //   // add determine dest
+  //   root.addNode(determineDest);
+  //   root.addNode(findPath);
+  //   root.addNode(new Inverter(new DestinationCheck(this)));
+  //   root.addNode(pathToPt);
+  //
+  //   //console.log(root);
+  //
+  //   return root;
+  // }
 }

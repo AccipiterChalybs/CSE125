@@ -33,6 +33,11 @@ const aStar = {
     },
 
     search: function(faceIndex,endingFace, startPos, endPos, path){
+        if(faceIndex === endingFace){
+            path.push(startPos);
+            path.push(endPos);
+            return true;
+        }
         //initialize the open and close list
         //console.log("aster started");
         let totalList = [];
@@ -66,11 +71,11 @@ const aStar = {
                 let child=successor[i];
                 if(child===finish[0] || child===finish[1] || child===finish[2]){
                     // let path=[];
-                    let parent=currNode.parent;
-                    let tmp1Vec3=vec3.fromValues(vertList[child].pos[0],vertList[child].pos[1],vertList[child].pos[2]);
-                    let tmp2Vec3=vec3.fromValues(vertList[currNode.index].pos[0],vertList[currNode.index].pos[1],vertList[currNode.index].pos[2]);
-                    path.unshift(tmp2Vec3,tmp1Vec3,endPos);
-                    while(parent!==-1){
+                      totalList[currNode.index]=currNode;
+                      let parent=currNode.index;
+                      let tmp1Vec3=vec3.fromValues(vertList[child].pos[0],vertList[child].pos[1],vertList[child].pos[2]);
+                      path.unshift(tmp1Vec3,endPos);
+                      while(parent!==-1){
                         let ind =totalList[parent].index;
                         let tmpVec3 = vec3.fromValues(vertList[ind].pos[0],vertList[ind].pos[1],vertList[ind].pos[2]);
                         path.unshift(tmpVec3);

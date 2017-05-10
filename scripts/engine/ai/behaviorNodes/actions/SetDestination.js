@@ -3,14 +3,14 @@
  */
 
 class SetDestination extends BehaviorTreeLeaf{
-  constructor(destToSet){
-    super("ActionLeaf", "SetDestination");
+  constructor(ai, destToSet){
+    super("Action", "SetDestination", ai);
 
     this._destinationToSet = destToSet;
   }
 
   updateNode(){
-    BehaviorTreeNode.prototype.data["destination"] = this._destinationToSet;
+    this.ai.data["destination"] = this._destinationToSet;
 
     this._currentState = BehaviorTreeNode.success;
     return this._currentState;

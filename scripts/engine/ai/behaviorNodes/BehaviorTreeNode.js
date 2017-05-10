@@ -38,5 +38,3 @@ class BehaviorTreeNode{
 
   }
 }
-
-BehaviorTreeNode.prototype.data = {};

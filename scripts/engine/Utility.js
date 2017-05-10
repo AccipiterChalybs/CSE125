@@ -28,3 +28,23 @@ Utility.moveTowards = function(a, b, delta){
 
   return val;
 };
+
+Utility.randomIntFromInterval = function(min,max)
+{
+  // Code from http://stackoverflow.com/questions/4959975/generate-random-number-between-two-numbers-in-javascript
+  return Math.floor(Math.random()*(max-min+1)+min);
+};
+
+Utility.vec3 = {};
+
+Utility.vec3.moveTowards = function(a, b, delta){
+  if(vec3.distance(a, b) < delta){
+    return b;
+  }
+
+  let dir = vec3.create(); vec3.subtract(dir, b, a);
+  vec3.normalize(dir, dir);
+  vec3.scale(dir, dir, delta);
+
+  return vec3.add(dir, a, dir);
+};
