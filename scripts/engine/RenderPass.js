@@ -46,20 +46,22 @@ class DecalPass extends RenderPass
     //This is just because we can't render to textures in the bound FBO, and so need to copy them out of it.
     let width = Renderer.getWindowWidth();
     let height = Renderer.getWindowHeight();
-    this.copyBuffers = new Framebuffer(width, height, 2, false, true, [GL.RGBA16F, GL.RGBA16F]);
+    this.copyBuffers = new Framebuffer(width, height, 3, false, true, [GL.RGBA8, GL.RGBA16F, GL.RGBA16F]);
 
   }
 
   render() {
     //Copy over deferred buffers we need (due to above issue)
+    Renderer.deferredPass.buffers.bindTexture(0, 0); //colour
     Renderer.deferredPass.buffers.bindTexture(1, 1); //normal
-    Renderer.deferredPass.buffers.bindTexture(0, 2); //position
-    this.copyBuffers.bind([GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1]);
+    Renderer.deferredPass.buffers.bindTexture(2, 2); //position
+    this.copyBuffers.bind([GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2]);
     Renderer.switchShader(Renderer.FBO_COPY);
     Renderer.deferredPass.fbo.draw();
 
-    this.copyBuffers.bindTexture(1, 0); //position
+    this.copyBuffers.bindTexture(1, 0); //colour
     this.copyBuffers.bindTexture(2, 1); //normal
+    this.copyBuffers.bindTexture(3, 2); //position
 
     Renderer.switchShader(Renderer.DEFERRED_DECAL);
 
@@ -75,15 +77,12 @@ class DecalPass extends RenderPass
     GL.enable(GL.DEPTH_TEST);
     GL.depthMask(false);
     GL.enable(GL.CULL_FACE);
-    GL.enable(GL.BLEND);
-    GL.blendFuncSeparate(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA, GL.ZERO, GL.ONE);
 
     for (let decal of Renderer.renderBuffer.decal) {
       decal.draw();
     }
 
     GL.depthMask(true);
-    GL.disable(GL.BLEND);
   }
 }
 

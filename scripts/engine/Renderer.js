@@ -393,12 +393,14 @@ const Renderer  = {
       Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("shadowTex", 3, UniformTypes.u1i);
 
       Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("inputTex", 0, UniformTypes.u1i);
-      Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("positionBuffer", 1, UniformTypes.u1i);
+      Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("colourBuffer", 1, UniformTypes.u1i);
       Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("normalBuffer", 2, UniformTypes.u1i);
+      Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("positionBuffer", 3, UniformTypes.u1i);
 
 
       Renderer.getShader(Renderer.FBO_COPY).setUniform("inputTex1", 0, UniformTypes.u1i);
       Renderer.getShader(Renderer.FBO_COPY).setUniform("inputTex2", 1, UniformTypes.u1i);
+      Renderer.getShader(Renderer.FBO_COPY).setUniform("inputTex3", 2, UniformTypes.u1i);
   },
 
   loop: function () {

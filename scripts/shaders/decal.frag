@@ -3,8 +3,9 @@
 precision mediump float;
 
 uniform sampler2D inputTex;
-uniform sampler2D positionBuffer;
+uniform sampler2D colourBuffer;
 uniform sampler2D normalBuffer;
+uniform sampler2D positionBuffer;
 
 uniform mat4 uInvM_Matrix;
 
@@ -30,7 +31,9 @@ void main() {
 
     if (dot(normal, uForwardNormal) <= 0.1) discard;
 
+    vec3 destColour = texture(colourBuffer, texCoord).rgb;
+
     //need to flip y of images
     vec4 color = texture(inputTex, vec2(objPos.x + 0.5, 0.5 - objPos.y));
-    fragColor = color.rgba;
+    fragColor = vec4((color.rgb * color.a) + (destColour.rgb * (1.0-color.a)), 1.0);
 }
