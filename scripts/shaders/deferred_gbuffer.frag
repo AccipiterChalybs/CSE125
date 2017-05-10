@@ -15,8 +15,8 @@ in vec3 vBitangent;
 
 const vec3 teamColor = vec3(1,0,0);
 
-layout (location = 0) out vec4 ColorOut; //color texture - rgb: color | a: metalness
-layout (location = 1) out vec4 NormOut; //normal texture - rgb: normal | a: IOR
+layout (location = 0) out vec4 ColorOut; //color texture - rgb: color | a: blank
+layout (location = 1) out vec4 NormOut; //normal texture - rgb: normal | a: metalness
 layout (location = 2) out vec4 PosOut; //position texture - rgb: position | a: roughness
 
 void main()
@@ -30,10 +30,10 @@ void main()
     mat3 model = mat3(tangent, binormal, norm);
 
 	vec4 color = texture(colorTex, vTexCoord);
-    ColorOut = vec4(teamColor * (1.0-color.a) + color.rgb, mat.x);
+    ColorOut = vec4(teamColor * (1.0-color.a) + color.rgb, 1.0);
 
     norm = 2.0 * texture(normalTex, vTexCoord).xyz - vec3(1.0);
-    NormOut = vec4(normalize(model * norm) * 0.5 + 0.5, 1.0);//TODO mat.y);
+    NormOut = vec4(normalize(model * norm) * 0.5 + 0.5, mat.x);
 
     PosOut = vec4(vPosition.xyz/vPosition.w, mat.z);
 }

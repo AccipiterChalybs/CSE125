@@ -193,6 +193,12 @@ class GameObject {
         }
       }
 
+
+      let decal = this.getComponent('Decal');
+      if (decal && decal !== null) {
+        Renderer.renderBuffer.decal.push(decal);
+      }
+
       /*
         GPUEmitter* emitter;
         if ((emitter = getComponent<GPUEmitter>()) != nullptr) {
