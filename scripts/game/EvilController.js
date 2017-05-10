@@ -70,7 +70,7 @@ class EvilController extends AIController{
     goToDest.addNode(new SetDestination(dest2));
     let goToDest1 = new ConcurrentSelector("goToDest1");
     goToDest1.addNode(new ProximityCheck(this, dest2, 0.1));
-    goToDest1.addNode(new SetDestination(dest0));
+    goToDest1.addNode(new SetDestination(dest1));
     let goToDest2 = new ConcurrentSelector("goToDes2");
     goToDest2.addNode(new ProximityCheck(this, dest1, 0.1));
     goToDest2.addNode(new SetDestination(dest0));

@@ -15,20 +15,20 @@ class pQueue{
     }
     search(index,priority){
         for(let i=0;i<this.data.length;i++){
-            if(this.data[i][0].index===index) {// && this.data[i][1]<=priority){
+            if(this.data[i][0].index===index && this.data[i][1]<=priority){
                 //already inside
                 return true;
             }
-            return false;
         }
+        return false;
     }
 }
 
 const aStar = {
     distance: function(pos0,pos1){
-        let dist1=Math.abs(pos1.x-pos0.x);
-        let dist2=Math.abs(pos1.y-pos0.y);
-        let dist3=Math.abs(pos1.z-pos0.z);
+        let dist1=Math.abs(pos1[0]-pos0[0]);
+        let dist2=Math.abs(pos1[1]-pos0[1]);
+        let dist3=Math.abs(pos1[2]-pos0[2]);
         return dist1+dist2+dist3;
     },
 
@@ -49,6 +49,11 @@ const aStar = {
         while(openList.size()>0){
             //Debug.assert(i++<200);
             let currNode=openList.pop();
+
+            if(currNode.index !== -1 && totalList[currNode.index]!==null){
+              continue;
+            }
+
             //console.log("size: ", openList.size());
             let successor=[];
             if(currNode.index===-1){
@@ -98,7 +103,7 @@ const aStar = {
                     continue;
                 }
                 //else add to the open list
-                openList.push(childNode);
+                openList.push(childNode, childNode.fValue);
             }
             //add currNode to close list
             //closeList.push(currNode,currNode.fValue);
