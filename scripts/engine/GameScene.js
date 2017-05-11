@@ -67,7 +67,7 @@ class GameScene {
               let mat = new Material(Renderer.getShader(Renderer.DEFERRED_PBR_SHADER));
 
               let color = vec4.create();
-              vec4.set(color, 1, 0.5, 0.1, 1);
+              vec4.set(color, 0.81, 0.81, 0.81, 1);
               mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
 
               vec4.set(color, 0.5, 0.5, 1, 1);
@@ -158,20 +158,36 @@ class GameScene {
       //TODO account for possibility of currentPlayer not set yet
       Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo(PlayerTable.players[PlayerTable.currentPlayer]));
 
-      let light = new GameObject();
-      let lightComp = new DirectionalLight(true);
-      light.addComponent(lightComp);
-      let lightPos = vec3.create();
-      vec3.set(lightPos, 0, 0, 0);
-      light.transform.setPosition(lightPos);
-      light.transform.rotateX(-Math.PI / 4.0);
+      Renderer.directionalLight = new GameObject();
+      Renderer.directionalLight.setName("DirectionalLight");
+      Renderer.directionalLight.addComponent(new DirectionalLight(true));
+      Renderer.directionalLight.addComponent(new ClientStickTo(Renderer.camera.transform.getParent().gameObject));
+      Renderer.directionalLight.transform.rotateY(-Math.PI / 3.0);
+      Renderer.directionalLight.transform.rotateX(-Math.PI / 4.0);
 
-      let lightCenter = new GameObject();
-      lightCenter.addChild(light);
-      lightCenter.addComponent(new RotateOverTime(2.5));
-
-      GameObject.prototype.SceneRoot.addChild(lightCenter);
+      Renderer.directionalLight.getComponent("Light").color = vec3.fromValues(0.16, 0.32, 0.64);
     }
+
+    let light = new GameObject();
+    let lightComp = new PointLight(true);
+    lightComp.color = vec3.fromValues(5, 2.5, 0);
+    lightComp.exponentialFalloff = 0.25;
+    light.addComponent(lightComp);
+    let lightPos = vec3.create();
+    vec3.set(lightPos, 10, 2.5, 0);
+
+    //For testing purposes
+    /*light.addComponent(new Mesh("Sphere_Icosphere"));
+    light.getComponent("Mesh").setMaterial(Debug.makeDefaultMaterial());*/
+    //light.transform.scale(0.25);
+
+    light.transform.setPosition(lightPos);
+
+    let lightCenter = new GameObject();
+    lightCenter.addChild(light);
+    lightCenter.addComponent(new RotateOverTime(2.5));
+
+    GameObject.prototype.SceneRoot.addChild(lightCenter);
 
     //let move = vec3.create(); vec3.set(move, 0, 500, 64);
     let move = vec3.create(); vec3.set(move, 0,-1,0);
@@ -195,5 +211,6 @@ class GameScene {
     }
 
     if (!IS_SERVER) Renderer.camera.transform.getParent().gameObject.updateClient();
+    if (!IS_SERVER) if (Renderer.directionalLight) Renderer.directionalLight.updateClient();
   }
 }

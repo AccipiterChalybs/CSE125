@@ -24,6 +24,8 @@ class Component
     if (this.updateComponent){
       this.update = this.updateComponent;
       this.updateComponent();
+    } else {
+      this.update = function() {};
     }
   }
 
@@ -32,6 +34,8 @@ class Component
     if(this.updateComponentClient){
       this.updateClient = this.updateComponentClient;
       this.updateComponentClient();
+    } else {
+      this.updateClient = function() {};
     }
   }
 
