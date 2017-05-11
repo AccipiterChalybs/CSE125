@@ -4,7 +4,7 @@
 
 const MAX_ZOOM = 5;
 const MIN_ZOOM = 1;
-const ZOOM_SCALE = .05;
+const ZOOM_SCALE = 0.05;
 
 class ZoomMouse extends Component{
   constructor(){

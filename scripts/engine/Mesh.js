@@ -8,7 +8,7 @@ class Mesh extends Component {
         super();
         this.componentType = "Mesh";
         this.name = name;
-        if (!Mesh.prototype.meshMap.hasOwnProperty(name)) throw new Error();
+        if (!Mesh.prototype.meshMap.hasOwnProperty(name)) throw new Error('No mesh of name\"'+name+'\" found.');
     }
 
     draw() {

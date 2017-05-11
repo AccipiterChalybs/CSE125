@@ -6,12 +6,14 @@ var albedo, mat, normal;
 var particleTex;
 
 class GameScene {
-  constructor(filenameList) {
+  constructor(sceneFile, meshFileList) {
     GameObject.prototype.SceneRoot = new GameObject();
     //Start loads here, do stuff with created objects in start()
-    for (let filename of filenameList) {
-        ObjectLoader.loadScene(filename); //TODO add callback to group these together
+    for (let filename of meshFileList) {
+        ObjectLoader.loadScene(filename);
     }
+
+    SceneLoader.loadScene(sceneFile);
 
     //TODO this will be moved into the JSON files
     if (!IS_SERVER) {
@@ -37,18 +39,7 @@ class GameScene {
     //GameObject.prototype.SceneRoot.transform.children[0].gameObject.getComponent('Animation').play(0, true);
 
 
-    GameObject.prototype.SceneRoot.transform.setScale(1);
-
-    let moveBack = vec3.create(); vec3.set(moveBack, 3, 0, 0);
-    GameObject.prototype.SceneRoot.transform.translate(moveBack);
-
-    GameObject.prototype.SceneRoot.transform.children[0].children.forEach(function(child){
-      if (child.gameObject.getComponent('Mesh')) {
-        child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.COLOR, albedo);
-        child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.MAT, mat);
-        child.gameObject.getComponent('Mesh').material.setTexture(MaterialTexture.NORMAL, normal);
-      }
-    });
+    GameObject.prototype.SceneRoot.transform.children[0].setScale(1);
 
     let rotation = quat.create();
     quat.rotateX(rotation, rotation, -Math.PI/2);
@@ -59,7 +50,7 @@ class GameScene {
     let metalNum = 10;
     let roughNum = 10;
     let separation = 0.5;
-    let yHeight = 20;
+    let yHeight = 1;
     for (let x=0; x<metalNum; ++x) {
         for (let y=0; y<roughNum; ++y) {
             let teapot = new GameObject();
@@ -90,6 +81,7 @@ class GameScene {
               teapot.addComponent(mesh);
             }
 
+          let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
             if (x===5 && y===5) {
               //add sound to a GameObject
               teapot.addComponent(new AudioSource());
@@ -98,9 +90,8 @@ class GameScene {
 
               teapot.addComponent(new ParticleSystem(true, {texture: particleTex}));
 
-
+              pos = vec3.fromValues(5,0,0);
             }
-            let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
 
             if(x===1 && y===1){
               pos[1] = 0;
@@ -125,7 +116,7 @@ class GameScene {
         }
     }
 
-    GameObject.prototype.SceneRoot.transform.gameObject.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);
+    //GameObject.prototype.SceneRoot.transform.gameObject.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);
     // GameObject.prototype.SceneRoot.transform.children[0].children[1].gameObject.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);
     GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.getComponent("Collider").setLayer(FILTER_PLAYER);
 
@@ -171,27 +162,6 @@ class GameScene {
 
       Renderer.directionalLight.getComponent("Light").color = vec3.fromValues(0.16, 0.32, 0.64);
     }
-
-    let light = new GameObject();
-    let lightComp = new PointLight(true);
-    lightComp.color = vec3.fromValues(5, 2.5, 0);
-    lightComp.exponentialFalloff = 0.25;
-    light.addComponent(lightComp);
-    let lightPos = vec3.create();
-    vec3.set(lightPos, 10, 2.5, 0);
-
-    //For testing purposes
-    /*light.addComponent(new Mesh("Sphere_Icosphere"));
-    light.getComponent("Mesh").setMaterial(Debug.makeDefaultMaterial());*/
-    //light.transform.scale(0.25);
-
-    light.transform.setPosition(lightPos);
-
-    let lightCenter = new GameObject();
-    lightCenter.addChild(light);
-    lightCenter.addComponent(new RotateOverTime(2.5));
-
-    GameObject.prototype.SceneRoot.addChild(lightCenter);
 
     //let move = vec3.create(); vec3.set(move, 0, 500, 64);
     let move = vec3.create(); vec3.set(move, 0,-1,0);

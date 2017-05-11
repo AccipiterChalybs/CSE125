@@ -16,7 +16,38 @@ GameEngine._StartGame = false;
 /** Init: starts loading objects */
 GameEngine.init = function () {
   PhysicsEngine.init();
-  GameEngine.currentScene = new GameScene(['assets/scenes/Primatives.json','assets/scenes/teapots.json', 'assets/scenes/ExampleLevel.json']);
+
+  let sceneFile = 'assets/scenes/mainScene.json';
+  let meshFiles = ['assets/scenes/Primatives.json','assets/scenes/teapots.json', 'assets/scenes/ExampleLevel.json',
+    'assets/meshes/Altar.1.json',
+    'assets/meshes/Altar.2.json',
+    'assets/meshes/Ceiling.1.json',
+    'assets/meshes/Ceiling.2.json',
+    'assets/meshes/Door.1.json',
+    'assets/meshes/DoorFrame.1.json',
+    'assets/meshes/DoorFrame.2.json',
+    'assets/meshes/FloorTiles.1.json',
+    'assets/meshes/FloorTiles.2.json',
+    'assets/meshes/FloorTiles.3.json',
+    'assets/meshes/Ground_tiled.1.json',
+    'assets/meshes/Pillar_round.1.json',
+    'assets/meshes/Pillar_round.2.json',
+    'assets/meshes/Pillar_round.3.json',
+    'assets/meshes/Pillar_square.1.json',
+    'assets/meshes/Pillar_square.2.json',
+    'assets/meshes/Railing.1.json',
+    'assets/meshes/Rock.1.json',
+    'assets/meshes/Rock.2.json',
+    'assets/meshes/Rock.3.json',
+    'assets/meshes/Rock.4.json',
+    'assets/meshes/Statue.1.json',
+    'assets/meshes/Statue.2.json',
+    'assets/meshes/Step.1.json',
+    'assets/meshes/Wall_ornate.1.json',
+    'assets/meshes/Wall_ornate.2.json',
+    'assets/meshes/Wall_rock.1.json',
+    'assets/meshes/Wall_rock.2.json',];
+  GameEngine.currentScene = new GameScene(sceneFile, meshFiles);
 };
 
 GameEngine.ready= function () {

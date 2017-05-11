@@ -172,6 +172,7 @@ class DeferredPass extends RenderPass
             }
             else //if directional light
             {
+              continue;//TODO REMOVE
                 GL.cullFace(GL.BACK);
                 GL.disable(GL.STENCIL_TEST);
                 if(d.isShadowCaster && d.fbo && !d.cubeShadow)
@@ -212,7 +213,7 @@ class DeferredPass extends RenderPass
         Renderer.currentShader.setUniform("uLightPosition", vec3.create(), UniformTypes.vec3);
         Renderer.currentShader.setUniform("uV_Matrix", mat4.create(), UniformTypes.mat4);
         Renderer.currentShader.setUniform("uP_Matrix", mat4.create(), UniformTypes.mat4);
-        GL.drawElements(GL.TRIANGLES, currentEntry.indexSize, GL.UNSIGNED_SHORT, 0);
+       // GL.drawElements(GL.TRIANGLES, currentEntry.indexSize, GL.UNSIGNED_SHORT, 0);
         Renderer.currentShader.setUniform("uP_Matrix", Renderer.perspective, UniformTypes.mat4);
 
 
@@ -422,7 +423,7 @@ class BloomPass extends RenderPass
                 this._deferredPass.buffers.draw();
               }
               GL.viewport(0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight()); //reset viewport
-            }
+            } else {Debug.currentLightIndex++;}
             break;
           default:
             break;

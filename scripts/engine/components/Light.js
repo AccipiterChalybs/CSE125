@@ -54,7 +54,7 @@ class PointLight extends Light{
       if(this.isShadowCaster)
       {
         this.cubeShadow = true;
-        this.fbo = Framebuffer.generateCubeMapArray(512, 512, true);
+        this.fbo = Framebuffer.generateCubeMapArray(128, 128, true);
       }
     }
 

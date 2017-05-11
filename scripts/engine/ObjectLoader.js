@@ -24,42 +24,15 @@ class ObjectLoader {
         }
 
         let lights = {};
-     /*TODO re-add
-        for (let i=0; i<scene.mNumLights; ++i) {
-            let l = scene.mLight[i];
-
-            let light = null;
-
-            if (l.mType === "aiLightSource_POINT") {
-                light = new PointLight();
-            } else if (l.mType === "aiLightSource_DIRECTIONAL") {
-                light = new DirectionalLight();
-            } else {
-                light = new SpotLight();
-            }
-            light.color = vec3(l.mColorDiffuse.r, l.mColorDiffuse.g, l.mColorDiffuse.b);
-            //light.constantFalloff = l.mAttenuationConstant;
-            lights[l.mName]=light;
-        }*/
-
         let loadingAcceleration = {};
 
         let retScene = ObjectLoader._parseNode(scene, scene.rootnode, filename, loadingAcceleration, lights);
-
-        //TODO bad hack - REMOVE THIS!!!
-        if (filename !== "assets/scenes/teapots.json" && filename !== "assets/scenes/Primatives.json") {
-          GameObject.prototype.SceneRoot.addChild(retScene);
-        }
-
 
         //TODO this looks incorrect - might need to put inside the recursive parseNode?
         if ("animations" in scene) {
             retScene.addComponent(new Animation(scene, loadingAcceleration));
             ObjectLoader.linkRoot(retScene.getComponent("Animation"), retScene.transform);
         }
-
-        //TODO REMOVE THIS!! (When proper scene loading is in)
-        ObjectLoader.loadCollision(GameObject.prototype.SceneRoot, "assets/scenes/ExampleLevel_Colliders.json")
 
         GameEngine.completeLoading(loadId);
         return retScene;
