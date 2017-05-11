@@ -50,15 +50,27 @@ class Collider extends Component{
 
   updateComponent(){
     //this.body.angularVelocity.set(this.body.angularVelocity.x / 2, this.body.angularVelocity.y / 2, this.body.angularVelocity.z / 2);
-    let newPos = vec3.create();
-    vec3.set(newPos, this.body.position.x, this.body.position.y, this.body.position.z);
-    this.transform.setPosition(newPos);
+    if (this.layer !== FILTER_KINEMATIC)
+    {
+      let newPos = vec3.create();
+      vec3.set(newPos, this.body.position.x, this.body.position.y, this.body.position.z);
+      this.transform.setPosition(newPos);
 
-    if(!this.freezeRotation){
-      let newRot = quat.fromValues(this.body.quaternion.x, this.body.quaternion.y,
-        this.body.quaternion.z, this.body.quaternion.w);
+      if(!this.freezeRotation){
+        let newRot = quat.fromValues(this.body.quaternion.x, this.body.quaternion.y,
+          this.body.quaternion.z, this.body.quaternion.w);
 
-      this.transform.setRotation(newRot);
+        this.transform.setRotation(newRot);
+      }
+    }else{
+      this.body.position.x = this.transform.getWorldPosition()[0];
+      this.body.position.y = this.transform.getWorldPosition()[1];
+      this.body.position.z = this.transform.getWorldPosition()[2];
+
+      this.body.quaternion.x = this.transform.getRotation()[0];
+      this.body.quaternion.y = this.transform.getRotation()[1];
+      this.body.quaternion.z = this.transform.getRotation()[2];
+
     }
   }
 

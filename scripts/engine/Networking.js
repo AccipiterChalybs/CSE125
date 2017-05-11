@@ -32,6 +32,7 @@ Networking.listeners = {
       }
     }
     PlayerTable.applySerialize(data.players);
+
   },
   client_get_playerId: (socket, data)=> {
     PlayerTable.currentPlayer = data.playerId;
@@ -50,6 +51,7 @@ Networking.update = function () {
   data.f = Renderer.camera.transform.getForward();
   data.s = Input.getAxis('sing');
   data.w = Input.getAxis('walk');
+  data.a = Input.getAxis('action');
   Networking.socket.emit('server_input_data', data);
 };
 

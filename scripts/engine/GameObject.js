@@ -139,6 +139,14 @@ class GameObject {
     gameObject.transform._parent = this.transform;
   }
 
+  removeChildFromParent(){
+    Debug.log("I have spliced");
+    Debug.log(this.transform.getParent().children.length);
+    this.transform.getParent().children.splice(this.transform.getParent().children.indexOf(this.transform), 1);
+    Debug.log(this.transform.getParent().children.length);
+
+  }
+
   isChildOf(gameObject) {
     let parent = this.transform.parent;
     while (parent !== null) {

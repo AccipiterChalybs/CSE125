@@ -12,6 +12,7 @@ const FILTER_LEVEL_GEOMETRY = 2;
 const FILTER_TRIGGER = 4;
 const FILTER_PLAYER = 8;
 const FILTER_ENEMY = 16;
+const FILTER_KINEMATIC = 32;
 
 PhysicsEngine.world = new CANNON.World();
 PhysicsEngine.bodyMap = {};
@@ -29,6 +30,7 @@ PhysicsEngine.init = function(){
   PhysicsEngine.layers[FILTER_TRIGGER] = [];
   PhysicsEngine.layers[FILTER_PLAYER] = [];
   PhysicsEngine.layers[FILTER_ENEMY] = [];
+  PhysicsEngine.layers[FILTER_KINEMATIC] = [];
 
   //PhysicsEngine.world.addEventListener("beginContact", function(e){console.log("begin contact")});
 };
@@ -120,28 +122,39 @@ PhysicsEngine.getLayers = function(mask){
   if((mask&FILTER_ENEMY)!==0){
     bodies = bodies.concat(PhysicsEngine.layers[FILTER_ENEMY]);
   }
+  if((mask&FILTER_KINEMATIC)!==0){
+    bodies = bodies.concat(PhysicsEngine.layers[FILTER_KINEMATIC]);
+  }
   return bodies;
 };
 
 PhysicsEngine.raycastClosest = function(origin,direction,maxDistance,mask,hit){
 
-  let closestResult = new CANNON.RaycastResult();
   let scaledDir = vec3.create();vec3.scale(scaledDir,direction,maxDistance); vec3.add(scaledDir,origin,scaledDir);
+  // Debug.drawTeapot(origin,color=[1,0,0,1]);
+  // Debug.drawTeapot(scaledDir,color=[0,1,0,1]);
   let cannonOrigin = {x:origin[0],y:origin[1],z:origin[2]};
   let cannonTo = {x:scaledDir[0],y:scaledDir[1],z:scaledDir[2]};
   let layers = PhysicsEngine.getLayers(mask);
+  // Debug.log(layers);
   let closest = maxDistance;
+  let isHit = false;
+  let bodyId = -1;
   PhysicsEngine.world.raycastAll(cannonOrigin,cannonTo, {},function(result){
     if(layers.indexOf(result.body.id)>-1 && result.hasHit && result.distance<closest) {
+      isHit = true;
       closest = result.distance;
-      closestResult = result;
+      bodyId = result.body.id;
+
     }
   });
-  if(closestResult.hasHit){
+  if(isHit){
     // Debug.log(result);
     hit.distance =closest;
     let newPos = vec3.create();vec3.scale(newPos,direction,hit.distance);vec3.add(newPos,origin,newPos);
     hit.position = newPos;
+    hit.collider = PhysicsEngine.bodyMap[bodyId];
+
     return true;
   }
   return false;

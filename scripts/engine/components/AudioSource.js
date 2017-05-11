@@ -18,17 +18,17 @@ class AudioSource extends Component{
     this.frameSkip = 0;
   }
 
-  start(){
+  start() {
     this.gameObject.addComponentToSerializeableList(this);
   }
 
-  startClient(){
+  startClient() {
     this.gameObject.addComponentToSerializeableList(this);
   }
 
   updateComponentClient() {
     if (this.sound === null) {
-      //console.error("no sound has been set");
+      console.error('no sound has been set');
       return;
     }
 
@@ -44,7 +44,7 @@ class AudioSource extends Component{
         this.playSound2d(this.name);
         break;
       case AudioState.play3dSound:
-        this.playSound3d(this.name,this.panObj);
+        this.playSound3d(this.name, this.panObj);
         break;
       case AudioState.resume:
         this.resumeSound();
@@ -58,19 +58,25 @@ class AudioSource extends Component{
   updateComponent() {
     switch (this.state) {
       case AudioState.play2dSound:
-        this.state = AudioState.noSound;
-        this.serializeDirty = true;
+        if (!this.serializeDirty) {
+          this.state = AudioState.noSound;
+          this.serializeDirty = true;
+        }
+
         break;
       case AudioState.play3dSound:
-        this.state = AudioState.noSound;
-        this.serializeDirty = true;
+        if (!this.serializeDirty) {
+          this.state = AudioState.noSound;
+          this.serializeDirty = true;
+        }
+
         break;
     }
     this.frameSkip++;
   }
 
-  setState(state){
-    if (this.frameSkip > 100){
+  setState(state) {
+    if (this.frameSkip > 100) {
       this.frameSkip = 0;
       this.state = state;
       this.serializeDirty = true;
@@ -154,12 +160,13 @@ class AudioSource extends Component{
   }
 
   serialize() {
-    if(this.serializeDirty){
+    if (this.serializeDirty) {
       let retVal = {};
       retVal.s = this.state;
       this.serializeDirty = false; // Dont know if need
       return retVal;
     }
+
     return null;
   }
 

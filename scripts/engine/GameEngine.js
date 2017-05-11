@@ -51,12 +51,12 @@ GameEngine.loop = function () {
   }
 
   GameEngine.currentScene.update();
+  GameObject.prototype.SceneRoot.updateClient();
 
   if (Debug.clientUpdate) {
     GameObject.prototype.SceneRoot.update();
   }
 
-  GameObject.prototype.SceneRoot.updateClient();
 
   if (!IS_SERVER) {
     Renderer.loop();

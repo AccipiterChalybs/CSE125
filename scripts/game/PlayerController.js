@@ -7,6 +7,7 @@ const WALK_SPEED = 2;
 const SING_SPEED = 0.8;
 const PLAYER_ACCELERATION = 4;
 const COOLDOWN_SINGING = 0.1;   // In seconds
+const CHAR_NAME = "CAIN"; // CUZ I GOT 1 KEY and 0 bombs
 
 const PlayerState = {
   default: "default",
@@ -27,7 +28,9 @@ class PlayerController extends Component{
     this.z = 0;
     this.singing = 0;
     this.walking = 0;
+    this.action = 0;
     this.forward = vec3.create(); vec3.set(this.forward,0,0,-1);
+    this.keys = 0;
 
     this._collider = null;
     this._singer = null;
@@ -35,11 +38,13 @@ class PlayerController extends Component{
     this._nextSingTime = 0;
     this._lastSingInput = 0;
     this._currentState = PlayerState.default;
+    this.injured = true;
   }
 
   start(){
     this._collider = this.transform.gameObject.getComponent("Collider");
     this._singer = this.transform.gameObject.getComponent("Sing");
+    this._looker = this.transform.gameObject.getComponent("Look");
     this._collider.setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
     this._collider.setFreezeRotation(true);
   }
@@ -49,7 +54,7 @@ class PlayerController extends Component{
   }
 
   updateComponentClient(){
-    if(this.singing === 1 && Time.time >= this._nextSingTime) {
+    if(!this.injured&& this.singing === 1 && Time.time >= this._nextSingTime) {
       this._singingSrc.resumeSound();
     }else{
       this._singingSrc.pauseSound();
@@ -65,25 +70,28 @@ class PlayerController extends Component{
     {
       this.x = Input.getAxis('horizontal');
       this.z = Input.getAxis('vertical');
-      this.singing = Input.getAxis('sing');
       this.walking = Input.getAxis('walk');
+      this.singing = Input.getAxis('sing');
+      this.action = Input.getAxis("action");
 
       this.forward = Renderer.camera.transform.getForward();
     }
 
     if(this.singing === 0 && this._lastSingInput === 1){
       this._nextSingTime = Time.time + COOLDOWN_SINGING;
-      this._singingSrc.pauseSound();
+      // if(!IS_SERVER) this._singingSrc.pauseSound();
     }
 
     this._lastSingInput = this.singing;
 
     if(this._currentState === PlayerState.cantMove){
 
-    }else if(this.singing === 1 && Time.time >= this._nextSingTime) {
+    }else if(!this.injured && this.singing === 1 && Time.time >= this._nextSingTime) {
       this._currentState = PlayerState.singing;
+      //if !injured
       this._singer.sing();
-      this._singingSrc.resumeSound();
+      // if(!IS_SERVER) this._singingSrc.resumeSound();
+      //
     }else if(this.walking === 1){
       this._currentState = PlayerState.walking;
     }else{
@@ -93,7 +101,12 @@ class PlayerController extends Component{
     if(this._currentState !== PlayerState.cantMove) {
       this.movement();
     }
+
+    if(this.action === 1){
+      this._looker.look();
+    }
   }
+
 
   movement(){
     if(this._currentState === PlayerState.singing){
