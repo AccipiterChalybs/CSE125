@@ -32,9 +32,17 @@ class ForwardPass extends RenderPass
 class ParticlePass extends RenderPass
 {
     render(){
-        for (let mesh of Renderer.renderBuffer.particle) {
-            mesh.draw();
-        }
+      GL.enable(GL.BLEND); //Blend function is specified on a per-particle system basis
+      GL.depthMask(false);
+
+      Renderer.switchShader(Renderer.PARTICLE_SHADER);
+
+      for (let ps of Renderer.renderBuffer.particle) {
+          ps.draw();
+      }
+
+      GL.depthMask(true);
+      GL.disable(GL.BLEND);
     }
 }
 

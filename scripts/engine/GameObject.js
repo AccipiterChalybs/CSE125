@@ -193,6 +193,11 @@ class GameObject {
         }
       }
 
+      let ps = this.getComponent('ParticleSystem');
+      if (ps && ps !== null) {
+        Renderer.renderBuffer.particle.push(ps);
+      }
+
       /*
         GPUEmitter* emitter;
         if ((emitter = getComponent<GPUEmitter>()) != nullptr) {
