@@ -272,7 +272,7 @@ Debug.drawTeapot = function(pos, color = null) {
 // Debugging for BehaviorTrees
 Debug.behaviorTree = {};
 Debug.behaviorTree.printAll = false;
-Debug.behaviorTree.printStates = true;
+Debug.behaviorTree.printStates = false;
 Debug.behaviorTree.printErrors = false;
 Debug.behaviorTree.printUniques = false;
 Debug.behaviorTree.printFailures = false;

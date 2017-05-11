@@ -93,7 +93,7 @@ class GameScene {
             if (x===5 && y===5) {
                 //add sound to a GameObject
                 teapot.addComponent(new AudioSource());
-                //if(!IS_SERVER) teapot.getComponent("AudioSource").playSound2d("cruelangel");
+                if(!IS_SERVER) teapot.getComponent("AudioSource").playSound2d("cruelangel");
                 teapot.addComponent(new PlayerController());
             }
             let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
@@ -174,11 +174,6 @@ class GameScene {
       GameObject.prototype.SceneRoot.addChild(lightCenter);
     }
 
-    //TODO REMOVE ME!!!!!!!!!1!
-    // GameObject.prototype.SceneRoot.transform.children[1].children = [];
-    // GameObject.prototype.SceneRoot.transform.children[2].children = [];
-    // rootTest.transform.setScale(1);
-    // GameObject.prototype.SceneRoot.transform.setScale(0.05);
     let pos = vec3.create(); vec3.set(pos, -27, 0, -9);
     let color = vec4.create(); vec4.set(color, 1, 0, 0, 1);
     let evilTeapot = Debug.drawTeapot(pos, color);

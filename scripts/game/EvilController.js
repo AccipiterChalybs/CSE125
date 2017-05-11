@@ -89,7 +89,7 @@ class EvilController extends AIController{
     root.addNode(pickPlayer);
     root.addNode(goGo);
 
-    Debug.log(root);
+    // Debug.log(root);
 
     return root;
   }

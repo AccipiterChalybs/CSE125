@@ -58,8 +58,8 @@ class NavMesh{
       return false;
     }
 
-    Debug.log("startFace: " + startFace);
-    Debug.log("endFace: " + endFace);
+    // Debug.log("startFace: " + startFace);
+    // Debug.log("endFace: " + endFace);
 
     let searchResult = aStar.search(startFace, endFace, startPos, endPos, path);
     if(!searchResult){
