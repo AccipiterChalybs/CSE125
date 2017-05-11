@@ -50,16 +50,20 @@ const SceneLoader = {
     let pos = vec3.fromValues.apply(vec3, currentNode["Transform"].position);
     pos[2] = -pos[2];
     //TODO may need to edit rotation due to z-axis change
+    /*
     let w=currentNode["Transform"].rotation[0];
     let x=currentNode["Transform"].rotation[1];
     let y=currentNode["Transform"].rotation[2];
-    let z=currentNode["Transform"].rotation[3];
-    let rotate = quat.fromValues.apply(quat, [x, y, z, w]);
+    let z=currentNode["Transform"].rotation[3];*/
+    let rotate = quat.create();//quat.fromValues.apply(quat, [x, y, z, w]);
+    quat.rotateY(rotate, rotate, -1*(currentNode["Transform"].rotation[1]+ 180) / 180 * Math.PI);
+    quat.rotateX(rotate, rotate, currentNode["Transform"].rotation[0] / 180 * Math.PI);
+    quat.rotateZ(rotate, rotate, -1 * currentNode["Transform"].rotation[2] / 180 * Math.PI);
+
     //rotate[2] = -rotate[2];
     let scale = currentNode["Transform"].scaleFactor;
-    if (scale > 10) scale /= 100;
 
-    nodeObject.transform.setScale(scale);
+    nodeObject.transform.setScale((scale > 10)?scale / 100 : scale);
     nodeObject.transform.setPosition(pos);
     nodeObject.transform.setRotation(rotate);
 
@@ -70,16 +74,16 @@ const SceneLoader = {
 
       for (let colliderData of currentNode["colliders"]) {
         colliderData.offset[2] = colliderData.offset[2];
-        vec3.scale(colliderData.offset, colliderData.offset, 100*scale);
+        vec3.scale(colliderData.offset, colliderData.offset, scale);
         if (colliderData.type === 'box') {
-          collider.addShape('box',[colliderData.scaleX*50*scale, colliderData.scaleY*50*scale, colliderData.scaleZ*50*scale], colliderData.offset);
+          collider.addShape('box',[colliderData.scaleX*scale, colliderData.scaleY*scale, colliderData.scaleZ*scale], colliderData.offset);
         } else {
           collider.addShape('sphere', [colliderData.scale, colliderData.scale, colliderData.scale], colliderData.offset);
         }
       }
       collider.setLayer(FILTER_LEVEL_GEOMETRY);
     }
-
+/*
     let shadowAvailable = 0;
     if ('Light' in currentNode) {
       let lightData = currentNode['Light'];
@@ -93,7 +97,7 @@ const SceneLoader = {
         //nodeObject.getComponent("Mesh").setMaterial(Debug.makeDefaultMaterial());
       }
     }
-
+*/
 
     if (!IS_SERVER) {
 

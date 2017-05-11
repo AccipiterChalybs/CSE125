@@ -86,7 +86,7 @@ class Transform extends Component
         {
             this.transformMatrix = mat4.create();
 
-
+            //TODO optimize with mat4.fromRotationTranslationScale
             // Translation
             mat4.translate(this.transformMatrix, this.transformMatrix, this.position);
 

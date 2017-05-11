@@ -8,11 +8,12 @@ class Mesh extends Component {
         super();
         this.componentType = "Mesh";
         this.name = name;
-        if (!Mesh.prototype.meshMap.hasOwnProperty(name)) throw new Error('No mesh of name\"'+name+'\" found.');
+        if (!Mesh.prototype.meshMap.hasOwnProperty(name)) this.name = name;//throw new Error('No mesh of name\"'+name+'\" found.');
     }
 
     draw() {
         let currentEntry = Mesh.prototype.meshMap[this.name];
+        if (!currentEntry) return;
         if (Renderer.gpuData.vaoHandle !== currentEntry.vaoHandle) {
             GL.bindVertexArray(currentEntry.vaoHandle);
             Renderer.gpuData.vaoHandle = currentEntry.vaoHandle;

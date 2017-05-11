@@ -186,7 +186,7 @@ Debug.drawTeapot = function(pos, color = null) {
   quat.rotateX(rotation, rotation, -Math.PI/2);
 
   let teapot = new GameObject();
-/*
+
   if (!IS_SERVER) {
     let mesh = new Mesh("Teapot02");
     let mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER));
@@ -210,6 +210,6 @@ Debug.drawTeapot = function(pos, color = null) {
   teapot.transform.setPosition(pos);
   teapot.transform.setRotation(rotation);
   teapot.transform.scale((.05));
-*/
+
   return teapot;
 };

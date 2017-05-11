@@ -39,7 +39,7 @@ class GameScene {
     //GameObject.prototype.SceneRoot.transform.children[0].gameObject.getComponent('Animation').play(0, true);
 
 
-    GameObject.prototype.SceneRoot.transform.children[0].setScale(1);
+    GameObject.prototype.SceneRoot.transform.setScale(1);
 
     let rotation = quat.create();
     quat.rotateX(rotation, rotation, -Math.PI/2);

@@ -31,7 +31,7 @@
     "name": "GameObject",
     "Transform": {
       "position": [0, 0, 0],
-      "rotation": [1, 0, 0, 0],
+      "rotation": [0, 0, 0],
       "scaleFactor": 1
     },
     "children": [
@@ -39,7 +39,7 @@
         "name": "Pillar_round.1",
         "Transform": {
           "position": [66.65, 0, -30.47],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Pillar_round.1",
@@ -49,8 +49,8 @@
         "name": "Pillar_round.3 (3)",
         "Transform": {
           "position": [74.54, 0, -30.48535],
-          "rotation": [0.09229647, -0.09229643, -0.7010574, -0.7010573],
-          "scaleFactor": 100.0001
+          "rotation": [270, 195.0001, 0],
+          "scaleFactor": 100
         },
         "MeshFilter": "Pillar_round.3",
         "MeshRenderer": "dungeon-stone1-albedo2"
@@ -59,7 +59,7 @@
         "name": "Pillar_round.2",
         "Transform": {
           "position": [66.65, 0, -21.476],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Pillar_round.2",
@@ -69,8 +69,8 @@
         "name": "Pillar_round.3",
         "Transform": {
           "position": [51.387, 0, -28.153],
-          "rotation": [0.6494554, -0.6492288, -0.2799684, -0.2798707],
-          "scaleFactor": 75.00004
+          "rotation": [270, 313.36, 0],
+          "scaleFactor": 75.00002
         },
         "MeshFilter": "Pillar_round.3",
         "MeshRenderer": "dungeon-stone1-albedo2"
@@ -79,7 +79,7 @@
         "name": "Pillar_square.1",
         "Transform": {
           "position": [57.16, 0, -51.118],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 50
         },
         "MeshFilter": "Pillar_square.1",
@@ -88,8 +88,8 @@
       {
         "name": "Wall_ornate.1 (2)",
         "Transform": {
-          "position": [36.96, -0.03999999, -1.32],
-          "rotation": [0.7072302, -0.7069834, 0, 0],
+          "position": [36.96, -0.04, -1.32],
+          "rotation": [270, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -108,8 +108,8 @@
         "name": "Rock.3",
         "Transform": {
           "position": [36.726, -0.5819999, -27.708],
-          "rotation": [0.6130201, -0.3397869, -0.6832871, 0.2046217],
-          "scaleFactor": 80.00011
+          "rotation": [352.1279, 260.4308, 46.22171],
+          "scaleFactor": 80.00006
         },
         "MeshFilter": "Rock.3",
         "MeshRenderer": "Rock 03 diffuse"
@@ -118,8 +118,8 @@
         "name": "Altar.2",
         "Transform": {
           "position": [37.102, -0.126, -28.64085],
-          "rotation": [0.4999999, -0.5000001, -0.4999999, -0.5000001],
-          "scaleFactor": 80.00008
+          "rotation": [270, 270, 0],
+          "scaleFactor": 80.00005
         },
         "MeshFilter": "Altar.2",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -137,8 +137,8 @@
         "name": "Point light (2)",
         "Transform": {
           "position": [36.598, 2.378, -28.6808],
-          "rotation": [0.7071068, 0, -0.7071068, 0],
-          "scaleFactor": 0.8000017
+          "rotation": [0, 270, 0],
+          "scaleFactor": 0.8000009
         },
         "Light": {
           "type": "Point",
@@ -150,8 +150,8 @@
         "name": "Point light (3)",
         "Transform": {
           "position": [37.75, 2.378, -28.6808],
-          "rotation": [0.7071068, 0, -0.7071068, 0],
-          "scaleFactor": 0.8000017
+          "rotation": [0, 270, 0],
+          "scaleFactor": 0.8000009
         },
         "Light": {
           "type": "Point",
@@ -163,8 +163,8 @@
         "name": "Point light (4)",
         "Transform": {
           "position": [37.102, 2.378, -28.068],
-          "rotation": [0.7071068, 0, -0.7071068, 0],
-          "scaleFactor": 0.8000017
+          "rotation": [0, 270, 0],
+          "scaleFactor": 0.8000009
         },
         "Light": {
           "type": "Point",
@@ -176,8 +176,8 @@
         "name": "Point light (5)",
         "Transform": {
           "position": [37.006, 2.378, -29.34],
-          "rotation": [0.7071068, 0, -0.7071068, 0],
-          "scaleFactor": 0.8000017
+          "rotation": [0, 270, 0],
+          "scaleFactor": 0.8000009
         },
         "Light": {
           "type": "Point",
@@ -189,8 +189,8 @@
         "name": "Statue.2",
         "Transform": {
           "position": [37.03, 0.65, -28.54],
-          "rotation": [0.7071068, 0, -0.7071068, 0],
-          "scaleFactor": 80.00009
+          "rotation": [0, 270, 0],
+          "scaleFactor": 80.00003
         },
         "MeshFilter": "Statue.2",
         "MeshRenderer": "carvedlimestoneground1_Base_Color"
@@ -199,7 +199,7 @@
         "name": "Rock.4",
         "Transform": {
           "position": [26.5, 6.44, 0.26],
-          "rotation": [0.7938264, -0.606135, 0.03737528, 0.03229809],
+          "rotation": [285.2589, 4.398666, 1.299635],
           "scaleFactor": 2
         },
         "MeshFilter": "Rock.4",
@@ -209,7 +209,7 @@
         "name": "DoorFrame.1",
         "Transform": {
           "position": [33.24, 0.0222702, -5.17],
-          "rotation": [0.6281987, -0.6281987, 0.324602, 0.324602],
+          "rotation": [270, 54.65249, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "DoorFrame.1",
@@ -235,8 +235,8 @@
         "name": "Ceiling.2",
         "Transform": {
           "position": [30.88, 3.349041, -1.98],
-          "rotation": [0.6357139, -0.6354921, 0.309907, 0.3097989],
-          "scaleFactor": 225.0001
+          "rotation": [270, 51.97794, 0],
+          "scaleFactor": 225
         },
         "MeshFilter": "Ceiling.2",
         "MeshRenderer": "dungeon-stone1-albedo2"
@@ -245,7 +245,7 @@
         "name": "Wall_ornate.2",
         "Transform": {
           "position": [34.81, 0.13555, -1.14],
-          "rotation": [0.5000873, -0.4999127, 0.5000873, 0.4999127],
+          "rotation": [270.0198, 90, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall.2",
@@ -264,7 +264,7 @@
         "name": "Pillar_round.1 (1)",
         "Transform": {
           "position": [31.95, 0, 1.23],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -283,7 +283,7 @@
         "name": "Wall_ornate.1",
         "Transform": {
           "position": [30.17, 0, 1.74],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -302,8 +302,8 @@
         "name": "Wall_rock.1",
         "Transform": {
           "position": [28.47, 0.117, -2.54],
-          "rotation": [0.647678, -0.6476781, 0.2837485, 0.2837486],
-          "scaleFactor": 100.0001
+          "rotation": [270, 47.31657, 0],
+          "scaleFactor": 100
         },
         "MeshFilter": "Wall_rock.1",
         "MeshRenderer": "carvedlimestoneground1_Base_Color",
@@ -321,7 +321,7 @@
         "name": "Rock.2",
         "Transform": {
           "position": [24.71, 1.175555, 2.25],
-          "rotation": [0.8322976, -0.554329, 0, 0],
+          "rotation": [292.671, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Rock.2",
@@ -335,36 +335,10 @@
         ]
       },
       {
-        "name": "DoorFrame.2",
-        "Transform": {
-          "position": [24.77, -0.35, -0.16],
-          "rotation": [0.5000873, -0.4999127, -0.5000873, -0.4999127],
-          "scaleFactor": 100
-        },
-        "MeshFilter": "DoorFrame.2",
-        "MeshRenderer": "carvedlimestoneground1_Base_Color",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.007410543,
-            "scaleY": 0.01909095,
-            "scaleZ": 0.08115432,
-            "offset": [0.01119016, 0.001721078, 0.04060002]
-          },
-          {
-            "type": "box",
-            "scaleX": 0.007410543,
-            "scaleY": 0.02001823,
-            "scaleZ": 0.08115432,
-            "offset": [-0.01119016, 0.002184715, 0.04060004]
-          }
-        ]
-      },
-      {
         "name": "Point light",
         "Transform": {
-          "position": [-2.01, 0.63, -1.3],
-          "rotation": [1, 0, 0, 0],
+          "position": [-2.01, 0.6299995, -1.3],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
         "Light": {
@@ -376,8 +350,8 @@
       {
         "name": "Point light (1)",
         "Transform": {
-          "position": [2.856, 3.55, 1.39],
-          "rotation": [1, 0, 0, 0],
+          "position": [2.855999, 3.550002, 1.39],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
         "Light": {
@@ -389,9 +363,9 @@
       {
         "name": "Ceiling.1",
         "Transform": {
-          "position": [-3.03, 3.31, 0.07999992],
-          "rotation": [0, 0, 0.7072302, 0.7069834],
-          "scaleFactor": 125.0004
+          "position": [-3.029999, 3.310002, 0.08000001],
+          "rotation": [270.0198, 180, 0],
+          "scaleFactor": 125.0002
         },
         "MeshFilter": "Ceiling.1",
         "MeshRenderer": "dungeon-stone1-albedo2"
@@ -399,8 +373,8 @@
       {
         "name": "Ceiling.1 (1)",
         "Transform": {
-          "position": [1.94, 3.31, 0.07999992],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "position": [1.940004, 3.31, 0.08000001],
+          "rotation": [270, 0, 0],
           "scaleFactor": 125
         },
         "MeshFilter": "Ceiling.1",
@@ -409,8 +383,8 @@
       {
         "name": "Wall_rock.1",
         "Transform": {
-          "position": [2.45, -0.23, -2.06],
-          "rotation": [0.7048219, -0.704822, -0.05679857, -0.05679858],
+          "position": [2.450005, -0.2299992, -2.06],
+          "rotation": [270, 350.7855, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_rock.1",
@@ -428,8 +402,8 @@
       {
         "name": "Wall_rock.1 (1)",
         "Transform": {
-          "position": [-0.892, -0.23, -2.038],
-          "rotation": [0.7046016, -0.7046017, -0.05946856, -0.05946856],
+          "position": [-0.8920002, -0.2299992, -2.038],
+          "rotation": [270.0198, 350.3513, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_rock.1",
@@ -447,8 +421,8 @@
       {
         "name": "Wall_rock.1 (2)",
         "Transform": {
-          "position": [-4.06, -0.23, -2.02],
-          "rotation": [0.7057948, -0.7057949, -0.04305497, -0.04305498],
+          "position": [-4.059999, -0.2299992, -2.02],
+          "rotation": [270, 353.0183, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_rock.1",
@@ -467,7 +441,7 @@
         "name": "Plane",
         "Transform": {
           "position": [0, 0, 0],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
         "MeshFilter": "Plane",
@@ -478,8 +452,8 @@
       {
         "name": "DoorFrame.1",
         "Transform": {
-          "position": [4.84, -0.4, -0.1],
-          "rotation": [0.7071068, -0.7071068, 0, 0],
+          "position": [4.840002, -0.4000011, -0.1],
+          "rotation": [270, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "DoorFrame.1",
@@ -504,8 +478,8 @@
       {
         "name": "Wall_rock.1 (3)",
         "Transform": {
-          "position": [3.03, -0.23, 2.21],
-          "rotation": [-0.06222878, 0.06222884, -0.7043631, -0.7043634],
+          "position": [3.030003, -0.2299992, 2.21],
+          "rotation": [270, 169.9023, 0],
           "scaleFactor": 100.0002
         },
         "MeshFilter": "Wall_rock.1",
@@ -523,8 +497,8 @@
       {
         "name": "Wall_rock.1 (4)",
         "Transform": {
-          "position": [-0.1400001, -0.23, 2.02],
-          "rotation": [-0.06222878, 0.06222884, -0.7043631, -0.7043634],
+          "position": [-0.1399994, -0.2299992, 2.02],
+          "rotation": [270, 169.9023, 0],
           "scaleFactor": 100.0002
         },
         "MeshFilter": "Wall_rock.1",
@@ -542,8 +516,8 @@
       {
         "name": "Wall_rock.1 (5)",
         "Transform": {
-          "position": [-3.49, -0.23, 1.83],
-          "rotation": [-0.06222878, 0.06222884, -0.7043631, -0.7043634],
+          "position": [-3.49, -0.2299992, 1.83],
+          "rotation": [270, 169.9023, 0],
           "scaleFactor": 100.0002
         },
         "MeshFilter": "Wall_rock.1",
@@ -561,8 +535,8 @@
       {
         "name": "Ceiling.1 (2)",
         "Transform": {
-          "position": [6.9, 3.31, 0.07999992],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "position": [6.900003, 3.310002, 0.08000001],
+          "rotation": [270, 90, 0],
           "scaleFactor": 125
         },
         "MeshFilter": "Ceiling.1",
@@ -571,8 +545,8 @@
       {
         "name": "Ceiling.1 (3)",
         "Transform": {
-          "position": [11.88, 3.31, 0.07999992],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "position": [11.88, 3.310001, 0.08000001],
+          "rotation": [270, 0, 0],
           "scaleFactor": 125
         },
         "MeshFilter": "Ceiling.1",
@@ -581,8 +555,8 @@
       {
         "name": "Ceiling.1 (4)",
         "Transform": {
-          "position": [16.86, 3.31, 0.07999992],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "position": [16.86, 3.31, 0.08000001],
+          "rotation": [270, 0, 0],
           "scaleFactor": 125
         },
         "MeshFilter": "Ceiling.1",
@@ -591,8 +565,8 @@
       {
         "name": "Ceiling.1 (5)",
         "Transform": {
-          "position": [21.84, 3.31, 0.07999992],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "position": [21.84, 3.309999, 0.08000001],
+          "rotation": [270, 0, 0],
           "scaleFactor": 125
         },
         "MeshFilter": "Ceiling.1",
@@ -601,8 +575,8 @@
       {
         "name": "Wall_rock.2",
         "Transform": {
-          "position": [-5.27, -0.13, 0],
-          "rotation": [0.7071068, 0, 0.7071068, 0],
+          "position": [-5.269999, -0.1299988, 0],
+          "rotation": [-4.829673E-06, 90, 0],
           "scaleFactor": 125.0002
         },
         "MeshFilter": "Wall_rock.2",
@@ -620,8 +594,8 @@
       {
         "name": "Rock.2",
         "Transform": {
-          "position": [-5.06, 0.29, 1.98],
-          "rotation": [1, 8.146034E-08, 0, 0],
+          "position": [-5.059998, 0.2900013, 1.98],
+          "rotation": [1.195283E-05, 3.415094E-06, -3.415094E-06],
           "scaleFactor": 100
         },
         "MeshFilter": "Rock.2",
@@ -637,8 +611,8 @@
       {
         "name": "Rock.1",
         "Transform": {
-          "position": [-4.8, 0.131197, -1.84],
-          "rotation": [1, 8.146034E-08, 0, 0],
+          "position": [-4.799997, 0.1311993, -1.84],
+          "rotation": [1.195283E-05, 3.415094E-06, -3.415094E-06],
           "scaleFactor": 100
         },
         "MeshFilter": "Rock.1",
@@ -655,7 +629,7 @@
         "name": "Ceiling.1 (3)",
         "Transform": {
           "position": [42.65, 3.31, -25.794],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270, 0, 0],
           "scaleFactor": 125
         },
         "MeshFilter": "Ceiling.1",
@@ -664,8 +638,8 @@
       {
         "name": "Ceiling.1 (3)",
         "Transform": {
-          "position": [47.6, 3.31, -25.794],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "position": [47.6, 3.309998, -25.794],
+          "rotation": [270, 0, 0],
           "scaleFactor": 125
         },
         "MeshFilter": "Ceiling.1",
@@ -674,8 +648,8 @@
       {
         "name": "Ceiling.1 (6)",
         "Transform": {
-          "position": [56.665, 3.267, -36.889],
-          "rotation": [0.5000873, -0.4999127, 0.5000873, 0.4999127],
+          "position": [56.665, 3.267001, -36.889],
+          "rotation": [270.0198, 90, 0],
           "scaleFactor": 125
         },
         "MeshFilter": "Ceiling.1",
@@ -685,7 +659,7 @@
         "name": "Ceiling.1 (8)",
         "Transform": {
           "position": [57, 3.212, -48.47],
-          "rotation": [0.5000873, -0.4999127, 0.5000873, 0.4999127],
+          "rotation": [270.0198, 90, 0],
           "scaleFactor": 225
         },
         "MeshFilter": "Ceiling.1",
@@ -694,26 +668,52 @@
       {
         "name": "Ceiling.1 (7)",
         "Transform": {
-          "position": [56.665, 3.267, -41.81],
-          "rotation": [0.5000873, -0.4999127, 0.5000873, 0.4999127],
+          "position": [56.665, 3.267001, -41.81],
+          "rotation": [270.0198, 90, 0],
           "scaleFactor": 125
         },
         "MeshFilter": "Ceiling.1",
         "MeshRenderer": "dungeon-stone1-albedo2"
       },
       {
+        "name": "DoorFrame.2",
+        "Transform": {
+          "position": [24.77, -0.35, -0.16],
+          "rotation": [270.0198, 270, 0],
+          "scaleFactor": 100
+        },
+        "MeshFilter": "DoorFrame.2",
+        "MeshRenderer": "carvedlimestoneground1_Base_Color",
+        "colliders": [
+          {
+            "type": "box",
+            "scaleX": 0.007410543,
+            "scaleY": 0.01909095,
+            "scaleZ": 0.08115432,
+            "offset": [0.01119016, 0.001721078, 0.04060002]
+          },
+          {
+            "type": "box",
+            "scaleX": 0.007410543,
+            "scaleY": 0.02001823,
+            "scaleZ": 0.08115432,
+            "offset": [-0.01119016, 0.002184715, 0.04060004]
+          }
+        ]
+      },
+      {
         "name": "Room0",
         "Transform": {
           "position": [0, 0, 0],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         }
       },
       {
         "name": "Plane (2)",
         "Transform": {
-          "position": [34.02, -0.03999999, -6.610001],
-          "rotation": [1, 0, 0, 0],
+          "position": [34.02, -0.04, -6.61],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
         "MeshFilter": "Plane",
@@ -722,10 +722,18 @@
         "MeshRenderer": "spaced-tiles1-albedo"
       },
       {
+        "name": "Corridor0",
+        "Transform": {
+          "position": [34.02, 0, -6.61],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        }
+      },
+      {
         "name": "Directional Light",
         "Transform": {
           "position": [5.12, 3, -6.7],
-          "rotation": [-0.2565564, 0.1902858, -0.4745939, 0.8202017],
+          "rotation": [42.91303, 49.35006, 235.21],
           "scaleFactor": 1
         },
         "Light": {
@@ -735,18 +743,10 @@
         }
       },
       {
-        "name": "Corridor0",
-        "Transform": {
-          "position": [34.02, 0, -6.610001],
-          "rotation": [1, 0, 0, 0],
-          "scaleFactor": 1
-        }
-      },
-      {
         "name": "Point light (2)",
         "Transform": {
           "position": [6.468, 2.627, 1.462],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
         "Light": {
@@ -759,7 +759,7 @@
         "name": "Point light (3)",
         "Transform": {
           "position": [12.98, 0.8399999, 1.399999],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
         "Light": {
@@ -772,7 +772,7 @@
         "name": "Pillar_round.1",
         "Transform": {
           "position": [8.835045, 0, -2.15],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -791,7 +791,7 @@
         "name": "Wall_ornate.1",
         "Transform": {
           "position": [7.2, 0, -1.92],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -810,7 +810,7 @@
         "name": "Wall_ornate.1 (1)",
         "Transform": {
           "position": [10.95, 0, -1.92],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -829,7 +829,7 @@
         "name": "Wall_ornate.1 (2)",
         "Transform": {
           "position": [14.77, 0, -1.92],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -848,7 +848,7 @@
         "name": "Pillar_round.1 (1)",
         "Transform": {
           "position": [12.85, 0, -2.15],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -867,7 +867,7 @@
         "name": "Plane (1)",
         "Transform": {
           "position": [10, 0, 0],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
         "MeshFilter": "Plane",
@@ -879,7 +879,7 @@
         "name": "DoorFrame.1",
         "Transform": {
           "position": [15.18808, -0.33, 0],
-          "rotation": [0.7071068, -0.7071068, 0, 0],
+          "rotation": [270, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "DoorFrame.1",
@@ -904,9 +904,9 @@
       {
         "name": "Pillar_round.1 (2)",
         "Transform": {
-          "position": [9.073999, 0, 2.164],
-          "rotation": [-0.004133869, 0.004133888, -0.7070946, -0.7070948],
-          "scaleFactor": 75.00018
+          "position": [9.074, 0, 2.164],
+          "rotation": [270, 179.3301, 0],
+          "scaleFactor": 75.00012
         },
         "MeshFilter": "Pillar_round.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -924,8 +924,8 @@
         "name": "Pillar_round.1 (3)",
         "Transform": {
           "position": [13.084, 0, 2.214],
-          "rotation": [-0.004133869, 0.004133888, -0.7070946, -0.7070948],
-          "scaleFactor": 75.00018
+          "rotation": [270, 179.3301, 0],
+          "scaleFactor": 75.00012
         },
         "MeshFilter": "Pillar_round.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -943,8 +943,8 @@
         "name": "Wall_ornate.1 (3)",
         "Transform": {
           "position": [7.154, 0, 1.914],
-          "rotation": [-0.004133869, 0.004133888, -0.7070946, -0.7070948],
-          "scaleFactor": 100.0002
+          "rotation": [270, 179.3301, 0],
+          "scaleFactor": 100.0001
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -962,8 +962,8 @@
         "name": "Wall_ornate.1 (4)",
         "Transform": {
           "position": [10.974, 0, 1.964],
-          "rotation": [-0.004133869, 0.004133888, -0.7070946, -0.7070948],
-          "scaleFactor": 100.0002
+          "rotation": [270, 179.3301, 0],
+          "scaleFactor": 100.0001
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -981,8 +981,8 @@
         "name": "Wall_ornate.1 (5)",
         "Transform": {
           "position": [14.724, 0, 2.004],
-          "rotation": [-0.004133869, 0.004133888, -0.7070946, -0.7070948],
-          "scaleFactor": 100.0002
+          "rotation": [270, 179.3301, 0],
+          "scaleFactor": 100.0001
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -1000,8 +1000,8 @@
         "name": "Wall_ornate.1 (6)",
         "Transform": {
           "position": [22.57, 0, 2.004],
-          "rotation": [-0.004133869, 0.004133888, -0.7070946, -0.7070948],
-          "scaleFactor": 100.0003
+          "rotation": [270, 179.3301, 0],
+          "scaleFactor": 100.0002
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -1019,8 +1019,8 @@
         "name": "Wall_ornate.1 (7)",
         "Transform": {
           "position": [18.82, 0, 1.964],
-          "rotation": [-0.004133869, 0.004133888, -0.7070946, -0.7070948],
-          "scaleFactor": 100.0003
+          "rotation": [270, 179.3301, 0],
+          "scaleFactor": 100.0002
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -1038,8 +1038,8 @@
         "name": "Pillar_round.1 (4)",
         "Transform": {
           "position": [20.93, 0, 2.214],
-          "rotation": [-0.004133869, 0.004133888, -0.7070946, -0.7070948],
-          "scaleFactor": 75.00027
+          "rotation": [270, 179.3301, 0],
+          "scaleFactor": 75.00021
         },
         "MeshFilter": "Pillar_round.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -1057,8 +1057,8 @@
         "name": "Pillar_round.1 (5)",
         "Transform": {
           "position": [16.92, 0, 2.164],
-          "rotation": [-0.004133869, 0.004133888, -0.7070946, -0.7070948],
-          "scaleFactor": 75.00027
+          "rotation": [270, 179.3301, 0],
+          "scaleFactor": 75.00021
         },
         "MeshFilter": "Pillar_round.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -1076,7 +1076,7 @@
         "name": "Pillar_round.1 (6)",
         "Transform": {
           "position": [20.7, 0, -2.15],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1095,7 +1095,7 @@
         "name": "Pillar_round.1 (7)",
         "Transform": {
           "position": [16.68, 0, -2.15],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1114,7 +1114,7 @@
         "name": "Wall_ornate.1 (8)",
         "Transform": {
           "position": [22.62, 0, -1.92],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -1133,7 +1133,7 @@
         "name": "Wall_ornate.1 (9)",
         "Transform": {
           "position": [18.8, 0, -1.92],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -1152,7 +1152,7 @@
         "name": "DoorFrame.1 (1)",
         "Transform": {
           "position": [39.38, -0.33, -25.98],
-          "rotation": [0.7071068, -0.7071068, 0, 0],
+          "rotation": [270, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "DoorFrame.1",
@@ -1178,7 +1178,7 @@
         "name": "DoorFrame.1 (2)",
         "Transform": {
           "position": [34.09, -0.33, -18.91],
-          "rotation": [0.5, -0.5, 0.5, 0.5],
+          "rotation": [270, 90, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "DoorFrame.1",
@@ -1203,8 +1203,8 @@
       {
         "name": "Pillar_round.1 (8)",
         "Transform": {
-          "position": [29.48, 0, -7.360001],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "position": [29.48, 0, -7.36],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1223,7 +1223,7 @@
         "name": "Pillar_round.1 (10)",
         "Transform": {
           "position": [38.603, 0, -2.148],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1242,7 +1242,7 @@
         "name": "Pillar_round.1 (11)",
         "Transform": {
           "position": [38.603, 0, -5.99],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1261,7 +1261,7 @@
         "name": "Pillar_round.1 (11)",
         "Transform": {
           "position": [38.603, 0, -9.79],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1280,7 +1280,7 @@
         "name": "Pillar_round.1 (9)",
         "Transform": {
           "position": [29.48, 0, -11.23],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1299,7 +1299,7 @@
         "name": "Pillar_round.1 (11)",
         "Transform": {
           "position": [38.603, 0, -13.45],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1318,7 +1318,7 @@
         "name": "Pillar_round.1 (12)",
         "Transform": {
           "position": [38.603, 0, -17.3],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1337,7 +1337,7 @@
         "name": "Pillar_round.1 (9)",
         "Transform": {
           "position": [29.48, 0, -14.97],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1356,7 +1356,7 @@
         "name": "Pillar_round.1 (15)",
         "Transform": {
           "position": [29.65, 0, -30.85],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1375,8 +1375,8 @@
         "name": "Pillar_round.1 (16)",
         "Transform": {
           "position": [33.41, 0, -30.814],
-          "rotation": [0.5001746, -0.4998257, -0.4999998, -0.4999998],
-          "scaleFactor": 75.00005
+          "rotation": [270.028, 270.02, 0],
+          "scaleFactor": 75.00003
         },
         "MeshFilter": "Pillar_round.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -1393,9 +1393,9 @@
       {
         "name": "Pillar_round.1 (17)",
         "Transform": {
-          "position": [37.539, 0.001000002, -30.814],
-          "rotation": [0.5001746, -0.4998257, -0.4999998, -0.4999998],
-          "scaleFactor": 75.00007
+          "position": [37.539, 0.001, -30.814],
+          "rotation": [270.028, 270.02, 0],
+          "scaleFactor": 75.00005
         },
         "MeshFilter": "Pillar_round.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -1413,7 +1413,7 @@
         "name": "Plane (2)",
         "Transform": {
           "position": [44.036, 0, -26.37],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
         "MeshFilter": "Plane",
@@ -1425,8 +1425,8 @@
         "name": "Pillar_round.1 (19)",
         "Transform": {
           "position": [43.86, 0, -23.884],
-          "rotation": [-0.004133869, 0.004133888, -0.7070946, -0.7070948],
-          "scaleFactor": 75.00027
+          "rotation": [270, 179.3301, 0],
+          "scaleFactor": 75.00021
         },
         "MeshFilter": "Pillar_round.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -1444,8 +1444,8 @@
         "name": "Wall_ornate.1 (11)",
         "Transform": {
           "position": [41.748, 0, -23.922],
-          "rotation": [-0.004134291, 0.004134291, -0.7070947, -0.7070947],
-          "scaleFactor": 100.0003
+          "rotation": [270, 179.33, 0],
+          "scaleFactor": 100.0002
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -1463,8 +1463,8 @@
         "name": "Pillar_round.1 (20)",
         "Transform": {
           "position": [47.79, 0, -23.884],
-          "rotation": [-0.004133869, 0.004133888, -0.7070946, -0.7070948],
-          "scaleFactor": 75.00037
+          "rotation": [270, 179.3301, 0],
+          "scaleFactor": 75.00031
         },
         "MeshFilter": "Pillar_round.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -1482,7 +1482,7 @@
         "name": "DoorFrame.1 (3)",
         "Transform": {
           "position": [44.358, -0.33, -28.367],
-          "rotation": [0.5, -0.5, -0.5, -0.5],
+          "rotation": [270, 270, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "DoorFrame.1",
@@ -1508,7 +1508,7 @@
         "name": "DoorFrame.1 (4)",
         "Transform": {
           "position": [28.916, -0.33, -25.233],
-          "rotation": [0.7071068, -0.7071068, 0, 0],
+          "rotation": [270, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "DoorFrame.1",
@@ -1534,7 +1534,7 @@
         "name": "Plane (3)",
         "Transform": {
           "position": [56.536, 0, -25.92],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1.5
         },
         "MeshFilter": "Plane",
@@ -1546,7 +1546,7 @@
         "name": "DoorFrame.1 (5)",
         "Transform": {
           "position": [49.26, -0.33, -25.98],
-          "rotation": [0.7071068, -0.7071068, 0, 0],
+          "rotation": [270, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "DoorFrame.1",
@@ -1572,7 +1572,7 @@
         "name": "DoorFrame.1 (6)",
         "Transform": {
           "position": [62.655, -0.33, -25.98],
-          "rotation": [0.7071068, -0.7071068, 0, 0],
+          "rotation": [270, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "DoorFrame.1",
@@ -1598,7 +1598,7 @@
         "name": "DoorFrame.1 (7)",
         "Transform": {
           "position": [56.72, -0.33, -18.407],
-          "rotation": [0.5, -0.5, -0.5, -0.5],
+          "rotation": [270, 270, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "DoorFrame.1",
@@ -1624,7 +1624,7 @@
         "name": "DoorFrame.1 (8)",
         "Transform": {
           "position": [56.72, -0.33, -33.508],
-          "rotation": [0.5, -0.5, -0.5, -0.5],
+          "rotation": [270, 270, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "DoorFrame.1",
@@ -1650,7 +1650,7 @@
         "name": "Plane (4)",
         "Transform": {
           "position": [71.536, 0, -25.92],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1.5
         },
         "MeshFilter": "Plane",
@@ -1662,7 +1662,7 @@
         "name": "Plane (5)",
         "Transform": {
           "position": [56.536, 0, -15.97],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 0.5
         },
         "MeshFilter": "Plane",
@@ -1674,7 +1674,7 @@
         "name": "Plane (6)",
         "Transform": {
           "position": [56.536, 0, -37.9],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 0.9
         },
         "MeshFilter": "Plane",
@@ -1686,7 +1686,7 @@
         "name": "Plane (7)",
         "Transform": {
           "position": [56.536, 0, -48.485],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1.25
         },
         "MeshFilter": "Plane",
@@ -1698,7 +1698,7 @@
         "name": "Pillar_round.1 (18)",
         "Transform": {
           "position": [54.572, 0, -37.91],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1717,7 +1717,7 @@
         "name": "Pillar_round.1 (21)",
         "Transform": {
           "position": [58.882, 0, -37.91],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1736,7 +1736,7 @@
         "name": "Pillar_round.1 (22)",
         "Transform": {
           "position": [54.571, 0, -42.043],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1755,7 +1755,7 @@
         "name": "Pillar_round.1 (23)",
         "Transform": {
           "position": [58.881, 0, -42.025],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1774,7 +1774,7 @@
         "name": "Pillar_round.1 (26)",
         "Transform": {
           "position": [61.134, 0, -49.769],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1793,7 +1793,7 @@
         "name": "Pillar_round.1 (27)",
         "Transform": {
           "position": [52.831, 0, -49.769],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1812,7 +1812,7 @@
         "name": "Pillar_round.1 (29)",
         "Transform": {
           "position": [61.134, 0, -52.969],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1831,7 +1831,7 @@
         "name": "Pillar_round.1 (30)",
         "Transform": {
           "position": [53.03, 0, -52.969],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1850,7 +1850,7 @@
         "name": "Pillar_round.1 (31)",
         "Transform": {
           "position": [57.215, 0, -53.244],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -1869,8 +1869,8 @@
         "name": "Wall_ornate.1 (12)",
         "Transform": {
           "position": [45.825, 0, -23.875],
-          "rotation": [-0.004134291, 0.004134291, -0.7070947, -0.7070947],
-          "scaleFactor": 100.0004
+          "rotation": [270, 179.33, 0],
+          "scaleFactor": 100.0003
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -1888,8 +1888,8 @@
         "name": "Wall_ornate.1 (13)",
         "Transform": {
           "position": [49.529, 0, -23.832],
-          "rotation": [-0.004134291, 0.004134291, -0.7070947, -0.7070947],
-          "scaleFactor": 100.0005
+          "rotation": [270, 179.33, 0],
+          "scaleFactor": 100.0004
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -1907,7 +1907,7 @@
         "name": "Wall_ornate.1 (14)",
         "Transform": {
           "position": [51.734, 0, -21.572],
-          "rotation": [0.5029148, -0.5029148, 0.4970681, 0.4970681],
+          "rotation": [270, 89.33001, 0],
           "scaleFactor": 100.0004
         },
         "MeshFilter": "Wall_ornate.1",
@@ -1926,8 +1926,8 @@
         "name": "Pillar_round.1 (24)",
         "Transform": {
           "position": [51.419, 0, -23.636],
-          "rotation": [-0.004133869, 0.004133888, -0.7070946, -0.7070948],
-          "scaleFactor": 75.00047
+          "rotation": [270, 179.3301, 0],
+          "scaleFactor": 75.00041
         },
         "MeshFilter": "Pillar_round.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -1945,8 +1945,8 @@
         "name": "Wall_ornate.1 (15)",
         "Transform": {
           "position": [52.842, 0, -19.001],
-          "rotation": [-0.004134291, 0.004134291, -0.7070947, -0.7070947],
-          "scaleFactor": 100.0006
+          "rotation": [270, 179.33, 0],
+          "scaleFactor": 100.0005
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -1964,7 +1964,7 @@
         "name": "Wall_ornate.1 (16)",
         "Transform": {
           "position": [54.835, 0, -16.807],
-          "rotation": [0.5029148, -0.5029148, 0.4970681, 0.4970681],
+          "rotation": [270, 89.33001, 0],
           "scaleFactor": 100.0004
         },
         "MeshFilter": "Wall_ornate.1",
@@ -1983,7 +1983,7 @@
         "name": "Wall_ornate.1 (17)",
         "Transform": {
           "position": [58.402, 0, -16.767],
-          "rotation": [0.4970681, -0.4970681, -0.5029148, -0.5029148],
+          "rotation": [270, 269.33, 0],
           "scaleFactor": 100.0004
         },
         "MeshFilter": "Wall_ornate.1",
@@ -2002,8 +2002,8 @@
         "name": "Wall_ornate.1 (18)",
         "Transform": {
           "position": [60.74, 0, -18.91],
-          "rotation": [-0.004134291, 0.004134291, -0.7070947, -0.7070947],
-          "scaleFactor": 100.0007
+          "rotation": [270, 179.33, 0],
+          "scaleFactor": 100.0006
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -2021,7 +2021,7 @@
         "name": "Wall_ornate.1 (21)",
         "Transform": {
           "position": [62.31, 0, -21.8],
-          "rotation": [-0.497068, 0.4970681, 0.502915, 0.5029149],
+          "rotation": [270, 269.33, 0],
           "scaleFactor": 100.0005
         },
         "MeshFilter": "Wall_ornate.1",
@@ -2040,7 +2040,7 @@
         "name": "Wall_ornate.1 (20)",
         "Transform": {
           "position": [51.691, 0, -17.857],
-          "rotation": [0.5029148, -0.5029148, 0.4970681, 0.4970681],
+          "rotation": [270, 89.33001, 0],
           "scaleFactor": 100.0004
         },
         "MeshFilter": "Wall_ornate.1",
@@ -2059,7 +2059,7 @@
         "name": "Wall_ornate.1 (19)",
         "Transform": {
           "position": [62.26, 0, -18.08],
-          "rotation": [-0.497068, 0.4970681, 0.502915, 0.5029149],
+          "rotation": [270, 269.33, 0],
           "scaleFactor": 100.0005
         },
         "MeshFilter": "Wall_ornate.1",
@@ -2078,8 +2078,8 @@
         "name": "Wall_ornate.1 (22)",
         "Transform": {
           "position": [62.4, 0, -30.19],
-          "rotation": [-0.497068, 0.4970681, 0.502915, 0.5029149],
-          "scaleFactor": 100.0005
+          "rotation": [270, 269.33, 0],
+          "scaleFactor": 100.0004
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -2097,8 +2097,8 @@
         "name": "Wall_ornate.1 (23)",
         "Transform": {
           "position": [62.45, 0, -33.91],
-          "rotation": [-0.497068, 0.4970681, 0.502915, 0.5029149],
-          "scaleFactor": 100.0005
+          "rotation": [270, 269.33, 0],
+          "scaleFactor": 100.0004
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -2116,7 +2116,7 @@
         "name": "Wall_ornate.1 (24)",
         "Transform": {
           "position": [60.713, 0, -32.979],
-          "rotation": [0.7070947, -0.7070947, -0.004134268, -0.004134268],
+          "rotation": [270, 359.33, 0],
           "scaleFactor": 100.0004
         },
         "MeshFilter": "Wall_ornate.1",
@@ -2132,10 +2132,26 @@
         ]
       },
       {
+        "name": "Room1",
+        "Transform": {
+          "position": [10, 0, 0],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        }
+      },
+      {
+        "name": "Room1 (1)",
+        "Transform": {
+          "position": [20, 0, 0],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        }
+      },
+      {
         "name": "Plane (1)",
         "Transform": {
           "position": [20, 0, 0],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
         "MeshFilter": "Plane",
@@ -2144,26 +2160,10 @@
         "MeshRenderer": "spaced-tiles1-albedo"
       },
       {
-        "name": "Room1",
-        "Transform": {
-          "position": [10, 0, 0],
-          "rotation": [1, 0, 0, 0],
-          "scaleFactor": 1
-        }
-      },
-      {
-        "name": "Room1 (1)",
-        "Transform": {
-          "position": [20, 0, 0],
-          "rotation": [1, 0, 0, 0],
-          "scaleFactor": 1
-        }
-      },
-      {
         "name": "Point light (4)",
         "Transform": {
           "position": [24.07, 0.8399999, 1.399999],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
         "Light": {
@@ -2176,7 +2176,7 @@
         "name": "Point light (5)",
         "Transform": {
           "position": [17.55, 2.627, 1.462],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
         "Light": {
@@ -2186,10 +2186,18 @@
         }
       },
       {
+        "name": "Corridor1",
+        "Transform": {
+          "position": [30.02, 0, 0.043],
+          "rotation": [0, 90, 0],
+          "scaleFactor": 1
+        }
+      },
+      {
         "name": "Plane (4)",
         "Transform": {
-          "position": [30.02, 0, 0.04299998],
-          "rotation": [0.7071068, 0, 0.7071068, 0],
+          "position": [30.02, 0, 0.043],
+          "rotation": [0, 90, 0],
           "scaleFactor": 1
         },
         "MeshFilter": "Plane",
@@ -2198,10 +2206,10 @@
         "MeshRenderer": "spaced-tiles1-albedo"
       },
       {
-        "name": "Corridor1",
+        "name": "Room2",
         "Transform": {
-          "position": [30.02, 0, 0.04299998],
-          "rotation": [0.7071068, 0, 0.7071068, 0],
+          "position": [34.1, 0, -16.1],
+          "rotation": [0, 90, 0],
           "scaleFactor": 1
         }
       },
@@ -2209,7 +2217,7 @@
         "name": "Plane (5)",
         "Transform": {
           "position": [34.1, 0, -16.1],
-          "rotation": [0.7071068, 0, 0.7071068, 0],
+          "rotation": [0, 90, 0],
           "scaleFactor": 1
         },
         "MeshFilter": "Plane",
@@ -2218,10 +2226,20 @@
         "MeshRenderer": "spaced-tiles1-albedo"
       },
       {
+        "name": "Statue.2",
+        "Transform": {
+          "position": [34.1, 0.74, -12.171],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 80.00002
+        },
+        "MeshFilter": "Statue.2",
+        "MeshRenderer": "carvedlimestoneground1_Base_Color"
+      },
+      {
         "name": "Rock.3",
         "Transform": {
           "position": [34.932, -0.4919999, -11.867],
-          "rotation": [0.9166276, -0.09557619, -0.04968634, 0.384955],
+          "rotation": [352.1279, 350.4308, 46.22171],
           "scaleFactor": 80.00002
         },
         "MeshFilter": "Rock.3",
@@ -2231,7 +2249,7 @@
         "name": "Altar.2",
         "Transform": {
           "position": [33.99915, -0.03600001, -12.243],
-          "rotation": [0.7071068, -0.7071069, 0, 0],
+          "rotation": [270, 0, 0],
           "scaleFactor": 80.00002
         },
         "MeshFilter": "Altar.2",
@@ -2250,7 +2268,7 @@
         "name": "Point light (2)",
         "Transform": {
           "position": [33.9592, 2.468, -11.739],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 0.8000001
         },
         "Light": {
@@ -2263,7 +2281,7 @@
         "name": "Point light (3)",
         "Transform": {
           "position": [33.9592, 2.468, -12.891],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 0.8000001
         },
         "Light": {
@@ -2276,7 +2294,7 @@
         "name": "Point light (4)",
         "Transform": {
           "position": [34.572, 2.468, -12.243],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 0.8000001
         },
         "Light": {
@@ -2289,7 +2307,7 @@
         "name": "Point light (5)",
         "Transform": {
           "position": [33.3, 2.468, -12.147],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 0.8000001
         },
         "Light": {
@@ -2299,20 +2317,10 @@
         }
       },
       {
-        "name": "Statue.2",
+        "name": "Room3",
         "Transform": {
-          "position": [34.1, 0.74, -12.171],
-          "rotation": [1, 0, 0, 0],
-          "scaleFactor": 80.00002
-        },
-        "MeshFilter": "Statue.2",
-        "MeshRenderer": "carvedlimestoneground1_Base_Color"
-      },
-      {
-        "name": "Room2",
-        "Transform": {
-          "position": [34.1, 0, -16.1],
-          "rotation": [0.7071068, 0, 0.7071068, 0],
+          "position": [34.1, 0, -26.1],
+          "rotation": [0, 90, 0],
           "scaleFactor": 1
         }
       },
@@ -2320,7 +2328,7 @@
         "name": "Plane (7)",
         "Transform": {
           "position": [34.1, 0, -26.1],
-          "rotation": [0.7071068, 0, 0.7071068, 0],
+          "rotation": [0, 90, 0],
           "scaleFactor": 1
         },
         "MeshFilter": "Plane",
@@ -2332,34 +2340,7 @@
         "name": "Door0",
         "Transform": {
           "position": [39.603, 3.225, -26.01],
-          "rotation": [0, 0, 1, 0],
-          "scaleFactor": 1
-        },
-        "MeshFilter": "Cube",
-        "MeshRenderer": "Default-Material",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 1,
-            "scaleY": 1,
-            "scaleZ": 1,
-            "offset": [0, 0, 0]
-          }
-        ]
-      },
-      {
-        "name": "Room3",
-        "Transform": {
-          "position": [34.1, 0, -26.1],
-          "rotation": [0.7071068, 0, 0.7071068, 0],
-          "scaleFactor": 1
-        }
-      },
-      {
-        "name": "Door",
-        "Transform": {
-          "position": [61.99, 3.152, -25.998],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 180, 0],
           "scaleFactor": 1
         },
         "MeshFilter": "Cube",
@@ -2378,7 +2359,34 @@
         "name": "Room4",
         "Transform": {
           "position": [54.05, 0, -25.66],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        }
+      },
+      {
+        "name": "Door",
+        "Transform": {
+          "position": [61.99, 3.152, -25.998],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "MeshFilter": "Cube",
+        "MeshRenderer": "Default-Material",
+        "colliders": [
+          {
+            "type": "box",
+            "scaleX": 1,
+            "scaleY": 1,
+            "scaleZ": 1,
+            "offset": [0, 0, 0]
+          }
+        ]
+      },
+      {
+        "name": "Corridor5",
+        "Transform": {
+          "position": [21.6, 0, -61.4],
+          "rotation": [0, 90, 0],
           "scaleFactor": 1
         }
       },
@@ -2386,8 +2394,8 @@
         "name": "Plane (11)",
         "Transform": {
           "position": [21.6, 0, -61.4],
-          "rotation": [0.7071068, 0, 0.7071068, 0],
-          "scaleFactor": 0.3300004
+          "rotation": [0, 90, 0],
+          "scaleFactor": 0.3300001
         },
         "MeshFilter": "Plane",
         "UnityEngine.MeshCollider": {
@@ -2395,10 +2403,10 @@
         "MeshRenderer": "Default-Material"
       },
       {
-        "name": "Corridor5",
+        "name": "Room5",
         "Transform": {
-          "position": [21.6, 0, -61.4],
-          "rotation": [0.7071068, 0, 0.7071068, 0],
+          "position": [56.65, 0, -48.15],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         }
       },
@@ -2406,7 +2414,7 @@
         "name": "Heal",
         "Transform": {
           "position": [57.166, 2.125, -51.24],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
         "MeshFilter": "Sphere",
@@ -2420,10 +2428,10 @@
         ]
       },
       {
-        "name": "Room5",
+        "name": "Room6",
         "Transform": {
-          "position": [56.65, 0, -48.15],
-          "rotation": [1, 0, 0, 0],
+          "position": [72.55, 0, -25.52],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         }
       },
@@ -2431,7 +2439,7 @@
         "name": "Enemy Trap",
         "Transform": {
           "position": [72.52334, 0, -25.62667],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
         "MeshFilter": "Capsule",
@@ -2440,18 +2448,10 @@
         "MeshRenderer": "Default-Material"
       },
       {
-        "name": "Room6",
-        "Transform": {
-          "position": [72.55, 0, -25.52],
-          "rotation": [1, 0, 0, 0],
-          "scaleFactor": 1
-        }
-      },
-      {
         "name": "Corridor0 (1)",
         "Transform": {
           "position": [44.1, 0, -26.01],
-          "rotation": [0.7071068, 0, 0.7071068, 0],
+          "rotation": [0, 90, 0],
           "scaleFactor": 1
         }
       },
@@ -2459,7 +2459,7 @@
         "name": "Room2 (1)",
         "Transform": {
           "position": [56.51, 0, -35.61],
-          "rotation": [0.7071068, 0, 0.7071068, 0],
+          "rotation": [0, 90, 0],
           "scaleFactor": 1
         }
       },
@@ -2467,7 +2467,7 @@
         "name": "Room2 (2)",
         "Transform": {
           "position": [56.51, 0, -18.19],
-          "rotation": [0.7071068, 0, 0.7071068, 0],
+          "rotation": [0, 90, 0],
           "scaleFactor": 1
         }
       },
@@ -2475,7 +2475,7 @@
         "name": "Rock.2 (1)",
         "Transform": {
           "position": [25.82, 0.88, -2.62],
-          "rotation": [0.677615, -0.7354169, 0, 0],
+          "rotation": [274.6848, 180, 180],
           "scaleFactor": 100
         },
         "MeshFilter": "Rock.2",
@@ -2492,7 +2492,7 @@
         "name": "Point light (6)",
         "Transform": {
           "position": [22.95, 4.59, 1.37],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
         "Light": {
@@ -2505,7 +2505,7 @@
         "name": "DoorFrame.2 (1)",
         "Transform": {
           "position": [27.82, -0.35, 0.21],
-          "rotation": [0.5000873, -0.4999127, 0.5000873, 0.4999127],
+          "rotation": [270.0198, 90, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "DoorFrame.2",
@@ -2531,7 +2531,7 @@
         "name": "Point light (7)",
         "Transform": {
           "position": [22.95, 4.59, -1.2],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
         "Light": {
@@ -2544,7 +2544,7 @@
         "name": "Wall_rock.1 (1)",
         "Transform": {
           "position": [30.33, 0.06, -5.11],
-          "rotation": [0.6558726, -0.6558727, 0.2642557, 0.2642558],
+          "rotation": [270, 43.88971, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_rock.1",
@@ -2563,7 +2563,7 @@
         "name": "Pillar_round.1 (2)",
         "Transform": {
           "position": [34.49, 0, 1.23],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -2582,7 +2582,7 @@
         "name": "Wall_ornate.1 (1)",
         "Transform": {
           "position": [33.79, 0, 1.74],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -2601,7 +2601,7 @@
         "name": "Pillar_round.1 (3)",
         "Transform": {
           "position": [34.44, 0, -3.22],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -2620,7 +2620,7 @@
         "name": "Pillar_round.1 (4)",
         "Transform": {
           "position": [30.81, 0, -5.93],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.1",
@@ -2639,7 +2639,7 @@
         "name": "Point light (8)",
         "Transform": {
           "position": [33.28, 0.8399999, 0.55],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
         "Light": {
@@ -2652,7 +2652,7 @@
         "name": "Wall_ornate.2 (1)",
         "Transform": {
           "position": [33.35, 3.7, -5.4],
-          "rotation": [0.6602485, -0.6600181, -0.2534689, -0.2533805],
+          "rotation": [270, 317.9965, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall.2",
@@ -2662,8 +2662,8 @@
         "name": "Wall_rock.2 (8)",
         "Transform": {
           "position": [39.35, -0.22, -20.76],
-          "rotation": [-0.7071068, 0, 0.7071068, 0],
-          "scaleFactor": 125.0002
+          "rotation": [0, 270, 0],
+          "scaleFactor": 125.0001
         },
         "MeshFilter": "Wall_rock.2",
         "MeshRenderer": "carvedlimestoneground1_Base_Color",
@@ -2681,7 +2681,7 @@
         "name": "Wall_rock.2 (9)",
         "Transform": {
           "position": [39.35, -0.22, -18.54],
-          "rotation": [-1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 125.0001
         },
         "MeshFilter": "Wall_rock.2",
@@ -2700,7 +2700,7 @@
         "name": "Wall_rock.2 (10)",
         "Transform": {
           "position": [39.35, -0.22, -19.16],
-          "rotation": [0, 0, 1, 0],
+          "rotation": [0, 180, 0],
           "scaleFactor": 125.0001
         },
         "MeshFilter": "Wall_rock.2",
@@ -2719,7 +2719,7 @@
         "name": "Wall_rock.2 (12)",
         "Transform": {
           "position": [28.76, -0.22, -18.47],
-          "rotation": [-1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 125.0001
         },
         "MeshFilter": "Wall_rock.2",
@@ -2737,8 +2737,8 @@
       {
         "name": "Wall_ornate.1 (3)",
         "Transform": {
-          "position": [29.689, -0.03999999, -6.591001],
-          "rotation": [0.7072302, -0.7069834, 0, 0],
+          "position": [29.689, -0.04, -6.591],
+          "rotation": [270, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -2756,8 +2756,8 @@
       {
         "name": "Wall_ornate.1 (4)",
         "Transform": {
-          "position": [28.81, -0.03999999, -9.06],
-          "rotation": [-0.5000873, 0.4999127, 0.5000873, 0.4999127],
+          "position": [28.81, -0.04, -9.06],
+          "rotation": [270.0198, 270, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -2775,8 +2775,8 @@
       {
         "name": "Wall_ornate.1 (6)",
         "Transform": {
-          "position": [39.323, -0.03999999, -4.019],
-          "rotation": [0.5000873, -0.4999127, 0.5000873, 0.4999127],
+          "position": [39.323, -0.04, -4.019],
+          "rotation": [270.0198, 90, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -2794,8 +2794,8 @@
       {
         "name": "Wall_ornate.1 (10)",
         "Transform": {
-          "position": [39.323, -0.03999999, -7.861],
-          "rotation": [0.5000873, -0.4999127, 0.5000873, 0.4999127],
+          "position": [39.323, -0.04, -7.861],
+          "rotation": [270.0198, 90, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -2813,8 +2813,8 @@
       {
         "name": "Wall_ornate.1 (11)",
         "Transform": {
-          "position": [39.323, -0.03999999, -11.66],
-          "rotation": [0.5000873, -0.4999127, 0.5000873, 0.4999127],
+          "position": [39.323, -0.04, -11.66],
+          "rotation": [270.0198, 90, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -2832,8 +2832,8 @@
       {
         "name": "Wall_ornate.1 (12)",
         "Transform": {
-          "position": [39.323, -0.03999999, -15.32],
-          "rotation": [0.5000873, -0.4999127, 0.5000873, 0.4999127],
+          "position": [39.323, -0.04, -15.32],
+          "rotation": [270.0198, 90, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -2852,7 +2852,7 @@
         "name": "Ceiling.2 (2)",
         "Transform": {
           "position": [35.28, 3.11, -9.7],
-          "rotation": [0.7071068, -0.7071068, 0, 0],
+          "rotation": [270, 0, 0],
           "scaleFactor": 425
         },
         "MeshFilter": "Ceiling.2",
@@ -2861,8 +2861,8 @@
       {
         "name": "Wall_ornate.1 (10)",
         "Transform": {
-          "position": [28.81, -0.03999999, -12.93],
-          "rotation": [-0.5000873, 0.4999127, 0.5000873, 0.4999127],
+          "position": [28.81, -0.04, -12.93],
+          "rotation": [270.0198, 270, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -2880,8 +2880,8 @@
       {
         "name": "Wall_ornate.1 (13)",
         "Transform": {
-          "position": [28.81, -0.03999999, -16.67],
-          "rotation": [-0.5000873, 0.4999127, 0.5000873, 0.4999127],
+          "position": [28.81, -0.04, -16.67],
+          "rotation": [270.0198, 270, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -2900,7 +2900,7 @@
         "name": "Wall_rock.2 (13)",
         "Transform": {
           "position": [28.76, -0.22, -19.08],
-          "rotation": [0, 0, 1, 0],
+          "rotation": [0, 180, 0],
           "scaleFactor": 125.0001
         },
         "MeshFilter": "Wall_rock.2",
@@ -2919,8 +2919,8 @@
         "name": "Wall_rock.2 (18)",
         "Transform": {
           "position": [39.356, -0.22, -31.46],
-          "rotation": [-0.7071068, 0, 0.7071068, 0],
-          "scaleFactor": 125.0002
+          "rotation": [0, 270, 0],
+          "scaleFactor": 125.0001
         },
         "MeshFilter": "Wall_rock.2",
         "MeshRenderer": "carvedlimestoneground1_Base_Color",
@@ -2937,8 +2937,8 @@
       {
         "name": "Wall_ornate.1 (13)",
         "Transform": {
-          "position": [28.81, -0.03999999, -21.1],
-          "rotation": [-0.5000873, 0.4999127, 0.5000873, 0.4999127],
+          "position": [28.81, -0.04, -21.1],
+          "rotation": [270.0198, 270, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -2956,8 +2956,8 @@
       {
         "name": "Wall_ornate.1 (13)",
         "Transform": {
-          "position": [28.81, -0.03999999, -29.52],
-          "rotation": [-0.5000873, 0.4999127, 0.5000873, 0.4999127],
+          "position": [28.81, -0.04, -29.52],
+          "rotation": [270.0198, 270, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -2975,9 +2975,9 @@
       {
         "name": "Wall_ornate.1 (13)",
         "Transform": {
-          "position": [31.42, -0.03999999, -31.484],
-          "rotation": [-0.0001236424, -0.0001231611, 0.7071068, 0.7071068],
-          "scaleFactor": 100.0004
+          "position": [31.42, -0.04, -31.484],
+          "rotation": [270, 180.02, 0],
+          "scaleFactor": 100.0001
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -2995,8 +2995,8 @@
         "name": "Wall_ornate.1 (13)",
         "Transform": {
           "position": [35.549, -0.039, -31.484],
-          "rotation": [-0.0001236424, -0.0001231611, 0.7071068, 0.7071068],
-          "scaleFactor": 100.0004
+          "rotation": [270, 180.02, 0],
+          "scaleFactor": 100.0001
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -3013,9 +3013,9 @@
       {
         "name": "Wall_ornate.1 (14)",
         "Transform": {
-          "position": [39.582, -0.03999999, -31.48],
-          "rotation": [-0.0001236424, -0.0001231611, 0.7071068, 0.7071068],
-          "scaleFactor": 100.0004
+          "position": [39.582, -0.04, -31.48],
+          "rotation": [270, 180.02, 0],
+          "scaleFactor": 100.0001
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -3033,7 +3033,7 @@
         "name": "Ceiling.2 (3)",
         "Transform": {
           "position": [32.26, 3.11, -26.66],
-          "rotation": [0.7071068, -0.7071068, 0, 0],
+          "rotation": [270, 0, 0],
           "scaleFactor": 425
         },
         "MeshFilter": "Ceiling.2",
@@ -3043,7 +3043,7 @@
         "name": "Wall_ornate.2 (2)",
         "Transform": {
           "position": [39.853, 3.707, -26.271],
-          "rotation": [-0.5, 0.5, 0.5, 0.5],
+          "rotation": [270, 270, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall.2",
@@ -3053,8 +3053,8 @@
         "name": "Wall_rock.2 (19)",
         "Transform": {
           "position": [29.112, -0.22, -25.15],
-          "rotation": [-0.7071068, 0, 0.7071068, 0],
-          "scaleFactor": 75.00009
+          "rotation": [0, 270, 0],
+          "scaleFactor": 75.00003
         },
         "MeshFilter": "Wall_rock.2",
         "MeshRenderer": "carvedlimestoneground1_Base_Color",
@@ -3072,7 +3072,7 @@
         "name": "Wall_rock.2 (20)",
         "Transform": {
           "position": [44.72, -0.22, -29.659],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Wall_rock.2",
@@ -3091,7 +3091,7 @@
         "name": "Wall_rock.2 (21)",
         "Transform": {
           "position": [48.53, -0.22, -28.357],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Wall_rock.2",
@@ -3110,7 +3110,7 @@
         "name": "Wall_rock.2 (22)",
         "Transform": {
           "position": [40.64, -0.122, -28.357],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 65
         },
         "MeshFilter": "Wall_rock.2",
@@ -3129,8 +3129,8 @@
         "name": "Wall_rock.2 (23)",
         "Transform": {
           "position": [42.469, -0.22, -30.757],
-          "rotation": [0.7071068, 0, 0.7071068, 0],
-          "scaleFactor": 75.00009
+          "rotation": [0, 90, 0],
+          "scaleFactor": 75.00003
         },
         "MeshFilter": "Wall_rock.2",
         "MeshRenderer": "carvedlimestoneground1_Base_Color",
@@ -3148,8 +3148,8 @@
         "name": "Wall_rock.2 (24)",
         "Transform": {
           "position": [46.757, -0.22, -30.757],
-          "rotation": [0.7071068, 0, 0.7071068, 0],
-          "scaleFactor": 75.00009
+          "rotation": [0, 90, 0],
+          "scaleFactor": 75.00003
         },
         "MeshFilter": "Wall_rock.2",
         "MeshRenderer": "carvedlimestoneground1_Base_Color",
@@ -3167,7 +3167,7 @@
         "name": "Wall_rock.2 (25)",
         "Transform": {
           "position": [49.75, -0.22, -28.357],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Wall_rock.2",
@@ -3186,7 +3186,7 @@
         "name": "Wall_rock.2 (26)",
         "Transform": {
           "position": [44.04, 3.252, -31.988],
-          "rotation": [0.7071068, 0.7071068, 0, 0],
+          "rotation": [90, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Wall_rock.2",
@@ -3205,7 +3205,7 @@
         "name": "Wall_rock.2 (27)",
         "Transform": {
           "position": [40.64, 2.966, -28.357],
-          "rotation": [1, 0, 0, 0],
+          "rotation": [0, 0, 0],
           "scaleFactor": 65
         },
         "MeshFilter": "Wall_rock.2",
@@ -3224,7 +3224,7 @@
         "name": "Wall_ornate.2 (3)",
         "Transform": {
           "position": [50.02, 3.707, -25.894],
-          "rotation": [-0.5, 0.5, 0.5, 0.5],
+          "rotation": [270, 270, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall.2",
@@ -3234,7 +3234,7 @@
         "name": "Ceiling.2 (4)",
         "Transform": {
           "position": [57, 3.11, -26.66],
-          "rotation": [0.7071068, -0.7071068, 0, 0],
+          "rotation": [270, 0, 0],
           "scaleFactor": 425
         },
         "MeshFilter": "Ceiling.2",
@@ -3244,8 +3244,8 @@
         "name": "Wall_ornate.2 (4)",
         "Transform": {
           "position": [56.633, 3.71, -34.158],
-          "rotation": [0, 0, 0.7071068, 0.7071068],
-          "scaleFactor": 100.0003
+          "rotation": [270, 180, 0],
+          "scaleFactor": 100.0001
         },
         "MeshFilter": "Wall.2",
         "MeshRenderer": "dungeon-stone1-albedo2"
@@ -3254,8 +3254,8 @@
         "name": "Wall_ornate.2 (5)",
         "Transform": {
           "position": [54.41, 3.395, -45.53],
-          "rotation": [0, 0, 0.7071068, 0.7071068],
-          "scaleFactor": 100.0003
+          "rotation": [270, 180, 0],
+          "scaleFactor": 100.0001
         },
         "MeshFilter": "Wall.2",
         "MeshRenderer": "dungeon-stone1-albedo2"
@@ -3264,8 +3264,8 @@
         "name": "Wall_ornate.2 (6)",
         "Transform": {
           "position": [56.633, 3.395, -44.744],
-          "rotation": [0, 0, 0.7071068, 0.7071068],
-          "scaleFactor": 100.0003
+          "rotation": [270, 180, 0],
+          "scaleFactor": 100.0001
         },
         "MeshFilter": "Wall.2",
         "MeshRenderer": "dungeon-stone1-albedo2"
@@ -3273,9 +3273,9 @@
       {
         "name": "Wall_ornate.1 (15)",
         "Transform": {
-          "position": [58.796, -0.03999999, -35.838],
-          "rotation": [-0.5000873, 0.5000871, 0.4999129, 0.4999127],
-          "scaleFactor": 100.0001
+          "position": [58.796, -0.04, -35.838],
+          "rotation": [270, 270.02, 0],
+          "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -3292,9 +3292,9 @@
       {
         "name": "Wall_ornate.1 (16)",
         "Transform": {
-          "position": [54.703, -0.03999999, -35.839],
-          "rotation": [0.4999129, -0.4999127, 0.5000873, 0.5000871],
-          "scaleFactor": 100.0001
+          "position": [54.703, -0.04, -35.839],
+          "rotation": [270, 90.01999, 0],
+          "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -3312,8 +3312,8 @@
         "name": "Wall_ornate.2 (7)",
         "Transform": {
           "position": [59.41, 3.395, -45.53],
-          "rotation": [0, 0, 0.7071068, 0.7071068],
-          "scaleFactor": 100.0003
+          "rotation": [270, 180, 0],
+          "scaleFactor": 100.0001
         },
         "MeshFilter": "Wall.2",
         "MeshRenderer": "dungeon-stone1-albedo2"
@@ -3322,8 +3322,8 @@
         "name": "Wall_ornate.2 (8)",
         "Transform": {
           "position": [59.41, 3.32, -53.031],
-          "rotation": [0, 0, 0.7071068, 0.7071068],
-          "scaleFactor": 100.0003
+          "rotation": [270, 180, 0],
+          "scaleFactor": 100.0001
         },
         "MeshFilter": "Wall.2",
         "MeshRenderer": "dungeon-stone1-albedo2"
@@ -3332,8 +3332,8 @@
         "name": "Wall_ornate.2 (9)",
         "Transform": {
           "position": [54.41, 3.32, -53.031],
-          "rotation": [0, 0, 0.7071068, 0.7071068],
-          "scaleFactor": 100.0003
+          "rotation": [270, 180, 0],
+          "scaleFactor": 100.0001
         },
         "MeshFilter": "Wall.2",
         "MeshRenderer": "dungeon-stone1-albedo2"
@@ -3341,9 +3341,9 @@
       {
         "name": "Wall_ornate.1 (18)",
         "Transform": {
-          "position": [60.95, -0.03999999, -46.172],
-          "rotation": [-0.0001234045, 0.0001234045, 0.7071068, 0.7071068],
-          "scaleFactor": 99.99991
+          "position": [60.95, -0.04, -46.172],
+          "rotation": [270, 180.02, 0],
+          "scaleFactor": 99.99997
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -3360,9 +3360,9 @@
       {
         "name": "Wall_ornate.1 (19)",
         "Transform": {
-          "position": [54.702, -0.03999999, -39.956],
-          "rotation": [0.4999129, -0.4999127, 0.5000873, 0.5000871],
-          "scaleFactor": 100.0001
+          "position": [54.702, -0.04, -39.956],
+          "rotation": [270, 90.01999, 0],
+          "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -3379,9 +3379,9 @@
       {
         "name": "Wall_ornate.1 (20)",
         "Transform": {
-          "position": [54.7, -0.03999999, -44.057],
-          "rotation": [0.4999129, -0.4999127, 0.5000873, 0.5000871],
-          "scaleFactor": 100.0001
+          "position": [54.7, -0.04, -44.057],
+          "rotation": [270, 90.01999, 0],
+          "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -3398,9 +3398,9 @@
       {
         "name": "Wall_ornate.1 (21)",
         "Transform": {
-          "position": [58.795, -0.03999999, -39.982],
-          "rotation": [-0.5000873, 0.5000871, 0.4999129, 0.4999127],
-          "scaleFactor": 100.0001
+          "position": [58.795, -0.04, -39.982],
+          "rotation": [270, 270.02, 0],
+          "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -3417,9 +3417,9 @@
       {
         "name": "Wall_ornate.1 (22)",
         "Transform": {
-          "position": [58.794, -0.03999999, -44.078],
-          "rotation": [-0.5000873, 0.5000871, 0.4999129, 0.4999127],
-          "scaleFactor": 100.0001
+          "position": [58.794, -0.04, -44.078],
+          "rotation": [270, 270.02, 0],
+          "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -3436,8 +3436,8 @@
       {
         "name": "Wall_ornate.1 (24)",
         "Transform": {
-          "position": [52.968, -0.03999999, -47.782],
-          "rotation": [0.4999127, -0.4999127, 0.5000873, 0.5000873],
+          "position": [52.968, -0.04, -47.782],
+          "rotation": [270, 90.02, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -3455,8 +3455,8 @@
       {
         "name": "Wall_ornate.1 (25)",
         "Transform": {
-          "position": [61.007, -0.03999999, -47.78],
-          "rotation": [-0.5000873, 0.5000873, 0.4999127, 0.4999127],
+          "position": [61.007, -0.04, -47.78],
+          "rotation": [270, 270.02, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -3474,9 +3474,9 @@
       {
         "name": "Wall_ornate.1 (23)",
         "Transform": {
-          "position": [52.626, -0.03999999, -46.169],
-          "rotation": [-0.0001234045, 0.0001234045, 0.7071068, 0.7071068],
-          "scaleFactor": 99.99991
+          "position": [52.626, -0.04, -46.169],
+          "rotation": [270, 180.02, 0],
+          "scaleFactor": 99.99997
         },
         "MeshFilter": "Wall_ornate.1",
         "MeshRenderer": "dungeon-stone1-albedo2",
@@ -3493,8 +3493,8 @@
       {
         "name": "Wall_ornate.1 (26)",
         "Transform": {
-          "position": [52.967, -0.03999999, -51.823],
-          "rotation": [0.4999127, -0.4999127, 0.5000873, 0.5000873],
+          "position": [52.967, -0.04, -51.823],
+          "rotation": [270, 90.02, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -3512,8 +3512,8 @@
       {
         "name": "Wall_ornate.1 (27)",
         "Transform": {
-          "position": [61.006, -0.03999999, -51.878],
-          "rotation": [-0.5000873, 0.5000873, 0.4999127, 0.4999127],
+          "position": [61.006, -0.04, -51.878],
+          "rotation": [270, 270.02, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -3531,8 +3531,8 @@
       {
         "name": "Wall_ornate.1 (28)",
         "Transform": {
-          "position": [59.192, -0.03999999, -53.058],
-          "rotation": [0.7071068, -0.7071068, 0.0001234045, 0.0001234045],
+          "position": [59.192, -0.04, -53.058],
+          "rotation": [270, 0.01999855, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -3550,8 +3550,8 @@
       {
         "name": "Wall_ornate.1 (29)",
         "Transform": {
-          "position": [55.03, -0.03999999, -53.057],
-          "rotation": [0.7071068, -0.7071068, 0.0001234045, 0.0001234045],
+          "position": [55.03, -0.04, -53.057],
+          "rotation": [270, 0.01999855, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_ornate.1",
@@ -3570,7 +3570,7 @@
         "name": "Wall_rock.2 (28)",
         "Transform": {
           "position": [52.745, -0.22, -29.581],
-          "rotation": [0.9238796, 0, 0.3826834, 0],
+          "rotation": [0, 45, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Wall_rock.2",
@@ -3589,8 +3589,8 @@
         "name": "Wall_rock.2 (29)",
         "Transform": {
           "position": [53.932, -0.22, -32.487],
-          "rotation": [0.7071068, 0, 0.7071068, 0],
-          "scaleFactor": 75.00009
+          "rotation": [0, 90, 0],
+          "scaleFactor": 75.00003
         },
         "MeshFilter": "Wall_rock.2",
         "MeshRenderer": "carvedlimestoneground1_Base_Color",
@@ -3608,7 +3608,7 @@
         "name": "Wall_rock.2 (30)",
         "Transform": {
           "position": [56.885, -0.22, -15.103],
-          "rotation": [0, 0, 1, 0],
+          "rotation": [0, 180, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall_rock.2",
@@ -3627,7 +3627,7 @@
         "name": "Ceiling.2 (5)",
         "Transform": {
           "position": [57, 3.11, -16.47],
-          "rotation": [0.7071068, -0.7071068, 0, 0],
+          "rotation": [270, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Ceiling.2",
@@ -3636,8 +3636,8 @@
       {
         "name": "Pillar_round.3 (1)",
         "Transform": {
-          "position": [54.897, -0.001000002, -15.358],
-          "rotation": [0.7072302, -0.7069834, 0, 0],
+          "position": [54.897, -0.001, -15.358],
+          "rotation": [270, 0, 0],
           "scaleFactor": 75
         },
         "MeshFilter": "Pillar_round.3",
@@ -3647,8 +3647,8 @@
         "name": "Pillar_round.3 (2)",
         "Transform": {
           "position": [58.312, -0.0009999871, -15.358],
-          "rotation": [-0.03510299, 0.03509075, -0.706112, -0.7063585],
-          "scaleFactor": 75.00019
+          "rotation": [270, 174.308, 0],
+          "scaleFactor": 75.00006
         },
         "MeshFilter": "Pillar_round.3",
         "MeshRenderer": "dungeon-stone1-albedo2"
@@ -3657,7 +3657,7 @@
         "name": "Ceiling.2 (6)",
         "Transform": {
           "position": [73.83, 3.11, -26.66],
-          "rotation": [0.7071068, -0.7071068, 0, 0],
+          "rotation": [270, 0, 0],
           "scaleFactor": 425
         },
         "MeshFilter": "Ceiling.2",
@@ -3667,7 +3667,7 @@
         "name": "Wall_ornate.2 (10)",
         "Transform": {
           "position": [62.804, 0.05, -30.689],
-          "rotation": [-0.5, 0.5, 0.5, 0.5],
+          "rotation": [270, 270, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall.2",
@@ -3677,7 +3677,7 @@
         "name": "Wall_ornate.2 (11)",
         "Transform": {
           "position": [62.804, 0.05, -21.155],
-          "rotation": [-0.5, 0.5, 0.5, 0.5],
+          "rotation": [270, 270, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall.2",
@@ -3687,7 +3687,7 @@
         "name": "Wall_ornate.2 (12)",
         "Transform": {
           "position": [65.42, 0.05, -18.447],
-          "rotation": [-0.7071068, 0.7071068, 1.490116E-08, 2.454438E-08],
+          "rotation": [270, -2.414836E-06, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall.2",
@@ -3697,7 +3697,7 @@
         "name": "Wall_ornate.2 (13)",
         "Transform": {
           "position": [70.45, 0.05, -18.447],
-          "rotation": [-0.7071068, 0.7071068, 1.490116E-08, 2.454438E-08],
+          "rotation": [270, -2.414836E-06, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall.2",
@@ -3707,7 +3707,7 @@
         "name": "Wall_ornate.2 (14)",
         "Transform": {
           "position": [75.48, 0.05, -18.447],
-          "rotation": [-0.7071068, 0.7071068, 1.490116E-08, 2.454438E-08],
+          "rotation": [270, -2.414836E-06, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall.2",
@@ -3717,7 +3717,7 @@
         "name": "Wall_ornate.2 (15)",
         "Transform": {
           "position": [75.48, 0.05, -33.43],
-          "rotation": [-0.7071068, 0.7071068, 1.490116E-08, 2.454438E-08],
+          "rotation": [270, -2.414836E-06, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall.2",
@@ -3727,7 +3727,7 @@
         "name": "Wall_ornate.2 (16)",
         "Transform": {
           "position": [70.45, 0.05, -33.43],
-          "rotation": [-0.7071068, 0.7071068, 1.490116E-08, 2.454438E-08],
+          "rotation": [270, -2.414836E-06, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall.2",
@@ -3737,7 +3737,7 @@
         "name": "Wall_ornate.2 (17)",
         "Transform": {
           "position": [65.42, 0.05, -33.43],
-          "rotation": [-0.7071068, 0.7071068, 1.490116E-08, 2.454438E-08],
+          "rotation": [270, -2.414836E-06, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall.2",
@@ -3747,7 +3747,7 @@
         "name": "Wall_ornate.2 (18)",
         "Transform": {
           "position": [78.33, 0.05, -20.89],
-          "rotation": [-0.5, 0.5, 0.5, 0.5],
+          "rotation": [270, 270, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall.2",
@@ -3757,7 +3757,7 @@
         "name": "Wall_ornate.2 (19)",
         "Transform": {
           "position": [78.33, 0.05, -30.95],
-          "rotation": [-0.5, 0.5, 0.5, 0.5],
+          "rotation": [270, 270, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall.2",
@@ -3767,7 +3767,7 @@
         "name": "Wall_ornate.2 (20)",
         "Transform": {
           "position": [78.33, 0.05, -25.92],
-          "rotation": [-0.5, 0.5, 0.5, 0.5],
+          "rotation": [270, 270, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Wall.2",
@@ -3777,7 +3777,7 @@
         "name": "Pillar_round.1 (5)",
         "Transform": {
           "position": [74.54, 0, -21.475],
-          "rotation": [0.7071067, -0.7071068, 0, 0],
+          "rotation": [270.0198, 0, 0],
           "scaleFactor": 100
         },
         "MeshFilter": "Pillar_round.1",
