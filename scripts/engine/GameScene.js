@@ -117,7 +117,23 @@ class GameScene {
               teapot.addComponent(new SingingSwitch(5));
             }else if(x===2 && y===2){
               teapot.addComponent(new SphereCollider(0, true));
+              teapot.addComponent(new AudioSource());
               teapot.addComponent(new TriggerTest());
+              if(!IS_SERVER) {
+                teapot.getComponent('AudioSource').playSound2d('singTone');
+                teapot.getComponent('AudioSource').pauseSound();
+              }
+              let lightComp = new PointLight(true);
+              lightComp.color = vec3.fromValues(5, 2.5, 0);
+              lightComp.exponentialFalloff = 0.25;
+              teapot.addComponent(lightComp);
+
+              //For testing purposes
+              /*light.addComponent(new Mesh("Sphere_Icosphere"));
+               light.getComponent("Mesh").setMaterial(Debug.makeDefaultMaterial());*/
+              //light.transform.scale(0.25);
+
+
             }else{
               teapot.addComponent(new SphereCollider(100, false, 10)); //set Transform BEFORE collider
             }
@@ -151,12 +167,14 @@ class GameScene {
     if(!IS_SERVER) {
       GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.getComponent("AudioSource").playSound2d("singTone00");
       GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.getComponent("AudioSource").pauseSound();
-      GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.getComponent("AudioSource").playSound2d("singTone00");
-      GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.getComponent("AudioSource").pauseSound();
-      GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.getComponent("AudioSource").playSound2d("singTone00");
-      GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.getComponent("AudioSource").pauseSound();
-      GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.getComponent("AudioSource").playSound2d("singTone00");
-      GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.getComponent("AudioSource").pauseSound();
+      if(!Debug.clientUpdate) {
+        GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.getComponent("AudioSource").playSound2d("singTone00");
+        GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.getComponent("AudioSource").pauseSound();
+        GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.getComponent("AudioSource").playSound2d("singTone00");
+        GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.getComponent("AudioSource").pauseSound();
+        GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.getComponent("AudioSource").playSound2d("singTone00");
+        GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.getComponent("AudioSource").pauseSound();
+      }
     }
 
 

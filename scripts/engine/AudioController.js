@@ -20,6 +20,10 @@ const SoundEngine = {
           volume: 0,
           loop: true
         });
+        SoundEngine.singTone = new Howl({
+          src: ['assets/audio/tone.wav'],
+          volume: 0
+        });
       },
 
     playSound2d: function (sound, volume=1) {

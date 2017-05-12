@@ -14,6 +14,10 @@ class Collider extends Component{
     this.layer = FILTER_DEFAULT;
   }
 
+  start(){
+    // this.gameObject.addComponentToSerializeableList(this);
+  }
+
   _setGameObject(go){
     super._setGameObject(go);
     if(this.transform === null) {
