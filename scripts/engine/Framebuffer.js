@@ -6,7 +6,7 @@
 
 class Framebuffer {
 
-    constructor(w, h, numColorTexture, accessibleDepth, hdrEnabled, colorFormats = null, manualSetup = false) {
+    constructor(w, h, numColorTexture, accessibleDepth, hdrEnabled, colorFormats = null, manualSetup = false, stencil = false) {
         //this.id = 0;
         this.accessibleDepth = accessibleDepth;
         //this.colorTex = [];
@@ -41,7 +41,7 @@ class Framebuffer {
           if (this.accessibleDepth) {
             this._addDepthTexture();
           } else {
-            this._addDepthBuffer();
+            this._addDepthBuffer(stencil);
           }
 
           GL.bindFramebuffer(GL.FRAMEBUFFER, null);
@@ -204,11 +204,17 @@ class Framebuffer {
         GL.framebufferTexture2D(GL.FRAMEBUFFER, GL.DEPTH_ATTACHMENT, GL.TEXTURE_2D, this.depthTex, 0);
     }
 
-    _addDepthBuffer() {
+    _addDepthBuffer(stencil) {
         this.depthTex = GL.createRenderbuffer();
         GL.bindRenderbuffer(GL.RENDERBUFFER, this.depthTex);
-        GL.renderbufferStorage(GL.RENDERBUFFER, GL.DEPTH_COMPONENT16, this.width, this.height);
-        GL.framebufferRenderbuffer(GL.FRAMEBUFFER, GL.DEPTH_ATTACHMENT, GL.RENDERBUFFER, this.depthTex);
+        if (stencil) {
+          GL.renderbufferStorage(GL.RENDERBUFFER, GL.DEPTH24_STENCIL8, this.width, this.height);
+          GL.framebufferRenderbuffer(GL.FRAMEBUFFER, GL.DEPTH_ATTACHMENT, GL.RENDERBUFFER, this.depthTex);
+          GL.framebufferRenderbuffer(GL.FRAMEBUFFER, GL.STENCIL_ATTACHMENT, GL.RENDERBUFFER, this.depthTex);
+        }else {
+          GL.renderbufferStorage(GL.RENDERBUFFER, GL.DEPTH_COMPONENT16, this.width, this.height);
+          GL.framebufferRenderbuffer(GL.FRAMEBUFFER, GL.DEPTH_ATTACHMENT, GL.RENDERBUFFER, this.depthTex);
+        }
     }
 
     static generateCubeMapArray(width, height, depthOnly) {

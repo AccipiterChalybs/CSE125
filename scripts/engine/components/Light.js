@@ -12,9 +12,7 @@ class Light extends Component{
         this.isShadowCaster = false;
         this.radius = 0.25;
         this.shadowMatrix = null;
-        this.constantFalloff = 1.0;
-        this.linearFalloff = 0.0;
-        this.exponentialFalloff = 1.0;
+        this.range = 10;
     }
     forwardPass(index){}
     deferredPass(bind){}
@@ -29,8 +27,7 @@ class Light extends Component{
           }
 
         if (bind) {
-            let lightMetaData = vec3.create(); vec3.set(lightMetaData, this.constantFalloff, this.linearFalloff, this.exponentialFalloff);
-            Renderer.currentShader.setUniform("uLightFalloff",lightMetaData,UniformTypes.vec3);
+            Renderer.currentShader.setUniform("uLightRange",this.range,UniformTypes.u1f);
             Renderer.currentShader.setUniform("uLightPosition",this.gameObject.transform.getWorldPosition(),UniformTypes.vec3);
             Renderer.currentShader.setUniform("uLightColor",this.color,UniformTypes.vec3);
             Renderer.currentShader.setUniform("uLightSize",this.radius,UniformTypes.u1f);
@@ -63,7 +60,7 @@ class PointLight extends Light{
             let posData = vec4.create(); vec4.set(posData, this.gameObject.transform.getWorldPosition()[0],
                 this.gameObject.transform.getWorldPosition()[1], this.gameObject.transform.getWorldPosition()[2], this.radius);
             let colourData = vec4.create(); vec4.set(colourData, this.color[0], this.color[1], this.color[2], 1.0);
-            let metaData = vec4.create(); vec4.set(metaData, this.constantFalloff, this.linearFalloff, this.exponentialFalloff, 1);
+            let metaData = vec4.create(); vec4.set(metaData, this.range, 0.0, 0.0, 1); //range, blank, blank, blank
 
             Renderer.getShader(shaderId).setUniform("uLightData[" + (3*index) + "]", posData, UniformTypes.vec4);
             Renderer.getShader(shaderId).setUniform("uLightData[" + (3*index+1) + "]", colourData, UniformTypes.vec4);
@@ -71,17 +68,11 @@ class PointLight extends Light{
         }
     }
     deferredPass(bind){
-        if (bind) {
-            Renderer.currentShader.setUniform("uLightType",0,UniformTypes.u1i);
-            let max = (this.color[0] > this.color[1]) ? this.color[0] : this.color[1];
-            max = (max > this.color[2]) ? max : this.color[2];
-            //TODO is scale correct? (or too big?)
-            let scale = (-this.linearFalloff + Math.sqrt(this.linearFalloff * this.linearFalloff - 4.0 * (this.constantFalloff - 256.0 * max) * this.exponentialFalloff))
-        / (2.0 * this.exponentialFalloff);
-            Renderer.currentShader.setUniform("uScale",scale,UniformTypes.u1f);
-
+        if (bind && this.isShadowCaster) {
             Renderer.currentShader.setUniform("uFarDepth", PointLight.prototype.FAR_DEPTH, UniformTypes.u1f);
         }
+
+        Renderer.currentShader.setUniform("uScale",this.range,UniformTypes.u1f);
         this.deferredHelper("Sphere_Icosphere", bind);
     }
 
@@ -157,11 +148,9 @@ class DirectionalLight extends Light{
         GL.disable(GL.CULL_FACE);
 
         let lightMetaData = vec3.create(); vec3.set(lightMetaData, this.constantFalloff, this.linearFalloff, this.exponentialFalloff);
-        Renderer.currentShader.setUniform("uLightFalloff",lightMetaData,UniformTypes.vec3);
         Renderer.currentShader.setUniform("uLightColor",this.color,UniformTypes.vec3);
         Renderer.currentShader.setUniform("uLightDirection",this.gameObject.transform.getForward(),UniformTypes.vec3);
 
-        Renderer.currentShader.setUniform("uLightType",1,UniformTypes.u1i);
         Renderer.currentShader.setUniform("uScale",1.0,UniformTypes.u1f);
         Renderer.currentShader.setUniform("uLightPosition",vec3.create(),UniformTypes.vec3);
         Renderer.currentShader.setUniform("uV_Matrix",mat4.create(),UniformTypes.mat4);

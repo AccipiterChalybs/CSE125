@@ -5,6 +5,7 @@
 const SceneLoader = {
 
   materialMap: {},
+  shadowLightsAvailable: 0,
 
   loadScene: function(filename) {
     let loadId = GameEngine.registerLoading();
@@ -17,7 +18,6 @@ const SceneLoader = {
       return;
     }
 
-    console.log(scene);
     for (let matData of scene.materialList) {
       //TODO support more shaders (e.g. animation)
       let mat = new Material(Renderer.getShader(Renderer.DEFERRED_PBR_SHADER), false);
@@ -78,26 +78,26 @@ const SceneLoader = {
         if (colliderData.type === 'box') {
           collider.addShape('box',[colliderData.scaleX*scale, colliderData.scaleY*scale, colliderData.scaleZ*scale], colliderData.offset);
         } else {
-          collider.addShape('sphere', [colliderData.scale, colliderData.scale, colliderData.scale], colliderData.offset);
+          collider.addShape('sphere', [colliderData.scale*scale, colliderData.scale*scale, colliderData.scale*scale], colliderData.offset);
         }
       }
       collider.setLayer(FILTER_LEVEL_GEOMETRY);
     }
-/*
-    let shadowAvailable = 0;
+
     if ('Light' in currentNode) {
       let lightData = currentNode['Light'];
       if (lightData.type === 'Point') {
-        let light = new PointLight(true);
+        let light = new PointLight(SceneLoader.shadowLightsAvailable-- > 0);
         light.color = vec3.fromValues(lightData.color[1], lightData.color[2], lightData.color[3]);
         vec3.scale(light.color, light.color, lightData.intensity);
+        light.range = lightData.range;
         nodeObject.addComponent(light);
 
         //nodeObject.addComponent(new Mesh("Sphere_Icosphere"));
         //nodeObject.getComponent("Mesh").setMaterial(Debug.makeDefaultMaterial());
       }
     }
-*/
+
 
     if (!IS_SERVER) {
 

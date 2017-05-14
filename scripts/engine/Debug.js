@@ -179,37 +179,3 @@ Debug.makeDefaultMaterial = function() {
 
   return mat;
 };
-
-
-Debug.drawTeapot = function(pos, color = null) {
-  let rotation = quat.create();
-  quat.rotateX(rotation, rotation, -Math.PI/2);
-
-  let teapot = new GameObject();
-
-  if (!IS_SERVER) {
-    let mesh = new Mesh("Teapot02");
-    let mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER));
-
-    if (color === null) {
-      color = vec4.create();
-      vec4.set(color, 1, 0.5, 0.1, 1);
-    }
-    mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
-
-    vec4.set(color, 0.5, 0.5, 1, 1);
-    mat.setTexture(MaterialTexture.NORMAL, Texture.makeColorTex(color));
-
-    vec4.set(color, 1, 0, 0.25, 1); //metalness, blank, roughness
-    mat.setTexture(MaterialTexture.MAT, Texture.makeColorTex(color));
-
-    mesh.setMaterial(mat);
-    teapot.addComponent(mesh);
-  }
-
-  teapot.transform.setPosition(pos);
-  teapot.transform.setRotation(rotation);
-  teapot.transform.scale((.05));
-
-  return teapot;
-};

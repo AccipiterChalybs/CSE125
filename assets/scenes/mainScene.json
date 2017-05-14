@@ -143,7 +143,8 @@
         "Light": {
           "type": "Point",
           "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 2
+          "intensity": 2,
+          "range": 10
         }
       },
       {
@@ -156,7 +157,8 @@
         "Light": {
           "type": "Point",
           "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 2
+          "intensity": 2,
+          "range": 10
         }
       },
       {
@@ -169,7 +171,8 @@
         "Light": {
           "type": "Point",
           "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 2
+          "intensity": 2,
+          "range": 10
         }
       },
       {
@@ -182,7 +185,8 @@
         "Light": {
           "type": "Point",
           "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 2
+          "intensity": 2,
+          "range": 10
         }
       },
       {
@@ -344,7 +348,8 @@
         "Light": {
           "type": "Point",
           "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 1.96
+          "intensity": 1.96,
+          "range": 10
         }
       },
       {
@@ -357,7 +362,8 @@
         "Light": {
           "type": "Point",
           "color": [1, 0.4681012, 0.8161765, 0.7873702],
-          "intensity": 1.15
+          "intensity": 1.15,
+          "range": 5.17
         }
       },
       {
@@ -739,7 +745,8 @@
         "Light": {
           "type": "Directional",
           "color": [1, 1, 0.9568627, 0.8392157],
-          "intensity": 1
+          "intensity": 1,
+          "range": 10
         }
       },
       {
@@ -752,7 +759,8 @@
         "Light": {
           "type": "Point",
           "color": [1, 0.4681012, 0.8161765, 0.7873702],
-          "intensity": 0.82
+          "intensity": 0.82,
+          "range": 5.17
         }
       },
       {
@@ -765,7 +773,8 @@
         "Light": {
           "type": "Point",
           "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 1
+          "intensity": 1,
+          "range": 10
         }
       },
       {
@@ -2169,7 +2178,8 @@
         "Light": {
           "type": "Point",
           "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 1
+          "intensity": 1,
+          "range": 10
         }
       },
       {
@@ -2182,7 +2192,8 @@
         "Light": {
           "type": "Point",
           "color": [1, 0.4681012, 0.8161765, 0.7873702],
-          "intensity": 0.82
+          "intensity": 0.82,
+          "range": 5.17
         }
       },
       {
@@ -2274,7 +2285,8 @@
         "Light": {
           "type": "Point",
           "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 2
+          "intensity": 2,
+          "range": 10
         }
       },
       {
@@ -2287,7 +2299,8 @@
         "Light": {
           "type": "Point",
           "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 2
+          "intensity": 2,
+          "range": 10
         }
       },
       {
@@ -2300,7 +2313,8 @@
         "Light": {
           "type": "Point",
           "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 2
+          "intensity": 2,
+          "range": 10
         }
       },
       {
@@ -2313,7 +2327,8 @@
         "Light": {
           "type": "Point",
           "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 2
+          "intensity": 2,
+          "range": 10
         }
       },
       {
@@ -2498,7 +2513,8 @@
         "Light": {
           "type": "Point",
           "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 1
+          "intensity": 1,
+          "range": 10
         }
       },
       {
@@ -2537,7 +2553,8 @@
         "Light": {
           "type": "Point",
           "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 1
+          "intensity": 1,
+          "range": 10
         }
       },
       {
@@ -2645,7 +2662,8 @@
         "Light": {
           "type": "Point",
           "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 1
+          "intensity": 1,
+          "range": 10
         }
       },
       {

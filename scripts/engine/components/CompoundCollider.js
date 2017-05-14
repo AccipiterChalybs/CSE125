@@ -15,7 +15,7 @@ class CompoundCollider extends Collider{
     //TODO this likely won't work if the parent has a rotation
     // vec3.transformQuat(offset, offset,
     //   quat.rotateX(this.rotation, this.rotation, theta););
-    this.gameObject.addChild(Debug.drawTeapot(vec3.add(vec3.create(),vec3.create(), offset), vec4.fromValues(1, 1, 0,1)));
+    //this.gameObject.addChild(Debug.drawTeapot(vec3.add(vec3.create(),vec3.create(), offset), vec4.fromValues(1, 1, 0,1)));
 
     if (type === "box") {
       let halfExtents = new CANNON.Vec3(this.transform.getScale()[0] * size[0]*0.5,this.transform.getScale()[0] * size[1]*0.5, this.transform.getScale()[0] * size[2]*0.5);

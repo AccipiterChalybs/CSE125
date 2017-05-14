@@ -22,8 +22,8 @@ class Collider extends Component{
     let xyz = vec3.fromValues(worldPosition[0], worldPosition[1],
       worldPosition[2]);
 
-    GameObject.prototype.SceneRoot.addChild(Debug.drawTeapot(xyz, vec4.fromValues(1, 0, 0,1)));
-    GameObject.prototype.SceneRoot.addChild(Debug.drawTeapot(this.transform.getPosition(), vec4.fromValues(1, 0, 1,1)));
+    // GameObject.prototype.SceneRoot.addChild(Debug.drawTeapot(xyz, vec4.fromValues(1, 0, 0,1)));
+    // GameObject.prototype.SceneRoot.addChild(Debug.drawTeapot(this.transform.getPosition(), vec4.fromValues(1, 0, 1,1)));
 
     // TODO: may be a problem in the future if the objects start with a weird rotation
     this.body.quaternion.set(this.transform.getRotation()[0], this.transform.getRotation()[1],

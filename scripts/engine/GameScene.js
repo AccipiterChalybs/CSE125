@@ -2,7 +2,6 @@
  * Created by Accipiter Chalybs on 4/14/2017.
  */
 
-var albedo, mat, normal;
 var particleTex;
 
 class GameScene {
@@ -17,9 +16,6 @@ class GameScene {
 
     //TODO this will be moved into the JSON files
     if (!IS_SERVER) {
-      albedo = new Texture('assets/texture/dungeon-stone1-albedo2.png');
-      mat = new Texture('assets/texture/dungeon-stone1-mat.png', false);
-      normal = new Texture('assets/texture/dungeon-stone1-normal.png', false);
       particleTex = new Texture('assets/texture/particle_fire_test.png');
     }
   }
@@ -87,8 +83,6 @@ class GameScene {
               teapot.addComponent(new AudioSource());
               if(!IS_SERVER) teapot.getComponent("AudioSource").playSound3d("cruelangel");
               teapot.addComponent(new PlayerController());
-
-              teapot.addComponent(new ParticleSystem(true, {texture: particleTex}));
 
               pos = vec3.fromValues(5,0,0);
             }
@@ -160,7 +154,7 @@ class GameScene {
       Renderer.directionalLight.transform.rotateY(-Math.PI / 3.0);
       Renderer.directionalLight.transform.rotateX(-Math.PI / 4.0);
 
-      Renderer.directionalLight.getComponent("Light").color = vec3.fromValues(0.16, 0.32, 0.64);
+      Renderer.directionalLight.getComponent("Light").color = vec3.fromValues(1.6, 3.2, 6.4);
     }
 
     //let move = vec3.create(); vec3.set(move, 0, 500, 64);
