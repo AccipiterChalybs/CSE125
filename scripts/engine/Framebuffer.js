@@ -78,25 +78,31 @@ class Framebuffer {
         GL.bindFramebuffer(GL.FRAMEBUFFER, null);
     }
 
+    static resizeRenderDimensions(width, height) {
+      if (Renderer.lastWidth !== width || Renderer.lastHeight !== height) {
+        GL.viewport(0, 0, width, height);
+        let perspective = mat4.create();
+        mat4.perspective(perspective, Renderer.camera.getFOV(), width / height, Renderer.NEAR_DEPTH, Renderer.FAR_DEPTH);
+        Renderer._updatePerspective(perspective); //fairly expensive, hence why we try to skip all of this if already set
+
+        Renderer.lastWidth = width;
+        Renderer.lastHeight = height;
+      }
+    }
+
     //note buffersToDraw should be an array of COLOR_ATTACHMENTX
     bind(buffersToDraw) {
         GL.bindFramebuffer(GL.FRAMEBUFFER, this.id);
         GL.drawBuffers(buffersToDraw);
         GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
 
-        //TODO use Renderer.resize()?
-        GL.viewport(0, 0, this.width, this.height);
-        let perspective = mat4.create();
-        mat4.perspective(perspective, Renderer.camera.getFOV(), this.width/this.height, Renderer.NEAR_DEPTH, Renderer.FAR_DEPTH);
-        Renderer._updatePerspective(perspective);
+        Framebuffer.resizeRenderDimensions(this.width, this.height);
     }
 
     unbind() {
         GL.bindFramebuffer(GL.FRAMEBUFFER, null);
-        GL.viewport(0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
-        let perspective = mat4.create();
-        mat4.perspective(perspective, Renderer.camera.getFOV(),Renderer.getWindowWidth()/Renderer.getWindowHeight(), Renderer.NEAR_DEPTH, Renderer.FAR_DEPTH);
-        Renderer._updatePerspective(perspective);
+
+        Framebuffer.resizeRenderDimensions(Renderer.getWindowWidth(), Renderer.getWindowHeight());
     }
 
     bindTexture(slot, index) {

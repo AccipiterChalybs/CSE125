@@ -21,17 +21,9 @@ class Light extends Component{
         let currentEntry = Mesh.prototype.meshMap[meshName];
 
         //TODO should this be out here? It wasn't originally
-          if (Renderer.gpuData.vaoHandle !== currentEntry.vaoHandle) {
-            GL.bindVertexArray(currentEntry.vaoHandle);
-            Renderer.gpuData.vaoHandle = currentEntry.vaoHandle;
-          }
-
-        if (bind) {
-            Renderer.currentShader.setUniform("uLightRange",this.range,UniformTypes.u1f);
-            Renderer.currentShader.setUniform("uLightPosition",this.gameObject.transform.getWorldPosition(),UniformTypes.vec3);
-            Renderer.currentShader.setUniform("uLightColor",this.color,UniformTypes.vec3);
-            Renderer.currentShader.setUniform("uLightSize",this.radius,UniformTypes.u1f);
-            Renderer.currentShader.setUniform("uLightDirection",this.gameObject.transform.getForward(),UniformTypes.vec3);
+        if (Renderer.gpuData.vaoHandle !== currentEntry.vaoHandle) {
+          GL.bindVertexArray(currentEntry.vaoHandle);
+          Renderer.gpuData.vaoHandle = currentEntry.vaoHandle;
         }
         GL.drawElements(GL.TRIANGLES, currentEntry.indexSize, GL.UNSIGNED_SHORT, 0);
 
@@ -72,6 +64,15 @@ class PointLight extends Light{
             Renderer.currentShader.setUniform("uFarDepth", PointLight.prototype.FAR_DEPTH, UniformTypes.u1f);
         }
 
+
+        if (bind) {
+          Renderer.currentShader.setUniform("uLightRange",this.range,UniformTypes.u1f);
+          Renderer.currentShader.setUniform("uLightColor",this.color,UniformTypes.vec3);
+          Renderer.currentShader.setUniform("uLightSize",this.radius,UniformTypes.u1f);
+          Renderer.currentShader.setUniform("uLightDirection",this.gameObject.transform.getForward(),UniformTypes.vec3);
+        }
+
+        Renderer.currentShader.setUniform("uLightPosition",this.gameObject.transform.getWorldPosition(),UniformTypes.vec3);
         Renderer.currentShader.setUniform("uScale",this.range,UniformTypes.u1f);
         this.deferredHelper("Sphere_Icosphere", bind);
     }

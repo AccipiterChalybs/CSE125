@@ -144,12 +144,16 @@ class DeferredPass extends RenderPass
         this.buffers.bindTexture(1, 1);
         this.buffers.bindTexture(2, 2);
 
+        GL.enable(GL.BLEND);
+        GL.blendEquation(GL.FUNC_ADD);
+        GL.blendFunc(GL.ONE, GL.ONE);
+
         for(let light of Renderer.renderBuffer.light) {
             let d = light;
             if (!d.isShadowCaster || d.cubeShadow)
             {
-                let currentPointShader = (d.isShadowCaster) ? Renderer.DEFERRED_SHADER_LIGHTING_POINT_SHADOW : Renderer.DEFERRED_SHADER_LIGHTING_POINT;
-                Renderer.switchShader(currentPointShader);
+                Renderer.switchShader(Renderer.DEFERRED_SHADER_LIGHTING_POINT_PASS1);
+
                 GL.drawBuffers([GL.NONE]);
                 GL.disable(GL.CULL_FACE);
                 GL.enable(GL.STENCIL_TEST);
@@ -157,8 +161,10 @@ class DeferredPass extends RenderPass
                 GL.clear(GL.STENCIL_BUFFER_BIT);
                 GL.stencilFunc(GL.ALWAYS, 0, 0);
 
-                light.deferredPass(true);
+                light.deferredPass(false);
 
+                let currentPointShader = (d.isShadowCaster) ? Renderer.DEFERRED_SHADER_LIGHTING_POINT_SHADOW : Renderer.DEFERRED_SHADER_LIGHTING_POINT;
+                Renderer.switchShader(currentPointShader);
 
                 GL.stencilFunc(GL.NOTEQUAL, 0, 0xFF);
                 GL.cullFace(GL.FRONT);
@@ -185,16 +191,12 @@ class DeferredPass extends RenderPass
             }
 
             GL.disable(GL.DEPTH_TEST);
-            GL.enable(GL.BLEND);
-            GL.blendEquation(GL.FUNC_ADD);
-            GL.blendFunc(GL.ONE, GL.ONE);
             GL.enable(GL.CULL_FACE);
             GL.drawBuffers([GL.COLOR_ATTACHMENT0]); //switch back to main image
 
-            light.deferredPass(false);
+            light.deferredPass(true);
         }
         GL.disable(GL.STENCIL_TEST);
-        GL.disable(GL.DEPTH_TEST);
         GL.disable(GL.CULL_FACE);
 
 
