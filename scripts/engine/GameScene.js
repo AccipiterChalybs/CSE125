@@ -96,7 +96,7 @@ class GameScene {
               if(!IS_SERVER) teapot.getComponent("AudioSource").playSound3d("cruelangel");
               teapot.addComponent(new PlayerController());
 
-              teapot.addComponent(new ParticleSystem(true, {texture: particleTex}));
+              if(!IS_SERVER) teapot.addComponent(new ParticleSystem(true, {texture: particleTex}));
 
 
             }
