@@ -52,38 +52,21 @@ const SceneLoader = {
     let pos = vec3.fromValues.apply(vec3, currentNode["Transform"].position);
     pos[2] = -pos[2];
 
-    if (parent.name === "Room1 (1)") {
-      pos[0] -= 20;
-      console.log("VEC#+"+pos[0] +" "+ pos[1] + " " +pos[2])
-      pos[0] += 20;
-      vec3.transformMat4(pos, pos, invParentTransform);
-      console.log("VEC#+"+pos[0] +" "+ pos[1] + " " +pos[2])
-    }
-
-    //vec3.transformMat4(pos, pos, invParentTransform);
+    vec3.transformMat4(pos, pos, invParentTransform);
 
     let rotate = quat.create();
-    quat.rotateY(rotate, rotate, -1*(currentNode["Transform"].rotation[1]+180) / 180 * Math.PI);
+    quat.rotateY(rotate, rotate, Math.PI);
+    quat.rotateY(rotate, rotate, -1*(currentNode["Transform"].rotation[1]) / 180 * Math.PI);
     quat.rotateX(rotate, rotate, 1*(currentNode["Transform"].rotation[0]) / 180 * Math.PI);
     quat.rotateZ(rotate, rotate, -1*(currentNode["Transform"].rotation[2]) / 180 * Math.PI);
-
-    // console.log(mat4.getRotation(quat.create(), invParentTransform));
 
     quat.multiply(rotate, mat4.getRotation(quat.create(), invParentTransform), rotate);
 
     let scale = currentNode["Transform"].scaleFactor;
 
-    let myScale = scale > 10 ? scale / 100 : scale;
-    let childMat = mat4.create(); mat4.fromRotationTranslation(childMat, rotate, pos);
-    childMat = mat4.multiply(childMat, invParentTransform, childMat);
-
-    nodeObject.transform.setScale(myScale);
-    nodeObject.transform.setPosition(mat4.getTranslation(vec3.create(), childMat));
-    nodeObject.transform.setRotation(mat4.getRotation(quat.create(), childMat));
-
-    /*nodeObject.transform.setScale((scale > 10) ? scale / 100 : scale);
+    nodeObject.transform.setScale((scale > 10) ? scale / 100 : scale);
     nodeObject.transform.setPosition(pos);
-    nodeObject.transform.setRotation(rotate);*/
+    nodeObject.transform.setRotation(rotate);
 
 
     if ("colliders" in currentNode) {
@@ -92,13 +75,17 @@ const SceneLoader = {
       nodeObject.addComponent(collider);
 
       for (let colliderData of currentNode["colliders"]) {
-        colliderData.offset[2] = colliderData.offset[2];
-        vec3.scale(colliderData.offset, colliderData.offset, scale);
-        if (colliderData.type === 'box') {
-         // collider.addShape('box',[colliderData.scaleX*scale, colliderData.scaleY*scale, colliderData.scaleZ*scale], colliderData.offset);
-        } else {
-          collider.addShape('sphere', [colliderData.scale*scale, colliderData.scale*scale, colliderData.scale*scale], colliderData.offset);
-        }
+        let colliderType = (colliderData.type === 'box') ? 'box' : 'sphere';
+        let colliderOffset = vec3.fromValues.apply(vec3, colliderData.offset);
+        let colliderSize = (colliderData.type === 'box') ? vec3.fromValues(colliderData.scaleX, colliderData.scaleY, colliderData.scaleZ)
+                                                         : vec3.fromValues(colliderData.scale, colliderData.scale, colliderData.scale);
+
+        //TODO why is the y switched?
+        colliderOffset[1] = -colliderOffset[1];
+        vec3.scale(colliderOffset, colliderOffset, scale);
+        vec3.scale(colliderSize, colliderSize, scale);
+
+        collider.addShape(colliderType, colliderSize, colliderOffset);
       }
       collider.setLayer(FILTER_LEVEL_GEOMETRY);
     }

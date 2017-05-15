@@ -66,7 +66,7 @@ class Collider extends Component{
     //this.body.angularVelocity.set(this.body.angularVelocity.x / 2, this.body.angularVelocity.y / 2, this.body.angularVelocity.z / 2);
     let newPos = vec3.create();
     vec3.set(newPos, this.body.position.x, this.body.position.y, this.body.position.z);
-    this.transform.setPosition(newPos);
+    this.transform.setWorldPosition(newPos);
 
     if(!this.freezeRotation){
       let newRot = quat.fromValues(this.body.quaternion.x, this.body.quaternion.y,

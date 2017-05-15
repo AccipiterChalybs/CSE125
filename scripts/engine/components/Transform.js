@@ -140,6 +140,12 @@ class Transform extends Component
         vec3.set(this.scaleFactor,s,s,s);
     }
 
+    setWorldPosition(pos) {
+        this.setDirty();
+        let invParentTransform = mat4.create(); mat4.invert(invParentTransform, this._parent.getTransformMatrix());
+        vec3.transformMat4(this.position, pos, invParentTransform);
+    }
+
     getWorldPosition()
     {
         if(this.worldPosDirty)

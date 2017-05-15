@@ -2,7 +2,7 @@
  * Created by Stephen on 5/1/2017.
  */
 
-const MAX_ZOOM = 30;
+const MAX_ZOOM = 7.5;
 const MIN_ZOOM = 1;
 const ZOOM_SCALE = 0.05;
 
