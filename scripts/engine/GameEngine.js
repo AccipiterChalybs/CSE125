@@ -46,7 +46,9 @@ GameEngine.init = function () {
     'assets/meshes/Wall_ornate.1.json',
     'assets/meshes/Wall_ornate.2.json',
     'assets/meshes/Wall_rock.1.json',
-    'assets/meshes/Wall_rock.2.json',];
+    'assets/meshes/Wall_rock.2.json',
+    'assets/meshes/walking.json',
+    'assets/meshes/AxisTest.json'];
   GameEngine.currentScene = new GameScene(sceneFile, meshFiles);
 };
 

@@ -30,9 +30,8 @@ const SceneLoader = {
 
     let loadingAcceleration = {};
 
-    let retScene = SceneLoader._parseNode(scene, scene.hierarchy, filename, loadingAcceleration, []);
+    let retScene = SceneLoader._parseNode(GameObject.prototype.SceneRoot, scene.hierarchy, filename, loadingAcceleration, []);
 
-    GameObject.prototype.SceneRoot.addChild(retScene);
 
     //ObjectLoader.loadCollision(GameObject.prototype.SceneRoot, "assets/scenes/ExampleLevel_Colliders.json");
 
@@ -40,32 +39,52 @@ const SceneLoader = {
     GameEngine.completeLoading(loadId);
   },
 
-  _parseNode: function(scene,  currentNode, filename, loadingAcceleration, lights) {
+  _parseNode: function(parent,  currentNode, filename, loadingAcceleration, lights) {
     let nodeObject = new GameObject();
+    parent.addChild(nodeObject);
 
     let name = currentNode.name;
     if (name === "defaultobject") name = filename + ObjectLoader.prototype.counter;
     nodeObject.setName(name);
 
+    let invParentTransform = mat4.create(); mat4.invert(invParentTransform, parent.transform.getTransformMatrix());
+
     let pos = vec3.fromValues.apply(vec3, currentNode["Transform"].position);
     pos[2] = -pos[2];
-    //TODO may need to edit rotation due to z-axis change
-    /*
-    let w=currentNode["Transform"].rotation[0];
-    let x=currentNode["Transform"].rotation[1];
-    let y=currentNode["Transform"].rotation[2];
-    let z=currentNode["Transform"].rotation[3];*/
-    let rotate = quat.create();//quat.fromValues.apply(quat, [x, y, z, w]);
-    quat.rotateY(rotate, rotate, -1*(currentNode["Transform"].rotation[1]+ 180) / 180 * Math.PI);
-    quat.rotateX(rotate, rotate, currentNode["Transform"].rotation[0] / 180 * Math.PI);
-    quat.rotateZ(rotate, rotate, -1 * currentNode["Transform"].rotation[2] / 180 * Math.PI);
 
-    //rotate[2] = -rotate[2];
+    if (parent.name === "Room1 (1)") {
+      pos[0] -= 20;
+      console.log("VEC#+"+pos[0] +" "+ pos[1] + " " +pos[2])
+      pos[0] += 20;
+      vec3.transformMat4(pos, pos, invParentTransform);
+      console.log("VEC#+"+pos[0] +" "+ pos[1] + " " +pos[2])
+    }
+
+    //vec3.transformMat4(pos, pos, invParentTransform);
+
+    let rotate = quat.create();
+    quat.rotateY(rotate, rotate, -1*(currentNode["Transform"].rotation[1]+180) / 180 * Math.PI);
+    quat.rotateX(rotate, rotate, 1*(currentNode["Transform"].rotation[0]) / 180 * Math.PI);
+    quat.rotateZ(rotate, rotate, -1*(currentNode["Transform"].rotation[2]) / 180 * Math.PI);
+
+    // console.log(mat4.getRotation(quat.create(), invParentTransform));
+
+    quat.multiply(rotate, mat4.getRotation(quat.create(), invParentTransform), rotate);
+
     let scale = currentNode["Transform"].scaleFactor;
 
-    nodeObject.transform.setScale((scale > 10)?scale / 100 : scale);
+    let myScale = scale > 10 ? scale / 100 : scale;
+    let childMat = mat4.create(); mat4.fromRotationTranslation(childMat, rotate, pos);
+    childMat = mat4.multiply(childMat, invParentTransform, childMat);
+
+    nodeObject.transform.setScale(myScale);
+    nodeObject.transform.setPosition(mat4.getTranslation(vec3.create(), childMat));
+    nodeObject.transform.setRotation(mat4.getRotation(quat.create(), childMat));
+
+    /*nodeObject.transform.setScale((scale > 10) ? scale / 100 : scale);
     nodeObject.transform.setPosition(pos);
-    nodeObject.transform.setRotation(rotate);
+    nodeObject.transform.setRotation(rotate);*/
+
 
     if ("colliders" in currentNode) {
       //TODO give mass
@@ -76,7 +95,7 @@ const SceneLoader = {
         colliderData.offset[2] = colliderData.offset[2];
         vec3.scale(colliderData.offset, colliderData.offset, scale);
         if (colliderData.type === 'box') {
-          collider.addShape('box',[colliderData.scaleX*scale, colliderData.scaleY*scale, colliderData.scaleZ*scale], colliderData.offset);
+         // collider.addShape('box',[colliderData.scaleX*scale, colliderData.scaleY*scale, colliderData.scaleZ*scale], colliderData.offset);
         } else {
           collider.addShape('sphere', [colliderData.scale*scale, colliderData.scale*scale, colliderData.scale*scale], colliderData.offset);
         }
@@ -102,7 +121,7 @@ const SceneLoader = {
     if (!IS_SERVER) {
 
       //TODO check spelling of SkinnedMeshRenderer
-      if ("MeshFilter" in currentNode || "SkinnedMeshRenderer" in currentNode) {
+      if ("MeshFilter" in currentNode) {//|| "SkinnedMeshRenderer" in currentNode) {
         let meshName = currentNode["MeshFilter"];
         if (meshName === 'Plane' || meshName === 'Cube' || meshName === 'Sphere' || meshName === 'Capsule') {
           console.log(meshName = 'Plane');
@@ -182,12 +201,9 @@ const SceneLoader = {
 
     loadingAcceleration[currentNode.name] = nodeObject.transform;
     if (Object.keys(currentNode).indexOf("children") >= 0) {
-      GO = new GameObject();
       for (let child of currentNode.children) {
-        GO.addChild(SceneLoader._parseNode(scene, child, filename, loadingAcceleration, lights));
+        SceneLoader._parseNode(nodeObject, child, filename, loadingAcceleration, lights);
       }
-      GO.addChild(nodeObject);
-      return GO;
     }
 
     return nodeObject;

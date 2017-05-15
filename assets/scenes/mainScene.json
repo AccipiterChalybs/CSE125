@@ -716,1431 +716,6 @@
         }
       },
       {
-        "name": "Plane (2)",
-        "Transform": {
-          "position": [34.02, -0.04, -6.61],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 1
-        },
-        "MeshFilter": "Plane",
-        "UnityEngine.MeshCollider": {
-        },
-        "MeshRenderer": "spaced-tiles1-albedo"
-      },
-      {
-        "name": "Corridor0",
-        "Transform": {
-          "position": [34.02, 0, -6.61],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 1
-        }
-      },
-      {
-        "name": "Directional Light",
-        "Transform": {
-          "position": [5.12, 3, -6.7],
-          "rotation": [42.91303, 49.35006, 235.21],
-          "scaleFactor": 1
-        },
-        "Light": {
-          "type": "Directional",
-          "color": [1, 1, 0.9568627, 0.8392157],
-          "intensity": 1,
-          "range": 10
-        }
-      },
-      {
-        "name": "Point light (2)",
-        "Transform": {
-          "position": [6.468, 2.627, 1.462],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 1
-        },
-        "Light": {
-          "type": "Point",
-          "color": [1, 0.4681012, 0.8161765, 0.7873702],
-          "intensity": 0.82,
-          "range": 5.17
-        }
-      },
-      {
-        "name": "Point light (3)",
-        "Transform": {
-          "position": [12.98, 0.8399999, 1.399999],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 1
-        },
-        "Light": {
-          "type": "Point",
-          "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 1,
-          "range": 10
-        }
-      },
-      {
-        "name": "Pillar_round.1",
-        "Transform": {
-          "position": [8.835045, 0, -2.15],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1",
-        "Transform": {
-          "position": [7.2, 0, -1.92],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 100
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (1)",
-        "Transform": {
-          "position": [10.95, 0, -1.92],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 100
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (2)",
-        "Transform": {
-          "position": [14.77, 0, -1.92],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 100
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (1)",
-        "Transform": {
-          "position": [12.85, 0, -2.15],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Plane (1)",
-        "Transform": {
-          "position": [10, 0, 0],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 1
-        },
-        "MeshFilter": "Plane",
-        "UnityEngine.MeshCollider": {
-        },
-        "MeshRenderer": "spaced-tiles1-albedo"
-      },
-      {
-        "name": "DoorFrame.1",
-        "Transform": {
-          "position": [15.18808, -0.33, 0],
-          "rotation": [270, 0, 0],
-          "scaleFactor": 100
-        },
-        "MeshFilter": "DoorFrame.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01684763,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, 0.02063507, 0.01758815]
-          },
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01651994,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, -0.02079891, 0.01758815]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (2)",
-        "Transform": {
-          "position": [9.074, 0, 2.164],
-          "rotation": [270, 179.3301, 0],
-          "scaleFactor": 75.00012
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (3)",
-        "Transform": {
-          "position": [13.084, 0, 2.214],
-          "rotation": [270, 179.3301, 0],
-          "scaleFactor": 75.00012
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (3)",
-        "Transform": {
-          "position": [7.154, 0, 1.914],
-          "rotation": [270, 179.3301, 0],
-          "scaleFactor": 100.0001
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (4)",
-        "Transform": {
-          "position": [10.974, 0, 1.964],
-          "rotation": [270, 179.3301, 0],
-          "scaleFactor": 100.0001
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (5)",
-        "Transform": {
-          "position": [14.724, 0, 2.004],
-          "rotation": [270, 179.3301, 0],
-          "scaleFactor": 100.0001
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (6)",
-        "Transform": {
-          "position": [22.57, 0, 2.004],
-          "rotation": [270, 179.3301, 0],
-          "scaleFactor": 100.0002
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (7)",
-        "Transform": {
-          "position": [18.82, 0, 1.964],
-          "rotation": [270, 179.3301, 0],
-          "scaleFactor": 100.0002
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (4)",
-        "Transform": {
-          "position": [20.93, 0, 2.214],
-          "rotation": [270, 179.3301, 0],
-          "scaleFactor": 75.00021
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (5)",
-        "Transform": {
-          "position": [16.92, 0, 2.164],
-          "rotation": [270, 179.3301, 0],
-          "scaleFactor": 75.00021
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (6)",
-        "Transform": {
-          "position": [20.7, 0, -2.15],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (7)",
-        "Transform": {
-          "position": [16.68, 0, -2.15],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (8)",
-        "Transform": {
-          "position": [22.62, 0, -1.92],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 100
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (9)",
-        "Transform": {
-          "position": [18.8, 0, -1.92],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 100
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "DoorFrame.1 (1)",
-        "Transform": {
-          "position": [39.38, -0.33, -25.98],
-          "rotation": [270, 0, 0],
-          "scaleFactor": 100
-        },
-        "MeshFilter": "DoorFrame.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01684763,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, 0.02063507, 0.01758815]
-          },
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01651994,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, -0.02079891, 0.01758815]
-          }
-        ]
-      },
-      {
-        "name": "DoorFrame.1 (2)",
-        "Transform": {
-          "position": [34.09, -0.33, -18.91],
-          "rotation": [270, 90, 0],
-          "scaleFactor": 100
-        },
-        "MeshFilter": "DoorFrame.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01684763,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, 0.02063507, 0.01758815]
-          },
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01651994,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, -0.02079891, 0.01758815]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (8)",
-        "Transform": {
-          "position": [29.48, 0, -7.36],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (10)",
-        "Transform": {
-          "position": [38.603, 0, -2.148],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (11)",
-        "Transform": {
-          "position": [38.603, 0, -5.99],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (11)",
-        "Transform": {
-          "position": [38.603, 0, -9.79],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (9)",
-        "Transform": {
-          "position": [29.48, 0, -11.23],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (11)",
-        "Transform": {
-          "position": [38.603, 0, -13.45],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (12)",
-        "Transform": {
-          "position": [38.603, 0, -17.3],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (9)",
-        "Transform": {
-          "position": [29.48, 0, -14.97],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (15)",
-        "Transform": {
-          "position": [29.65, 0, -30.85],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (16)",
-        "Transform": {
-          "position": [33.41, 0, -30.814],
-          "rotation": [270.028, 270.02, 0],
-          "scaleFactor": 75.00003
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (17)",
-        "Transform": {
-          "position": [37.539, 0.001, -30.814],
-          "rotation": [270.028, 270.02, 0],
-          "scaleFactor": 75.00005
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Plane (2)",
-        "Transform": {
-          "position": [44.036, 0, -26.37],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 1
-        },
-        "MeshFilter": "Plane",
-        "UnityEngine.MeshCollider": {
-        },
-        "MeshRenderer": "spaced-tiles1-albedo"
-      },
-      {
-        "name": "Pillar_round.1 (19)",
-        "Transform": {
-          "position": [43.86, 0, -23.884],
-          "rotation": [270, 179.3301, 0],
-          "scaleFactor": 75.00021
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (11)",
-        "Transform": {
-          "position": [41.748, 0, -23.922],
-          "rotation": [270, 179.33, 0],
-          "scaleFactor": 100.0002
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (20)",
-        "Transform": {
-          "position": [47.79, 0, -23.884],
-          "rotation": [270, 179.3301, 0],
-          "scaleFactor": 75.00031
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "DoorFrame.1 (3)",
-        "Transform": {
-          "position": [44.358, -0.33, -28.367],
-          "rotation": [270, 270, 0],
-          "scaleFactor": 100
-        },
-        "MeshFilter": "DoorFrame.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01684763,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, 0.02063507, 0.01758815]
-          },
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01651994,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, -0.02079891, 0.01758815]
-          }
-        ]
-      },
-      {
-        "name": "DoorFrame.1 (4)",
-        "Transform": {
-          "position": [28.916, -0.33, -25.233],
-          "rotation": [270, 0, 0],
-          "scaleFactor": 100
-        },
-        "MeshFilter": "DoorFrame.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01684763,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, 0.02063507, 0.01758815]
-          },
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01651994,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, -0.02079891, 0.01758815]
-          }
-        ]
-      },
-      {
-        "name": "Plane (3)",
-        "Transform": {
-          "position": [56.536, 0, -25.92],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 1.5
-        },
-        "MeshFilter": "Plane",
-        "UnityEngine.MeshCollider": {
-        },
-        "MeshRenderer": "spaced-tiles1-albedo"
-      },
-      {
-        "name": "DoorFrame.1 (5)",
-        "Transform": {
-          "position": [49.26, -0.33, -25.98],
-          "rotation": [270, 0, 0],
-          "scaleFactor": 100
-        },
-        "MeshFilter": "DoorFrame.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01684763,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, 0.02063507, 0.01758815]
-          },
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01651994,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, -0.02079891, 0.01758815]
-          }
-        ]
-      },
-      {
-        "name": "DoorFrame.1 (6)",
-        "Transform": {
-          "position": [62.655, -0.33, -25.98],
-          "rotation": [270, 0, 0],
-          "scaleFactor": 100
-        },
-        "MeshFilter": "DoorFrame.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01684763,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, 0.02063507, 0.01758815]
-          },
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01651994,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, -0.02079891, 0.01758815]
-          }
-        ]
-      },
-      {
-        "name": "DoorFrame.1 (7)",
-        "Transform": {
-          "position": [56.72, -0.33, -18.407],
-          "rotation": [270, 270, 0],
-          "scaleFactor": 100
-        },
-        "MeshFilter": "DoorFrame.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01684763,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, 0.02063507, 0.01758815]
-          },
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01651994,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, -0.02079891, 0.01758815]
-          }
-        ]
-      },
-      {
-        "name": "DoorFrame.1 (8)",
-        "Transform": {
-          "position": [56.72, -0.33, -33.508],
-          "rotation": [270, 270, 0],
-          "scaleFactor": 100
-        },
-        "MeshFilter": "DoorFrame.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01684763,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, 0.02063507, 0.01758815]
-          },
-          {
-            "type": "box",
-            "scaleX": 0.01986963,
-            "scaleY": 0.01651994,
-            "scaleZ": 0.03642169,
-            "offset": [5.960464E-10, -0.02079891, 0.01758815]
-          }
-        ]
-      },
-      {
-        "name": "Plane (4)",
-        "Transform": {
-          "position": [71.536, 0, -25.92],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 1.5
-        },
-        "MeshFilter": "Plane",
-        "UnityEngine.MeshCollider": {
-        },
-        "MeshRenderer": "spaced-tiles1-albedo"
-      },
-      {
-        "name": "Plane (5)",
-        "Transform": {
-          "position": [56.536, 0, -15.97],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 0.5
-        },
-        "MeshFilter": "Plane",
-        "UnityEngine.MeshCollider": {
-        },
-        "MeshRenderer": "spaced-tiles1-albedo"
-      },
-      {
-        "name": "Plane (6)",
-        "Transform": {
-          "position": [56.536, 0, -37.9],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 0.9
-        },
-        "MeshFilter": "Plane",
-        "UnityEngine.MeshCollider": {
-        },
-        "MeshRenderer": "spaced-tiles1-albedo"
-      },
-      {
-        "name": "Plane (7)",
-        "Transform": {
-          "position": [56.536, 0, -48.485],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 1.25
-        },
-        "MeshFilter": "Plane",
-        "UnityEngine.MeshCollider": {
-        },
-        "MeshRenderer": "spaced-tiles1-albedo"
-      },
-      {
-        "name": "Pillar_round.1 (18)",
-        "Transform": {
-          "position": [54.572, 0, -37.91],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (21)",
-        "Transform": {
-          "position": [58.882, 0, -37.91],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (22)",
-        "Transform": {
-          "position": [54.571, 0, -42.043],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (23)",
-        "Transform": {
-          "position": [58.881, 0, -42.025],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (26)",
-        "Transform": {
-          "position": [61.134, 0, -49.769],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (27)",
-        "Transform": {
-          "position": [52.831, 0, -49.769],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (29)",
-        "Transform": {
-          "position": [61.134, 0, -52.969],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (30)",
-        "Transform": {
-          "position": [53.03, 0, -52.969],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (31)",
-        "Transform": {
-          "position": [57.215, 0, -53.244],
-          "rotation": [270.0198, 0, 0],
-          "scaleFactor": 75
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (12)",
-        "Transform": {
-          "position": [45.825, 0, -23.875],
-          "rotation": [270, 179.33, 0],
-          "scaleFactor": 100.0003
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (13)",
-        "Transform": {
-          "position": [49.529, 0, -23.832],
-          "rotation": [270, 179.33, 0],
-          "scaleFactor": 100.0004
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (14)",
-        "Transform": {
-          "position": [51.734, 0, -21.572],
-          "rotation": [270, 89.33001, 0],
-          "scaleFactor": 100.0004
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Pillar_round.1 (24)",
-        "Transform": {
-          "position": [51.419, 0, -23.636],
-          "rotation": [270, 179.3301, 0],
-          "scaleFactor": 75.00041
-        },
-        "MeshFilter": "Pillar_round.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.01,
-            "scaleY": 0.01,
-            "scaleZ": 0.06195197,
-            "offset": [0, 0, 0.03097598]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (15)",
-        "Transform": {
-          "position": [52.842, 0, -19.001],
-          "rotation": [270, 179.33, 0],
-          "scaleFactor": 100.0005
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (16)",
-        "Transform": {
-          "position": [54.835, 0, -16.807],
-          "rotation": [270, 89.33001, 0],
-          "scaleFactor": 100.0004
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (17)",
-        "Transform": {
-          "position": [58.402, 0, -16.767],
-          "rotation": [270, 269.33, 0],
-          "scaleFactor": 100.0004
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (18)",
-        "Transform": {
-          "position": [60.74, 0, -18.91],
-          "rotation": [270, 179.33, 0],
-          "scaleFactor": 100.0006
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (21)",
-        "Transform": {
-          "position": [62.31, 0, -21.8],
-          "rotation": [270, 269.33, 0],
-          "scaleFactor": 100.0005
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (20)",
-        "Transform": {
-          "position": [51.691, 0, -17.857],
-          "rotation": [270, 89.33001, 0],
-          "scaleFactor": 100.0004
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (19)",
-        "Transform": {
-          "position": [62.26, 0, -18.08],
-          "rotation": [270, 269.33, 0],
-          "scaleFactor": 100.0005
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (22)",
-        "Transform": {
-          "position": [62.4, 0, -30.19],
-          "rotation": [270, 269.33, 0],
-          "scaleFactor": 100.0004
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (23)",
-        "Transform": {
-          "position": [62.45, 0, -33.91],
-          "rotation": [270, 269.33, 0],
-          "scaleFactor": 100.0004
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
-        "name": "Wall_ornate.1 (24)",
-        "Transform": {
-          "position": [60.713, 0, -32.979],
-          "rotation": [270, 359.33, 0],
-          "scaleFactor": 100.0004
-        },
-        "MeshFilter": "Wall_ornate.1",
-        "MeshRenderer": "dungeon-stone1-albedo2",
-        "colliders": [
-          {
-            "type": "box",
-            "scaleX": 0.03728509,
-            "scaleY": 0.007680845,
-            "scaleZ": 0.03349042,
-            "offset": [0, 0.002861429, 0.01674521]
-          }
-        ]
-      },
-      {
         "name": "Room1",
         "Transform": {
           "position": [10, 0, 0],
@@ -2154,7 +729,1434 @@
           "position": [20, 0, 0],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
-        }
+        },
+        "children": [
+          {
+            "name": "Plane (2)",
+            "Transform": {
+              "position": [34.02, -0.04, -6.61],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 1
+            },
+            "MeshFilter": "Plane",
+            "UnityEngine.MeshCollider": {
+            },
+            "MeshRenderer": "spaced-tiles1-albedo"
+          },
+          {
+            "name": "Corridor0",
+            "Transform": {
+              "position": [34.02, 0, -6.61],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 1
+            }
+          },
+          {
+            "name": "Directional Light",
+            "Transform": {
+              "position": [5.12, 3, -6.7],
+              "rotation": [42.91303, 49.35006, 235.21],
+              "scaleFactor": 1
+            },
+            "Light": {
+              "type": "Directional",
+              "color": [1, 1, 0.9568627, 0.8392157],
+              "intensity": 1,
+              "range": 10
+            }
+          },
+          {
+            "name": "Point light (2)",
+            "Transform": {
+              "position": [6.468, 2.627, 1.462],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 1
+            },
+            "Light": {
+              "type": "Point",
+              "color": [1, 0.4681012, 0.8161765, 0.7873702],
+              "intensity": 0.82,
+              "range": 5.17
+            }
+          },
+          {
+            "name": "Point light (3)",
+            "Transform": {
+              "position": [12.98, 0.8399999, 1.399999],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 1
+            },
+            "Light": {
+              "type": "Point",
+              "color": [1, 0.7279412, 0.4160929, 0.2141003],
+              "intensity": 1,
+              "range": 10
+            }
+          },
+          {
+            "name": "Pillar_round.1",
+            "Transform": {
+              "position": [8.835045, 0, -2.15],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1",
+            "Transform": {
+              "position": [7.2, 0, -1.92],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 100
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (1)",
+            "Transform": {
+              "position": [10.95, 0, -1.92],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 100
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (2)",
+            "Transform": {
+              "position": [14.77, 0, -1.92],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 100
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (1)",
+            "Transform": {
+              "position": [12.85, 0, -2.15],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Plane (1)",
+            "Transform": {
+              "position": [10, 0, 0],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 1
+            },
+            "MeshFilter": "Plane",
+            "UnityEngine.MeshCollider": {
+            },
+            "MeshRenderer": "spaced-tiles1-albedo"
+          },
+          {
+            "name": "DoorFrame.1",
+            "Transform": {
+              "position": [15.18808, -0.33, 0],
+              "rotation": [270, 0, 0],
+              "scaleFactor": 100
+            },
+            "MeshFilter": "DoorFrame.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01684763,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, 0.02063507, 0.01758815]
+              },
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01651994,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, -0.02079891, 0.01758815]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (2)",
+            "Transform": {
+              "position": [9.074, 0, 2.164],
+              "rotation": [270, 179.3301, 0],
+              "scaleFactor": 75.00018
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (3)",
+            "Transform": {
+              "position": [13.084, 0, 2.214],
+              "rotation": [270, 179.3301, 0],
+              "scaleFactor": 75.00018
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (3)",
+            "Transform": {
+              "position": [7.154, 0, 1.914],
+              "rotation": [270, 179.3301, 0],
+              "scaleFactor": 100.0002
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (4)",
+            "Transform": {
+              "position": [10.974, 0, 1.964],
+              "rotation": [270, 179.3301, 0],
+              "scaleFactor": 100.0002
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (5)",
+            "Transform": {
+              "position": [14.724, 0, 2.004],
+              "rotation": [270, 179.3301, 0],
+              "scaleFactor": 100.0002
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (6)",
+            "Transform": {
+              "position": [22.57, 0, 2.004],
+              "rotation": [270, 179.3301, 0],
+              "scaleFactor": 100.0003
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (7)",
+            "Transform": {
+              "position": [18.82, 0, 1.964],
+              "rotation": [270, 179.3301, 0],
+              "scaleFactor": 100.0003
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (4)",
+            "Transform": {
+              "position": [20.93, 0, 2.214],
+              "rotation": [270, 179.3301, 0],
+              "scaleFactor": 75.00027
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (5)",
+            "Transform": {
+              "position": [16.92, 0, 2.164],
+              "rotation": [270, 179.3301, 0],
+              "scaleFactor": 75.00027
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (6)",
+            "Transform": {
+              "position": [20.7, 0, -2.15],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (7)",
+            "Transform": {
+              "position": [16.68, 0, -2.15],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (8)",
+            "Transform": {
+              "position": [22.62, 0, -1.92],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 100
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (9)",
+            "Transform": {
+              "position": [18.8, 0, -1.92],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 100
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "DoorFrame.1 (1)",
+            "Transform": {
+              "position": [39.38, -0.33, -25.98],
+              "rotation": [270, 0, 0],
+              "scaleFactor": 100
+            },
+            "MeshFilter": "DoorFrame.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01684763,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, 0.02063507, 0.01758815]
+              },
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01651994,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, -0.02079891, 0.01758815]
+              }
+            ]
+          },
+          {
+            "name": "DoorFrame.1 (2)",
+            "Transform": {
+              "position": [34.09, -0.33, -18.91],
+              "rotation": [270, 90, 0],
+              "scaleFactor": 100
+            },
+            "MeshFilter": "DoorFrame.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01684763,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, 0.02063507, 0.01758815]
+              },
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01651994,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, -0.02079891, 0.01758815]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (8)",
+            "Transform": {
+              "position": [29.48, 0, -7.36],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (10)",
+            "Transform": {
+              "position": [38.603, 0, -2.148],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (11)",
+            "Transform": {
+              "position": [38.603, 0, -5.99],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (11)",
+            "Transform": {
+              "position": [38.603, 0, -9.79],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (9)",
+            "Transform": {
+              "position": [29.48, 0, -11.23],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (11)",
+            "Transform": {
+              "position": [38.603, 0, -13.45],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (12)",
+            "Transform": {
+              "position": [38.603, 0, -17.3],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (9)",
+            "Transform": {
+              "position": [29.48, 0, -14.97],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (15)",
+            "Transform": {
+              "position": [29.65, 0, -30.85],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (16)",
+            "Transform": {
+              "position": [33.41, 0, -30.814],
+              "rotation": [270.028, 270.02, 0],
+              "scaleFactor": 75.00005
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (17)",
+            "Transform": {
+              "position": [37.539, 0.001, -30.814],
+              "rotation": [270.028, 270.02, 0],
+              "scaleFactor": 75.00007
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Plane (2)",
+            "Transform": {
+              "position": [44.036, 0, -26.37],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 1
+            },
+            "MeshFilter": "Plane",
+            "UnityEngine.MeshCollider": {
+            },
+            "MeshRenderer": "spaced-tiles1-albedo"
+          },
+          {
+            "name": "Pillar_round.1 (19)",
+            "Transform": {
+              "position": [43.86, 0, -23.884],
+              "rotation": [270, 179.3301, 0],
+              "scaleFactor": 75.00027
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (11)",
+            "Transform": {
+              "position": [41.748, 0, -23.922],
+              "rotation": [270, 179.33, 0],
+              "scaleFactor": 100.0003
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (20)",
+            "Transform": {
+              "position": [47.79, 0, -23.884],
+              "rotation": [270, 179.3301, 0],
+              "scaleFactor": 75.00037
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "DoorFrame.1 (3)",
+            "Transform": {
+              "position": [44.358, -0.33, -28.367],
+              "rotation": [270, 270, 0],
+              "scaleFactor": 100
+            },
+            "MeshFilter": "DoorFrame.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01684763,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, 0.02063507, 0.01758815]
+              },
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01651994,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, -0.02079891, 0.01758815]
+              }
+            ]
+          },
+          {
+            "name": "DoorFrame.1 (4)",
+            "Transform": {
+              "position": [28.916, -0.33, -25.233],
+              "rotation": [270, 0, 0],
+              "scaleFactor": 100
+            },
+            "MeshFilter": "DoorFrame.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01684763,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, 0.02063507, 0.01758815]
+              },
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01651994,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, -0.02079891, 0.01758815]
+              }
+            ]
+          },
+          {
+            "name": "Plane (3)",
+            "Transform": {
+              "position": [56.536, 0, -25.92],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 1.5
+            },
+            "MeshFilter": "Plane",
+            "UnityEngine.MeshCollider": {
+            },
+            "MeshRenderer": "spaced-tiles1-albedo"
+          },
+          {
+            "name": "DoorFrame.1 (5)",
+            "Transform": {
+              "position": [49.26, -0.33, -25.98],
+              "rotation": [270, 0, 0],
+              "scaleFactor": 100
+            },
+            "MeshFilter": "DoorFrame.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01684763,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, 0.02063507, 0.01758815]
+              },
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01651994,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, -0.02079891, 0.01758815]
+              }
+            ]
+          },
+          {
+            "name": "DoorFrame.1 (6)",
+            "Transform": {
+              "position": [62.655, -0.33, -25.98],
+              "rotation": [270, 0, 0],
+              "scaleFactor": 100
+            },
+            "MeshFilter": "DoorFrame.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01684763,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, 0.02063507, 0.01758815]
+              },
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01651994,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, -0.02079891, 0.01758815]
+              }
+            ]
+          },
+          {
+            "name": "DoorFrame.1 (7)",
+            "Transform": {
+              "position": [56.72, -0.33, -18.407],
+              "rotation": [270, 270, 0],
+              "scaleFactor": 100
+            },
+            "MeshFilter": "DoorFrame.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01684763,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, 0.02063507, 0.01758815]
+              },
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01651994,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, -0.02079891, 0.01758815]
+              }
+            ]
+          },
+          {
+            "name": "DoorFrame.1 (8)",
+            "Transform": {
+              "position": [56.72, -0.33, -33.508],
+              "rotation": [270, 270, 0],
+              "scaleFactor": 100
+            },
+            "MeshFilter": "DoorFrame.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01684763,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, 0.02063507, 0.01758815]
+              },
+              {
+                "type": "box",
+                "scaleX": 0.01986963,
+                "scaleY": 0.01651994,
+                "scaleZ": 0.03642169,
+                "offset": [5.960464E-10, -0.02079891, 0.01758815]
+              }
+            ]
+          },
+          {
+            "name": "Plane (4)",
+            "Transform": {
+              "position": [71.536, 0, -25.92],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 1.5
+            },
+            "MeshFilter": "Plane",
+            "UnityEngine.MeshCollider": {
+            },
+            "MeshRenderer": "spaced-tiles1-albedo"
+          },
+          {
+            "name": "Plane (5)",
+            "Transform": {
+              "position": [56.536, 0, -15.97],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 0.5
+            },
+            "MeshFilter": "Plane",
+            "UnityEngine.MeshCollider": {
+            },
+            "MeshRenderer": "spaced-tiles1-albedo"
+          },
+          {
+            "name": "Plane (6)",
+            "Transform": {
+              "position": [56.536, 0, -37.9],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 0.9
+            },
+            "MeshFilter": "Plane",
+            "UnityEngine.MeshCollider": {
+            },
+            "MeshRenderer": "spaced-tiles1-albedo"
+          },
+          {
+            "name": "Plane (7)",
+            "Transform": {
+              "position": [56.536, 0, -48.485],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 1.25
+            },
+            "MeshFilter": "Plane",
+            "UnityEngine.MeshCollider": {
+            },
+            "MeshRenderer": "spaced-tiles1-albedo"
+          },
+          {
+            "name": "Pillar_round.1 (18)",
+            "Transform": {
+              "position": [54.572, 0, -37.91],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (21)",
+            "Transform": {
+              "position": [58.882, 0, -37.91],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (22)",
+            "Transform": {
+              "position": [54.571, 0, -42.043],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (23)",
+            "Transform": {
+              "position": [58.881, 0, -42.025],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (26)",
+            "Transform": {
+              "position": [61.134, 0, -49.769],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (27)",
+            "Transform": {
+              "position": [52.831, 0, -49.769],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (29)",
+            "Transform": {
+              "position": [61.134, 0, -52.969],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (30)",
+            "Transform": {
+              "position": [53.03, 0, -52.969],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (31)",
+            "Transform": {
+              "position": [57.215, 0, -53.244],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 75
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (12)",
+            "Transform": {
+              "position": [45.825, 0, -23.875],
+              "rotation": [270, 179.33, 0],
+              "scaleFactor": 100.0004
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (13)",
+            "Transform": {
+              "position": [49.529, 0, -23.832],
+              "rotation": [270, 179.33, 0],
+              "scaleFactor": 100.0005
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (14)",
+            "Transform": {
+              "position": [51.734, 0, -21.572],
+              "rotation": [270, 89.33001, 0],
+              "scaleFactor": 100.0004
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Pillar_round.1 (24)",
+            "Transform": {
+              "position": [51.419, 0, -23.636],
+              "rotation": [270, 179.3301, 0],
+              "scaleFactor": 75.00047
+            },
+            "MeshFilter": "Pillar_round.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.01,
+                "scaleY": 0.01,
+                "scaleZ": 0.06195197,
+                "offset": [0, 0, 0.03097598]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (15)",
+            "Transform": {
+              "position": [52.842, 0, -19.001],
+              "rotation": [270, 179.33, 0],
+              "scaleFactor": 100.0006
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (16)",
+            "Transform": {
+              "position": [54.835, 0, -16.807],
+              "rotation": [270, 89.33001, 0],
+              "scaleFactor": 100.0004
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (17)",
+            "Transform": {
+              "position": [58.402, 0, -16.767],
+              "rotation": [270, 269.33, 0],
+              "scaleFactor": 100.0004
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (18)",
+            "Transform": {
+              "position": [60.74, 0, -18.91],
+              "rotation": [270, 179.33, 0],
+              "scaleFactor": 100.0007
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (21)",
+            "Transform": {
+              "position": [62.31, 0, -21.8],
+              "rotation": [270, 269.33, 0],
+              "scaleFactor": 100.0005
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (20)",
+            "Transform": {
+              "position": [51.691, 0, -17.857],
+              "rotation": [270, 89.33001, 0],
+              "scaleFactor": 100.0004
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (19)",
+            "Transform": {
+              "position": [62.26, 0, -18.08],
+              "rotation": [270, 269.33, 0],
+              "scaleFactor": 100.0005
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (22)",
+            "Transform": {
+              "position": [62.4, 0, -30.19],
+              "rotation": [270, 269.33, 0],
+              "scaleFactor": 100.0005
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (23)",
+            "Transform": {
+              "position": [62.45, 0, -33.91],
+              "rotation": [270, 269.33, 0],
+              "scaleFactor": 100.0005
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          },
+          {
+            "name": "Wall_ornate.1 (24)",
+            "Transform": {
+              "position": [60.713, 0, -32.979],
+              "rotation": [270, 359.33, 0],
+              "scaleFactor": 100.0004
+            },
+            "MeshFilter": "Wall_ornate.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.03728509,
+                "scaleY": 0.007680845,
+                "scaleZ": 0.03349042,
+                "offset": [0, 0.002861429, 0.01674521]
+              }
+            ]
+          }
+        ]
       },
       {
         "name": "Plane (1)",
@@ -2487,6 +2489,48 @@
         }
       },
       {
+        "name": "Point light (6)",
+        "Transform": {
+          "position": [22.95, 4.59, 1.37],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "Light": {
+          "type": "Point",
+          "color": [1, 0.7279412, 0.4160929, 0.2141003],
+          "intensity": 1,
+          "range": 10
+        }
+      },
+      {
+        "name": "Point light (7)",
+        "Transform": {
+          "position": [22.95, 4.59, -1.2],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "Light": {
+          "type": "Point",
+          "color": [1, 0.7279412, 0.4160929, 0.2141003],
+          "intensity": 1,
+          "range": 10
+        }
+      },
+      {
+        "name": "Point light (8)",
+        "Transform": {
+          "position": [33.28, 0.8399999, 0.55],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "Light": {
+          "type": "Point",
+          "color": [1, 0.7279412, 0.4160929, 0.2141003],
+          "intensity": 1,
+          "range": 10
+        }
+      },
+      {
         "name": "Rock.2 (1)",
         "Transform": {
           "position": [25.82, 0.88, -2.62],
@@ -2502,20 +2546,6 @@
             "offset": [0.002641986, -0.00144644, 0.0004114229]
           }
         ]
-      },
-      {
-        "name": "Point light (6)",
-        "Transform": {
-          "position": [22.95, 4.59, 1.37],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 1
-        },
-        "Light": {
-          "type": "Point",
-          "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 1,
-          "range": 10
-        }
       },
       {
         "name": "DoorFrame.2 (1)",
@@ -2542,20 +2572,6 @@
             "offset": [-0.01119016, 0.002184715, 0.04060004]
           }
         ]
-      },
-      {
-        "name": "Point light (7)",
-        "Transform": {
-          "position": [22.95, 4.59, -1.2],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 1
-        },
-        "Light": {
-          "type": "Point",
-          "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 1,
-          "range": 10
-        }
       },
       {
         "name": "Wall_rock.1 (1)",
@@ -2651,20 +2667,6 @@
             "offset": [0, 0, 0.03097598]
           }
         ]
-      },
-      {
-        "name": "Point light (8)",
-        "Transform": {
-          "position": [33.28, 0.8399999, 0.55],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 1
-        },
-        "Light": {
-          "type": "Point",
-          "color": [1, 0.7279412, 0.4160929, 0.2141003],
-          "intensity": 1,
-          "range": 10
-        }
       },
       {
         "name": "Wall_ornate.2 (1)",
@@ -3800,6 +3802,116 @@
         },
         "MeshFilter": "Pillar_round.1",
         "MeshRenderer": "dungeon-stone1-albedo2"
+      },
+      {
+        "name": "AxisTest",
+        "Transform": {
+          "position": [-1.55, 11.35234, -17.19823],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 0.1
+        },
+        "MeshFilter": "AxisTest",
+        "MeshRenderer": "No Name"
+      },
+      {
+        "name": "AxisTest (1)",
+        "Transform": {
+          "position": [-1.55, 11.35234, -19.2],
+          "rotation": [90, 0, 0],
+          "scaleFactor": 0.1
+        },
+        "MeshFilter": "AxisTest",
+        "MeshRenderer": "No Name"
+      },
+      {
+        "name": "AxisTest (2)",
+        "Transform": {
+          "position": [-1.55, 11.35234, -21.2],
+          "rotation": [0, 180, 180],
+          "scaleFactor": 0.1
+        },
+        "MeshFilter": "AxisTest",
+        "MeshRenderer": "No Name"
+      },
+      {
+        "name": "AxisTest (3)",
+        "Transform": {
+          "position": [-1.55, 11.35234, -23.79],
+          "rotation": [270, 0, 0],
+          "scaleFactor": 0.1
+        },
+        "MeshFilter": "AxisTest",
+        "MeshRenderer": "No Name"
+      },
+      {
+        "name": "AxisTest (4)",
+        "Transform": {
+          "position": [-3.55, 11.35234, -23.79],
+          "rotation": [270, 90, 0],
+          "scaleFactor": 0.1
+        },
+        "MeshFilter": "AxisTest",
+        "MeshRenderer": "No Name"
+      },
+      {
+        "name": "AxisTest (5)",
+        "Transform": {
+          "position": [-3.55, 11.35234, -21.2],
+          "rotation": [0, 270, 180],
+          "scaleFactor": 0.1000001
+        },
+        "MeshFilter": "AxisTest",
+        "MeshRenderer": "No Name"
+      },
+      {
+        "name": "AxisTest (6)",
+        "Transform": {
+          "position": [-3.55, 11.35234, -19.2],
+          "rotation": [90, 90, 0],
+          "scaleFactor": 0.1
+        },
+        "MeshFilter": "AxisTest",
+        "MeshRenderer": "No Name"
+      },
+      {
+        "name": "AxisTest (7)",
+        "Transform": {
+          "position": [-3.55, 11.35234, -17.19823],
+          "rotation": [0, 90, 0],
+          "scaleFactor": 0.1000001
+        },
+        "MeshFilter": "AxisTest",
+        "MeshRenderer": "No Name"
+      },
+      {
+        "name": "AxisTest (8)",
+        "Transform": {
+          "position": [-6.52, 11.35234, -18.17],
+          "rotation": [0, 90, 90],
+          "scaleFactor": 0.1
+        },
+        "MeshFilter": "AxisTest",
+        "MeshRenderer": "No Name"
+      },
+      {
+        "name": "AxisTest (9)",
+        "Transform": {
+          "position": [-6.52, 11.35234, -20.52],
+          "rotation": [0, 90, 180],
+          "scaleFactor": 0.1000001
+        },
+        "MeshFilter": "AxisTest",
+        "MeshRenderer": "No Name"
+      },
+      {
+        "name": "AxisTest (10)",
+        "Transform": {
+          "position": [-6.52, 11.35234, -22.29],
+          "rotation": [0, 90, 270],
+          "scaleFactor": 0.1
+        },
+        "MeshFilter": "AxisTest",
+        "MeshRenderer": "No Name"
       }
     ]
   }
