@@ -17,6 +17,7 @@ class Animation extends Component
       this._currentTime = 0;
       this._playing = false;
       this._looping = false;
+      this.rootAxisLocked = [false, true, false];
     }
 
     start() {
@@ -50,14 +51,15 @@ class Animation extends Component
     }
 
     updateComponent() {
+        let double = false;
         let lastTime = this._currentTime;
         let currentAnim = Animation.prototype._animData[this.animationName][this._currentAnimationIndex];
         if (this._playing) {
             this._currentTime += currentAnim.tickrate*Time.deltaTime; //TODO update constant (maybe from JSON file's tickrate?)
-            if (this._currentTime > currentAnim.animationTime) {
+            if (this._currentTime >= currentAnim.animationTime) {
                 if (this._looping) {
                     this._currentTime -= currentAnim.animationTime;
-                    lastTime -= currentAnim.animationTime;
+                    double=true;
                 }
                 else {
                     this.stop();
@@ -68,9 +70,36 @@ class Animation extends Component
 
         for (let node of currentAnim.boneData) {
           if (node.isRoot) {
-            let lastPosition = Animation._interpolateKeyframes(node.keyframes.position, lastTime, node.isRoot);
-            let newPosition = Animation._interpolateKeyframes(node.keyframes.position, this._currentTime, node.isRoot);
-            //this.boneMap[node.name].translate(vec3.subtract(vec3.create(), newPosition, lastPosition));
+            let motion = vec3.create();
+            let newPosition = null;
+            if (double) {
+              let lastPosition = Animation._interpolateKeyframes(node.keyframes.position, lastTime, node.isRoot);
+              newPosition = Animation._interpolateKeyframes(node.keyframes.position, currentAnim.animationTime-0.1, node.isRoot);
+              vec3.subtract(motion, newPosition, lastPosition);
+              lastPosition = Animation._interpolateKeyframes(node.keyframes.position, 0, node.isRoot);
+              newPosition = Animation._interpolateKeyframes(node.keyframes.position, this._currentTime, node.isRoot);
+              vec3.add(motion, motion, vec3.subtract(vec3.create(), newPosition, lastPosition));
+            } else {
+              let lastPosition = Animation._interpolateKeyframes(node.keyframes.position, lastTime, node.isRoot);
+              newPosition = Animation._interpolateKeyframes(node.keyframes.position, this._currentTime, node.isRoot);
+              vec3.subtract(motion, newPosition, lastPosition);
+            }
+            for (let rootAxis=0; rootAxis<3; ++rootAxis) {
+              if (this.rootAxisLocked[rootAxis]) {
+                motion[rootAxis] = 0;
+              } else {
+                newPosition[rootAxis] = 0;
+              }
+            }
+
+            //Root Motion (need to reapply this transform's transformations (i.e. rotation & scale)
+            vec3.scale(motion, motion, this.transform.getScale()[0]);
+            vec3.transformQuat(motion, motion, this.transform.rotation);
+            this.transform.translate(motion);
+
+            //Non-Root Motion (i.e. locked axes)
+            this.boneMap[node.name].setPosition(newPosition);
+
             this.boneMap[node.name].setRotation(Animation._interpolateQuaternions(node.keyframes.rotation, this._currentTime));
           } else {
             this.boneMap[node.name].setPosition(Animation._interpolateKeyframes(node.keyframes.position, this._currentTime, node.isRoot));
@@ -90,7 +119,7 @@ class Animation extends Component
     static _interpolateKeyframes(data, time, rescale) {
         let positionIndex = 0;
         let numPositions = data.length;
-        let currentPosition = null;
+        let currentPosition = vec3.create();
 
         for (let index = numPositions -1; index >=0; --index) {
             if (data[index].first < time) {
@@ -101,10 +130,9 @@ class Animation extends Component
 
         if (positionIndex + 1 < numPositions) {
             let t = (time - data[positionIndex].first) / (data[positionIndex + 1].first - data[positionIndex].first);
-            currentPosition = vec3.create();
             vec3.lerp(currentPosition, data[positionIndex].second, data[positionIndex + 1].second, t);
         } else {
-            currentPosition = data[positionIndex].second
+            vec3.copy(currentPosition, data[positionIndex].second);
         }
 
         if (rescale) {
@@ -117,7 +145,7 @@ class Animation extends Component
     static _interpolateQuaternions(data, time) {
         let rotationIndex = 0;
         let numRotations = data.length;
-        let currentRotation = null;
+        let currentRotation = quat.create();
         for (let index = numRotations - 1; index >= 0; --index) {
             if (data[index].first < time) {
                 rotationIndex = index;
@@ -126,11 +154,10 @@ class Animation extends Component
         }
         if (rotationIndex + 1 < numRotations) {
             let t = (time - data[rotationIndex].first) / (data[rotationIndex + 1].first - data[rotationIndex].first);
-            currentRotation = quat.create();
             quat.slerp(currentRotation, data[rotationIndex].second, data[rotationIndex + 1].second, t);
         }
         else {
-            currentRotation = data[rotationIndex].second;
+            quat.copy(currentRotation, data[rotationIndex].second);
         }
         return currentRotation;
     }
