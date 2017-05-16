@@ -6,7 +6,7 @@
 
 class Framebuffer {
 
-    constructor(w, h, numColorTexture, accessibleDepth, hdrEnabled, colorFormats = null) {
+    constructor(w, h, numColorTexture, accessibleDepth, hdrEnabled, colorFormats = null, manualSetup = false) {
         //this.id = 0;
         this.accessibleDepth = accessibleDepth;
         //this.colorTex = [];
@@ -23,26 +23,29 @@ class Framebuffer {
         this.id = GL.createFramebuffer();
         GL.bindFramebuffer(GL.FRAMEBUFFER, this.id);
 
-        this.colorTex = [];
-        this.colorFormats = colorFormats;
-        if (colorFormats === null) {
+
+          this.colorTex = [];
+          this.colorFormats = colorFormats;
+          if (colorFormats === null) {
             this.colorFormats = [];
             for (let x = 0; x < this.numColorTex; ++x) {
-                this.colorFormats[x] = (this.hdrEnabled) ? GL.RGBA16F : GL.RGBA;
+              this.colorFormats[x] = (this.hdrEnabled) ? GL.RGBA16F : GL.RGBA;
             }
-        }
+          }
 
-        for (let x = 0; x < this.numColorTex; ++x) {
+        if (!manualSetup) {
+          for (let x = 0; x < this.numColorTex; ++x) {
             this._addColorTexture(x);
-        }
+          }
 
-        if (this.accessibleDepth) {
+          if (this.accessibleDepth) {
             this._addDepthTexture();
-        } else {
+          } else {
             this._addDepthBuffer();
-        }
+          }
 
-        GL.bindFramebuffer(GL.FRAMEBUFFER, null);
+          GL.bindFramebuffer(GL.FRAMEBUFFER, null);
+        }
     }
 
     deleteTextures() {
@@ -103,10 +106,16 @@ class Framebuffer {
     }
 
     bindDepthTexture(slot) {
-        if (!this.accessibleDepth) { console.error("inaccessible Depth Tex"); return;}
+        if (!this.accessibleDepth) { Debug.error("inaccessible Depth Tex"); return;}
         GL.activeTexture(GL.TEXTURE0 + slot);
         let tex = this.depthTex;
         GL.bindTexture(GL.TEXTURE_2D, tex);
+    }
+
+    bindCubeMapTexture(slot) {
+        if (!this.cubeTex) {Debug.error("FBO is not part of a cubemap"); return;}
+        GL.activeTexture(GL.TEXTURE0 + slot);
+        GL.bindTexture(GL.TEXTURE_CUBE_MAP, this.cubeTex);
     }
 
     blitAll() {
@@ -200,6 +209,38 @@ class Framebuffer {
         GL.bindRenderbuffer(GL.RENDERBUFFER, this.depthTex);
         GL.renderbufferStorage(GL.RENDERBUFFER, GL.DEPTH_COMPONENT16, this.width, this.height);
         GL.framebufferRenderbuffer(GL.FRAMEBUFFER, GL.DEPTH_ATTACHMENT, GL.RENDERBUFFER, this.depthTex);
+    }
+
+    static generateCubeMapArray(width, height, depthOnly) {
+      if (!depthOnly) Debug.assert(false); //not yet implemented
+
+      let fboArray = [];
+
+
+      GL.activeTexture(GL.TEXTURE0);
+      let cubeTex = GL.createTexture();
+      GL.bindTexture(GL.TEXTURE_CUBE_MAP, cubeTex);
+      GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MIN_FILTER, GL.NEAREST);
+      GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MAG_FILTER, GL.NEAREST);
+
+      for (let f1=0; f1<6; ++f1) {
+        GL.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_X + f1, 0, GL.DEPTH_COMPONENT16, width, height, 0, GL.DEPTH_COMPONENT, GL.UNSIGNED_SHORT, null);
+      }
+
+      for (let f=0; f<6; ++f) {
+        fboArray[f] = new Framebuffer(width, height, 0, true, false, null, true);
+
+        GL.framebufferTexture2D(GL.FRAMEBUFFER, GL.DEPTH_ATTACHMENT, GL.TEXTURE_CUBE_MAP_POSITIVE_X + f, cubeTex, 0);
+
+        fboArray[f].cubeTex = cubeTex;
+
+        GL.bindFramebuffer(GL.FRAMEBUFFER, null);
+      }
+
+      GL.bindTexture(GL.TEXTURE_CUBE_MAP, null);
+
+      return fboArray;
+
     }
 
 
