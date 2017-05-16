@@ -66,6 +66,10 @@ PhysicsEngine.overlapSphere = function(position, radius){
   return hitObjects;
 };
 
+PhysicsEngine.dot2D = function(v0, v1){
+  return v0[0] * v1[0] + v0[2] * v1[2];
+};
+
 // 'PM' is short for 'physics material'
 PhysicsEngine.createMaterials = function(){
   let basicPM = new CANNON.Material("basicMaterial");

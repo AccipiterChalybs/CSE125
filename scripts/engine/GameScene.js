@@ -13,7 +13,9 @@ class GameScene {
         ObjectLoader.loadScene(filename); //TODO add callback to group these together
     }
 
-    //TODO this will be moved into the JSON files
+    // TODO REMOVE ME LATER
+    NavMesh.prototype.currentNavMesh= new NavMesh();
+
     if (!IS_SERVER) {
       albedo = new Texture('assets/texture/dungeon-stone1-albedo2.png');
       mat = new Texture('assets/texture/dungeon-stone1-mat.png', false);
@@ -98,7 +100,6 @@ class GameScene {
 
               if(!IS_SERVER) teapot.addComponent(new ParticleSystem(true, {texture: particleTex}));
 
-
             }
             let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
 
@@ -158,6 +159,7 @@ class GameScene {
       GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.getComponent("AudioSource").pauseSound();
     }
 
+
     if(!IS_SERVER) {
       //TODO account for possibility of currentPlayer not set yet
       Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo(PlayerTable.players[PlayerTable.currentPlayer]));
@@ -171,6 +173,11 @@ class GameScene {
 
       Renderer.directionalLight.getComponent("Light").color = vec3.fromValues(0.16, 0.32, 0.64);
     }
+
+    let pos = vec3.create(); vec3.set(pos, -27, 0, -9);
+    let color = vec4.create(); vec4.set(color, 1, 0, 0, 1);
+    let evilTeapot = Debug.drawTeapot(pos, color);
+    evilTeapot.addComponent(new EvilController());
 
     let light = new GameObject();
     let lightComp = new PointLight(true);
@@ -204,7 +211,6 @@ class GameScene {
     ground.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);
 
     GameObject.prototype.SceneRoot.findComponents("Interactable", PhysicsEngine.sphereChecks);
-
   }
 
   update() {
