@@ -208,7 +208,7 @@ class NavMesh{
     return hitResult;
   }
 
-  // Code from https://stackoverflow.com/questions/2257196/git-pull-from-other-branch/2257205
+  // Code from http://stackoverflow.com/questions/849211/shortest-distance-between-a-point-and-a-line-segment
   distToSegmentSquared(p, v, w, pt) {
     let l2 = Utility.distanceSqrd2D(v, w);
     if (l2 <= Number.EPSILON) return Utility.distanceSqrd2D(p, v);
