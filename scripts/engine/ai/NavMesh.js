@@ -54,8 +54,14 @@ class NavMesh{
     let startFace = this.findFace(startPos);
     let endFace = this.findFace(endPos);
 
-    if(startFace === -1 || endFace === -1){
-      return false;
+    // Check if the start and end are on the navmesh
+    if(startFace === -1){
+      startPos = this.findClosestPoint(startPos);
+      startFace = this.findFace(startPos);
+    }
+    if(endFace === -1){
+      endPos = this.findClosestPoint(endPos);
+      endFace = this.findFace(endPos);
     }
 
     // Debug.log("startFace: " + startFace);
@@ -71,6 +77,22 @@ class NavMesh{
     // Debug.log(path);
 
     return path;
+  }
+
+  // Finds the closest point ON the navmesh FROM a point OUTSIDE of the navmesh
+  findClosestPoint(pt){
+    let closestPt = vec3.create();
+    let closestDist = Number.POSITIVE_INFINITY;
+    for(let i = 0; i < this.boundaryList.length; ++i){
+      let newPt = {pos: vec3.create()};
+      let dist = this.distToSegmentSquared(pt, this.boundaryList[i][0], this.boundaryList[i][1], newPt);
+      if(dist < closestDist){
+        closestDist = dist;
+        closestPt = newPt.pos;
+      }
+    }
+
+    return closestPt;
   }
 
   cleanPath(path){
@@ -184,6 +206,16 @@ class NavMesh{
     }
 
     return hitResult;
+  }
+
+  // Code from https://stackoverflow.com/questions/2257196/git-pull-from-other-branch/2257205
+  distToSegmentSquared(p, v, w, pt) {
+    let l2 = Utility.distanceSqrd2D(v, w);
+    if (l2 <= Number.EPSILON) return Utility.distanceSqrd2D(p, v);
+    let t = ((p[0] - v[0]) * (w[0] - v[0]) + (p[2] - v[2]) * (w[2] - v[2])) / l2;
+    t = Math.max(0, Math.min(1, t));
+    pt.pos = [v[0] + t * (w[0] - v[0]), 0, v[2] + t * (w[2] - v[2])];
+    return Utility.distanceSqrd2D(p, pt.pos);
   }
 }
 NavMesh.prototype.currentNavMesh= null;

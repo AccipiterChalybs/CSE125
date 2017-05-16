@@ -39,8 +39,6 @@ class EvilController extends AIController{
   updateComponent(){
     super.updateComponent();
 
-    Debug.log("\n");
-
     // NAVMESH
     // test/debugging zone
 

@@ -2,7 +2,7 @@
  * Created by Stephen on 4/15/2017.
  */
 
-const REGULAR_SPEED = 4;
+const REGULAR_SPEED = 20;
 const WALK_SPEED = 2;
 const SING_SPEED = 0.8;
 const PLAYER_ACCELERATION = 4;

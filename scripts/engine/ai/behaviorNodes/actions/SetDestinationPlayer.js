@@ -11,7 +11,7 @@ class SetDestinationPlayer extends BehaviorTreeLeaf{
     if(this.ai.data["player"] && this.ai.data["player"] !== null) {
       this.ai.data["destination"] = this.ai.data["player"].transform.getPosition();
       this._currentState = BehaviorTreeNode.success;
-      Debug.log(this.ai.data["player"].transform.getPosition());
+      // Debug.log(this.ai.data["player"].transform.getPosition());
     }else{
       this._currentState = BehaviorTreeNode.failure;
     }

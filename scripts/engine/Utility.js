@@ -4,6 +4,14 @@
 
 let Utility = {};
 
+Utility.sqr = function(x){
+  return x * x;
+};
+
+Utility.distanceSqrd2D = function(a, b){
+  return Utility.sqr(a[0] - b[0]) + Utility.sqr(a[2] - b[2]);
+};
+
 Utility.lerp = function(a, b, t){
   t = t > 1 ? 1 : t < 0 ? 0 : t;
   return (1 - t) * a + t * b;

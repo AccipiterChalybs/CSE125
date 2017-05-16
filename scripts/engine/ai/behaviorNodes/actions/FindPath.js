@@ -27,7 +27,7 @@ class FindPath extends BehaviorTreeLeaf{
 
       let path = [];
       let foundPath = NavMesh.prototype.currentNavMesh.findPath(this.ai.transform.getPosition(), this._destination, path);
-      Debug.log(foundPath, path);
+      // Debug.log(foundPath, path);
 
       if(!foundPath) {
         this._currentState = BehaviorState.failure;
