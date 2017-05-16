@@ -33,7 +33,7 @@ class Mesh extends Component {
                 let id = meshBoneData.boneMap[node.name];
 
                 let transformMatrix = mat4.create();
-                mat4.multiply(transformMatrix, node.object.getTransformMatrix(), meshBoneData.boneBindArray[id]);
+                mat4.multiply(transformMatrix, this.animationRoot.boneMap[node.name].getTransformMatrix(), meshBoneData.boneBindArray[id]);
 
                 Renderer.currentShader.setUniform("bone_Matrix[" + id + "]", transformMatrix, UniformTypes.mat4);
             }

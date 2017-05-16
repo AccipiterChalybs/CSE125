@@ -28,10 +28,20 @@ class ObjectLoader {
 
         let retScene = ObjectLoader._parseNode(scene, scene.rootnode, filename, loadingAcceleration, lights);
 
-        //TODO this looks incorrect - might need to put inside the recursive parseNode?
         if ("animations" in scene) {
-            retScene.addComponent(new Animation(scene, loadingAcceleration));
-            ObjectLoader.linkRoot(retScene.getComponent("Animation"), retScene.transform);
+            //TODO make this better
+            let filenameList = filename.split('/');
+            let animationName = (filenameList[filenameList.length-1]).substring(0,filenameList[filenameList.length-1].indexOf('.json'));
+
+            //TODO make this better too
+            let rootName = "No Root Name";
+            for (let child of scene.rootnode.children) {
+                if (child.children && child.children !== null && child.children.length > 0) {
+                  rootName = child.name;
+                }
+            }
+
+            Animation.loadAnimationData(animationName, scene, rootName);
         }
 
         GameEngine.completeLoading(loadId);
@@ -169,18 +179,6 @@ class ObjectLoader {
         }
 
         return nodeObject;
-    }
-
-    static linkRoot(anim, currentTransform) {
-        if (!currentTransform) return;
-
-        let currentMesh = currentTransform.gameObject.getComponent("Mesh");
-        if (currentMesh && currentMesh !== null) {
-            currentMesh.animationRoot = anim;
-        }
-        for (let child of currentTransform.children) {
-            ObjectLoader.linkRoot(anim, child);
-        }
     }
 
 

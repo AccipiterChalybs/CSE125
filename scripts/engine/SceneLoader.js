@@ -20,7 +20,8 @@ const SceneLoader = {
 
     for (let matData of scene.materialList) {
       //TODO support more shaders (e.g. animation)
-      let mat = new Material(Renderer.getShader(Renderer.DEFERRED_PBR_SHADER), false);
+      let shaderId = (matData.animated) ? Renderer.DEFERRED_PBR_SHADER_ANIM : Renderer.DEFERRED_PBR_SHADER;
+      let mat = new Material(Renderer.getShader(shaderId), false);
       mat.setTexture(MaterialTexture.COLOR, new Texture(matData.color));
       mat.setTexture(MaterialTexture.MAT, new Texture(matData.mat, false));
       mat.setTexture(MaterialTexture.NORMAL, new Texture(matData.normal, false));
@@ -104,12 +105,11 @@ const SceneLoader = {
       }
     }
 
-
     if (!IS_SERVER) {
 
       //TODO check spelling of SkinnedMeshRenderer
-      if ("MeshFilter" in currentNode) {//|| "SkinnedMeshRenderer" in currentNode) {
-        let meshName = currentNode["MeshFilter"];
+      if ("MeshFilter" in currentNode || "SkinnedMeshRenderer" in currentNode) {
+        let meshName = currentNode["MeshFilter"] || currentNode["SkinnedMeshRenderer"].name;
         if (meshName === 'Plane' || meshName === 'Cube' || meshName === 'Sphere' || meshName === 'Capsule') {
           console.log(meshName = 'Plane');
           nodeObject.transform.scale(5);
@@ -118,72 +118,20 @@ const SceneLoader = {
         let mesh = new Mesh(meshName);
 
 //TEMP
-        let materialName = currentNode["MeshRenderer"];
+        let materialName = currentNode["MeshRenderer"] || currentNode["SkinnedMeshRenderer"].material;
         if (!SceneLoader.materialMap[materialName]) {
-          console.log(materialName);
+          console.log(meshName, materialName);
           materialName = 'default';
         }
         mesh.setMaterial(SceneLoader.materialMap[materialName]);
 
         nodeObject.addComponent(mesh);
-
-/*
-        let aMat = scene.materials[scene.meshes[currentNode.meshes[0]].materialindex];
-        let foundForward = name.search("Forward") !== -1;
-        let foundEmit = name.search("Emit") !== -1;
-        let mat = null;
-
-        //TODO either change material to accept an index, or pass in the shader object from Renderer
-        let hasBones = ("bones" in scene.meshes[currentNode.meshes[0]]);
-        if (foundForward) {
-          mat = new Material(Renderer.getShader(hasBones ? Renderer.FORWARD_PBR_SHADER_ANIM : Renderer.FORWARD_UNLIT));
-          mat.transparent = true;
-        }
-        else if (foundEmit) {
-          mat = new Material(Renderer.getShader(Renderer.FORWARD_EMISSIVE));
-          mat.transparent = true;
-        } else {
-          mat = new Material(Renderer.getShader(hasBones ? Renderer.DEFERRED_PBR_SHADER_ANIM : Renderer.DEFERRED_PBR_SHADER));
-          mat.transparent = false;
-        }
-
-
-        //TODO make it load textures!
-        if (false && aMat.GetTextureCount("aiTextureType_DIFFUSE") > 0) {
-          let path = null;
-          aMath.GetTexture(aiTextureType_DIFFUSE, 0, path);
-          mat.setTexture(MaterialTexture.COLOR, new Texture(getPath(filename) + path, true))
-        }
-        else {
-          let color = vec4.create();
-          vec4.set(color, 1, 1, 1, 1);
-          mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color))
-        }
-
-        if (false && aMat.GetTextureCount("aiTextureType_NORMALS") > 0) {
-          let path = null;
-          aMath.GetTexture(aiTextureType_NORMALS, 0, path);
-          mat.setTexture(MaterialTexture.NORMAL, new Texture(getPath(filename) + path, false))
-        }
-        else {
-          let color = vec4.create();
-          vec4.set(color, 0.5, 0.5, 1, 1);
-          mat.setTexture(MaterialTexture.NORMAL, Texture.makeColorTex(color))
-        }
-
-        if (false && aMat.GetTextureCount("aiTextureType_SPECULAR") > 0) {
-          let path = null;
-          aMath.GetTexture(aiTextureType_DIFFUSE, 0, path);
-          mat.setTexture(MaterialTexture.MAT, new Texture(getPath(filename) + path, false));
-        }
-        else {
-          let color = vec4.create();
-          vec4.set(color, 0, 0, 0.25, 1); //metalness, blank, roughness
-          mat.setTexture(MaterialTexture.MAT, Texture.makeColorTex(color))
-        }
-        */
-
       }
+    }
+
+    //TODO there's probably a better way to do this...
+    if ('Animator' in currentNode) {
+      loadingAcceleration = {};
     }
 
     loadingAcceleration[currentNode.name] = nodeObject.transform;
@@ -193,8 +141,29 @@ const SceneLoader = {
       }
     }
 
-    return nodeObject;
-  }
+    if ('Animator' in currentNode) {
+      let animComponent = new Animation(currentNode['Animator']);
+      animComponent.link(loadingAcceleration);
+      nodeObject.addComponent(animComponent);
+      SceneLoader.linkRoot(animComponent, nodeObject.transform);
 
+      //TODO remove
+      nodeObject.getComponent('Animation').play(1, true);
+    }
+
+    return nodeObject;
+  },
+
+  linkRoot : function(anim, currentTransform) {
+    if (!currentTransform) return;
+
+    let currentMesh = currentTransform.gameObject.getComponent("Mesh");
+    if (currentMesh && currentMesh !== null) {
+      currentMesh.animationRoot = anim;
+    }
+    for (let child of currentTransform.children) {
+      SceneLoader.linkRoot(anim, child);
+    }
+  }
 
 };

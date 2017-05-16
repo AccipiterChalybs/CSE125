@@ -4,27 +4,37 @@
       "name": "dungeon-stone1-albedo2",
       "color": "assets/texture/dungeon-stone1-albedo2.png",
       "mat": "assets/texture/dungeon-stone1-mat.png",
-      "normal" : "assets/texture/dungeon-stone1-normal.png"
+      "normal" : "assets/texture/dungeon-stone1-normal.png",
+      "animated" : false
     },
     {
       "name": "spaced-tiles1-albedo",
       "color": "assets/texture/spaced-tiles1-Unreal-Engine/spaced-tiles1-albedo.png",
       "mat": "assets/texture/spaced-tiles1-Unreal-Engine/spaced-tiles1-rough.png",
-      "normal" : "assets/texture/spaced-tiles1-Unreal-Engine/spaced-tiles1-normal.png"
+      "normal" : "assets/texture/spaced-tiles1-Unreal-Engine/spaced-tiles1-normal.png",
+      "animated" : false
     },
     {
       "name": "carvedlimestoneground1_Base_Color",
       "color": "assets/texture/carvedlimestone-Unreal-Engine/carvedlimestoneground1_Base_Color.png",
       "mat": "assets/texture/carvedlimestone-Unreal-Engine/carvedlimestoneground1_Roughness.png",
-      "normal" : "assets/texture/carvedlimestone-Unreal-Engine/carvedlimestoneground1_Normal.png"
+      "normal" : "assets/texture/carvedlimestone-Unreal-Engine/carvedlimestoneground1_Normal.png",
+      "animated" : false
     },
     {
       "name": "Rock 02 diffuse",
       "color": "assets/texture/Rocks/Rock-02-diffuse.png",
       "mat": "assets/texture/dungeon-stone1-mat.png",
-      "normal" : "assets/texture/Rocks/Rock-02-normal.png"
+      "normal" : "assets/texture/Rocks/Rock-02-normal.png",
+      "animated" : false
+    },
+    {
+      "name": "OctopusCharacterMaterial",
+      "color": "assets/texture/Octopus-Character/DefaultMaterial_Base_Color.png",
+      "mat": "assets/texture/Octopus-Character/DefaultMaterial_Roughness.png",
+      "normal" : "assets/texture/Octopus-Character/DefaultMaterial_Normal.png",
+      "animated" : true
     }
-
   ],
   "hierarchy":
   {
@@ -485,7 +495,7 @@
         "name": "Wall_rock.1 (3)",
         "Transform": {
           "position": [3.030003, -0.2299992, 2.21],
-          "rotation": [270, 169.9023, 0],
+          "rotation": [270, 169.902, 0],
           "scaleFactor": 100.0002
         },
         "MeshFilter": "Wall_rock.1",
@@ -3912,6 +3922,345 @@
         },
         "MeshFilter": "AxisTest",
         "MeshRenderer": "No Name"
+      },
+      {
+        "name": "walking",
+        "Transform": {
+          "position": [0, 0, 0],
+          "rotation": [0, 90.00005, 0],
+          "scaleFactor": 0.5
+        },
+        "Animator": "walking",
+        "children": [
+          {
+            "name": "BezierCurve.008",
+            "Transform": {
+              "position": [0, 0, 0],
+              "rotation": [270, 90.00005, 0],
+              "scaleFactor": 100
+            },
+            "SkinnedMeshRenderer": {
+              "name": "BezierCurve.008",
+              "material": "OctopusCharacterMaterial"
+            }
+          },
+          {
+            "name": "metarig",
+            "Transform": {
+              "position": [-0.0158296, -0.01966572, -0.009884326],
+              "rotation": [272.1245, 63.90554, 24.12016],
+              "scaleFactor": 100
+            },
+            "children": [
+              {
+                "name": "hips",
+                "Transform": {
+                  "position": [-0.02825418, 0.5642879, -0.001462525],
+                  "rotation": [14.2708, 88.23183, 0.8957103],
+                  "scaleFactor": 1
+                },
+                "children": [
+                  {
+                    "name": "spine",
+                    "Transform": {
+                      "position": [-0.002990212, 0.6638559, 0.0009243896],
+                      "rotation": [11.7059, 90.0218, 358.9318],
+                      "scaleFactor": 1
+                    },
+                    "children": [
+                      {
+                        "name": "chest",
+                        "Transform": {
+                          "position": [0.01563624, 0.7537564, -0.0007945383],
+                          "rotation": [10.53347, 94.3113, 358.6709],
+                          "scaleFactor": 1
+                        },
+                        "children": [
+                          {
+                            "name": "neck",
+                            "Transform": {
+                              "position": [0.05392858, 0.9622717, -0.008616079],
+                              "rotation": [25.22184, 91.69907, 358.2996],
+                              "scaleFactor": 1
+                            },
+                            "children": [
+                              {
+                                "name": "head",
+                                "Transform": {
+                                  "position": [0.09072056, 1.040578, -0.01227824],
+                                  "rotation": [20.04188, 89.63866, 358.1127],
+                                  "scaleFactor": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "head_end",
+                                    "Transform": {
+                                      "position": [0.1578115, 1.224382, -0.01830222],
+                                      "rotation": [20.04188, 89.63866, 358.1127],
+                                      "scaleFactor": 1
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "shoulder.L",
+                            "Transform": {
+                              "position": [0.0890992, 0.8931014, 0.0007707104],
+                              "rotation": [289.367, 56.53963, 104.9902],
+                              "scaleFactor": 1
+                            },
+                            "children": [
+                              {
+                                "name": "upper_arm.L",
+                                "Transform": {
+                                  "position": [0.05174899, 0.8706055, 0.108967],
+                                  "rotation": [14.47275, 135.6584, 172.4205],
+                                  "scaleFactor": 0.9999999
+                                },
+                                "children": [
+                                  {
+                                    "name": "forearm.L",
+                                    "Transform": {
+                                      "position": [0.032417, 0.635187, 0.1750367],
+                                      "rotation": [2.077248, 127.371, 171.1793],
+                                      "scaleFactor": 1
+                                    },
+                                    "children": [
+                                      {
+                                        "name": "hand.L",
+                                        "Transform": {
+                                          "position": [0.04454856, 0.4497623, 0.2020011],
+                                          "rotation": [358.2546, 221.723, 186.9121],
+                                          "scaleFactor": 0.9999999
+                                        },
+                                        "children": [
+                                          {
+                                            "name": "hand.L_end",
+                                            "Transform": {
+                                              "position": [0.02763835, 0.2971469, 0.210849],
+                                              "rotation": [358.2546, 221.723, 186.9121],
+                                              "scaleFactor": 1
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "shoulder.R",
+                            "Transform": {
+                              "position": [0.08742113, 0.8926193, -0.02029569],
+                              "rotation": [291.4855, 142.4808, 249.9898],
+                              "scaleFactor": 0.9999999
+                            },
+                            "children": [
+                              {
+                                "name": "upper_arm.R",
+                                "Transform": {
+                                  "position": [0.02447348, 0.8655808, -0.11471],
+                                  "rotation": [7.122828, 57.14901, 196.5564],
+                                  "scaleFactor": 0.9999999
+                                },
+                                "children": [
+                                  {
+                                    "name": "forearm.R",
+                                    "Transform": {
+                                      "position": [0.03789716, 0.6322874, -0.1892405],
+                                      "rotation": [342.0675, 59.94764, 196.3696],
+                                      "scaleFactor": 1
+                                    },
+                                    "children": [
+                                      {
+                                        "name": "hand.R",
+                                        "Transform": {
+                                          "position": [0.112411, 0.4608836, -0.207267],
+                                          "rotation": [10.11142, 332.5838, 198.6905],
+                                          "scaleFactor": 0.9999999
+                                        },
+                                        "children": [
+                                          {
+                                            "name": "hand.R_end",
+                                            "Transform": {
+                                              "position": [0.1679404, 0.3174533, -0.2072781],
+                                              "rotation": [10.11142, 332.5838, 198.6905],
+                                              "scaleFactor": 1
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "thigh.L",
+                    "Transform": {
+                      "position": [-0.004333355, 0.5984357, 0.05652722],
+                      "rotation": [25.3412, 257.6977, 180.0035],
+                      "scaleFactor": 1
+                    },
+                    "children": [
+                      {
+                        "name": "shin.L",
+                        "Transform": {
+                          "position": [0.1252081, 0.3184604, 0.08479665],
+                          "rotation": [319.5383, 263.8517, 175.9217],
+                          "scaleFactor": 1
+                        },
+                        "children": [
+                          {
+                            "name": "foot.L",
+                            "Transform": {
+                              "position": [-0.04162604, 0.1193704, 0.04805978],
+                              "rotation": [26.96255, 258.5912, 175.5391],
+                              "scaleFactor": 1
+                            },
+                            "children": [
+                              {
+                                "name": "toe.L",
+                                "Transform": {
+                                  "position": [-0.007401451, 0.0530391, 0.04904316],
+                                  "rotation": [293.084, 71.23338, 190.184],
+                                  "scaleFactor": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "toe.L_end",
+                                    "Transform": {
+                                      "position": [0.0280798, 0.03806145, 0.05385122],
+                                      "rotation": [293.084, 71.23338, 190.184],
+                                      "scaleFactor": 1
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "heel.L",
+                            "Transform": {
+                              "position": [-0.04162604, 0.1193704, 0.04805978],
+                              "rotation": [74.76169, 92.67499, 191.879],
+                              "scaleFactor": 1
+                            },
+                            "children": [
+                              {
+                                "name": "heel.02.L",
+                                "Transform": {
+                                  "position": [-0.05811423, 0.07490423, 0.0208286],
+                                  "rotation": [304.9934, 76.76265, 95.41424],
+                                  "scaleFactor": 0.9999999
+                                },
+                                "children": [
+                                  {
+                                    "name": "heel.02.L_end",
+                                    "Transform": {
+                                      "position": [-0.06517061, 0.07240409, 0.06642275],
+                                      "rotation": [304.9934, 76.76265, 95.41424],
+                                      "scaleFactor": 1
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "thigh.R",
+                    "Transform": {
+                      "position": [-0.0004049093, 0.6001507, -0.05659296],
+                      "rotation": [13.92808, 275.7379, 183.2028],
+                      "scaleFactor": 1
+                    },
+                    "children": [
+                      {
+                        "name": "shin.R",
+                        "Transform": {
+                          "position": [0.07540228, 0.2999441, -0.04681513],
+                          "rotation": [342.552, 271.788, 179.5675],
+                          "scaleFactor": 1
+                        },
+                        "children": [
+                          {
+                            "name": "foot.R",
+                            "Transform": {
+                              "position": [-0.00327801, 0.04968596, -0.04634014],
+                              "rotation": [58.87245, 271.6961, 180.0001],
+                              "scaleFactor": 1
+                            },
+                            "children": [
+                              {
+                                "name": "toe.R",
+                                "Transform": {
+                                  "position": [0.06059307, 0.01109771, -0.04823129],
+                                  "rotation": [275.8497, 271.6955, 0.0004691146],
+                                  "scaleFactor": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "toe.R_end",
+                                    "Transform": {
+                                      "position": [0.09918602, 0.01505346, -0.04937401],
+                                      "rotation": [275.8497, 271.6955, 0.0004691146],
+                                      "scaleFactor": 1
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "heel.R",
+                            "Transform": {
+                              "position": [-0.00327801, 0.04968596, -0.04634014],
+                              "rotation": [51.98639, 92.18687, 180.6705],
+                              "scaleFactor": 1
+                            },
+                            "children": [
+                              {
+                                "name": "heel.02.R",
+                                "Transform": {
+                                  "position": [-0.003546725, -0.0005523525, -0.02473729],
+                                  "rotation": [281.7953, 89.68204, 272.0189],
+                                  "scaleFactor": 0.9999999
+                                },
+                                "children": [
+                                  {
+                                    "name": "heel.02.R_end",
+                                    "Transform": {
+                                      "position": [-0.004883814, -0.0002196431, -0.0709214],
+                                      "rotation": [281.7953, 89.68204, 272.0189],
+                                      "scaleFactor": 1
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       }
     ]
   }
