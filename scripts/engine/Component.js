@@ -11,48 +11,62 @@ class Component
     this.visible = true;
     this.active = true;
     this.componentType = null; //must override in subclass!
+    this.serializeDirty = true;
+
     // if (!this.updateClient) this.updateClient = null; //null function unless needed
   }
 
-  start(){}
-  startClient(){}
+  start() {}
 
-  update(deltaTime){
+  startClient() {}
+
+  update(deltaTime) {
     this.start();
 
     // Use updateComponent if you want access to start
-    if (this.updateComponent){
+    if (this.updateComponent) {
       this.update = this.updateComponent;
       this.updateComponent();
+    } else {
+      this.update = function () {};
     }
   }
 
-  updateClient(){
+  updateClient() {
     this.startClient();
-    if(this.updateComponentClient){
+    if (this.updateComponentClient) {
       this.updateClient = this.updateComponentClient;
       this.updateComponentClient();
+    } else {
+      this.updateClient = function () {};
     }
   }
 
-
-  draw(){
+  draw() {
   }
 
-  _setGameObject(go){
+  _setGameObject(go) {
     this.gameObject = go;
     if (go !== null) {
-        this.transform = go.transform;
+      this.transform = go.transform;
     } else {
-        this.transform = null;
+      this.transform = null;
     }
   }
 
   // This gets called if the game object's collision IS NOT a trigger (even with colliding with a trigger)
-  onCollisionEnter(collision){
+  onCollisionEnter(collision) {
   }
 
   // This gets called if the game object's collision IS a trigger (even with colliding with a normal one)
-  onTriggerEnter(collider){
+  onTriggerEnter(collider) {
+  }
+
+  serialize() {
+
+  }
+
+  applySerializedData(data) {
+
   }
 }
