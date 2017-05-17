@@ -76,6 +76,7 @@ class AudioSource extends Component{
   }
 
   setState(state) {
+    //TODO Change this to make sure no sound effects get delayed.
     if (this.frameSkip > 100) {
       this.frameSkip = 0;
       this.state = state;

@@ -296,4 +296,3 @@ Debug.behaviorTree.printUniques = false;
 Debug.behaviorTree.printFailures = false;
 Debug.behaviorTree.printSuccesses = false;
 
-};

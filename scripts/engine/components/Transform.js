@@ -18,7 +18,7 @@ class Transform extends Component
         this.cachedWorldScale = vec3.create();
         this.worldScaleDirty = null;
         this.cachedForwardVec = vec3.create();
-        this.worldForwardDirty = true
+        this.worldForwardDirty = true;
         this.serializeDirty = true;
         this.oldParent = null;
         this._parent = null;

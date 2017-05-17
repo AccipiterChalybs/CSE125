@@ -5,61 +5,68 @@
 // const COOLDOWN_SINGING = 0.1;   // In seconds
 
 class DoorEvent extends Event{
-  constructor(){
+  constructor(openPos, closePos) {
     super();
+
     // this.movementSpeed = REGULAR_SPEED;
     this.setCurrentState(EventState.uncharged);
     this._unlocked = false;
+    this.openPos = openPos;
+    this.closePos = closePos;
   }
 
-  start(){
-    this._collider = this.transform.gameObject.getComponent("Collider");
+  start() {
+    this._collider = this.transform.gameObject.getComponent('Collider');
     //this._singer = this.transform.gameObject.getComponent("Sing");
     this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
     this._collider.setFreezeRotation(true);
   }
 
-  startClient(){
+  startClient() {
     // this._singingSrc = this.transform.gameObject.getComponent("AudioSource");
   }
 
-  updateComponent(){
+  updateComponent() {
     if (this._unlocked)
     {
-     super.updateComponent();
+      super.updateComponent();
     }
   }
 
-  onUncharged(){
+  onUncharged() {
 
   }
 
-  onCharged(){
+  onCharged() {
 
   }
 
-  onDischarging(){
-    this.transform.position[1] = Utility.moveTowards(this.transform.position[1], 0, Time.deltaTime);
-    if (this.transform.position[1] === 0) {
+  onDischarging() {
+    this.transform.position[0] = Utility.moveTowards(this.transform.position[0], this.closePos[0], Time.deltaTime);
+    this.transform.position[1] = Utility.moveTowards(this.transform.position[1], this.closePos[1], Time.deltaTime);
+    this.transform.position[2] = Utility.moveTowards(this.transform.position[2], this.closePos[2], Time.deltaTime);
+    if (this.transform.position[0] === this.closePos[0] && this.transform.position[1] === this.closePos[1] && this.transform.position[2] === this.closePos[2]) {
       this.setCurrentState(EventState.uncharged);
     }
   }
 
-  onCharging(){
-    this.transform.position[1] = Utility.moveTowards(this.transform.position[1], 2, Time.deltaTime);
-    if (this.transform.position[1] === 2) {
+  onCharging() {
+    this.transform.position[0] = Utility.moveTowards(this.transform.position[0], this.openPos[0], Time.deltaTime);
+    this.transform.position[1] = Utility.moveTowards(this.transform.position[1], this.openPos[1], Time.deltaTime);
+    this.transform.position[2] = Utility.moveTowards(this.transform.position[2], this.openPos[2], Time.deltaTime);
+    if (this.transform.position[0] === this.openPos[0] && this.transform.position[1] === this.openPos[1] && this.transform.position[2] === this.openPos[2]) {
       this.setCurrentState(EventState.charged);
     }
   }
 
-  onRaycast(interactingObj){
+  onRaycast(interactingObj) {
     let pController = interactingObj.getComponent('PlayerController');
     if (!this._unlocked && pController && pController !== null && pController.keys > 0) {
-      let audio = this.gameObject.getComponent("AudioSource");
-      if(audio && audio!==null) audio.setState(AudioState.play2dSound);
+      let audio = this.gameObject.getComponent('AudioSource');
+      if (audio && audio !== null) audio.setState(AudioState.play2dSound);
       this._unlocked = true;
       pController.keys--; //Becareful in future here is HACK what if has lots of keys
-      interactingObj.transform.children.splice(0,1);
+      interactingObj.transform.children.splice(0, 1);
     }
   }
 

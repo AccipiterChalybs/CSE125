@@ -25,11 +25,13 @@ class GameObject {
     return id;
   };
 
-  constructor() {
+  constructor(clientSideOnly=false) {
     this.components = {}; //NOTE: associative map, so go over keys (in doesn't seem to work)
     this.name = '';
-    this.id = GameObject.addNewSerializableObject(this);
-    this.serializableList = [];
+    if(!clientSideOnly){
+      this.id = GameObject.addNewSerializableObject(this);
+      this.serializableList = [];
+    }
     this.transform = new Transform();
     this.transform.gameObject = this;
     this.dead = false;
@@ -139,12 +141,9 @@ class GameObject {
     gameObject.transform._parent = this.transform;
   }
 
-  removeChildFromParent(){
-    Debug.log("I have spliced");
-    Debug.log(this.transform.getParent().children.length);
+  removeChildFromParent() {
     this.transform.getParent().children.splice(this.transform.getParent().children.indexOf(this.transform), 1);
-    Debug.log(this.transform.getParent().children.length);
-
+    this.transform._parent = null;
   }
 
   isChildOf(gameObject) {

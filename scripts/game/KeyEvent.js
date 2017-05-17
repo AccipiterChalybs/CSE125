@@ -41,7 +41,7 @@ class KeyEvent extends Event{
   }
 
   onRaycast(interactingObj){
-    Debug.log("haiyai");
+    // Debug.log("haiyai");
     //TODO Make this cleaner! Or maybe add to playerobject
     // // this.transform.gameObject.parent=null;
     // this.transform._parent.children[]

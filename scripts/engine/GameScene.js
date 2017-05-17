@@ -124,7 +124,7 @@ class GameScene {
             if (x===1 && y===1){
               teapot.addComponent(new SphereCollider(0, true));
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
-              teapot.addComponent(new DoorEvent());
+              teapot.addComponent(new DoorEvent([-2,2,2],[-2,0,2]));
               teapot.addComponent(new AudioSource());
               if(!IS_SERVER) {
                 teapot.getComponent("AudioSource").playSound2d('door_unlocked');
@@ -213,10 +213,10 @@ class GameScene {
       //
       PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject);
       GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new PlayerController());
-      // PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject);
-      // GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new PlayerController());
-      // PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject);
-      // GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new PlayerController());
+      PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject);
+      GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new PlayerController());
+      PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject);
+      GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new PlayerController());
     }
     if(!IS_SERVER) {
       GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.getComponent("AudioSource").playSound2d("singTone00");
@@ -231,12 +231,13 @@ class GameScene {
       }
     }
 
+    let directionalLight = new GameObject();
 
     if(!IS_SERVER) {
       //TODO account for possibility of currentPlayer not set yet
       Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo(PlayerTable.getPlayer()));
 
-      Renderer.directionalLight = new GameObject();
+      Renderer.directionalLight = directionalLight;
       Renderer.directionalLight.setName("DirectionalLight");
       Renderer.directionalLight.addComponent(new DirectionalLight(true));
       Renderer.directionalLight.addComponent(new ClientStickTo(Renderer.camera.transform.getParent().gameObject));
@@ -250,6 +251,7 @@ class GameScene {
     let color = vec4.create(); vec4.set(color, 1, 0, 0, 1);
     let evilTeapot = Debug.drawTeapot(pos, color);
     evilTeapot.addComponent(new EvilController());
+
 
     let light = new GameObject();
     let lightComp = new PointLight(true);

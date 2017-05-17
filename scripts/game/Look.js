@@ -26,7 +26,7 @@ class Look extends Component{
       let seen = hit.collider.gameObject.getComponent('Viewable');
       if (seen && seen !== null)
       {
-        Debug.log("I SAW HERE THERE SHE GOES");
+        // Debug.log("I SAW HERE THERE SHE GOES");
         seen.view(this.transform.gameObject);
       }
     }
