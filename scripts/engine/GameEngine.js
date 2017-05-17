@@ -11,15 +11,20 @@ GameEngine._numLoads = 0;         //total number of loads (for UI)
 GameEngine._loadHandles = [];   //handles of currently loading objects
 GameEngine._nextLoadHandle = 0; //next load handle to return
 GameEngine.currentScene = null;
-
+GameEngine._StartGame = false;
 
 /** Init: starts loading objects */
 GameEngine.init = function () {
   PhysicsEngine.init();
-
   GameEngine.currentScene = new GameScene(['assets/scenes/Primatives.json','assets/scenes/teapots.json', 'assets/scenes/ExampleLevel.json']);
 };
 
+GameEngine.ready= function () {
+
+    document.getElementById("progress").style.visibility="hidden";
+    GameEngine.start();
+
+};
 
 /** Start: setup everything after loading is complete, then start loop */
 GameEngine.start = function () {
@@ -33,7 +38,7 @@ GameEngine.start = function () {
     }
   };
 
-GameEngine.startMethod = GameEngine.start;
+GameEngine.startMethod = GameEngine.ready;
 
 /** Loop: called every frame */
 GameEngine.loop = function () {
@@ -41,10 +46,11 @@ GameEngine.loop = function () {
   Input.update();
 
   // send data
+  // Debug.log(GameObject.prototype.SceneRoot.transform.children[2].position);
+
   if (!Debug.clientUpdate){
     Networking.update();
   }
-
   GameEngine.currentScene.update();
 
   if (Debug.clientUpdate) {
@@ -52,6 +58,8 @@ GameEngine.loop = function () {
   }
 
   GameObject.prototype.SceneRoot.updateClient();
+
+
 
   if (!IS_SERVER) {
     Renderer.loop();
@@ -99,7 +107,14 @@ GameEngine.completeLoading = function (loadHandle) {
 
 /** Updates the UI with current loading status */
 GameEngine.updateLoadingBar = function () {
-  let loadText = document.getElementById(GameEngine.loadingTextId);
-  loadText.innerText = 'Loading Progress: (' +
-      (GameEngine._numLoads - GameEngine._loadHandles.length) + ' / ' + GameEngine._numLoads + ')';
+    let loadBar = document.getElementById("progressBar");
+    let progress = (GameEngine._numLoads-GameEngine._loadHandles.length)/GameEngine._numLoads;
+    progress=Math.round(progress*100);
+    loadBar.setAttribute("style","width: "+progress+"%");
+    //set Text
+    let loadText = document.getElementById("progressBarText");
+    loadText.innerText = 'Loading Progress: (' +
+        (GameEngine._numLoads - GameEngine._loadHandles.length) + ' / ' + GameEngine._numLoads + ')';
 };
+
+

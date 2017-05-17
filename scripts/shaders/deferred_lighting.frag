@@ -10,6 +10,7 @@ uniform sampler2D colorTex; //color texture - rgb: color | a: metalness
 uniform sampler2D normalTex; //normal texture - rgb: normal | a: Empty
 uniform sampler2D posTex; //position texture - rgb: position | a: roughness
 uniform sampler2D shadowTex;
+uniform samplerCube shadowCube;
 
 uniform samplerCube environment; //the environment cubemap to sample reflections from
 uniform float environment_mipmap; //the number of mipmaps the environment map has (used to select mipmap based on roughness)
@@ -27,6 +28,8 @@ uniform vec2 uScreenSize;
 uniform int uLightType;
 uniform mat4 uShadow_Matrix;
 uniform mat4 uIV_Matrix;
+
+uniform float uFarDepth;
 
 float GGX_Visibility(float dotProduct, float k) {
 	//return 2.0 / (dotProduct + sqrt(k*k + (1.0 - k*k)*dotProduct*dotProduct)); //More accurate, but slower version
@@ -84,13 +87,18 @@ float textureShadow(float posZ, vec2 uv) {
     return step(posZ, texture(shadowTex, uv).r);
 }
 
+float textureShadowCube(float posZ, vec3 dir) {
+    float shadowDist = texture(shadowCube, normalize(dir)).r;
+    return step(posZ, shadowDist);
+}
+
 void main () {
   vec2 screenTexCoord = gl_FragCoord.xy / uScreenSize;
   vec4 albedo = texture(colorTex, screenTexCoord);
   if(albedo.xyz == vec3(0.0)) discard; //TODO does this actually provide a performance boost?
   vec4 pos = texture(posTex, screenTexCoord);
   vec4 normal = texture(normalTex, screenTexCoord);
-  vec3 mat = vec3(albedo.a, pos.w, normal.w);
+  vec3 mat = vec3(normal.w, pos.w, normal.w);
   //pos = uIV_Matrix * vec4(pos.xyz, 1.0); //TODO do we need these two lines?
   //pos /= pos.w;
   normal.xyz = normal.xyz * 2.0 - 1.0;
@@ -126,6 +134,25 @@ void main () {
 	  if(uLightType == 0) {
 		  lightDir = uLightPosition - pos.xyz;
 		  lightDist = length(lightDir);
+
+          float ldist = lightDist/uFarDepth;
+          ldist -= max(0.01 * (1.0 - clamp(dot(normal.xyz, lightDir), 0.0, 1.0)), 0.01);
+		  //ldist = min(ldist, 0.9999);
+
+          shadow = 0.0;
+		  for(int i = 0; i < 4; i++) {
+			vec3 offset = vec3(poissonDisk[i] * (ldist * uFarDepth / 2000.0), 0.0);
+			vec3 dir = normalize(-lightDir);
+			vec3 right = cross((dir + vec3(0.001, 0, 0)), vec3(0,1,0));
+			vec3 up = cross(right, dir);
+
+			int x =0; int y = 0;
+            vec3 uv = dir + right * (offset.x + float(x)/100.0) + up * (offset.y + float(y) / 100.0);
+
+            shadow += textureShadowCube(ldist,  uv );
+		  }
+		  shadow /= 4.0;
+
 
 		  //Spherical light algorithm from http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
 		  float sphereRadius = uLightSize;

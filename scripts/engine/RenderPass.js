@@ -32,10 +32,66 @@ class ForwardPass extends RenderPass
 class ParticlePass extends RenderPass
 {
     render(){
-        for (let mesh of Renderer.renderBuffer.particle) {
-            mesh.draw();
-        }
+      GL.enable(GL.BLEND); //Blend function is specified on a per-particle system basis
+      GL.depthMask(false);
+
+      Renderer.switchShader(Renderer.PARTICLE_SHADER);
+
+      for (let ps of Renderer.renderBuffer.particle) {
+          ps.draw();
+      }
+
+      GL.depthMask(true);
+      GL.disable(GL.BLEND);
     }
+}
+
+class DecalPass extends RenderPass
+{
+
+  constructor(deferredPassMain){
+    super();
+    //This is just because we can't render to textures in the bound FBO, and so need to copy them out of it.
+    let width = Renderer.getWindowWidth();
+    let height = Renderer.getWindowHeight();
+    this.copyBuffers = new Framebuffer(width, height, 3, false, true, [GL.RGBA8, GL.RGBA16F, GL.RGBA16F]);
+
+  }
+
+  render() {
+    //Copy over deferred buffers we need (due to above issue)
+    Renderer.deferredPass.buffers.bindTexture(0, 0); //colour
+    Renderer.deferredPass.buffers.bindTexture(1, 1); //normal
+    Renderer.deferredPass.buffers.bindTexture(2, 2); //position
+    this.copyBuffers.bind([GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2]);
+    Renderer.switchShader(Renderer.FBO_COPY);
+    Renderer.deferredPass.fbo.draw();
+
+    this.copyBuffers.bindTexture(0, 0); //colour
+    this.copyBuffers.bindTexture(1, 1); //normal
+    this.copyBuffers.bindTexture(2, 2); //position
+
+    Renderer.switchShader(Renderer.DEFERRED_DECAL);
+
+    Renderer.currentShader.setUniform("uSizeZ", Decal.prototype.sizeZ, UniformTypes.u1f);
+
+    //Bind deferred buffers to render to
+    let buffers = [GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2];
+    GL.bindFramebuffer(GL.FRAMEBUFFER, Renderer.deferredPass.buffers.id);
+    GL.drawBuffers(buffers);
+
+    //TODO should disable depth test incase camera is inside volume. Optimally, will disable / enable for each object.
+    //TODO however, just keeping it on will be faster, and shouldn't matter if we keep our objects thin.
+    GL.enable(GL.DEPTH_TEST);
+    GL.depthMask(false);
+    GL.enable(GL.CULL_FACE);
+
+    for (let decal of Renderer.renderBuffer.decal) {
+      decal.draw();
+    }
+
+    GL.depthMask(true);
+  }
 }
 
 
@@ -57,20 +113,61 @@ class ShadowPass extends ForwardPass
         for (let l of Renderer.renderBuffer.light) {
             let caster = l;
             if (!caster || !caster.isShadowCaster) continue;
-            caster.bindShadowMap();
-            for (let mesh of Renderer.renderBuffer.deferred) {
-                let mat = mesh.material;
-                let s = null;
-                if (mat.shader === Renderer.getShader(Renderer.DEFERRED_PBR_SHADER_ANIM)) s = Renderer.getShader(Renderer.SHADOW_SHADER_ANIM);
-                else s = Renderer.getShader(Renderer.SHADOW_SHADER);
-                if (s !== Renderer.currentShader) { s.use(); }
-                mesh.draw();
+            if (caster.cubeShadow) {
+              caster.prepShadowMap();
+              for (let f=0; f<6; ++f) {
+                caster.bindShadowMap(f);
+                this._drawMeshes(true);
+              }
+            } else {
+              caster.bindShadowMap(0);
+              this._drawMeshes(false);
             }
         }
+    }
+
+    _drawMeshes(isPoint) {
+      let animShader = (isPoint) ? Renderer.POINT_SHADOW_SHADER_ANIM : Renderer.SHADOW_SHADER_ANIM;
+      let regShader = (isPoint) ? Renderer.POINT_SHADOW_SHADER : Renderer.SHADOW_SHADER;
+      for (let mesh of Renderer.renderBuffer.deferred) {
+        let mat = mesh.material;
+        let s = null;
+        if (mat.shader === Renderer.getShader(Renderer.DEFERRED_PBR_SHADER_ANIM)) s = Renderer.getShader(animShader);
+        else s = Renderer.getShader(regShader);
+        if (s !== Renderer.currentShader) {
+          s.use();
+        }
+        mesh.draw();
+      }
     }
 }
 
 
+class DeferredPrePass extends RenderPass
+{
+
+  constructor(deferredPassMain){
+    super();
+    this.buffers = deferredPassMain.buffers;
+    this.fbo = deferredPassMain.fbo;
+  }
+
+  render() {
+    GL.enable(GL.DEPTH_TEST);
+    GL.depthMask(true);
+    GL.disable(GL.BLEND);
+    GL.enable(GL.CULL_FACE);
+    GL.cullFace(GL.BACK);
+    GL.disable(GL.STENCIL_TEST);
+
+    let buffers = [GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2];
+    this.buffers.bind(buffers);
+    for (let mesh of Renderer.renderBuffer.deferred) {
+      mesh.material.bind();
+      mesh.draw();
+    }
+  }
+}
 
 
 ///////////////////////////////////
@@ -83,22 +180,8 @@ class DeferredPass extends RenderPass
     }
 
     render(){
-        GL.enable(GL.DEPTH_TEST);
-        GL.depthMask(true);
-        GL.disable(GL.BLEND);
-        GL.enable(GL.CULL_FACE);
-        GL.cullFace(GL.BACK);
-        GL.disable(GL.STENCIL_TEST);
 
-        let buffers = [ GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2 ];
-        this.buffers.bind(buffers);
-        for(let mesh of Renderer.renderBuffer.deferred)
-        {
-            mesh.material.bind();
-            mesh.draw();
-        }
-
-
+        //make sure prepass is done first!
 
         Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).use();
         let screenSize = vec2.create(); vec2.set(screenSize, Renderer.getWindowWidth(), Renderer.getWindowHeight());
@@ -127,7 +210,7 @@ class DeferredPass extends RenderPass
 
         for(let light of Renderer.renderBuffer.light) {
             let d = light;
-            if (!d.isShadowCaster)
+            if (!d.isShadowCaster || d.cubeShadow)
             {
                 GL.drawBuffers([GL.NONE]);
                 GL.disable(GL.CULL_FACE);
@@ -141,12 +224,16 @@ class DeferredPass extends RenderPass
 
                 GL.stencilFunc(GL.NOTEQUAL, 0, 0xFF);
                 GL.cullFace(GL.FRONT);
+
+                if (d.isShadowCaster) {
+                  d.fbo[0].bindCubeMapTexture(4);
+                }
             }
             else //if directional light
             {
                 GL.cullFace(GL.BACK);
                 GL.disable(GL.STENCIL_TEST);
-                if(d.isShadowCaster && d.fbo)
+                if(d.isShadowCaster && d.fbo && !d.cubeShadow)
                 {
                     d.fbo.bindDepthTexture(3);
                     let shadowMat = mat4.create();
@@ -345,25 +432,21 @@ class BloomPass extends RenderPass
             break;
           case Debug.BUFFERTYPE_COLOUR:
             this._deferredPass.buffers.bindTexture(0, 0);
-            s5.setUniform("inputTex", 0, UniformTypes.u1i);
             s5.setUniform("rgbOutput", 1, UniformTypes.u1i);
             this._deferredPass.buffers.draw();
             break;
           case Debug.BUFFERTYPE_NORMAL:
             this._deferredPass.buffers.bindTexture(0, 1);
-            s5.setUniform("inputTex", 0, UniformTypes.u1i);
             s5.setUniform("rgbOutput", 1, UniformTypes.u1i);
             this._deferredPass.buffers.draw();
             break;
           case Debug.BUFFERTYPE_ROUGH:
             this._deferredPass.buffers.bindTexture(0, 2);
-            s5.setUniform("inputTex", 0, UniformTypes.u1i);
             s5.setUniform("rgbOutput", 0, UniformTypes.u1i);
             this._deferredPass.buffers.draw();
             break;
           case Debug.BUFFERTYPE_METAL:
-            this._deferredPass.buffers.bindTexture(0, 0);
-            s5.setUniform("inputTex", 0, UniformTypes.u1i);
+            this._deferredPass.buffers.bindTexture(0, 1);
             s5.setUniform("rgbOutput", 0, UniformTypes.u1i);
             this._deferredPass.buffers.draw();
             break;
@@ -376,23 +459,33 @@ class BloomPass extends RenderPass
             this._averagePass.blitFramebuffer(0, 0, 450, 50, 50);
             break;
           case Debug.BUFFERTYPE_SHADOW:
-            Renderer.renderBuffer.light[0].fbo.bindDepthTexture(0);
-            GL.viewport(0,0,512, 512); //render shadow map to a square-sized portion of the screen
-            s5.setUniform("inputTex", 0, UniformTypes.u1i);
-            s5.setUniform("rgbOutput", 2, UniformTypes.u1i);
-            this._deferredPass.buffers.draw();
-            GL.viewport(0,0,Renderer.getWindowWidth(), Renderer.getWindowHeight()); //reset viewport
+            let light = Renderer.renderBuffer.light[Debug.currentLightIndex];
+            if (light.isShadowCaster) {
+              if (light.cubeShadow) {
+                let pos=0;
+                light.fbo[0].bindCubeMapTexture(1);
+                for (let f of [-1, -1, 3, -1, 4, 1, 5, 0, -1, -1, 2]) {
+                  if (f===-1) { ++pos; continue; }
+                  const displaySize = 256;
+                  GL.viewport(displaySize*(pos%4), displaySize*Math.floor(pos/4), displaySize, displaySize); //render shadow map to a square-sized portion of the screen
+                  s5.setUniform("cubeTex", 1, UniformTypes.u1i);
+                  s5.setUniform("rgbOutput", 3, UniformTypes.u1i);
+                  s5.setUniform("face", f, UniformTypes.u1i);
+                  ++pos;
+                  this._deferredPass.buffers.draw();
+                }
+              } else {
+                light.fbo.bindDepthTexture(0);
+                GL.viewport(0, 0, 512, 512); //render shadow map to a square-sized portion of the screen
+                s5.setUniform("rgbOutput", 2, UniformTypes.u1i);
+                this._deferredPass.buffers.draw();
+              }
+              GL.viewport(0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight()); //reset viewport
+            }
             break;
           default:
             break;
         }
       }
-
-
-        // Debug code - enable and disable anti-aliasing to see results of intermediate blur buffers.
-        if (Debug.bufferDebugMode) {
-            if (Debug.currentBuffer === Debug.BUFFERTYPE_BLOOM) {
-            }
-        }
     }
 }
