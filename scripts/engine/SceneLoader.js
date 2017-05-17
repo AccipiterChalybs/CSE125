@@ -5,6 +5,9 @@
 const SceneLoader = {
 
   materialMap: {},
+  //Ignore these in general pass, likely because they are already handled specially
+  ignoreComponents: ["name", "index", "static", "Animator", "AnimatorJS", "SkinnedMeshRenderer", "MeshFilter", "MeshRenderer",
+                     "Light", "colliders", "Transform", "Rigidbody", "children"],
   shadowLightsAvailable: 0,
 
   loadScene: function(filename) {
@@ -29,9 +32,7 @@ const SceneLoader = {
     }
     SceneLoader.materialMap['default'] = Debug.makeDefaultMaterial();
 
-    let loadingAcceleration = {};
-
-    let retScene = SceneLoader._parseNode(GameObject.prototype.SceneRoot, scene.hierarchy, filename, loadingAcceleration, []);
+    let retScene = SceneLoader._parseNode(GameObject.prototype.SceneRoot, scene.hierarchy, filename, {}, []);
 
 
     //ObjectLoader.loadCollision(GameObject.prototype.SceneRoot, "assets/scenes/ExampleLevel_Colliders.json");
@@ -69,10 +70,12 @@ const SceneLoader = {
     nodeObject.transform.setPosition(pos);
     nodeObject.transform.setRotation(rotate);
 
+    //TODO assign index
+
 
     if ("colliders" in currentNode) {
-      //TODO give mass
-      let collider = new CompoundCollider(0, false, 1, 1, 1);
+      let mass = (currentNode.static) ? currentNode['Rigidbody'] : 0;
+      let collider = new CompoundCollider(mass, false, 1, 1, 1);
       nodeObject.addComponent(collider);
 
       for (let colliderData of currentNode["colliders"]) {
@@ -129,8 +132,25 @@ const SceneLoader = {
       }
     }
 
+    //Handle other general components
+    for (let generalCompName of Object.keys(currentNode)) {
+      if (SceneLoader.ignoreComponents.indexOf(generalCompName) >= 0) continue;
+      let compData = currentNode[generalCompName];
+
+      switch (generalCompName) {
+        case "PlayerController":
+          PlayerTable.addPlayer(nodeObject);
+          nodeObject.addComponent(new Sing());
+          nodeObject.addComponent(new AudioSource());
+          let pc = new PlayerControllerAnim();
+          nodeObject.addComponent(pc);
+          nodeObject.getComponent("AudioSource").playSound2d("singTone00");
+          break;
+      }
+    }
+
     //TODO there's probably a better way to do this...
-    if ('Animator' in currentNode) {
+    if ('AnimatorJS' in currentNode) {
       loadingAcceleration = {};
     }
 
@@ -141,14 +161,11 @@ const SceneLoader = {
       }
     }
 
-    if ('Animator' in currentNode) {
-      let animComponent = new Animation(currentNode['Animator']);
+    if ('AnimatorJS' in currentNode) {
+      let animComponent = new Animation(currentNode['AnimatorJS'].animationName);
       animComponent.link(loadingAcceleration);
       nodeObject.addComponent(animComponent);
       SceneLoader.linkRoot(animComponent, nodeObject.transform);
-
-      //TODO remove
-      nodeObject.getComponent('Animation').play(1, true);
     }
 
     return nodeObject;

@@ -47,9 +47,15 @@ GameEngine.init = function () {
     'assets/meshes/Wall_ornate.2.json',
     'assets/meshes/Wall_rock.1.json',
     'assets/meshes/Wall_rock.2.json',
-    'assets/meshes/walking.json',
+    'assets/meshes/octo_idle.json',
     'assets/meshes/AxisTest.json'];
-  GameEngine.currentScene = new GameScene(sceneFile, meshFiles);
+  let animationFiles = {
+    'OctopusCharacterAnim' : {
+        'assets/meshes/octo_idle.json' : [0, 1],
+        'assets/meshes/octo_walking.json' : [1]
+    }
+  };
+  GameEngine.currentScene = new GameScene(sceneFile, meshFiles, animationFiles);
 };
 
 GameEngine.ready= function () {

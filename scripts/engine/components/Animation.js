@@ -35,11 +35,17 @@ class Animation extends Component
       this._currentAnimationIndex = tmp;
     }
 
-    play ( animation, loop) {
-        this._currentAnimationIndex = animation;
-        this._currentTime = 0;
+    play ( animation, loop, restart = false) {
+        if (restart || animation !== this._currentAnimationIndex) {
+          this._currentAnimationIndex = animation;
+          this._currentTime = 0;
+        }
         this._playing = true;
         this._looping = loop;
+    }
+
+    resume() {
+      this._playing = true;
     }
 
     stop() {
@@ -96,6 +102,12 @@ class Animation extends Component
             vec3.scale(motion, motion, this.transform.getScale()[0]);
             vec3.transformQuat(motion, motion, this.transform.rotation);
             this.transform.translate(motion);
+
+            let body = this.gameObject.getComponent('Collider').body;
+
+            body.position.x = this.transform.getWorldPosition()[0];
+            body.position.y = this.transform.getWorldPosition()[1];
+            body.position.z = this.transform.getWorldPosition()[2];
 
             //Non-Root Motion (i.e. locked axes)
             this.boneMap[node.name].setPosition(newPosition);
@@ -172,10 +184,15 @@ class Animation extends Component
         return retVal;
     }
 
-  static loadAnimationData(animName, scene, rootName) {
-      Animation.prototype._animData[animName] = [];
+  static loadAnimationData(animName, scene, rootName, indexList) {
+      if (!Animation.prototype._animData[animName]) {
+        Animation.prototype._animData[animName] = [];
+      }
 
       for (let a = 0; a < scene.animations.length; ++a) { //separate animations (e.g. run, jump)
+        if (! (a in indexList)) {
+          continue;
+        }
         let animation = scene.animations[a];
 
         let currentAnimData = {boneData: [], animationTime: 0};
@@ -192,30 +209,30 @@ class Animation extends Component
           newData.isRoot = (name === rootName);
           newData.keyframes = {position:[], rotation:[], scale:[]};
           for (let keyframe = 0; keyframe < channel.positionkeys.length; ++keyframe) {
-          let pair = {first: channel.positionkeys[keyframe][0],  second:  Animation._convertVec(channel.positionkeys[keyframe][1])};
-          newData.keyframes.position.push(pair);
-        }
+            let pair = {first: channel.positionkeys[keyframe][0],  second:  Animation._convertVec(channel.positionkeys[keyframe][1])};
+            newData.keyframes.position.push(pair);
+          }
 
-        for (let keyframe = 0; keyframe < channel.rotationkeys.length; ++keyframe) {
-          let pair = {first: channel.rotationkeys[keyframe][0], second: Animation._convertQuat(channel.rotationkeys[keyframe][1])};
-          newData.keyframes.rotation.push(pair);
-        }
+          for (let keyframe = 0; keyframe < channel.rotationkeys.length; ++keyframe) {
+            let pair = {first: channel.rotationkeys[keyframe][0], second: Animation._convertQuat(channel.rotationkeys[keyframe][1])};
+            newData.keyframes.rotation.push(pair);
+          }
 
-        for (let keyframe = 0; keyframe < channel.scalingkeys.length; ++keyframe) {
-          let pair = {first: channel.scalingkeys[keyframe][0], second: Animation._convertVec(channel.scalingkeys[keyframe][1])};
-          newData.keyframes.scale.push(pair);
-        }
+          for (let keyframe = 0; keyframe < channel.scalingkeys.length; ++keyframe) {
+            let pair = {first: channel.scalingkeys[keyframe][0], second: Animation._convertVec(channel.scalingkeys[keyframe][1])};
+            newData.keyframes.scale.push(pair);
+          }
 
-        if (newData.keyframes.position[newData.keyframes.position.length - 1].first > longestTime) longestTime = newData.keyframes.position[newData.keyframes.position.length - 1].first;
-        if (newData.keyframes.rotation[newData.keyframes.rotation.length - 1].first > longestTime) longestTime = newData.keyframes.rotation[newData.keyframes.rotation.length - 1].first;
-        if (newData.keyframes.scale[newData.keyframes.scale.length - 1].first > longestTime) longestTime = newData.keyframes.scale[newData.keyframes.scale.length - 1].first;
+          if (newData.keyframes.position[newData.keyframes.position.length - 1].first > longestTime) longestTime = newData.keyframes.position[newData.keyframes.position.length - 1].first;
+          if (newData.keyframes.rotation[newData.keyframes.rotation.length - 1].first > longestTime) longestTime = newData.keyframes.rotation[newData.keyframes.rotation.length - 1].first;
+          if (newData.keyframes.scale[newData.keyframes.scale.length - 1].first > longestTime) longestTime = newData.keyframes.scale[newData.keyframes.scale.length - 1].first;
 
-        currentAnimData.boneData.push(newData);
+          currentAnimData.boneData.push(newData);
 
         }
         currentAnimData.animationTime = longestTime;
         currentAnimData.tickrate = animation.tickspersecond;
-        Animation.prototype._animData[animName].push(currentAnimData);
+        Animation.prototype._animData[animName][indexList[a]]= currentAnimData;
       }
     }
 

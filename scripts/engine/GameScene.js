@@ -5,11 +5,22 @@
 var particleTex;
 
 class GameScene {
-  constructor(sceneFile, meshFileList) {
+  constructor(sceneFile, meshFileList, animationFiles) {
     GameObject.prototype.SceneRoot = new GameObject();
     //Start loads here, do stuff with created objects in start()
     for (let filename of meshFileList) {
-        ObjectLoader.loadScene(filename);
+        ObjectLoader.loadMeshes(filename);
+    }
+
+    for (let animationName of Object.keys(animationFiles)) {
+      let index=0;
+      for (let animFilename of Object.keys(animationFiles[animationName])) {
+        let indexMap = {};
+        for (let loadIndex of animationFiles[animationName][animFilename]) {
+          indexMap[loadIndex] = index++;
+        }
+        ObjectLoader.loadAnimation(animationName, animFilename, indexMap);
+      }
     }
 
     SceneLoader.loadScene(sceneFile);
@@ -145,12 +156,13 @@ class GameScene {
 
     if(!IS_SERVER) {
       //TODO account for possibility of currentPlayer not set yet
-      Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo(PlayerTable.players[PlayerTable.currentPlayer]));
+      Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo(PlayerTable.players[PlayerTable.currentPlayer],
+                                                                                      vec3.fromValues(0, 1, 0)));
 
       Renderer.directionalLight = new GameObject();
       Renderer.directionalLight.setName("DirectionalLight");
       Renderer.directionalLight.addComponent(new DirectionalLight(true));
-      Renderer.directionalLight.addComponent(new ClientStickTo(Renderer.camera.transform.getParent().gameObject));
+      Renderer.directionalLight.addComponent(new ClientStickTo(Renderer.camera.transform.getParent().gameObject, vec3.create()));
       Renderer.directionalLight.transform.rotateY(-Math.PI / 3.0);
       Renderer.directionalLight.transform.rotateX(-Math.PI / 4.0);
 
