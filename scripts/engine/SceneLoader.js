@@ -142,7 +142,7 @@ const SceneLoader = {
           PlayerTable.addPlayer(nodeObject);
           nodeObject.addComponent(new Sing());
           nodeObject.addComponent(new AudioSource());
-          let pc = new PlayerControllerAnim();
+          let pc = new PlayerController();
           nodeObject.addComponent(pc);
           if (!IS_SERVER) {
             nodeObject.getComponent("AudioSource").playSound2d("singTone00");

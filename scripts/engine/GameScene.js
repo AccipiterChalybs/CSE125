@@ -26,16 +26,13 @@ class GameScene {
 
     SceneLoader.loadScene(sceneFile);
 
-    //TODO this will be moved into the JSON files
-    if (!IS_SERVER) {
-      // TODO REMOVE ME LATER
-      NavMesh.prototype.currentNavMesh = new NavMesh();
+    // TODO REMOVE ME LATER
+    NavMesh.prototype.currentNavMesh = new NavMesh();
 
-      if (!IS_SERVER) {
-        decalTex = new Texture('assets/texture/test_decal2.png');
-        decalNormal = new Texture('assets/texture/test_decal_normal.png', false);
-        particleTex = new Texture('assets/texture/particle_fire_test.png');
-      }
+    if (!IS_SERVER) {
+      decalTex = new Texture('assets/texture/test_decal2.png');
+      decalNormal = new Texture('assets/texture/test_decal_normal.png', false);
+      particleTex = new Texture('assets/texture/particle_fire_test.png');
     }
   }
 

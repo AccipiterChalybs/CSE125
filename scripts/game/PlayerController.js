@@ -129,9 +129,21 @@ class PlayerController extends Component{
     vec3.normalize(move, move);
     vec3.scale(move, move, this.movementSpeed);
 
-    let body = this._collider.body;
-    body.velocity.x = move[0];
-    body.velocity.z = move[2];
+
+    if (vec3.length(move) > 0.01) {
+      this.transform.setRotation(quat.create());
+      this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
+      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(2, true);
+      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').resume();
+    } else {
+      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').stop();
+      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(1, true);
+    }
+
+
+    /*let body = this._collider.body;
+     body.velocity.x = move[0];
+     body.velocity.z = move[2];*/
     //col.setRotation(this.forward);
   }
 
