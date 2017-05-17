@@ -100,7 +100,6 @@ class GameScene {
 
               let decal = new GameObject();
               teapot.addChild(decal);
-              teapot.addComponent(new RotateOverTime(5.0));
               decal.addComponent(new Decal(200, vec4.fromValues(0.5,25,0.5,1),decalTex, decalNormal));
               decal.transform.setPosition(vec3.fromValues(0, 30, 60));
               decal.transform.rotateX(Math.PI/2);

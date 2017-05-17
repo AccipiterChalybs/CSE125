@@ -41,6 +41,7 @@ class Decal extends Component {
     Renderer.setModelMatrix(transformMatrix);
     Renderer.currentShader.setUniform('uInvM_Matrix', mat4.invert(transformMatrix, transformMatrix), UniformTypes.mat4);
     Renderer.currentShader.setUniform('uForwardNormal', forward, UniformTypes.vec3);
+    Renderer.currentShader.setUniform('decalWorldPosition', this.transform.getWorldPosition(), UniformTypes.vec3);
 
     Renderer.currentShader.setUniform('uDecalColor', this.color, UniformTypes.vec4);
 
