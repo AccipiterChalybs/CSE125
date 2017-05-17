@@ -69,6 +69,13 @@ const Input = {
         positiveButton: 16,
         value: 0
       },
+      {
+        name: 'action',
+        type: InputType.keyboard,
+        positiveButton: ('E'.charCodeAt(0)),
+        negativeButton: -1,
+        value: 0
+      },
         //TODO these should be buttons, not axes
       {
         name: 'debugButton_Buffer1',

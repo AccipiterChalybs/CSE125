@@ -9,7 +9,6 @@ Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that
 Debug.debugDisplay = true;
 Debug.quickLoad = false;
 Debug.autoStart = false;
-
 Debug.tmp_shadowTwoSideRender = true; //Var to remind me to remove this when we get in new level geometry
 
 Debug.start = function() {
@@ -296,3 +295,4 @@ Debug.behaviorTree.printErrors = false;
 Debug.behaviorTree.printUniques = false;
 Debug.behaviorTree.printFailures = false;
 Debug.behaviorTree.printSuccesses = false;
+

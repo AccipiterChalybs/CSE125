@@ -12,7 +12,7 @@ class PickRandomPlayer extends BehaviorTreeLeaf{
   updateNode(){
     let randPlayerNum = Utility.randomIntFromInterval(0, 3);
 
-    this.ai.data["player"] = PlayerTable.players[randPlayerNum];
+    this.ai.setPlayer(PlayerTable.players[randPlayerNum]);
 
     // Debug.log(PlayerTable.players[randPlayerNum]);
     return this._currentState;

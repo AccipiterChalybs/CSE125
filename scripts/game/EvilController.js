@@ -5,14 +5,14 @@
 const EVIL_MOVEMENTSPEED = 4.1;
 
 class EvilController extends AIController{
-  constructor(){
+  constructor() {
     super();
-    this.componentType = "EvilController";
+    this.componentType = 'EvilController';
     this.movementSpeed = EVIL_MOVEMENTSPEED;
 
     this.data = {
-      "destination": vec3.create(),
-      "player": null
+      destination: vec3.create(),
+      player: null,
     };
 
     // this.lastFaceIndex = -1;
@@ -22,21 +22,21 @@ class EvilController extends AIController{
     // this.oldTeapot[2] = Debug.drawTeapot([0,0,0]);
 
     let pt0 = vec3.create(); vec3.set(pt0, -27, 0, -9);
-    this.patrolPath = [[-27,0,-9],
+    this.patrolPath = [[-27, 0, -9],
       [-6.5, 0, -9],
       [-6.5, 0, 9],
       [0, 0, 9],
       [-6.5, 0, 9],
       [-6.5, 0, -5],
       [22, 0, -5],
-      [22, 0, 15]];
+      [22, 0, 15],];
   }
 
-  start(){
+  start() {
     super.start();
   }
 
-  updateComponent(){
+  updateComponent() {
     super.updateComponent();
 
     // NAVMESH
@@ -54,29 +54,29 @@ class EvilController extends AIController{
     // }
   }
 
-  chase(){
+  chase() {
     // Determine which triangle it's in and player
     // Do A*
     // Clean A* path
   }
 
-  _buildBehaviorTree(){
-    let root = new PrioritySelector("chase");
+  _buildBehaviorTree() {
+    let root = new PrioritySelector('chase');
 
-    let pickPlayer = new ConcurrentSelector("pickPlayer");
+    let pickPlayer = new ConcurrentSelector('pickPlayer');
     pickPlayer.addNode(new CountdownTimer(this, 5));
     pickPlayer.addNode(new PickRandomPlayer(this));
 
-    let goGo = new PrioritySelector("goGo");
+    let goGo = new PrioritySelector('goGo');
 
-    let setPlayerDest = new ConcurrentSelector("setPlayerDest");
+    let setPlayerDest = new ConcurrentSelector('setPlayerDest');
     setPlayerDest.addNode(new CountdownTimer(this, 0.25));
     setPlayerDest.addNode(new SetDestinationPlayer(this));
 
     let pathToPlayer = new PathToPoint(this, EVIL_MOVEMENTSPEED);
     let findPath = new FindPath(this, pathToPlayer);
 
-    let moveToPlayer = new ConcurrentSelector("moveToPlayer");
+    let moveToPlayer = new ConcurrentSelector('moveToPlayer');
     moveToPlayer.addNode(findPath);
     moveToPlayer.addNode(new Inverter(new DestinationCheck(this)));
     moveToPlayer.addNode(pathToPlayer);
@@ -90,6 +90,16 @@ class EvilController extends AIController{
     // Debug.log(root);
 
     return root;
+  }
+
+  setDestination(destination) {
+    this.data['destination'] = destination;
+    this.serializeDirty = true;
+  }
+
+  setPlayer(player) {
+    this.data['player'] = player;
+    this.serializeDirty = true;
   }
 
   // _buildBehaviorTree(){
@@ -126,5 +136,24 @@ class EvilController extends AIController{
   //   //console.log(root);
   //
   //   return root;
+  // }
+
+  // serialize() {
+  //   if (this.serializeDirty) {
+  //     let retVal = {};
+  //     if (this.data.player !== null) retVal.pid = this.data.player.id;
+  //     retVal.d = this.data.destination;
+  //     this.serializeDirty = false;
+  //     return retVal;
+  //   }
+  //
+  //   return null;
+  // }
+  //
+  // applySerializedData(data) {
+  //   this.data.destination = [data.d[0], data.d[1], data.d[2]];
+  //   if (data.pid && data.pid !== null)
+  //     this.data.player = GameObject.prototype.SerializeMap[data.pid];
+  //
   // }
 }
