@@ -175,17 +175,14 @@ class DeferredPass extends RenderPass
 {
     constructor(){
         super();
-        this.buffers = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 3, false, true, [GL.RGBA8, GL.RGBA16F/*TODO should be RGBA16 - is this ok*/, GL.RGBA16F]);
-        this.fbo = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 1, false, true, [GL.RGBA16F]);
+        this.buffers = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 3, false, true, [GL.RGBA8, GL.RGBA16F/*TODO should be RGBA16 - is this ok*/, GL.RGBA16F], false, true);
+        this.fbo = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 1, false, true, [GL.RGBA16F], false, true);
     }
 
     render(){
 
         //make sure prepass is done first!
 
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).use();
-        let screenSize = vec2.create(); vec2.set(screenSize, Renderer.getWindowWidth(), Renderer.getWindowHeight());
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("uScreenSize", screenSize, UniformTypes.vec2);
         GL.depthMask(false);
         GL.stencilOpSeparate(GL.BACK, GL.KEEP, GL.INCR_WRAP, GL.KEEP);
         GL.stencilOpSeparate(GL.FRONT, GL.KEEP, GL.DECR_WRAP, GL.KEEP);
@@ -206,12 +203,16 @@ class DeferredPass extends RenderPass
         this.buffers.bindTexture(1, 1);
         this.buffers.bindTexture(2, 2);
 
-        Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("uIV_Matrix", Renderer.camera.gameObject.transform.getTransformMatrix(), UniformTypes.mat4);
+        GL.enable(GL.BLEND);
+        GL.blendEquation(GL.FUNC_ADD);
+        GL.blendFunc(GL.ONE, GL.ONE);
 
         for(let light of Renderer.renderBuffer.light) {
             let d = light;
             if (!d.isShadowCaster || d.cubeShadow)
             {
+                Renderer.switchShader(Renderer.DEFERRED_SHADER_LIGHTING_POINT_PASS1);
+
                 GL.drawBuffers([GL.NONE]);
                 GL.disable(GL.CULL_FACE);
                 GL.enable(GL.STENCIL_TEST);
@@ -219,8 +220,10 @@ class DeferredPass extends RenderPass
                 GL.clear(GL.STENCIL_BUFFER_BIT);
                 GL.stencilFunc(GL.ALWAYS, 0, 0);
 
-                light.deferredPass(true);
+                light.deferredPass(false);
 
+                let currentPointShader = (d.isShadowCaster) ? Renderer.DEFERRED_SHADER_LIGHTING_POINT_SHADOW : Renderer.DEFERRED_SHADER_LIGHTING_POINT;
+                Renderer.switchShader(currentPointShader);
 
                 GL.stencilFunc(GL.NOTEQUAL, 0, 0xFF);
                 GL.cullFace(GL.FRONT);
@@ -231,6 +234,7 @@ class DeferredPass extends RenderPass
             }
             else //if directional light
             {
+                Renderer.switchShader(Renderer.DEFERRED_SHADER_LIGHTING_DIRECTIONAL_SHADOW);
                 GL.cullFace(GL.BACK);
                 GL.disable(GL.STENCIL_TEST);
                 if(d.isShadowCaster && d.fbo && !d.cubeShadow)
@@ -241,23 +245,21 @@ class DeferredPass extends RenderPass
                     mat4.multiply(shadowMat, DirectionalLight.prototype.shadowMatrix, shadowMat);
                     mat4.multiply(shadowMat, DeferredPass.prototype.bias, shadowMat);
 
-                    Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("uShadow_Matrix", shadowMat, UniformTypes.mat4);
+                    Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING_DIRECTIONAL_SHADOW).setUniform("uShadow_Matrix", shadowMat, UniformTypes.mat4);
                 }
             }
 
-            GL.enable(GL.BLEND);
-            GL.blendEquation(GL.FUNC_ADD);
-            GL.blendFunc(GL.ONE, GL.ONE);
-            GL.enable(GL.CULL_FACE);
             GL.disable(GL.DEPTH_TEST);
+            GL.enable(GL.CULL_FACE);
             GL.drawBuffers([GL.COLOR_ATTACHMENT0]); //switch back to main image
 
-            light.deferredPass(false);
+            light.deferredPass(true);
         }
         GL.disable(GL.STENCIL_TEST);
-        GL.disable(GL.DEPTH_TEST);
         GL.disable(GL.CULL_FACE);
 
+
+        Renderer.switchShader(Renderer.DEFERRED_SHADER_LIGHTING_ENVIRONMENT);
 
         let currentEntry = Mesh.prototype.meshMap["Plane"];
 
@@ -271,7 +273,7 @@ class DeferredPass extends RenderPass
         Renderer.currentShader.setUniform("uLightPosition", vec3.create(), UniformTypes.vec3);
         Renderer.currentShader.setUniform("uV_Matrix", mat4.create(), UniformTypes.mat4);
         Renderer.currentShader.setUniform("uP_Matrix", mat4.create(), UniformTypes.mat4);
-        GL.drawElements(GL.TRIANGLES, currentEntry.indexSize, GL.UNSIGNED_SHORT, 0);
+        //GL.drawElements(GL.TRIANGLES, currentEntry.indexSize, GL.UNSIGNED_SHORT, 0);
         Renderer.currentShader.setUniform("uP_Matrix", Renderer.perspective, UniformTypes.mat4);
 
 
@@ -426,6 +428,8 @@ class BloomPass extends RenderPass
 
       if (Debug.bufferDebugMode) {
         let s5 = Renderer.getShader(Renderer.FBO_DEBUG_CHANNEL);
+        Renderer.DEFERRED_SHADER_LIGHTING_POINT = Renderer.DEFERRED_SHADER_LIGHTING_POINT_NORMAL; //reset if not set (e.g. in 8)
+
         switch (Debug.currentBuffer) {
           case Debug.BUFFERTYPE_PRE:
             this._deferredPass.fbo.blitFramebuffer(0, 0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
@@ -482,6 +486,7 @@ class BloomPass extends RenderPass
               }
               GL.viewport(0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight()); //reset viewport
             }
+            Renderer.DEFERRED_SHADER_LIGHTING_POINT = Renderer.DEFERRED_SHADER_LIGHTING_POINT_DEBUG;
             break;
           default:
             break;

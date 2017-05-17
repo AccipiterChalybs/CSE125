@@ -89,7 +89,7 @@ class Transform extends Component
         {
             this.transformMatrix = mat4.create();
 
-
+            //TODO optimize with mat4.fromRotationTranslationScale
             // Translation
             mat4.translate(this.transformMatrix, this.transformMatrix, this.position);
 
@@ -141,6 +141,12 @@ class Transform extends Component
     {
         this.setDirty();
         vec3.set(this.scaleFactor,s,s,s);
+    }
+
+    setWorldPosition(pos) {
+        this.setDirty();
+        let invParentTransform = mat4.create(); mat4.invert(invParentTransform, this._parent.getTransformMatrix());
+        vec3.transformMat4(this.position, pos, invParentTransform);
     }
 
     getWorldPosition()

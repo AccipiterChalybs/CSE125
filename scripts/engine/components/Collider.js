@@ -15,10 +15,23 @@ class Collider extends Component{
   }
 
   start() {
-    // this.gameObject.addComponentToSerializeableList(this);
+    let worldPosition = this.transform.getWorldPosition();
+    this.body.position.set(worldPosition[0], worldPosition[1],
+      worldPosition[2]);
+
+    let xyz = vec3.fromValues(worldPosition[0], worldPosition[1],
+      worldPosition[2]);
+
+    // GameObject.prototype.SceneRoot.addChild(Debug.drawTeapot(xyz, vec4.fromValues(1, 0, 0,1)));
+    // GameObject.prototype.SceneRoot.addChild(Debug.drawTeapot(this.transform.getPosition(), vec4.fromValues(1, 0, 1,1)));
+
+    // TODO: may be a problem in the future if the objects start with a weird rotation
+    this.body.quaternion.set(this.transform.getRotation()[0], this.transform.getRotation()[1],
+      this.transform.getRotation()[2], this.transform.getRotation()[3]);
   }
 
-  _setGameObject(go) {
+
+  _setGameObject(go){
     super._setGameObject(go);
     if (this.transform === null) {
       return;
@@ -26,8 +39,9 @@ class Collider extends Component{
 
     this.body = new CANNON.Body({ mass: this.mass });
 
-    this.body.position.set(this.transform.getPosition()[0], this.transform.getPosition()[1],
-      this.transform.getPosition()[2]);
+    let worldPosition = this.transform.getWorldPosition();
+    this.body.position.set(worldPosition[0], worldPosition[1],
+      worldPosition[2]);
 
     // TODO: may be a problem in the future if the objects start with a weird rotation
     this.body.quaternion.set(this.transform.getRotation()[0], this.transform.getRotation()[1],
@@ -54,12 +68,13 @@ class Collider extends Component{
     {
       let newPos = vec3.create();
       vec3.set(newPos, this.body.position.x, this.body.position.y, this.body.position.z);
-      this.transform.setPosition(newPos);
+      this.transform.setWorldPosition(newPos);
 
       if (!this.freezeRotation) {
         let newRot = quat.fromValues(this.body.quaternion.x, this.body.quaternion.y,
           this.body.quaternion.z, this.body.quaternion.w);
 
+        //TODO may need to do something like 'setWorldRotation' here.
         this.transform.setRotation(newRot);
       }
     }else {

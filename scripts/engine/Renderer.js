@@ -13,6 +13,9 @@ const Renderer  = {
       Renderer.width = windowWidth;
       Renderer.height = windowHeight;
 
+      Renderer.lastWidth = 0;
+      Renderer.lastHeight = 0;
+
       Renderer.canvas = canvas;
       Renderer.shaderPath = "scripts/shaders/";
       Renderer.FORWARD_PBR_SHADER_ANIM = 0;
@@ -22,18 +25,27 @@ const Renderer  = {
       Renderer.PARTICLE_SHADER=4;
       Renderer.DEFERRED_PBR_SHADER_ANIM=6;
       Renderer.DEFERRED_PBR_SHADER=7;
-      Renderer.DEFERRED_SHADER_LIGHTING=8;
       Renderer.SHADOW_SHADER=9;
       Renderer.SHADOW_SHADER_ANIM=10;
       Renderer.POINT_SHADOW_SHADER=11;
       Renderer.POINT_SHADOW_SHADER_ANIM=12;
       Renderer.FORWARD_UNLIT = 13;
+
       Renderer.FBO_BLUR=15;
       Renderer.FBO_PASS=16;
       Renderer.FBO_AVERAGE=17;
       Renderer.FBO_DEBUG_CHANNEL=18;
       Renderer.FBO_COPY=19;
+
       Renderer.DEFERRED_DECAL=25;
+
+      Renderer.DEFERRED_SHADER_LIGHTING_ENVIRONMENT=32;
+      Renderer.DEFERRED_SHADER_LIGHTING_POINT_PASS1=33;
+      Renderer.DEFERRED_SHADER_LIGHTING_POINT_NORMAL=34;
+      Renderer.DEFERRED_SHADER_LIGHTING_POINT_DEBUG=35;
+      Renderer.DEFERRED_SHADER_LIGHTING_POINT = Renderer.DEFERRED_SHADER_LIGHTING_POINT_NORMAL;
+      Renderer.DEFERRED_SHADER_LIGHTING_POINT_SHADOW=36;
+      Renderer.DEFERRED_SHADER_LIGHTING_DIRECTIONAL_SHADOW=37;
       Renderer.MODEL_MATRIX = "uM_Matrix";
       Renderer.VIEW_MATRIX = "uV_Matrix";
       Renderer.PERSPECTIVE_MATRIX = "uP_Matrix";
@@ -53,15 +65,20 @@ const Renderer  = {
       Renderer.shaderForwardLightList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM];
 
       Renderer.shaderViewList = [Renderer.FORWARD_PBR_SHADER, Renderer.PARTICLE_SHADER, Renderer.FORWARD_UNLIT, Renderer.SKYBOX_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM,
-        Renderer.DEFERRED_SHADER_LIGHTING, Renderer.SHADOW_SHADER, Renderer.SHADOW_SHADER_ANIM, Renderer.DEFERRED_DECAL];
+        Renderer.SHADOW_SHADER, Renderer.SHADOW_SHADER_ANIM, Renderer.DEFERRED_DECAL,
+        Renderer.DEFERRED_SHADER_LIGHTING_ENVIRONMENT, Renderer.DEFERRED_SHADER_LIGHTING_DIRECTIONAL_SHADOW,Renderer.DEFERRED_SHADER_LIGHTING_POINT_PASS1, Renderer.DEFERRED_SHADER_LIGHTING_POINT_NORMAL, Renderer.DEFERRED_SHADER_LIGHTING_POINT_DEBUG, Renderer.DEFERRED_SHADER_LIGHTING_POINT_SHADOW];
+      /* Renderer.PARTICLE_TRAIL_SHADER, Renderer.BASIC_SHADER,
+            Renderer.FORWARD_EMISSIVE ];*/
 
-      Renderer.shaderCameraPosList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.DEFERRED_SHADER_LIGHTING];
+      Renderer.shaderCameraPosList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM,
+        Renderer.DEFERRED_SHADER_LIGHTING_ENVIRONMENT, Renderer.DEFERRED_SHADER_LIGHTING_DIRECTIONAL_SHADOW, Renderer.DEFERRED_SHADER_LIGHTING_POINT_NORMAL, Renderer.DEFERRED_SHADER_LIGHTING_POINT_DEBUG, Renderer.DEFERRED_SHADER_LIGHTING_POINT_SHADOW];
 
-      Renderer.shaderEnvironmentList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.DEFERRED_SHADER_LIGHTING];
+      Renderer.shaderEnvironmentList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM,
+        Renderer.DEFERRED_SHADER_LIGHTING_ENVIRONMENT];
 
       Renderer.shaderPerspectiveList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.PARTICLE_SHADER, Renderer.SKYBOX_SHADER,
-          Renderer.FORWARD_UNLIT, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM, Renderer.DEFERRED_SHADER_LIGHTING,
-        Renderer.DEFERRED_DECAL
+          Renderer.FORWARD_UNLIT, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM, Renderer.DEFERRED_DECAL,
+        Renderer.DEFERRED_SHADER_LIGHTING_ENVIRONMENT, Renderer.DEFERRED_SHADER_LIGHTING_DIRECTIONAL_SHADOW,Renderer.DEFERRED_SHADER_LIGHTING_POINT_PASS1,  Renderer.DEFERRED_SHADER_LIGHTING_POINT_NORMAL, Renderer.DEFERRED_SHADER_LIGHTING_POINT_DEBUG, Renderer.DEFERRED_SHADER_LIGHTING_POINT_SHADOW
       ];
       /* Renderer.EMITTER_BURST_SHADER, Renderer.PARTICLE_TRAIL_SHADER,
             Renderer.BASIC_SHADER, Renderer.FORWARD_UNLIT, Renderer.FORWARD_EMISSIVE ];*/
@@ -95,8 +112,23 @@ const Renderer  = {
         Renderer.shaderPath + "forward_pbr.vert", Renderer.shaderPath + "deferred_gbuffer.frag"
       );
 
-      Renderer.shaderList[Renderer.DEFERRED_SHADER_LIGHTING] = new Shader(
+      Renderer.shaderList[Renderer.DEFERRED_SHADER_LIGHTING_ENVIRONMENT] = new Shader(
         Renderer.shaderPath + "deferred_lighting.vert", Renderer.shaderPath + "deferred_lighting.frag"
+      );
+      Renderer.shaderList[Renderer.DEFERRED_SHADER_LIGHTING_DIRECTIONAL_SHADOW] = new Shader(
+        Renderer.shaderPath + "deferred_lighting.vert", Renderer.shaderPath + "deferred_lighting_directional_shadow.frag"
+      );
+      Renderer.shaderList[Renderer.DEFERRED_SHADER_LIGHTING_POINT_PASS1] = new Shader(
+        Renderer.shaderPath + "deferred_lighting.vert", Renderer.shaderPath + "deferred_lighting_pass.frag"
+      );
+      Renderer.shaderList[Renderer.DEFERRED_SHADER_LIGHTING_POINT_NORMAL] = new Shader(
+        Renderer.shaderPath + "deferred_lighting.vert", Renderer.shaderPath + "deferred_lighting_point.frag"
+      );
+      Renderer.shaderList[Renderer.DEFERRED_SHADER_LIGHTING_POINT_DEBUG] = new Shader(
+        Renderer.shaderPath + "deferred_lighting.vert", Renderer.shaderPath + "deferred_lighting_point_debug.frag"
+      );
+      Renderer.shaderList[Renderer.DEFERRED_SHADER_LIGHTING_POINT_SHADOW] = new Shader(
+        Renderer.shaderPath + "deferred_lighting.vert", Renderer.shaderPath + "deferred_lighting_point_shadow.frag"
       );
 
       Renderer.shaderList[Renderer.SHADOW_SHADER] = new Shader(
@@ -408,11 +440,17 @@ const Renderer  = {
       s5.setUniform("cubeTex", 1, UniformTypes.u1i);
       s5.setUniform("face", 0, UniformTypes.u1i);
 
-      Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("colorTex", 0, UniformTypes.u1i);
-      Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("normalTex", 1, UniformTypes.u1i);
-      Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("posTex", 2, UniformTypes.u1i);
-      Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("shadowTex", 3, UniformTypes.u1i);
-      Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING).setUniform("shadowCube", 4, UniformTypes.u1i);
+      for (let shaderId of [Renderer.DEFERRED_SHADER_LIGHTING_ENVIRONMENT,
+                            Renderer.DEFERRED_SHADER_LIGHTING_POINT_PASS1,
+                            Renderer.DEFERRED_SHADER_LIGHTING_POINT_NORMAL, Renderer.DEFERRED_SHADER_LIGHTING_POINT_SHADOW, Renderer.DEFERRED_SHADER_LIGHTING_POINT_DEBUG,
+                            Renderer.DEFERRED_SHADER_LIGHTING_DIRECTIONAL_SHADOW]) {
+        Renderer.getShader(shaderId).setUniform("colorTex", 0, UniformTypes.u1i);
+        Renderer.getShader(shaderId).setUniform("normalTex", 1, UniformTypes.u1i);
+        Renderer.getShader(shaderId).setUniform("posTex", 2, UniformTypes.u1i);
+      }
+
+      Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING_DIRECTIONAL_SHADOW).setUniform("shadowTex", 3, UniformTypes.u1i);
+      Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING_POINT_SHADOW).setUniform("shadowCube", 4, UniformTypes.u1i);
 
       Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("colourBuffer", 0, UniformTypes.u1i);
       Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("normalBuffer", 1, UniformTypes.u1i);
@@ -544,6 +582,17 @@ const Renderer  = {
         Renderer.NEAR_DEPTH, Renderer.FAR_DEPTH);
 
     Renderer._updatePerspective(Renderer.perspective);
+
+    Renderer.lastWidth = width;
+    Renderer.lastHeight = height;
+
+
+    let screenSize = vec2.create(); vec2.set(screenSize, Renderer.getWindowWidth(), Renderer.getWindowHeight());
+    Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING_ENVIRONMENT).setUniform("uScreenSize", screenSize, UniformTypes.vec2);
+    Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING_POINT_NORMAL).setUniform("uScreenSize", screenSize, UniformTypes.vec2);
+    Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING_POINT_DEBUG).setUniform("uScreenSize", screenSize, UniformTypes.vec2);
+    Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING_POINT_SHADOW).setUniform("uScreenSize", screenSize, UniformTypes.vec2);
+    Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING_DIRECTIONAL_SHADOW).setUniform("uScreenSize", screenSize, UniformTypes.vec2);
   },
 
   getWindowWidth: function() {

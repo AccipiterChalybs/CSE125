@@ -133,6 +133,7 @@ void main () {
 		vec3 centerToRay = dot(lightDir, reflectedRay) * reflectedRay - lightDir;
 		lightDir = normalize(lightDir + centerToRay * clamp(sphereRadius / length(centerToRay), 0.0, 1.0));
 		//todo normalize based on sphere size
+		//TODO this won't work! update to use range
 	    power = 1.0 / (lightDist * lightDist * uLightData[3*i+2].z + lightDist * uLightData[3*i+2].y + uLightData[3*i+2].x);
 	}
 

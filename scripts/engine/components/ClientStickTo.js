@@ -1,8 +1,9 @@
 class ClientStickTo extends Component{
-  constructor(target=null){
+  constructor(target=null, offset){
     super();
     this.componentType = "ClientStickTo";
     this.setFollowObject(target);
+    this.offset = offset;
   }
 
   setFollowObject(target) {
@@ -11,7 +12,7 @@ class ClientStickTo extends Component{
 
   updateClient(){
     if (this.target !== null) {
-      this.transform.setPosition(this.target.transform.getWorldPosition());
+      this.transform.setPosition(vec3.add(vec3.create(), this.target.transform.getWorldPosition(), this.offset));
     }
   }
 }
