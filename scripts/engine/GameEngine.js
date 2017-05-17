@@ -85,10 +85,11 @@ GameEngine.loop = function () {
   Input.update();
 
   // send data
+  // Debug.log(GameObject.prototype.SceneRoot.transform.children[2].position);
+
   if (!Debug.clientUpdate){
     Networking.update();
   }
-
   GameEngine.currentScene.update();
 
   if (Debug.clientUpdate) {
@@ -96,6 +97,8 @@ GameEngine.loop = function () {
   }
 
   GameObject.prototype.SceneRoot.updateClient();
+
+
 
   if (!IS_SERVER) {
     Renderer.loop();

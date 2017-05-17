@@ -1,6 +1,7 @@
 /**
  * Created by Accipiter Chalybs on 4/14/2017.
  */
+var decalTex, decalNormal;
 
 var particleTex;
 
@@ -9,11 +10,11 @@ class GameScene {
     GameObject.prototype.SceneRoot = new GameObject();
     //Start loads here, do stuff with created objects in start()
     for (let filename of meshFileList) {
-        ObjectLoader.loadMeshes(filename);
+      ObjectLoader.loadMeshes(filename);
     }
 
     for (let animationName of Object.keys(animationFiles)) {
-      let index=0;
+      let index = 0;
       for (let animFilename of Object.keys(animationFiles[animationName])) {
         let indexMap = {};
         for (let loadIndex of animationFiles[animationName][animFilename]) {
@@ -27,7 +28,14 @@ class GameScene {
 
     //TODO this will be moved into the JSON files
     if (!IS_SERVER) {
-      particleTex = new Texture('assets/texture/particle_fire_test.png');
+      // TODO REMOVE ME LATER
+      NavMesh.prototype.currentNavMesh = new NavMesh();
+
+      if (!IS_SERVER) {
+        decalTex = new Texture('assets/texture/test_decal2.png');
+        decalNormal = new Texture('assets/texture/test_decal_normal.png', false);
+        particleTex = new Texture('assets/texture/particle_fire_test.png');
+      }
     }
   }
 
@@ -79,7 +87,16 @@ class GameScene {
               if (x===1 && y===1){
                 vec4.set(color, 1, 0, 0, 1);
                 mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
-              } else if( x===2 && y ===2){
+              }else if( x===1 && y ===3){
+                vec4.set(color, 0, 1, 0, 1);
+                mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
+              }else if( x===4 && y ===3){
+                vec4.set(color, .5, .5, .5, 1);
+                mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
+              }else if( x===9 && y ===3){
+                vec4.set(color, 1, 0, 1, 1);
+                mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
+              }else if( x===2 && y ===2){
                 vec4.set(color, 0, 0, 1, 1);
                 mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
               }
@@ -95,7 +112,13 @@ class GameScene {
               if(!IS_SERVER) teapot.getComponent("AudioSource").playSound3d("cruelangel");
               teapot.addComponent(new PlayerController());
 
-              pos = vec3.fromValues(5,0,0);
+              if(!IS_SERVER) teapot.addComponent(new ParticleSystem(true, {texture: particleTex}));
+
+              let decal = new GameObject();
+              teapot.addChild(decal);
+              decal.addComponent(new Decal(200, vec4.fromValues(0.5,25,0.5,1),decalTex, decalNormal));
+              decal.transform.setPosition(vec3.fromValues(0, 30, 60));
+              decal.transform.rotateX(Math.PI/2);
             }
 
             if(x===1 && y===1){
@@ -109,10 +132,57 @@ class GameScene {
 
             if (x===1 && y===1){
               teapot.addComponent(new SphereCollider(0, true));
-              teapot.addComponent(new SingingSwitch(5));
+              teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
+              teapot.addComponent(new DoorEvent([-2,2,2],[-2,0,2]));
+              teapot.addComponent(new AudioSource());
+              if(!IS_SERVER) {
+                teapot.getComponent("AudioSource").playSound2d('door_unlocked');
+                teapot.getComponent("AudioSource").pauseSound();
+              }
+            }else if(x===1 && y===3){
+              teapot.addComponent(new SphereCollider(100, false,15));
+              teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
+            }else if(x===4 && y===3){
+              teapot.addComponent(new SphereCollider(100, false,15));
+              teapot.transform.scale(.5);
+              teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
+              teapot.addComponent(new KeyEvent());
+              teapot.addComponent(new AudioSource());
+              if(!IS_SERVER) {
+                teapot.getComponent("AudioSource").playSound2d('get_item');
+                teapot.getComponent("AudioSource").pauseSound();
+              }
+            }else if(x===9 && y===3){
+              teapot.addComponent(new SphereCollider(100, false,15));
+              teapot.transform.scale(1.1);
+              teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
+              teapot.addComponent(new HealEvent());
+              teapot.addComponent(new AudioSource());
+              teapot.addComponent(new RaycastSwitch(teapot.getComponent("Event")));
+              if(!IS_SERVER) {
+                teapot.getComponent("AudioSource").playSound2d('heal');
+                teapot.getComponent("AudioSource").pauseSound();
+              }
+              teapot.transform.position[1]=0;
             }else if(x===2 && y===2){
               teapot.addComponent(new SphereCollider(0, true));
+              teapot.addComponent(new AudioSource());
               teapot.addComponent(new TriggerTest());
+              if(!IS_SERVER) {
+                teapot.getComponent('AudioSource').playSound2d('singTone03');
+                teapot.getComponent('AudioSource').pauseSound();
+              }
+              let lightComp = new PointLight(true);
+              lightComp.color = vec3.fromValues(5, 2.5, 0);
+              lightComp.exponentialFalloff = 0.25;
+              teapot.addComponent(lightComp);
+
+              //For testing purposes
+              /*light.addComponent(new Mesh("Sphere_Icosphere"));
+               light.getComponent("Mesh").setMaterial(Debug.makeDefaultMaterial());*/
+              //light.transform.scale(0.25);
+
+
             }else{
               teapot.addComponent(new SphereCollider(100, false, 10)); //set Transform BEFORE collider
             }
@@ -121,45 +191,64 @@ class GameScene {
         }
     }
 
-    //GameObject.prototype.SceneRoot.transform.gameObject.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);
+
+    GameObject.prototype.SceneRoot.transform.children[1].children[11].gameObject.addComponent(new SingingSwitch(GameObject.prototype.SceneRoot.transform.children[1].children[11].gameObject.getComponent("Event"),5));
+    // GameObject.prototype.SceneRoot.transform.children[1].children[13].gameObject.getComponent("Collider").setLayer(FILTER_KINEMATIC);
+    GameObject.prototype.SceneRoot.transform.children[1].children[13].gameObject.addComponent(new RaycastSwitch(GameObject.prototype.SceneRoot.transform.children[1].children[11].gameObject.getComponent("Event"),5));
+    GameObject.prototype.SceneRoot.transform.children[1].children[43].gameObject.addComponent(new RaycastSwitch(GameObject.prototype.SceneRoot.transform.children[1].children[43].gameObject.getComponent("Event"),5));
+    // GameObject.prototype.SceneRoot.transform.children[1].children[93].gameObject.addComponent(new RaycastSwitch(GameObject.prototype.SceneRoot.transform.children[1].children[93].gameObject.getComponent("Event"),5));
+
+    GameObject.prototype.SceneRoot.transform.children[1].children[13].position[1]=0;
+    GameObject.prototype.SceneRoot.transform.children[1].children[43].position[1]=0;
+
     // GameObject.prototype.SceneRoot.transform.children[0].children[1].gameObject.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);
     GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.getComponent("Collider").setLayer(FILTER_PLAYER);
 
     PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject);
     GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new Sing());
+    GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new Look());
     GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new AudioSource());
-    GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new Sing());
-    GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new AudioSource());
-    GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new Sing());
-    GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new AudioSource());
-    GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new Sing());
-    GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new AudioSource());
+    if(!Debug.clientUpdate) {
 
-
-    PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject);
-    GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new PlayerController());
-    PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject);
-    GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new PlayerController());
-    PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject);
-    GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new PlayerController());
-
+      GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new Sing());
+      GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new AudioSource());
+      GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new Look());
+      GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new Sing());
+      GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new AudioSource());
+      GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new Look());
+      GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new Sing());
+      GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new AudioSource());
+      GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new Look());
+      //
+      //
+      PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject);
+      GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new PlayerController());
+      PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject);
+      GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new PlayerController());
+      PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject);
+      GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new PlayerController());
+    }
     if(!IS_SERVER) {
       GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.getComponent("AudioSource").playSound2d("singTone00");
       GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.getComponent("AudioSource").pauseSound();
-      GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.getComponent("AudioSource").playSound2d("singTone00");
-      GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.getComponent("AudioSource").pauseSound();
-      GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.getComponent("AudioSource").playSound2d("singTone00");
-      GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.getComponent("AudioSource").pauseSound();
-      GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.getComponent("AudioSource").playSound2d("singTone00");
-      GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.getComponent("AudioSource").pauseSound();
+      if(!Debug.clientUpdate) {
+        GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.getComponent("AudioSource").playSound2d("singTone01");
+        GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.getComponent("AudioSource").pauseSound();
+        GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.getComponent("AudioSource").playSound2d("singTone02");
+        GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.getComponent("AudioSource").pauseSound();
+        GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.getComponent("AudioSource").playSound2d("singTone03");
+        GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.getComponent("AudioSource").pauseSound();
+      }
     }
 
+    //TODO make true and make clientside objects work
+    let directionalLight = new GameObject(false);
+
     if(!IS_SERVER) {
-      //TODO account for possibility of currentPlayer not set yet
-      Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo(PlayerTable.players[PlayerTable.currentPlayer],
+      Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo(PlayerTable.getPlayer(),
                                                                                       vec3.fromValues(0, 1, 0)));
 
-      Renderer.directionalLight = new GameObject();
+      Renderer.directionalLight = directionalLight;
       Renderer.directionalLight.setName("DirectionalLight");
       Renderer.directionalLight.addComponent(new DirectionalLight(true));
       Renderer.directionalLight.addComponent(new ClientStickTo(Renderer.camera.transform.getParent().gameObject, vec3.create()));
@@ -168,6 +257,33 @@ class GameScene {
 
       Renderer.directionalLight.getComponent("Light").color = vec3.fromValues(1.6, 3.2, 6.4);
     }
+
+    let pos = vec3.create(); vec3.set(pos, -27, 0, -9);
+    let color = vec4.create(); vec4.set(color, 1, 0, 0, 1);
+    let evilTeapot = Debug.drawTeapot(pos, color);
+    evilTeapot.addComponent(new EvilController());
+
+
+    let light = new GameObject();
+    let lightComp = new PointLight(true);
+    lightComp.color = vec3.fromValues(5, 2.5, 0);
+    lightComp.exponentialFalloff = 0.25;
+    light.addComponent(lightComp);
+    let lightPos = vec3.create();
+    vec3.set(lightPos, 10, 2.5, 0);
+
+    //For testing purposes
+    /*light.addComponent(new Mesh("Sphere_Icosphere"));
+    light.getComponent("Mesh").setMaterial(Debug.makeDefaultMaterial());*/
+    //light.transform.scale(0.25);
+
+    light.transform.setPosition(lightPos);
+
+    let lightCenter = new GameObject();
+    lightCenter.addChild(light);
+    lightCenter.addComponent(new RotateOverTime(2.5));
+
+    GameObject.prototype.SceneRoot.addChild(lightCenter);
 
     //let move = vec3.create(); vec3.set(move, 0, 500, 64);
     let move = vec3.create(); vec3.set(move, 0,-1,0);
@@ -179,7 +295,8 @@ class GameScene {
     ground.getComponent("Collider").setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
     ground.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);
 
-    GameObject.prototype.SceneRoot.findComponents("Interactable", PhysicsEngine.sphereChecks);
+
+    GameObject.prototype.SceneRoot.findComponents("Listenable", PhysicsEngine.sphereChecks);
 
   }
 

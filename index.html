@@ -94,19 +94,50 @@
 <script src="https://cdn-orig.socket.io/socket.io-1.2.1.js"></script>
 <script src="scripts/engine/Component.js"></script>
 <script src="scripts/engine/components/Collider.js"></script>
+<script src="scripts/game/Event.js"></script>
 
 <script src="scripts/engine/Utility.js"></script>
 <script src="scripts/howler.core.min.js"></script>
 <script src="scripts/howler.spatial.min.js"></script>
 <script src="scripts/engine/AudioController.js"></script>
+
+<!-- AI -->
+<script src="scripts/engine/ai/NavMesh.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/BehaviorTreeNode.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/ConcurrentSelector.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/PrioritySelector.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/SequenceSelector.js"></script>
+<script src="scripts/engine/components/AIController.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/BehaviorTreeLeaf.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/Inverter.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/specialSelectors/PathToPoint.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/actions/MoveToPoint.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/actions/FindPath.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/actions/SetDestination.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/actions/ReturnTrue.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/actions/PickRandomPlayer.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/actions/SetDestinationPlayer.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/conditions/ProximityCheck.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/conditions/DestinationCheck.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/conditions/CountdownTimer.js"></script>
+<script src="scripts/engine/ai/astar.js"></script>
+<script src="scripts/game/EvilController.js"></script>
+
 <script src="scripts/engine/JsonLoader.js"></script>
+<script src="scripts/engine/NavMesh.js"></script>
 <script src="scripts/game/RotateMouse.js"></script>
 <script src="scripts/game/ZoomMouse.js"></script>
 <script src="scripts/game/PlayerController.js"></script>
 <script src="scripts/game/PlayerControllerAnim.js"></script>
 <script src="scripts/game/Sing.js"></script>
-<script src="scripts/game/Interactable.js"></script>
+<script src="scripts/game/Listenable.js"></script>
+<script src="scripts/game/Look.js"></script>
+<script src="scripts/game/Viewable.js"></script>
 <script src="scripts/game/SingingSwitch.js"></script>
+<script src="scripts/game/RaycastSwitch.js"></script>
+<script src="scripts/game/DoorEvent.js"></script>
+<script src="scripts/game/KeyEvent.js"></script>
+<script src="scripts/game/HealEvent.js"></script>
 <script src="scripts/game/TriggerTest.js"></script>
 <script src="scripts/game/RotateOverTime.js"></script>
 <script src="scripts/game/RotateArrowKey.js"></script>
@@ -115,6 +146,7 @@
 <script src="scripts/engine/GameEngine.js"></script>
 <script src="scripts/engine/Debug.js"></script>
 <script src="scripts/engine/RGBE_Loader.js"></script>
+<script src="scripts/engine/components/Decal.js"></script>
 <script src="scripts/engine/components/Animation.js"></script>
 <script src="scripts/engine/components/ParticleSystem.js"></script>
 <script src="scripts/engine/components/ClientStickTo.js"></script>

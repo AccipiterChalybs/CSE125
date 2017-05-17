@@ -124,6 +124,8 @@ class Skybox
 
         Skybox.prototype._meshData.vaoHandle = vao;
         Skybox.prototype._meshData.indexSize = indices.length;
+
+        Skybox.prototype._loaded = true;
     }
 
     _loadGLCube(data){}

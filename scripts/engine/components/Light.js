@@ -13,7 +13,17 @@ class Light extends Component{
         this.radius = 0.25;
         this.shadowMatrix = null;
         this.range = 10;
+        this.serializeDirty=true;
     }
+
+    start(){
+      this.gameObject.addComponentToSerializeableList(this);
+    }
+
+    startClient(){
+      this.gameObject.addComponentToSerializeableList(this);
+    }
+
     forwardPass(index){}
     deferredPass(bind){}
 
@@ -30,6 +40,30 @@ class Light extends Component{
     }
     bindShadowMap(pass){
     }
+
+    setColor(color){
+      this.color = color;
+      this.serializeDirty=true;
+    }
+
+    serialize() {
+      if(this.serializeDirty){
+        let retVal = {};
+        retVal.c = [this.color[0],this.color[1],this.color[2]];
+        retVal.r = this.range;
+        this.serializeDirty = false; // Dont know if need
+        return retVal;
+      }
+      return null;
+    }
+
+    applySerializedData(data) {
+      this.color[0] = data.c[0];
+      this.color[1] = data.c[1];
+      this.color[2] = data.c[2];
+      this.range = data.r;
+    }
+
 }
 
 class PointLight extends Light{
@@ -40,6 +74,7 @@ class PointLight extends Light{
     }
 
     startClient() {
+      super.startClient();
       if(this.isShadowCaster)
       {
         this.cubeShadow = true;
@@ -123,6 +158,7 @@ class DirectionalLight extends Light{
   }
 
   startClient() {
+    super.startClient();
     if(this.isShadowCaster)
     {
       this.cubeShadow = false;
@@ -185,6 +221,11 @@ class SpotLight extends Light{
         this.angle = 30;
         this.exponent = 5;
     }
+
+    startClient(){
+      super.startClient();
+    }
+
     forwardPass(index){}
     deferredPass(bind){}
 }

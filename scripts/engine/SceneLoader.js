@@ -144,7 +144,9 @@ const SceneLoader = {
           nodeObject.addComponent(new AudioSource());
           let pc = new PlayerControllerAnim();
           nodeObject.addComponent(pc);
-          nodeObject.getComponent("AudioSource").playSound2d("singTone00");
+          if (!IS_SERVER) {
+            nodeObject.getComponent("AudioSource").playSound2d("singTone00");
+          }
           break;
       }
     }

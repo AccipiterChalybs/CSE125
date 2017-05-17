@@ -4,12 +4,11 @@
 
 let Debug = {};
 
-Debug.clientUpdate = true; //Run the client in standalone mode, so it doesn't need a server - good for testing!
+Debug.clientUpdate = false; //Run the client in standalone mode, so it doesn't need a server - good for testing!
 Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
 Debug.debugDisplay = true;
-Debug.quickLoad = true;
-Debug.autoStart = true;
-
+Debug.quickLoad = false;
+Debug.autoStart = false;
 Debug.tmp_shadowTwoSideRender = true; //Var to remind me to remove this when we get in new level geometry
 
 Debug.start = function() {
@@ -160,7 +159,7 @@ Debug.printCollisionInfo = function(collisionEvent, gameObject, isTrigger){
   }
 };
 
-Debug.printOverlapSphereInfo = function(checkingObj, distance, radius){
+Debug.printOverlapSphereInfo = function(checkingObj, distance, radius) {
   console.log("TestingObj [distance^2, radius^2]: ", checkingObj, " [" + distance + ", " + radius + "]");
 };
 
@@ -179,3 +178,121 @@ Debug.makeDefaultMaterial = function() {
 
   return mat;
 };
+
+// Debugging for NavMesh
+Debug.navMesh = {};
+Debug.navMesh.printPointTriangle = false; Debug.navMesh._printPointTriangleDetailed = false;
+Debug.navMesh.printRaySegment = false; Debug.navMesh._printRaySegmentDetailed = true;
+Debug.navMesh.printFindFace = false; Debug.navMesh._printFindFaceDetailed = true;
+Debug.navMesh.printLoadFinished = false;
+
+Debug.navMesh.printPointTriangleInfo = function(result, pt, v0, v1, v2, b0, b1, b2){
+  let resultString = result ? "INSIDE" : "OUTSIDE";
+  if(Debug.navMesh._printPointTriangleDetailed){
+    console.log("NavMesh (Point in triangle) DETAILED:");
+  }else{
+    console.log("NavMesh (Point in triangle):");
+  }
+  console.log("\tRESULT: " + resultString);
+  console.log("\tpoint: (" + pt[0] + ", " + pt[1] + ")");
+  console.log("\ttriangle:");
+  console.log("\t\tv0: (" + v0[0] + ", " + v0[1] + ")");
+  console.log("\t\tv1: (" + v1[0] + ", " + v1[1] + ")");
+  console.log("\t\tv2: (" + v2[0] + ", " + v2[1] + ")");
+
+  if(Debug.navMesh._printPointTriangleDetailed){
+    console.log("\tbooleans:");
+    console.log("\t\tb0: " + b0);
+    console.log("\t\tb0: " + b1);
+    console.log("\t\tb0: " + b2);
+  }
+};
+
+// s must be between 0 and 1 to lie on the line segment
+Debug.navMesh.printRaySegmentInfo = function(hitResult, ray2D, segment, maxDistance, hitDistance, s){
+  let hitResultString = hitResult ? "HIT" : "MISS";
+  if(Debug.navMesh._printRaySegmentDetailed){
+    console.log("NavMesh (Ray, segment intersection) DETAILED:");
+  }else{
+    console.log("NavMesh (Ray, segment intersection):");
+  }
+  console.log("\tRESULT: " + hitResultString);
+  console.log("\tray2D: ");
+  console.log("\t\torigin: (" + ray2D.origin[0] + ", " + ray2D.origin[1] + ", " + ray2D.origin[2] + ")");
+  console.log("\t\tdirection: (" + ray2D.direction[0] + ", " + ray2D.direction[1] + ", " + ray2D.direction[2] + ")");
+  console.log("\tsegment: ");
+  console.log("\t\tpt0: (" + segment[0][0] + ", " + segment[0][1] + ", " + segment[0][2] + ")");
+  console.log("\t\tpt1: (" + segment[1][0] + ", " + segment[1][1] + ", " + segment[1][2] + ")");
+
+  if(Debug.navMesh._printRaySegmentDetailed){
+    console.log("\thitDistance: " + hitDistance.dist);
+    console.log("\tmaxDistance: " + maxDistance);
+    console.log("\ttimeHitOnSegment: " + s);
+  }
+};
+
+Debug.navMesh.printFindFaceInfo = function(pt, faceIndex, face){
+  if(faceIndex !== -1) {
+    console.log("Point (" + pt[0] + ", " + pt[1] + ", " + pt[2] + ") lies on face (" + faceIndex + ").");
+    if(Debug.navMesh._printFindFaceDetailed){
+      console.log("\tFace vertices: ", face[0], ", ", face[1], ", ", face[2]);
+
+    }
+  } else{
+    console.log("Point (" + pt[0] + ", " + pt[1] + ", " + pt[2] + ") does NOT lie on a face.");
+  }
+};
+
+Debug.navMesh.printLoadFinishedInfo = function(jsonObj){
+  console.log("NavMesh (Loading Completed):");
+  console.log("\tmeta: ", jsonObj.meta);
+  console.log("\tfaceList: ", jsonObj.faceList);
+  console.log("\tboundary: ", jsonObj.boundary);
+};
+
+
+Debug.drawTeapot = function(pos, color = null) {
+  let rotation = quat.create();
+  quat.rotateX(rotation, rotation, -Math.PI/2);
+
+  let teapot = new GameObject();
+
+  if (!IS_SERVER) {
+    let mesh = new Mesh("Teapot02");
+    let mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER));
+
+    if (color === null) {
+      color = vec4.create();
+      vec4.set(color, 1, 0.5, 0.1, 1);
+    }
+    mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
+
+    vec4.set(color, 0.5, 0.5, 1, 1);
+    mat.setTexture(MaterialTexture.NORMAL, Texture.makeColorTex(color));
+
+    vec4.set(color, 1, 0, 0.25, 1); //metalness, blank, roughness
+    mat.setTexture(MaterialTexture.MAT, Texture.makeColorTex(color));
+
+    mesh.setMaterial(mat);
+    teapot.addComponent(mesh);
+  }
+
+  teapot.transform.setPosition(pos);
+  teapot.transform.setRotation(rotation);
+  teapot.transform.scale((.05));
+
+  GameObject.prototype.SceneRoot.addChild(teapot);
+
+  return teapot;
+};
+
+
+// Debugging for BehaviorTrees
+Debug.behaviorTree = {};
+Debug.behaviorTree.printAll = false;
+Debug.behaviorTree.printStates = false;
+Debug.behaviorTree.printErrors = false;
+Debug.behaviorTree.printUniques = false;
+Debug.behaviorTree.printFailures = false;
+Debug.behaviorTree.printSuccesses = false;
+

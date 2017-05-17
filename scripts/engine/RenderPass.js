@@ -46,6 +46,54 @@ class ParticlePass extends RenderPass
     }
 }
 
+class DecalPass extends RenderPass
+{
+
+  constructor(deferredPassMain){
+    super();
+    //This is just because we can't render to textures in the bound FBO, and so need to copy them out of it.
+    let width = Renderer.getWindowWidth();
+    let height = Renderer.getWindowHeight();
+    this.copyBuffers = new Framebuffer(width, height, 3, false, true, [GL.RGBA8, GL.RGBA16F, GL.RGBA16F]);
+
+  }
+
+  render() {
+    //Copy over deferred buffers we need (due to above issue)
+    Renderer.deferredPass.buffers.bindTexture(0, 0); //colour
+    Renderer.deferredPass.buffers.bindTexture(1, 1); //normal
+    Renderer.deferredPass.buffers.bindTexture(2, 2); //position
+    this.copyBuffers.bind([GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2]);
+    Renderer.switchShader(Renderer.FBO_COPY);
+    Renderer.deferredPass.fbo.draw();
+
+    this.copyBuffers.bindTexture(0, 0); //colour
+    this.copyBuffers.bindTexture(1, 1); //normal
+    this.copyBuffers.bindTexture(2, 2); //position
+
+    Renderer.switchShader(Renderer.DEFERRED_DECAL);
+
+    Renderer.currentShader.setUniform("uSizeZ", Decal.prototype.sizeZ, UniformTypes.u1f);
+
+    //Bind deferred buffers to render to
+    let buffers = [GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2];
+    GL.bindFramebuffer(GL.FRAMEBUFFER, Renderer.deferredPass.buffers.id);
+    GL.drawBuffers(buffers);
+
+    //TODO should disable depth test incase camera is inside volume. Optimally, will disable / enable for each object.
+    //TODO however, just keeping it on will be faster, and shouldn't matter if we keep our objects thin.
+    GL.enable(GL.DEPTH_TEST);
+    GL.depthMask(false);
+    GL.enable(GL.CULL_FACE);
+
+    for (let decal of Renderer.renderBuffer.decal) {
+      decal.draw();
+    }
+
+    GL.depthMask(true);
+  }
+}
+
 
 
 class ShadowPass extends ForwardPass
@@ -95,6 +143,31 @@ class ShadowPass extends ForwardPass
 }
 
 
+class DeferredPrePass extends RenderPass
+{
+
+  constructor(deferredPassMain){
+    super();
+    this.buffers = deferredPassMain.buffers;
+    this.fbo = deferredPassMain.fbo;
+  }
+
+  render() {
+    GL.enable(GL.DEPTH_TEST);
+    GL.depthMask(true);
+    GL.disable(GL.BLEND);
+    GL.enable(GL.CULL_FACE);
+    GL.cullFace(GL.BACK);
+    GL.disable(GL.STENCIL_TEST);
+
+    let buffers = [GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2];
+    this.buffers.bind(buffers);
+    for (let mesh of Renderer.renderBuffer.deferred) {
+      mesh.material.bind();
+      mesh.draw();
+    }
+  }
+}
 
 
 ///////////////////////////////////
@@ -107,22 +180,8 @@ class DeferredPass extends RenderPass
     }
 
     render(){
-        GL.enable(GL.DEPTH_TEST);
-        GL.depthMask(true);
-        GL.disable(GL.BLEND);
-        GL.enable(GL.CULL_FACE);
-        GL.cullFace(GL.BACK);
-        GL.disable(GL.STENCIL_TEST);
 
-        let buffers = [ GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2 ];
-        this.buffers.bind(buffers);
-        for(let mesh of Renderer.renderBuffer.deferred)
-        {
-            mesh.material.bind();
-            mesh.draw();
-        }
-
-
+        //make sure prepass is done first!
 
         GL.depthMask(false);
         GL.stencilOpSeparate(GL.BACK, GL.KEEP, GL.INCR_WRAP, GL.KEEP);
@@ -391,7 +450,7 @@ class BloomPass extends RenderPass
             this._deferredPass.buffers.draw();
             break;
           case Debug.BUFFERTYPE_METAL:
-            this._deferredPass.buffers.bindTexture(0, 0);
+            this._deferredPass.buffers.bindTexture(0, 1);
             s5.setUniform("rgbOutput", 0, UniformTypes.u1i);
             this._deferredPass.buffers.draw();
             break;

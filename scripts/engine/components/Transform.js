@@ -19,6 +19,7 @@ class Transform extends Component
         this.worldScaleDirty = null;
         this.cachedForwardVec = vec3.create();
         this.worldForwardDirty = true;
+        this.serializeDirty = true;
         this.oldParent = null;
         this._parent = null;
         this.children = [];
@@ -30,7 +31,9 @@ class Transform extends Component
         this.worldPosDirty = true;
         this.worldScaleDirty = true;
         this.worldForwardDirty = true;
-        for(let child of this.children)
+        this.serializeDirty = true;
+
+      for(let child of this.children)
         {
             child.setDirty();
         }
@@ -193,15 +196,16 @@ class Transform extends Component
     }
 
     serialize() {
-        let retVal = {};
-        retVal.p = this.position;
-        retVal.r = this.rotation;
-        retVal.s = this.scaleFactor[0];
-        retVal.c = [];
-        for (let child of this.children) {
-            retVal.c.push(child.serialize());
+        if(this.serializeDirty){
+          let retVal = {};
+          retVal.p = this.position;
+          retVal.r = this.rotation;
+          retVal.s = this.scaleFactor[0];
+          this.serializeDirty = false; // Dont know if need
+          return retVal;
+
         }
-        return retVal;
+        return null;
     }
 
     applySerializedData(data) {
@@ -209,16 +213,16 @@ class Transform extends Component
         this.position = data.p;
         this.rotation = data.r;
         this.scaleFactor[0] = this.scaleFactor[1] = this.scaleFactor[2] = data.s;
-        let index=0;
-        for (let child of this.children) {
-            Debug.assert(index < data.c.length);
-
-            if(index < data.c.length)
-            {
-              child.applySerializedData(data.c[index]);
-            }
-
-            ++index;
-        }
+        // let index=0;
+        // for (let child of this.children) {
+        //     Debug.assert(index < data.c.length);
+        //
+        //     if(index < data.c.length)
+        //     {
+        //       child.applySerializedData(data.c[index]);
+        //     }
+        //
+        //     ++index;
+        // }
     }
 }
