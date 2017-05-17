@@ -209,6 +209,11 @@ class GameObject {
         }
       }
 
+      let decal = this.getComponent('Decal');
+      if (decal && decal !== null) {
+        Renderer.renderBuffer.decal.push(decal);
+      }
+
       let ps = this.getComponent('ParticleSystem');
       if (ps && ps !== null) {
         Renderer.renderBuffer.particle.push(ps);

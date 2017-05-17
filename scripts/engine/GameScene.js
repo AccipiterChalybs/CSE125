@@ -1,6 +1,7 @@
 /**
  * Created by Accipiter Chalybs on 4/14/2017.
  */
+var decalTex, decalNormal;
 
 var albedo, mat, normal;
 var particleTex;
@@ -20,6 +21,8 @@ class GameScene {
       albedo = new Texture('assets/texture/dungeon-stone1-albedo2.png');
       mat = new Texture('assets/texture/dungeon-stone1-mat.png', false);
       normal = new Texture('assets/texture/dungeon-stone1-normal.png', false);
+      decalTex = new Texture('assets/texture/test_decal2.png');
+      decalNormal = new Texture('assets/texture/test_decal_normal.png', false);
       particleTex = new Texture('assets/texture/particle_fire_test.png');
     }
   }
@@ -109,6 +112,11 @@ class GameScene {
 
               if(!IS_SERVER) teapot.addComponent(new ParticleSystem(true, {texture: particleTex}));
 
+              let decal = new GameObject();
+              teapot.addChild(decal);
+              decal.addComponent(new Decal(200, vec4.fromValues(0.5,25,0.5,1),decalTex, decalNormal));
+              decal.transform.setPosition(vec3.fromValues(0, 30, 60));
+              decal.transform.rotateX(Math.PI/2);
             }
             let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
 
