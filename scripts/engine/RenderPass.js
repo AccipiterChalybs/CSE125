@@ -9,6 +9,7 @@ class RenderPass
 class ForwardPass extends RenderPass
 {
     render(){
+      Debug.Profiler.startTimer("ForwardPass", 2);
         let lightIndex = 0;
         //TODO sort lights by importance?
         for (let l of Renderer.renderBuffer.light) {
@@ -26,12 +27,14 @@ class ForwardPass extends RenderPass
             if (mesh.material.shader === Renderer.getShader(Renderer.FORWARD_UNLIT) || mesh.material.shader === Renderer.getShader(Renderer.FORWARD_EMISSIVE))
                 GL.depthMask(true);
         }
+      Debug.Profiler.endTimer("ForwardPass", 2);
     }
 }
 
 class ParticlePass extends RenderPass
 {
     render(){
+      Debug.Profiler.startTimer("ParticlePass", 2);
       GL.enable(GL.BLEND); //Blend function is specified on a per-particle system basis
       GL.depthMask(false);
 
@@ -43,6 +46,7 @@ class ParticlePass extends RenderPass
 
       GL.depthMask(true);
       GL.disable(GL.BLEND);
+      Debug.Profiler.endTimer("ParticlePass", 2);
     }
 }
 
@@ -59,6 +63,7 @@ class DecalPass extends RenderPass
   }
 
   render() {
+    Debug.Profiler.startTimer("DecalPass", 2);
     //Copy over deferred buffers we need (due to above issue)
     Renderer.deferredPass.buffers.bindTexture(0, 0); //colour
     Renderer.deferredPass.buffers.bindTexture(1, 1); //normal
@@ -91,6 +96,7 @@ class DecalPass extends RenderPass
     }
 
     GL.depthMask(true);
+    Debug.Profiler.endTimer("DecalPass", 2);
   }
 }
 
@@ -99,6 +105,7 @@ class DecalPass extends RenderPass
 class ShadowPass extends ForwardPass
 {
     render(){
+      Debug.Profiler.startTimer("ShadowPass", 2);
         GL.enable(GL.DEPTH_TEST);
         GL.depthMask(true);
         GL.disable(GL.BLEND);
@@ -124,6 +131,7 @@ class ShadowPass extends ForwardPass
               this._drawMeshes(false);
             }
         }
+      Debug.Profiler.endTimer("ShadowPass", 2);
     }
 
     _drawMeshes(isPoint) {
@@ -153,6 +161,7 @@ class DeferredPrePass extends RenderPass
   }
 
   render() {
+    Debug.Profiler.startTimer("DeferredPrePass", 2);
     GL.enable(GL.DEPTH_TEST);
     GL.depthMask(true);
     GL.disable(GL.BLEND);
@@ -166,6 +175,7 @@ class DeferredPrePass extends RenderPass
       mesh.material.bind();
       mesh.draw();
     }
+    Debug.Profiler.endTimer("DeferredPrePass", 2);
   }
 }
 
@@ -180,6 +190,7 @@ class DeferredPass extends RenderPass
     }
 
     render(){
+      Debug.Profiler.startTimer("DeferredMainPass", 2);
 
         //make sure prepass is done first!
 
@@ -283,6 +294,7 @@ class DeferredPass extends RenderPass
         GL.depthMask(true);
         GL.cullFace(GL.BACK);
         GL.blendFunc(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA);
+        Debug.Profiler.endTimer("DeferredMainPass", 2);
     }
 }
 
@@ -300,7 +312,9 @@ class SkyboxPass extends RenderPass
     }
 
     render(){
+      Debug.Profiler.startTimer("SkyboxPass", 2);
         if (this.skybox && this.skybox !== null) { this.skybox.draw(); }
+      Debug.Profiler.endTimer("SkyboxPass", 2);
     }
 }
 
@@ -338,6 +352,7 @@ class BloomPass extends RenderPass
     }
     
     render() {
+      Debug.Profiler.startTimer("PostProcessingPass", 2);
         let s1 = Renderer.getShader(Renderer.FBO_PASS);
         let s2 = Renderer.getShader(Renderer.FBO_BLUR);
         let s3 = Renderer.getShader(Renderer.FBO_HDR);
@@ -372,6 +387,7 @@ class BloomPass extends RenderPass
         }
         lumen /= this._averageSize*this._averageSize;
 
+        lumen=1; //TODO remove to re-enable expsoure adjustment
         if (!isNaN(lumen)) {
             this.averageExposure = this.averageExposure * (1 - newDataWeight) + lumen * (newDataWeight);
         }
@@ -492,5 +508,6 @@ class BloomPass extends RenderPass
             break;
         }
       }
+      Debug.Profiler.endTimer("PostProcessingPass", 2);
     }
 }

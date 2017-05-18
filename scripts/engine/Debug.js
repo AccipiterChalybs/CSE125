@@ -4,17 +4,18 @@
 
 let Debug = {};
 
-Debug.clientUpdate = false; //Run the client in standalone mode, so it doesn't need a server - good for testing!
+Debug.clientUpdate = true; //Run the client in standalone mode, so it doesn't need a server - good for testing!
 Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
 Debug.debugDisplay = true;
-Debug.quickLoad = false;
-Debug.autoStart = false;
+Debug.quickLoad = true;
+Debug.autoStart = true;
 Debug.tmp_shadowTwoSideRender = true; //Var to remind me to remove this when we get in new level geometry
 
 Debug.start = function() {
   if (Debug.debugDisplay) {
     if (Debug.fpsElement === null) Debug.fpsElement = document.getElementById("fpsLog");
     if (Debug.exposureElement === null) Debug.exposureElement = document.getElementById("exposureLog");
+    if (Debug.profilerElement === null) Debug.profilerElement = document.getElementById("profilerLog");
   }
 };
 
@@ -27,6 +28,7 @@ Debug.update = function() {
   if (Debug.displayOpen) {
     Debug.logFPS();
     Debug.logExposure();
+    Debug.Profiler.report();
   }
 
   if (Debug.bufferDebugMode) {
@@ -80,6 +82,7 @@ Debug.currentLightIndex = 1; //TODO make this switchable with input
 Debug.displayOpen = false;
 Debug.fpsElement = null;
 Debug.exposureElement = null;
+Debug.profilerElement = null;
 Debug.lastTime=-1;
 Debug.frames=0;
 Debug.logFPS = function() {
@@ -284,6 +287,61 @@ Debug.drawTeapot = function(pos, color = null) {
   GameObject.prototype.SceneRoot.addChild(teapot);
 
   return teapot;
+};
+
+Debug.Profiler = {data:[], map:{}, index:0};
+Debug.Profiler.newFrame = function() {
+  Debug.Profiler.index = 0;
+};
+
+Debug.Profiler.startTimer = function(name, level) {
+  if (!Debug.Profiler.data[name]) Debug.Profiler.data[name] = {};
+  Debug.Profiler.data[name].level = level;
+  Debug.Profiler.data[name].start = new Date().getTime();
+
+  Debug.Profiler.data[name].uniforms = 0;
+  Debug.Profiler.data[name].shaderUses = 0;
+  Debug.Profiler.data[name].draws = 0;
+
+  Debug.Profiler.map[Debug.Profiler.index] = name;
+  Debug.Profiler.index++;
+};
+
+Debug.Profiler.endTimer = function(name) {
+  Debug.Profiler.data[name].time = new Date().getTime() - Debug.Profiler.data[name].start;
+};
+
+Debug.Profiler.setUniform = function() {
+  if (Debug.Profiler.index > 0) {
+    Debug.Profiler.data[Debug.Profiler.map[Debug.Profiler.index - 1]].uniforms++;
+  }
+};
+
+Debug.Profiler.useShader = function() {
+  if (Debug.Profiler.index > 0) {
+    Debug.Profiler.data[Debug.Profiler.map[Debug.Profiler.index - 1]].shaderUses++;
+  }
+};
+
+Debug.Profiler.drawCall = function() {
+  if (Debug.Profiler.index > 0) {
+    Debug.Profiler.data[Debug.Profiler.map[Debug.Profiler.index - 1]].draws++;
+  }
+};
+
+Debug.Profiler.report = function() {
+  let mainStr = '';
+  for (let i=0; i<Debug.Profiler.index; ++i) {
+    let currentProfile = Debug.Profiler.data[Debug.Profiler.map[i]];
+    let str = '|';
+    for (let space=0; space < currentProfile.level; space++) {
+      str += '__';
+    }
+    str += "["+Debug.Profiler.map[i] + "]: T " + currentProfile.time + " /U "
+           + currentProfile.uniforms + " /S " + currentProfile.shaderUses + " /D" + currentProfile.draws;
+    mainStr += str + '\n';
+  }
+  Debug.profilerElement.innerText = mainStr;
 };
 
 

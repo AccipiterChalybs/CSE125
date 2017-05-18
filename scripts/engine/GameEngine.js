@@ -81,6 +81,7 @@ GameEngine.startMethod = GameEngine.ready;
 
 /** Loop: called every frame */
 GameEngine.loop = function () {
+  if (!IS_SERVER) {Debug.Profiler.newFrame(); Debug.Profiler.startTimer("UpdateLoop", 1);}
   Time.tick();
   Input.update();
 
@@ -101,7 +102,10 @@ GameEngine.loop = function () {
 
 
   if (!IS_SERVER) {
+    Debug.Profiler.endTimer("UpdateLoop", 1);
+    Debug.Profiler.startTimer("RenderTime", 1);
     Renderer.loop();
+    Debug.Profiler.endTimer("RenderTime", 1);
     Debug.update();
     window.requestAnimationFrame(GameEngine.loop.bind(GameEngine));
   }

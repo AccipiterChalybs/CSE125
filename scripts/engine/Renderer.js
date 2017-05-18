@@ -466,8 +466,10 @@ const Renderer  = {
 
   loop: function () {
 
+    Debug.Profiler.startTimer("apply&extract", 2);
         Renderer._applyPerFrameData();
         Renderer._extractObjects();
+    Debug.Profiler.endTimer("apply&extract", 2);
 
 
       //  Renderer.camera.update(Time.deltaTime());
@@ -486,10 +488,13 @@ const Renderer  = {
       //GL.clearColor(0.25, 0.5, 0.81, 1);
       GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
 
+
       if (Renderer.canvas.clientWidth  !== Renderer.width ||
         Renderer.canvas.clientHeight !== Renderer.height) {
 
+        Debug.Profiler.startTimer("resize", 2);
         Renderer.resize(Renderer.canvas.clientWidth, Renderer.canvas.clientHeight);
+        Debug.Profiler.endTimer("resize", 2);
       }
 
       for (let pass of Renderer.passes) {
@@ -498,11 +503,13 @@ const Renderer  = {
     },
 
   //private
+  //TODO optimize this function?
   _extractObjects: function () {
     Renderer.renderBuffer.deferred = [];
     Renderer.renderBuffer.forward = [];
     Renderer.renderBuffer.particle = [];
     Renderer.renderBuffer.light = [];
+    Renderer.renderBuffer.decal = [];
     if (Renderer.directionalLight) Renderer.renderBuffer.light.push(Renderer.directionalLight.getComponent("Light"));
     GameObject.prototype.SceneRoot.extract();
   },
