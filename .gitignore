@@ -2,4 +2,5 @@
 **/.idea/workspace.xml
 **/.idea/watcherTasks.xml
 *.DS_Store
-/scripts/generated/*
+/scripts/generated/
+/node_modules/

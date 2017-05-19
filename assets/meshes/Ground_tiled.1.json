@@ -1,0 +1,292 @@
+{
+	 "rootnode": {
+		 "name": "RootNode"
+		,"transformation": [
+			 1
+			,0
+			,0
+			,0
+			,0
+			,1
+			,0
+			,0
+			,0
+			,0
+			,1
+			,0
+			,0
+			,0
+			,0
+			,1
+		]
+		,"children": [
+			{
+				 "name": "Ground_tiled.1"
+				,"transformation": [
+					 100
+					,0
+					,0
+					,-211.831
+					,0
+					,-1.62921e-05
+					,100
+					,0
+					,0
+					,-100
+					,-1.62921e-05
+					,-220.178
+					,0
+					,0
+					,0
+					,1
+				]
+				,"meshes": [
+					 0
+				]
+			}
+		]
+	}
+	,"flags": 8
+	,"meshes": [
+		{
+			 "name": "Plane.008"
+			,"materialindex": 0
+			,"primitivetypes": 4
+			,"vertices": [
+				 -1
+				,-1
+				,0
+				,1
+				,-1
+				,0
+				,1
+				,1
+				,0
+				,-1
+				,1
+				,0
+			]
+			,"normals": [
+				 0
+				,0
+				,1
+				,0
+				,0
+				,1
+				,0
+				,0
+				,1
+				,0
+				,0
+				,1
+			]
+			,"tangents": [
+				 1
+				,0
+				,0
+				,1
+				,0
+				,0
+				,1
+				,0
+				,0
+				,1
+				,0
+				,0
+			]
+			,"bitangents": [
+				 -5.9602e-08
+				,-1
+				,0
+				,0
+				,-1
+				,0
+				,-5.9602e-08
+				,-1
+				,0
+				,-5.9602e-08
+				,-1
+				,0
+			]
+			,"numuvcomponents": [
+				 2
+			]
+			,"texturecoords": [
+				[
+					 0.00010004
+					,9.998e-05
+					,0.9999
+					,9.998e-05
+					,0.9999
+					,0.9999
+					,9.998e-05
+					,0.9999
+				]
+			]
+			,"faces": [
+				[
+					 0
+					,1
+					,2
+				]
+				,[
+					 0
+					,2
+					,3
+				]
+			]
+		}
+	]
+	,"materials": [
+		{
+			 "properties": [
+				{
+					 "key": "?mat.name"
+					,"semantic": 0
+					,"index": 0
+					,"type": 3
+					,"value": "Material"
+				}
+				,{
+					 "key": "$clr.diffuse"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0.64
+						,0.64
+						,0.64
+					]
+				}
+				,{
+					 "key": "$clr.emissive"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,0
+					]
+				}
+				,{
+					 "key": "$clr.ambient"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,0
+					]
+				}
+				,{
+					 "key": "$clr.specular"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0.25
+						,0.25
+						,0.25
+					]
+				}
+				,{
+					 "key": "$mat.shinpercent"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": 9.60784
+				}
+				,{
+					 "key": "$mat.shininess"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": 9.60784
+				}
+				,{
+					 "key": "$tex.file"
+					,"semantic": 1
+					,"index": 0
+					,"type": 3
+					,"value": "/Users/johnpallag/Pictures/Textures/pbr/spaced-tiles1-Unreal-Engine/spaced-tiles1-albedo.png"
+				}
+				,{
+					 "key": "$tex.uvtrafo"
+					,"semantic": 1
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,1
+						,1
+						,0
+					]
+				}
+				,{
+					 "key": "$tex.uvwsrc"
+					,"semantic": 1
+					,"index": 0
+					,"type": 4
+					,"value": 0
+				}
+				,{
+					 "key": "$tex.file"
+					,"semantic": 2
+					,"index": 0
+					,"type": 3
+					,"value": "/Users/johnpallag/Pictures/Textures/pbr/spaced-tiles1-Unreal-Engine/spaced-tiles1-rough.png"
+				}
+				,{
+					 "key": "$tex.uvtrafo"
+					,"semantic": 2
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,1
+						,1
+						,0
+					]
+				}
+				,{
+					 "key": "$tex.uvwsrc"
+					,"semantic": 2
+					,"index": 0
+					,"type": 4
+					,"value": 0
+				}
+				,{
+					 "key": "$tex.file"
+					,"semantic": 6
+					,"index": 0
+					,"type": 3
+					,"value": "/Users/johnpallag/Pictures/Textures/pbr/spaced-tiles1-Unreal-Engine/spaced-tiles1-height.png"
+				}
+				,{
+					 "key": "$tex.uvtrafo"
+					,"semantic": 6
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,1
+						,1
+						,0
+					]
+				}
+				,{
+					 "key": "$tex.uvwsrc"
+					,"semantic": 6
+					,"index": 0
+					,"type": 4
+					,"value": 0
+				}
+			]
+		}
+	]
+}

@@ -15,7 +15,44 @@ const SoundEngine = {
             src: ['assets/audio/cine_ambience.wav'],
             volume: 0,
           });
-      },
+        SoundEngine.singTone00 = new Howl({
+          src: ['assets/audio/tone.wav'],
+          volume: 0,
+          loop: true
+        });
+        SoundEngine.singTone01 = new Howl({
+          src: ['assets/audio/tone.wav'],
+          volume: 0,
+          loop: true
+        });
+        SoundEngine.singTone02 = new Howl({
+          src: ['assets/audio/tone.wav'],
+          volume: 0,
+          loop: true
+        });
+        SoundEngine.singTone03 = new Howl({
+          src: ['assets/audio/tone.wav'],
+          volume: 0,
+          loop: true
+        });
+        SoundEngine.you_won = new Howl({
+          src: ['assets/audio/you_won.mp3'],
+          volume: 0,
+          loop: true
+        });
+        SoundEngine.get_item = new Howl({
+          src: ['assets/audio/get_item.mp3'],
+          volume: 0,
+        });
+        SoundEngine.door_unlocked = new Howl({
+          src: ['assets/audio/door_unlocked.mp3'],
+          volume: 0,
+        });
+        SoundEngine.heal = new Howl({
+          src: ['assets/audio/healmag.wav'],
+          volume: 0,
+        });
+       },
 
     playSound2d: function (sound, volume=1) {
         let soundId = sound.play();

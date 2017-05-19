@@ -35,29 +35,6 @@ uniform float testMetal;
 uniform float testRough;
 uniform bool useTextures;
 
-
-//sampling angle calculations from http://blog.tobias-franke.eu/2014/03/30/notes_on_importance_sampling.html
-//vector calculations from http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
-vec3 GGX_Sample(vec2 xi,  vec3 normal, float a) {
-	float phi = 2.0 * PI * xi.x;
-	float cosTheta = sqrt((1.0 - xi.y) / ((a*a - 1.0) * xi.y + 1.0));
-	float sinTheta = sqrt(1.0 - cosTheta * cosTheta);
-
-
-	vec3 H;
-	H.x = sinTheta * cos( phi );
-	H.y = sinTheta * sin( phi );
-	H.z = cosTheta;
-
-
-	vec3 UpVector = abs(normal.z) < 0.999 ? vec3(0,0,1) : vec3(1,0,0);
-	vec3 TangentX = normalize( cross( UpVector, normal ) );
-	vec3 TangentY = cross( normal, TangentX );
-
-	// Tangent to world space
-	return TangentX * H.x + TangentY * H.y + normal * H.z;
-}
-
 float GGX_Visibility(float dotProduct, float k) {
 	//return 2.0 / (dotProduct + sqrt(k*k + (1.0 - k*k)*dotProduct*dotProduct)); //More accurate, but slower version
 
@@ -156,6 +133,7 @@ void main () {
 		vec3 centerToRay = dot(lightDir, reflectedRay) * reflectedRay - lightDir;
 		lightDir = normalize(lightDir + centerToRay * clamp(sphereRadius / length(centerToRay), 0.0, 1.0));
 		//todo normalize based on sphere size
+		//TODO this won't work! update to use range
 	    power = 1.0 / (lightDist * lightDist * uLightData[3*i+2].z + lightDist * uLightData[3*i+2].y + uLightData[3*i+2].x);
 	}
 
