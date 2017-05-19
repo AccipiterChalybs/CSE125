@@ -1,1 +1,41 @@
-.btn {border-radius: 0;}
+.btn {
+  border-radius: 0;
+}
+
+.btn-transparent {
+  background-color: transparent;
+  color: lightgray;
+}
+
+.btn-menu {
+  border: none;
+  border-radius: 0;
+  letter-spacing: 1px;
+  transition-duration: 1s;
+}
+
+.btn-menu:active,
+.btn-menu:focus {
+  outline: none;
+}
+
+.btn-menu:hover {
+  background: radial-gradient(rgba(178, 178, 178, 0.46), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
+  text-shadow: 0 0 15px white;
+  transition-duration: 1s;
+}
+
+.modal-header {
+  text-align: center;
+  border-bottom: 1px solid rgba(229, 229, 229, 0.51);
+}
+
+.modal-dialog {
+  background-color: transparent;
+}
+
+.modal-content {
+  background-color: rgba(86, 86, 86, 0.46);
+  border-radius: 0;
+  color: white;
+}
