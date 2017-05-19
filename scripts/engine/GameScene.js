@@ -155,7 +155,7 @@ class GameScene {
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
               teapot.addComponent(new HealEvent());
               teapot.addComponent(new AudioSource());
-              teapot.addComponent(new RaycastSwitch({event: teapot.getComponent("Event"), activationLevel: 5}));
+              teapot.addComponent(new RaycastSwitch({event: teapot.getComponent("Event")}));
               if(!IS_SERVER) {
                 teapot.getComponent("AudioSource").playSound2d('heal');
                 teapot.getComponent("AudioSource").pauseSound();
@@ -191,9 +191,9 @@ class GameScene {
 
     GameObject.prototype.SceneRoot.transform.children[1].children[11].gameObject.addComponent(new SingingSwitch({event: GameObject.prototype.SceneRoot.transform.children[1].children[11].gameObject.getComponent("Event"), activationLevel: 5}));
     // GameObject.prototype.SceneRoot.transform.children[1].children[13].gameObject.getComponent("Collider").setLayer(FILTER_KINEMATIC);
-    GameObject.prototype.SceneRoot.transform.children[1].children[13].gameObject.addComponent(new RaycastSwitch({event: GameObject.prototype.SceneRoot.transform.children[1].children[11].gameObject.getComponent("Event"), activationLevel: 5}));
-    GameObject.prototype.SceneRoot.transform.children[1].children[43].gameObject.addComponent(new RaycastSwitch({event: GameObject.prototype.SceneRoot.transform.children[1].children[43].gameObject.getComponent("Event"), activationLevel: 5}));
-    // GameObject.prototype.SceneRoot.transform.children[1].children[93].gameObject.addComponent(new RaycastSwitch({event: GameObject.prototype.SceneRoot.transform.children[1].children[93].gameObject.getComponent("Event"), activationLevel: 5}));
+    GameObject.prototype.SceneRoot.transform.children[1].children[13].gameObject.addComponent(new RaycastSwitch({event: GameObject.prototype.SceneRoot.transform.children[1].children[11].gameObject.getComponent("Event")}));
+    GameObject.prototype.SceneRoot.transform.children[1].children[43].gameObject.addComponent(new RaycastSwitch({event: GameObject.prototype.SceneRoot.transform.children[1].children[43].gameObject.getComponent("Event")}));
+    // GameObject.prototype.SceneRoot.transform.children[1].children[93].gameObject.addComponent(new RaycastSwitch({event: GameObject.prototype.SceneRoot.transform.children[1].children[93].gameObject.getComponent("Event")}));
 
     GameObject.prototype.SceneRoot.transform.children[1].children[13].position[1]=0;
     GameObject.prototype.SceneRoot.transform.children[1].children[43].position[1]=0;
