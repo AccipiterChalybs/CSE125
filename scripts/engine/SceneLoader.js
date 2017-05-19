@@ -75,7 +75,7 @@ const SceneLoader = {
 
     if ("colliders" in currentNode) {
       let mass = (currentNode.static) ? currentNode['Rigidbody'] : 0;
-      let collider = new CompoundCollider(mass, false, 1, 1, 1);
+      let collider = new CompoundCollider({mass: mass, trigger: false, scaleX: 1, scaleY: 1, scaleZ: 1});
       nodeObject.addComponent(collider);
 
       for (let colliderData of currentNode["colliders"]) {
@@ -140,8 +140,9 @@ const SceneLoader = {
       switch (generalCompName) {
         case "PlayerController":
           PlayerTable.addPlayer(nodeObject);
-          nodeObject.addComponent(new Sing());
+          nodeObject.addComponent(new Sing({}));
           nodeObject.addComponent(new AudioSource());
+          nodeObject.addComponent(new Look({}));
           let pc = new PlayerController();
           nodeObject.addComponent(pc);
           if (!IS_SERVER) {
@@ -149,6 +150,8 @@ const SceneLoader = {
           }
           break;
       }
+
+      // new map["PC"](options);
     }
 
     //TODO there's probably a better way to do this...
@@ -164,7 +167,7 @@ const SceneLoader = {
     }
 
     if ('AnimatorJS' in currentNode) {
-      let animComponent = new Animation(currentNode['AnimatorJS'].animationName);
+      let animComponent = new Animation({name: currentNode['AnimatorJS'].animationName});
       animComponent.link(loadingAcceleration);
       nodeObject.addComponent(animComponent);
       SceneLoader.linkRoot(animComponent, nodeObject.transform);

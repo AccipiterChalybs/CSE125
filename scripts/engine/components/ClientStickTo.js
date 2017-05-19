@@ -1,5 +1,5 @@
 class ClientStickTo extends Component{
-  constructor(target=null, offset){
+  constructor({target=null, offset}){
     super();
     this.componentType = "ClientStickTo";
     this.setFollowObject(target);

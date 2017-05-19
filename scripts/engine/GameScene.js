@@ -109,11 +109,11 @@ class GameScene {
               if(!IS_SERVER) teapot.getComponent("AudioSource").playSound3d("cruelangel");
               teapot.addComponent(new PlayerController());
 
-              if(!IS_SERVER) teapot.addComponent(new ParticleSystem(true, {texture: particleTex}));
+              if(!IS_SERVER) teapot.addComponent(new ParticleSystem({additive: true, texture: particleTex}));
 
               let decal = new GameObject();
               teapot.addChild(decal);
-              decal.addComponent(new Decal(200, vec4.fromValues(0.5,25,0.5,1),decalTex, decalNormal));
+              decal.addComponent(new Decal({scale: 200, color: vec4.fromValues(0.5,25,0.5,1), texture: decalTex, normal: decalNormal}));
               decal.transform.setPosition(vec3.fromValues(0, 30, 60));
               decal.transform.rotateX(Math.PI/2);
             }
@@ -128,19 +128,19 @@ class GameScene {
             teapot.transform.scale((0.02));
 
             if (x===1 && y===1){
-              teapot.addComponent(new SphereCollider(0, true));
+              teapot.addComponent(new SphereCollider({mass: 0, trigger: true}));
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
-              teapot.addComponent(new DoorEvent([-2,2,2],[-2,0,2]));
+              teapot.addComponent(new DoorEvent({openPos: [-2,2,2], closePos: [-2,0,2]}));
               teapot.addComponent(new AudioSource());
               if(!IS_SERVER) {
                 teapot.getComponent("AudioSource").playSound2d('door_unlocked');
                 teapot.getComponent("AudioSource").pauseSound();
               }
             }else if(x===1 && y===3){
-              teapot.addComponent(new SphereCollider(100, false,15));
+              teapot.addComponent(new SphereCollider({mass: 100, trigger: false, scale:15}));
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
             }else if(x===4 && y===3){
-              teapot.addComponent(new SphereCollider(100, false,15));
+              teapot.addComponent(new SphereCollider({mass: 100, trigger: false, scale: 15}));
               teapot.transform.scale(.5);
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
               teapot.addComponent(new KeyEvent());
@@ -150,19 +150,19 @@ class GameScene {
                 teapot.getComponent("AudioSource").pauseSound();
               }
             }else if(x===9 && y===3){
-              teapot.addComponent(new SphereCollider(100, false,15));
+              teapot.addComponent(new SphereCollider({mass: 100, trigger: false, scale: 15}));
               teapot.transform.scale(1.1);
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
               teapot.addComponent(new HealEvent());
               teapot.addComponent(new AudioSource());
-              teapot.addComponent(new RaycastSwitch(teapot.getComponent("Event")));
+              teapot.addComponent(new RaycastSwitch({event: teapot.getComponent("Event")}));
               if(!IS_SERVER) {
                 teapot.getComponent("AudioSource").playSound2d('heal');
                 teapot.getComponent("AudioSource").pauseSound();
               }
               teapot.transform.position[1]=0;
             }else if(x===2 && y===2){
-              teapot.addComponent(new SphereCollider(0, true));
+              teapot.addComponent(new SphereCollider({mass: 0, trigger: true}));
               teapot.addComponent(new AudioSource());
               teapot.addComponent(new TriggerTest());
               if(!IS_SERVER) {
@@ -181,7 +181,7 @@ class GameScene {
 
 
             }else{
-              teapot.addComponent(new SphereCollider(100, false, 10)); //set Transform BEFORE collider
+              teapot.addComponent(new SphereCollider({mass: 100, triger: false, scale: 10})); //set Transform BEFORE collider
             }
 
             container.addChild(teapot);
@@ -189,11 +189,11 @@ class GameScene {
     }
 
 
-    GameObject.prototype.SceneRoot.transform.children[1].children[11].gameObject.addComponent(new SingingSwitch(GameObject.prototype.SceneRoot.transform.children[1].children[11].gameObject.getComponent("Event"),5));
+    GameObject.prototype.SceneRoot.transform.children[1].children[11].gameObject.addComponent(new SingingSwitch({event: GameObject.prototype.SceneRoot.transform.children[1].children[11].gameObject.getComponent("Event"), activationLevel: 5}));
     // GameObject.prototype.SceneRoot.transform.children[1].children[13].gameObject.getComponent("Collider").setLayer(FILTER_KINEMATIC);
-    GameObject.prototype.SceneRoot.transform.children[1].children[13].gameObject.addComponent(new RaycastSwitch(GameObject.prototype.SceneRoot.transform.children[1].children[11].gameObject.getComponent("Event"),5));
-    GameObject.prototype.SceneRoot.transform.children[1].children[43].gameObject.addComponent(new RaycastSwitch(GameObject.prototype.SceneRoot.transform.children[1].children[43].gameObject.getComponent("Event"),5));
-    // GameObject.prototype.SceneRoot.transform.children[1].children[93].gameObject.addComponent(new RaycastSwitch(GameObject.prototype.SceneRoot.transform.children[1].children[93].gameObject.getComponent("Event"),5));
+    GameObject.prototype.SceneRoot.transform.children[1].children[13].gameObject.addComponent(new RaycastSwitch({event: GameObject.prototype.SceneRoot.transform.children[1].children[11].gameObject.getComponent("Event")}));
+    GameObject.prototype.SceneRoot.transform.children[1].children[43].gameObject.addComponent(new RaycastSwitch({event: GameObject.prototype.SceneRoot.transform.children[1].children[43].gameObject.getComponent("Event")}));
+    // GameObject.prototype.SceneRoot.transform.children[1].children[93].gameObject.addComponent(new RaycastSwitch({event: GameObject.prototype.SceneRoot.transform.children[1].children[93].gameObject.getComponent("Event")}));
 
     GameObject.prototype.SceneRoot.transform.children[1].children[13].position[1]=0;
     GameObject.prototype.SceneRoot.transform.children[1].children[43].position[1]=0;
@@ -202,20 +202,20 @@ class GameScene {
     GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.getComponent("Collider").setLayer(FILTER_PLAYER);
 
     PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject);
-    GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new Sing());
-    GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new Look());
+    GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new Sing({}));
+    GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new Look({}));
     GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new AudioSource());
     if(!Debug.clientUpdate) {
 
-      GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new Sing());
+      GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new Sing({}));
       GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new AudioSource());
-      GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new Look());
-      GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new Sing());
+      GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new Look({}));
+      GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new Sing({}));
       GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new AudioSource());
-      GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new Look());
-      GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new Sing());
+      GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new Look({}));
+      GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new Sing({}));
       GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new AudioSource());
-      GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new Look());
+      GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new Look({}));
       //
       //
       PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject);
@@ -242,13 +242,13 @@ class GameScene {
     let directionalLight = new GameObject(false);
 
     if(!IS_SERVER) {
-      Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo(PlayerTable.getPlayer(),
-                                                                                      vec3.fromValues(0, 1, 0)));
+      Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo({target: PlayerTable.getPlayer(),
+                                                                                      offset: vec3.fromValues(0, 1, 0)}));
 
       Renderer.directionalLight = directionalLight;
       Renderer.directionalLight.setName("DirectionalLight");
       Renderer.directionalLight.addComponent(new DirectionalLight(true));
-      Renderer.directionalLight.addComponent(new ClientStickTo(Renderer.camera.transform.getParent().gameObject, vec3.create()));
+      Renderer.directionalLight.addComponent(new ClientStickTo({target: Renderer.camera.transform.getParent().gameObject, offset: vec3.create()}));
       Renderer.directionalLight.transform.rotateY(-Math.PI / 3.0);
       Renderer.directionalLight.transform.rotateX(-Math.PI / 4.0);
 
@@ -278,7 +278,7 @@ class GameScene {
 
     let lightCenter = new GameObject();
     lightCenter.addChild(light);
-    lightCenter.addComponent(new RotateOverTime(2.5));
+    lightCenter.addComponent(new RotateOverTime({speed: 2.5}));
 
     GameObject.prototype.SceneRoot.addChild(lightCenter);
 
@@ -287,7 +287,7 @@ class GameScene {
     let ground = new GameObject();
     ground.setName("ground");
     ground.transform.setPosition(move);
-    let box = new BoxCollider(0, false, 10000, 1, 10000);
+    let box = new BoxCollider({mass: 0, trigger: false, scaleX: 10000, scaleY: 1, scaleZ: 10000});
     ground.addComponent(box);
     ground.getComponent("Collider").setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
     ground.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);

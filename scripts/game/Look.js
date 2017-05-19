@@ -3,9 +3,9 @@
  */
 
 class Look extends Component{
-  constructor(range = 5) {
+  constructor({range = 5}) {
     super();
-    this.componentType = 'Look';
+    this.componentType = "Look";
 
     this.range = range;
   }

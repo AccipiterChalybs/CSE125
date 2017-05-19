@@ -3,7 +3,7 @@
  */
 
 class RotateOverTime extends Component {
-    constructor(speed) {
+    constructor({speed}) {
         super();
         this.componentType = "RotateOverTime";
         this.speed = speed;
