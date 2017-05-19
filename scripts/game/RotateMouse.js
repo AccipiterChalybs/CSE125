@@ -11,16 +11,18 @@ class RotateMouse extends Component{
     this.xAngle = 0;
     this.yAngle = 0;
     this.sensitivity = 0.08;
+
+    this.dr = quat.create();
   }
 
   updateClient() {
-    let dr = quat.create();
+    this.dr = quat.create();
     this.xAngle += Time.deltaTime * Input.getAxis('mouseVertical') * this.sensitivity * -1;
     this.yAngle += Time.deltaTime * Input.getAxis('mouseHorizontal') * this.sensitivity * -1;
     this.xAngle = (this.xAngle < MAX_LOOK_ANGLE_PITCH) ? this.xAngle : MAX_LOOK_ANGLE_PITCH;
     this.xAngle = (this.xAngle > -MAX_LOOK_ANGLE_PITCH) ? this.xAngle : -MAX_LOOK_ANGLE_PITCH;
-    quat.rotateY(dr, dr, this.yAngle);
-    quat.rotateX(dr, dr, this.xAngle);
-    this.transform.setRotation(dr);
+    quat.rotateY(this.dr, this.dr, this.yAngle);
+    quat.rotateX(this.dr, this.dr, this.xAngle);
+    // this.transform.setRotation(this.dr);
   }
 }

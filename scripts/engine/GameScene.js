@@ -45,8 +45,8 @@ class GameScene {
     camera.gameObject.addComponent(new ZoomMouse());
     let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 5);
     if(!IS_SERVER){
-      Renderer.camera.transform.setPosition(newPosition);
-      Renderer.camera.transform.getParent().gameObject.addComponent(new RotateMouse());
+      camera.transform.setPosition(newPosition);
+      camera.gameObject.addComponent(new RotateMouse());
     }
     //GameObject.prototype.SceneRoot.transform.children[0].gameObject.getComponent('Animation').play(0, true);
 
@@ -111,11 +111,11 @@ class GameScene {
 
               if(!IS_SERVER) teapot.addComponent(new ParticleSystem(true, {texture: particleTex}));
 
-              let decal = new GameObject();
-              teapot.addChild(decal);
-              decal.addComponent(new Decal(200, vec4.fromValues(0.5,25,0.5,1),decalTex, decalNormal));
-              decal.transform.setPosition(vec3.fromValues(0, 30, 60));
-              decal.transform.rotateX(Math.PI/2);
+              // let decal = new GameObject();
+              // teapot.addChild(decal);
+              // decal.addComponent(new Decal(200, vec4.fromValues(0.5,25,0.5,1),decalTex, decalNormal));
+              // decal.transform.setPosition(vec3.fromValues(0, 30, 60));
+              // decal.transform.rotateX(Math.PI/2);
             }
 
             if(x===1 && y===1){

@@ -2,6 +2,8 @@
  * Created by Accipiter Chalybs on 4/5/2017.
  */
 
+const ZOOM_BUFFER = 0.1;
+
 class Camera extends Component
 {
 
@@ -36,6 +38,7 @@ class Camera extends Component
 
         this._matrix = mat4.create();
         this._zoom = null;
+        this._rotateMouse = null;
 
         let initialOffsetPos = vec3.create();
         vec3.set(initialOffsetPos, 0, 0, 0);
@@ -46,7 +49,7 @@ class Camera extends Component
 
     startClient(){
       this._zoom = this.transform.gameObject.getComponent("ZoomMouse");
-
+      this._rotateMouse = this.transform.gameObject.getComponent("RotateMouse");
     }
     getCameraMatrix()
     {
@@ -128,13 +131,36 @@ class Camera extends Component
     updateComponentClient(){
 
         let pos = Renderer.camera.transform.getParent().getWorldPosition();
-        let forward = vec3.create();vec3.negate(forward, this.transform.getForward());
+
+        let backward = vec3.create();vec3.negate(backward, this.transform.getForward());
+        let right = vec3.create(); vec3.cross(right, backward, this._up);
+        vec3.scale(right, ZOOM_BUFFER);
+        let up = vec3.create(); vec3.cross(up, right, backward);
+        vec3.scale(up, ZOOM_BUFFER);
+        let backRight = vec3.create(); vec3.add(backRight, backward, right);
+        let backLeft = vec3.create(); vec3.subtract(backLeft, backward, right);
+        let backUp = vec3.create(); vec3.add(backUp, backward, up);
+        let backDown = vec3.create(); vec3.subtract(backDown, backward, up);
         let distance = this._zoom.currentZoom;
         let result = {};
-        if(PhysicsEngine.raycastClosest(pos,forward,distance,FILTER_LEVEL_GEOMETRY,result)){
+        if(PhysicsEngine.raycastClosest(pos,backward,distance,FILTER_LEVEL_GEOMETRY,result)){
             distance = result.distance-0.1;
         }
+        if(PhysicsEngine.raycastClosest(pos,backRight,distance,FILTER_LEVEL_GEOMETRY,result)){
+          distance = result.distance-0.1 < distance ? result.distance - 0.1 : distance;
+        }
+        if(PhysicsEngine.raycastClosest(pos,backLeft,distance,FILTER_LEVEL_GEOMETRY,result)){
+          distance = result.distance-0.1 < distance ? result.distance - 0.1 : distance;
+        }
+        if(PhysicsEngine.raycastClosest(pos,backUp,distance,FILTER_LEVEL_GEOMETRY,result)){
+          distance = result.distance-0.1 < distance ? result.distance - 0.1 : distance;
+        }
+        if(PhysicsEngine.raycastClosest(pos,backDown,distance,FILTER_LEVEL_GEOMETRY,result)){
+          distance = result.distance-0.1 < distance ? result.distance - 0.1 : distance;
+        }
+
         vec3.set(this.transform.position,0,0,distance);
+        this.transform.getParent().setRotation(this._rotateMouse.dr);
     }
 
     screenShake(amount, duration)

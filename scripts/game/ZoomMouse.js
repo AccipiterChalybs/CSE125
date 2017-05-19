@@ -20,7 +20,6 @@ class ZoomMouse extends Component{
       this.currentZoom += zoomAxis;
       this.currentZoom = (this.currentZoom < MAX_ZOOM) ? this.currentZoom : MAX_ZOOM;
       this.currentZoom = (this.currentZoom > MIN_ZOOM) ? this.currentZoom : MIN_ZOOM;
-      // this.transform.setPosition(vec3.fromValues(0, 0, this.currentZoom));
     }
   }
 }
