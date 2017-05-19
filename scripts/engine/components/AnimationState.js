@@ -1,4 +1,4 @@
-class AnimationState extends Components {
+class AnimationState extends Component {
   constructor() {
     super();
 
