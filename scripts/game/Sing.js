@@ -21,7 +21,7 @@ class Sing extends Component{
   sing(){
     // Debug.log("singing");
     let hitColliders = [];
-    hitColliders = PhysicsEngine.overlapSphere(this.transform.getPosition(), this.range);
+    hitColliders = PhysicsEngine.overlapSphere(this.transform.getWorldPosition(), this.range);
 
     for(let i = 0; i < hitColliders.length; ++i){
       hitColliders[i].listen(this.transform.gameObject);

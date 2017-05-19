@@ -45,6 +45,8 @@ class PlayerController extends Component{
     this._collider = this.transform.gameObject.getComponent("Collider");
     this._singer = this.transform.gameObject.getComponent("Sing");
     this._looker = this.transform.gameObject.getComponent("Look");
+    this.transform.gameObject.getComponent("Collider").setLayer(FILTER_PLAYER);
+
     this._collider.setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
     this._collider.setFreezeRotation(true);
   }

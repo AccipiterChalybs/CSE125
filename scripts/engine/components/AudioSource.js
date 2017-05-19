@@ -37,14 +37,19 @@ class AudioSource extends Component{
       SoundEngine.updatePosition(this.sound[0], this.sound[1], emitterSrc[0], emitterSrc[1], emitterSrc[2]);
     }
 
+    if(Debug.clientUpdate){
+      this.frameSkip++;
+    }
     switch (this.state){
       case AudioState.noSound:
         break;
       case AudioState.play2dSound:
         this.playSound2d(this.name);
+        if(Debug.clientUpdate) this.state = AudioState.noSound;
         break;
       case AudioState.play3dSound:
         this.playSound3d(this.name, this.panObj);
+        if(Debug.clientUpdate) this.state = AudioState.noSound;
         break;
       case AudioState.resume:
         this.resumeSound();
@@ -78,6 +83,7 @@ class AudioSource extends Component{
   setState(state) {
     //TODO Change this to make sure no sound effects get delayed.
     if (this.frameSkip > 100) {
+      Debug.log(state," frame ", this.frameSkip);
       this.frameSkip = 0;
       this.state = state;
       this.serializeDirty = true;
@@ -165,6 +171,7 @@ class AudioSource extends Component{
       let retVal = {};
       retVal.s = this.state;
       this.serializeDirty = false; // Dont know if need
+      Debug.log(retVal); // WE NEED THIS LATER FOR DEBUGGING FOR SPOOKY SOUND NO PLAY
       return retVal;
     }
 
@@ -172,6 +179,7 @@ class AudioSource extends Component{
   }
 
   applySerializedData(data) {
+    Debug.log(data); // WE NEED THIS LATER FOR DEBUGGING FOR SPOOKY SOUND NO PLAY
     this.state = data.s;
   }
 }
