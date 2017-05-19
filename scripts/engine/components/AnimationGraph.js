@@ -1,4 +1,4 @@
-class AnimationGraph extends Components {
+class AnimationGraph extends Component {
   constructor() {
     super();
     this.animGraph = {};
