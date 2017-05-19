@@ -109,7 +109,7 @@ class GameScene {
               if(!IS_SERVER) teapot.getComponent("AudioSource").playSound3d("cruelangel");
               teapot.addComponent(new PlayerController());
 
-              if(!IS_SERVER) teapot.addComponent(new ParticleSystem({additive: true, parameters: {texture: particleTex}}));
+              if(!IS_SERVER) teapot.addComponent(new ParticleSystem({additive: true, texture: particleTex}));
 
               let decal = new GameObject();
               teapot.addChild(decal);
