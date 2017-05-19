@@ -3,8 +3,8 @@
  */
 
 class CompoundCollider extends Collider{
-  constructor(mass = 0, trigger = false, scaleX = 1, scaleY = 1, scaleZ = 1){
-    super(mass, trigger);
+  constructor({mass = 0, trigger = false, scaleX = 1, scaleY = 1, scaleZ = 1}){
+    super({mass: mass, trigger: trigger});
 
     this.scaleX = scaleX;
     this.scaleY = scaleY;

@@ -3,7 +3,7 @@
  */
 class ParticleSystem extends Component {
 
-  constructor(additive = false, parameters) {
+  constructor({additive = false, parameters}) {
     super();
     this.componentType = "ParticleSystem";
 

@@ -1,5 +1,5 @@
 class RaycastSwitch extends Viewable{
-  constructor(event, activationLevel) {
+  constructor({event, activationLevel}) {
     super();
     this._event = event;
     this.activationLevel = activationLevel;

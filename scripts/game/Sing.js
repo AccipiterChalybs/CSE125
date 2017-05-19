@@ -3,7 +3,7 @@
  */
 
 class Sing extends Component{
-  constructor(range = 2){
+  constructor({range = 2}){
     super();
     this.componentType = "Sing";
 

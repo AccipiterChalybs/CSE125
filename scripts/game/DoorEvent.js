@@ -5,7 +5,7 @@
 // const COOLDOWN_SINGING = 0.1;   // In seconds
 
 class DoorEvent extends Event{
-  constructor(openPos, closePos) {
+  constructor({openPos, closePos}) {
     super();
 
     // this.movementSpeed = REGULAR_SPEED;
