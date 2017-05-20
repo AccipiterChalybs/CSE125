@@ -18,7 +18,7 @@ class RaycastSwitch extends Viewable{
   }
 
   view(interactingObj) {
-    Debug.log("Did senpai notice me?");
+    Debug.log("Viewable object has been viewed");
     this._event.onRaycast(interactingObj);
   }
 }

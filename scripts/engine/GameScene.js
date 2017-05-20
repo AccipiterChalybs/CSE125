@@ -132,7 +132,7 @@ class GameScene {
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
               teapot.addComponent(new DoorEvent({openPos: [-2,2,2], closePos: [-2,0,2]}));
               teapot.addComponent(new AudioSource());
-              teapot.addComponent(new SingingSwitch(teapot.getComponent("Event"),5));
+              teapot.addComponent(new SingingSwitch({event: teapot.getComponent("Event"),activationLevel:5 }));
               quickEvent = teapot.getComponent("Event");
 
               if(!IS_SERVER) {
@@ -143,7 +143,7 @@ class GameScene {
             }else if(x===9 && y===5){
               teapot.addComponent(new SphereCollider({mass: 100, trigger: false, scale:15}));
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
-              teapot.addComponent(new RaycastSwitch(quickEvent,5));
+              teapot.addComponent(new RaycastSwitch({event: quickEvent}));
               teapot.transform.position[1]=0;
               teapot.transform.scale(1.5);
 
@@ -155,7 +155,7 @@ class GameScene {
               teapot.addComponent(new KeyEvent());
               teapot.addComponent(new AudioSource());
               teapot.transform.position[1]=0;
-              teapot.addComponent(new RaycastSwitch(teapot.getComponent("Event"),5));
+              teapot.addComponent(new RaycastSwitch({event: teapot.getComponent("Event")}));
 
               if(!IS_SERVER) {
                 teapot.getComponent("AudioSource").playSound2d('get_item');
