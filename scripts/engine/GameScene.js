@@ -169,7 +169,7 @@ class GameScene {
                 teapot.getComponent('AudioSource').playSound2d('singTone03');
                 teapot.getComponent('AudioSource').pauseSound();
               }
-              let lightComp = new PointLight(true);
+              let lightComp = new PointLight(false);
               lightComp.color = vec3.fromValues(5, 2.5, 0);
               lightComp.exponentialFalloff = 0.25;
               teapot.addComponent(lightComp);
@@ -262,7 +262,7 @@ class GameScene {
 
 
     let light = new GameObject();
-    let lightComp = new PointLight(true);
+    let lightComp = new PointLight(false);
     lightComp.color = vec3.fromValues(5, 2.5, 0);
     lightComp.exponentialFalloff = 0.25;
     light.addComponent(lightComp);
@@ -278,7 +278,7 @@ class GameScene {
 
     let lightCenter = new GameObject();
     lightCenter.addChild(light);
-    lightCenter.addComponent(new RotateOverTime(2.5));
+    //lightCenter.addComponent(new RotateOverTime(2.5));
 
     GameObject.prototype.SceneRoot.addChild(lightCenter);
 
@@ -301,10 +301,16 @@ class GameScene {
     // -- Physics update call will likely go here --
     if(Debug.clientUpdate)
     {
+      Debug.Profiler.startTimer('Physics', 2);
       PhysicsEngine.update();
+      Debug.Profiler.endTimer('Physics', 2);
     }
 
-    if (!IS_SERVER) Renderer.camera.transform.getParent().gameObject.updateClient();
-    if (!IS_SERVER) if (Renderer.directionalLight) Renderer.directionalLight.updateClient();
+    if (!IS_SERVER){
+      Debug.Profiler.startTimer('GameLogic', 2);
+      Renderer.camera.transform.getParent().gameObject.updateClient();
+      if (Renderer.directionalLight) Renderer.directionalLight.updateClient();
+      Debug.Profiler.endTimer('GameLogic', 2);
+    }
   }
 }

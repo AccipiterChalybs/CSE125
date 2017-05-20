@@ -17,7 +17,7 @@ class Animation extends Component
       this._currentTime = 0;
       this._playing = false;
       this._looping = false;
-      this.rootAxisLocked = [false, true, false];
+      this.rootAxisLocked = [true, true, false];
     }
 
     start() {

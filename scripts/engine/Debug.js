@@ -76,7 +76,7 @@ Debug.BUFFERTYPE_BLOOM = 6;
 Debug.BUFFERTYPE_SHADOW = 7;
 Debug.currentBuffer = Debug.BUFFERTYPE_NONE;
 
-Debug.currentLightIndex = 1; //TODO make this switchable with input
+Debug.currentLightIndex = 0; //TODO make this switchable with input
 
 
 Debug.displayOpen = false;
@@ -91,8 +91,7 @@ Debug.logFPS = function() {
   let current = new Date().getTime();
   let duration = (current - Debug.lastTime) / 1000.0;
   if (duration >= 1) {
-    console.log(Debug.frames);
-    let fpsString = "FPS: " + Math.floor(Debug.frames/duration);
+    let fpsString = "FPS: " + Math.floor(Debug.frames/duration) + " " + Debug.frames;
     Debug.fpsElement.innerText = fpsString;
 
     Debug.frames = 0;
@@ -299,6 +298,7 @@ Debug.Profiler.startTimer = function(name, level) {
   Debug.Profiler.data[name].level = level;
   Debug.Profiler.data[name].start = new Date().getTime();
 
+  Debug.Profiler.data[name].active = true;
   Debug.Profiler.data[name].uniforms = 0;
   Debug.Profiler.data[name].shaderUses = 0;
   Debug.Profiler.data[name].draws = 0;
@@ -308,24 +308,37 @@ Debug.Profiler.startTimer = function(name, level) {
 };
 
 Debug.Profiler.endTimer = function(name) {
+  Debug.Profiler.data[name].active = false;
   Debug.Profiler.data[name].time = new Date().getTime() - Debug.Profiler.data[name].start;
 };
 
 Debug.Profiler.setUniform = function() {
   if (Debug.Profiler.index > 0) {
-    Debug.Profiler.data[Debug.Profiler.map[Debug.Profiler.index - 1]].uniforms++;
+    let checkIndex = Debug.Profiler.index - 1;
+    while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
+      checkIndex--;
+    }
+    Debug.Profiler.data[Debug.Profiler.map[checkIndex]].uniforms++;
   }
 };
 
 Debug.Profiler.useShader = function() {
   if (Debug.Profiler.index > 0) {
-    Debug.Profiler.data[Debug.Profiler.map[Debug.Profiler.index - 1]].shaderUses++;
+    let checkIndex = Debug.Profiler.index - 1;
+    while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
+      checkIndex--;
+    }
+    Debug.Profiler.data[Debug.Profiler.map[checkIndex]].shaderUses++;
   }
 };
 
 Debug.Profiler.drawCall = function() {
   if (Debug.Profiler.index > 0) {
-    Debug.Profiler.data[Debug.Profiler.map[Debug.Profiler.index - 1]].draws++;
+    let checkIndex = Debug.Profiler.index - 1;
+    while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
+      checkIndex--;
+    }
+    Debug.Profiler.data[Debug.Profiler.map[checkIndex]].draws++;
   }
 };
 

@@ -133,7 +133,8 @@ class PlayerController extends Component{
     if (vec3.length(move) > 0.01) {
       this.transform.setRotation(quat.create());
       this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
-      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(2, true);
+      let animState = (this._currentState === PlayerState.singing) ? 2 : 3;
+      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(3, true);
       if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').resume();
     } else {
       if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').stop();

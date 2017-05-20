@@ -52,7 +52,8 @@ GameEngine.init = function () {
   let animationFiles = {
     'OctopusCharacterAnim' : {
         'assets/meshes/octo_idle.json' : [0, 1],
-        'assets/meshes/octo_walking.json' : [1]
+        'assets/meshes/octo_walking.json' : [1],
+        'assets/meshes/octo_run.json' : [1]
     }
   };
   GameEngine.currentScene = new GameScene(sceneFile, meshFiles, animationFiles);
@@ -107,6 +108,7 @@ GameEngine.loop = function () {
     Renderer.loop();
     Debug.Profiler.endTimer("RenderTime", 1);
     Debug.update();
+    //window.setTimeout(GameEngine.loop.bind(GameEngine), 5);
     window.requestAnimationFrame(GameEngine.loop.bind(GameEngine));
   }
 };

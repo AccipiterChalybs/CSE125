@@ -113,21 +113,20 @@ class PointLight extends Light{
     }
 
   prepShadowMap() {
-    Renderer.shaderList[Renderer.POINT_SHADOW_SHADER].setUniform("uP_Matrix", PointLight.prototype.shadowMatrix, UniformTypes.mat4);
     Renderer.shaderList[Renderer.POINT_SHADOW_SHADER_ANIM].setUniform("uP_Matrix", PointLight.prototype.shadowMatrix, UniformTypes.mat4);
-
-    Renderer.shaderList[Renderer.POINT_SHADOW_SHADER].setUniform("uLightPosition",this.gameObject.transform.getWorldPosition(),UniformTypes.vec3);
     Renderer.shaderList[Renderer.POINT_SHADOW_SHADER_ANIM].setUniform("uLightPosition",this.gameObject.transform.getWorldPosition(),UniformTypes.vec3);
-
-    Renderer.shaderList[Renderer.POINT_SHADOW_SHADER].setUniform("uFarDepth", PointLight.prototype.FAR_DEPTH, UniformTypes.u1f);
     Renderer.shaderList[Renderer.POINT_SHADOW_SHADER_ANIM].setUniform("uFarDepth", PointLight.prototype.FAR_DEPTH, UniformTypes.u1f);
+
+    Renderer.shaderList[Renderer.POINT_SHADOW_SHADER].setUniform("uP_Matrix", PointLight.prototype.shadowMatrix, UniformTypes.mat4);
+    Renderer.shaderList[Renderer.POINT_SHADOW_SHADER].setUniform("uLightPosition",this.gameObject.transform.getWorldPosition(),UniformTypes.vec3);
+    Renderer.shaderList[Renderer.POINT_SHADOW_SHADER].setUniform("uFarDepth", PointLight.prototype.FAR_DEPTH, UniformTypes.u1f);
   }
 
 
   bindShadowMap(pass){
     if(this.fbo && this.fbo !== null && this.isShadowCaster)
     {
-      this.fbo[pass].bind([]);
+      this.fbo[pass].bind([], false);
 
       let mat = mat4.fromTranslation(mat4.create(), vec3.scale(vec3.create(), this.gameObject.transform.getWorldPosition(), -1));
       mat4.multiply(mat, PointLight.prototype.viewMatrixArray[pass], mat);
@@ -184,7 +183,6 @@ class DirectionalLight extends Light{
         GL.disable(GL.DEPTH_TEST);
         GL.disable(GL.CULL_FACE);
 
-        let lightMetaData = vec3.create(); vec3.set(lightMetaData, this.constantFalloff, this.linearFalloff, this.exponentialFalloff);
         Renderer.currentShader.setUniform("uLightColor",this.color,UniformTypes.vec3);
         Renderer.currentShader.setUniform("uLightDirection",this.gameObject.transform.getForward(),UniformTypes.vec3);
 
@@ -203,13 +201,16 @@ class DirectionalLight extends Light{
   bindShadowMap(pass){
     if(this.fbo && this.fbo !== null && this.isShadowCaster)
     {
-      this.fbo.bind([]);
-      Renderer.shaderList[Renderer.SHADOW_SHADER].setUniform("uP_Matrix", DirectionalLight.prototype.shadowMatrix, UniformTypes.mat4);
-      Renderer.shaderList[Renderer.SHADOW_SHADER_ANIM].setUniform("uP_Matrix", DirectionalLight.prototype.shadowMatrix, UniformTypes.mat4);
+      this.fbo.bind([], false);
 
       let mat = mat4.invert(mat4.create(), this.gameObject.transform.getTransformMatrix());
+
+      Renderer.shaderList[Renderer.SHADOW_SHADER_ANIM].setUniform("uP_Matrix", DirectionalLight.prototype.shadowMatrix, UniformTypes.mat4);
       Renderer.getShader(Renderer.SHADOW_SHADER_ANIM).setUniform("uV_Matrix",mat,UniformTypes.mat4);
+
+      Renderer.shaderList[Renderer.SHADOW_SHADER].setUniform("uP_Matrix", DirectionalLight.prototype.shadowMatrix, UniformTypes.mat4);
       Renderer.getShader(Renderer.SHADOW_SHADER).setUniform("uV_Matrix",mat,UniformTypes.mat4);
+
     }
   }
 }

@@ -440,6 +440,13 @@ const Renderer  = {
       s5.setUniform("cubeTex", 1, UniformTypes.u1i);
       s5.setUniform("face", 0, UniformTypes.u1i);
 
+      for (let shaderId of [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM]) {
+        Renderer.getShader(shaderId).setUniform(MaterialTexture.COLOR, 0, UniformTypes.u1i); //use glUniform1i for samplers
+        Renderer.getShader(shaderId).setUniform(MaterialTexture.NORMAL, 1, UniformTypes.u1i);
+        Renderer.getShader(shaderId).setUniform(MaterialTexture.MAT, 2, UniformTypes.u1i);
+      }
+
+
       for (let shaderId of [Renderer.DEFERRED_SHADER_LIGHTING_ENVIRONMENT,
                             Renderer.DEFERRED_SHADER_LIGHTING_POINT_PASS1,
                             Renderer.DEFERRED_SHADER_LIGHTING_POINT_NORMAL, Renderer.DEFERRED_SHADER_LIGHTING_POINT_SHADOW, Renderer.DEFERRED_SHADER_LIGHTING_POINT_DEBUG,
@@ -477,13 +484,6 @@ const Renderer  = {
         {
             Renderer.prevFOV = Renderer.camera.getFOV();
         }
-
-/*
-        Renderer.shaderList[Renderer.SHADOW_SHADER].setUniform(["uP_Matrix"],
-        DirectionalLight.prototype.shadowMatrix, UniformTypes.mat4);
-        Renderer.shaderList[Renderer.SHADOW_SHADER_ANIM].setUniform(["uP_Matrix"],
-        DirectionalLight.prototype.shadowMatrix, UniformTypes.mat4);
-*/
 
       //GL.clearColor(0.25, 0.5, 0.81, 1);
       GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
