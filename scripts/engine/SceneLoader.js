@@ -34,7 +34,6 @@ const SceneLoader = {
 
     let retScene = SceneLoader._parseNode(GameObject.prototype.SceneRoot, scene.hierarchy, filename, {}, []);
 
-
     //ObjectLoader.loadCollision(GameObject.prototype.SceneRoot, "assets/scenes/ExampleLevel_Colliders.json");
 
 
@@ -62,7 +61,10 @@ const SceneLoader = {
     quat.rotateX(rotate, rotate, 1*(currentNode["Transform"].rotation[0]) / 180 * Math.PI);
     quat.rotateZ(rotate, rotate, -1*(currentNode["Transform"].rotation[2]) / 180 * Math.PI);
 
-    quat.multiply(rotate, mat4.getRotation(quat.create(), invParentTransform), rotate);
+    let parentRotation = parent.transform.getWorldRotation();
+    quat.normalize(parentRotation, parentRotation);
+    quat.invert(parentRotation, parentRotation);
+    quat.multiply(rotate, parentRotation, rotate);
 
     let scale = currentNode["Transform"].scaleFactor;
 
@@ -115,7 +117,7 @@ const SceneLoader = {
         let meshName = currentNode["MeshFilter"] || currentNode["SkinnedMeshRenderer"].name;
         if (meshName === 'Plane' || meshName === 'Cube' || meshName === 'Sphere' || meshName === 'Capsule') {
           console.log(meshName = 'Plane');
-          nodeObject.transform.scale(5);
+        //  nodeObject.transform.scale(5);
           nodeObject.transform.rotateX(Math.PI/2);
         }
         let mesh = new Mesh(meshName);

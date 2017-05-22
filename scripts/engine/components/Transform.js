@@ -89,17 +89,7 @@ class Transform extends Component
         {
             this.transformMatrix = mat4.create();
 
-            //TODO optimize with mat4.fromRotationTranslationScale
-            // Translation
-            mat4.translate(this.transformMatrix, this.transformMatrix, this.position);
-
-            // Rotation
-            let rotationMat = mat4.create();
-            mat4.fromQuat(rotationMat, this.rotation);
-            mat4.multiply(this.transformMatrix, this.transformMatrix, rotationMat);
-
-            // Scale
-            mat4.scale(this.transformMatrix, this.transformMatrix, this.scaleFactor);
+            mat4.fromRotationTranslationScale(this.transformMatrix, this.rotation, this.position, this.scaleFactor);
 
             let parMat = (this._parent !== null) ? this._parent.getTransformMatrix() : mat4.create();
             mat4.multiply(this.transformMatrix, parMat, this.transformMatrix);
@@ -177,6 +167,14 @@ class Transform extends Component
         }
 
         return this.cachedWorldScale;
+    }
+
+    getWorldRotation() {
+        if (this._parent && this._parent !== null) {
+          return quat.multiply(quat.create(), this._parent.getWorldRotation(), this.rotation);
+        } else {
+            return this.rotation;
+        }
     }
 
     getForward()
