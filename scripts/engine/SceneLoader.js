@@ -169,11 +169,11 @@ const SceneLoader = {
 
           if(Debug.clientUpdate){
             if(this.tone===0){
-              let pc = new PlayerController();
+              let pc = new PlayerController({lightColor:[4,3,.5,1],lightRange:1,singingCooldown:COOLDOWN_SINGING});
               nodeObject.addComponent(pc);
             }
           }else{
-            let pc = new PlayerController();
+            let pc = new PlayerController({lightColor:[4,3,.5,1],lightRange:1,singingCooldown:COOLDOWN_SINGING});
             nodeObject.addComponent(pc);
           }
 

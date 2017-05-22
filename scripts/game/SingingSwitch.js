@@ -7,9 +7,9 @@ const SWITCH_LOSS_RATE = 0.5; // per second
 const TIME_BEFORE_LOSS = 3;
 
 class SingingSwitch extends Listenable {
-  constructor({event, activationLevel}) {
+  constructor({events, activationLevel}) {
     super();
-    this._event = event;
+    this._events = events;
     this.activationLevel = activationLevel;
     this.charged = false;
 
@@ -27,12 +27,16 @@ class SingingSwitch extends Listenable {
   updateComponent() {
     if (this.charged === false || Time.time - this._lastSingTime >= TIME_BEFORE_LOSS) {
       this._currentCharge = Utility.moveTowards(this._currentCharge, 0, SWITCH_LOSS_RATE * Time.deltaTime);
-      this._event.setCurrentState(EventState.discharging);
+      for(let event of this._events){
+        event.setCurrentState(EventState.discharging);
+      }
     }
 
     if (Time.time <= this._lastSingTime + 0.1) {
       this._currentCharge = Utility.moveTowards(this._currentCharge, this.activationLevel, SWITCH_CHARGE_RATE * Time.deltaTime);
-      this._event.setCurrentState(EventState.charging);
+      for(let event of this._events){
+        event.setCurrentState(EventState.charging);
+      }
     }
 
     if (this.charged === false && this._currentCharge > this.activationLevel - 0.01) {
@@ -46,13 +50,17 @@ class SingingSwitch extends Listenable {
 
   uncharged() {
     Debug.log('I became uncharged');
-    this._event.setCurrentState(EventState.uncharged);
+    for(let event of this._events){
+      event.setCurrentState(EventState.uncharged);
+    }
     this.charged = false;
   }
 
   fullyCharged() {
     Debug.log('I am charged!');
-    this._event.setCurrentState(EventState.charged);
+    for(let event of this._events){
+      event.setCurrentState(EventState.charged);
+    }
     this.charged = true;
   }
 
