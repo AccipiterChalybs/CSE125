@@ -8,11 +8,12 @@ class Mesh extends Component {
         super();
         this.componentType = "Mesh";
         this.name = name;
-        if (!Mesh.prototype.meshMap.hasOwnProperty(name)) throw new Error();
+        if (!Mesh.prototype.meshMap.hasOwnProperty(name)) this.name = name;//throw new Error('No mesh of name\"'+name+'\" found.');
     }
 
     draw() {
         let currentEntry = Mesh.prototype.meshMap[this.name];
+        if (!currentEntry) return;
         if (Renderer.gpuData.vaoHandle !== currentEntry.vaoHandle) {
             GL.bindVertexArray(currentEntry.vaoHandle);
             Renderer.gpuData.vaoHandle = currentEntry.vaoHandle;
@@ -32,7 +33,7 @@ class Mesh extends Component {
                 let id = meshBoneData.boneMap[node.name];
 
                 let transformMatrix = mat4.create();
-                mat4.multiply(transformMatrix, node.object.getTransformMatrix(), meshBoneData.boneBindArray[id]);
+                mat4.multiply(transformMatrix, this.animationRoot.boneMap[node.name].getTransformMatrix(), meshBoneData.boneBindArray[id]);
 
                 Renderer.currentShader.setUniform("bone_Matrix[" + id + "]", transformMatrix, UniformTypes.mat4);
             }

@@ -35,7 +35,7 @@ class Camera extends Component
         this._velocity=null;
 
         this._matrix = mat4.create();
-
+        this._zoom = null;
 
         let initialOffsetPos = vec3.create();
         vec3.set(initialOffsetPos, 0, 0, 0);
@@ -44,6 +44,10 @@ class Camera extends Component
         this.fovDuration = 1;
     }
 
+    startClient(){
+      this._zoom = this.transform.gameObject.getComponent("ZoomMouse");
+
+    }
     getCameraMatrix()
     {
         /*mat4.multiply(this._matrix,
@@ -77,7 +81,8 @@ class Camera extends Component
         return mat4.invert(dummy, camScaledMatrix);
     }
 
-    update()
+
+    updateComponent()
     {
         /* TODO update this
         if(this.fov !== this._prevFOV)
@@ -118,6 +123,18 @@ class Camera extends Component
 
         // Original has update info for FMOD (not written here)
         */
+    }
+
+    updateComponentClient(){
+
+        let pos = Renderer.camera.transform.getParent().getWorldPosition();
+        let forward = vec3.create();vec3.negate(forward, this.transform.getForward());
+        let distance = this._zoom.currentZoom;
+        let result = {};
+        if(PhysicsEngine.raycastClosest(pos,forward,distance,FILTER_LEVEL_GEOMETRY,result)){
+            distance = result.distance-0.1;
+        }
+        vec3.set(this.transform.position,0,0,distance);
     }
 
     screenShake(amount, duration)

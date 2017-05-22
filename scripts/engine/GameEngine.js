@@ -11,15 +11,59 @@ GameEngine._numLoads = 0;         //total number of loads (for UI)
 GameEngine._loadHandles = [];   //handles of currently loading objects
 GameEngine._nextLoadHandle = 0; //next load handle to return
 GameEngine.currentScene = null;
-
+GameEngine._StartGame = false;
 
 /** Init: starts loading objects */
 GameEngine.init = function () {
   PhysicsEngine.init();
 
-  GameEngine.currentScene = new GameScene(['assets/scenes/teapots.json', 'assets/scenes/ExampleLevel.json']);
+  let sceneFile = 'assets/scenes/mainScene.json';
+  let meshFiles = ['assets/scenes/Primatives.json','assets/scenes/teapots.json', 'assets/scenes/ExampleLevel.json',
+    'assets/meshes/Altar.1.json',
+    'assets/meshes/Altar.2.json',
+    'assets/meshes/Ceiling.1.json',
+    'assets/meshes/Ceiling.2.json',
+    'assets/meshes/Door.1.json',
+    'assets/meshes/DoorFrame.1.json',
+    'assets/meshes/DoorFrame.2.json',
+    'assets/meshes/FloorTiles.1.json',
+    'assets/meshes/FloorTiles.2.json',
+    'assets/meshes/FloorTiles.3.json',
+    'assets/meshes/Ground_tiled.1.json',
+    'assets/meshes/Pillar_round.1.json',
+    'assets/meshes/Pillar_round.2.json',
+    'assets/meshes/Pillar_round.3.json',
+    'assets/meshes/Pillar_square.1.json',
+    'assets/meshes/Pillar_square.2.json',
+    'assets/meshes/Railing.1.json',
+    'assets/meshes/Rock.1.json',
+    'assets/meshes/Rock.2.json',
+    'assets/meshes/Rock.3.json',
+    'assets/meshes/Rock.4.json',
+    'assets/meshes/Statue.1.json',
+    'assets/meshes/Statue.2.json',
+    'assets/meshes/Step.1.json',
+    'assets/meshes/Wall_ornate.1.json',
+    'assets/meshes/Wall_ornate.2.json',
+    'assets/meshes/Wall_rock.1.json',
+    'assets/meshes/Wall_rock.2.json',
+    'assets/meshes/octo_idle.json',
+    'assets/meshes/AxisTest.json'];
+  let animationFiles = {
+    'OctopusCharacterAnim' : {
+        'assets/meshes/octo_idle.json' : [0, 1],
+        'assets/meshes/octo_walking.json' : [1]
+    }
+  };
+  GameEngine.currentScene = new GameScene(sceneFile, meshFiles, animationFiles);
 };
 
+GameEngine.ready= function () {
+
+    document.getElementById("progress").style.visibility="hidden";
+    GameEngine.start();
+
+};
 
 /** Start: setup everything after loading is complete, then start loop */
 GameEngine.start = function () {
@@ -33,7 +77,7 @@ GameEngine.start = function () {
     }
   };
 
-GameEngine.startMethod = GameEngine.start;
+GameEngine.startMethod = GameEngine.ready;
 
 /** Loop: called every frame */
 GameEngine.loop = function () {
@@ -41,10 +85,11 @@ GameEngine.loop = function () {
   Input.update();
 
   // send data
+  // Debug.log(GameObject.prototype.SceneRoot.transform.children[2].position);
+
   if (!Debug.clientUpdate){
     Networking.update();
   }
-
   GameEngine.currentScene.update();
 
   if (Debug.clientUpdate) {
@@ -52,6 +97,8 @@ GameEngine.loop = function () {
   }
 
   GameObject.prototype.SceneRoot.updateClient();
+
+
 
   if (!IS_SERVER) {
     Renderer.loop();
@@ -99,7 +146,14 @@ GameEngine.completeLoading = function (loadHandle) {
 
 /** Updates the UI with current loading status */
 GameEngine.updateLoadingBar = function () {
-  let loadText = document.getElementById(GameEngine.loadingTextId);
-  loadText.innerText = 'Loading Progress: (' +
-      (GameEngine._numLoads - GameEngine._loadHandles.length) + ' / ' + GameEngine._numLoads + ')';
+    let loadBar = document.getElementById("progressBar");
+    let progress = (GameEngine._numLoads-GameEngine._loadHandles.length)/GameEngine._numLoads;
+    progress=Math.round(progress*100);
+    loadBar.setAttribute("style","width: "+progress+"%");
+    //set Text
+    let loadText = document.getElementById("progressBarText");
+    loadText.innerText = 'Loading Progress: (' +
+        (GameEngine._numLoads - GameEngine._loadHandles.length) + ' / ' + GameEngine._numLoads + ')';
 };
+
+

@@ -18,13 +18,22 @@ class GameObject {
     //TODO: do we need scene.loop?
   }
 
-  constructor() {
+  static addNewSerializableObject(gameObject) {
+    let id = GameObject.prototype.objectId;
+    GameObject.prototype.SerializeMap[id] = gameObject;
+    GameObject.prototype.objectId++;
+    return id;
+  };
+
+  constructor(clientSideOnly=false) {
     this.components = {}; //NOTE: associative map, so go over keys (in doesn't seem to work)
     this.name = '';
-
+    if(!clientSideOnly){
+      this.id = GameObject.addNewSerializableObject(this);
+      this.serializableList = [];
+    }
     this.transform = new Transform();
     this.transform.gameObject = this;
-
     this.dead = false;
     this.visible = true;
   }
@@ -33,11 +42,12 @@ class GameObject {
     if (visible) {
 
       for (let compName of Object.keys(this.components)) {
-          let component = this.components[compName];
-          if (component.visible) {
-              component.draw();
-          }
+        let component = this.components[compName];
+        if (component.visible) {
+          component.draw();
+        }
       }
+
       for (let child of this.transform.children) {
         child.gameObject.draw();
       }
@@ -66,7 +76,7 @@ class GameObject {
     }
   }
 
-  updateClient(){
+  updateClient() {
 
     for (let compName of Object.keys(this.components)) {
       if (this.components[compName].updateClient && this.components[compName].updateClient !== null) {
@@ -96,8 +106,9 @@ class GameObject {
 
   addComponent(component) {
     if (component.componentType === null) {
-        console.error("ERROR: this component has no type - make sure to override this in the constructor!");
+      console.error('ERROR: this component has no type - make sure to override this in the constructor!');
     }
+
     this.removeComponent(component.componentType);
     component._setGameObject(this);
     this.components[component.componentType] = component;
@@ -115,9 +126,24 @@ class GameObject {
     return this.components[type];
   }
 
+  findComponents(type, componentList) {
+    if (this.components[type] && this.components[type] !== null) {
+      componentList.push(this.components[type]);
+    }
+
+    for (let i = 0; i < this.transform.children.length; ++i) {
+      this.transform.children[i].gameObject.findComponents(type, componentList);
+    }
+  }
+
   addChild(gameObject) {
     this.transform.children.push(gameObject.transform);
     gameObject.transform._parent = this.transform;
+  }
+
+  removeChildFromParent() {
+    this.transform.getParent().children.splice(this.transform.getParent().children.indexOf(this.transform), 1);
+    this.transform._parent = null;
   }
 
   isChildOf(gameObject) {
@@ -176,12 +202,21 @@ class GameObject {
       let mesh = this.getComponent('Mesh');
       if (mesh && mesh !== null) {
 
-        //TODO take out true, re-add deferred
-        if (true || mesh.material && mesh.material.transparent) {
+        if (mesh.material && mesh.material.transparent) {
           Renderer.renderBuffer.forward.push(mesh);
         } else if (mesh.material) {
           Renderer.renderBuffer.deferred.push(mesh);
         }
+      }
+
+      let decal = this.getComponent('Decal');
+      if (decal && decal !== null) {
+        Renderer.renderBuffer.decal.push(decal);
+      }
+
+      let ps = this.getComponent('ParticleSystem');
+      if (ps && ps !== null) {
+        Renderer.renderBuffer.particle.push(ps);
       }
 
       /*
@@ -221,16 +256,39 @@ class GameObject {
   }
 
   serialize() {
-    return this.transform.serialize();
+    let data = {};
+    for (let serializable of this.serializableList) {
+      let comp = this.getComponent(serializable).serialize();
+      if (comp && comp !== null)
+        data[serializable] = comp;
+    }
+
+    if (this.transform.serializeDirty)
+    {
+      // TODO add back in after serialize/applySerialization is implemented in components
+      data['Transform'] = this.transform.serialize();
+    }
+
+    if (Object.keys(data).length > 0) return data;
+
+    return null;
   }
 
   applySerializedData(data) {
-    this.transform.applySerializedData(data);
+    for (let serializable of this.serializableList) {
+      if (data[serializable] && data[serializable] !== null) this.getComponent(serializable).applySerializedData(data[serializable]);
+    }
+  }
+
+  addComponentToSerializeableList(comp) {
+    this.serializableList.push(comp.componentType);
   }
 
 }
 
 GameObject.prototype._nameMap = {};
 GameObject.prototype.SceneRoot = null;
+GameObject.prototype.SerializeMap = {};
+GameObject.prototype.objectId = 0;
 ComponentName = {};
-ComponentName.MESH_COMPONENT = "Mesh";
+ComponentName.MESH_COMPONENT = 'Mesh';

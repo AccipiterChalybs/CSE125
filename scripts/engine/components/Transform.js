@@ -19,6 +19,7 @@ class Transform extends Component
         this.worldScaleDirty = null;
         this.cachedForwardVec = vec3.create();
         this.worldForwardDirty = true;
+        this.serializeDirty = true;
         this.oldParent = null;
         this._parent = null;
         this.children = [];
@@ -30,7 +31,9 @@ class Transform extends Component
         this.worldPosDirty = true;
         this.worldScaleDirty = true;
         this.worldForwardDirty = true;
-        for(let child of this.children)
+        this.serializeDirty = true;
+
+      for(let child of this.children)
         {
             child.setDirty();
         }
@@ -66,12 +69,12 @@ class Transform extends Component
 
     rotateY(theta) {
         this.setDirty();
-        quat.rotateX(this.rotation, this.rotation, theta);
+        quat.rotateY(this.rotation, this.rotation, theta);
     }
 
     rotateZ(theta) {
         this.setDirty();
-        quat.rotateX(this.rotation, this.rotation, theta);
+        quat.rotateZ(this.rotation, this.rotation, theta);
     }
 
     scale(s)
@@ -86,7 +89,7 @@ class Transform extends Component
         {
             this.transformMatrix = mat4.create();
 
-
+            //TODO optimize with mat4.fromRotationTranslationScale
             // Translation
             mat4.translate(this.transformMatrix, this.transformMatrix, this.position);
 
@@ -140,6 +143,12 @@ class Transform extends Component
         vec3.set(this.scaleFactor,s,s,s);
     }
 
+    setWorldPosition(pos) {
+        this.setDirty();
+        let invParentTransform = mat4.create(); mat4.invert(invParentTransform, this._parent.getTransformMatrix());
+        vec3.transformMat4(this.position, pos, invParentTransform);
+    }
+
     getWorldPosition()
     {
         if(this.worldPosDirty)
@@ -187,15 +196,16 @@ class Transform extends Component
     }
 
     serialize() {
-        let retVal = {};
-        retVal.p = this.position;
-        retVal.r = this.rotation;
-        retVal.s = this.scaleFactor[0];
-        retVal.c = [];
-        for (let child of this.children) {
-            retVal.c.push(child.serialize());
+        if(this.serializeDirty){
+          let retVal = {};
+          retVal.p = this.position;
+          retVal.r = this.rotation;
+          retVal.s = this.scaleFactor[0];
+          this.serializeDirty = false; // Dont know if need
+          return retVal;
+
         }
-        return retVal;
+        return null;
     }
 
     applySerializedData(data) {
@@ -203,10 +213,16 @@ class Transform extends Component
         this.position = data.p;
         this.rotation = data.r;
         this.scaleFactor[0] = this.scaleFactor[1] = this.scaleFactor[2] = data.s;
-        let index=0;
-        for (let child of this.children) {
-            child.applySerializedData(data.c[index]);
-            ++index;
-        }
+        // let index=0;
+        // for (let child of this.children) {
+        //     Debug.assert(index < data.c.length);
+        //
+        //     if(index < data.c.length)
+        //     {
+        //       child.applySerializedData(data.c[index]);
+        //     }
+        //
+        //     ++index;
+        // }
     }
 }
