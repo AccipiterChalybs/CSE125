@@ -4,7 +4,7 @@
 
 // Don't call 'new' on this class. It's meant to be abstract.
 class Collider extends Component{
-  constructor(mass = 0, trigger = false) {
+  constructor({mass = 0, trigger = false}) {
     super();
     this.componentType = 'Collider';
 

@@ -8,7 +8,7 @@
 class Animation extends Component
 {
 
-    constructor(name) {
+    constructor({name}) {
       super();
       this.componentType = "Animation";
 

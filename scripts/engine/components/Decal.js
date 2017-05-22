@@ -3,7 +3,7 @@
  */
 
 class Decal extends Component {
-  constructor(scale = 1, color, texture, normal){
+  constructor({scale = 1, color, texture, normal}){
     super();
     this.componentType = "Decal";
 
