@@ -47,15 +47,18 @@ class HealEvent extends Event{
 
     let player = interactingObj.getComponent('PlayerController');
     if (player && player !== null) {
-      player.injured = false;
-      Debug.log('HEALING');
-      let audio = this.gameObject.getComponent('AudioSource');
-      if (audio && audio !== null) {
-        audio.setState(AudioState.play2dSound);
-        // if(!IS_SERVER){
-        //   SoundEngine.playSound2d(SoundEngine.heal);
-        // }
+      if (player.injured) {
+        player.injured = false;
+        Debug.log('HEALING');
+        let audio = this.gameObject.getComponent('AudioSource');
+        if (audio && audio !== null) {
+          audio.setState(AudioState.play2dSound);
+          // if(!IS_SERVER){
+          //   SoundEngine.playSound2d(SoundEngine.heal);
+          // }
+        }
       }
+
 
       // if(!IS_SERVER) {
       //   SoundEngine.playSound2d(SoundEngine.heal);

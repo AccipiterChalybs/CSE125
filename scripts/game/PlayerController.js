@@ -8,6 +8,10 @@ const SING_SPEED = 0.8;
 const PLAYER_ACCELERATION = 4;
 const COOLDOWN_SINGING = 0.1;   // In seconds
 const CHAR_NAME = "CAIN"; // CUZ I GOT 1 KEY and 0 bombs
+const MAX_LIGHT_RANGE = 8;
+const MIN_LIGHT_RANGE = 1;
+const LIGHT_EXPAND_RATE = 15;
+const LIGHT_DIMINISH_RATE = 5;
 
 const PlayerState = {
   default: "default",
@@ -45,6 +49,11 @@ class PlayerController extends Component{
     this._collider = this.transform.gameObject.getComponent("Collider");
     this._singer = this.transform.gameObject.getComponent("Sing");
     this._looker = this.transform.gameObject.getComponent("Look");
+    this._pointLight = this.transform.gameObject.getComponent("Light");
+    this._pointLight.setColor([4,3,0.25,1]);
+    this._pointLight.setRange(1);
+    this.transform.gameObject.getComponent("Collider").setLayer(FILTER_PLAYER);
+
     this._collider.setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
     this._collider.setFreezeRotation(true);
   }
@@ -90,6 +99,7 @@ class PlayerController extends Component{
       this._currentState = PlayerState.singing;
       //if !injured
       this._singer.sing();
+
       // if(!IS_SERVER) this._singingSrc.resumeSound();
       //
     }else if(this.walking === 1){
@@ -100,6 +110,12 @@ class PlayerController extends Component{
 
     if(this._currentState !== PlayerState.cantMove) {
       this.movement();
+    }
+
+    if(this._currentState === PlayerState.singing){
+      this._pointLight.setRange(Utility.moveTowards(this._pointLight.range,MAX_LIGHT_RANGE,LIGHT_EXPAND_RATE*Time.deltaTime));
+    }else{
+      this._pointLight.setRange(Utility.moveTowards(this._pointLight.range,MIN_LIGHT_RANGE,LIGHT_DIMINISH_RATE*Time.deltaTime));
     }
 
     if(this.action === 1){
