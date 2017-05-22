@@ -148,6 +148,7 @@ const SceneLoader = {
           nodeObject.addComponent(new Sing({}));
           nodeObject.addComponent(new AudioSource());
           nodeObject.addComponent(new Look({}));
+          nodeObject.addComponent(new PointLight(false));
 
           if(Debug.clientUpdate){
             if(this.tone===0){

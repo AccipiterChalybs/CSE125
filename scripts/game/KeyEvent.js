@@ -47,11 +47,12 @@ class KeyEvent extends Event{
     // this.transform._parent.children[]
     // this.transform.gameObject.removeChildFromParent();
     // interactingObj.addChild(this.transform.gameObject);
-    this.transform.scale(.001);
     // this.transform.setWorldPosition([100,100,100]);
     let player = interactingObj.getComponent("PlayerController");
     if(player && player!==null){
+      this.transform.scale(.001);
       player.keys++;
+      this.transform.gameObject.getComponent('Collider').setLayer(FILTER_DEFAULT);
       let audio = this.gameObject.getComponent("AudioSource");
       if(audio && audio!==null) audio.setState(AudioState.play2dSound);
     }
@@ -59,7 +60,5 @@ class KeyEvent extends Event{
 
     // this.transform.setPosition([30,0,20]);
     // delete this.transform.gameObject.components['Mesh'];
-    delete this.transform.gameObject.components['Viewable'];
-    delete this.transform.gameObject.components['Collider'];
   }
 }

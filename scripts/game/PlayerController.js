@@ -45,6 +45,8 @@ class PlayerController extends Component{
     this._collider = this.transform.gameObject.getComponent("Collider");
     this._singer = this.transform.gameObject.getComponent("Sing");
     this._looker = this.transform.gameObject.getComponent("Look");
+    this._pointLight = this.transform.gameObject.getComponent("Light");
+    this._pointLight.setRange(1);
     this.transform.gameObject.getComponent("Collider").setLayer(FILTER_PLAYER);
 
     this._collider.setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
@@ -85,6 +87,7 @@ class PlayerController extends Component{
     }
 
     this._lastSingInput = this.singing;
+    this._pointLight.setRange(Utility.moveTowards(this._pointLight.range,1,Time.deltaTime));
 
     if(this._currentState === PlayerState.cantMove){
 
@@ -92,6 +95,7 @@ class PlayerController extends Component{
       this._currentState = PlayerState.singing;
       //if !injured
       this._singer.sing();
+      this._pointLight.setRange(Utility.moveTowards(this._pointLight.range,8,Time.deltaTime));
       // if(!IS_SERVER) this._singingSrc.resumeSound();
       //
     }else if(this.walking === 1){
