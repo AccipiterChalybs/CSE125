@@ -1,0 +1,12 @@
+{
+  "Tone":{
+    "src": "assets/audio/tone.wav",
+    "loop": true,
+    "type": 0
+  },
+  "MainTheme":{
+    "src": "assets/audio/cruelangel.mp3",
+    "loop": false,
+    "type": 1
+  }
+}

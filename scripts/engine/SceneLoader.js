@@ -146,7 +146,7 @@ const SceneLoader = {
         case "PlayerController":
           PlayerTable.addPlayer(nodeObject);
           nodeObject.addComponent(new Sing({}));
-          nodeObject.addComponent(new AudioSource());
+          //nodeObject.addComponent(new AudioSource());
           nodeObject.addComponent(new Look({}));
           nodeObject.addComponent(new PointLight(false));
 
@@ -161,9 +161,9 @@ const SceneLoader = {
           }
 
           if (!IS_SERVER) {
-            nodeObject.getComponent("AudioSource").playSound2d("singTone0"+this.tone);
+            //nodeObject.getComponent("AudioSource").playSound2d("singTone0"+this.tone);
             this.tone+=1;
-            nodeObject.getComponent("AudioSource").pauseSound();
+            //nodeObject.getComponent("AudioSource").pauseSound();
           }
           break;
       }

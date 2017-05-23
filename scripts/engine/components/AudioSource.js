@@ -1,3 +1,4 @@
+
 const AudioState = {
   noSound: 0,
   play2dSound: 1,
@@ -5,7 +6,7 @@ const AudioState = {
   resume: 3,
   pause: 4,
 };
-
+/*
 class AudioSource extends Component{
   constructor() {
     super();
@@ -182,3 +183,4 @@ class AudioSource extends Component{
     // this.state = data.s;
   }
 }
+*/
