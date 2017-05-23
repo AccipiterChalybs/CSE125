@@ -120,7 +120,7 @@ const SceneLoader = {
       if ("MeshFilter" in currentNode || "SkinnedMeshRenderer" in currentNode) {
         let meshName = currentNode["MeshFilter"] || currentNode["SkinnedMeshRenderer"].name;
         if (meshName === 'Plane' || meshName === 'Cube' || meshName === 'Sphere' || meshName === 'Capsule') {
-          console.log(meshName = 'Plane');
+          console.log(meshName = 'SceneLoader');
         //  nodeObject.transform.scale(5);
           nodeObject.transform.rotateX(Math.PI/2);
         }
@@ -150,7 +150,12 @@ const SceneLoader = {
           nodeObject.addComponent(new Sing({}));
           nodeObject.addComponent(new AudioSource());
           nodeObject.addComponent(new Look({}));
-          nodeObject.addComponent(new PointLight(false));
+
+          //TODO attach to body instead
+          let lightHolder = new GameObject();
+          lightHolder.transform.setPosition(vec3.fromValues(0, 1.32, 0));
+          lightHolder.addComponent(new PointLight(false));
+          nodeObject.addChild(lightHolder);
 
           if(Debug.clientUpdate){
             if(this.tone===0){

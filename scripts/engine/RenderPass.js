@@ -56,8 +56,10 @@ class DecalPass extends RenderPass
   constructor(deferredPassMain){
     super();
     //This is just because we can't render to textures in the bound FBO, and so need to copy them out of it.
-    let width = Renderer.getWindowWidth();
-    let height = Renderer.getWindowHeight();
+    //TODO maybe try editing the scale for faster speed?
+    let decalBufferScale = 1;
+    let width = Renderer.getWindowWidth() * decalBufferScale;
+    let height = Renderer.getWindowHeight() * decalBufferScale;
     this.copyBuffers = new Framebuffer(width, height, 3, false, true, [GL.RGBA8, GL.RGBA16F, GL.RGBA16F]);
 
   }
@@ -84,6 +86,7 @@ class DecalPass extends RenderPass
     let buffers = [GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2];
     GL.bindFramebuffer(GL.FRAMEBUFFER, Renderer.deferredPass.buffers.id);
     GL.drawBuffers(buffers);
+    GL.viewport(0,0,Renderer.deferredPass.buffers.width, Renderer.deferredPass.buffers.height);
 
     //TODO should disable depth test incase camera is inside volume. Optimally, will disable / enable for each object.
     //TODO however, just keeping it on will be faster, and shouldn't matter if we keep our objects thin.

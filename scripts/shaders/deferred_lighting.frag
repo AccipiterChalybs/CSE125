@@ -98,7 +98,7 @@ void main () {
   if(albedo.xyz == vec3(0.0)) discard; //TODO does this actually provide a performance boost?
   vec4 pos = texture(posTex, screenTexCoord);
   vec4 normal = texture(normalTex, screenTexCoord);
-  vec3 mat = vec3(normal.w, pos.w, normal.w);
+  vec3 mat = vec3(normal.a, pos.w, 0.0);
   //pos = uIV_Matrix * vec4(pos.xyz, 1.0); //TODO do we need these two lines?
   //pos /= pos.w;
   normal.xyz = normal.xyz * 2.0 - 1.0;
