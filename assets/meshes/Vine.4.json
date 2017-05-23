@@ -1,0 +1,246 @@
+{
+	 "rootnode": {
+		 "name": "RootNode"
+		,"transformation": [
+			 1
+			,0
+			,0
+			,0
+			,0
+			,1
+			,0
+			,0
+			,0
+			,0
+			,1
+			,0
+			,0
+			,0
+			,0
+			,1
+		]
+		,"children": [
+			{
+				 "name": "Decal_vine.4"
+				,"transformation": [
+					 100
+					,0
+					,0
+					,1493.09
+					,0
+					,-1.62921e-005
+					,100
+					,284.964
+					,0
+					,-100
+					,-1.62921e-005
+					,-217.246
+					,0
+					,0
+					,0
+					,1
+				]
+				,"meshes": [
+					 0
+				]
+			}
+		]
+	}
+	,"flags": 8
+	,"meshes": [
+		{
+			 "name": "swampcanopytree01_vines.alpha.003"
+			,"materialindex": 0
+			,"primitivetypes": 4
+			,"vertices": [
+				 -1.29888
+				,2.24151e-007
+				,-2.46137
+				,1.29888
+				,2.24151e-007
+				,-2.46137
+				,1.29888
+				,-4.44089e-016
+				,0.0251025
+				,-1.29888
+				,-4.44089e-016
+				,0.0251025
+			]
+			,"normals": [
+				 0
+				,-1
+				,-9.01484e-008
+				,0
+				,-1
+				,-9.01484e-008
+				,0
+				,-1
+				,-9.01484e-008
+				,0
+				,-1
+				,-9.01484e-008
+			]
+			,"tangents": [
+				 1
+				,0
+				,0
+				,1
+				,0
+				,0
+				,1
+				,0
+				,0
+				,1
+				,0
+				,0
+			]
+			,"bitangents": [
+				 0
+				,9.01484e-008
+				,-1
+				,0
+				,9.01484e-008
+				,-1
+				,0
+				,9.01484e-008
+				,-1
+				,0
+				,9.01484e-008
+				,-1
+			]
+			,"numuvcomponents": [
+				 2
+			]
+			,"texturecoords": [
+				[
+					 0
+					,0
+					,1
+					,0
+					,1
+					,1
+					,0
+					,1
+				]
+			]
+			,"faces": [
+				[
+					 0
+					,1
+					,2
+				]
+				,[
+					 0
+					,2
+					,3
+				]
+			]
+		}
+	]
+	,"materials": [
+		{
+			 "properties": [
+				{
+					 "key": "?mat.name"
+					,"semantic": 0
+					,"index": 0
+					,"type": 3
+					,"value": "Vine.4"
+				}
+				,{
+					 "key": "$clr.diffuse"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0.64
+						,0.64
+						,0.64
+					]
+				}
+				,{
+					 "key": "$clr.emissive"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,0
+					]
+				}
+				,{
+					 "key": "$clr.ambient"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,0
+					]
+				}
+				,{
+					 "key": "$clr.specular"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,0
+					]
+				}
+				,{
+					 "key": "$mat.opacity"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": 0
+				}
+				,{
+					 "key": "$mat.shinpercent"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": 9.60784
+				}
+				,{
+					 "key": "$mat.shininess"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": 9.60784
+				}
+				,{
+					 "key": "$tex.file"
+					,"semantic": 1
+					,"index": 0
+					,"type": 3
+					,"value": "/Users/johnpallag/Downloads/alphameat02.alpha.png"
+				}
+				,{
+					 "key": "$tex.uvtrafo"
+					,"semantic": 1
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,1
+						,1
+						,0
+					]
+				}
+				,{
+					 "key": "$tex.uvwsrc"
+					,"semantic": 1
+					,"index": 0
+					,"type": 4
+					,"value": 0
+				}
+			]
+		}
+	]
+}
+

@@ -1,0 +1,284 @@
+{
+	 "rootnode": {
+		 "name": "RootNode"
+		,"transformation": [
+			 1
+			,0
+			,0
+			,0
+			,0
+			,1
+			,0
+			,0
+			,0
+			,0
+			,1
+			,0
+			,0
+			,0
+			,0
+			,1
+		]
+		,"children": [
+			{
+				 "name": "Decal_vine.1"
+				,"transformation": [
+					 100
+					,0
+					,0
+					,605.46
+					,0
+					,-1.62921e-005
+					,100
+					,284.964
+					,0
+					,-100
+					,-1.62921e-005
+					,-217.246
+					,0
+					,0
+					,0
+					,1
+				]
+				,"meshes": [
+					 0
+				]
+			}
+		]
+	}
+	,"flags": 8
+	,"meshes": [
+		{
+			 "name": "swampcanopytree01_vines.alpha"
+			,"materialindex": 0
+			,"primitivetypes": 4
+			,"vertices": [
+				 0
+				,-0.145295
+				,-2.9434
+				,0.73585
+				,1.2866e-007
+				,-2.9434
+				,0.73585
+				,0
+				,0
+				,0
+				,-0.145296
+				,0
+				,-0.73585
+				,1.2866e-007
+				,-2.9434
+				,-0.73585
+				,0
+				,0
+			]
+			,"normals": [
+				 0
+				,-1
+				,0
+				,0.193701
+				,-0.981048
+				,0
+				,0.193701
+				,-0.981048
+				,0
+				,0
+				,-1
+				,0
+				,-0.193701
+				,-0.981048
+				,0
+				,-0.193701
+				,-0.981048
+				,0
+			]
+			,"tangents": [
+				 1
+				,0
+				,0
+				,0.98106
+				,0.193703
+				,0
+				,0.98106
+				,0.193703
+				,0
+				,1
+				,0
+				,0
+				,0.98106
+				,-0.193703
+				,0
+				,0.98106
+				,-0.193703
+				,0
+			]
+			,"bitangents": [
+				 0
+				,0
+				,-1
+				,8.65835e-009
+				,1.71066e-009
+				,-1
+				,8.65835e-009
+				,1.71066e-009
+				,-1
+				,0
+				,0
+				,-1
+				,-8.30647e-009
+				,1.64114e-009
+				,-1
+				,-8.30647e-009
+				,1.64114e-009
+				,-1
+			]
+			,"numuvcomponents": [
+				 2
+			]
+			,"texturecoords": [
+				[
+					 0.5
+					,0
+					,1
+					,0
+					,1
+					,1
+					,0.5
+					,1
+					,0
+					,0
+					,0
+					,1
+				]
+			]
+			,"faces": [
+				[
+					 0
+					,1
+					,2
+				]
+				,[
+					 0
+					,2
+					,3
+				]
+				,[
+					 4
+					,0
+					,3
+				]
+				,[
+					 4
+					,3
+					,5
+				]
+			]
+		}
+	]
+	,"materials": [
+		{
+			 "properties": [
+				{
+					 "key": "?mat.name"
+					,"semantic": 0
+					,"index": 0
+					,"type": 3
+					,"value": "Vine.1"
+				}
+				,{
+					 "key": "$clr.diffuse"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0.64
+						,0.64
+						,0.64
+					]
+				}
+				,{
+					 "key": "$clr.emissive"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,0
+					]
+				}
+				,{
+					 "key": "$clr.ambient"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,0
+					]
+				}
+				,{
+					 "key": "$clr.specular"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,0
+					]
+				}
+				,{
+					 "key": "$mat.opacity"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": 0
+				}
+				,{
+					 "key": "$mat.shinpercent"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": 9.60784
+				}
+				,{
+					 "key": "$mat.shininess"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": 9.60784
+				}
+				,{
+					 "key": "$tex.file"
+					,"semantic": 1
+					,"index": 0
+					,"type": 3
+					,"value": "/Users/johnpallag/Downloads/swampcanopytree01_vines.alpha.png"
+				}
+				,{
+					 "key": "$tex.uvtrafo"
+					,"semantic": 1
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,1
+						,1
+						,0
+					]
+				}
+				,{
+					 "key": "$tex.uvwsrc"
+					,"semantic": 1
+					,"index": 0
+					,"type": 4
+					,"value": 0
+				}
+			]
+		}
+	]
+}
+

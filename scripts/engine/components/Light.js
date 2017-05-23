@@ -78,7 +78,7 @@ class PointLight extends Light{
       if(this.isShadowCaster)
       {
         this.cubeShadow = true;
-        this.fbo = Framebuffer.generateCubeMapArray(64, 64, true);
+        this.fbo = Framebuffer.generateCubeMapArray(256, 256, true);
       }
     }
 
@@ -136,7 +136,8 @@ class PointLight extends Light{
   }
 }
 
-PointLight.prototype.FAR_DEPTH = 25;
+//TODO change per light
+PointLight.prototype.FAR_DEPTH = 10;
 PointLight.prototype.shadowMatrix = mat4.perspective(mat4.create(), Math.PI/2, 1, 0.1, PointLight.prototype.FAR_DEPTH);
 PointLight.prototype.viewMatrixArray = [
   mat4.lookAt(mat4.create(), vec3.create(), vec3.fromValues(1,0,0), vec3.fromValues(0,-1,0)),
