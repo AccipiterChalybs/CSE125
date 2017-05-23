@@ -46,6 +46,11 @@ class Light extends Component{
       this.serializeDirty=true;
     }
 
+    setRange(range){
+      this.range = range;
+      this.serializeDirty=true;
+    }
+
     serialize() {
       if(this.serializeDirty){
         let retVal = {};

@@ -207,20 +207,22 @@ class Transform extends Component
     }
 
     applySerializedData(data) {
-        this.setDirty();
-        this.position = data.p;
-        this.rotation = data.r;
-        this.scaleFactor[0] = this.scaleFactor[1] = this.scaleFactor[2] = data.s;
-        // let index=0;
-        // for (let child of this.children) {
-        //     Debug.assert(index < data.c.length);
-        //
-        //     if(index < data.c.length)
-        //     {
-        //       child.applySerializedData(data.c[index]);
-        //     }
-        //
-        //     ++index;
-        // }
+        if(data && data !== null) {
+          this.setDirty();
+          this.position = data.p;
+          this.rotation = data.r;
+          this.scaleFactor[0] = this.scaleFactor[1] = this.scaleFactor[2] = data.s;
+          // let index=0;
+          // for (let child of this.children) {
+          //     Debug.assert(index < data.c.length);
+          //
+          //     if(index < data.c.length)
+          //     {
+          //       child.applySerializedData(data.c[index]);
+          //     }
+          //
+          //     ++index;
+          // }
+        }
     }
 }

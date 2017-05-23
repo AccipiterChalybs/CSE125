@@ -15,7 +15,7 @@ class AudioSource extends Component{
     this.sound = null;
     this.sound3D = false;
     this.state = AudioState.noSound;
-    this.frameSkip = 0;
+    this.queue = [];
   }
 
   start() {
@@ -37,14 +37,23 @@ class AudioSource extends Component{
       SoundEngine.updatePosition(this.sound[0], this.sound[1], emitterSrc[0], emitterSrc[1], emitterSrc[2]);
     }
 
+    // if(Debug.clientUpdate){
+    //   this.frameSkip++;
+    // }
+    if (this.queue.length > 0) {
+      this.state = this.queue.shift();
+    }
+
     switch (this.state){
       case AudioState.noSound:
         break;
       case AudioState.play2dSound:
         this.playSound2d(this.name);
+        if (Debug.clientUpdate) this.state = AudioState.noSound;
         break;
       case AudioState.play3dSound:
         this.playSound3d(this.name, this.panObj);
+        if (Debug.clientUpdate) this.state = AudioState.noSound;
         break;
       case AudioState.resume:
         this.resumeSound();
@@ -72,16 +81,12 @@ class AudioSource extends Component{
 
         break;
     }
-    this.frameSkip++;
   }
 
   setState(state) {
     //TODO Change this to make sure no sound effects get delayed.
-    if (this.frameSkip > 100) {
-      this.frameSkip = 0;
-      this.state = state;
-      this.serializeDirty = true;
-    }
+    this.state = state;
+    this.serializeDirty = true;
   }
 
   //bool name is the name of the sound, type is bool for 2d or 3d
@@ -164,7 +169,7 @@ class AudioSource extends Component{
     if (this.serializeDirty) {
       let retVal = {};
       retVal.s = this.state;
-      this.serializeDirty = false; // Dont know if need
+      this.serializeDirty = false;
       return retVal;
     }
 
@@ -172,6 +177,8 @@ class AudioSource extends Component{
   }
 
   applySerializedData(data) {
-    this.state = data.s;
+    this.queue.push(data.s);
+
+    // this.state = data.s;
   }
 }

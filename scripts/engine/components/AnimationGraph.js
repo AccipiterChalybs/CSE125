@@ -9,7 +9,6 @@ class AnimationGraph extends Component {
       }
     */
     this.name = '';
-    ssfsd
 
     this.componentType = 'AnimationGraph';
   }
