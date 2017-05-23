@@ -50,7 +50,7 @@ class PlayerController extends Component{
     this._singer = this.transform.gameObject.getComponent("Sing");
     this._looker = this.transform.gameObject.getComponent("Look");
     this._pointLight = this.transform.children[0].gameObject.getComponent("Light");
-    this._pointLight.setColor([4,3,0.25,1]);
+    this._pointLight.setColor(vec3.fromValues(3.6,12.1,2));
     this._pointLight.setRange(1);
     this.transform.gameObject.getComponent("Collider").setLayer(FILTER_PLAYER);
 
