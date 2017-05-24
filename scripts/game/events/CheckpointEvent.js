@@ -51,9 +51,7 @@ class CheckpointEvent extends Event{
     let player = interactingObj.getComponent("PlayerController");
     if(player && player!==null){
       Debug.log("INSIDE CHECKPOINT RAYCAST");
-      Debug.log(player.checkpoint);
-      player.checkpoint = this.transform.getWorldPosition();
-      Debug.log(player.checkpoint);
+      player.checkpoint = this.transform.position;//getWorldPosition();
     }
     // this.transform.scale(50);
 

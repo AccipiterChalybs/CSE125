@@ -18,41 +18,47 @@ class StatueController extends Playerable{
   }
 
   updateComponent() {
-    if (this.singing === 0 && this._lastSingInput === 1) {
-      this._nextSingTime = Time.time + this._singingCooldown;
-      // if(!IS_SERVER) this._singingSrc.pauseSound();
-    }
+    if(this._singer && this._singer!==null) {
+      if (this.singing === 0 && this._lastSingInput === 1) {
+        this._nextSingTime = Time.time + this._singingCooldown;
+        // if(!IS_SERVER) this._singingSrc.pauseSound();
+      }
 
-    this._lastSingInput = this.singing;
+      this._lastSingInput = this.singing;
 
-    if (Time.time >= this._nextSingTime && this._currentSingingDuration < this._maxSingingDuration) {
-      this.singing = 1;
-      this._currentState = PlayerState.singing;
-      this._currentSingingDuration += Time.deltaTime;
-      //if !injured
-      this._singer.sing();
-    } else {
-      this._currentSingingDuration = 0;
-      this.singing = 0;
-      this._currentState = PlayerState.default;
-    }
+      if (Time.time >= this._nextSingTime && this._currentSingingDuration < this._maxSingingDuration) {
+        this.singing = 1;
+        this._currentState = PlayerState.singing;
+        this._currentSingingDuration += Time.deltaTime;
+        //if !injured
+        this._singer.sing();
+      } else {
+        this._currentSingingDuration = 0;
+        this.singing = 0;
+        this._currentState = PlayerState.default;
+      }
 
-    if (this._currentState === PlayerState.singing) {
-      this._pointLight.setRange(Utility.moveTowards(this._pointLight.range, MAX_LIGHT_RANGE, LIGHT_EXPAND_RATE * Time.deltaTime));
-    }else {
-      this._pointLight.setRange(Utility.moveTowards(this._pointLight.range, MIN_LIGHT_RANGE, LIGHT_DIMINISH_RATE * Time.deltaTime));
+      if (this._currentState === PlayerState.singing) {
+        this._pointLight.setRange(Utility.moveTowards(this._pointLight.range, MAX_LIGHT_RANGE, LIGHT_EXPAND_RATE * Time.deltaTime));
+      } else {
+        this._pointLight.setRange(Utility.moveTowards(this._pointLight.range, MIN_LIGHT_RANGE, LIGHT_DIMINISH_RATE * Time.deltaTime));
+      }
     }
   }
 
   updateComponentClient() {
-    if (this.singing === 1 && Time.time >= this._nextSingTime) {
-      this._singingSrc.resumeSound();
-    }else {
-      this._singingSrc.pauseSound();
+    if(this._singingSrc && this._singingSrc!==null) {
+      if (this.singing === 1 && Time.time >= this._nextSingTime) {
+        this._singingSrc.resumeSound();
+      } else {
+        this._singingSrc.pauseSound();
+      }
     }
   }
 
-  movement() {}
+  movement() {
+
+  }
 
   serialize() {
     let data = super.serialize();

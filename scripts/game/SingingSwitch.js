@@ -7,12 +7,12 @@ const SWITCH_LOSS_RATE = 0.5; // per second
 const TIME_BEFORE_LOSS = 3;
 
 class SingingSwitch extends Listenable {
-  constructor({events, activationLevel}) {
+  constructor({ events, activationLevel,time_before_loss =TIME_BEFORE_LOSS }) {
     super();
     this._events = events;
     this.activationLevel = activationLevel;
     this.charged = false;
-
+    this.time_before_loss = time_before_loss;
     this._lastSingTime = 0;
     this._currentCharge = 0;
   }
@@ -25,23 +25,29 @@ class SingingSwitch extends Listenable {
   }
 
   updateComponent() {
-    if (this.charged === false || Time.time - this._lastSingTime >= TIME_BEFORE_LOSS) {
+    if (this.charged === false || Time.time - this._lastSingTime >= this.time_before_loss) {
       this._currentCharge = Utility.moveTowards(this._currentCharge, 0, SWITCH_LOSS_RATE * Time.deltaTime);
-      for(let event of this._events){
+      for (let event of this._events) {
         event.setCurrentState(EventState.discharging);
       }
     }
 
-    if (Time.time <= this._lastSingTime + 0.1) {
+    if (this.charged === false && Time.time <= this._lastSingTime + 0.1) {
       this._currentCharge = Utility.moveTowards(this._currentCharge, this.activationLevel, SWITCH_CHARGE_RATE * Time.deltaTime);
-      for(let event of this._events){
+      for (let event of this._events) {
         event.setCurrentState(EventState.charging);
       }
     }
 
     if (this.charged === false && this._currentCharge > this.activationLevel - 0.01) {
       this.fullyCharged();
-    } else if (this.charged === true && Time.time - this._lastSingTime >= TIME_BEFORE_LOSS) {
+    } else if (this.charged === true && Time.time - this._lastSingTime >= this.time_before_loss) {
+      for (let event of this._events) {
+        event.setCurrentState(EventState.discharging);
+      }
+    }
+
+    if (this._currentCharge === 0) {
       this.uncharged();
     }
 
@@ -49,18 +55,20 @@ class SingingSwitch extends Listenable {
   }
 
   uncharged() {
-    Debug.log('I became uncharged');
-    for(let event of this._events){
+    // Debug.log('I am uncharged');
+    for (let event of this._events) {
       event.setCurrentState(EventState.uncharged);
     }
+
     this.charged = false;
   }
 
   fullyCharged() {
     Debug.log('I am charged!');
-    for(let event of this._events){
+    for (let event of this._events) {
       event.setCurrentState(EventState.charged);
     }
+
     this.charged = true;
   }
 
