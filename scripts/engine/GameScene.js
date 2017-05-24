@@ -41,7 +41,7 @@ class GameScene {
     new GameObject().addComponent(camera);
     let rootTest = new GameObject();
     camera.gameObject.transform.setParent(rootTest.transform);
-    //camera.gameObject.addComponent(new AudioListener());
+    camera.gameObject.addComponent(new AudioListener());
     camera.gameObject.addComponent(new ZoomMouse());
     let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 5);
     if(!IS_SERVER){
@@ -166,10 +166,10 @@ class GameScene {
               teapot.transform.scale(1.1);
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
               teapot.addComponent(new HealEvent());
-              //teapot.addComponent(new AudioSource());
+              teapot.addComponent(new AudioSource('MainTheme'));
               teapot.addComponent(new RaycastSwitch({event: teapot.getComponent("Event")}));
               if(!IS_SERVER) {
-                //teapot.getComponent("AudioSource").playSound2d('heal');
+                //teapot.getComponent("AudioSource").playSound();
                 //teapot.getComponent("AudioSource").pauseSound();
               }
               teapot.transform.position[1]=0;

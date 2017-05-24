@@ -44,7 +44,6 @@ class HealEvent extends Event{
     //TODO Make this cleaner! Or maybe add to playerobject
     // // this.transform.gameObject.parent=null;
     // this.transform._parent.children[]
-
     let player = interactingObj.getComponent('PlayerController');
     if (player && player !== null) {
       if (player.injured) {
@@ -52,7 +51,7 @@ class HealEvent extends Event{
         Debug.log('HEALING');
         let audio = this.gameObject.getComponent('AudioSource');
         if (audio && audio !== null) {
-          audio.setState(AudioState.play2dSound);
+          audio.setState(AudioState.playSound);
           // if(!IS_SERVER){
           //   SoundEngine.playSound2d(SoundEngine.heal);
           // }
