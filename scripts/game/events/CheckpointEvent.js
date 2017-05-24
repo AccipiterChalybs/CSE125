@@ -1,4 +1,4 @@
-class KeyEvent extends Event{
+class CheckpointEvent extends Event{
 
   constructor(){
     super();
@@ -50,11 +50,10 @@ class KeyEvent extends Event{
     // this.transform.setWorldPosition([100,100,100]);
     let player = interactingObj.getComponent("PlayerController");
     if(player && player!==null){
-      this.transform.scale(.001);
-      player.keys++;
-      this.transform.gameObject.getComponent('Collider').setLayer(FILTER_DEFAULT);
-      let audio = this.gameObject.getComponent("AudioSource");
-      if(audio && audio!==null) audio.setState(AudioState.playSound);
+      Debug.log("INSIDE CHECKPOINT RAYCAST");
+      Debug.log(player.checkpoint);
+      player.checkpoint = this.transform.getWorldPosition();
+      Debug.log(player.checkpoint);
     }
     // this.transform.scale(50);
 

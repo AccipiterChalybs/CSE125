@@ -188,6 +188,8 @@ class GameScene {
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
               teapot.addComponent(new HealEvent());
               teapot.addComponent(new AudioSource('heal'));
+              // teapot.addComponent(new HealEvent());
+              teapot.addComponent(new CheckpointEvent());
               teapot.addComponent(new RaycastSwitch({events: [teapot.getComponent("Event")]}));
               if(!IS_SERVER) {
                 //teapot.getComponent("AudioSource").playSound();
@@ -222,14 +224,14 @@ class GameScene {
               teapot.transform.scale(1.1);
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
               teapot.addComponent(new PointLight(false));
-              teapot.addComponent(new AudioSource());
+              teapot.addComponent(new AudioSource("Tone02"));
               teapot.addComponent(new Sing({}));
               teapot.addComponent(new StatueController({lightColor:[.5,3,4,1], lightRange: 1, singingCooldown: 2}));
 
-              if(!IS_SERVER) {
-                teapot.getComponent("AudioSource").playSound2d('singTone02');
-                teapot.getComponent("AudioSource").pauseSound();
-              }
+              // if(!IS_SERVER) {
+              //   teapot.getComponent("AudioSource").playSound2d('singTone02');
+              //   teapot.getComponent("AudioSource").pauseSound();
+              // }
               teapot.transform.position[1]=0;
             }
             else{

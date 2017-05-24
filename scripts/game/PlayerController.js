@@ -13,13 +13,22 @@ const MIN_LIGHT_RANGE = 1;
 const LIGHT_EXPAND_RATE = 15;
 const LIGHT_DIMINISH_RATE = 5;
 
+const PlayerState = {
+  default: "default",
+  walking: "walking",
+  singing: "singing",
+  noControl: "noControl",
+  cantMove: "cantMove",
+  dead: "dead"
+};
+
 // Requires a collider, sing
 
 class PlayerController extends Playerable{
   constructor({lightColor,lightRange,singingCooldown}){
     super({lightColor,lightRange,singingCooldown});
-    this._looker =null;
-
+    this._looker = null;
+    this.checkpoint = null;
     this.keys = 0;
     this.injured = true;
 
@@ -32,6 +41,9 @@ class PlayerController extends Playerable{
     super.start();
     this._looker = this.transform.gameObject.getComponent("Look");
     this.state.start(this.gameObject);
+    this.transform.gameObject.getComponent("Collider").setLayer(FILTER_PLAYER);
+    this.checkpoint = this.transform.getWorldPosition();
+
   }
 
   startClient(){
@@ -48,7 +60,14 @@ class PlayerController extends Playerable{
   }
 
   updateComponent(){
-    if(this.state.status === 'noControl')
+
+    if(this._currentState === PlayerState.dead){
+      Debug.log('INSDIE DEAD');
+      this.transform.translate(this.checkpoint);
+      this._currentState = PlayerState.default;
+      return;
+    }
+    if(this._currentState === PlayerState.noControl)
       return;
 
     // Add if loop to enable client side testing w/o server
