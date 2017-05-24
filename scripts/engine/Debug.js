@@ -4,7 +4,7 @@
 
 let Debug = {};
 
-Debug.clientUpdate = false; //Run the client in standalone mode, so it doesn't need a server - good for testing!
+Debug.clientUpdate = true; //Run the client in standalone mode, so it doesn't need a server - good for testing!
 Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
 Debug.debugDisplay = true;
 Debug.quickLoad = true;
@@ -76,7 +76,7 @@ Debug.BUFFERTYPE_BLOOM = 6;
 Debug.BUFFERTYPE_SHADOW = 7;
 Debug.currentBuffer = Debug.BUFFERTYPE_NONE;
 
-Debug.currentLightIndex = 0; //TODO make this switchable with input
+Debug.currentLightIndex = 2; //TODO make this switchable with input
 
 
 Debug.displayOpen = false;

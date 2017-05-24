@@ -38,7 +38,7 @@ class Light extends Component{
         GL.drawElements(GL.TRIANGLES, currentEntry.indexSize, GL.UNSIGNED_SHORT, 0);
 
     }
-    bindShadowMap(pass){
+    bindShadowMap(pass, bake){
     }
 
     setColor(color){
@@ -73,9 +73,10 @@ class Light extends Component{
 
 class PointLight extends Light{
 
-    constructor(shadow) {
+    constructor(shadow, isStatic) {
       super();
       this.isShadowCaster = shadow;
+      this.isStatic = isStatic;
     }
 
     startClient() {
@@ -83,7 +84,10 @@ class PointLight extends Light{
       if(this.isShadowCaster)
       {
         this.cubeShadow = true;
-        this.fbo = Framebuffer.generateCubeMapArray(256, 256, true);
+        if (this.isStatic) {
+          this.staticFBO = Framebuffer.generateCubeMapArray(PointLight.shadowSize, PointLight.shadowSize, true);
+        }
+        this.fbo = Framebuffer.generateCubeMapArray(PointLight.shadowSize, PointLight.shadowSize, true);
       }
     }
 
@@ -128,15 +132,25 @@ class PointLight extends Light{
   }
 
 
-  bindShadowMap(pass){
-    if(this.fbo && this.fbo !== null && this.isShadowCaster)
+  bindShadowMap(pass, bake){
+    if (bake && !this.isStatic) return;
+    let target = (bake) ? this.staticFBO : this.fbo;
+    if(target && target !== null && this.isShadowCaster)
     {
-      this.fbo[pass].bind([], false);
+      target[pass].bind([], false);
 
       let mat = mat4.fromTranslation(mat4.create(), vec3.scale(vec3.create(), this.gameObject.transform.getWorldPosition(), -1));
       mat4.multiply(mat, PointLight.prototype.viewMatrixArray[pass], mat);
       Renderer.getShader(Renderer.POINT_SHADOW_SHADER_ANIM).setUniform("uV_Matrix",mat,UniformTypes.mat4);
       Renderer.getShader(Renderer.POINT_SHADOW_SHADER).setUniform("uV_Matrix",mat,UniformTypes.mat4);
+    }
+  }
+
+  bindCubeMap(slot) {
+    if (this.isStatic){
+      this.staticFBO[0].bindCubeMapTexture(slot);
+    } else {
+      this.fbo[0].bindCubeMapTexture(slot);
     }
   }
 }
@@ -152,6 +166,7 @@ PointLight.prototype.viewMatrixArray = [
   mat4.lookAt(mat4.create(), vec3.create(), vec3.fromValues(0,0,1), vec3.fromValues(0,-1,0)),
   mat4.lookAt(mat4.create(), vec3.create(), vec3.fromValues(0,0,-1), vec3.fromValues(0,-1,0)),
 ];
+PointLight.shadowSize = 256;
 
 
 
@@ -204,7 +219,7 @@ class DirectionalLight extends Light{
     updateComponentClient(){
     }
 
-  bindShadowMap(pass){
+  bindShadowMap(pass, bake){
     if(this.fbo && this.fbo !== null && this.isShadowCaster)
     {
       this.fbo.bind([], false);

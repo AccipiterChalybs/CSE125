@@ -198,7 +198,9 @@ const Renderer  = {
       //TODO should make a json file to load this with, and have exposure variable
       Renderer.skybox = new Skybox(skyboxName, (Debug.quickLoad)? 3 : 10);//TODO revert
 
-      let shadowPass = new ShadowPass();
+      Renderer.bakeComplete = false;
+
+      Renderer.shadowPass = new ShadowPass();
       let forwardPass = new ForwardPass();
       let skyboxPass = new SkyboxPass(Renderer.skybox);
       let particlePass = new ParticlePass();
@@ -210,7 +212,7 @@ const Renderer  = {
       Renderer.postPass = new BloomPass(Renderer.deferredPass);
 
       Renderer.passes = [];
-      Renderer.passes.push(shadowPass);
+      Renderer.passes.push(Renderer.shadowPass);
       Renderer.passes.push(deferredPrePass);
       Renderer.passes.push(decalPass);
       Renderer.passes.push(Renderer.deferredPass);
@@ -473,11 +475,16 @@ const Renderer  = {
 
   loop: function () {
 
+
     Debug.Profiler.startTimer("apply&extract", 2);
         Renderer._applyPerFrameData();
         Renderer._extractObjects();
     Debug.Profiler.endTimer("apply&extract", 2);
 
+    if (!Renderer.bakeComplete) {
+      Renderer.shadowPass.bake();
+      Renderer.bakeComplete = true;
+    }
 
       //  Renderer.camera.update(Time.deltaTime());
         if (Renderer.camera.getFOV() !== Renderer.prevFOV)

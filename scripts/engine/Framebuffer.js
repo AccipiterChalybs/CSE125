@@ -101,7 +101,7 @@ class Framebuffer {
         Framebuffer.resizeRenderDimensions(resize, this.width, this.height);
     }
 
-    unbind() {
+    static unbind() {
         GL.bindFramebuffer(GL.FRAMEBUFFER, null);
 
         Framebuffer.resizeRenderDimensions(true, Renderer.getWindowWidth(), Renderer.getWindowHeight());

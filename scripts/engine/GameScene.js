@@ -66,6 +66,8 @@ class GameScene {
     let quickEvent = null;
     for (let x=0; x<metalNum; ++x) {
         for (let y=0; y<roughNum; ++y) {
+            let specialTeapot = false;
+
             let teapot = new GameObject();
 
             if (!IS_SERVER) {
@@ -116,6 +118,8 @@ class GameScene {
               decal.addComponent(new Decal({scale: 200, color: vec4.fromValues(0.5,25,0.5,1), texture: decalTex, normal: decalNormal}));
               decal.transform.setPosition(vec3.fromValues(0, 30, 60));
               decal.transform.rotateX(Math.PI/2);
+
+              specialTeapot = true;
             }
 
             if(x===1 && y===1){
@@ -140,6 +144,8 @@ class GameScene {
                 teapot.getComponent("AudioSource").pauseSound();
               }
 
+              specialTeapot = true;
+
             }else if(x===9 && y===5){
               teapot.addComponent(new SphereCollider({mass: 100, trigger: false, scale:15}));
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
@@ -147,6 +153,7 @@ class GameScene {
               teapot.transform.position[1]=0;
               teapot.transform.scale(1.5);
 
+              specialTeapot = true;
 
             }else if(x===4 && y===3){
               teapot.addComponent(new SphereCollider({mass: 100, trigger: false, scale: 15}));
@@ -161,6 +168,7 @@ class GameScene {
                 teapot.getComponent("AudioSource").playSound2d('get_item');
                 teapot.getComponent("AudioSource").pauseSound();
               }
+              specialTeapot = true;
             }else if(x===9 && y===3){
               teapot.addComponent(new SphereCollider({mass: 100, trigger: false, scale: 15}));
               teapot.transform.scale(1.1);
@@ -173,6 +181,7 @@ class GameScene {
                 teapot.getComponent("AudioSource").pauseSound();
               }
               teapot.transform.position[1]=0;
+              specialTeapot = true;
             }else if(x===2 && y===2){
               teapot.addComponent(new SphereCollider({mass: 0, trigger: true}));
               // teapot.addComponent(new AudioSource());
@@ -187,6 +196,7 @@ class GameScene {
               lightComp.color = vec3.fromValues(5, 2.5, 0);
               lightComp.exponentialFalloff = 0.25;
               teapot.addComponent(lightComp);
+              specialTeapot = true;
 
               //For testing purposes
               /*light.addComponent(new Mesh("Sphere_Icosphere"));
@@ -198,7 +208,9 @@ class GameScene {
               teapot.addComponent(new SphereCollider({mass: 100, triger: false, scale: 10})); //set Transform BEFORE collider
             }
 
-            container.addChild(teapot);
+            if (specialTeapot) {
+              container.addChild(teapot);
+            }
         }
     }
 

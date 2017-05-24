@@ -8,7 +8,7 @@ const SceneLoader = {
   //Ignore these in general pass, likely because they are already handled specially
   ignoreComponents: ["name", "index", "static", "Animator", "AnimatorJS", "SkinnedMeshRenderer", "MeshFilter", "MeshRenderer",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
-  shadowLightsAvailable: 1,
+  shadowLightsAvailable: 20,
   tone: 0,
 
   loadScene: function(filename) {
@@ -51,6 +51,8 @@ const SceneLoader = {
     let name = currentNode.name;
     if (name === "defaultobject") name = filename + ObjectLoader.prototype.counter;
     nodeObject.setName(name);
+
+    nodeObject.isStatic = (currentNode.static);
 
     let invParentTransform = mat4.create(); mat4.invert(invParentTransform, parent.transform.getTransformMatrix());
 
@@ -103,7 +105,7 @@ const SceneLoader = {
     if ('Light' in currentNode) {
       let lightData = currentNode['Light'];
       if (lightData.type === 'Point') {
-        let light = new PointLight(SceneLoader.shadowLightsAvailable-- > 0);
+        let light = new PointLight(SceneLoader.shadowLightsAvailable-- > 0, nodeObject.isStatic);
         light.color = vec3.fromValues(lightData.color[1], lightData.color[2], lightData.color[3]);
         vec3.scale(light.color, light.color, lightData.intensity);
         light.range = lightData.range;
