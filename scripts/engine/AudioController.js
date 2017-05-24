@@ -7,13 +7,15 @@ const AudioEngine={
     soundLoaded: function(loadId, SoundList){
         //create new howl object for each specific sound item
         for(sound in SoundList){
-            AudioEngine.soundArr[sound]= new Howl({
-                src: [SoundList[sound].src],
-                volume: 1,
-                loop: SoundList[sound].loop
-            });
-            AudioEngine.soundArr[sound].G_SType=SoundList[sound].type;
-            AudioEngine.soundArr[sound].G_SSpace=SoundList[sound].space;
+            if(sound !== null) {
+                AudioEngine.soundArr[sound] = new Howl({
+                    src: [SoundList[sound].src],
+                    volume: 1,
+                    loop: SoundList[sound].loop
+                });
+                AudioEngine.soundArr[sound].G_SType = SoundList[sound].type;
+                AudioEngine.soundArr[sound].G_SSpace = SoundList[sound].space;
+            }
         }
         GameEngine.completeLoading(loadId);
     },

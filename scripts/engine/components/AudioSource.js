@@ -38,7 +38,7 @@ class AudioSource extends Component {
         }
         if (this.sound3D) {
             let emitterSrc = this.transform.getWorldPosition();
-            SoundEngine.updatePosition(this.sound[0], this.sound[1], emitterSrc[0], emitterSrc[1], emitterSrc[2]);
+            AudioEngine.setPosition(this.sound[0], this.sound[1], emitterSrc[0], emitterSrc[1], emitterSrc[2]);
         }
         if (this.queue.length > 0) {
             this.state = this.queue.shift();

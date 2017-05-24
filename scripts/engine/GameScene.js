@@ -110,8 +110,15 @@ class GameScene {
               //if(!IS_SERVER) teapot.getComponent("AudioSource").playSound3d("cruelangel");
 
               if(!IS_SERVER) teapot.addComponent(new ParticleSystem({additive: true, texture: particleTex}));
+              //get rid of later just for testing
+              if(!IS_SERVER) {
+                  teapot.addComponent(new AudioSource('MainTheme'));
+                  teapot.getComponent('AudioSource').playSound();
+              }
+                //teapot.getComponent("AudioSource").playSound();
 
-              let decal = new GameObject();
+
+                let decal = new GameObject();
               teapot.addChild(decal);
               decal.addComponent(new Decal({scale: 200, color: vec4.fromValues(0.5,25,0.5,1), texture: decalTex, normal: decalNormal}));
               decal.transform.setPosition(vec3.fromValues(0, 30, 60));
