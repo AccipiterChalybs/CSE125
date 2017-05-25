@@ -13,112 +13,181 @@ class Animation extends Component
       this.componentType = "Animation";
 
       this.animationName = name;
-      this._currentAnimationIndex = 0;
-      this._currentTime = 0;
-      this._playing = false;
-      this._looping = false;
+      this._currentAnimIndex = 0;
+      this._currentTime = [];
+      this._lastTime = [];
+      this._playing = [];
+      this._looping = [];
+      this._animWeight = [];
       this.rootAxisLocked = [true, true, false];
     }
 
     start() {
-      //TODO this may be un-necessary / cause issues for some models, but may be needed for others to get initial pose
-      let tmp = this._currentAnimationIndex;
-      this._currentAnimationIndex = 0;
 
-      let currentAnim = Animation.prototype._animData[this.animationName][this._currentAnimationIndex];
+      for (let i=0; i<Animation.prototype._animData[this.animationName].length; ++i) {
+        this._currentTime[i] = 0;
+        this._lastTime[i] = 0;
+        this._playing[i] = false;
+        this._looping[i] = false;
+        this._animWeight[i] = 0;
+      }
+
+      //TODO this may be un-necessary / cause issues for some models, but may be needed for others to get initial pose
+      let tmp = this._currentAnimIndex;
+      this._currentAnimIndex = 0;
+
+      let currentAnim = Animation.prototype._animData[this.animationName][this._currentAnimIndex];
       for (let node of currentAnim.boneData) {
         this.boneMap[node.name].setPosition(Animation._interpolateKeyframes(node.keyframes.position, 0, node.isRoot));
         this.boneMap[node.name].setRotation(Animation._interpolateQuaternions(node.keyframes.rotation, 0));
         // node.object.scale = node.keyframes.scale[scaleIndex].second;
       }
 
-      this._currentAnimationIndex = tmp;
+      this._currentAnimIndex = tmp;
     }
 
     play ( animation, loop, restart = false) {
-        if (restart || animation !== this._currentAnimationIndex) {
-          this._currentAnimationIndex = animation;
-          this._currentTime = 0;
+        if (restart || animation !== this._currentAnimIndex) {
+          this._currentAnimIndex = animation;
+          this._currentTime[this._currentAnimIndex] = 0;
         }
-        this._playing = true;
-        this._looping = loop;
+        this._playing[this._currentAnimIndex] = true;
+        this._looping[this._currentAnimIndex] = loop;
     }
 
-    resume() {
-      this._playing = true;
+    resume(index) {
+      this._playing[index] = true;
     }
 
-    stop() {
-        this._playing = false;
+    stop(index) {
+        this._playing[index] = false;
     }
 
     getAnimationData() {
-        return Animation.prototype._animData[this.animationName][this._currentAnimationIndex].boneData;
+        return Animation.prototype._animData[this.animationName][this._currentAnimIndex].boneData;
     }
 
     updateComponent() {
-        let double = false;
-        let lastTime = this._currentTime;
-        let currentAnim = Animation.prototype._animData[this.animationName][this._currentAnimationIndex];
-        if (this._playing) {
-            this._currentTime += currentAnim.tickrate*Time.deltaTime; //TODO update constant (maybe from JSON file's tickrate?)
-            if (this._currentTime >= currentAnim.animationTime) {
-                if (this._looping) {
-                    this._currentTime -= currentAnim.animationTime;
-                    double=true;
-                }
-                else {
-                    this.stop();
-                }
-            }
+      let weightSum =0;
+      for (let i=0; i<Animation.prototype._animData[this.animationName].length; ++i) {
+        if (this._currentAnimIndex === i) {
+          this._animWeight[i] += Animation.prototype.BLEND_RATE * Time.deltaTime;
+          if (this._animWeight[i] > 1) this._animWeight[i] = 1;
+        } else {
+          this._animWeight[i] -= Animation.prototype.BLEND_RATE * Time.deltaTime;
+          if (this._animWeight[i] < 0) this._animWeight[i] = 0;
         }
 
 
-        for (let node of currentAnim.boneData) {
-          if (node.isRoot) {
-            let motion = vec3.create();
-            let newPosition = null;
-            if (double) {
-              let lastPosition = Animation._interpolateKeyframes(node.keyframes.position, lastTime, node.isRoot);
-              newPosition = Animation._interpolateKeyframes(node.keyframes.position, currentAnim.animationTime-0.1, node.isRoot);
-              vec3.subtract(motion, newPosition, lastPosition);
-              lastPosition = Animation._interpolateKeyframes(node.keyframes.position, 0, node.isRoot);
-              newPosition = Animation._interpolateKeyframes(node.keyframes.position, this._currentTime, node.isRoot);
-              vec3.add(motion, motion, vec3.subtract(vec3.create(), newPosition, lastPosition));
+        if (this._animWeight[i] > 0) {
+          this.updateAnim(i);
+        }
+
+        weightSum+=this._animWeight[i];
+      }
+
+      let animResults = {};
+      let rootResults = vec3.create();
+
+      for (let i = 0; i < Animation.prototype._animData[this.animationName].length; ++i) {
+        for (let node of Animation.prototype._animData[this.animationName][i].boneData) {
+          if (this._animWeight[i] > 0) {
+            animResults[node.name] = animResults[node.name] || [vec3.create(), quat.create(), 0];
+            let normalizedWeight = this._animWeight[i] / weightSum;
+
+            let boneResults = this.getAnimData(node, i);
+            vec3.scale(boneResults[0], boneResults[0], normalizedWeight);
+            vec3.add(animResults[node.name][0], animResults[node.name][0], boneResults[0]);
+            if (animResults[node.name][2] > 0) {
+              quat.slerp(animResults[node.name][1], animResults[node.name][1], boneResults[1], normalizedWeight/(normalizedWeight+animResults[node.name][2]));
             } else {
-              let lastPosition = Animation._interpolateKeyframes(node.keyframes.position, lastTime, node.isRoot);
-              newPosition = Animation._interpolateKeyframes(node.keyframes.position, this._currentTime, node.isRoot);
-              vec3.subtract(motion, newPosition, lastPosition);
-            }
-            for (let rootAxis=0; rootAxis<3; ++rootAxis) {
-              if (this.rootAxisLocked[rootAxis]) {
-                motion[rootAxis] = 0;
-              } else {
-                newPosition[rootAxis] = 0;
-              }
+              animResults[node.name][1] = boneResults[1];
             }
 
-            //Root Motion (need to reapply this transform's transformations (i.e. rotation & scale)
-            vec3.scale(motion, motion, this.transform.getScale()[0]);
-            vec3.transformQuat(motion, motion, this.transform.rotation);
-            this.transform.translate(motion);
-
-            let body = this.gameObject.getComponent('Collider').body;
-
-            body.position.x = this.transform.getWorldPosition()[0];
-            body.position.y = this.transform.getWorldPosition()[1];
-            body.position.z = this.transform.getWorldPosition()[2];
-
-            //Non-Root Motion (i.e. locked axes)
-            this.boneMap[node.name].setPosition(newPosition);
-
-            this.boneMap[node.name].setRotation(Animation._interpolateQuaternions(node.keyframes.rotation, this._currentTime));
-          } else {
-            this.boneMap[node.name].setPosition(Animation._interpolateKeyframes(node.keyframes.position, this._currentTime, node.isRoot));
-            this.boneMap[node.name].setRotation(Animation._interpolateQuaternions(node.keyframes.rotation, this._currentTime));
-            // node.object.scale = node.keyframes.scale[scaleIndex].second;
+            if (node.isRoot) {
+              vec3.add(rootResults, rootResults, vec3.scale(boneResults[2], boneResults[2], normalizedWeight));
+            }
+            animResults[node.name][2] += normalizedWeight;
           }
         }
+      }
+
+
+      for (let nodeName of Object.keys(animResults)) {
+        this.boneMap[nodeName].setPosition(animResults[nodeName][0]);
+        this.boneMap[nodeName].setRotation(animResults[nodeName][1]);
+      }
+
+
+      //Root Motion (need to reapply this transform's transformations (i.e. rotation & scale)
+      vec3.scale(rootResults, rootResults, this.transform.getScale()[0]);
+      vec3.transformQuat(rootResults, rootResults, this.transform.rotation);
+      this.transform.translate(rootResults);
+
+      let body = this.gameObject.getComponent('Collider').body;
+
+      body.position.x = this.transform.getWorldPosition()[0];
+      body.position.y = this.transform.getWorldPosition()[1];
+      body.position.z = this.transform.getWorldPosition()[2];
+
+
+
+
+  // node.object.scale = node.keyframes.scale[scaleIndex].second;
+
+
+    }
+
+
+    updateAnim(index) {
+      this._lastTime[index] = this._currentTime[index];
+      let currentAnim = Animation.prototype._animData[this.animationName][index];
+      if (this._playing[index]) {
+        this._currentTime[index] += currentAnim.tickrate * Time.deltaTime; //TODO update constant (maybe from JSON file's tickrate?)
+        if (this._currentTime[index] >= currentAnim.animationTime) {
+          if (this._looping[index]) {
+            this._currentTime[index] -= currentAnim.animationTime;
+          }
+          else {
+            this.stop(index);
+          }
+        }
+      }
+    }
+
+    getAnimData(node, index) {
+      let currentAnim = Animation.prototype._animData[this.animationName][index];
+      if (node.isRoot) {
+        let motion = vec3.create();
+        let newPosition = null;
+        if (this._lastTime[index] > this._currentTime[index]) {
+          let lastPosition = Animation._interpolateKeyframes(node.keyframes.position, this._lastTime[index], node.isRoot);
+          newPosition = Animation._interpolateKeyframes(node.keyframes.position, currentAnim.animationTime-0.1, node.isRoot);
+          vec3.subtract(motion, newPosition, lastPosition);
+          lastPosition = Animation._interpolateKeyframes(node.keyframes.position, 0, node.isRoot);
+          newPosition = Animation._interpolateKeyframes(node.keyframes.position, this._currentTime[index], node.isRoot);
+          vec3.add(motion, motion, vec3.subtract(vec3.create(), newPosition, lastPosition));
+        } else {
+          let lastPosition = Animation._interpolateKeyframes(node.keyframes.position, this._lastTime[index], node.isRoot);
+          newPosition = Animation._interpolateKeyframes(node.keyframes.position, this._currentTime[index], node.isRoot);
+          vec3.subtract(motion, newPosition, lastPosition);
+        }
+        for (let rootAxis=0; rootAxis<3; ++rootAxis) {
+          if (this.rootAxisLocked[rootAxis]) {
+            motion[rootAxis] = 0;
+          } else {
+            newPosition[rootAxis] = 0;
+          }
+        }
+
+        //Non-Root Motion (i.e. locked axes)
+        return [newPosition,
+                Animation._interpolateQuaternions(node.keyframes.rotation, this._currentTime[index]),
+                motion];
+      } else {
+        return [Animation._interpolateKeyframes(node.keyframes.position, this._currentTime[index], node.isRoot),
+                Animation._interpolateQuaternions(node.keyframes.rotation, this._currentTime[index])];
+      }
     }
 
     link (loadingAcceleration) {
@@ -238,3 +307,4 @@ class Animation extends Component
 
 }
 Animation.prototype._animData = {};
+Animation.prototype.BLEND_RATE = 2.5;//TODO: should probably be property of animation
