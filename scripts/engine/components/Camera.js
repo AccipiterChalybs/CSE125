@@ -3,9 +3,10 @@
  */
 
 const ZOOM_BUFFER = 0.1;
-const CAMERA_X_OFFSET = 0.25;
+const CAMERA_X_OFFSET = 0.08;
 const CAMERA_NORMAL_SCALE = 0.1;
-const CAMERA_SPEED_DOLLY = 1;
+const CAMERA_SPEED_DOLLY = 0.5;
+const CAMERA_WALK_OFFSET = 0.25;
 
 
 // Camera needs TWO game objects above it. First for orientation, second for position
@@ -26,8 +27,7 @@ class Camera extends Component
     this._up = vec3.create(); vec3.set(this._up, 0, 1, 0);
     this._matrix = mat4.create();
 
-    this._playerFollow = null;
-    this._playerPrevPos = vec3.create();
+    this._playerFocus = null;
 
     this._zoom = null;              // Component
     this._rotateMouse = null;       // Component
@@ -36,7 +36,8 @@ class Camera extends Component
   }
 
   startClient(){
-    this._playerFollow = PlayerTable.getPlayer().transform;
+    this._playerFocus = PlayerTable.getPlayer().getComponent("PlayerController");
+
     this._zoom = this.transform.gameObject.getComponent("ZoomMouse");
     this._rotateMouse = this.transform.gameObject.getComponent("RotateMouse");
     this._cameraOrientation = this.transform.getParent().getParent();
@@ -45,8 +46,6 @@ class Camera extends Component
     let targetPos = vec3.fromValues(CAMERA_X_OFFSET, 0, 0);
     this._targetTransform.setPosition(targetPos);
     this.transform.setPosition(vec3.fromValues(0, 0, this._zoom.currentZoom));
-
-    vec3.copy(this._playerPrevPos, this._playerFollow.getPosition());
   }
 
   getCameraMatrix()
@@ -87,9 +86,11 @@ class Camera extends Component
     let backUp = vec3.create(); vec3.add(backUp, backward, up);
     let backDown = vec3.create(); vec3.subtract(backDown, backward, up);
 
-    let playerMovement = vec3.squaredDistance(this._playerFollow.getPosition(), this._playerPrevPos);
     let newZoom = this._zoom.currentZoom;
-    Debug.log(playerMovement);
+    if(this._playerFocus.getCurrentState() === PlayerState.walking){
+      newZoom += CAMERA_WALK_OFFSET;
+    }
+
     let distance = newZoom;
     let normal = vec3.create();
     let result = {};
@@ -137,8 +138,6 @@ class Camera extends Component
 
     this.dolly({newPos: newPos, speed: dollySpeed});
     this.orbit({newRot: this._rotateMouse.dr});
-
-    vec3.copy(this._playerPrevPos, this._playerFollow.getPosition());
   }
 
   getFOV()

@@ -263,8 +263,8 @@ class GameScene {
     let directionalLight = new GameObject(false);
 
     if(!IS_SERVER) {
-      Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo({target: PlayerTable.getPlayer(),
-                                                                                      offset: vec3.fromValues(0, 0.32, 0)}));
+      Renderer.camera.transform.getParent().getParent().gameObject.addComponent(new ClientStickTo({target: PlayerTable.getPlayer(),
+                                                                                      offset: vec3.fromValues(0, .4, 0)}));
 
       Renderer.directionalLight = directionalLight;
       Renderer.directionalLight.setName("DirectionalLight");
@@ -328,7 +328,7 @@ class GameScene {
 
     if (!IS_SERVER){
       Debug.Profiler.startTimer('GameLogic', 2);
-      if (!IS_SERVER) Renderer.camera.transform.getParent().getParent().gameObject.updateClient();
+      Renderer.camera.transform.getParent().getParent().gameObject.updateClient();
       if (Renderer.directionalLight) Renderer.directionalLight.updateClient();
       Debug.Profiler.endTimer('GameLogic', 2);
     }
