@@ -263,9 +263,6 @@ class GameScene {
     let directionalLight = new GameObject(false);
 
     if(!IS_SERVER) {
-      Renderer.camera.transform.getParent().getParent().gameObject.addComponent(new ClientStickTo({target: PlayerTable.getPlayer(),
-                                                                                      offset: vec3.fromValues(0, .4, 0)}));
-
       Renderer.directionalLight = directionalLight;
       Renderer.directionalLight.setName("DirectionalLight");
       Renderer.directionalLight.addComponent(new DirectionalLight(true));

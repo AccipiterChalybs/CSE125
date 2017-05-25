@@ -4,6 +4,7 @@
 
 const ZOOM_BUFFER = 0.1;
 const CAMERA_X_OFFSET = 0.08;
+const CAMERA_Y_OFFSET = 0.4;
 const CAMERA_NORMAL_SCALE = 0.1;
 const CAMERA_SPEED_DOLLY = 0.5;
 const CAMERA_WALK_OFFSET = 0.25;
@@ -31,8 +32,8 @@ class Camera extends Component
 
     this._zoom = null;              // Component
     this._rotateMouse = null;       // Component
-    this._targetTransform = null;   // Gameobj
-    this._cameraOrientation = null; // Gameobj
+    this._targetTransform = null;   // Transform
+    this._cameraOrientation = null; // Transform
   }
 
   startClient(){
@@ -42,6 +43,9 @@ class Camera extends Component
     this._rotateMouse = this.transform.gameObject.getComponent("RotateMouse");
     this._cameraOrientation = this.transform.getParent().getParent();
     this._targetTransform = this.transform.getParent();
+
+    this._cameraOrientation.gameObject.addComponent(new ClientStickTo({target: this._playerFocus.gameObject,
+      offset: vec3.fromValues(0, CAMERA_Y_OFFSET, 0)}));
 
     let targetPos = vec3.fromValues(CAMERA_X_OFFSET, 0, 0);
     this._targetTransform.setPosition(targetPos);
