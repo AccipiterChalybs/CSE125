@@ -25,9 +25,8 @@ class Material{
         }
 
         let i=0;
-        for (let textureName of Object.keys(this.textures)) {
-            this._useTexture(textureName,i);
-            ++i;
+        for (let textureName of [MaterialTexture.COLOR, MaterialTexture.NORMAL, MaterialTexture.MAT]) {
+            this._useTexture(textureName, i++);
         }
     }
 
@@ -41,7 +40,6 @@ class Material{
     }
 
     _useTexture(textureName, slot) {
-        this.textures[textureName].bindTexture(slot);
-        this.shader.setUniform(textureName, slot, UniformTypes.u1i); //use glUniform1i for samplers
+        if (this.textures[textureName]) this.textures[textureName].bindTexture(slot);
     }
 }

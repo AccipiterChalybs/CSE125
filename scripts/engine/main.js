@@ -16,8 +16,7 @@ function initialize() {
   //glCanvas.getContext("webgl") || glCanvas.getContext("experimental-webgl");
 
   Input.init();
-
-  SoundEngine.init();
+  AudioEngine.init();
   GameEngine.init();
   if (!Debug.clientUpdate)
   {

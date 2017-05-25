@@ -3,8 +3,8 @@
  */
 
 class SphereCollider extends Collider{
-  constructor(mass = 0, trigger = false, scale = 1){
-    super(mass, trigger);
+  constructor({mass = 0, trigger = false, scale = 1}){
+    super({mass: mass, trigger: trigger});
 
     this.scale = scale;
   }

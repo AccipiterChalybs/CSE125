@@ -15,6 +15,7 @@ Debug.start = function() {
   if (Debug.debugDisplay) {
     if (Debug.fpsElement === null) Debug.fpsElement = document.getElementById("fpsLog");
     if (Debug.exposureElement === null) Debug.exposureElement = document.getElementById("exposureLog");
+    if (Debug.profilerElement === null) Debug.profilerElement = document.getElementById("profilerLog");
   }
 };
 
@@ -27,6 +28,7 @@ Debug.update = function() {
   if (Debug.displayOpen) {
     Debug.logFPS();
     Debug.logExposure();
+    Debug.Profiler.report();
   }
 
   if (Debug.bufferDebugMode) {
@@ -74,12 +76,13 @@ Debug.BUFFERTYPE_BLOOM = 6;
 Debug.BUFFERTYPE_SHADOW = 7;
 Debug.currentBuffer = Debug.BUFFERTYPE_NONE;
 
-Debug.currentLightIndex = 1; //TODO make this switchable with input
+Debug.currentLightIndex = 0; //TODO make this switchable with input
 
 
 Debug.displayOpen = false;
 Debug.fpsElement = null;
 Debug.exposureElement = null;
+Debug.profilerElement = null;
 Debug.lastTime=-1;
 Debug.frames=0;
 Debug.logFPS = function() {
@@ -88,8 +91,7 @@ Debug.logFPS = function() {
   let current = new Date().getTime();
   let duration = (current - Debug.lastTime) / 1000.0;
   if (duration >= 1) {
-    console.log(Debug.frames);
-    let fpsString = "FPS: " + Math.floor(Debug.frames/duration);
+    let fpsString = "FPS: " + Math.floor(Debug.frames/duration) + " " + Debug.frames;
     Debug.fpsElement.innerText = fpsString;
 
     Debug.frames = 0;
@@ -284,6 +286,75 @@ Debug.drawTeapot = function(pos, color = null) {
   GameObject.prototype.SceneRoot.addChild(teapot);
 
   return teapot;
+};
+
+Debug.Profiler = {data:[], map:{}, index:0};
+Debug.Profiler.newFrame = function() {
+  Debug.Profiler.index = 0;
+};
+
+Debug.Profiler.startTimer = function(name, level) {
+  if (!Debug.Profiler.data[name]) Debug.Profiler.data[name] = {};
+  Debug.Profiler.data[name].level = level;
+  Debug.Profiler.data[name].start = new Date().getTime();
+
+  Debug.Profiler.data[name].active = true;
+  Debug.Profiler.data[name].uniforms = 0;
+  Debug.Profiler.data[name].shaderUses = 0;
+  Debug.Profiler.data[name].draws = 0;
+
+  Debug.Profiler.map[Debug.Profiler.index] = name;
+  Debug.Profiler.index++;
+};
+
+Debug.Profiler.endTimer = function(name) {
+  Debug.Profiler.data[name].active = false;
+  Debug.Profiler.data[name].time = new Date().getTime() - Debug.Profiler.data[name].start;
+};
+
+Debug.Profiler.setUniform = function() {
+  if (Debug.Profiler.index > 0) {
+    let checkIndex = Debug.Profiler.index - 1;
+    while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
+      checkIndex--;
+    }
+    Debug.Profiler.data[Debug.Profiler.map[checkIndex]].uniforms++;
+  }
+};
+
+Debug.Profiler.useShader = function() {
+  if (Debug.Profiler.index > 0) {
+    let checkIndex = Debug.Profiler.index - 1;
+    while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
+      checkIndex--;
+    }
+    Debug.Profiler.data[Debug.Profiler.map[checkIndex]].shaderUses++;
+  }
+};
+
+Debug.Profiler.drawCall = function() {
+  if (Debug.Profiler.index > 0) {
+    let checkIndex = Debug.Profiler.index - 1;
+    while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
+      checkIndex--;
+    }
+    Debug.Profiler.data[Debug.Profiler.map[checkIndex]].draws++;
+  }
+};
+
+Debug.Profiler.report = function() {
+  let mainStr = '';
+  for (let i=0; i<Debug.Profiler.index; ++i) {
+    let currentProfile = Debug.Profiler.data[Debug.Profiler.map[i]];
+    let str = '|';
+    for (let space=0; space < currentProfile.level; space++) {
+      str += '__';
+    }
+    str += "["+Debug.Profiler.map[i] + "]: T " + currentProfile.time + " /U "
+           + currentProfile.uniforms + " /S " + currentProfile.shaderUses + " /D" + currentProfile.draws;
+    mainStr += str + '\n';
+  }
+  Debug.profilerElement.innerText = mainStr;
 };
 
 

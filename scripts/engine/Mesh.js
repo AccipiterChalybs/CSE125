@@ -25,7 +25,8 @@ class Mesh extends Component {
 
         if ((Renderer.currentShader === Renderer.getShader(Renderer.FORWARD_PBR_SHADER_ANIM) ||
             Renderer.currentShader === Renderer.getShader(Renderer.DEFERRED_PBR_SHADER_ANIM) ||
-            Renderer.currentShader === Renderer.getShader(Renderer.SHADOW_SHADER_ANIM)) && this.animationRoot) {
+            Renderer.currentShader === Renderer.getShader(Renderer.SHADOW_SHADER_ANIM) ||
+            Renderer.currentShader === Renderer.getShader(Renderer.POINT_SHADOW_SHADER_ANIM)) && this.animationRoot) {
             let meshBoneData = Mesh.prototype.boneIdMap[this.name];
 
             for (let node of this.animationRoot.getAnimationData()) {
@@ -39,6 +40,7 @@ class Mesh extends Component {
             }
         }
 
+        Debug.Profiler.drawCall();
         GL.drawElements(GL.TRIANGLES, currentEntry.indexSize, GL.UNSIGNED_SHORT, 0);
     }
 

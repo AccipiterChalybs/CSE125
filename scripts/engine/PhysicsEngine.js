@@ -14,11 +14,12 @@ const FILTER_PLAYER = 8;
 const FILTER_ENEMY = 16;
 const FILTER_KINEMATIC = 32;
 
-PhysicsEngine.world = new CANNON.World();
-PhysicsEngine.bodyMap = {};
-PhysicsEngine.sphereChecks = [];
 
 PhysicsEngine.init = function(){
+
+  PhysicsEngine.world = new CANNON.World();
+  PhysicsEngine.bodyMap = {};
+  PhysicsEngine.sphereChecks = [];
   PhysicsEngine.world.gravity.set(0, GRAVITY, 0);
   PhysicsEngine.world.broadphase = new CANNON.NaiveBroadphase();
 
@@ -53,9 +54,8 @@ PhysicsEngine.getCollider = function(bodyID){
 PhysicsEngine.overlapSphere = function(position, radius){
   let hitObjects = [];
   let radiusSqrd = radius * radius;
-
   for(let i = 0; i < PhysicsEngine.sphereChecks.length; ++i){
-    let dist = vec3.squaredDistance(position, PhysicsEngine.sphereChecks[i].transform.getPosition());
+    let dist = vec3.squaredDistance(position, PhysicsEngine.sphereChecks[i].transform.getWorldPosition());
 
     if(Debug.collision.printOverlapSphere) {
       Debug.printOverlapSphereInfo(PhysicsEngine.sphereChecks[i], dist, radiusSqrd);

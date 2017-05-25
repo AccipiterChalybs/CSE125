@@ -5,7 +5,7 @@
 // const COOLDOWN_SINGING = 0.1;   // In seconds
 
 class DoorEvent extends Event{
-  constructor(openPos, closePos) {
+  constructor({openPos, closePos}) {
     super();
 
     // this.movementSpeed = REGULAR_SPEED;
@@ -61,12 +61,14 @@ class DoorEvent extends Event{
 
   onRaycast(interactingObj) {
     let pController = interactingObj.getComponent('PlayerController');
+    // Debug.log(this._unlocked,pController.keys);
     if (!this._unlocked && pController && pController !== null && pController.keys > 0) {
+      Debug.log('unlocking');
       let audio = this.gameObject.getComponent('AudioSource');
-      if (audio && audio !== null) audio.setState(AudioState.play2dSound);
+      if (audio && audio !== null) audio.setState(AudioState.playSound);
       this._unlocked = true;
       pController.keys--; //Becareful in future here is HACK what if has lots of keys
-      interactingObj.transform.children.splice(0, 1);
+      // interactingObj.transform.children.splice(0, 1);
     }
   }
 
