@@ -144,10 +144,10 @@ class GameScene {
             if (x===1 && y===1){
               teapot.addComponent(new SphereCollider({mass: 0, trigger: true}));
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
-              let doorEvent = new DoorEvent({openPos: [-2,2,2], closePos: [-2,0,2]});
+              let doorEvent = new DoorEvent({openPos: [-2,2,2], closePos: [-2,0,2],unlocked:false});
               teapot.addComponent(new EventContainer({ events:[doorEvent] }));
               teapot.addComponent(new AudioSource("door_unlocked"));
-              teapot.addComponent(new SingingSwitch({events: [doorEvent],activationLevel:5 }));
+              teapot.addComponent(new SingingSwitch({events: [doorEvent],activationLevel:5,time_before_loss:3 }));
               quickEvent = doorEvent;
 
               if(!IS_SERVER) {
@@ -224,8 +224,8 @@ class GameScene {
               teapot.transform.scale(1.1);
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
               teapot.addComponent(new PointLight(false));
-              teapot.addComponent(new AudioSource("Tone02"));
-              teapot.addComponent(new Sing({}));
+              // teapot.addComponent(new AudioSource("Tone02"));
+              // teapot.addComponent(new Sing({}));
               teapot.addComponent(new StatueController({lightColor:[.5,3,4,1], lightRange: 1, singingCooldown: 2}));
 
               // if(!IS_SERVER) {

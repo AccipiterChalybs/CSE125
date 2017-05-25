@@ -7,7 +7,7 @@ const SWITCH_LOSS_RATE = 0.5; // per second
 const TIME_BEFORE_LOSS = 3;
 
 class SingingSwitch extends Listenable {
-  constructor({ events, activationLevel,time_before_loss =TIME_BEFORE_LOSS }) {
+  constructor({ events, activationLevel,time_before_loss }) {
     super();
     this._events = events;
     this.activationLevel = activationLevel;
@@ -25,31 +25,42 @@ class SingingSwitch extends Listenable {
   }
 
   updateComponent() {
-    if (this.charged === false || Time.time - this._lastSingTime >= this.time_before_loss) {
+    //TODO Clean up this logic
+
+    if (this.charged === true && Time.time - this._lastSingTime >= this.time_before_loss) {
       this._currentCharge = Utility.moveTowards(this._currentCharge, 0, SWITCH_LOSS_RATE * Time.deltaTime);
       for (let event of this._events) {
         event.setCurrentState(EventState.discharging);
       }
-    }
+      this.charged = false;
+    }else{
+      if (this._currentCharge === 0 && Time.time - this._lastSingTime >= this.time_before_loss) {
+        this.uncharged();
+      }else if (Time.time - this._lastSingTime >= this.time_before_loss) {
+        this._currentCharge = Utility.moveTowards(this._currentCharge, 0, SWITCH_LOSS_RATE * Time.deltaTime);
+        for (let event of this._events) {
+          event.setCurrentState(EventState.discharging);
+        }
+      }else if (Time.time <= this._lastSingTime + 0.1) {
+        this._currentCharge = Utility.moveTowards(this._currentCharge, this.activationLevel, SWITCH_CHARGE_RATE * Time.deltaTime);
 
-    if (this.charged === false && Time.time <= this._lastSingTime + 0.1) {
-      this._currentCharge = Utility.moveTowards(this._currentCharge, this.activationLevel, SWITCH_CHARGE_RATE * Time.deltaTime);
-      for (let event of this._events) {
-        event.setCurrentState(EventState.charging);
+        if(this._currentCharge===this.activationLevel){
+          this.fullyCharged();
+        }else{
+          for (let event of this._events) {
+            event.setCurrentState(EventState.charging);
+          }
+        }
+      }else if (this._currentCharge > this.activationLevel - 0.01) {
+        this.fullyCharged();
+      }else{
+        this._currentCharge = Utility.moveTowards(this._currentCharge, 0, SWITCH_LOSS_RATE * Time.deltaTime);
+        for (let event of this._events) {
+          event.setCurrentState(EventState.discharging);
+        }
       }
     }
 
-    if (this.charged === false && this._currentCharge > this.activationLevel - 0.01) {
-      this.fullyCharged();
-    } else if (this.charged === true && Time.time - this._lastSingTime >= this.time_before_loss) {
-      for (let event of this._events) {
-        event.setCurrentState(EventState.discharging);
-      }
-    }
-
-    if (this._currentCharge === 0) {
-      this.uncharged();
-    }
 
     this.transform.setScale(this._currentCharge / 100 + 0.02);
   }

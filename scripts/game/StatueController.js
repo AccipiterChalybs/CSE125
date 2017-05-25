@@ -49,7 +49,7 @@ class StatueController extends Playerable{
   updateComponentClient() {
     if(this._singingSrc && this._singingSrc!==null) {
       if (this.singing === 1 && Time.time >= this._nextSingTime) {
-        this._singingSrc.resumeSound();
+        this._singingSrc.playSound();
       } else {
         this._singingSrc.pauseSound();
       }
