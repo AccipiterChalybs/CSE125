@@ -64,9 +64,9 @@ class PlayerController extends Component{
 
   updateComponentClient(){
     if(!this.injured&& this.singing === 1 && Time.time >= this._nextSingTime) {
-      this._singingSrc.resumeSound();
+      //this._singingSrc.resumeSound();
     }else{
-      this._singingSrc.pauseSound();
+      //this._singingSrc.pauseSound();
     }
   }
 

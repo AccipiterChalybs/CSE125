@@ -106,12 +106,19 @@ class GameScene {
           let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
             if (x===5 && y===5) {
               //add sound to a GameObject
-              teapot.addComponent(new AudioSource());
-              if(!IS_SERVER) teapot.getComponent("AudioSource").playSound3d("cruelangel");
+              //teapot.addComponent(new AudioSource());
+              //if(!IS_SERVER) teapot.getComponent("AudioSource").playSound3d("cruelangel");
 
               if(!IS_SERVER) teapot.addComponent(new ParticleSystem({additive: true, texture: particleTex}));
+              //get rid of later just for testing
+              if(!IS_SERVER) {
+                  teapot.addComponent(new AudioSource('MainTheme'));
+                  teapot.getComponent('AudioSource').playSound();
+              }
+                //teapot.getComponent("AudioSource").playSound();
 
-              let decal = new GameObject();
+
+                let decal = new GameObject();
               teapot.addChild(decal);
               decal.addComponent(new Decal({scale: 200, color: vec4.fromValues(0.5,25,0.5,1), texture: decalTex, normal: decalNormal}));
               decal.transform.setPosition(vec3.fromValues(0, 30, 60));
@@ -131,13 +138,13 @@ class GameScene {
               teapot.addComponent(new SphereCollider({mass: 0, trigger: true}));
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
               teapot.addComponent(new DoorEvent({openPos: [-2,2,2], closePos: [-2,0,2]}));
-              teapot.addComponent(new AudioSource());
+              //teapot.addComponent(new AudioSource());
               teapot.addComponent(new SingingSwitch({event: teapot.getComponent("Event"),activationLevel:5 }));
               quickEvent = teapot.getComponent("Event");
 
               if(!IS_SERVER) {
-                teapot.getComponent("AudioSource").playSound2d('door_unlocked');
-                teapot.getComponent("AudioSource").pauseSound();
+                //teapot.getComponent("AudioSource").playSound2d('door_unlocked');
+                //teapot.getComponent("AudioSource").pauseSound();
               }
 
             }else if(x===9 && y===5){
@@ -153,24 +160,24 @@ class GameScene {
               teapot.transform.scale(.5);
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
               teapot.addComponent(new KeyEvent());
-              teapot.addComponent(new AudioSource());
+              //teapot.addComponent(new AudioSource());
               teapot.transform.position[1]=0;
               teapot.addComponent(new RaycastSwitch({event: teapot.getComponent("Event")}));
 
               if(!IS_SERVER) {
-                teapot.getComponent("AudioSource").playSound2d('get_item');
-                teapot.getComponent("AudioSource").pauseSound();
+                //teapot.getComponent("AudioSource").playSound2d('get_item');
+                //teapot.getComponent("AudioSource").pauseSound();
               }
             }else if(x===9 && y===3){
               teapot.addComponent(new SphereCollider({mass: 100, trigger: false, scale: 15}));
               teapot.transform.scale(1.1);
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
               teapot.addComponent(new HealEvent());
-              teapot.addComponent(new AudioSource());
+              teapot.addComponent(new AudioSource('MainTheme'));
               teapot.addComponent(new RaycastSwitch({event: teapot.getComponent("Event")}));
               if(!IS_SERVER) {
-                teapot.getComponent("AudioSource").playSound2d('heal');
-                teapot.getComponent("AudioSource").pauseSound();
+                //teapot.getComponent("AudioSource").playSound();
+                //teapot.getComponent("AudioSource").pauseSound();
               }
               teapot.transform.position[1]=0;
             }else if(x===2 && y===2){
