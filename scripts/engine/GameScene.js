@@ -40,12 +40,14 @@ class GameScene {
     let camera = new Camera();
     new GameObject().addComponent(camera);
     let rootTest = new GameObject();
-    camera.gameObject.transform.setParent(rootTest.transform);
+    let rotationCam = new GameObject();
+    rotationCam.transform.setParent(rootTest.transform);
+    camera.gameObject.transform.setParent(rotationCam.transform);
     camera.gameObject.addComponent(new AudioListener());
     camera.gameObject.addComponent(new ZoomMouse());
-    let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 5);
+    // let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 5);
     if(!IS_SERVER){
-      camera.transform.setPosition(newPosition);
+      // camera.transform.setPosition(newPosition);
       camera.gameObject.addComponent(new RotateMouse());
     }
     //GameObject.prototype.SceneRoot.transform.children[0].gameObject.getComponent('Animation').play(0, true);
@@ -242,7 +244,7 @@ class GameScene {
     let directionalLight = new GameObject(false);
 
     if(!IS_SERVER) {
-      Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo(PlayerTable.getPlayer(),
+      Renderer.camera.transform.getParent().getParent().gameObject.addComponent(new ClientStickTo(PlayerTable.getPlayer(),
                                                                                       vec3.fromValues(0, 1, 0)));
 
       Renderer.directionalLight = directionalLight;
@@ -304,7 +306,7 @@ class GameScene {
       PhysicsEngine.update();
     }
 
-    if (!IS_SERVER) Renderer.camera.transform.getParent().gameObject.updateClient();
+    if (!IS_SERVER) Renderer.camera.transform.getParent().getParent().gameObject.updateClient();
     if (!IS_SERVER) if (Renderer.directionalLight) Renderer.directionalLight.updateClient();
   }
 }
