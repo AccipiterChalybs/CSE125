@@ -138,6 +138,7 @@ PhysicsEngine.raycastClosest = function(origin,direction,maxDistance,mask,hit){
   let layers = PhysicsEngine.getLayers(mask);
   // Debug.log(layers);
   let closest = maxDistance;
+  let normal = vec3.create();
   let isHit = false;
   let bodyId = -1;
   PhysicsEngine.world.raycastAll(cannonOrigin,cannonTo, {},function(result){
@@ -145,7 +146,7 @@ PhysicsEngine.raycastClosest = function(origin,direction,maxDistance,mask,hit){
       isHit = true;
       closest = result.distance;
       bodyId = result.body.id;
-
+      normal = vec3.set(normal, result.hitNormalWorld.x, result.hitNormalWorld.y, result.hitNormalWorld.z);
     }
   });
   if(isHit){
@@ -153,6 +154,7 @@ PhysicsEngine.raycastClosest = function(origin,direction,maxDistance,mask,hit){
     hit.distance =closest;
     let newPos = vec3.create();vec3.scale(newPos,direction,hit.distance);vec3.add(newPos,origin,newPos);
     hit.position = newPos;
+    hit.normal = vec3.fromValues(normal[0], normal[1], normal[2]);
     hit.collider = PhysicsEngine.bodyMap[bodyId];
 
     return true;

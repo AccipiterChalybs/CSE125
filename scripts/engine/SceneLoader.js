@@ -144,13 +144,21 @@ const SceneLoader = {
     for (let generalCompName of Object.keys(currentNode)) {
       if (SceneLoader.ignoreComponents.indexOf(generalCompName) >= 0) continue;
       let compData = currentNode[generalCompName];
+      // Debug.log(currentNode, generalCompName, compData);
+
+      // switch(generalCompName){
+      //   case "Static":
+      //     break;
+      //   default:
+      //     nodeObject.addComponent(new map["PlayerController"](options));
+      //     break;
+      // }
 
 
       switch (generalCompName) {
         case "PlayerController":
           PlayerTable.addPlayer(nodeObject);
           nodeObject.addComponent(new Sing({}));
-          nodeObject.addComponent(new AudioSource());
           nodeObject.addComponent(new Look({}));
 
           //TODO attach to body instead
@@ -170,9 +178,10 @@ const SceneLoader = {
           }
 
           if (!IS_SERVER) {
-            nodeObject.getComponent("AudioSource").playSound2d("singTone0"+this.tone);
+            nodeObject.addComponent(new AudioSource("Tone0"+this.tone));
+            //nodeObject.getComponent("AudioSource").playSound2d("singTone0"+this.tone);
             this.tone+=1;
-            nodeObject.getComponent("AudioSource").pauseSound();
+            //nodeObject.getComponent("AudioSource").pauseSound();
           }
           break;
       }

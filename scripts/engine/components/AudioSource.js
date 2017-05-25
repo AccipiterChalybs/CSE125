@@ -1,184 +1,152 @@
 const AudioState = {
-  noSound: 0,
-  play2dSound: 1,
-  play3dSound: 2,
-  resume: 3,
-  pause: 4,
+    noSound: 0,
+    playSound: 1,
+    resume: 2,
+    pause: 3,
 };
 
-class AudioSource extends Component{
-  constructor() {
-    super();
-    this.componentType = 'AudioSource';
-    //this.sound=SoundEngine.playSound3d(SoundEngine[name]);
-    //sound is an array of [sound object, id]
-    this.sound = null;
-    this.sound3D = false;
-    this.state = AudioState.noSound;
-    this.queue = [];
-  }
-
-  start() {
-    this.gameObject.addComponentToSerializeableList(this);
-  }
-
-  startClient() {
-    this.gameObject.addComponentToSerializeableList(this);
-  }
-
-  updateComponentClient() {
-    if (this.sound === null) {
-      console.error('no sound has been set');
-      return;
+class AudioSource extends Component {
+    constructor(name) {
+        super();
+        this.componentType = 'AudioSource';
+        this.state = AudioState.noSound;
+        this.queue = [];
+        this.sound3D = false;
+        this.sound = null;
+        if(!IS_SERVER) {
+          if (AudioEngine.soundArr[name].G_SSpace === 3) {
+            this.sound3D = true;
+            this.sound = AudioEngine.playSound3d(name);
+          } else {
+            this.sound = AudioEngine.playSound2d(name);
+          }
+          AudioEngine.stopAudio(this.sound[0], this.sound[1])
+        }
     }
 
-    if (this.sound3D) {
-      let emitterSrc = this.transform.getWorldPosition();
-      SoundEngine.updatePosition(this.sound[0], this.sound[1], emitterSrc[0], emitterSrc[1], emitterSrc[2]);
+    //component and serilazation stuff
+    start() {
+        this.gameObject.addComponentToSerializeableList(this);
     }
 
-    // if(Debug.clientUpdate){
-    //   this.frameSkip++;
-    // }
-    if (this.queue.length > 0) {
-      this.state = this.queue.shift();
+    startClient() {
+        this.gameObject.addComponentToSerializeableList(this);
     }
 
-    switch (this.state){
-      case AudioState.noSound:
-        break;
-      case AudioState.play2dSound:
-        this.playSound2d(this.name);
-        if (Debug.clientUpdate) this.state = AudioState.noSound;
-        break;
-      case AudioState.play3dSound:
-        this.playSound3d(this.name, this.panObj);
-        if (Debug.clientUpdate) this.state = AudioState.noSound;
-        break;
-      case AudioState.resume:
-        this.resumeSound();
-        break;
-      case AudioState.pause:
-        this.pauseSound();
-        break;
+    updateComponentClient() {
+        if (this.sound === null) {
+            console.error('no sound has been set');
+            return;
+        }
+        if (this.sound3D) {
+            let emitterSrc = this.transform.getWorldPosition();
+            AudioEngine.setPosition(this.sound[0], this.sound[1], emitterSrc[0], emitterSrc[1], emitterSrc[2]);
+        }
+        if (this.queue.length > 0) {
+            this.state = this.queue.shift();
+        }
+        switch (this.state) {
+            case AudioState.noSound:
+                break;
+            case AudioState.playSound:
+                //this.playSound3d(this.name, this.panObj);
+                this.playSound();
+                if (Debug.clientUpdate) this.state = AudioState.noSound;
+                break;
+            case AudioState.resume:
+                this.resumeSound();
+                break;
+            case AudioState.pause:
+                this.pauseSound();
+                break;
+        }
     }
-  }
 
-  updateComponent() {
-    switch (this.state) {
-      case AudioState.play2dSound:
-        if (!this.serializeDirty) {
-          this.state = AudioState.noSound;
-          this.serializeDirty = true;
+    updateComponent() {
+        if(this.state===AudioState.playSound){
+            if (!this.serializeDirty) {
+                this.state = AudioState.noSound;
+                this.serializeDirty = true;
+            }
+        }
+    }
+
+    setState(state) {
+        //TODO Change this to make sure no sound effects get delayed.
+        this.state = state;
+        this.serializeDirty = true;
+    }
+
+    serialize() {
+        if (this.serializeDirty) {
+            let retVal = {};
+            retVal.s = this.state;
+            this.serializeDirty = false;
+            return retVal;
+        }
+        return null;
+    }
+
+    applySerializedData(data) {
+        this.queue.push(data.s);
+    }
+
+    //Sound Stuff
+    playSound() {
+        if (this.sound === null) {
+            console.error('no sound has been set');
+            return;
+        }
+        AudioEngine.resumeAudio(this.sound[0], this.sound[1]);
+    }
+
+    changeVolume(volume) {
+        if (this.sound === null) {
+            console.error('no sound has been set');
+            return;
+        }
+        AudioEngine.setVolume(this.sound[0], this.sound[1],volume);
+    }
+
+    pauseSound() {
+        if (this.sound === null) {
+            console.error('no sound has been set');
+            return;
+        }
+        AudioEngine.pauseAudio(this.sound[0], this.sound[1]);
+    }
+
+    stopSound() {
+        if (this.sound === null) {
+            console.error('no sound has been set');
+            return;
+        }
+        AudioEngine.stopAudio(this.sound[0], this.sound[1]);
+    }
+
+    loopSound(loop) {
+        if (this.sound === null) {
+            console.error('no sound has been set');
+            return;
+        }
+        AudioEngine.setLoop(this.sound[0], this.sound[1],loop);
+    }
+
+    updateOrientation(x, y, z) {
+        if (this.sound === null) {
+            console.error('no sound has been set');
+            return;
         }
 
-        break;
-      case AudioState.play3dSound:
-        if (!this.serializeDirty) {
-          this.state = AudioState.noSound;
-          this.serializeDirty = true;
+        AudioEngine.setOrientation(this.sound[0], this.sound[1], x, y, z);
+    }
+
+    setRate(rate) {
+        if (this.sound === null) {
+            console.error('no sound has been set');
+            return;
         }
 
-        break;
+        AudioEngine.setRate(this.sound[0], this.sound[1], rate);
     }
-  }
-
-  setState(state) {
-    //TODO Change this to make sure no sound effects get delayed.
-    this.state = state;
-    this.serializeDirty = true;
-  }
-
-  //bool name is the name of the sound, type is bool for 2d or 3d
-  playSound2d(name) {
-    this.name = name;
-    this.sound = SoundEngine.playSound2d(SoundEngine[name]);
-  }
-
-  playSound3d(name, panObj={ panningModel: 'HRTF', refDistance: 0.8, rolloffFactor: 2.5, distanceModel: 'exponential' }) {
-    this.name = name;
-    this.panObj = panObj;
-    this.sound = SoundEngine.playSound3d(SoundEngine[name], panObj);
-    this.sound3D = true;
-  }
-
-  changeVolume(volume) {
-    if (this.sound === null) {
-      console.error('no sound has been set');
-      return;
-    }
-
-    SoundEngine.changeVolume(this.sound[1], volume);
-  }
-
-  pauseSound() {
-    if (this.sound === null) {
-      console.error('no sound has been set');
-      return;
-    }
-
-    SoundEngine.pauseSound(this.sound[0], this.sound[1]);
-  }
-
-  resumeSound() {
-    if (this.sound === null) {
-      console.error('no sound has been set');
-      return;
-    }
-
-    SoundEngine.resumeSound(this.sound[0], this.sound[1]);
-  }
-
-  stopSound() {
-    if (this.sound === null) {
-      console.error('no sound has been set');
-      return;
-    }
-
-    SoundEngine.stopSound(this.sound[0], this.sound[1]);
-  }
-
-  loopSound() {
-    if (this.sound === null) {
-      console.error('no sound has been set');
-      return;
-    }
-
-    SoundEngine.loopSound(this.sound[0], this.sound[1]);
-  }
-
-  updateOrientation(x, y, z) {
-    if (this.sound === null) {
-      console.error('no sound has been set');
-      return;
-    }
-
-    SoundEngine.updateOrientation(this.sound[0], this.sound[1], x, y, z);
-  }
-
-  setRate(rate) {
-    if (this.sound === null) {
-      console.error('no sound has been set');
-      return;
-    }
-
-    SoundEngine.changeRate(this.sound[0], this.sound[1], rate);
-  }
-
-  serialize() {
-    if (this.serializeDirty) {
-      let retVal = {};
-      retVal.s = this.state;
-      this.serializeDirty = false;
-      return retVal;
-    }
-
-    return null;
-  }
-
-  applySerializedData(data) {
-    this.queue.push(data.s);
-
-    // this.state = data.s;
-  }
 }
