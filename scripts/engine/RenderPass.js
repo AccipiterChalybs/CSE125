@@ -125,7 +125,7 @@ class ShadowPass extends ForwardPass
         let caster = l;
         if (!caster || !caster.isShadowCaster) continue;
         if (caster.cubeShadow) {
-          caster.prepShadowMap();
+          caster.prepShadowMap(true);
           for (let f=0; f<6; ++f) {
             caster.bindShadowMap(f, true);
             this._drawMeshes(true, ShadowPass.prototype.MODE_STATIC);
@@ -157,10 +157,10 @@ class ShadowPass extends ForwardPass
             if (!caster || !caster.isShadowCaster) continue;
             if (caster.cubeShadow) {
               Debug.Profiler.startTimer("PointShadow "+lightIndex, 3);
-              caster.prepShadowMap();
+              caster.prepShadowMap(false);
               for (let f=0; f<6; ++f) {
                 caster.bindShadowMap(f, false);
-                this._drawMeshes(true, ShadowPass.prototype.MODE_DYNAMIC);
+                this._drawMeshes(true, caster.getShadowMode());
               }
               Debug.Profiler.endTimer("PointShadow "+lightIndex, 3);
             } else {
@@ -534,7 +534,7 @@ class BloomPass extends RenderPass
             if (light.isShadowCaster) {
               if (light.cubeShadow) {
                 let pos=0;
-                light.staticFBO[0].bindCubeMapTexture(1); //TODO switch back
+                light.bindCubeMap(1);
                 for (let f of [-1, -1, 3, -1, 4, 1, 5, 0, -1, -1, 2]) {
                   if (f===-1) { ++pos; continue; }
                   const displaySize = 256;

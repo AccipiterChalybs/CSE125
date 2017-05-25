@@ -36,6 +36,7 @@ const Renderer  = {
       Renderer.FBO_AVERAGE=17;
       Renderer.FBO_DEBUG_CHANNEL=18;
       Renderer.FBO_COPY=19;
+      Renderer.FBO_COPY_DEPTH=20;
 
       Renderer.DEFERRED_DECAL=25;
 
@@ -172,6 +173,10 @@ const Renderer  = {
 
       Renderer.shaderList[Renderer.FBO_COPY] = new Shader(
         Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_copy.frag"
+      );
+
+      Renderer.shaderList[Renderer.FBO_COPY_DEPTH] = new Shader(
+        Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_copy_depth.frag"
       );
 
 
@@ -471,6 +476,8 @@ const Renderer  = {
       Renderer.getShader(Renderer.FBO_COPY).setUniform("inputTex1", 0, UniformTypes.u1i);
       Renderer.getShader(Renderer.FBO_COPY).setUniform("inputTex2", 1, UniformTypes.u1i);
       Renderer.getShader(Renderer.FBO_COPY).setUniform("inputTex3", 2, UniformTypes.u1i);
+
+      Renderer.getShader(Renderer.FBO_COPY_DEPTH).setUniform("inputDepth", 0, UniformTypes.u1i);
   },
 
   loop: function () {

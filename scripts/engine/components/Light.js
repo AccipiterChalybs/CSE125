@@ -73,7 +73,7 @@ class Light extends Component{
 
 class PointLight extends Light{
 
-    constructor(shadow, isStatic) {
+    constructor(shadow, isStatic = false) {
       super();
       this.isShadowCaster = shadow;
       this.isStatic = isStatic;
@@ -121,7 +121,11 @@ class PointLight extends Light{
         this.deferredHelper("Sphere_Icosphere", bind);
     }
 
-  prepShadowMap() {
+  prepShadowMap(bake) {
+    if (!bake && this.isStatic) {
+      this.copyShadowMap();
+    }
+
     Renderer.shaderList[Renderer.POINT_SHADOW_SHADER_ANIM].setUniform("uP_Matrix", PointLight.prototype.shadowMatrix, UniformTypes.mat4);
     Renderer.shaderList[Renderer.POINT_SHADOW_SHADER_ANIM].setUniform("uLightPosition",this.gameObject.transform.getWorldPosition(),UniformTypes.vec3);
     Renderer.shaderList[Renderer.POINT_SHADOW_SHADER_ANIM].setUniform("uFarDepth", PointLight.prototype.FAR_DEPTH, UniformTypes.u1f);
@@ -131,13 +135,25 @@ class PointLight extends Light{
     Renderer.shaderList[Renderer.POINT_SHADOW_SHADER].setUniform("uFarDepth", PointLight.prototype.FAR_DEPTH, UniformTypes.u1f);
   }
 
+  copyShadowMap() {
+    if (Renderer.getCurrentShader() !== Renderer.getShader(Renderer.FBO_COPY_DEPTH)) {
+      Renderer.switchShader(Renderer.FBO_COPY_DEPTH);
+    }
+    this.staticFBO[0].bindCubeMapTexture(0);
+    for (let f=0; f<6; ++f) {
+      Renderer.currentShader.setUniform("currentFace", f, UniformTypes.u1i);
+      this.fbo[f].bind([], false, true);
+      this.fbo[f].draw();
+    }
+  }
+
 
   bindShadowMap(pass, bake){
     if (bake && !this.isStatic) return;
     let target = (bake) ? this.staticFBO : this.fbo;
     if(target && target !== null && this.isShadowCaster)
     {
-      target[pass].bind([], false);
+      target[pass].bind([], false, !this.isStatic);
 
       let mat = mat4.fromTranslation(mat4.create(), vec3.scale(vec3.create(), this.gameObject.transform.getWorldPosition(), -1));
       mat4.multiply(mat, PointLight.prototype.viewMatrixArray[pass], mat);
@@ -147,11 +163,11 @@ class PointLight extends Light{
   }
 
   bindCubeMap(slot) {
-    if (this.isStatic){
-      this.staticFBO[0].bindCubeMapTexture(slot);
-    } else {
-      this.fbo[0].bindCubeMapTexture(slot);
-    }
+    this.fbo[0].bindCubeMapTexture(slot);
+  }
+
+  getShadowMode() {
+    return (this.isStatic) ? ShadowPass.prototype.MODE_DYNAMIC : ShadowPass.prototype.MODE_STATIC /*TODO CHANGE*/;
   }
 }
 

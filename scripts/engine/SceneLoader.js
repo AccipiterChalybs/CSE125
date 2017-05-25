@@ -156,7 +156,7 @@ const SceneLoader = {
           //TODO attach to body instead
           let lightHolder = new GameObject();
           lightHolder.transform.setPosition(vec3.fromValues(0, 1.32, 0));
-          lightHolder.addComponent(new PointLight(false));
+          lightHolder.addComponent(new PointLight(true));
           nodeObject.addChild(lightHolder);
 
           if(Debug.clientUpdate){

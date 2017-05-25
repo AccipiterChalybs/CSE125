@@ -93,10 +93,10 @@ class Framebuffer {
     }
 
     //note buffersToDraw should be an array of COLOR_ATTACHMENTX
-    bind(buffersToDraw, resize = true) {
+    bind(buffersToDraw, resize = true, clear = true) {
         GL.bindFramebuffer(GL.FRAMEBUFFER, this.id);
         GL.drawBuffers(buffersToDraw);
-        GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
+        if (clear) GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
 
         Framebuffer.resizeRenderDimensions(resize, this.width, this.height);
     }
