@@ -108,7 +108,7 @@ class PlayerController extends Component{
       this.movement();
     }
 
-    if(this.this.state.status === 'singing'){
+    if(this.state.status === 'singing'){
       this._pointLight.setRange(Utility.moveTowards(this._pointLight.range,MAX_LIGHT_RANGE,LIGHT_EXPAND_RATE*Time.deltaTime));
     }else{
       this._pointLight.setRange(Utility.moveTowards(this._pointLight.range,MIN_LIGHT_RANGE,LIGHT_DIMINISH_RATE*Time.deltaTime));
@@ -148,7 +148,7 @@ class PlayerController extends Component{
     if (this.state.moveAmt > 0.01) {
       this.transform.setRotation(quat.create());
       this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
-      let animState = (this.this.state.status === 'singing') ? 2 : 3;
+      let animState = (this.state.status === 'singing') ? 2 : 3;
       // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(2, true);
       // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').resume();
     } else {
