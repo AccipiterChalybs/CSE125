@@ -149,6 +149,9 @@ const SceneLoader = {
             nodeObject.getComponent("AudioSource").playSound2d("singTone00");
           }
           break;
+        case "SingingSwitch":
+
+          break;
       }
 
       // new map["PC"](options);
