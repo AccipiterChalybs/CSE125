@@ -9,6 +9,7 @@ class RenderPass
 class ForwardPass extends RenderPass
 {
     render(){
+      Debug.Profiler.startTimer("ForwardPass", 2);
         let lightIndex = 0;
         //TODO sort lights by importance?
         for (let l of Renderer.renderBuffer.light) {
@@ -26,12 +27,14 @@ class ForwardPass extends RenderPass
             if (mesh.material.shader === Renderer.getShader(Renderer.FORWARD_UNLIT) || mesh.material.shader === Renderer.getShader(Renderer.FORWARD_EMISSIVE))
                 GL.depthMask(true);
         }
+      Debug.Profiler.endTimer("ForwardPass", 2);
     }
 }
 
 class ParticlePass extends RenderPass
 {
     render(){
+      Debug.Profiler.startTimer("ParticlePass", 2);
       GL.enable(GL.BLEND); //Blend function is specified on a per-particle system basis
       GL.depthMask(false);
 
@@ -43,6 +46,7 @@ class ParticlePass extends RenderPass
 
       GL.depthMask(true);
       GL.disable(GL.BLEND);
+      Debug.Profiler.endTimer("ParticlePass", 2);
     }
 }
 
@@ -59,6 +63,7 @@ class DecalPass extends RenderPass
   }
 
   render() {
+    Debug.Profiler.startTimer("DecalPass", 2);
     //Copy over deferred buffers we need (due to above issue)
     Renderer.deferredPass.buffers.bindTexture(0, 0); //colour
     Renderer.deferredPass.buffers.bindTexture(1, 1); //normal
@@ -91,6 +96,7 @@ class DecalPass extends RenderPass
     }
 
     GL.depthMask(true);
+    Debug.Profiler.endTimer("DecalPass", 2);
   }
 }
 
@@ -99,6 +105,7 @@ class DecalPass extends RenderPass
 class ShadowPass extends ForwardPass
 {
     render(){
+      Debug.Profiler.startTimer("ShadowPass", 2);
         GL.enable(GL.DEPTH_TEST);
         GL.depthMask(true);
         GL.disable(GL.BLEND);
@@ -110,20 +117,27 @@ class ShadowPass extends ForwardPass
         GL.cullFace(GL.BACK);
         GL.disable(GL.STENCIL_TEST);
 
+        let lightIndex = 0;
         for (let l of Renderer.renderBuffer.light) {
             let caster = l;
             if (!caster || !caster.isShadowCaster) continue;
             if (caster.cubeShadow) {
+              Debug.Profiler.startTimer("PointShadow "+lightIndex, 3);
               caster.prepShadowMap();
               for (let f=0; f<6; ++f) {
                 caster.bindShadowMap(f);
                 this._drawMeshes(true);
               }
+              Debug.Profiler.endTimer("PointShadow "+lightIndex, 3);
             } else {
+              Debug.Profiler.startTimer("DirShadow "+lightIndex, 3);
               caster.bindShadowMap(0);
               this._drawMeshes(false);
+              Debug.Profiler.endTimer("DirShadow "+lightIndex, 3);
             }
+            lightIndex++;
         }
+      Debug.Profiler.endTimer("ShadowPass", 2);
     }
 
     _drawMeshes(isPoint) {
@@ -153,6 +167,7 @@ class DeferredPrePass extends RenderPass
   }
 
   render() {
+    Debug.Profiler.startTimer("DeferredPrePass", 2);
     GL.enable(GL.DEPTH_TEST);
     GL.depthMask(true);
     GL.disable(GL.BLEND);
@@ -166,6 +181,7 @@ class DeferredPrePass extends RenderPass
       mesh.material.bind();
       mesh.draw();
     }
+    Debug.Profiler.endTimer("DeferredPrePass", 2);
   }
 }
 
@@ -180,6 +196,7 @@ class DeferredPass extends RenderPass
     }
 
     render(){
+      Debug.Profiler.startTimer("DeferredMainPass", 2);
 
         //make sure prepass is done first!
 
@@ -273,7 +290,7 @@ class DeferredPass extends RenderPass
         Renderer.currentShader.setUniform("uLightPosition", vec3.create(), UniformTypes.vec3);
         Renderer.currentShader.setUniform("uV_Matrix", mat4.create(), UniformTypes.mat4);
         Renderer.currentShader.setUniform("uP_Matrix", mat4.create(), UniformTypes.mat4);
-        //GL.drawElements(GL.TRIANGLES, currentEntry.indexSize, GL.UNSIGNED_SHORT, 0);
+        GL.drawElements(GL.TRIANGLES, currentEntry.indexSize, GL.UNSIGNED_SHORT, 0);
         Renderer.currentShader.setUniform("uP_Matrix", Renderer.perspective, UniformTypes.mat4);
 
 
@@ -283,6 +300,7 @@ class DeferredPass extends RenderPass
         GL.depthMask(true);
         GL.cullFace(GL.BACK);
         GL.blendFunc(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA);
+        Debug.Profiler.endTimer("DeferredMainPass", 2);
     }
 }
 
@@ -300,7 +318,10 @@ class SkyboxPass extends RenderPass
     }
 
     render(){
-        if (this.skybox && this.skybox !== null) { this.skybox.draw(); }
+      Debug.Profiler.startTimer("SkyboxPass", 2);
+        if (this.skybox && this.skybox !== null) { this.skybox.draw();
+          Debug.Profiler.drawCall(); }
+      Debug.Profiler.endTimer("SkyboxPass", 2);
     }
 }
 
@@ -338,6 +359,7 @@ class BloomPass extends RenderPass
     }
     
     render() {
+      Debug.Profiler.startTimer("PostProcessingPass", 2);
         let s1 = Renderer.getShader(Renderer.FBO_PASS);
         let s2 = Renderer.getShader(Renderer.FBO_BLUR);
         let s3 = Renderer.getShader(Renderer.FBO_HDR);
@@ -353,11 +375,11 @@ class BloomPass extends RenderPass
         //Calculate Average Exposure for Eye Adjustment
         //(Have to render again to get highest mipmap since WebGL doesn't have getTexImage)
         const newDataWeight = 0.05;
-        this._averagePass.bind([buffers[0]]);
+        this._averagePass.bind([buffers[0]], false);
         s4.use();
         this._deferredPass.fbo.draw();
         let currentRGB = new Float32Array(this._averageSize * this._averageSize * 4);
-        GL.readPixels(0, 0, this._averageSize, this._averageSize, GL.RGBA, GL.FLOAT, currentRGB);
+        //TODO GL.readPixels(0, 0, this._averageSize, this._averageSize, GL.RGBA, GL.FLOAT, currentRGB);
         let lumen = 0;
 
         for (let x=0; x<currentRGB.length; ++x) {
@@ -372,12 +394,13 @@ class BloomPass extends RenderPass
         }
         lumen /= this._averageSize*this._averageSize;
 
+        lumen=1; //TODO remove to re-enable expsoure adjustment
         if (!isNaN(lumen)) {
             this.averageExposure = this.averageExposure * (1 - newDataWeight) + lumen * (newDataWeight);
         }
         //-----------------------------------------------------
 
-        this._brightPass.bind([buffers[0]]);
+        this._brightPass.bind([buffers[0]], false);
         s1.use();
         this._deferredPass.fbo.draw();
 
@@ -395,13 +418,13 @@ class BloomPass extends RenderPass
             s2.setUniform("width", (Renderer.getWindowWidth() / Math.pow(2, i + 1)), UniformTypes.u1f);
             s2.setUniform("height", (Renderer.getWindowHeight() / Math.pow(2, i + 1)), UniformTypes.u1f);
             this._brightPass.bindTexture(0, 0);
-            this._blurBuffers[i][0].bind([buffers[0]]);
+            this._blurBuffers[i][0].bind([buffers[0]], false);
             s2.setUniform("direction", new Float32Array([1, 0]), UniformTypes.vec2);
             this._deferredPass.fbo.draw();
 
             s2.setUniform("level", 0, UniformTypes.u1f);
             this._blurBuffers[i][0].bindTexture(0, 0);
-            this._blurBuffers[i][1].bind([buffers[0]] );
+            this._blurBuffers[i][1].bind([buffers[0]], false );
             s2.setUniform("direction", new Float32Array([0, 1]), UniformTypes.vec2);
             this._deferredPass.fbo.draw();
         }
@@ -492,5 +515,6 @@ class BloomPass extends RenderPass
             break;
         }
       }
+      Debug.Profiler.endTimer("PostProcessingPass", 2);
     }
 }

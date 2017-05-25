@@ -184,11 +184,13 @@ class GameScene {
               teapot.addComponent(new SphereCollider({mass: 0, trigger: true}));
               // teapot.addComponent(new AudioSource());
               teapot.addComponent(new TriggerTest());
+
               // if(!IS_SERVER) {
               //   teapot.getComponent('AudioSource').playSound2d('singTone03');
               //   teapot.getComponent('AudioSource').pauseSound();
               // }
               let lightComp = new PointLight(true);
+
               lightComp.color = vec3.fromValues(5, 2.5, 0);
               lightComp.exponentialFalloff = 0.25;
               teapot.addComponent(lightComp);
@@ -259,7 +261,7 @@ class GameScene {
 
     if(!IS_SERVER) {
       Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo({target: PlayerTable.getPlayer(),
-                                                                                      offset: vec3.fromValues(0, 1, 0)}));
+                                                                                      offset: vec3.fromValues(0, 0.32, 0)}));
 
       Renderer.directionalLight = directionalLight;
       Renderer.directionalLight.setName("DirectionalLight");
@@ -278,7 +280,7 @@ class GameScene {
 
 
     let light = new GameObject();
-    let lightComp = new PointLight(true);
+    let lightComp = new PointLight(false);
     lightComp.color = vec3.fromValues(5, 2.5, 0);
     lightComp.exponentialFalloff = 0.25;
     light.addComponent(lightComp);
@@ -295,7 +297,6 @@ class GameScene {
     let lightCenter = new GameObject();
     lightCenter.addChild(light);
     lightCenter.addComponent(new RotateOverTime({speed: 2.5}));
-
     GameObject.prototype.SceneRoot.addChild(lightCenter);
 
     //let move = vec3.create(); vec3.set(move, 0, 500, 64);
@@ -317,10 +318,16 @@ class GameScene {
     // -- Physics update call will likely go here --
     if(Debug.clientUpdate)
     {
+      Debug.Profiler.startTimer('Physics', 2);
       PhysicsEngine.update();
+      Debug.Profiler.endTimer('Physics', 2);
     }
 
-    if (!IS_SERVER) Renderer.camera.transform.getParent().gameObject.updateClient();
-    if (!IS_SERVER) if (Renderer.directionalLight) Renderer.directionalLight.updateClient();
+    if (!IS_SERVER){
+      Debug.Profiler.startTimer('GameLogic', 2);
+      Renderer.camera.transform.getParent().gameObject.updateClient();
+      if (Renderer.directionalLight) Renderer.directionalLight.updateClient();
+      Debug.Profiler.endTimer('GameLogic', 2);
+    }
   }
 }
