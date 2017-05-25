@@ -135,13 +135,13 @@ class GameScene {
             }
             teapot.transform.setPosition(pos);
             teapot.transform.setRotation(rotation);
-            teapot.transform.scale((0.02));
+            teapot.transform.scale((0.01));
 
             if (x===1 && y===1){
               teapot.addComponent(new SphereCollider({mass: 0, trigger: true}));
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
               teapot.addComponent(new DoorEvent({openPos: [-2,2,2], closePos: [-2,0,2]}));
-              //teapot.addComponent(new AudioSource());
+              teapot.addComponent(new AudioSource("door_unlocked"));
               teapot.addComponent(new SingingSwitch({event: teapot.getComponent("Event"),activationLevel:5 }));
               quickEvent = teapot.getComponent("Event");
 
@@ -163,7 +163,7 @@ class GameScene {
               teapot.transform.scale(.5);
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
               teapot.addComponent(new KeyEvent());
-              //teapot.addComponent(new AudioSource());
+              teapot.addComponent(new AudioSource("get_item"));
               teapot.transform.position[1]=0;
               teapot.addComponent(new RaycastSwitch({event: teapot.getComponent("Event")}));
 
@@ -176,7 +176,7 @@ class GameScene {
               teapot.transform.scale(1.1);
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
               teapot.addComponent(new HealEvent());
-              teapot.addComponent(new AudioSource('MainTheme'));
+              teapot.addComponent(new AudioSource('heal'));
               teapot.addComponent(new RaycastSwitch({event: teapot.getComponent("Event")}));
               if(!IS_SERVER) {
                 //teapot.getComponent("AudioSource").playSound();

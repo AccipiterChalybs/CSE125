@@ -13,13 +13,15 @@ class AudioSource extends Component {
         this.queue = [];
         this.sound3D = false;
         this.sound = null;
-        if (AudioEngine.soundArr[name].G_SSpace === 3) {
+        if(!IS_SERVER) {
+          if (AudioEngine.soundArr[name].G_SSpace === 3) {
             this.sound3D = true;
             this.sound = AudioEngine.playSound3d(name);
-        } else {
+          } else {
             this.sound = AudioEngine.playSound2d(name);
+          }
+          AudioEngine.stopAudio(this.sound[0], this.sound[1])
         }
-        AudioEngine.stopAudio(this.sound[0], this.sound[1])
     }
 
     //component and serilazation stuff

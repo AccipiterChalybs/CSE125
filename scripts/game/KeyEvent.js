@@ -54,7 +54,7 @@ class KeyEvent extends Event{
       player.keys++;
       this.transform.gameObject.getComponent('Collider').setLayer(FILTER_DEFAULT);
       let audio = this.gameObject.getComponent("AudioSource");
-      if(audio && audio!==null) audio.setState(AudioState.play2dSound);
+      if(audio && audio!==null) audio.setState(AudioState.playSound);
     }
     // this.transform.scale(50);
 
