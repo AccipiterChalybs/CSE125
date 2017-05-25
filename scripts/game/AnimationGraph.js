@@ -8,11 +8,6 @@ class AnimationGraph {
         ...
       }
     */
-<<<<<<< HEAD
-    this.name = '';
-=======
->>>>>>> 6cc8a00... ag: animation states working
-
     this.componentType = 'AnimationGraph';
   }
 
