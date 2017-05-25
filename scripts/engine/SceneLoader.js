@@ -142,6 +142,15 @@ const SceneLoader = {
     for (let generalCompName of Object.keys(currentNode)) {
       if (SceneLoader.ignoreComponents.indexOf(generalCompName) >= 0) continue;
       let compData = currentNode[generalCompName];
+      // Debug.log(currentNode, generalCompName, compData);
+
+      // switch(generalCompName){
+      //   case "Static":
+      //     break;
+      //   default:
+      //     nodeObject.addComponent(new map["PlayerController"](options));
+      //     break;
+      // }
 
 
       switch (generalCompName) {

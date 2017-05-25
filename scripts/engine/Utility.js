@@ -54,5 +54,7 @@ Utility.vec3.moveTowards = function(a, b, delta){
   vec3.normalize(dir, dir);
   vec3.scale(dir, dir, delta);
 
-  return vec3.add(dir, a, dir);
+  vec3.add(dir, a, dir);
+
+  return dir;
 };

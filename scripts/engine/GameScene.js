@@ -40,13 +40,15 @@ class GameScene {
     let camera = new Camera();
     new GameObject().addComponent(camera);
     let rootTest = new GameObject();
-    camera.gameObject.transform.setParent(rootTest.transform);
+    let rotationCam = new GameObject();
+    rotationCam.transform.setParent(rootTest.transform);
+    camera.gameObject.transform.setParent(rotationCam.transform);
     camera.gameObject.addComponent(new AudioListener());
     camera.gameObject.addComponent(new ZoomMouse());
-    let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 5);
+    // let newPosition = vec3.create(); vec3.set(newPosition, 0, 0, 5);
     if(!IS_SERVER){
-      Renderer.camera.transform.setPosition(newPosition);
-      Renderer.camera.transform.getParent().gameObject.addComponent(new RotateMouse());
+      // camera.transform.setPosition(newPosition);
+      camera.gameObject.addComponent(new RotateMouse());
     }
     //GameObject.prototype.SceneRoot.transform.children[0].gameObject.getComponent('Animation').play(0, true);
 
@@ -118,7 +120,8 @@ class GameScene {
                 //teapot.getComponent("AudioSource").playSound();
 
 
-                let decal = new GameObject();
+
+              let decal = new GameObject();
               teapot.addChild(decal);
               decal.addComponent(new Decal({scale: 200, color: vec4.fromValues(0.5,25,0.5,1), texture: decalTex, normal: decalNormal}));
               decal.transform.setPosition(vec3.fromValues(0, 30, 60));
@@ -260,9 +263,6 @@ class GameScene {
     let directionalLight = new GameObject(false);
 
     if(!IS_SERVER) {
-      Renderer.camera.transform.getParent().gameObject.addComponent(new ClientStickTo({target: PlayerTable.getPlayer(),
-                                                                                      offset: vec3.fromValues(0, 0.32, 0)}));
-
       Renderer.directionalLight = directionalLight;
       Renderer.directionalLight.setName("DirectionalLight");
       Renderer.directionalLight.addComponent(new DirectionalLight(true));
@@ -325,7 +325,7 @@ class GameScene {
 
     if (!IS_SERVER){
       Debug.Profiler.startTimer('GameLogic', 2);
-      Renderer.camera.transform.getParent().gameObject.updateClient();
+      Renderer.camera.transform.getParent().getParent().gameObject.updateClient();
       if (Renderer.directionalLight) Renderer.directionalLight.updateClient();
       Debug.Profiler.endTimer('GameLogic', 2);
     }
