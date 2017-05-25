@@ -24,6 +24,7 @@ class Look extends Component{
     if (PhysicsEngine.raycastClosest(this.transform.getWorldPosition(), this.transform.gameObject.getComponent('PlayerController').forward, this.range, FILTER_KINEMATIC, hit))
     {
       let seen = hit.collider.gameObject.getComponent('Viewable');
+      // Debug.log(hit);
       if (seen && seen !== null)
       {
         // Debug.log("I SAW HERE THERE SHE GOES");

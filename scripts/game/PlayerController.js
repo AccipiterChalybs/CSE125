@@ -8,26 +8,20 @@ const SING_SPEED = 0.8;
 const PLAYER_ACCELERATION = 4;
 const COOLDOWN_SINGING = 0.1;   // In seconds
 const CHAR_NAME = "CAIN"; // CUZ I GOT 1 KEY and 0 bombs
-
-const PlayerState = {
-  default: "default",
-  walking: "walking",
-  singing: "singing",
-  noControl: "noControl",
-  cantMove: "cantMove"
-};
+const MAX_LIGHT_RANGE = 8;
+const MIN_LIGHT_RANGE = 1;
+const LIGHT_EXPAND_RATE = 15;
+const LIGHT_DIMINISH_RATE = 5;
 
 // Requires a collider, sing
 class PlayerController extends Component{
   constructor(){
     super();
     this.componentType = "PlayerController";
-    this.movementSpeed = REGULAR_SPEED;
     this.x = 0;
     this.y = 0;
     this.z = 0;
     this.singing = 0;
-    this.walking = 0;
     this.action = 0;
     this.forward = vec3.create(); vec3.set(this.forward,0,0,-1);
     this.keys = 0;
@@ -37,16 +31,26 @@ class PlayerController extends Component{
     this._singingSrc = null;
     this._nextSingTime = 0;
     this._lastSingInput = 0;
-    this._currentState = PlayerState.default;
     this.injured = true;
+
+    this.state = new PlayerLogicState();
+    this.state.status = 'default';
+    this.state.moveSpeed = REGULAR_SPEED;
   }
 
   start(){
     this._collider = this.transform.gameObject.getComponent("Collider");
     this._singer = this.transform.gameObject.getComponent("Sing");
     this._looker = this.transform.gameObject.getComponent("Look");
+    this._pointLight = this.transform.gameObject.getComponent("Light");
+    this._pointLight.setColor([4,3,0.25,1]);
+    this._pointLight.setRange(1);
+    this.transform.gameObject.getComponent("Collider").setLayer(FILTER_PLAYER);
+
     this._collider.setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
     this._collider.setFreezeRotation(true);
+
+    this.state.start(this.gameObject);
   }
 
   startClient(){
@@ -55,14 +59,15 @@ class PlayerController extends Component{
 
   updateComponentClient(){
     if(!this.injured&& this.singing === 1 && Time.time >= this._nextSingTime) {
-      this._singingSrc.resumeSound();
+      this._singingSrc.playSound();
     }else{
       this._singingSrc.pauseSound();
     }
+
   }
 
   updateComponent(){
-    if(this._currentState === PlayerState.noControl)
+    if(this.state.status === 'noControl')
       return;
 
     // Add if loop to enable client side testing w/o server
@@ -84,37 +89,46 @@ class PlayerController extends Component{
 
     this._lastSingInput = this.singing;
 
-    if(this._currentState === PlayerState.cantMove){
+    if(this.state.status === 'cantMove'){
 
     }else if(!this.injured && this.singing === 1 && Time.time >= this._nextSingTime) {
-      this._currentState = PlayerState.singing;
+      this.state.status = 'singing';
       //if !injured
       this._singer.sing();
+
       // if(!IS_SERVER) this._singingSrc.resumeSound();
       //
     }else if(this.walking === 1){
-      this._currentState = PlayerState.walking;
+      this.state.status = 'walking';
     }else{
-      this._currentState = PlayerState.default;
+      this.state.status = 'default';
     }
 
-    if(this._currentState !== PlayerState.cantMove) {
+    if(this.state.status !== 'cantMove') {
       this.movement();
+    }
+
+    if(this.state.status === 'singing'){
+      this._pointLight.setRange(Utility.moveTowards(this._pointLight.range,MAX_LIGHT_RANGE,LIGHT_EXPAND_RATE*Time.deltaTime));
+    }else{
+      this._pointLight.setRange(Utility.moveTowards(this._pointLight.range,MIN_LIGHT_RANGE,LIGHT_DIMINISH_RATE*Time.deltaTime));
     }
 
     if(this.action === 1){
       this._looker.look();
     }
+
+    this.state.update();
   }
 
 
   movement(){
-    if(this._currentState === PlayerState.singing){
-      this.movementSpeed = Utility.moveTowards(this.movementSpeed, SING_SPEED, 4 * PLAYER_ACCELERATION * Time.deltaTime);
-    } else if(this._currentState === PlayerState.walking){
-      this.movementSpeed = Utility.moveTowards(this.movementSpeed, WALK_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
-    } else if(this._currentState === PlayerState.default){
-      this.movementSpeed = Utility.moveTowards(this.movementSpeed, REGULAR_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
+    if(this.state.status === 'singing'){
+      this.state.moveSpeed = Utility.moveTowards(this.state.moveSpeed, SING_SPEED, 4 * PLAYER_ACCELERATION * Time.deltaTime);
+    } else if(this.state.status === 'walking'){
+      this.state.moveSpeed = Utility.moveTowards(this.state.moveSpeed, WALK_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
+    } else if(this.state.status === 'default'){
+      this.state.moveSpeed = Utility.moveTowards(this.state.moveSpeed, REGULAR_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
     }
 
     let up = vec3.create(); vec3.set(up, 0, 1, 0);
@@ -123,21 +137,23 @@ class PlayerController extends Component{
     let moveZ = vec3.create(); vec3.cross(moveZ, up, moveX);
     vec3.normalize(moveX, moveX);
     vec3.normalize(moveZ, moveZ);
-    vec3.scale(moveX, moveX, this.x * this.movementSpeed);
-    vec3.scale(moveZ, moveZ, this.z * this.movementSpeed);
+    vec3.scale(moveX, moveX, this.x * this.state.moveSpeed);
+    vec3.scale(moveZ, moveZ, this.z * this.state.moveSpeed);
     vec3.add(move, moveX, moveZ);
     vec3.normalize(move, move);
-    vec3.scale(move, move, this.movementSpeed);
+    vec3.scale(move, move, this.state.moveSpeed);
 
+    this.state.moveAmt = vec3.length(move);
 
-    if (vec3.length(move) > 0.01) {
+    if (this.state.moveAmt > 0.01) {
       this.transform.setRotation(quat.create());
       this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
-      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(2, true);
-      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').resume();
+      let animState = (this.state.status === 'singing') ? 2 : 3;
+      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(2, true);
+      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').resume();
     } else {
-      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').stop();
-      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(1, true);
+      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').stop();
+      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(1, true);
     }
 
 
@@ -152,10 +168,10 @@ class PlayerController extends Component{
   }
 
   getCurrentState(){
-    return this._currentState;
+    return this.state.status;
   }
 
   setCurrentState(newState){
-    this._currentState = newState;
+    this.state.status = newState;
   }
 }

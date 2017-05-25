@@ -1,0 +1,44 @@
+{
+  "Tone00":{
+    "src": "assets/audio/tone.wav",
+    "loop": true,
+    "type": 0,
+    "space": 3
+  },
+  "MainTheme":{
+    "src": "assets/audio/cruelangel.mp3",
+    "loop": false,
+    "type": 1,
+    "space": 3
+  },
+  "get_item":{
+    "src": "assets/audio/get_item.mp3",
+    "loop": false,
+    "type": 0,
+    "space": 2
+  },
+  "door_unlocked":{
+    "src": "assets/audio/door_unlocked.mp3",
+    "loop": false,
+    "type": 0,
+    "space": 2
+  },
+  "heal":{
+    "src": "assets/audio/healmag.wav",
+    "loop": false,
+    "type": 0,
+    "space": 2
+  },
+  "Tone01":{
+    "src": "assets/audio/tone.wav",
+    "loop": true,
+    "type": 0,
+    "space": 3
+  },
+  "Tone02":{
+    "src": "assets/audio/tone.wav",
+    "loop": true,
+    "type": 0,
+    "space": 3
+  }
+}

@@ -8,7 +8,8 @@ const SceneLoader = {
   //Ignore these in general pass, likely because they are already handled specially
   ignoreComponents: ["name", "index", "static", "Animator", "AnimatorJS", "SkinnedMeshRenderer", "MeshFilter", "MeshRenderer",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
-  shadowLightsAvailable: 0,
+  shadowLightsAvailable: 1,
+  tone: 0,
 
   loadScene: function(filename) {
     let loadId = GameEngine.registerLoading();
@@ -21,19 +22,21 @@ const SceneLoader = {
       return;
     }
 
-    for (let matData of scene.materialList) {
-      //TODO support more shaders (e.g. animation)
-      let shaderId = (matData.animated) ? Renderer.DEFERRED_PBR_SHADER_ANIM : Renderer.DEFERRED_PBR_SHADER;
-      let mat = new Material(Renderer.getShader(shaderId), false);
-      mat.setTexture(MaterialTexture.COLOR, new Texture(matData.color));
-      mat.setTexture(MaterialTexture.MAT, new Texture(matData.mat, false));
-      mat.setTexture(MaterialTexture.NORMAL, new Texture(matData.normal, false));
-      SceneLoader.materialMap[matData.name] = mat;
+    if(!IS_SERVER) {
+
+
+      for (let matData of scene.materialList) {
+        //TODO support more shaders (e.g. animation)
+        let shaderId = (matData.animated) ? Renderer.DEFERRED_PBR_SHADER_ANIM : Renderer.DEFERRED_PBR_SHADER;
+        let mat = new Material(Renderer.getShader(shaderId), false);
+        mat.setTexture(MaterialTexture.COLOR, new Texture(matData.color));
+        mat.setTexture(MaterialTexture.MAT, new Texture(matData.mat, false));
+        mat.setTexture(MaterialTexture.NORMAL, new Texture(matData.normal, false));
+        SceneLoader.materialMap[matData.name] = mat;
+      }
+      SceneLoader.materialMap['default'] = Debug.makeDefaultMaterial();
     }
-    SceneLoader.materialMap['default'] = Debug.makeDefaultMaterial();
-
     let retScene = SceneLoader._parseNode(GameObject.prototype.SceneRoot, scene.hierarchy, filename, {}, []);
-
 
     //ObjectLoader.loadCollision(GameObject.prototype.SceneRoot, "assets/scenes/ExampleLevel_Colliders.json");
 
@@ -62,7 +65,10 @@ const SceneLoader = {
     quat.rotateX(rotate, rotate, 1*(currentNode["Transform"].rotation[0]) / 180 * Math.PI);
     quat.rotateZ(rotate, rotate, -1*(currentNode["Transform"].rotation[2]) / 180 * Math.PI);
 
-    quat.multiply(rotate, mat4.getRotation(quat.create(), invParentTransform), rotate);
+    let parentRotation = parent.transform.getWorldRotation();
+    quat.normalize(parentRotation, parentRotation);
+    quat.invert(parentRotation, parentRotation);
+    quat.multiply(rotate, parentRotation, rotate);
 
     let scale = currentNode["Transform"].scaleFactor;
 
@@ -115,7 +121,7 @@ const SceneLoader = {
         let meshName = currentNode["MeshFilter"] || currentNode["SkinnedMeshRenderer"].name;
         if (meshName === 'Plane' || meshName === 'Cube' || meshName === 'Sphere' || meshName === 'Capsule') {
           console.log(meshName = 'Plane');
-          nodeObject.transform.scale(5);
+        //  nodeObject.transform.scale(5);
           nodeObject.transform.rotateX(Math.PI/2);
         }
         let mesh = new Mesh(meshName);
@@ -136,17 +142,39 @@ const SceneLoader = {
     for (let generalCompName of Object.keys(currentNode)) {
       if (SceneLoader.ignoreComponents.indexOf(generalCompName) >= 0) continue;
       let compData = currentNode[generalCompName];
+      // Debug.log(currentNode, generalCompName, compData);
+
+      // switch(generalCompName){
+      //   case "Static":
+      //     break;
+      //   default:
+      //     nodeObject.addComponent(new map["PlayerController"](options));
+      //     break;
+      // }
+
 
       switch (generalCompName) {
         case "PlayerController":
           PlayerTable.addPlayer(nodeObject);
           nodeObject.addComponent(new Sing({}));
-          nodeObject.addComponent(new AudioSource());
           nodeObject.addComponent(new Look({}));
-          let pc = new PlayerController();
-          nodeObject.addComponent(pc);
+          nodeObject.addComponent(new PointLight(false));
+
+          if(Debug.clientUpdate){
+            if(this.tone===0){
+              let pc = new PlayerController();
+              nodeObject.addComponent(pc);
+            }
+          }else{
+            let pc = new PlayerController();
+            nodeObject.addComponent(pc);
+          }
+
           if (!IS_SERVER) {
-            nodeObject.getComponent("AudioSource").playSound2d("singTone00");
+            nodeObject.addComponent(new AudioSource("Tone0"+this.tone));
+            //nodeObject.getComponent("AudioSource").playSound2d("singTone0"+this.tone);
+            this.tone+=1;
+            //nodeObject.getComponent("AudioSource").pauseSound();
           }
           break;
         case "SingingSwitch":
