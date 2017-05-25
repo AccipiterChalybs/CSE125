@@ -4,7 +4,7 @@
 
 let Debug = {};
 
-Debug.clientUpdate = false; //Run the client in standalone mode, so it doesn't need a server - good for testing!
+Debug.clientUpdate = true; //Run the client in standalone mode, so it doesn't need a server - good for testing!
 Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
 Debug.debugDisplay = true;
 Debug.quickLoad = true;
@@ -16,6 +16,11 @@ Debug.start = function() {
     if (Debug.fpsElement === null) Debug.fpsElement = document.getElementById("fpsLog");
     if (Debug.exposureElement === null) Debug.exposureElement = document.getElementById("exposureLog");
     if (Debug.profilerElement === null) Debug.profilerElement = document.getElementById("profilerLog");
+    if (!Debug.animationStateElement) {
+      Debug.animationStateElement = document.createElement('div');
+      console.log(Debug.animationStateElement);
+      document.getElementById('debugContainer').appendChild(Debug.animationStateElement);
+    }
   }
 };
 
@@ -29,6 +34,7 @@ Debug.update = function() {
     Debug.logFPS();
     Debug.logExposure();
     Debug.Profiler.report();
+    Debug.logAnimationState();
   }
 
   if (Debug.bufferDebugMode) {
@@ -104,6 +110,15 @@ Debug.logExposure = function() {
   Debug.exposureElement.innerText = "Exposure: " + Renderer.postPass.averageExposure;
 };
 
+Debug.logAnimationState = () => {
+  const p = PlayerTable.currentPlayer;
+  const o = PlayerTable.getPlayer();
+  const ls = o.getComponent('PlayerController').state;
+  const s = ls.state.name;
+  const m = ls.moveAmt;
+  const l = ls.status;
+  Debug.animationStateElement.innerText = `Player ${p} is ${s} with ms ${m} and status ${l}`;
+};
 
 //Go through Debug, so easier to find and remove;
 Debug.log = console.log;

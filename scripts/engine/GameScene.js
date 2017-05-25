@@ -24,6 +24,9 @@ class GameScene {
       }
     }
 
+    // Animations graphs loaded here, for now
+    AnimationGraph.loadPlayerAnimationGraph();
+
     SceneLoader.loadScene(sceneFile);
 
     // TODO REMOVE ME LATER
