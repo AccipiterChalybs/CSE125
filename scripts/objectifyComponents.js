@@ -5,6 +5,7 @@ const glm = require('./glMatrix-2.3.2.min.js');
 const vec3 = glm.vec3;
 const mat4 = glm.mat4;
 const quat = glm.quat;
+const IS_SERVER = true;
 
 const componentsClasses = [
   'AudioListener', 'AudioSource',
