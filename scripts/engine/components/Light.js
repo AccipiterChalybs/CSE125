@@ -73,7 +73,7 @@ class Light extends Component{
 
 class PointLight extends Light{
 
-    constructor(shadow) {
+    constructor(shadow = false) {
       super();
       this.isShadowCaster = shadow;
     }
@@ -157,7 +157,7 @@ PointLight.prototype.viewMatrixArray = [
 
 class DirectionalLight extends Light{
 
-  constructor(shadow) {
+  constructor(shadow = false) {
     super();
     this.isShadowCaster = shadow;
   }

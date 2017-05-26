@@ -14,18 +14,36 @@ function isArray(a) {
   return false;
 }
 
-function formatVar(type, prop, data) {
-  let out = `\tpublic ${type} ${prop} = `;
-  if (data === null) {
-    out += `${data};`;
-  } else if (type === 'string') {
-    out += `"${data}"`;
-  } else if (isArray(data)) {
-    out += `[${data}];`;
+function specialFormating(type, prop, data) {
+  if (prop === 'color') {
+    type = 'Color';
+    data = `new Color(${data[0]}f, ${data[1]}f, ${data[2]}f)`;
   } else {
-    out += `${data};`;
+    return false;
   }
-  return out;
+
+  return {type, prop, out: data};
+}
+
+function formatVar(type, prop, data) {
+  let out = '';
+  if (data === null || data === undefined) {
+    out = 'null';
+  } else {
+    const sf = specialFormating(type, prop, data);
+    if (sf) {
+      ({ type, prop, out } = sf);
+    } else if (type === 'string') {
+      out = `"${data}"`;
+    } else if (isArray(data)) {
+      type = `${type}[]`
+      out = `{${data}}`;
+    } else {
+      out = `${data}`;
+    }
+  }
+  // return `${out};`;
+  return `\tpublic ${type} ${prop} = ${out};`;
 }
 
 // unity class file template
@@ -37,10 +55,12 @@ function createUnityClass(obj) {
   lines.push(`public class ${obj.constructor.name} : MonoBehavior {`);
   for (const prop in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, prop)) {
-      const type = typeConv[typeof obj[prop]];
+      let type = typeConv[typeof obj[prop]];
       if (type === undefined) {
-        console.log(`${prop} of type ${typeof obj[prop]} is undef`);
+        console.log(`Warning, ${prop} from ${obj.constructor.name} of type ${typeof obj[prop]} is undef`);
+        type = 'object';
       }
+      // obj prop undef???
       lines.push(formatVar(type, prop, obj[prop]));
     }
   }
@@ -49,6 +69,11 @@ function createUnityClass(obj) {
   return lines.join('\n');
 }
 
+try {
+  fs.mkdirSync(dirPath);
+} catch(err) {
+  // fail silently
+}
 // create unity class files
 componentsClasses.forEach((c) => {
   // use default constructor to create instantiation with member props

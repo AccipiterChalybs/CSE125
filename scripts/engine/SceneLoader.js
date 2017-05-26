@@ -1,11 +1,22 @@
 /**
  * Created by Accipiter Chalybs on 5/10/2017.
  */
+const c = {
+  AIController, Animation, AudioListener, AudioSource, BoxCollider, Camera,
+  ClientStickTo, Collider, CompoundCollider, Decal, Light, ParticleSystem,
+  SphereCollider, Transform,
+  AnimationGraph, AnimationState, DoorEvent, Event, EvilController, HealEvent,
+  KeyEvent, Listenable, Look, ObjectLogicState, PlayerController,
+  PlayerLogicState, PlayerTable, RaycastSwitch, RotateArrowKey, RotateMouse,
+  RotateOverTime, Sing, SingingSwitch, TriggerTest, Viewable, ZoomMouse,
+};
 
 const SceneLoader = {
 
   materialMap: {},
-  //Ignore these in general pass, likely because they are already handled specially
+  // All components we load into gameObject
+  components: c,
+  // Ignore these in general pass, likely because they are already handled specially
   ignoreComponents: ["name", "index", "static", "Animator", "AnimatorJS", "SkinnedMeshRenderer", "MeshFilter", "MeshRenderer",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
   shadowLightsAvailable: 1,
