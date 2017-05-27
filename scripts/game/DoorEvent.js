@@ -5,14 +5,15 @@
 // const COOLDOWN_SINGING = 0.1;   // In seconds
 
 class DoorEvent extends Event{
-  constructor(params = {openPos: null, closePos: null}) {
+  constructor(params = {openPosX: 0, openPosY: 0, openPosZ: 0,
+    closePosX: 0, closePosY: 1.5, closePosZ: 0, unlocked: false}) {
     super();
 
     // this.movementSpeed = REGULAR_SPEED;
     this.setCurrentState(EventState.uncharged);
-    this._unlocked = false;
-    this.openPos = params.openPos;
-    this.closePos = params.closePos;
+    this._unlocked = params.unlocked;
+    this.openPos = vec3.fromValues(params.openPosX, params.openPosY, params.openPosZ);
+    this.closePos = vec3.fromValues(params.closePosZ, params.closePosZ, params.closePosZ);
   }
 
   start() {

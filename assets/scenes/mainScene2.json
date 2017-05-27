@@ -11111,7 +11111,7 @@
         "index": "742",
         "static": true,
         "Transform": {
-          "position": [17.149, -0.006, -11.98245],
+          "position": [17.149, 0, -11.98245],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -11121,12 +11121,21 @@
             "index": "743",
             "static": true,
             "Transform": {
-              "position": [17.149, -0.006, -11.98245],
+              "position": [17.149, 0, -11.98245],
               "rotation": [270, 90, 0],
               "scaleFactor": 0.55
             },
             "MeshFilter": "Door.000",
             "MeshRenderer": "dungeon-stone1-albedo2",
+            "DoorEvent": {
+              "_unlocked": "True",
+              "openPosX": "0",
+              "openPosY": "1.5",
+              "openPosZ": "0",
+              "closePosX": "0",
+              "closePosY": "0",
+              "closePos": "0"
+            },
             "colliders": [
               {
                 "type": "box",
@@ -11193,6 +11202,15 @@
             },
             "MeshFilter": "Door.000",
             "MeshRenderer": "dungeon-stone1-albedo2",
+            "DoorEvent": {
+              "_unlocked": "True",
+              "openPosX": "0",
+              "openPosY": "1.5",
+              "openPosZ": "0",
+              "closePosX": "0",
+              "closePosY": "0",
+              "closePos": "0"
+            },
             "colliders": [
               {
                 "type": "box",
