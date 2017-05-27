@@ -3,8 +3,8 @@
  */
 
 const ZOOM_BUFFER = 0.1;
-const CAMERA_X_OFFSET = 0.08;
-const CAMERA_Y_OFFSET = 0.4;
+const CAMERA_X_OFFSET = 0.09;
+const CAMERA_Y_OFFSET = 0.75;
 const CAMERA_NORMAL_SCALE = 0.1;
 const CAMERA_SPEED_DOLLY = 0.5;
 const CAMERA_WALK_OFFSET = 0.25;

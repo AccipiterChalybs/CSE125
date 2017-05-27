@@ -31,7 +31,7 @@ class PlayerController extends Component{
     this._singingSrc = null;
     this._nextSingTime = 0;
     this._lastSingInput = 0;
-    this.injured = true;
+    this.injured = false;
 
     this.state = new PlayerLogicState();
     this.state.status = 'default';

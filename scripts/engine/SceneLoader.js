@@ -154,6 +154,8 @@ const SceneLoader = {
       if (SceneLoader.ignoreComponents.indexOf(generalCompName) >= 0) continue;
       let compData = currentNode[generalCompName];
       // Debug.log(currentNode, generalCompName, compData);
+      Debug.log(c[generalCompName]);
+      Debug.log(compData);
 
       // switch(generalCompName){
       //   case "Static":
@@ -167,8 +169,8 @@ const SceneLoader = {
       switch (generalCompName) {
         case "PlayerController":
           PlayerTable.addPlayer(nodeObject);
-          nodeObject.addComponent(new Sing({}));
-          nodeObject.addComponent(new Look({}));
+          // nodeObject.addComponent(new Sing({}));
+          // nodeObject.addComponent(new Look({}));
           nodeObject.addComponent(new PointLight(false));
 
           if(Debug.clientUpdate){
@@ -188,8 +190,8 @@ const SceneLoader = {
             //nodeObject.getComponent("AudioSource").pauseSound();
           }
           break;
-        case "SingingSwitch":
-
+        default:
+          nodeObject.addComponent(new c[generalCompName](compData));
           break;
       }
 

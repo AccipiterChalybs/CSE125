@@ -52,7 +52,7 @@ const unityPrelude = 'using System.Collections;\n' +
                      'using UnityEngine;\n';
 function createUnityClass(obj) {
   const lines = [unityPrelude];
-  lines.push(`public class ${obj.constructor.name} : MonoBehavior {`);
+  lines.push(`public class ${obj.constructor.name} : MonoBehaviour {`);
   for (const prop in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, prop)) {
       let type = typeConv[typeof obj[prop]];
