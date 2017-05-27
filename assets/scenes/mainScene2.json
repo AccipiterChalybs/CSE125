@@ -12158,7 +12158,7 @@
             "colliders": [
               {
                 "type": "sphere",
-                "scale": 0.01330701,
+                "scale": 1.32,
                 "offset": [7.450581E-09, 3.725291E-09, 0]
               }
             ]
@@ -12175,9 +12175,18 @@
             "MeshFilter": "Statue.2",
             "MeshRenderer": "carvedlimestoneground1_Base_Color",
             "SingingSwitch": {
-              "attachedEvent": [743],
+              "events": [743],
               "activationLevel": "5"
-            }
+            },
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.970925,
+                "scaleY": 2.429153,
+                "scaleZ": 1.087409,
+                "offset": [-0.1420816, 1.212189, -0.1047038]
+              }
+            ]
           }
         ]
       },
@@ -12205,7 +12214,7 @@
             "colliders": [
               {
                 "type": "sphere",
-                "scale": 0.01330701,
+                "scale": 1.32,
                 "offset": [7.450581E-09, 3.725291E-09, 0]
               }
             ]
@@ -12221,10 +12230,15 @@
             },
             "MeshFilter": "Statue.2",
             "MeshRenderer": "carvedlimestoneground1_Base_Color",
-            "SingingSwitch": {
-              "attachedEvent": "null",
-              "activationLevel": "5"
-            }
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.970925,
+                "scaleY": 2.429153,
+                "scaleZ": 1.087409,
+                "offset": [-0.1420816, 1.212189, -0.1047038]
+              }
+            ]
           }
         ]
       },
@@ -12252,7 +12266,7 @@
             "colliders": [
               {
                 "type": "sphere",
-                "scale": 0.01330701,
+                "scale": 1.32,
                 "offset": [7.450581E-09, 3.725291E-09, 0]
               }
             ]
@@ -12269,9 +12283,18 @@
             "MeshFilter": "Statue.2",
             "MeshRenderer": "carvedlimestoneground1_Base_Color",
             "SingingSwitch": {
-              "attachedEvent": "null",
+              "events": [747],
               "activationLevel": "5"
-            }
+            },
+            "colliders": [
+              {
+                "type": "box",
+                "scaleX": 0.970925,
+                "scaleY": 2.429153,
+                "scaleZ": 1.087409,
+                "offset": [-0.1420816, 1.212189, -0.1047038]
+              }
+            ]
           }
         ]
       },

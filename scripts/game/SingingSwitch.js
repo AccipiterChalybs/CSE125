@@ -9,9 +9,11 @@ const TIME_BEFORE_LOSS = 3;
 class SingingSwitch extends Listenable {
   constructor({ events, activationLevel,time_before_loss }) {
     super();
-    for(event of events){
-      Debug.log(GameObject.prototype.SerializeMap[event]);
-      this._events.push(GameObject.prototype.SerializeMap[event]);
+    this._events = [];
+    // Debug.log(GameObject.prototype.SerializeMap);
+    for(let i = 0; i < events.length; ++i){
+      // Debug.log(GameObject.prototype.SerializeMap[events[i]]);
+      this._events.push(GameObject.prototype.SerializeMap[events[i]].getComponent("Event"));
     }
     Debug.log(this._events);
     this.activationLevel = activationLevel;
@@ -30,6 +32,8 @@ class SingingSwitch extends Listenable {
 
   updateComponent() {
     //TODO Clean up this logic
+    // Debug.log(this._events[0].transform);
+    Debug.log(this.transform);
 
     if (this.charged === true && Time.time - this._lastSingTime >= this.time_before_loss) {
       this._currentCharge = Utility.moveTowards(this._currentCharge, 0, SWITCH_LOSS_RATE * Time.deltaTime);

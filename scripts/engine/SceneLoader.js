@@ -19,7 +19,7 @@ const SceneLoader = {
   // Ignore these in general pass, likely because they are already handled specially
   ignoreComponents: ["name", "index", "static", "Animator", "AnimatorJS", "SkinnedMeshRenderer", "MeshFilter", "MeshRenderer",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
-  shadowLightsAvailable: 20,
+  shadowLightsAvailable: 0,
   tone: 0,
 
   loadScene: function(filename) {
@@ -56,7 +56,7 @@ const SceneLoader = {
   },
 
   _parseNode: function(parent,  currentNode, filename, loadingAcceleration, lights) {
-    let nodeObject = new GameObject();
+    let nodeObject = new GameObject({id: currentNode.index});
     parent.addChild(nodeObject);
 
     let name = currentNode.name;
@@ -156,17 +156,8 @@ const SceneLoader = {
       if (SceneLoader.ignoreComponents.indexOf(generalCompName) >= 0) continue;
       let compData = currentNode[generalCompName];
       // Debug.log(currentNode, generalCompName, compData);
-      Debug.log(c[generalCompName]);
-      Debug.log(compData);
-
-      // switch(generalCompName){
-      //   case "Static":
-      //     break;
-      //   default:
-      //     nodeObject.addComponent(new map["PlayerController"](options));
-      //     break;
-      // }
-
+      // Debug.log(c[generalCompName]);
+      // Debug.log(compData);
 
       switch (generalCompName) {
         case "PlayerController":
@@ -198,8 +189,6 @@ const SceneLoader = {
           nodeObject.addComponent(new c[generalCompName](compData));
           break;
       }
-
-      // new map["PC"](options);
     }
 
     //TODO there's probably a better way to do this...

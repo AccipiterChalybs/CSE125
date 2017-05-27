@@ -29,7 +29,7 @@ class PlayerController extends Playerable{
     this._looker = null;
     this.checkpoint = null;
     this.keys = 0;
-    this.injured = true;
+    this.injured = false;
 
     this.state = new PlayerLogicState();
     this.state.status = 'default';

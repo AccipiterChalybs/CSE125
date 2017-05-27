@@ -147,7 +147,7 @@ class GameScene {
               let doorEvent = new DoorEvent({openPos: [-2,2,2], closePos: [-2,0,2],unlocked:false});
               teapot.addComponent(new EventContainer({ events:[doorEvent] }));
               teapot.addComponent(new AudioSource("door_unlocked"));
-              teapot.addComponent(new SingingSwitch({events: [doorEvent],activationLevel:5,time_before_loss:3 }));
+              // teapot.addComponent(new SingingSwitch({events: [doorEvent],activationLevel:5,time_before_loss:3 }));
               quickEvent = doorEvent;
 
               if(!IS_SERVER) {
@@ -246,7 +246,7 @@ class GameScene {
               teapot.addComponent(new StatueController({lightColor:[.5,3,4,1], lightRange: 1, singingCooldown: 2}));
               let moveTowardsEvent= new MoveTowardsEvent({target: PlayerTable.players[0]});
               teapot.addComponent(new EventContainer({events:[moveTowardsEvent]}));
-              teapot.addComponent(new SingingSwitch({events: [moveTowardsEvent],activationLevel: .5,time_before_loss: 0.1}));
+              // teapot.addComponent(new SingingSwitch({events: [moveTowardsEvent],activationLevel: .5,time_before_loss: 0.1}));
               teapot.transform.position[1]=0;
               specialTeapot = true;
             }else{
@@ -307,7 +307,7 @@ class GameScene {
     // }
 
     //TODO make true and make clientside objects work
-    let directionalLight = new GameObject(false);
+    let directionalLight = new GameObject({clientSideOnly: false});
 
     if(!IS_SERVER) {
       Renderer.directionalLight = directionalLight;
