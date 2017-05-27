@@ -6,31 +6,30 @@ const REGULAR_SPEED = 4;
 const WALK_SPEED = 2;
 const SING_SPEED = 0.8;
 const PLAYER_ACCELERATION = 4;
-const COOLDOWN_SINGING = 0.1;   // In seconds
 const CHAR_NAME = "CAIN"; // CUZ I GOT 1 KEY and 0 bombs
+const COOLDOWN_SINGING = 0.1;   // In seconds
 const MAX_LIGHT_RANGE = 8;
 const MIN_LIGHT_RANGE = 1;
 const LIGHT_EXPAND_RATE = 15;
 const LIGHT_DIMINISH_RATE = 5;
 
-// Requires a collider, sing
-class PlayerController extends Component{
-  constructor(){
-    super();
-    this.componentType = "PlayerController";
-    this.x = 0;
-    this.y = 0;
-    this.z = 0;
-    this.singing = 0;
-    this.action = 0;
-    this.forward = vec3.create(); vec3.set(this.forward,0,0,-1);
-    this.keys = 0;
+const PlayerState = {
+  default: "default",
+  walking: "walking",
+  singing: "singing",
+  noControl: "noControl",
+  cantMove: "cantMove",
+  dead: "dead"
+};
 
-    this._collider = null;
-    this._singer = null;
-    this._singingSrc = null;
-    this._nextSingTime = 0;
-    this._lastSingInput = 0;
+// Requires a collider, sing
+
+class PlayerController extends Playerable{
+  constructor({lightColor,lightRange,singingCooldown}){
+    super({lightColor,lightRange,singingCooldown});
+    this._looker = null;
+    this.checkpoint = null;
+    this.keys = 0;
     this.injured = true;
 
     this.state = new PlayerLogicState();
@@ -39,22 +38,16 @@ class PlayerController extends Component{
   }
 
   start(){
-    this._collider = this.transform.gameObject.getComponent("Collider");
-    this._singer = this.transform.gameObject.getComponent("Sing");
+    super.start();
     this._looker = this.transform.gameObject.getComponent("Look");
-    this._pointLight = this.transform.children[0].gameObject.getComponent("Light");
-    this._pointLight.setColor(vec3.fromValues(3.6,12.1,2));
-    this._pointLight.setRange(1);
-    this.transform.gameObject.getComponent("Collider").setLayer(FILTER_PLAYER);
-
-    this._collider.setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
-    this._collider.setFreezeRotation(true);
-
     this.state.start(this.gameObject);
+    this.transform.gameObject.getComponent("Collider").setLayer(FILTER_PLAYER);
+    this.checkpoint = this.transform.getWorldPosition();
+
   }
 
   startClient(){
-    this._singingSrc = this.transform.gameObject.getComponent("AudioSource");
+    super.startClient();
   }
 
   updateComponentClient(){
@@ -67,7 +60,14 @@ class PlayerController extends Component{
   }
 
   updateComponent(){
-    if(this.state.status === 'noControl')
+
+    if(this._currentState === PlayerState.dead){
+      Debug.log('INSDIE DEAD');
+      this.transform.setWorldPosition(this.checkpoint);
+      this._currentState = PlayerState.default;
+      return;
+    }
+    if(this._currentState === PlayerState.noControl)
       return;
 
     // Add if loop to enable client side testing w/o server
@@ -83,7 +83,7 @@ class PlayerController extends Component{
     }
 
     if(this.singing === 0 && this._lastSingInput === 1){
-      this._nextSingTime = Time.time + COOLDOWN_SINGING;
+      this._nextSingTime = Time.time + this._singingCooldown;
       // if(!IS_SERVER) this._singingSrc.pauseSound();
     }
 
@@ -163,9 +163,6 @@ class PlayerController extends Component{
     //col.setRotation(this.forward);
   }
 
-  sing(){
-    // console.log("singing!");
-  }
 
   getCurrentState(){
     return this.state.status;
@@ -173,5 +170,22 @@ class PlayerController extends Component{
 
   setCurrentState(newState){
     this.state.status = newState;
+    return data;
   }
+
+  serialize() {
+    let data = super.serialize();
+    data.i = this.injured;
+    data.k = this.keys;
+    return data;
+  }
+
+  applySerializedData(data) {
+    // Debug.log(this);
+    super.applySerializedData(data);
+    this.injured = data.i;
+    this.keys = data.k;
+  }
+
+
 }
