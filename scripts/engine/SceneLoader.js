@@ -19,7 +19,7 @@ const SceneLoader = {
   // Ignore these in general pass, likely because they are already handled specially
   ignoreComponents: ["name", "index", "static", "Animator", "AnimatorJS", "SkinnedMeshRenderer", "MeshFilter", "MeshRenderer",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
-  shadowLightsAvailable: 1,
+  shadowLightsAvailable: 20,
   tone: 0,
 
   loadScene: function(filename) {
@@ -62,6 +62,8 @@ const SceneLoader = {
     let name = currentNode.name;
     if (name === "defaultobject") name = filename + ObjectLoader.prototype.counter;
     nodeObject.setName(name);
+
+    nodeObject.isStatic = (currentNode.static);
 
     let invParentTransform = mat4.create(); mat4.invert(invParentTransform, parent.transform.getTransformMatrix());
 
@@ -114,7 +116,7 @@ const SceneLoader = {
     if ('Light' in currentNode) {
       let lightData = currentNode['Light'];
       if (lightData.type === 'Point') {
-        let light = new PointLight(SceneLoader.shadowLightsAvailable-- > 0);
+        let light = new PointLight(SceneLoader.shadowLightsAvailable-- > 0, nodeObject.isStatic);
         light.color = vec3.fromValues(lightData.color[1], lightData.color[2], lightData.color[3]);
         vec3.scale(light.color, light.color, lightData.intensity);
         light.range = lightData.range;
@@ -131,7 +133,7 @@ const SceneLoader = {
       if ("MeshFilter" in currentNode || "SkinnedMeshRenderer" in currentNode) {
         let meshName = currentNode["MeshFilter"] || currentNode["SkinnedMeshRenderer"].name;
         if (meshName === 'Plane' || meshName === 'Cube' || meshName === 'Sphere' || meshName === 'Capsule') {
-          console.log(meshName = 'Plane');
+          console.log(meshName = 'SceneLoader');
         //  nodeObject.transform.scale(5);
           nodeObject.transform.rotateX(Math.PI/2);
         }
@@ -172,6 +174,12 @@ const SceneLoader = {
           // nodeObject.addComponent(new Sing({}));
           // nodeObject.addComponent(new Look({}));
           nodeObject.addComponent(new PointLight(false));
+
+          //TODO attach to body instead
+          let lightHolder = new GameObject();
+          lightHolder.transform.setPosition(vec3.fromValues(0, 1.32, 0));
+          lightHolder.addComponent(new PointLight(true));
+          nodeObject.addChild(lightHolder);
 
           if(Debug.clientUpdate){
             if(this.tone===0){

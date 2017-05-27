@@ -29,6 +29,7 @@ class Shader {
 
         if (! (name in this.uniformLocationMap)) {
             this.uniformLocationMap[name] = GL.getUniformLocation(this.id, name);
+            Debug.assert(this.uniformLocationMap[name] !== -1)
         }
         let location = this.uniformLocationMap[name];
         if (Renderer.getCurrentShader() !== this) this.use();

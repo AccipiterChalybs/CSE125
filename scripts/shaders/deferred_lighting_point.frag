@@ -75,7 +75,7 @@ void main () {
   if(albedo.xyz == vec3(0.0)) discard; //TODO does this actually provide a performance boost?
   vec4 pos = texture(posTex, screenTexCoord);
   vec4 normal = texture(normalTex, screenTexCoord);
-  vec3 mat = vec3(albedo.a, pos.w, normal.w);
+  vec3 mat = vec3(normal.a, pos.w, 0.0);
 
   normal.xyz = normal.xyz * 2.0 - 1.0;
 
@@ -92,6 +92,7 @@ void main () {
 
   vec3 lightDir = uLightPosition - pos.xyz;
   float lightDist = length(lightDir);
+  vec3 lightDirDiffuse = lightDir / lightDist;
 
   //Spherical light algorithm from http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
   float sphereRadius = uLightSize;
@@ -102,7 +103,7 @@ void main () {
 
 
   float power = pointAttenuation(lightDist);
-  vec3 diffuseLight = uLightColor * clamp(dot(lightDir, normal.xyz), 0.0, 1.0) * power;
+  vec3 diffuseLight = uLightColor * clamp(dot(lightDirDiffuse, normal.xyz), 0.0, 1.0) * power;
 
   vec3 halfVec = normalize(view + lightDir);
   float dotNH = clamp(dot(normal.xyz, halfVec), 0.0, 1.0);
