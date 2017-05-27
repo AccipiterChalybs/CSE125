@@ -75,7 +75,7 @@ class SingingSwitch extends Listenable {
   }
 
   fullyCharged() {
-    Debug.log('I am charged!');
+    // Debug.log('I am charged!');
     for (let event of this._events) {
       event.setCurrentState(EventState.charged);
     }

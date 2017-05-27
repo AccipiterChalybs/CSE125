@@ -163,11 +163,6 @@ class PlayerController extends Playerable{
     //col.setRotation(this.forward);
   }
 
-  serialize() {
-    let data = super.serialize();
-    data.i = this.injured;
-    data.k = this.keys;
-  }
 
   getCurrentState(){
     return this.state.status;
@@ -175,6 +170,13 @@ class PlayerController extends Playerable{
 
   setCurrentState(newState){
     this.state.status = newState;
+    return data;
+  }
+
+  serialize() {
+    let data = super.serialize();
+    data.i = this.injured;
+    data.k = this.keys;
     return data;
   }
 

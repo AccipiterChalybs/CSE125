@@ -2,7 +2,7 @@
  * Created by ajermaky on 5/22/17.
  */
 class Playerable extends Component{
-  constructor({ lightColor=[3.6,12.1,2], lightRange, singingCooldown }) {
+  constructor({ lightColor, lightRange, singingCooldown }) {
     super();
     this.componentType = "PlayerController";
     this.movementSpeed = REGULAR_SPEED;
@@ -31,7 +31,7 @@ class Playerable extends Component{
     this.gameObject.addComponentToSerializeableList(this);
     this._collider = this.transform.gameObject.getComponent('Collider');
     this._singer = this.transform.gameObject.getComponent('Sing');
-    this._pointLight = this.transform.gameObject.getComponent('Light');
+    this._pointLight = this.transform.children[0].gameObject.getComponent('Light');
     this._pointLight.setColor(this.lightColor);
     this._pointLight.setRange(this.lightRange);
 

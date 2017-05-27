@@ -223,9 +223,11 @@ class GameScene {
               teapot.addComponent(new SphereCollider({mass: 100, trigger: false, scale: 15}));
               teapot.transform.scale(1.1);
               teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
-              teapot.addComponent(new PointLight(false));
-              // teapot.addComponent(new AudioSource("Tone02"));
-              // teapot.addComponent(new Sing({}));
+              let lightHolder = new GameObject();
+              lightHolder.addComponent(new PointLight(false));
+              teapot.addChild(lightHolder);
+              teapot.addComponent(new AudioSource("Tone02"));
+              teapot.addComponent(new Sing({}));
               teapot.addComponent(new StatueController({lightColor:[.5,3,4,1], lightRange: 1, singingCooldown: 2}));
 
               // if(!IS_SERVER) {
@@ -233,16 +235,20 @@ class GameScene {
               //   teapot.getComponent("AudioSource").pauseSound();
               // }
               teapot.transform.position[1]=0;
+              specialTeapot = true;
             }else if(x===6){
               teapot.addComponent(new SphereCollider({mass: 10, trigger: false, scale: 15}));
               teapot.transform.scale(1.1);
               teapot.getComponent('Collider').setLayer(FILTER_DEFAULT);
-              teapot.addComponent(new PointLight(false));
+              let lightholder = new GameObject();
+              lightholder.addComponent(new PointLight(false));
+              teapot.addChild(lightholder);
               teapot.addComponent(new StatueController({lightColor:[.5,3,4,1], lightRange: 1, singingCooldown: 2}));
               let moveTowardsEvent= new MoveTowardsEvent({target: PlayerTable.players[0]});
               teapot.addComponent(new EventContainer({events:[moveTowardsEvent]}));
               teapot.addComponent(new SingingSwitch({events: [moveTowardsEvent],activationLevel: .5,time_before_loss: 0.1}));
               teapot.transform.position[1]=0;
+              specialTeapot = true;
             }else{
               teapot.addComponent(new SphereCollider({mass: 100, triger: false, scale: 10})); //set Transform BEFORE collider
             }
