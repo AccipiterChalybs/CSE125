@@ -183,20 +183,16 @@ const SceneLoader = {
 
           if(Debug.clientUpdate){
             if(this.tone===0){
-              let pc = new PlayerController();
+              let pc = new PlayerController({lightColor:vec3.fromValues(3.6,12.1,2),lightRange:1,singingCooldown:COOLDOWN_SINGING});
               nodeObject.addComponent(pc);
             }
           }else{
-            let pc = new PlayerController();
+            let pc = new PlayerController({lightColor:vec3.fromValues(3.6,12.1,2),lightRange:1,singingCooldown:COOLDOWN_SINGING});
             nodeObject.addComponent(pc);
           }
 
-          if (!IS_SERVER) {
-            nodeObject.addComponent(new AudioSource("Tone0"+this.tone));
-            //nodeObject.getComponent("AudioSource").playSound2d("singTone0"+this.tone);
-            this.tone+=1;
-            //nodeObject.getComponent("AudioSource").pauseSound();
-          }
+          nodeObject.addComponent(new AudioSource("Tone0"+this.tone));
+          this.tone+=1;
           break;
         default:
           nodeObject.addComponent(new c[generalCompName](compData));

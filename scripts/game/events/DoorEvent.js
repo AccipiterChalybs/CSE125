@@ -35,10 +35,15 @@ class DoorEvent extends Event{
   }
 
   onUncharged() {
-
+    this.transform.position[0] = Utility.moveTowards(this.transform.position[0], this.closePos[0], Time.deltaTime);
+    this.transform.position[1] = Utility.moveTowards(this.transform.position[1], this.closePos[1], Time.deltaTime);
+    this.transform.position[2] = Utility.moveTowards(this.transform.position[2], this.closePos[2], Time.deltaTime);
   }
 
   onCharged() {
+    this.transform.position[0] = Utility.moveTowards(this.transform.position[0], this.openPos[0], Time.deltaTime);
+    this.transform.position[1] = Utility.moveTowards(this.transform.position[1], this.openPos[1], Time.deltaTime);
+    this.transform.position[2] = Utility.moveTowards(this.transform.position[2], this.openPos[2], Time.deltaTime);
 
   }
 

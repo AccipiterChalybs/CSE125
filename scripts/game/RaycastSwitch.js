@@ -1,7 +1,7 @@
 class RaycastSwitch extends Viewable{
-  constructor(params = {event: null}) {
+  constructor({events}) {
     super();
-    this._event = params.event;
+    this._events = events;
     this.charged = false;
     this._currentCharge = 0;
   }
@@ -19,6 +19,9 @@ class RaycastSwitch extends Viewable{
 
   view(interactingObj) {
     Debug.log("Viewable object has been viewed");
-    this._event.onRaycast(interactingObj);
+    for(let event of this._events)
+    {
+      event.onRaycast(interactingObj);
+    }
   }
 }
