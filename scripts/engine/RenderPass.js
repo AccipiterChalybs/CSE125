@@ -56,8 +56,10 @@ class DecalPass extends RenderPass
   constructor(deferredPassMain){
     super();
     //This is just because we can't render to textures in the bound FBO, and so need to copy them out of it.
-    let width = Renderer.getWindowWidth();
-    let height = Renderer.getWindowHeight();
+    //TODO maybe try editing the scale for faster speed?
+    let decalBufferScale = 1;
+    let width = Renderer.getWindowWidth() * decalBufferScale;
+    let height = Renderer.getWindowHeight() * decalBufferScale;
     this.copyBuffers = new Framebuffer(width, height, 3, false, true, [GL.RGBA8, GL.RGBA16F, GL.RGBA16F]);
 
   }
@@ -84,6 +86,7 @@ class DecalPass extends RenderPass
     let buffers = [GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2];
     GL.bindFramebuffer(GL.FRAMEBUFFER, Renderer.deferredPass.buffers.id);
     GL.drawBuffers(buffers);
+    GL.viewport(0,0,Renderer.deferredPass.buffers.width, Renderer.deferredPass.buffers.height);
 
     //TODO should disable depth test incase camera is inside volume. Optimally, will disable / enable for each object.
     //TODO however, just keeping it on will be faster, and shouldn't matter if we keep our objects thin.
@@ -104,6 +107,37 @@ class DecalPass extends RenderPass
 
 class ShadowPass extends ForwardPass
 {
+
+    bake() {
+      GL.enable(GL.DEPTH_TEST);
+      GL.depthMask(true);
+      GL.disable(GL.BLEND);
+      GL.enable(GL.CULL_FACE);
+      //TODO remove this later when we have new level geometry
+      if (Debug.tmp_shadowTwoSideRender) {
+        GL.disable(GL.CULL_FACE);
+      }
+      GL.cullFace(GL.BACK);
+      GL.disable(GL.STENCIL_TEST);
+
+      let lightIndex = 0;
+      for (let l of Renderer.renderBuffer.light) {
+        let caster = l;
+        if (!caster || !caster.isShadowCaster) continue;
+        if (caster.cubeShadow) {
+          caster.prepShadowMap(true);
+          for (let f=0; f<6; ++f) {
+            caster.bindShadowMap(f, true);
+            this._drawMeshes(true, ShadowPass.prototype.MODE_STATIC);
+          }
+        } else {
+          //No baking needed
+        }
+        lightIndex++;
+      }
+      Framebuffer.unbind();
+    }
+
     render(){
       Debug.Profiler.startTimer("ShadowPass", 2);
         GL.enable(GL.DEPTH_TEST);
@@ -123,16 +157,16 @@ class ShadowPass extends ForwardPass
             if (!caster || !caster.isShadowCaster) continue;
             if (caster.cubeShadow) {
               Debug.Profiler.startTimer("PointShadow "+lightIndex, 3);
-              caster.prepShadowMap();
+              caster.prepShadowMap(false);
               for (let f=0; f<6; ++f) {
-                caster.bindShadowMap(f);
-                this._drawMeshes(true);
+                caster.bindShadowMap(f, false);
+                this._drawMeshes(true, caster.getShadowMode());
               }
               Debug.Profiler.endTimer("PointShadow "+lightIndex, 3);
             } else {
               Debug.Profiler.startTimer("DirShadow "+lightIndex, 3);
-              caster.bindShadowMap(0);
-              this._drawMeshes(false);
+              caster.bindShadowMap(0, false);
+              this._drawMeshes(false, ShadowPass.prototype.MODE_ALL);
               Debug.Profiler.endTimer("DirShadow "+lightIndex, 3);
             }
             lightIndex++;
@@ -140,10 +174,17 @@ class ShadowPass extends ForwardPass
       Debug.Profiler.endTimer("ShadowPass", 2);
     }
 
-    _drawMeshes(isPoint) {
+    _drawMeshes(isPoint, mode) {
       let animShader = (isPoint) ? Renderer.POINT_SHADOW_SHADER_ANIM : Renderer.SHADOW_SHADER_ANIM;
       let regShader = (isPoint) ? Renderer.POINT_SHADOW_SHADER : Renderer.SHADOW_SHADER;
       for (let mesh of Renderer.renderBuffer.deferred) {
+        if (mode === ShadowPass.prototype.MODE_DYNAMIC && mesh.gameObject.isStatic) {
+          continue;
+        }
+        if (mode === ShadowPass.prototype.MODE_STATIC && !mesh.gameObject.isStatic) {
+          continue;
+        }
+
         let mat = mesh.material;
         let s = null;
         if (mat.shader === Renderer.getShader(Renderer.DEFERRED_PBR_SHADER_ANIM)) s = Renderer.getShader(animShader);
@@ -155,6 +196,9 @@ class ShadowPass extends ForwardPass
       }
     }
 }
+ShadowPass.prototype.MODE_ALL = 0;
+ShadowPass.prototype.MODE_STATIC = 1;
+ShadowPass.prototype.MODE_DYNAMIC = 2;
 
 
 class DeferredPrePass extends RenderPass
@@ -246,7 +290,7 @@ class DeferredPass extends RenderPass
                 GL.cullFace(GL.FRONT);
 
                 if (d.isShadowCaster) {
-                  d.fbo[0].bindCubeMapTexture(4);
+                  d.bindCubeMap(4);
                 }
             }
             else //if directional light
@@ -364,7 +408,7 @@ class BloomPass extends RenderPass
         let s2 = Renderer.getShader(Renderer.FBO_BLUR);
         let s3 = Renderer.getShader(Renderer.FBO_HDR);
         let s4 = Renderer.getShader(Renderer.FBO_AVERAGE);
-        this._deferredPass.fbo.unbind();
+        //Framebuffer.unbind(); //TODO don't think this line is needed
 
         let buffers = [ GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2, GL.COLOR_ATTACHMENT3 ];
 
@@ -405,7 +449,7 @@ class BloomPass extends RenderPass
         this._deferredPass.fbo.draw();
 
 
-        this._brightPass.unbind();
+        //TODO can I delete this? this._brightPass.unbind();
         s2.use();
         this._brightPass.bindTexture(0, 0);
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.LINEAR_MIPMAP_NEAREST);
@@ -428,7 +472,7 @@ class BloomPass extends RenderPass
             s2.setUniform("direction", new Float32Array([0, 1]), UniformTypes.vec2);
             this._deferredPass.fbo.draw();
         }
-        this._blurBuffers[4][1].unbind();
+        Framebuffer.unbind();
         s3.use();
 
         this._deferredPass.fbo.bindTexture(0, 0); //TODO switch to (0, 3)
@@ -490,7 +534,7 @@ class BloomPass extends RenderPass
             if (light.isShadowCaster) {
               if (light.cubeShadow) {
                 let pos=0;
-                light.fbo[0].bindCubeMapTexture(1);
+                light.bindCubeMap(1);
                 for (let f of [-1, -1, 3, -1, 4, 1, 5, 0, -1, -1, 2]) {
                   if (f===-1) { ++pos; continue; }
                   const displaySize = 256;

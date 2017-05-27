@@ -36,6 +36,7 @@ const Renderer  = {
       Renderer.FBO_AVERAGE=17;
       Renderer.FBO_DEBUG_CHANNEL=18;
       Renderer.FBO_COPY=19;
+      Renderer.FBO_COPY_DEPTH=20;
 
       Renderer.DEFERRED_DECAL=25;
 
@@ -174,6 +175,10 @@ const Renderer  = {
         Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_copy.frag"
       );
 
+      Renderer.shaderList[Renderer.FBO_COPY_DEPTH] = new Shader(
+        Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_copy_depth.frag"
+      );
+
 
 
       Renderer.shaderList[Renderer.DEFERRED_DECAL] = new Shader(
@@ -198,7 +203,9 @@ const Renderer  = {
       //TODO should make a json file to load this with, and have exposure variable
       Renderer.skybox = new Skybox(skyboxName, (Debug.quickLoad)? 3 : 10);//TODO revert
 
-      let shadowPass = new ShadowPass();
+      Renderer.bakeComplete = false;
+
+      Renderer.shadowPass = new ShadowPass();
       let forwardPass = new ForwardPass();
       let skyboxPass = new SkyboxPass(Renderer.skybox);
       let particlePass = new ParticlePass();
@@ -210,7 +217,7 @@ const Renderer  = {
       Renderer.postPass = new BloomPass(Renderer.deferredPass);
 
       Renderer.passes = [];
-      Renderer.passes.push(shadowPass);
+      Renderer.passes.push(Renderer.shadowPass);
       Renderer.passes.push(deferredPrePass);
       Renderer.passes.push(decalPass);
       Renderer.passes.push(Renderer.deferredPass);
@@ -469,15 +476,22 @@ const Renderer  = {
       Renderer.getShader(Renderer.FBO_COPY).setUniform("inputTex1", 0, UniformTypes.u1i);
       Renderer.getShader(Renderer.FBO_COPY).setUniform("inputTex2", 1, UniformTypes.u1i);
       Renderer.getShader(Renderer.FBO_COPY).setUniform("inputTex3", 2, UniformTypes.u1i);
+
+      Renderer.getShader(Renderer.FBO_COPY_DEPTH).setUniform("inputDepth", 0, UniformTypes.u1i);
   },
 
   loop: function () {
+
 
     Debug.Profiler.startTimer("apply&extract", 2);
         Renderer._applyPerFrameData();
         Renderer._extractObjects();
     Debug.Profiler.endTimer("apply&extract", 2);
 
+    if (!Renderer.bakeComplete) {
+      Renderer.shadowPass.bake();
+      Renderer.bakeComplete = true;
+    }
 
       //  Renderer.camera.update(Time.deltaTime());
         if (Renderer.camera.getFOV() !== Renderer.prevFOV)

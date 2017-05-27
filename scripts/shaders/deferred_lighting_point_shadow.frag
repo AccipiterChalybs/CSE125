@@ -80,7 +80,7 @@ void main () {
   if(albedo.xyz == vec3(0.0)) discard; //TODO does this actually provide a performance boost?
   vec4 pos = texture(posTex, screenTexCoord);
   vec4 normal = texture(normalTex, screenTexCoord);
-  vec3 mat = vec3(albedo.a, pos.w, normal.w);
+  vec3 mat = vec3(normal.a, pos.w, 0.0);
 
   normal.xyz = normal.xyz * 2.0 - 1.0;
 
@@ -95,46 +95,49 @@ void main () {
   F0 = mix(F0, albedo.rgb, mat.r); //interpolate Fresnel with the color as metalness increases (with metalness=1, color => reflection color)
   F0 = mix(vec3(1,1,1) * dot(vec3(.33,.33,.33),F0), F0, mat.r); //my own improvement - could be wrong : desaturates Fresnel as metalness decreases
 
-	  vec3 lightDir;
-	  float lightDist;
-	  float shadow = 1.0;
-      lightDir = uLightPosition - pos.xyz;
-      lightDist = length(lightDir);
+  vec3 lightDir;
+  float lightDist;
+  float shadow = 0.0;
+  lightDir = uLightPosition - pos.xyz;
+  lightDist = length(lightDir);
+  vec3 lightDirDiffuse = lightDir / lightDist;
 
-      float ldist = lightDist/uFarDepth;
-      ldist -= max(0.01 * (1.0 - clamp(dot(normal.xyz, lightDir), 0.0, 1.0)), 0.01);
+  float ldist = lightDist/uFarDepth;
+  ldist -= max(0.01 * (1.0 - clamp(dot(normal.xyz, lightDir), 0.0, 1.0)), 0.01);
 
-	  for(int i = 0; i < 4; i++) {
-        vec3 offset = vec3(poissonDisk[i] * (ldist * uFarDepth / 2000.0), 0.0);
-        vec3 dir = normalize(-lightDir);
-        vec3 right = cross((dir + vec3(0.001, 0, 0)), vec3(0,1,0));
-        vec3 up = cross(right, dir);
+  for(int i = 0; i < 4; i++) {
+    vec3 offset = vec3(poissonDisk[i] * (ldist * uFarDepth / 2000.0), 0.0);
+    vec3 dir = normalize(-lightDir);
+    vec3 right = cross((dir + vec3(0.001, 0, 0)), vec3(0,1,0));
+    vec3 up = cross(right, dir);
 
-        int x =0; int y = 0;
-        vec3 uv = dir + right * (offset.x + float(x)/100.0) + up * (offset.y + float(y) / 100.0);
+    int x =0; int y = 0;
+    vec3 uv = dir + right * (offset.x + float(x)/100.0) + up * (offset.y + float(y) / 100.0);
 
-        shadow += textureShadowCube(ldist,  uv );
-      }
-      shadow /= 4.0;
+    shadow += textureShadowCube(ldist,  uv );
+  }
+  shadow /= 4.0;
 
-      //Spherical light algorithm from http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
-      float sphereRadius = uLightSize;
-      vec3 reflectedRay = reflect(-view, normal.xyz);
-      vec3 centerToRay = dot(lightDir, reflectedRay) * reflectedRay - lightDir;
-      lightDir = normalize(lightDir + centerToRay * clamp(sphereRadius / length(centerToRay), 0.0, 1.0));
-      //todo normalize based on sphere size
+  if (shadow == 0.0) discard;
+
+  //Spherical light algorithm from http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
+  float sphereRadius = uLightSize;
+  vec3 reflectedRay = reflect(-view, normal.xyz);
+  vec3 centerToRay = dot(lightDir, reflectedRay) * reflectedRay - lightDir;
+  lightDir = normalize(lightDir + centerToRay * clamp(sphereRadius / length(centerToRay), 0.0, 1.0));
+  //todo normalize based on sphere size
 
 
-      float power = pointAttenuation(lightDist);
-	  vec3 diffuseLight = uLightColor * clamp(dot(lightDir, normal.xyz), 0.0, 1.0) * power;
-	
-	  vec3 halfVec = normalize(view + lightDir);
-	  float dotNH = clamp(dot(normal.xyz, halfVec), 0.0, 1.0);
-	  
-	  float a2 = a*a;
-	  vec3 specColor = GGX_D(dotNH, a2*a2) * SpecularBRDF(uLightColor, normal.xyz, view, lightDir, a, F0, 1.0) * power;
+  float power = pointAttenuation(lightDist);
+  vec3 diffuseLight = uLightColor * clamp(dot(lightDirDiffuse, normal.xyz), 0.0, 1.0) * power;
 
-	  vec3 diffuseColor = ((1.0-mat.r) * albedo.rgb) * diffuseLight;
-	  vec3 color = diffuseColor + specColor;
-	  frag_color = vec4(color * shadow, 1.0);
+  vec3 halfVec = normalize(view + lightDir);
+  float dotNH = clamp(dot(normal.xyz, halfVec), 0.0, 1.0);
+
+  float a2 = a*a;
+  vec3 specColor = GGX_D(dotNH, a2*a2) * SpecularBRDF(uLightColor, normal.xyz, view, lightDir, a, F0, 1.0) * power;
+
+  vec3 diffuseColor = ((1.0-mat.r) * albedo.rgb) * diffuseLight;
+  vec3 color = diffuseColor + specColor;
+  frag_color = vec4(color * shadow, 1.0);
 }

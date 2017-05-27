@@ -36,6 +36,7 @@ class GameObject {
     this.transform.gameObject = this;
     this.dead = false;
     this.visible = true;
+    this.isStatic = false;
   }
 
   draw() {
