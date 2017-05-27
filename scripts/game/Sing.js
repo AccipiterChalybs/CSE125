@@ -3,11 +3,11 @@
  */
 
 class Sing extends Component{
-  constructor({range = 2}){
+  constructor(params = {range: 2}){
     super();
     this.componentType = "Sing";
 
-    this.range = range;
+    this.range = params.range;
   }
 
   start(){

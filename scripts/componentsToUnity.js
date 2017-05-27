@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const oc = require('./objectifyComponents.js');
 
-const componentsClasses = oc.componentsClasses;
+const allClasses = oc.allClasses;
 const typeConv = oc.typeConv;
 const o = oc.o;
 
@@ -70,12 +70,12 @@ function createUnityClass(obj) {
 }
 
 try {
-  fs.mkdirSync(dirPath);
+  fs.mkdirSync('generated');
 } catch(err) {
   // fail silently
 }
 // create unity class files
-componentsClasses.forEach((c) => {
+allClasses.forEach((c) => {
   // use default constructor to create instantiation with member props
   const unityClassStr = createUnityClass(new o[c]());
   // create file from unity class str

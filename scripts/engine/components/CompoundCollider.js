@@ -3,12 +3,12 @@
  */
 
 class CompoundCollider extends Collider{
-  constructor({mass = 0, trigger = false, scaleX = 1, scaleY = 1, scaleZ = 1}){
-    super({mass: mass, trigger: trigger});
+  constructor(params = {mass: 0, trigger: false, scaleX: 1, scaleY: 1, scaleZ: 1}){
+    super({mass: params.mass, trigger: params.trigger});
 
-    this.scaleX = scaleX;
-    this.scaleY = scaleY;
-    this.scaleZ = scaleZ;
+    this.scaleX = params.scaleX;
+    this.scaleY = params.scaleY;
+    this.scaleZ = params.scaleZ;
   }
 
   addShape (type, size, offset) {

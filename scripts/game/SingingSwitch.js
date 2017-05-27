@@ -7,10 +7,10 @@ const SWITCH_LOSS_RATE = 0.5; // per second
 const TIME_BEFORE_LOSS = 3;
 
 class SingingSwitch extends Listenable {
-  constructor({event, activationLevel}) {
+  constructor(params = {event: null, activationLevel: 0}) {
     super();
-    this._event = event;
-    this.activationLevel = activationLevel;
+    this._event = params.event;
+    this.activationLevel = params.activationLevel;
     this.charged = false;
 
     this._lastSingTime = 0;
