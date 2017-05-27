@@ -9,6 +9,60 @@
     "src": "assets/audio/cruelangel.mp3",
     "loop": false,
     "type": 1,
+    "space": 2
+  },
+  "DoorOpen":{
+    "src": "assets/audio/crypt-door-open.mp3",
+    "loop": false,
+    "type": 1,
+    "space": 2
+  },
+  "DoorClose":{
+    "src": "assets/audio/crypt-door-close.mp3",
+    "loop": false,
+    "type": 1,
+    "space": 2
+  },
+  "Heal":{
+    "src": "assets/audio/healmag.wav",
+    "loop": false,
+    "type": 1,
+    "space": 2
+  },
+  "Victory":{
+    "src": "assets/audio/you_won.mp3",
+    "loop": false,
+    "type": 1,
+    "space": 2
+  },
+  "Item":{
+    "src": "assets/audio/get_item.mp3",
+    "loop": false,
+    "type": 1,
+    "space": 2
+  },
+  "Tone1":{
+    "src": "assets/audio/Tone1.wav",
+    "loop": true,
+    "type": 1,
+    "space": 3
+  },
+  "Tone2":{
+    "src": "assets/audio/Tone2.wav",
+    "loop": true,
+    "type": 1,
+    "space": 3
+  },
+  "Tone3":{
+    "src": "assets/audio/Tone3.wav",
+    "loop": true,
+    "type": 1,
+    "space": 3
+  },
+  "Tone4":{
+    "src": "assets/audio/Tone4.wav",
+    "loop": true,
+    "type": 1,
     "space": 3
   }
 }
