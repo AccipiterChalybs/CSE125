@@ -7,10 +7,14 @@ const SWITCH_LOSS_RATE = 0.5; // per second
 const TIME_BEFORE_LOSS = 3;
 
 class SingingSwitch extends Listenable {
-  constructor(params = {event: null, activationLevel: 0}) {
+  constructor({ events, activationLevel,time_before_loss }) {
     super();
-    this._event = params.event;
-    this.activationLevel = params.activationLevel;
+    for(event of events){
+      Debug.log(GameObject.prototype.SerializeMap[event]);
+      this._events.push(GameObject.prototype.SerializeMap[event]);
+    }
+    Debug.log(this._events);
+    this.activationLevel = activationLevel;
     this.charged = false;
     this.time_before_loss = time_before_loss;
     this._lastSingTime = 0;

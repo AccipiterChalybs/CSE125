@@ -12173,7 +12173,11 @@
               "scaleFactor": 0.4
             },
             "MeshFilter": "Statue.2",
-            "MeshRenderer": "carvedlimestoneground1_Base_Color"
+            "MeshRenderer": "carvedlimestoneground1_Base_Color",
+            "SingingSwitch": {
+              "attachedEvent": [743],
+              "activationLevel": "5"
+            }
           }
         ]
       },
@@ -12216,7 +12220,11 @@
               "scaleFactor": 0.4
             },
             "MeshFilter": "Statue.2",
-            "MeshRenderer": "carvedlimestoneground1_Base_Color"
+            "MeshRenderer": "carvedlimestoneground1_Base_Color",
+            "SingingSwitch": {
+              "attachedEvent": "null",
+              "activationLevel": "5"
+            }
           }
         ]
       },
@@ -12259,7 +12267,11 @@
               "scaleFactor": 0.4
             },
             "MeshFilter": "Statue.2",
-            "MeshRenderer": "carvedlimestoneground1_Base_Color"
+            "MeshRenderer": "carvedlimestoneground1_Base_Color",
+            "SingingSwitch": {
+              "attachedEvent": "null",
+              "activationLevel": "5"
+            }
           }
         ]
       },
