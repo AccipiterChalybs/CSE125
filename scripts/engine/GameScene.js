@@ -201,7 +201,7 @@ class GameScene {
               //   teapot.getComponent('AudioSource').playSound2d('singTone03');
               //   teapot.getComponent('AudioSource').pauseSound();
               // }
-              let lightComp = new PointLight(true);
+              let lightComp = new PointLight(false);
 
               lightComp.color = vec3.fromValues(5, 2.5, 0);
               lightComp.exponentialFalloff = 0.25;

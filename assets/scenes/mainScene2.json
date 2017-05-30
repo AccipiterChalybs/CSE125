@@ -737,7 +737,8 @@
         },
         "colliders": [
           {
-            "type": "box",
+            "type": "sphere",
+            "scale":1,
             "scaleX": 1,
             "scaleY": 2.5,
             "scaleZ": 1,

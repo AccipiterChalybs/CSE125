@@ -11,6 +11,9 @@ Debug.quickLoad = true;
 Debug.autoStart = true;
 Debug.tmp_shadowTwoSideRender = true; //Var to remind me to remove this when we get in new level geometry
 
+Debug.drawColliders = false;
+
+
 Debug.start = function() {
   if (Debug.debugDisplay) {
     if (Debug.fpsElement === null) Debug.fpsElement = document.getElementById("fpsLog");
@@ -287,6 +290,45 @@ Debug.drawTeapot = function(pos, color = null) {
 
   return teapot;
 };
+
+Debug.drawCollider = function(name, pos, color = null) {
+  if (!Debug.drawColliders) return null;
+  let rotation = quat.create();
+  quat.rotateX(rotation, rotation, -Math.PI/2);
+
+  name = (name === 'sphere') ? 'Sphere_Icosphere' : 'Cube';
+
+  let teapot = new GameObject();
+
+  if (!IS_SERVER) {
+    let mesh = new Mesh(name);
+    let mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER), true);
+
+    if (color === null) {
+      color = vec4.create();
+      vec4.set(color, 1, 0.5, 0.1, 1);
+    }
+    mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
+
+    vec4.set(color, 0.5, 0.5, 1, 1);
+    mat.setTexture(MaterialTexture.NORMAL, Texture.makeColorTex(color));
+
+    vec4.set(color, 1, 0, 0.25, 1); //metalness, blank, roughness
+    mat.setTexture(MaterialTexture.MAT, Texture.makeColorTex(color));
+
+    mesh.setMaterial(mat);
+    teapot.addComponent(mesh);
+  }
+
+  teapot.transform.setPosition(pos);
+  teapot.transform.setRotation(rotation);
+  teapot.transform.scale((.05));
+
+  GameObject.prototype.SceneRoot.addChild(teapot);
+
+  return teapot;
+};
+
 
 Debug.Profiler = {data:[], map:{}, index:0};
 Debug.Profiler.newFrame = function() {

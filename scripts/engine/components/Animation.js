@@ -20,6 +20,7 @@ class Animation extends Component
       this._looping = [];
       this._animWeight = [];
       this.rootAxisLocked = [true, true, false];
+      this.lastRootMotion = vec3.create();
     }
 
     start() {
@@ -122,19 +123,25 @@ class Animation extends Component
       //Root Motion (need to reapply this transform's transformations (i.e. rotation & scale)
       vec3.scale(rootResults, rootResults, this.transform.getScale()[0]);
       vec3.transformQuat(rootResults, rootResults, this.transform.rotation);
-      this.transform.translate(rootResults);
+      vec3.scale(rootResults, rootResults, -60);
+  //    this.transform.translate(rootResults);
 
       let body = this.gameObject.getComponent('Collider').body;
-
+/*
       body.position.x = this.transform.getWorldPosition()[0];
       body.position.y = this.transform.getWorldPosition()[1];
       body.position.z = this.transform.getWorldPosition()[2];
+*/
+      let tmp = vec3.copy(vec3.create(), rootResults);
+      this.lastRootMotion = tmp;
+      body.velocity.x *= 0.1;
+      //body.velocity.y *= 0.1;
+      body.velocity.z *= 0.1;
 
-
-
-
-  // node.object.scale = node.keyframes.scale[scaleIndex].second;
-
+      body.velocity.x += rootResults[0];
+      //body.velocity.y += rootResults[1];
+      body.velocity.z += rootResults[2];
+     //body.applyImpulse(new CANNON.Vec3(rootResults[0], rootResults[1],rootResults[2]), body.position);
 
     }
 
