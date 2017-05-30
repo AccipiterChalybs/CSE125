@@ -19,7 +19,7 @@ class Sing extends Component{
   }
 
   sing(){
-    // Debug.log("singing");
+    Debug.log("singing with range: ", this.range);
     let hitColliders = [];
     hitColliders = PhysicsEngine.overlapSphere(this.transform.getWorldPosition(), this.range);
 

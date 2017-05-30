@@ -61,7 +61,7 @@ class PlayerController extends Playerable{
   updateComponent(){
 
     if(this._currentState === PlayerState.dead){
-      Debug.log('INSDIE DEAD');
+      Debug.log('INSIDE DEAD');
       this.transform.setWorldPosition(this.checkpoint);
       this._currentState = PlayerState.default;
       return;

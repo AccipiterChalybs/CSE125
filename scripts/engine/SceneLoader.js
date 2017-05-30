@@ -17,7 +17,7 @@ const SceneLoader = {
   // All components we load into gameObject
   components: c,
   // Ignore these in general pass, likely because they are already handled specially
-  ignoreComponents: ["name", "index", "static", "Animator", "AnimatorJS", "SkinnedMeshRenderer", "MeshFilter", "MeshRenderer",
+  ignoreComponents: ["name", "index", "static", "Kinematic", "Animator", "AnimatorJS", "SkinnedMeshRenderer", "MeshFilter", "MeshRenderer",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
   shadowLightsAvailable: 0,
   tone: 0,
@@ -110,7 +110,11 @@ const SceneLoader = {
 
         collider.addShape(colliderType, colliderSize, colliderOffset);
       }
-      collider.setLayer(FILTER_LEVEL_GEOMETRY);
+      if(currentNode["Kinematic"] !== undefined){
+        collider.setLayer(FILTER_KINEMATIC);
+      }else {
+        collider.setLayer(FILTER_LEVEL_GEOMETRY);
+      }
     }
 
     if ('Light' in currentNode) {

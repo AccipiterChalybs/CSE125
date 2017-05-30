@@ -78,6 +78,7 @@ class Collider extends Component{
         this.transform.setRotation(newRot);
       }
     }else {
+      // Debug.log("im kinematic!");
       this.body.position.x = this.transform.getWorldPosition()[0];
       this.body.position.y = this.transform.getWorldPosition()[1];
       this.body.position.z = this.transform.getWorldPosition()[2];
@@ -137,6 +138,5 @@ class Collider extends Component{
     PhysicsEngine.layers[this.layer].splice(idx, 1);
     this.layer = layer;
     PhysicsEngine.layers[this.layer].push(this.body.id);
-
   }
 }
