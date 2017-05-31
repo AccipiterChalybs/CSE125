@@ -35,13 +35,6 @@ class PlayerController extends Playerable{
   start(){
     super.start();
     this._looker = this.transform.gameObject.getComponent("Look");
-    let pointList = [];
-    //--TODO delete this?--
-    this.gameObject.findComponents("Light", pointList);
-    this._pointLight = pointList[0];
-    this._pointLight.setColor(vec3.fromValues(3.6,12.1,2));
-    this._pointLight.setRange(1);
-    //--------------------
     this.state.start(this.gameObject);
     this.transform.gameObject.getComponent("Collider").setLayer(FILTER_PLAYER);
     this.checkpoint = this.transform.getWorldPosition();

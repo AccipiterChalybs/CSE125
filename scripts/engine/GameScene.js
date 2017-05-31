@@ -73,17 +73,6 @@ class GameScene {
     let evilTeapot = Debug.drawTeapot(pos, color);
     evilTeapot.addComponent(new EvilController());
 
-    //let move = vec3.create(); vec3.set(move, 0, 500, 64);
-    let move = vec3.create(); vec3.set(move, 0,-1,0);
-    let ground = new GameObject();
-    ground.setName("ground");
-    ground.transform.setPosition(move);
-    let box = new BoxCollider({mass: 0, trigger: false, scaleX: 10000, scaleY: 1, scaleZ: 10000});
-    ground.addComponent(box);
-    ground.getComponent("Collider").setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
-    ground.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);
-
-
     GameObject.prototype.SceneRoot.findComponents("Listenable", PhysicsEngine.sphereChecks);
   }
 
