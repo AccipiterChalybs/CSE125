@@ -501,6 +501,24 @@ const Renderer  = {
       Renderer.getShader(Renderer.FBO_COPY).setUniform("inputTex3", 2, UniformTypes.u1i);
 
       Renderer.getShader(Renderer.FBO_COPY_DEPTH).setUniform("inputDepth", 4, UniformTypes.u1i);
+
+
+
+      let ssao = Renderer.getShader(Renderer.FBO_SSAO);
+      ssao.setUniform('normalTex', 1, UniformTypes.u1i );
+      ssao.setUniform('positionTex', 2, UniformTypes.u1i );
+      ssao.setUniform('uRadius', 7.2, UniformTypes.u1f );
+      ssao.setUniform('uSigma', 0.125, UniformTypes.u1f );
+      ssao.setUniform('uK', 1, UniformTypes.u1f );
+
+      let s3 = Renderer.getShader(Renderer.FBO_HDR);
+      s3.setUniform("inputTex", 0, UniformTypes.u1i);
+      s3.setUniform("addTex1", 1, UniformTypes.u1i);
+      s3.setUniform("addTex2", 2, UniformTypes.u1i);
+      s3.setUniform("addTex3", 3, UniformTypes.u1i);
+      s3.setUniform("addTex4", 4, UniformTypes.u1i);
+      s3.setUniform("addTex5", 5, UniformTypes.u1i);
+      s3.setUniform("ssao", 6, UniformTypes.u1i);
   },
 
   loop: function () {
