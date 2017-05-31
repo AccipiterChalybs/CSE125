@@ -4,7 +4,7 @@
 const c = {
   AIController, Animation, AudioListener, AudioSource, BoxCollider, Camera,
   ClientStickTo, Collider, CompoundCollider, Decal, Light, ParticleSystem,
-  SphereCollider, Transform,
+  SphereCollider, Transform, StatueController,
   AnimationGraph, AnimationState, DoorEvent, Event, EvilController, HealEvent,
   KeyEvent, Listenable, Look, ObjectLogicState, PlayerController,
   PlayerLogicState, PlayerTable, RaycastSwitch, RotateArrowKey, RotateMouse,
@@ -166,23 +166,14 @@ const SceneLoader = {
       switch (generalCompName) {
         case "PlayerController":
           PlayerTable.addPlayer(nodeObject);
-          // nodeObject.addComponent(new Sing({}));
-          // nodeObject.addComponent(new Look({}));
-          nodeObject.addComponent(new PointLight(false));
-
-          //TODO attach to body instead
-          let lightHolder = new GameObject();
-          lightHolder.transform.setPosition(vec3.fromValues(0, 1.32, 0));
-          lightHolder.addComponent(new PointLight(true));
-          nodeObject.addChild(lightHolder);
 
           if(Debug.clientUpdate){
             if(this.tone===0){
-              let pc = new PlayerController({lightColor:vec3.fromValues(3.6,12.1,2),lightRange:1,singingCooldown:COOLDOWN_SINGING});
+              let pc = new PlayerController();
               nodeObject.addComponent(pc);
             }
           }else{
-            let pc = new PlayerController({lightColor:vec3.fromValues(3.6,12.1,2),lightRange:1,singingCooldown:COOLDOWN_SINGING});
+            let pc = new PlayerController();
             nodeObject.addComponent(pc);
           }
 

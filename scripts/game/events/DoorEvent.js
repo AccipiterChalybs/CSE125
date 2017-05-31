@@ -35,19 +35,19 @@ class DoorEvent extends Event{
   }
 
   onUncharged() {
-    Debug.log("Fully discharged ", this);
+    // Debug.log("Fully discharged ", this);
     let newPos = Utility.vec3.moveTowards(this.transform.position, this.closePos, CLOSE_SPEED * Time.deltaTime);
     this.transform.setPosition(newPos);
   }
 
   onCharged() {
-    Debug.log("Fully charged ", this);
+    // Debug.log("Fully charged ", this);
     let newPos = Utility.vec3.moveTowards(this.transform.position, this.openPos, OPEN_SPEED * Time.deltaTime);
     this.transform.setPosition(newPos);
   }
 
   onDischarging() {
-    Debug.log("Discharging... ", this);
+    // Debug.log("Discharging... ", this);
     let newPos = Utility.vec3.moveTowards(this.transform.position, this.closePos, CLOSE_SPEED * Time.deltaTime);
     this.transform.setPosition(newPos);
     // if (this.transform.position[0] === this.closePos[0] && this.transform.position[1] === this.closePos[1] && this.transform.position[2] === this.closePos[2]) {
@@ -56,7 +56,7 @@ class DoorEvent extends Event{
   }
 
   onCharging() {
-    Debug.log("Charging... ", this);
+    // Debug.log("Charging... ", this);
     let newPos = Utility.vec3.moveTowards(this.transform.position, this.openPos, OPEN_SPEED * Time.deltaTime);
     this.transform.setPosition(newPos);
     // if (this.transform.position[0] === this.openPos[0] && this.transform.position[1] === this.openPos[1] && this.transform.position[2] === this.openPos[2]) {

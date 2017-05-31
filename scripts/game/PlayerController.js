@@ -8,10 +8,6 @@ const SING_SPEED = 0.8;
 const PLAYER_ACCELERATION = 4;
 const CHAR_NAME = "CAIN"; // CUZ I GOT 1 KEY and 0 bombs
 const COOLDOWN_SINGING = 0.1;   // In seconds
-const MAX_LIGHT_RANGE = 8;
-const MIN_LIGHT_RANGE = 1;
-const LIGHT_EXPAND_RATE = 15;
-const LIGHT_DIMINISH_RATE = 5;
 
 const PlayerState = {
   default: "default",
@@ -24,8 +20,8 @@ const PlayerState = {
 
 // Requires a collider, sing
 class PlayerController extends Playerable{
-  constructor({lightColor,lightRange,singingCooldown}){
-    super({lightColor,lightRange,singingCooldown});
+  constructor(){
+    super({singingCooldown: COOLDOWN_SINGING});
     this._looker = null;
     this.checkpoint = null;
     this.keys = 0;
@@ -59,7 +55,6 @@ class PlayerController extends Playerable{
   }
 
   updateComponent(){
-
     if(this._currentState === PlayerState.dead){
       Debug.log('INSIDE DEAD');
       this.transform.setWorldPosition(this.checkpoint);
@@ -93,7 +88,6 @@ class PlayerController extends Playerable{
     }else if(!this.injured && this.singing === 1 && Time.time >= this._nextSingTime) {
       this.state.status = 'singing';
       //if !injured
-      this._singer.sing();
 
       // if(!IS_SERVER) this._singingSrc.resumeSound();
       //
@@ -108,9 +102,9 @@ class PlayerController extends Playerable{
     }
 
     if(this.state.status === 'singing'){
-      this._pointLight.setRange(Utility.moveTowards(this._pointLight.range,MAX_LIGHT_RANGE,LIGHT_EXPAND_RATE*Time.deltaTime));
+      this._singer.sing();
     }else{
-      this._pointLight.setRange(Utility.moveTowards(this._pointLight.range,MIN_LIGHT_RANGE,LIGHT_DIMINISH_RATE*Time.deltaTime));
+      this._singer.quiet();
     }
 
     if(this.action === 1){

@@ -2,7 +2,7 @@
  * Created by ajermaky on 5/22/17.
  */
 class Playerable extends Component{
-  constructor({ lightColor, lightRange, singingCooldown }) {
+  constructor(params = {singingCooldown: COOLDOWN_SINGING}) {
     super();
     this.componentType = "PlayerController";
     this.movementSpeed = REGULAR_SPEED;
@@ -14,29 +14,24 @@ class Playerable extends Component{
     this.action = 0;
     this.forward = vec3.create(); vec3.set(this.forward, 0, 0, -1);
 
-    this._collider = null;
+    this._colliders = [];
     this._singer = null;
     this._singingSrc = null;
     this._nextSingTime = 0;
     this._lastSingInput = 0;
-    this._pointLight = null;
     this._currentState = PlayerState.default;
-    this._singingCooldown = singingCooldown;
-
-    this.lightColor = lightColor;
-    this.lightRange = lightRange;
+    this._singingCooldown = params.singingCooldown;
   }
 
   start() {
     this.gameObject.addComponentToSerializeableList(this);
-    this._collider = this.transform.gameObject.getComponent('Collider');
+    this.transform.gameObject.findComponents('Collider', this._colliders);
     this._singer = this.transform.gameObject.getComponent('Sing');
-    this._pointLight = this.transform.children[0].gameObject.getComponent('Light');
-    this._pointLight.setColor(this.lightColor);
-    this._pointLight.setRange(this.lightRange);
 
-    this._collider.setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
-    this._collider.setFreezeRotation(true);
+    for(let i = 0; i < this._colliders.length; ++i) {
+      this._colliders[i].setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
+      this._colliders[i].setFreezeRotation(true);
+    }
   }
 
   startClient() {

@@ -64,7 +64,6 @@ class SingingSwitch extends Listenable {
       }else{
         this._currentCharge = Utility.moveTowards(this._currentCharge, 0, SWITCH_LOSS_RATE * Time.deltaTime);
         for (let event of this._events) {
-          Debug.log("hi");
           event.setCurrentState(EventState.discharging);
         }
       }
