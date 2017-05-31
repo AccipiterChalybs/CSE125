@@ -5,7 +5,7 @@ uniform sampler2D colorTex; //color texture - rgb: color | a: team mask
 uniform sampler2D matTex; //material texture - r: metalness | g: IOR | b: roughness | a: unused
 uniform sampler2D normalTex; //normal texture - rgb: normal | a: unused
 
-uniform vec3 CameraPos;
+uniform vec3 cameraPos;
 
 in vec2 vTexCoord;
 in vec3 vNormal;
@@ -36,5 +36,5 @@ void main()
     norm.y = -norm.y;
     NormOut = vec4(normalize(model * norm) * 0.5 + 0.5, mat.x);
 
-    PosOut = vec4(vPosition.xyz/vPosition.w, mat.z);
+    PosOut = vec4(vPosition.xyz/vPosition.w - cameraPos, mat.z);
 }

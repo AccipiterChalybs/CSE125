@@ -512,6 +512,20 @@ class BloomPass extends RenderPass
         this._deferredPass.fbo.draw();
 
 
+
+        let ssao = Renderer.getShader(Renderer.FBO_SSAO);
+        ssao.use();
+        this._deferredPass.buffers.bindTexture(1, 1);
+        this._deferredPass.buffers.bindTexture(2, 2);
+        ssao.setUniform('normalTex', 1, UniformTypes.u1i );
+        ssao.setUniform('positionTex', 2, UniformTypes.u1i );
+        ssao.setUniform('uScreenSize', vec2.fromValues(Renderer.getWindowWidth(), Renderer.getWindowHeight()), UniformTypes.vec2 );
+        ssao.setUniform('uRadius', 5, UniformTypes.u1f );
+        ssao.setUniform('uSigma', 1, UniformTypes.u1f );
+        ssao.setUniform('uK', 1, UniformTypes.u1f );
+        this._deferredPass.fbo.draw();
+
+
       if (Debug.bufferDebugMode) {
         let s5 = Renderer.getShader(Renderer.FBO_DEBUG_CHANNEL);
         Renderer.DEFERRED_SHADER_LIGHTING_POINT = Renderer.DEFERRED_SHADER_LIGHTING_POINT_NORMAL; //reset if not set (e.g. in 8)
