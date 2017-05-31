@@ -60,7 +60,7 @@ Debug.update = function() {
       Debug.currentBuffer = Debug.BUFFERTYPE_SHADOW;
     }
     if (Input.getAxis("debugButton_Buffer9")) {
-      Debug.currentBuffer = 0;
+      Debug.currentBuffer = Debug.BUFFERTYPE_SSAO;
     }
     if (Input.getAxis("debugButton_Buffer0")) {
       Debug.currentBuffer = 0;
@@ -77,6 +77,7 @@ Debug.BUFFERTYPE_ROUGH = 4;
 Debug.BUFFERTYPE_METAL = 5;
 Debug.BUFFERTYPE_BLOOM = 6;
 Debug.BUFFERTYPE_SHADOW = 7;
+Debug.BUFFERTYPE_SSAO = 8;
 Debug.currentBuffer = Debug.BUFFERTYPE_NONE;
 
 Debug.currentLightIndex = 1; //TODO make this switchable with input

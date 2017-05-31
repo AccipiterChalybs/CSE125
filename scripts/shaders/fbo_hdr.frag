@@ -8,6 +8,7 @@ uniform sampler2D addTex2;
 uniform sampler2D addTex3;
 uniform sampler2D addTex4;
 uniform sampler2D addTex5;
+uniform sampler2D ssao; //I know this should only be applied to ambient, but doing it here for artistic style.
 
 uniform float exposure;
 
@@ -34,6 +35,7 @@ float ACESFilm( float x )
 void main() {
 	vec3 bloom = texture(addTex1, vTexCoord).rgb/5.0 + texture(addTex2, vTexCoord).rgb/10.0 + texture(addTex3, vTexCoord).rgb/20.0 + texture(addTex4, vTexCoord).rgb/30.0 + texture(addTex5, vTexCoord).rgb/40.0;
 	vec3 color = textureLod(inputTex, vTexCoord, 0.0).rgb + max(bloom, vec3(0.0));
+	color *= (texture(ssao, vTexCoord).r);
 	color *= 0.5 / exposure;
 
 	//tonemap on luminance
@@ -42,5 +44,5 @@ void main() {
 	color *= scale;
 
 	color = pow(color, vec3(1.0/2.2)); //linear to gamma correction
-    fragColor = vec4(color,1);
+    fragColor =  vec4(color,1);
 }
