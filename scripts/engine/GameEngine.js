@@ -81,7 +81,8 @@ GameEngine.init = function () {
     'assets/meshes/Wall_ornate.3.json',
     'assets/meshes/Wall_rock.1.json',
     'assets/meshes/Wall_rock.2.json',
-    'assets/meshes/Wall_rock.3.json'];
+    'assets/meshes/Wall_rock.3.json',
+    'assets/meshes/unitCube.json'];
   let animationFiles = {
     'OctopusCharacterAnim' : {
         'assets/meshes/octo_idle.json' : [0, 1],

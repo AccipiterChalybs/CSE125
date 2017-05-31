@@ -169,6 +169,18 @@ class Transform extends Component
         return this.cachedWorldScale;
     }
 
+    setWorldRotation(rotation) {
+      this.setDirty();
+      if (!this._parent || this._parent === null) {
+          this.setRotation(rotation);
+          return;
+      }
+      let parentRotation = quat.copy(quat.create(),this._parent.getWorldRotation());
+      quat.normalize(parentRotation, parentRotation);
+      quat.invert(parentRotation, parentRotation);
+      quat.multiply(this.rotation, parentRotation, rotation);
+    }
+
     getWorldRotation() {
         if (this._parent && this._parent !== null) {
           return quat.multiply(quat.create(), this._parent.getWorldRotation(), this.rotation);
