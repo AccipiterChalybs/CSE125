@@ -6,8 +6,8 @@ const REGULAR_SPEED = 4;
 const WALK_SPEED = 2;
 const SING_SPEED = 0.8;
 const PLAYER_ACCELERATION = 4;
-const COOLDOWN_SINGING = 0.1;   // In seconds
 const CHAR_NAME = "CAIN"; // CUZ I GOT 1 KEY and 0 bombs
+const COOLDOWN_SINGING = 0.1;   // In seconds
 const MAX_LIGHT_RANGE = 8;
 const MIN_LIGHT_RANGE = 1;
 const LIGHT_EXPAND_RATE = 15;
@@ -18,50 +18,43 @@ const PlayerState = {
   walking: "walking",
   singing: "singing",
   noControl: "noControl",
-  cantMove: "cantMove"
+  cantMove: "cantMove",
+  dead: "dead"
 };
 
 // Requires a collider, sing
-class PlayerController extends Component{
-  constructor(){
-    super();
-    this.componentType = "PlayerController";
-    this.movementSpeed = REGULAR_SPEED;
-    this.x = 0;
-    this.y = 0;
-    this.z = 0;
-    this.singing = 0;
-    this.walking = 0;
-    this.action = 0;
-    this.forward = vec3.create(); vec3.set(this.forward,0,0,-1);
-    this.keys = 0;
 
-    this._collider = null;
-    this._singer = null;
-    this._singingSrc = null;
-    this._nextSingTime = 0;
-    this._lastSingInput = 0;
-    this._currentState = PlayerState.default;
+class PlayerController extends Playerable{
+  constructor({lightColor,lightRange,singingCooldown}){
+    super({lightColor,lightRange,singingCooldown});
+    this._looker = null;
+    this.checkpoint = null;
+    this.keys = 0;
     this.injured = true;
+
+    this.state = new PlayerLogicState();
+    this.state.status = 'default';
+    this.state.moveSpeed = REGULAR_SPEED;
   }
 
   start(){
-    this._collider = this.transform.gameObject.getComponent("Collider");
-    this._singer = this.transform.gameObject.getComponent("Sing");
+    super.start();
     this._looker = this.transform.gameObject.getComponent("Look");
     let pointList = [];
+    //--TODO delete this?--
     this.gameObject.findComponents("Light", pointList);
     this._pointLight = pointList[0];
     this._pointLight.setColor(vec3.fromValues(3.6,12.1,2));
     this._pointLight.setRange(1);
+    //--------------------
+    this.state.start(this.gameObject);
     this.transform.gameObject.getComponent("Collider").setLayer(FILTER_PLAYER);
+    this.checkpoint = this.transform.getWorldPosition();
 
-    this._collider.setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
-    this._collider.setFreezeRotation(true);
   }
 
   startClient(){
-    this._singingSrc = this.transform.gameObject.getComponent("AudioSource");
+    super.startClient();
   }
 
   updateComponentClient(){
@@ -70,9 +63,17 @@ class PlayerController extends Component{
     }else{
       this._singingSrc.pauseSound();
     }
+
   }
 
   updateComponent(){
+
+    if(this._currentState === PlayerState.dead){
+      Debug.log('INSDIE DEAD');
+      this.transform.setWorldPosition(this.checkpoint);
+      this._currentState = PlayerState.default;
+      return;
+    }
     if(this._currentState === PlayerState.noControl)
       return;
 
@@ -89,32 +90,32 @@ class PlayerController extends Component{
     }
 
     if(this.singing === 0 && this._lastSingInput === 1){
-      this._nextSingTime = Time.time + COOLDOWN_SINGING;
+      this._nextSingTime = Time.time + this._singingCooldown;
       // if(!IS_SERVER) this._singingSrc.pauseSound();
     }
 
     this._lastSingInput = this.singing;
 
-    if(this._currentState === PlayerState.cantMove){
+    if(this.state.status === 'cantMove'){
 
     }else if(!this.injured && this.singing === 1 && Time.time >= this._nextSingTime) {
-      this._currentState = PlayerState.singing;
+      this.state.status = 'singing';
       //if !injured
       this._singer.sing();
 
       // if(!IS_SERVER) this._singingSrc.resumeSound();
       //
     }else if(this.walking === 1){
-      this._currentState = PlayerState.walking;
+      this.state.status = 'walking';
     }else{
-      this._currentState = PlayerState.default;
+      this.state.status = 'default';
     }
 
-    if(this._currentState !== PlayerState.cantMove) {
+    if(this.state.status !== 'cantMove') {
       this.movement();
     }
 
-    if(this._currentState === PlayerState.singing){
+    if(this.state.status === 'singing'){
       this._pointLight.setRange(Utility.moveTowards(this._pointLight.range,MAX_LIGHT_RANGE,LIGHT_EXPAND_RATE*Time.deltaTime));
     }else{
       this._pointLight.setRange(Utility.moveTowards(this._pointLight.range,MIN_LIGHT_RANGE,LIGHT_DIMINISH_RATE*Time.deltaTime));
@@ -123,16 +124,18 @@ class PlayerController extends Component{
     if(this.action === 1){
       this._looker.look();
     }
+
+    this.state.update();
   }
 
 
   movement(){
-    if(this._currentState === PlayerState.singing){
-      this.movementSpeed = Utility.moveTowards(this.movementSpeed, SING_SPEED, 4 * PLAYER_ACCELERATION * Time.deltaTime);
-    } else if(this._currentState === PlayerState.walking){
-      this.movementSpeed = Utility.moveTowards(this.movementSpeed, WALK_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
-    } else if(this._currentState === PlayerState.default){
-      this.movementSpeed = Utility.moveTowards(this.movementSpeed, REGULAR_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
+    if(this.state.status === 'singing'){
+      this.state.moveSpeed = Utility.moveTowards(this.state.moveSpeed, SING_SPEED, 4 * PLAYER_ACCELERATION * Time.deltaTime);
+    } else if(this.state.status === 'walking'){
+      this.state.moveSpeed = Utility.moveTowards(this.state.moveSpeed, WALK_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
+    } else if(this.state.status === 'default'){
+      this.state.moveSpeed = Utility.moveTowards(this.state.moveSpeed, REGULAR_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
     }
 
     let up = vec3.create(); vec3.set(up, 0, 1, 0);
@@ -141,22 +144,23 @@ class PlayerController extends Component{
     let moveZ = vec3.create(); vec3.cross(moveZ, up, moveX);
     vec3.normalize(moveX, moveX);
     vec3.normalize(moveZ, moveZ);
-    vec3.scale(moveX, moveX, this.x * this.movementSpeed);
-    vec3.scale(moveZ, moveZ, this.z * this.movementSpeed);
+    vec3.scale(moveX, moveX, this.x * this.state.moveSpeed);
+    vec3.scale(moveZ, moveZ, this.z * this.state.moveSpeed);
     vec3.add(move, moveX, moveZ);
     vec3.normalize(move, move);
-    vec3.scale(move, move, this.movementSpeed);
+    vec3.scale(move, move, this.state.moveSpeed);
 
+    this.state.moveAmt = vec3.length(move);
 
-    if (vec3.length(move) > 0.01) {
+    if (this.state.moveAmt > 0.01) {
       this.transform.setRotation(quat.create());
       this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
-      let animState = (this._currentState === PlayerState.singing) ? 2 : 3;
-      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(3, true);
-      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').resume();
+      let animState = (this.state.status === 'singing') ? 2 : 3;
+      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(2, true);
+      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').resume();
     } else {
-      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').stop();
-      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(1, true);
+      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').stop();
+      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(1, true);
     }
 
 
@@ -166,15 +170,29 @@ class PlayerController extends Component{
     //col.setRotation(this.forward);
   }
 
-  sing(){
-    // console.log("singing!");
-  }
 
   getCurrentState(){
-    return this._currentState;
+    return this.state.status;
   }
 
   setCurrentState(newState){
-    this._currentState = newState;
+    this.state.status = newState;
+    return data;
   }
+
+  serialize() {
+    let data = super.serialize();
+    data.i = this.injured;
+    data.k = this.keys;
+    return data;
+  }
+
+  applySerializedData(data) {
+    // Debug.log(this);
+    super.applySerializedData(data);
+    this.injured = data.i;
+    this.keys = data.k;
+  }
+
+
 }
