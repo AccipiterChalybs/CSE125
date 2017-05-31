@@ -91,7 +91,7 @@ class Camera extends Component
     let backDown = vec3.create(); vec3.subtract(backDown, backward, up);
 
     let newZoom = this._zoom.currentZoom;
-    if(this._playerFocus.getCurrentState() === PlayerState.walking){
+    if(this._playerFocus.getCurrentState() === 'walking'){
       newZoom += CAMERA_WALK_OFFSET;
     }
 
