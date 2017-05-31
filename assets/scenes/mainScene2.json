@@ -772,7 +772,7 @@
         "index": "46",
         "static": false,
         "Transform": {
-          "position": [26, -0.024, -22],
+          "position": [26.24, -0.024, -22.47],
           "rotation": [0, 90, 0],
           "scaleFactor": 0.3
         },
@@ -783,6 +783,7 @@
           "animationName": "OctopusCharacterAnim"
         },
         "Look": {
+          "range": 5
         },
         "Sing": {
           "range": 2,
@@ -804,7 +805,7 @@
             "index": "47",
             "static": false,
             "Transform": {
-              "position": [26, -0.024, -22],
+              "position": [26.24, -0.024, -22.47],
               "rotation": [270, 90, 0],
               "scaleFactor": 1
             },
@@ -818,7 +819,7 @@
             "index": "48",
             "static": false,
             "Transform": {
-              "position": [25.9905, -0.03579943, -22.00593],
+              "position": [26.2305, -0.03579943, -22.47593],
               "rotation": [272.1246, 63.90548, 24.12019],
               "scaleFactor": 1
             },
@@ -828,7 +829,7 @@
                 "index": "49",
                 "static": false,
                 "Transform": {
-                  "position": [25.98305, 0.3145729, -22.00088],
+                  "position": [26.22305, 0.3145729, -22.47088],
                   "rotation": [14.2708, 88.23178, 0.8957102],
                   "scaleFactor": 1
                 },
@@ -838,7 +839,7 @@
                     "index": "50",
                     "static": false,
                     "Transform": {
-                      "position": [25.99821, 0.3743137, -21.99944],
+                      "position": [26.2382, 0.3743137, -22.46944],
                       "rotation": [11.70589, 90.02175, 358.9318],
                       "scaleFactor": 1
                     },
@@ -848,7 +849,7 @@
                         "index": "51",
                         "static": false,
                         "Transform": {
-                          "position": [26.00938, 0.428254, -22.00048],
+                          "position": [26.24938, 0.428254, -22.47048],
                           "rotation": [10.53347, 94.31126, 358.6709],
                           "scaleFactor": 1
                         },
@@ -858,7 +859,7 @@
                             "index": "52",
                             "static": false,
                             "Transform": {
-                              "position": [26.03236, 0.5533632, -22.00517],
+                              "position": [26.27236, 0.5533632, -22.47517],
                               "rotation": [25.22184, 91.69904, 358.2996],
                               "scaleFactor": 1
                             },
@@ -868,7 +869,7 @@
                                 "index": "53",
                                 "static": false,
                                 "Transform": {
-                                  "position": [26.05443, 0.6003467, -22.00737],
+                                  "position": [26.29443, 0.6003467, -22.47737],
                                   "rotation": [20.04188, 89.63861, 358.1127],
                                   "scaleFactor": 1
                                 },
@@ -878,7 +879,7 @@
                                     "index": "54",
                                     "static": false,
                                     "Transform": {
-                                      "position": [26.09469, 0.7106295, -22.01098],
+                                      "position": [26.33469, 0.7106295, -22.48098],
                                       "rotation": [20.04188, 89.63861, 358.1127],
                                       "scaleFactor": 1
                                     }
@@ -892,7 +893,7 @@
                             "index": "55",
                             "static": false,
                             "Transform": {
-                              "position": [26.05346, 0.511861, -21.99954],
+                              "position": [26.29346, 0.511861, -22.46954],
                               "rotation": [289.367, 56.53955, 104.9902],
                               "scaleFactor": 1
                             },
@@ -902,7 +903,7 @@
                                 "index": "56",
                                 "static": false,
                                 "Transform": {
-                                  "position": [26.02861, 0.4992283, -21.93539],
+                                  "position": [26.26861, 0.4992283, -22.40539],
                                   "rotation": [14.47275, 135.6583, 172.4205],
                                   "scaleFactor": 0.9999999
                                 },
@@ -912,7 +913,7 @@
                                     "index": "57",
                                     "static": false,
                                     "Transform": {
-                                      "position": [26.01701, 0.3579772, -21.89575],
+                                      "position": [26.25701, 0.3579772, -22.36575],
                                       "rotation": [2.077247, 127.371, 171.1793],
                                       "scaleFactor": 1
                                     },
@@ -922,7 +923,7 @@
                                         "index": "58",
                                         "static": false,
                                         "Transform": {
-                                          "position": [26.02429, 0.2467225, -21.87957],
+                                          "position": [26.26429, 0.2467225, -22.34957],
                                           "rotation": [358.2546, 221.723, 186.9121],
                                           "scaleFactor": 0.9999999
                                         },
@@ -932,7 +933,7 @@
                                             "index": "59",
                                             "static": false,
                                             "Transform": {
-                                              "position": [26.01414, 0.1551532, -21.87426],
+                                              "position": [26.25414, 0.1551532, -22.34426],
                                               "rotation": [358.2546, 221.723, 186.9121],
                                               "scaleFactor": 1
                                             }
@@ -950,7 +951,7 @@
                             "index": "60",
                             "static": false,
                             "Transform": {
-                              "position": [26.05245, 0.5115717, -22.01218],
+                              "position": [26.29245, 0.5115717, -22.48218],
                               "rotation": [291.4854, 142.4807, 249.9898],
                               "scaleFactor": 0.9999999
                             },
@@ -960,7 +961,7 @@
                                 "index": "61",
                                 "static": false,
                                 "Transform": {
-                                  "position": [26.01251, 0.4962778, -22.06752],
+                                  "position": [26.25251, 0.4962778, -22.53752],
                                   "rotation": [7.122828, 57.14896, 196.5564],
                                   "scaleFactor": 0.9999999
                                 },
@@ -970,7 +971,7 @@
                                     "index": "62",
                                     "static": false,
                                     "Transform": {
-                                      "position": [26.02057, 0.3563019, -22.11223],
+                                      "position": [26.26057, 0.3563019, -22.58223],
                                       "rotation": [342.0675, 59.9476, 196.3696],
                                       "scaleFactor": 1
                                     },
@@ -980,7 +981,7 @@
                                         "index": "63",
                                         "static": false,
                                         "Transform": {
-                                          "position": [26.06528, 0.2534595, -22.12305],
+                                          "position": [26.30527, 0.2534595, -22.59305],
                                           "rotation": [10.11142, 332.5838, 198.6905],
                                           "scaleFactor": 0.9999999
                                         },
@@ -990,7 +991,7 @@
                                             "index": "64",
                                             "static": false,
                                             "Transform": {
-                                              "position": [26.09859, 0.1674014, -22.12306],
+                                              "position": [26.33859, 0.1674014, -22.59306],
                                               "rotation": [10.11142, 332.5838, 198.6905],
                                               "scaleFactor": 1
                                             }
@@ -1012,7 +1013,7 @@
                     "index": "65",
                     "static": false,
                     "Transform": {
-                      "position": [25.9974, 0.3350616, -21.96608],
+                      "position": [26.2374, 0.3350616, -22.43608],
                       "rotation": [25.3412, 257.6977, 180.0035],
                       "scaleFactor": 1
                     },
@@ -1022,7 +1023,7 @@
                         "index": "66",
                         "static": false,
                         "Transform": {
-                          "position": [26.07512, 0.1670763, -21.94912],
+                          "position": [26.31512, 0.1670763, -22.41912],
                           "rotation": [319.5383, 263.8517, 175.9217],
                           "scaleFactor": 1
                         },
@@ -1032,7 +1033,7 @@
                             "index": "67",
                             "static": false,
                             "Transform": {
-                              "position": [25.97503, 0.04762237, -21.97116],
+                              "position": [26.21502, 0.04762237, -22.44116],
                               "rotation": [26.96255, 258.5912, 175.5391],
                               "scaleFactor": 1
                             },
@@ -1042,7 +1043,7 @@
                                 "index": "68",
                                 "static": false,
                                 "Transform": {
-                                  "position": [25.99556, 0.007823672, -21.97057],
+                                  "position": [26.23556, 0.007823672, -22.44057],
                                   "rotation": [293.084, 71.23333, 190.184],
                                   "scaleFactor": 1
                                 },
@@ -1052,7 +1053,7 @@
                                     "index": "69",
                                     "static": false,
                                     "Transform": {
-                                      "position": [26.01685, -0.001162963, -21.96769],
+                                      "position": [26.25685, -0.001162963, -22.43769],
                                       "rotation": [293.084, 71.23333, 190.184],
                                       "scaleFactor": 1
                                     }
@@ -1066,7 +1067,7 @@
                             "index": "70",
                             "static": false,
                             "Transform": {
-                              "position": [25.97503, 0.04762237, -21.97116],
+                              "position": [26.21502, 0.04762237, -22.44116],
                               "rotation": [74.76167, 92.67496, 191.879],
                               "scaleFactor": 1
                             },
@@ -1076,7 +1077,7 @@
                                 "index": "71",
                                 "static": false,
                                 "Transform": {
-                                  "position": [25.96513, 0.02094263, -21.9875],
+                                  "position": [26.20513, 0.02094263, -22.4575],
                                   "rotation": [304.9934, 76.76261, 95.41423],
                                   "scaleFactor": 0.9999999
                                 },
@@ -1086,7 +1087,7 @@
                                     "index": "72",
                                     "static": false,
                                     "Transform": {
-                                      "position": [25.9609, 0.01944256, -21.96015],
+                                      "position": [26.2009, 0.01944256, -22.43015],
                                       "rotation": [304.9934, 76.76261, 95.41423],
                                       "scaleFactor": 1
                                     }
@@ -1104,7 +1105,7 @@
                     "index": "73",
                     "static": false,
                     "Transform": {
-                      "position": [25.99976, 0.3360906, -22.03396],
+                      "position": [26.23976, 0.3360906, -22.50396],
                       "rotation": [13.92808, 275.7378, 183.2028],
                       "scaleFactor": 1
                     },
@@ -1114,7 +1115,7 @@
                         "index": "74",
                         "static": false,
                         "Transform": {
-                          "position": [26.04524, 0.1559666, -22.02809],
+                          "position": [26.28524, 0.1559666, -22.49809],
                           "rotation": [342.552, 271.788, 179.5675],
                           "scaleFactor": 1
                         },
@@ -1124,7 +1125,7 @@
                             "index": "75",
                             "static": false,
                             "Transform": {
-                              "position": [25.99803, 0.005811734, -22.0278],
+                              "position": [26.23803, 0.005811734, -22.4978],
                               "rotation": [58.87246, 271.696, 180.0001],
                               "scaleFactor": 1
                             },
@@ -1134,7 +1135,7 @@
                                 "index": "76",
                                 "static": false,
                                 "Transform": {
-                                  "position": [26.03636, -0.01734117, -22.02894],
+                                  "position": [26.27636, -0.01734117, -22.49894],
                                   "rotation": [275.8496, 271.6955, 0.0004858686],
                                   "scaleFactor": 1
                                 },
@@ -1144,7 +1145,7 @@
                                     "index": "77",
                                     "static": false,
                                     "Transform": {
-                                      "position": [26.05951, -0.01496782, -22.02962],
+                                      "position": [26.29951, -0.01496782, -22.49962],
                                       "rotation": [275.8496, 271.6955, 0.0004858686],
                                       "scaleFactor": 1
                                     }
@@ -1158,7 +1159,7 @@
                             "index": "78",
                             "static": false,
                             "Transform": {
-                              "position": [25.99803, 0.005811734, -22.0278],
+                              "position": [26.23803, 0.005811734, -22.4978],
                               "rotation": [51.98639, 92.18683, 180.6705],
                               "scaleFactor": 1
                             },
@@ -1168,7 +1169,7 @@
                                 "index": "79",
                                 "static": false,
                                 "Transform": {
-                                  "position": [25.99787, -0.02433127, -22.01484],
+                                  "position": [26.23787, -0.02433127, -22.48484],
                                   "rotation": [281.7953, 89.68201, 272.0189],
                                   "scaleFactor": 0.9999999
                                 },
@@ -1178,7 +1179,7 @@
                                     "index": "80",
                                     "static": false,
                                     "Transform": {
-                                      "position": [25.99707, -0.02413169, -22.04255],
+                                      "position": [26.23707, -0.02413169, -22.51255],
                                       "rotation": [281.7953, 89.68201, 272.0189],
                                       "scaleFactor": 1
                                     }
@@ -1200,7 +1201,7 @@
             "index": "81",
             "static": false,
             "Transform": {
-              "position": [26.1596, 0.3807, -22],
+              "position": [26.3996, 0.3807, -22.47],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -23150,29 +23151,33 @@
       {
         "name": "Healing Basin",
         "index": "1572",
-        "static": true,
+        "static": false,
         "Transform": {
           "position": [26, 0.5, -24],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
+        "Kinematic": {
+        },
         "children": [
           {
             "name": "Pot.2",
             "index": "1573",
-            "static": true,
+            "static": false,
             "Transform": {
               "position": [26, 0.5, -24],
               "rotation": [270, 0, 0],
               "scaleFactor": 1
             },
             "MeshFilter": "Pot.2",
-            "MeshRenderer": "pockedconcrete1-albedo"
+            "MeshRenderer": "pockedconcrete1-albedo",
+            "Kinematic": {
+            }
           },
           {
             "name": "Collider",
             "index": "1574",
-            "static": true,
+            "static": false,
             "Transform": {
               "position": [26, 0.702, -24],
               "rotation": [0, 0, 0],
@@ -23189,11 +23194,13 @@
             "RaycastSwitch": {
               "events": [1574]
             },
+            "Kinematic": {
+            },
             "colliders": [
               {
                 "type": "sphere",
                 "isTrigger": false,
-                "scale": 1,
+                "scale": 0.25,
                 "offset": [0, 0, 0]
               }
             ]
