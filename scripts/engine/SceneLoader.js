@@ -108,8 +108,10 @@ const SceneLoader = {
         vec3.scale(colliderOffset, colliderOffset, scale);
         vec3.scale(colliderSize, colliderSize, scale);
 
+        collider.setTrigger(colliderData.isTrigger);
         collider.addShape(colliderType, colliderSize, colliderOffset);
       }
+
       if(currentNode["Kinematic"] !== undefined){
         collider.setLayer(FILTER_KINEMATIC);
       }else {

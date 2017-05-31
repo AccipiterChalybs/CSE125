@@ -2,20 +2,18 @@ class HealEvent extends Event{
 
   constructor() {
     super();
-    // this.movementSpeed = REGULAR_SPEED;
     this.setCurrentState(EventState.uncharged);
   }
 
-  start() {
-    this._collider = this.transform.gameObject.getComponent('Collider');
-    //this._singer = this.transform.gameObject.getComponent("Sing");
-    this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
-    this._collider.setFreezeRotation(true);
-  }
-
-  startClient() {
-    // this._singingSrc = this.transform.gameObject.getComponent("AudioSource");
-  }
+  // start() {
+  //   this._collider = this.transform.gameObject.getComponent('Collider');
+  //   this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
+  //   this._collider.setFreezeRotation(true);
+  // }
+  //
+  // startClient() {
+  //   // this._singingSrc = this.transform.gameObject.getComponent("AudioSource");
+  // }
 
   // updateComponent(){
   //   if (this._unlocked)
@@ -43,6 +41,7 @@ class HealEvent extends Event{
     //TODO Make this cleaner! Or maybe add to playerobject
     // // this.transform.gameObject.parent=null;
     // this.transform._parent.children[]
+    Debug.log("hello");
     let player = interactingObj.getComponent('PlayerController');
     if (player && player !== null) {
       if (player.injured) {

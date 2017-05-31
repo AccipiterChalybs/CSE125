@@ -28,7 +28,6 @@ class SingingSwitch extends Listenable {
     // Debug.log(this._events);
 
     this._collider = this.transform.gameObject.getComponent('Collider');
-    //this._singer = this.transform.gameObject.getComponent("Sing");
     this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
     this._collider.setFreezeRotation(true);
   }
