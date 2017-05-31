@@ -40,5 +40,11 @@
     "loop": true,
     "type": 0,
     "space": 3
+  },
+  "Tone03":{
+    "src": "assets/audio/tone.wav",
+    "loop": true,
+    "type": 0,
+    "space": 3
   }
 }
