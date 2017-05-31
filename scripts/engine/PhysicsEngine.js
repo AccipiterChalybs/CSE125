@@ -5,7 +5,7 @@
 const PhysicsEngine = {};
 
 const TIME_STEP = 1.0/60.0;
-const GRAVITY = -20;
+const GRAVITY = -50;
 const DEFAULT_ANGULAR_DAMPING = 0.9; // How fast things will stop rotating
 const FILTER_DEFAULT = 1;
 const FILTER_LEVEL_GEOMETRY = 2;

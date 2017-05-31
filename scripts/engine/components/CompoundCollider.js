@@ -28,5 +28,15 @@ class CompoundCollider extends Collider{
       let sphereShape = new CANNON.Sphere(radius);
       this.body.addShape(sphereShape, new CANNON.Vec3(objScale * offset[0], objScale * offset[1], objScale * offset[2]));
     }
+
+    let debugTeapot = Debug.drawCollider(type, vec3.fromValues(objScale * offset[0], objScale * offset[1], objScale * offset[2]),
+      vec4.fromValues(1, 1, 0,1));
+    if (debugTeapot === null) return;
+
+    debugTeapot.transform.translate(this.transform.getWorldPosition());
+    debugTeapot.transform.setRotation(this.transform.getWorldRotation());
+    debugTeapot.isStatic = true;
+    debugTeapot.transform.scaleFactor = vec3.fromValues(objScale * size[0],objScale * size[1], objScale * size[2]);
+    GameObject.prototype.SceneRoot.addChild(debugTeapot);
   }
 }

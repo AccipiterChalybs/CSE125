@@ -78,14 +78,14 @@ const SceneLoader = {
     quat.rotateX(rotate, rotate, 1*(currentNode["Transform"].rotation[0]) / 180 * Math.PI);
     quat.rotateZ(rotate, rotate, -1*(currentNode["Transform"].rotation[2]) / 180 * Math.PI);
 
-    let parentRotation = parent.transform.getWorldRotation();
+    let parentRotation = quat.copy(quat.create(),parent.transform.getWorldRotation());
     quat.normalize(parentRotation, parentRotation);
     quat.invert(parentRotation, parentRotation);
     quat.multiply(rotate, parentRotation, rotate);
 
     let scale = currentNode["Transform"].scaleFactor;
 
-    nodeObject.transform.setScale((scale > 10) ? scale / 100 : scale);
+    nodeObject.transform.setScale(scale);
     nodeObject.transform.setPosition(pos);
     nodeObject.transform.setRotation(rotate);
 
@@ -93,18 +93,18 @@ const SceneLoader = {
 
 
     if ("colliders" in currentNode) {
-      let mass = (currentNode.static) ? currentNode['Rigidbody'] : 0;
+      let mass = (currentNode.static) ? 0 : currentNode['Rigidbody'];
       let collider = new CompoundCollider({mass: mass, trigger: false, scaleX: 1, scaleY: 1, scaleZ: 1});
       nodeObject.addComponent(collider);
 
       for (let colliderData of currentNode["colliders"]) {
         let colliderType = (colliderData.type === 'box') ? 'box' : 'sphere';
-        let colliderOffset = vec3.fromValues.apply(vec3, colliderData.offset);
+        let colliderOffset = vec3.create();//vec3.fromValues.apply(vec3, colliderData.offset);
         let colliderSize = (colliderData.type === 'box') ? vec3.fromValues(colliderData.scaleX, colliderData.scaleY, colliderData.scaleZ)
                                                          : vec3.fromValues(colliderData.scale, colliderData.scale, colliderData.scale);
 
         //TODO why is the y switched?
-        colliderOffset[1] = -colliderOffset[1];
+        //colliderOffset[1] = -colliderOffset[1];
         vec3.scale(colliderOffset, colliderOffset, scale);
         vec3.scale(colliderSize, colliderSize, scale);
 

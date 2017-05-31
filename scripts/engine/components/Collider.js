@@ -19,15 +19,9 @@ class Collider extends Component{
     this.body.position.set(worldPosition[0], worldPosition[1],
       worldPosition[2]);
 
-    let xyz = vec3.fromValues(worldPosition[0], worldPosition[1],
-      worldPosition[2]);
-
-    // GameObject.prototype.SceneRoot.addChild(Debug.drawTeapot(xyz, vec4.fromValues(1, 0, 0,1)));
-    // GameObject.prototype.SceneRoot.addChild(Debug.drawTeapot(this.transform.getPosition(), vec4.fromValues(1, 0, 1,1)));
-
-    // TODO: may be a problem in the future if the objects start with a weird rotation
-    this.body.quaternion.set(this.transform.getRotation()[0], this.transform.getRotation()[1],
-      this.transform.getRotation()[2], this.transform.getRotation()[3]);
+    let worldRotation = this.transform.getWorldRotation();
+    this.body.quaternion.set(worldRotation[0], worldRotation[1],
+      worldRotation[2], worldRotation[3]);
   }
 
 
@@ -44,8 +38,8 @@ class Collider extends Component{
       worldPosition[2]);
 
     // TODO: may be a problem in the future if the objects start with a weird rotation
-    this.body.quaternion.set(this.transform.getRotation()[0], this.transform.getRotation()[1],
-                                this.transform.getRotation()[2], this.transform.getRotation()[3]);
+    this.body.quaternion.set(this.transform.getWorldRotation()[0], this.transform.getWorldRotation()[1],
+                                this.transform.getWorldRotation()[2], this.transform.getWorldRotation()[3]);
 
     if (this.trigger) {
       this.body.collisionResponse = 0;
@@ -75,7 +69,13 @@ class Collider extends Component{
           this.body.quaternion.z, this.body.quaternion.w);
 
         //TODO may need to do something like 'setWorldRotation' here.
-        this.transform.setRotation(newRot);
+        this.transform.setWorldRotation(newRot);
+      } else {
+        let bodyRotation = this.transform.getWorldRotation();
+        this.body.quaternion.set( bodyRotation[0],
+          bodyRotation[1],
+          bodyRotation[2],
+          bodyRotation[3]);
       }
     }else {
       // Debug.log("im kinematic!");
@@ -83,10 +83,11 @@ class Collider extends Component{
       this.body.position.y = this.transform.getWorldPosition()[1];
       this.body.position.z = this.transform.getWorldPosition()[2];
 
-      this.body.quaternion.set( this.transform.getRotation()[0],
-                                this.transform.getRotation()[1],
-                                this.transform.getRotation()[2],
-                                this.transform.getRotation()[3]);
+      let bodyRotation = this.transform.getWorldRotation();
+      this.body.quaternion.set( bodyRotation[0],
+        bodyRotation[1],
+        bodyRotation[2],
+        bodyRotation[3]);
 
     }
   }
