@@ -4546,7 +4546,8 @@
           "scaleFactor": 1
         },
         "StatueController": {
-          "singingDelay": 0
+          "singingDelay": 0,
+          "singingDuration": 0
         },
         "Sing": {
           "range": 3,
@@ -6269,7 +6270,8 @@
           "scaleFactor": 1
         },
         "StatueController": {
-          "singingDelay": 3
+          "singingDelay": 3,
+          "singingDuration": 2
         },
         "Sing": {
           "range": 3,

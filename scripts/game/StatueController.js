@@ -2,9 +2,11 @@
  * Created by ajermaky on 5/22/17.
  */
 class StatueController extends Playerable{
-  constructor(params = {singingDelay: 0}) {
+  constructor(params = {singingDelay: 0, singingDuration: 3}) {
     super({singingCooldown: params.singingDelay});
     // Debug.log(this._singingCooldown);
+
+    this._maxSingingDuration = params.singingDuration;
   }
 
   start() {
