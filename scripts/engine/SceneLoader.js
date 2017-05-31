@@ -27,8 +27,11 @@ const SceneLoader = {
 
       for (let matData of scene.materialList) {
         //TODO support more shaders (e.g. animation)
-        let shaderId = (matData.animated) ? Renderer.DEFERRED_PBR_SHADER_ANIM : Renderer.DEFERRED_PBR_SHADER;
-        let mat = new Material(Renderer.getShader(shaderId), false);
+        let forwardShaders = (matData.animated) ? Renderer.FORWARD_PBR_SHADER_ANIM : Renderer.FORWARD_PBR_SHADER;
+        let deferredShaders = (matData.animated) ? Renderer.DEFERRED_PBR_SHADER_ANIM : Renderer.DEFERRED_PBR_SHADER;
+        let shaderId = (matData.forward) ? forwardShaders : deferredShaders;
+        console.log(shaderId, Renderer.FORWARD_PBR_SHADER);
+        let mat = new Material(Renderer.getShader(shaderId), !!(matData.forward));
         mat.setTexture(MaterialTexture.COLOR, new Texture(matData.color));
         mat.setTexture(MaterialTexture.MAT, new Texture(matData.mat, false));
         mat.setTexture(MaterialTexture.NORMAL, new Texture(matData.normal, false));

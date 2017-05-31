@@ -201,11 +201,6 @@ class GameScene {
               //   teapot.getComponent('AudioSource').playSound2d('singTone03');
               //   teapot.getComponent('AudioSource').pauseSound();
               // }
-              let lightComp = new PointLight(false);
-
-              lightComp.color = vec3.fromValues(5, 2.5, 0);
-              lightComp.exponentialFalloff = 0.25;
-              teapot.addComponent(lightComp);
               specialTeapot = true;
 
               //For testing purposes
@@ -289,27 +284,6 @@ class GameScene {
     let color = vec4.create(); vec4.set(color, 1, 0, 0, 1);
     let evilTeapot = Debug.drawTeapot(pos, color);
     evilTeapot.addComponent(new EvilController());
-
-
-    let light = new GameObject();
-    let lightComp = new PointLight(false);
-    lightComp.color = vec3.fromValues(5, 2.5, 0);
-    lightComp.exponentialFalloff = 0.25;
-    light.addComponent(lightComp);
-    let lightPos = vec3.create();
-    vec3.set(lightPos, 10, 2.5, 0);
-
-    //For testing purposes
-    /*light.addComponent(new Mesh("Sphere_Icosphere"));
-    light.getComponent("Mesh").setMaterial(Debug.makeDefaultMaterial());*/
-    //light.transform.scale(0.25);
-
-    light.transform.setPosition(lightPos);
-
-    let lightCenter = new GameObject();
-    lightCenter.addChild(light);
-    lightCenter.addComponent(new RotateOverTime({speed: 2.5}));
-    GameObject.prototype.SceneRoot.addChild(lightCenter);
 
     //let move = vec3.create(); vec3.set(move, 0, 500, 64);
     let move = vec3.create(); vec3.set(move, 0,-1,0);

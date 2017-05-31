@@ -177,6 +177,7 @@ class ShadowPass extends ForwardPass
     _drawMeshes(isPoint, mode) {
       let animShader = (isPoint) ? Renderer.POINT_SHADOW_SHADER_ANIM : Renderer.SHADOW_SHADER_ANIM;
       let regShader = (isPoint) ? Renderer.POINT_SHADOW_SHADER : Renderer.SHADOW_SHADER;
+      let forwardShader = (isPoint) ? Renderer.FORWARD_POINT_SHADOW_SHADER : Renderer.FORWARD_SHADOW_SHADER;
       for (let mesh of Renderer.renderBuffer.deferred) {
         if (mode === ShadowPass.prototype.MODE_DYNAMIC && mesh.gameObject.isStatic) {
           continue;
@@ -192,6 +193,24 @@ class ShadowPass extends ForwardPass
         if (s !== Renderer.currentShader) {
           s.use();
         }
+        mesh.draw();
+      }
+      for (let mesh of Renderer.renderBuffer.forward) {
+        //TODO animated meshes
+        let mat = mesh.material;
+        if (mat.shader !== Renderer.getShader(Renderer.FORWARD_PBR_SHADER)) continue;
+        if (mode === ShadowPass.prototype.MODE_DYNAMIC && mesh.gameObject.isStatic) {
+          continue;
+        }
+        if (mode === ShadowPass.prototype.MODE_STATIC && !mesh.gameObject.isStatic) {
+          continue;
+        }
+        mat._useTexture(MaterialTexture.COLOR, 0);
+        let s = Renderer.getShader(forwardShader);
+        if (s !== Renderer.currentShader) {
+          s.use();
+        }
+
         mesh.draw();
       }
     }
@@ -534,12 +553,11 @@ class BloomPass extends RenderPass
             if (light.isShadowCaster) {
               if (light.cubeShadow) {
                 let pos=0;
-                light.bindCubeMap(1);
+                light.bindCubeMap(4);
                 for (let f of [-1, -1, 3, -1, 4, 1, 5, 0, -1, -1, 2]) {
                   if (f===-1) { ++pos; continue; }
                   const displaySize = 256;
                   GL.viewport(displaySize*(pos%4), displaySize*Math.floor(pos/4), displaySize, displaySize); //render shadow map to a square-sized portion of the screen
-                  s5.setUniform("cubeTex", 1, UniformTypes.u1i);
                   s5.setUniform("rgbOutput", 3, UniformTypes.u1i);
                   s5.setUniform("face", f, UniformTypes.u1i);
                   ++pos;
