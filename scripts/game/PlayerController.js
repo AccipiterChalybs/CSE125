@@ -26,6 +26,8 @@ class PlayerController extends Playerable{
     this.checkpoint = null;
     this.keys = 0;
     this.injured = false;
+    this.forward = vec3.create(); vec3.set(this.forward, 0, 0, -1);
+    this.cameraPos = vec3.create(); vec3.set(this.cameraPos, 0, 0, -1);
 
     this.state = new PlayerLogicState();
     this.state.status = 'default';
@@ -74,6 +76,7 @@ class PlayerController extends Playerable{
       this.action = Input.getAxis("action");
 
       this.forward = Renderer.camera.transform.getForward();
+      this.cameraPos = Renderer.camera.transform.getWorldPosition();
     }
 
     if(this.singing === 0 && this._lastSingInput === 1){

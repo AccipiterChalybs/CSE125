@@ -12,7 +12,6 @@ class Playerable extends Component{
     this.singing = 0;
     this.walking = 0;
     this.action = 0;
-    this.forward = vec3.create(); vec3.set(this.forward, 0, 0, -1);
 
     this._colliders = [];
     this._singer = null;
