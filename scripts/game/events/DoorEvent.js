@@ -4,64 +4,49 @@
 // const PLAYER_ACCELERATION = 4;
 // const COOLDOWN_SINGING = 0.1;   // In seconds
 
-const OPEN_SPEED = 0.5;
-const CLOSE_SPEED = 0.5;
-
 class DoorEvent extends Event{
-  constructor(params = {openPosX: 0, openPosY: 0, openPosZ: 0,
-    closePosX: 0, closePosY: 1.5, closePosZ: 0, _unlocked: false}) {
-    super();
+  constructor(params = {maximumCharge: 3, _unlocked: true, openPos: vec3.create(), closePos: vec3.create()}){
+    super({maximumCharge: params.maximumCharge});
 
     this.setCurrentState(EventState.uncharged);
+    this.openPos = vec3.copy(vec3.create(), params.openPos);
+    this.closePos = vec3.copy(vec3.create(), params.closePos);
+
     this._unlocked = params._unlocked;
-    this.openPos = vec3.fromValues(params.openPosX, params.openPosY, params.openPosZ);
-    this.closePos = vec3.fromValues(params.closePosX, params.closePosY, params.closePosZ);
   }
 
   start() {
-    this._collider = this.transform.gameObject.getComponent('Collider');
-    this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
-    this._collider.setFreezeRotation(true);
   }
 
   startClient() {
   }
 
   updateComponent() {
-    if (this._unlocked)
-    {
+    if (this._unlocked){
       super.updateComponent();
     }
   }
 
   onUncharged() {
-    // Debug.log("Fully discharged ", this);
-    let newPos = Utility.vec3.moveTowards(this.transform.position, this.closePos, CLOSE_SPEED * Time.deltaTime);
-    this.transform.setPosition(newPos);
+    // Debug.log("Fully Discharged... ", this);
+    this.transform.setPosition(this.closePos);
   }
 
   onCharged() {
-    // Debug.log("Fully charged ", this);
-    let newPos = Utility.vec3.moveTowards(this.transform.position, this.openPos, OPEN_SPEED * Time.deltaTime);
-    this.transform.setPosition(newPos);
+    // Debug.log("Fully Charged... ", this);
+    this.transform.setPosition(this.openPos);
   }
 
   onDischarging() {
     // Debug.log("Discharging... ", this);
-    let newPos = Utility.vec3.moveTowards(this.transform.position, this.closePos, CLOSE_SPEED * Time.deltaTime);
+    let newPos = vec3.scale(vec3.create(), this.openPos, this.currentCharge / this.maximumCharge);
     this.transform.setPosition(newPos);
-    // if (this.transform.position[0] === this.closePos[0] && this.transform.position[1] === this.closePos[1] && this.transform.position[2] === this.closePos[2]) {
-    //   this.setCurrentState(EventState.uncharged);
-    // }
   }
 
   onCharging() {
     // Debug.log("Charging... ", this);
-    let newPos = Utility.vec3.moveTowards(this.transform.position, this.openPos, OPEN_SPEED * Time.deltaTime);
+    let newPos = vec3.scale(vec3.create(), this.openPos, this.currentCharge / this.maximumCharge);
     this.transform.setPosition(newPos);
-    // if (this.transform.position[0] === this.openPos[0] && this.transform.position[1] === this.openPos[1] && this.transform.position[2] === this.openPos[2]) {
-    //   this.setCurrentState(EventState.charged);
-    // }
   }
 
   onRaycast(interactingObj) {
