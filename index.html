@@ -2,33 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
-  <script src="scripts/glMatrix-2.3.2.min.js">
-  </script>
-  <script src="scripts/cannon.min.js">
-  </script>
-  <script src="scripts/jquery.min.js">
-  </script>
-  <!-- Latest compiled and minified CSS -->
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Optional theme -->
-  <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet"><!-- Latest compiled and minified JavaScript -->
-
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
-  </script>
+  <title>Voiceless</title>
+  <script src="scripts/glMatrix-2.3.2.min.js"></script>
+  <script src="scripts/cannon.min.js"></script>
+  <script src="scripts/jquery.min.js"></script>
+  <link href="styles/bootstrap.css" rel="stylesheet">
+  <script src="scripts/bootstrap.min.js"></script>
   <link href="styles/menu.css" rel="stylesheet">
 </head>
 <!--<body onload="initialize()" style="background-image: url('assets/images/concept_environment_chamber_medival-spikes-statues.jpg');background-size: cover">-->
-<body onload="menuStart()" style="background-image: url('assets/images/concept_environment_chamber_medival-spikes-statues.jpg');background-size: cover">
+<body onload="menuStart()">
 <div id="mainMenu" class="container menu" style="margin-top: 40vh">
   <div class="row">
-    <div class="col-md-4">
-      <h1>Song of the Voiceless</h1>
-      <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="startGame()">Start</button>
-      <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="$('#options').modal('show');">Options</button>
-      <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="quit()">Quit</button>
-    </div>
+    <!-- <h1 class="text-center">Song of the Voiceless</h1> -->
+    <div class="title-img"></div>
+  </div>
+  <div class="row">
     <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="startGame()">START</button>
+      <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="$('#options').modal('show');">OPTIONS</button>
+      <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="quit()">QUIT</button>
+    </div>
     <div class="col-md-4"></div>
   </div>
 </div>
@@ -38,9 +33,9 @@
   <div id="exposureLog"></div>
   <div id="profilerLog"></div>
 </div>
-<div id="progress" class="container" style="margin-top: 30vh;visibility: hidden">
+<div id="progress" class="container" style="  visibility: hidden">
   <div class="progress">
-    <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" class="progress-bar progress-bar-success" id="progressBar" role="progressbar" style="width: 0%">
+    <div class="progress-bar progress-bar-success" id="progressBar" role="progressbar" style="width: 0%">
       <span id="progressBarText">Loading Progress: (0/0)</span>
     </div>
   </div>
@@ -102,9 +97,21 @@
           <h1 class="modal-title">Options</h1>
         </div>
         <div class="modal-body">
-          <h1>somebody once told me</h1>
-          <h1>the world is gonna roll me</h1>
-          <h1>what is love</h1>
+          <div id="controls">
+            <h2>Controls</h2>
+            <div class="modal-row" id="foward">
+              <div class="text"></div><div class="btn"></div>
+            </div>
+            <div class="modal-row" id="left">
+              <div class="text"></div><div class="btn"></div>
+            </div>
+            <div class="modal-row" id="backward">
+              <div class="text"></div><div class="btn"></div>
+            </div>
+            <div class="modal-row" id="right">
+              <div class="text"></div><div class="btn"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -204,6 +211,7 @@
 <script src="scripts/engine/Networking.js"></script>
 
 <script src="scripts/engine/main.js"></script>
+<script src="scripts/UI/utilities.js"></script>
 <script src="scripts/UI/mainpage.js"></script>
 <script>
   var test= function () {

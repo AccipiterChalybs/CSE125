@@ -66,7 +66,7 @@ const Input = {
       {
         name: 'walk',
         type: InputType.keyboard,
-        positiveButton: 16,
+        positiveButton: 16, // shift
         value: 0
       },
       {
@@ -284,28 +284,28 @@ const Input = {
     }
     // End pointer lock
 
-      // Mouse buttons
-      // document.body.onmouseup = (e)=> Input._options.axes.filter(
-      //     (axis)=>axis.type === InputType.mouseButton)
-      //     .forEach((axis)=>updateAxisInt(axis, e.button, true));
-      // document.body.onmousedown = (e)=> Input._options.axes.filter(
-      //     (axis)=>axis.type === InputType.mouseButton)
-      //     .forEach((axis)=>updateAxisInt(axis, e.button));
+    // Mouse buttons
+    // document.body.onmouseup = (e)=> Input._options.axes.filter(
+    //     (axis)=>axis.type === InputType.mouseButton)
+    //     .forEach((axis)=>updateAxisInt(axis, e.button, true));
+    // document.body.onmousedown = (e)=> Input._options.axes.filter(
+    //     (axis)=>axis.type === InputType.mouseButton)
+    //     .forEach((axis)=>updateAxisInt(axis, e.button));
 
-      // Prevent default Right-click menu
-      document.body.oncontextmenu = ()=>false;
+    // Prevent default Right-click menu
+    document.body.oncontextmenu = ()=>false;
 
-      // Keyboard buttons
-      document.body.onkeyup = (e)=> Input._options.axes.filter(
-          (axis)=>axis.type === InputType.keyboard)
-          .forEach((axis)=>updateAxisInt(axis, e.which, true));
-      document.body.onkeydown = (e)=> Input._options.axes.filter(
-          (axis)=>axis.type === InputType.keyboard)
-          .forEach((axis)=>updateAxisInt(axis, e.which));
+    // Keyboard buttons
+    document.body.onkeyup = (e)=> Input._options.axes.filter(
+        (axis)=>axis.type === InputType.keyboard)
+        .forEach((axis)=>updateAxisInt(axis, e.which, true));
+    document.body.onkeydown = (e)=> Input._options.axes.filter(
+        (axis)=>axis.type === InputType.keyboard)
+        .forEach((axis)=>updateAxisInt(axis, e.which));
 
-      // Mouse Movement
-      //document.body.onmousemove = (e)=> Input._options.axes.filter(
-      //    (axis)=>axis.type === InputType.mouse)
-      //    .forEach((axis)=>updateAxisFloat(axis, e));
-    },
+    // Mouse Movement
+    //document.body.onmousemove = (e)=> Input._options.axes.filter(
+    //    (axis)=>axis.type === InputType.mouse)
+    //    .forEach((axis)=>updateAxisFloat(axis, e));
+  },
 };

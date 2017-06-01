@@ -20,9 +20,12 @@
 }
 
 .btn-menu:hover {
-  background: radial-gradient(rgba(178, 178, 178, 0.46), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
-  text-shadow: 0 0 15px white;
-  transition-duration: 1s;
+  /*background: radial-gradient(rgba(178, 178, 178, 0.46), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
+  text-shadow: 0 0 15px white;*/
+  background: radial-gradient(rgba(146, 237, 124, 0.46), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
+  text-shadow: 0 0 15px black;
+  color: white;
+  transition-duration: .6s;
 }
 
 .modal-header {
@@ -38,4 +41,46 @@
   background-color: rgba(86, 86, 86, 0.46);
   border-radius: 0;
   color: white;
+}
+
+.modal-row {
+  height: 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.modal-row .text {
+  height: 100%;
+  display: inline-block;
+  text-align: right;
+  width: 120px;
+}
+
+.modal-row .text::after {
+  margin-left: 20px;
+  margin-right: 20px;
+  content: "|";
+}
+
+
+.modal-row + .modal-row {
+  margin-top: 10px
+}
+
+.modal-row .btn {
+  height: 100%;
+  width: 100px;
+  padding: 0;
+  border: none;
+}
+
+.title-img {
+  content: url(/assets/images/voiceless_title.png);
+  max-width: 909px;
+  width: 100%;
+  margin: auto;
+}
+
+.menu {
+  margin-top: 20px !important;
 }

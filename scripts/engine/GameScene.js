@@ -54,7 +54,6 @@ class GameScene {
       camera.gameObject.addComponent(new RotateMouse());
     }
 
-
     //TODO make true and make clientside objects work
     let directionalLight = new GameObject({clientSideOnly: false});
 
