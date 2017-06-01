@@ -24,6 +24,9 @@ class GameScene {
       }
     }
 
+    // Animations graphs loaded here, for now
+    AnimationGraph.loadPlayerAnimationGraph();
+
     SceneLoader.loadScene(sceneFile);
 
     // TODO REMOVE ME LATER
@@ -50,224 +53,10 @@ class GameScene {
       // camera.transform.setPosition(newPosition);
       camera.gameObject.addComponent(new RotateMouse());
     }
-    //GameObject.prototype.SceneRoot.transform.children[0].gameObject.getComponent('Animation').play(0, true);
 
-
-    GameObject.prototype.SceneRoot.transform.setScale(1);
-
-    let rotation = quat.create();
-    quat.rotateX(rotation, rotation, -Math.PI/2);
-
-    let container = new GameObject();
-    GameObject.prototype.SceneRoot.addChild(container);
-
-    let metalNum = 10;
-    let roughNum = 10;
-    let separation = 0.5;
-    let yHeight = 1;
-    let quickEvent = null;
-    for (let x=0; x<metalNum; ++x) {
-        for (let y=0; y<roughNum; ++y) {
-            let specialTeapot = false;
-
-            let teapot = new GameObject();
-
-            if (!IS_SERVER) {
-              let mesh = new Mesh("Teapot02");
-              let mat = new Material(Renderer.getShader(Renderer.DEFERRED_PBR_SHADER));
-
-              let color = vec4.create();
-              vec4.set(color, 0.81, 0.81, 0.81, 1);
-              mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
-
-              vec4.set(color, 0.5, 0.5, 1, 1);
-              mat.setTexture(MaterialTexture.NORMAL, Texture.makeColorTex(color));
-
-              vec4.set(color, x / (metalNum - 1), 0, y / (roughNum - 1), 1); //metalness, blank, roughness
-              mat.setTexture(MaterialTexture.MAT, Texture.makeColorTex(color));
-
-              if (x===1 && y===1){
-                vec4.set(color, 1, 0, 0, 1);
-                mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
-              }else if( x===9 && y ===5){
-                vec4.set(color, 0, 1, 0, 1);
-                mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
-              }else if( x===4 && y ===3){
-                vec4.set(color, .5, .0, 0, 1);
-                mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
-              }else if( x===9 && y ===3){
-                vec4.set(color, 1, 0, 1, 1);
-                mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
-              }else if( x===2 && y ===2){
-                vec4.set(color, 0, 0, 1, 1);
-                mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
-              }
-
-              mesh.setMaterial(mat);
-              teapot.addComponent(mesh);
-            }
-
-          let pos = vec3.create(); vec3.set(pos, (x - metalNum/2.0)*separation, yHeight, -1 * (y - roughNum/2.0)*separation);
-            if (x===5 && y===5) {
-              //add sound to a GameObject
-              //teapot.addComponent(new AudioSource());
-              //if(!IS_SERVER) teapot.getComponent("AudioSource").playSound3d("cruelangel");
-
-              if(!IS_SERVER) teapot.addComponent(new ParticleSystem({additive: true, texture: particleTex}));
-              //get rid of later just for testing
-              if(!IS_SERVER) {
-                  teapot.addComponent(new AudioSource('MainTheme'));
-                  teapot.getComponent('AudioSource').playSound();
-              }
-                //teapot.getComponent("AudioSource").playSound();
-
-
-
-              let decal = new GameObject();
-              teapot.addChild(decal);
-              decal.addComponent(new Decal({scale: 200, color: vec4.fromValues(0.5,25,0.5,1), texture: decalTex, normal: decalNormal}));
-              decal.transform.setPosition(vec3.fromValues(0, 30, 60));
-              decal.transform.rotateX(Math.PI/2);
-
-              specialTeapot = true;
-            }
-
-            if(x===1 && y===1){
-              pos[1] = 0;
-            } else if(x===2 && y===2){
-              pos[1] = 0;
-            }
-            teapot.transform.setPosition(pos);
-            teapot.transform.setRotation(rotation);
-            teapot.transform.scale((0.01));
-
-            if (x===1 && y===1){
-              teapot.addComponent(new SphereCollider({mass: 0, trigger: true}));
-              teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
-              teapot.addComponent(new DoorEvent({openPos: [-2,2,2], closePos: [-2,0,2]}));
-              teapot.addComponent(new AudioSource("door_unlocked"));
-              teapot.addComponent(new SingingSwitch({event: teapot.getComponent("Event"),activationLevel:5 }));
-              quickEvent = teapot.getComponent("Event");
-
-              if(!IS_SERVER) {
-                //teapot.getComponent("AudioSource").playSound2d('door_unlocked');
-                //teapot.getComponent("AudioSource").pauseSound();
-              }
-
-              specialTeapot = true;
-
-            }else if(x===9 && y===5){
-              teapot.addComponent(new SphereCollider({mass: 100, trigger: false, scale:15}));
-              teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
-              teapot.addComponent(new RaycastSwitch({event: quickEvent}));
-              teapot.transform.position[1]=0;
-              teapot.transform.scale(1.5);
-
-              specialTeapot = true;
-
-            }else if(x===4 && y===3){
-              teapot.addComponent(new SphereCollider({mass: 100, trigger: false, scale: 15}));
-              teapot.transform.scale(.5);
-              teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
-              teapot.addComponent(new KeyEvent());
-              teapot.addComponent(new AudioSource("get_item"));
-              teapot.transform.position[1]=0;
-              teapot.addComponent(new RaycastSwitch({event: teapot.getComponent("Event")}));
-
-              if(!IS_SERVER) {
-                //teapot.getComponent("AudioSource").playSound2d('get_item');
-                //teapot.getComponent("AudioSource").pauseSound();
-              }
-              specialTeapot = true;
-            }else if(x===9 && y===3){
-              teapot.addComponent(new SphereCollider({mass: 100, trigger: false, scale: 15}));
-              teapot.transform.scale(1.1);
-              teapot.getComponent('Collider').setLayer(FILTER_KINEMATIC);
-              teapot.addComponent(new HealEvent());
-              teapot.addComponent(new AudioSource('heal'));
-              teapot.addComponent(new RaycastSwitch({event: teapot.getComponent("Event")}));
-              if(!IS_SERVER) {
-                //teapot.getComponent("AudioSource").playSound();
-                //teapot.getComponent("AudioSource").pauseSound();
-              }
-              teapot.transform.position[1]=0;
-              specialTeapot = true;
-            }else if(x===2 && y===2){
-              teapot.addComponent(new SphereCollider({mass: 0, trigger: true}));
-              // teapot.addComponent(new AudioSource());
-              teapot.addComponent(new TriggerTest());
-
-              // if(!IS_SERVER) {
-              //   teapot.getComponent('AudioSource').playSound2d('singTone03');
-              //   teapot.getComponent('AudioSource').pauseSound();
-              // }
-              specialTeapot = true;
-
-              //For testing purposes
-              /*light.addComponent(new Mesh("Sphere_Icosphere"));
-               light.getComponent("Mesh").setMaterial(Debug.makeDefaultMaterial());*/
-              //light.transform.scale(0.25);
-
-
-            }else{
-              teapot.addComponent(new SphereCollider({mass: 100, triger: false, scale: 10})); //set Transform BEFORE collider
-            }
-
-            if (specialTeapot) {
-              container.addChild(teapot);
-            }
-        }
-    }
-
-
-    // GameObject.prototype.SceneRoot.transform.children[1].children[13].gameObject.getComponent("Collider").setLayer(FILTER_KINEMATIC);
-    // GameObject.prototype.SceneRoot.transform.children[1].children[93].gameObject.addComponent(new RaycastSwitch(GameObject.prototype.SceneRoot.transform.children[1].children[93].gameObject.getComponent("Event"),5));
-    //
-    // GameObject.prototype.SceneRoot.transform.children[1].children[13].position[1]=0;
-    // GameObject.prototype.SceneRoot.transform.children[1].children[43].position[1]=0;
-
-    // GameObject.prototype.SceneRoot.transform.children[0].children[1].gameObject.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);
-    // GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.getComponent("Collider").setLayer(FILTER_PLAYER);
-
-    // PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject);
-    // GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new Sing());
-    // GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new Look());
-    // GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.addComponent(new AudioSource());
-    // if(!Debug.clientUpdate) {
-    //
-    //   GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new Sing());
-    //   GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new AudioSource());
-    //   GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new Look());
-    //   GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new Sing());
-    //   GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new AudioSource());
-    //   GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new Look());
-    //   GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new Sing());
-    //   GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new AudioSource());
-    //   GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new Look());
-    //   //
-    //   //
-    //   PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject);
-    //   GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.addComponent(new PlayerController());
-    //   PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject);
-    //   GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.addComponent(new PlayerController());
-    //   PlayerTable.addPlayer(GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject);
-    //   GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.addComponent(new PlayerController());
-    // }
-    // if(!IS_SERVER) {
-    //   // GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.getComponent("AudioSource").playSound2d("singTone00");
-    //   // GameObject.prototype.SceneRoot.transform.children[1].children[55].gameObject.getComponent("AudioSource").pauseSound();
-    //   if(!Debug.clientUpdate) {
-    //     GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.getComponent("AudioSource").playSound2d("singTone01");
-    //     GameObject.prototype.SceneRoot.transform.children[1].children[56].gameObject.getComponent("AudioSource").pauseSound();
-    //     GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.getComponent("AudioSource").playSound2d("singTone02");
-    //     GameObject.prototype.SceneRoot.transform.children[1].children[57].gameObject.getComponent("AudioSource").pauseSound();
-    //     GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.getComponent("AudioSource").playSound2d("singTone03");
-    //     GameObject.prototype.SceneRoot.transform.children[1].children[58].gameObject.getComponent("AudioSource").pauseSound();
-    //   }
-    // }
 
     //TODO make true and make clientside objects work
-    let directionalLight = new GameObject(false);
+    let directionalLight = new GameObject({clientSideOnly: false});
 
     if(!IS_SERVER) {
       Renderer.directionalLight = directionalLight;
@@ -285,19 +74,7 @@ class GameScene {
     let evilTeapot = Debug.drawTeapot(pos, color);
     evilTeapot.addComponent(new EvilController());
 
-    //let move = vec3.create(); vec3.set(move, 0, 500, 64);
-    let move = vec3.create(); vec3.set(move, 0,-1,0);
-    let ground = new GameObject();
-    ground.setName("ground");
-    ground.transform.setPosition(move);
-    let box = new BoxCollider({mass: 0, trigger: false, scaleX: 10000, scaleY: 1, scaleZ: 10000});
-    ground.addComponent(box);
-    ground.getComponent("Collider").setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
-    ground.getComponent("Collider").setLayer(FILTER_LEVEL_GEOMETRY);
-
-
     GameObject.prototype.SceneRoot.findComponents("Listenable", PhysicsEngine.sphereChecks);
-
   }
 
   update() {

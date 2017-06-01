@@ -10,5 +10,5 @@ app.get('/', (req, res) => {
 app.use(express.static('.'));
 
 http.listen(8081, () => {
-  console.log('WARNING: run this server on the internet\nlistening on *:8081');
+  console.log('WARNING: dont run this server on the internet\nlistening on *:8081');
 });

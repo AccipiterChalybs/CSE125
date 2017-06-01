@@ -1,16 +1,23 @@
 class RaycastSwitch extends Viewable{
-  constructor({event}) {
+  constructor({events}) {
     super();
-    this._event = event;
+    this._events = [];
+    this._unparsedEvents = events;
     this.charged = false;
     this._currentCharge = 0;
   }
 
   start() {
-    this._collider = this.transform.gameObject.getComponent('Collider');
-    //this._singer = this.transform.gameObject.getComponent("Sing");
-    this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
-    this._collider.setFreezeRotation(true);
+    // Debug.log(GameObject.prototype.SerializeMap);
+    for(let i = 0; i < this._unparsedEvents.length; ++i){
+      // Debug.log(GameObject.prototype.SerializeMap[events[i]]);
+      // Debug.log(this._unparsedEvents[i]);
+      this._events.push(GameObject.prototype.SerializeMap[this._unparsedEvents[i]].getComponent("Event"));
+    }
+
+    // this._collider = this.transform.gameObject.getComponent('Collider');
+    // this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
+    // this._collider.setFreezeRotation(true);
   }
 
   updateComponent() {
@@ -19,6 +26,9 @@ class RaycastSwitch extends Viewable{
 
   view(interactingObj) {
     Debug.log("Viewable object has been viewed");
-    this._event.onRaycast(interactingObj);
+    for(let event of this._events)
+    {
+      event.onRaycast(interactingObj);
+    }
   }
 }

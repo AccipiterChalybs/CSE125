@@ -31,7 +31,7 @@ Networking.listeners = {
         GameObject.prototype.SerializeMap[key].applySerializedData(data.gameObjectTree[key]);
       }
     }
-    PlayerTable.applySerialize(data.players);
+    // PlayerTable.applySerialize(data.players);
 
   },
   client_get_playerId: (socket, data)=> {
