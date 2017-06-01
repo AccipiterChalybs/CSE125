@@ -72,7 +72,6 @@ class Light extends Component{
 }
 
 class PointLight extends Light{
-
     constructor(shadow, isStatic = false) {
       super();
       this.isShadowCaster = shadow;
@@ -188,7 +187,7 @@ PointLight.shadowSize = 256;
 
 class DirectionalLight extends Light{
 
-  constructor(shadow) {
+  constructor(shadow = false) {
     super();
     this.isShadowCaster = shadow;
   }

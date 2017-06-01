@@ -7,26 +7,33 @@ const SWITCH_LOSS_RATE = 0.5; // per second
 const TIME_BEFORE_LOSS = 3;
 
 class SingingSwitch extends Listenable {
-  constructor({ events, activationLevel,time_before_loss }) {
+  constructor(params = {events : null, activationLevel: 5,timeBeforeLoss: TIME_BEFORE_LOSS }) {
     super();
-    this._events = events;
-    this.activationLevel = activationLevel;
+    this._events = [];
+    this._unparsedEvents = params.events;
+    this.activationLevel = params.activationLevel;
     this.charged = false;
-    this.time_before_loss = time_before_loss;
+    this.time_before_loss = params.timeBeforeLoss;
     this._lastSingTime = 0;
     this._currentCharge = 0;
   }
 
   start() {
+    // Debug.log(GameObject.prototype.SerializeMap);
+    for(let i = 0; i < this._unparsedEvents.length; ++i){
+      // Debug.log(GameObject.prototype.SerializeMap[events[i]]);
+      // Debug.log(this._unparsedEvents[i]);
+      this._events.push(GameObject.prototype.SerializeMap[this._unparsedEvents[i]].getComponent("Event"));
+    }
+    // Debug.log(this._events);
+
     this._collider = this.transform.gameObject.getComponent('Collider');
-    //this._singer = this.transform.gameObject.getComponent("Sing");
     this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
     this._collider.setFreezeRotation(true);
   }
 
   updateComponent() {
     //TODO Clean up this logic
-
     if (this.charged === true && Time.time - this._lastSingTime >= this.time_before_loss) {
       this._currentCharge = Utility.moveTowards(this._currentCharge, 0, SWITCH_LOSS_RATE * Time.deltaTime);
       for (let event of this._events) {
@@ -60,9 +67,6 @@ class SingingSwitch extends Listenable {
         }
       }
     }
-
-
-    this.transform.setScale(this._currentCharge / 100 + 0.02);
   }
 
   uncharged() {
@@ -87,7 +91,7 @@ class SingingSwitch extends Listenable {
 
     let singer = interactingObj.getComponent('Sing');
 
-    //console.log(player, " is interacting with me. ", this.gameObject);
+    // console.log("player is interacting with me. ", this.gameObject);
     if (singer && singer !== null) {
       this._lastSingTime = Time.time;
     }

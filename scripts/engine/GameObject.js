@@ -18,18 +18,23 @@ class GameObject {
     //TODO: do we need scene.loop?
   }
 
-  static addNewSerializableObject(gameObject) {
-    let id = GameObject.prototype.objectId;
-    GameObject.prototype.SerializeMap[id] = gameObject;
+  static addNewSerializableObject(gameObject, id) {
+    if(id !== undefined){
+      GameObject.prototype.SerializeMap[id] = gameObject;
+      return id;
+    }
+
+    let newId = GameObject.prototype.objectId;
+    GameObject.prototype.SerializeMap[newId] = gameObject;
     GameObject.prototype.objectId++;
-    return id;
+    return newId;
   };
 
-  constructor(clientSideOnly=false) {
+  constructor(params = {id: -1, clientSideOnly: false}) {
     this.components = {}; //NOTE: associative map, so go over keys (in doesn't seem to work)
     this.name = '';
-    if(!clientSideOnly){
-      this.id = GameObject.addNewSerializableObject(this);
+    if(!params.clientSideOnly){
+      this.id = GameObject.addNewSerializableObject(this, params.id);
       this.serializableList = [];
     }
     this.transform = new Transform();
@@ -290,6 +295,6 @@ class GameObject {
 GameObject.prototype._nameMap = {};
 GameObject.prototype.SceneRoot = null;
 GameObject.prototype.SerializeMap = {};
-GameObject.prototype.objectId = 0;
+GameObject.prototype.objectId = 25000;
 ComponentName = {};
 ComponentName.MESH_COMPONENT = 'Mesh';

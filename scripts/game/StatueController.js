@@ -2,13 +2,18 @@
  * Created by ajermaky on 5/22/17.
  */
 class StatueController extends Playerable{
-  constructor({ lightColor, lightRange, singingCooldown }) {
-    super({ lightColor, lightRange, singingCooldown });
+  constructor(params = {singingDelay: 0, singingDuration: 3}) {
+    super({singingCooldown: params.singingDelay});
+    // Debug.log(this._singingCooldown);
+
+    this._maxSingingDuration = params.singingDuration;
   }
 
   start() {
     super.start();
-    this.transform.gameObject.getComponent('Collider').setLayer(FILTER_KINEMATIC);
+    for(let i = 0; i < this._colliders.length; ++i) {
+      this._colliders[i].setLayer(FILTER_KINEMATIC);
+    }
     this._maxSingingDuration = 3;
     this._currentSingingDuration = 0;
   }
@@ -39,9 +44,9 @@ class StatueController extends Playerable{
       }
 
       if (this._currentState === PlayerState.singing) {
-        this._pointLight.setRange(Utility.moveTowards(this._pointLight.range, MAX_LIGHT_RANGE, LIGHT_EXPAND_RATE * Time.deltaTime));
+        this._singer.sing();
       } else {
-        this._pointLight.setRange(Utility.moveTowards(this._pointLight.range, MIN_LIGHT_RANGE, LIGHT_DIMINISH_RATE * Time.deltaTime));
+        this._singer.quiet();
       }
     }
   }

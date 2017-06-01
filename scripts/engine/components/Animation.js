@@ -8,11 +8,11 @@
 class Animation extends Component
 {
 
-    constructor({name}) {
+    constructor(params = {name: ''}) {
       super();
       this.componentType = "Animation";
 
-      this.animationName = name;
+      this.animationName = params.name;
       this._currentAnimIndex = 0;
       this._currentTime = [];
       this._lastTime = [];
