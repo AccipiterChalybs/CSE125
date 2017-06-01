@@ -51,7 +51,6 @@ class PlayerController extends Playerable{
     }else{
       this._singingSrc.pauseSound();
     }
-
   }
 
   updateComponent(){
