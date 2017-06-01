@@ -22,6 +22,8 @@
     <div class="col-md-4">
       <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="startGame()">START</button>
       <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="$('#options').modal('show');">OPTIONS</button>
+      <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="$('#lose').modal('show');">WIN</button>
+      <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="$('#lose').modal('show');">LOSE</button>
       <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="quit()">QUIT</button>
     </div>
     <div class="col-md-4"></div>
@@ -76,12 +78,13 @@
   <div class="modal fade" id="lose" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
+        <!-- <div class="modal-header">
           <button class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-          <h1 class="modal-title" id="loseLabel">YOU DIED</h1>
-        </div>
+        </div -->
         <div class="modal-body">
-          <h1>You Lose</h1>
+          <div class="lose-screen">
+            <div class="lose-text">YOU DIED</div>
+          </div>
         </div>
       </div>
     </div>
@@ -97,21 +100,33 @@
           <h1 class="modal-title">Options</h1>
         </div>
         <div class="modal-body">
+<<<<<<< HEAD
+          <h1>somebody once told me</h1>
+          <h1>the world is gonna roll me</h1>
+          <h1>what is love</h1>
+=======
           <div id="controls">
             <h2>Controls</h2>
-            <div class="modal-row" id="foward">
-              <div class="text"></div><div class="btn"></div>
+            <div class="modal-row" id="forward">
+              <div class="text"></div><div class="btn btn-default"></div>
             </div>
             <div class="modal-row" id="left">
-              <div class="text"></div><div class="btn"></div>
+              <div class="text"></div><div class="btn btn-default"></div>
             </div>
             <div class="modal-row" id="backward">
-              <div class="text"></div><div class="btn"></div>
+              <div class="text"></div><div class="btn btn-default"></div>
             </div>
             <div class="modal-row" id="right">
-              <div class="text"></div><div class="btn"></div>
+              <div class="text"></div><div class="btn btn-default"></div>
+            </div>
+            <div class="modal-row" id="walk">
+              <div class="text"></div><div class="btn btn-default"></div>
+            </div>
+            <div class="modal-row" id="action">
+              <div class="text"></div><div class="btn btn-default"></div>
             </div>
           </div>
+>>>>>>> ea435ea... ag: can change controls now
         </div>
       </div>
     </div>
@@ -211,7 +226,6 @@
 <script src="scripts/engine/Networking.js"></script>
 
 <script src="scripts/engine/main.js"></script>
-<script src="scripts/UI/utilities.js"></script>
 <script src="scripts/UI/mainpage.js"></script>
 <script>
   var test= function () {

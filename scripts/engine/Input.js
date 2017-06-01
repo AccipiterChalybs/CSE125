@@ -166,6 +166,11 @@ const Input = {
     axis.value=val;
   },
 
+  setButton: function ({ axis, btn }, keyCode) {
+    const axisObj = Input._options.axes.filter((a)=>a.name === axis)[0];
+    axisObj[btn] = keyCode;
+  },
+
   getMouse: function () {
     var x = Input._options.axes.filter((axis)=>axis.name === 'mouseHorizontal')[0];
     var y = Input._options.axes.filter((axis)=>axis.name === 'mouseVertical')[0];
