@@ -299,7 +299,7 @@ Debug.drawTeapot = function(pos, color = null) {
 
   teapot.transform.setPosition(pos);
   teapot.transform.setRotation(rotation);
-  teapot.transform.scale((.05));
+  teapot.transform.scale(0.05);
 
   GameObject.prototype.SceneRoot.addChild(teapot);
 
