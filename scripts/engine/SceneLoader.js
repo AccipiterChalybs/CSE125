@@ -111,6 +111,7 @@ const SceneLoader = {
         vec3.scale(colliderOffset, colliderOffset, scale);
         vec3.scale(colliderSize, colliderSize, scale);
 
+        collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
         collider.setTrigger(colliderData.isTrigger);
         collider.addShape(colliderType, colliderSize, colliderOffset);
       }

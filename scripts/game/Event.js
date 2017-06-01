@@ -6,16 +6,17 @@ const EventState = {
 };
 
 class Event extends Component{
-  constructor(){
+  constructor({maximumCharge}){
     super();
     this.componentType = "Event";
+
+    this.maximumCharge = maximumCharge;
+    this.currentCharge = 0;
+
+    this._lastCharge = 0;
   }
 
   start(){
-    this._collider = this.transform.gameObject.getComponent("Collider");
-    //this._singer = this.transform.gameObject.getComponent("Sing");
-    this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
-    this._collider.setFreezeRotation(true);
   }
 
   startClient(){
@@ -27,6 +28,16 @@ class Event extends Component{
   }
 
   updateComponent() {
+    if(this.currentCharge === this.maximumCharge){
+      this.setCurrentState(EventState.charged);
+    }else if(this.currentCharge === 0){
+      this.setCurrentState(EventState.uncharged);
+    }else if(this.currentCharge >= this._lastCharge){
+      this.setCurrentState(EventState.charging);
+    } else{
+      this.setCurrentState(EventState.discharging);
+    }
+
     switch (this.getCurrentState()){
       case EventState.charged:
         this.onCharged();
@@ -40,6 +51,16 @@ class Event extends Component{
       case EventState.discharging:
         this.onDischarging();
         break;
+    }
+
+    this._lastCharge = this.currentCharge;
+    this.currentCharge = 0;
+  }
+
+  charge(amt){
+    this.currentCharge += amt;
+    if(this.currentCharge > this.maximumCharge){
+      this.currentCharge = this.maximumCharge;
     }
   }
 

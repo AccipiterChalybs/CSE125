@@ -1,7 +1,7 @@
 class HealEvent extends Event{
 
   constructor() {
-    super();
+    super({});
     this.setCurrentState(EventState.uncharged);
   }
 
