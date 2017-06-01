@@ -29,6 +29,8 @@ GameEngine.init = function () {
     'assets/meshes/Ceiling.1.json',
     'assets/meshes/Ceiling.2.json',
     'assets/meshes/Ceiling.3.json',
+    'assets/meshes/Ceiling.large.1.json',
+    'assets/meshes/Ceiling.large.2.json',
     'assets/meshes/Door.1.json',
     'assets/meshes/Door.2.json',
     'assets/meshes/DoorFrame.1.json',
@@ -43,6 +45,8 @@ GameEngine.init = function () {
     'assets/meshes/LillyPad.1.json',
     'assets/meshes/navmesh.json',
     'assets/meshes/octo_idle.json',
+    'assets/meshes/octo_run.json',
+    'assets/meshes/octo_walking.json',
     'assets/meshes/Pebble.1.json',
     'assets/meshes/Pebble.2.json',
     'assets/meshes/Pebble.3.json',
@@ -61,6 +65,12 @@ GameEngine.init = function () {
     'assets/meshes/Rock.2.json',
     'assets/meshes/Rock.3.json',
     'assets/meshes/Rock.4.json',
+    'assets/meshes/Roots.1.json',
+   // 'assets/meshes/SetPiece1.json',
+    'assets/meshes/SetPiece1_Ceiling.json',
+    //'assets/meshes/SetPiece1_Ground.json',
+    'assets/meshes/SetPiece1_Pillars.json',
+    'assets/meshes/SetPiece1_Sculptures.json',
     'assets/meshes/Skeleton.1.json',
     'assets/meshes/Skeleton.2.json',
     'assets/meshes/Stalactite.1.json',
@@ -69,12 +79,16 @@ GameEngine.init = function () {
     'assets/meshes/Statue.2.json',
     'assets/meshes/Statue.3.json',
     'assets/meshes/Step.1.json',
- //   'assets/meshes/Tree.1.json',
- //   'assets/meshes/Tree.2.json',
+    //'assets/meshes/Tree.1.json',
+    //'assets/meshes/Tree.2.json',
+    'assets/meshes/unitCube.json',
     'assets/meshes/Vine.1.json',
     'assets/meshes/Vine.2.json',
     'assets/meshes/Vine.3.json',
     'assets/meshes/Vine.4.json',
+    'assets/meshes/RedRobedFemale_idle.json',
+    'assets/meshes/RedRobedFemale_walk.json',
+    'assets/meshes/RedRobedFemale_run.json',
     'assets/meshes/walking.json',
     'assets/meshes/Wall_ornate.1.json',
     'assets/meshes/Wall_ornate.2.json',
@@ -82,12 +96,17 @@ GameEngine.init = function () {
     'assets/meshes/Wall_rock.1.json',
     'assets/meshes/Wall_rock.2.json',
     'assets/meshes/Wall_rock.3.json',
-    'assets/meshes/unitCube.json'];
+    'assets/meshes/Wall_simple.1.json'];
   let animationFiles = {
     'OctopusCharacterAnim' : {
         'assets/meshes/octo_idle.json' : [0, 1],
         'assets/meshes/octo_walking.json' : [1],
         'assets/meshes/octo_run.json' : [1]
+    },
+    'RedRobesCharacterAnim' : {
+      'assets/meshes/RedRobedFemale_idle.json' : [0, 1],
+      'assets/meshes/RedRobedFemale_walk.json' : [1],
+      'assets/meshes/RedRobedFemale_run.json' : [1]
     }
   };
   GameEngine.currentScene = new GameScene(sceneFile, meshFiles, animationFiles);
