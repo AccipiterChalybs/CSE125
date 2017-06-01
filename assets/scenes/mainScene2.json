@@ -34,6 +34,14 @@
       "mat": "assets/texture/Octopus-Character/DefaultMaterial_Roughness.png",
       "normal" : "assets/texture/Octopus-Character/DefaultMaterial_Normal.png",
       "animated" : true
+    },
+    {
+      "name": "ivy_leaves_c",
+      "color": "assets/texture/IvyC/ivy_leaves_c.png",
+      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "normal" : "assets/texture/IvyC/ivy_leaves_n2.png",
+      "forward" : true,
+      "animated" : false
     }
   ],
   "hierarchy":
@@ -26127,6 +26135,414 @@
             }
           }
         ]
+      },
+      {
+        "name": "Vine.1",
+        "index": "1683",
+        "static": true,
+        "Transform": {
+          "position": [6.276, 1.915, -0.901],
+          "rotation": [270, 0, 0],
+          "scaleFactor": 0.5
+        },
+        "MeshFilter": "Decal_vine.1",
+        "MeshRenderer": "swampcanopytree01_vines.alpha"
+      },
+      {
+        "name": "Roots.1",
+        "index": "1684",
+        "static": true,
+        "Transform": {
+          "position": [16.559, 1.888, -8.505],
+          "rotation": [89.98022, 24.85847, 0],
+          "scaleFactor": 1
+        },
+        "MeshFilter": "Roots.1",
+        "MeshRenderer": "bark-oldbrown-c"
+      },
+      {
+        "name": "Roots.1 (1)",
+        "index": "1685",
+        "static": true,
+        "Transform": {
+          "position": [16.777, 1.888, -3.448],
+          "rotation": [90, 263.9178, 0],
+          "scaleFactor": 1
+        },
+        "MeshFilter": "Roots.1",
+        "MeshRenderer": "bark-oldbrown-c"
+      },
+      {
+        "name": "Ivy_Short (1)",
+        "index": "1686",
+        "static": true,
+        "Transform": {
+          "position": [4.099, 1.599, 1.02],
+          "rotation": [0, 180, 180],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ivy.1",
+            "index": "1687",
+            "static": true,
+            "Transform": {
+              "position": [4.099, 1.599, 1.02],
+              "rotation": [0, 180, 180],
+              "scaleFactor": 0.2
+            },
+            "MeshFilter": "Ivy.002",
+            "MeshRenderer": "ivy_leaves_c"
+          }
+        ]
+      },
+      {
+        "name": "Ivy_Short (2)",
+        "index": "1688",
+        "static": true,
+        "Transform": {
+          "position": [3.75, 1.584, 1.02],
+          "rotation": [0, 180, 180],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ivy.1",
+            "index": "1689",
+            "static": true,
+            "Transform": {
+              "position": [3.75, 1.584, 1.02],
+              "rotation": [0, 180, 180],
+              "scaleFactor": 0.2
+            },
+            "MeshFilter": "Ivy.002",
+            "MeshRenderer": "ivy_leaves_c"
+          }
+        ]
+      },
+      {
+        "name": "Ivy_Short (3)",
+        "index": "1690",
+        "static": true,
+        "Transform": {
+          "position": [3.364, 1.584, 1.02],
+          "rotation": [0, 180, 180],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ivy.1",
+            "index": "1691",
+            "static": true,
+            "Transform": {
+              "position": [3.364, 1.584, 1.02],
+              "rotation": [0, 180, 180],
+              "scaleFactor": 0.2
+            },
+            "MeshFilter": "Ivy.002",
+            "MeshRenderer": "ivy_leaves_c"
+          }
+        ]
+      },
+      {
+        "name": "Ivy_Short (4)",
+        "index": "1692",
+        "static": true,
+        "Transform": {
+          "position": [3.618, 1.402, 1.02],
+          "rotation": [0, 180, 180],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ivy.1",
+            "index": "1693",
+            "static": true,
+            "Transform": {
+              "position": [3.618, 1.402, 1.02],
+              "rotation": [0, 180, 180],
+              "scaleFactor": 0.2
+            },
+            "MeshFilter": "Ivy.002",
+            "MeshRenderer": "ivy_leaves_c"
+          }
+        ]
+      },
+      {
+        "name": "Ivy_Short (5)",
+        "index": "1694",
+        "static": true,
+        "Transform": {
+          "position": [4.274, 1.506, 1.02],
+          "rotation": [0, 180, 180],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ivy.1",
+            "index": "1695",
+            "static": true,
+            "Transform": {
+              "position": [4.274, 1.506, 1.02],
+              "rotation": [0, 180, 180],
+              "scaleFactor": 0.2
+            },
+            "MeshFilter": "Ivy.002",
+            "MeshRenderer": "ivy_leaves_c"
+          }
+        ]
+      },
+      {
+        "name": "Ivy_Short (8)",
+        "index": "1696",
+        "static": true,
+        "Transform": {
+          "position": [4.733, 1.584, 1.02],
+          "rotation": [0, 180, 180],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ivy.1",
+            "index": "1697",
+            "static": true,
+            "Transform": {
+              "position": [4.733, 1.584, 1.02],
+              "rotation": [0, 180, 180],
+              "scaleFactor": 0.2
+            },
+            "MeshFilter": "Ivy.002",
+            "MeshRenderer": "ivy_leaves_c"
+          }
+        ]
+      },
+      {
+        "name": "Ivy_Short (9)",
+        "index": "1698",
+        "static": true,
+        "Transform": {
+          "position": [5.119, 1.584, 1.02],
+          "rotation": [0, 180, 180],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ivy.1",
+            "index": "1699",
+            "static": true,
+            "Transform": {
+              "position": [5.119, 1.584, 1.02],
+              "rotation": [0, 180, 180],
+              "scaleFactor": 0.2
+            },
+            "MeshFilter": "Ivy.002",
+            "MeshRenderer": "ivy_leaves_c"
+          }
+        ]
+      },
+      {
+        "name": "Ivy_Short (10)",
+        "index": "1700",
+        "static": true,
+        "Transform": {
+          "position": [5.468, 1.599, 1.02],
+          "rotation": [0, 180, 180],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ivy.1",
+            "index": "1701",
+            "static": true,
+            "Transform": {
+              "position": [5.468, 1.599, 1.02],
+              "rotation": [0, 180, 180],
+              "scaleFactor": 0.2
+            },
+            "MeshFilter": "Ivy.002",
+            "MeshRenderer": "ivy_leaves_c"
+          }
+        ]
+      },
+      {
+        "name": "Ivy_Short (12)",
+        "index": "1702",
+        "static": true,
+        "Transform": {
+          "position": [6.186, 1.593, 1.02],
+          "rotation": [0, 180, 180],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ivy.1",
+            "index": "1703",
+            "static": true,
+            "Transform": {
+              "position": [6.186, 1.593, 1.02],
+              "rotation": [0, 180, 180],
+              "scaleFactor": 0.2
+            },
+            "MeshFilter": "Ivy.002",
+            "MeshRenderer": "ivy_leaves_c"
+          }
+        ]
+      },
+      {
+        "name": "Ivy_Short (13)",
+        "index": "1704",
+        "static": true,
+        "Transform": {
+          "position": [6.355, 1.54, 1.02],
+          "rotation": [0, 180, 180],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ivy.1",
+            "index": "1705",
+            "static": true,
+            "Transform": {
+              "position": [6.355, 1.54, 1.02],
+              "rotation": [0, 180, 180],
+              "scaleFactor": 0.2
+            },
+            "MeshFilter": "Ivy.002",
+            "MeshRenderer": "ivy_leaves_c"
+          }
+        ]
+      },
+      {
+        "name": "Ivy_Short (14)",
+        "index": "1706",
+        "static": true,
+        "Transform": {
+          "position": [3.364, 1.28, 1.02],
+          "rotation": [0, 180, 180],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ivy.1",
+            "index": "1707",
+            "static": true,
+            "Transform": {
+              "position": [3.364, 1.28, 1.02],
+              "rotation": [0, 180, 180],
+              "scaleFactor": 0.2
+            },
+            "MeshFilter": "Ivy.002",
+            "MeshRenderer": "ivy_leaves_c"
+          }
+        ]
+      },
+      {
+        "name": "Ivy_Short",
+        "index": "1708",
+        "static": true,
+        "Transform": {
+          "position": [4.52, 1.446, 1.02],
+          "rotation": [0, 180, 180],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ivy.1",
+            "index": "1709",
+            "static": true,
+            "Transform": {
+              "position": [4.52, 1.446, 1.02],
+              "rotation": [0, 180, 180],
+              "scaleFactor": 0.2
+            },
+            "MeshFilter": "Ivy.002",
+            "MeshRenderer": "ivy_leaves_c"
+          }
+        ]
+      },
+      {
+        "name": "Ivy_Short (11)",
+        "index": "1710",
+        "static": true,
+        "Transform": {
+          "position": [5.889, 1.489, 1.02],
+          "rotation": [0, 180, 180],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ivy.1",
+            "index": "1711",
+            "static": true,
+            "Transform": {
+              "position": [5.889, 1.489, 1.02],
+              "rotation": [0, 180, 180],
+              "scaleFactor": 0.2
+            },
+            "MeshFilter": "Ivy.002",
+            "MeshRenderer": "ivy_leaves_c"
+          }
+        ]
+      },
+      {
+        "name": "Ivy_Short (6)",
+        "index": "1712",
+        "static": true,
+        "Transform": {
+          "position": [5.643, 1.506, 1.02],
+          "rotation": [0, 180, 180],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ivy.1",
+            "index": "1713",
+            "static": true,
+            "Transform": {
+              "position": [5.643, 1.506, 1.02],
+              "rotation": [0, 180, 180],
+              "scaleFactor": 0.2
+            },
+            "MeshFilter": "Ivy.002",
+            "MeshRenderer": "ivy_leaves_c"
+          }
+        ]
+      },
+      {
+        "name": "Vine.1 (1)",
+        "index": "1714",
+        "static": true,
+        "Transform": {
+          "position": [5.377, 1.915, -0.901],
+          "rotation": [270, 0, 0],
+          "scaleFactor": 0.75
+        },
+        "MeshFilter": "Decal_vine.1",
+        "MeshRenderer": "swampcanopytree01_vines.alpha"
+      },
+      {
+        "name": "Vine.1 (2)",
+        "index": "1715",
+        "static": true,
+        "Transform": {
+          "position": [3.803, 1.915, -0.901],
+          "rotation": [270, 0, 0],
+          "scaleFactor": 0.75
+        },
+        "MeshFilter": "Decal_vine.1",
+        "MeshRenderer": "swampcanopytree01_vines.alpha"
+      },
+      {
+        "name": "Vine.1 (3)",
+        "index": "1716",
+        "static": true,
+        "Transform": {
+          "position": [4.702, 1.915, -0.901],
+          "rotation": [270, 0, 0],
+          "scaleFactor": 0.5
+        },
+        "MeshFilter": "Decal_vine.1",
+        "MeshRenderer": "swampcanopytree01_vines.alpha"
       }
     ]
   }

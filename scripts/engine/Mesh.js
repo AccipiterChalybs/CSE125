@@ -27,14 +27,15 @@ class Mesh extends Component {
             Renderer.currentShader === Renderer.getShader(Renderer.DEFERRED_PBR_SHADER_ANIM) ||
             Renderer.currentShader === Renderer.getShader(Renderer.SHADOW_SHADER_ANIM) ||
             Renderer.currentShader === Renderer.getShader(Renderer.POINT_SHADOW_SHADER_ANIM)) && this.animationRoot) {
+
             let meshBoneData = Mesh.prototype.boneIdMap[this.name];
 
-            for (let node of this.animationRoot.getAnimationData()) {
-                if (!meshBoneData.boneMap.hasOwnProperty(node.name)) { continue; }
-                let id = meshBoneData.boneMap[node.name];
+            for (let nodeName in this.animationRoot.boneMap) {
+                if (!meshBoneData.boneMap.hasOwnProperty(nodeName)) { continue; }
+                let id = meshBoneData.boneMap[nodeName];
 
                 let transformMatrix = mat4.create();
-                mat4.multiply(transformMatrix, this.animationRoot.boneMap[node.name].getTransformMatrix(), meshBoneData.boneBindArray[id]);
+                mat4.multiply(transformMatrix, this.animationRoot.boneMap[nodeName].getTransformMatrix(), meshBoneData.boneBindArray[id]);
 
                 Renderer.currentShader.setUniform("bone_Matrix[" + id + "]", transformMatrix, UniformTypes.mat4);
             }

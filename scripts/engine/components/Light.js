@@ -95,12 +95,16 @@ class PointLight extends Light{
             let posData = vec4.create(); vec4.set(posData, this.gameObject.transform.getWorldPosition()[0],
                 this.gameObject.transform.getWorldPosition()[1], this.gameObject.transform.getWorldPosition()[2], this.radius);
             let colourData = vec4.create(); vec4.set(colourData, this.color[0], this.color[1], this.color[2], 1.0);
-            let metaData = vec4.create(); vec4.set(metaData, this.range, 0.0, 0.0, 1); //range, blank, blank, blank
+            let metaData = vec4.create(); vec4.set(metaData, this.range, this.isShadowCaster ? 1.0 : 0.0,
+                                                             PointLight.prototype.FAR_DEPTH, 1); //range, shadows, far_depth, blank
 
             Renderer.getShader(shaderId).setUniform("uLightData[" + (3*index) + "]", posData, UniformTypes.vec4);
             Renderer.getShader(shaderId).setUniform("uLightData[" + (3*index+1) + "]", colourData, UniformTypes.vec4);
             Renderer.getShader(shaderId).setUniform("uLightData[" + (3*index+2) + "]", metaData, UniformTypes.vec4);
+
         }
+        //TODO enable:
+        //if (this.isShadowCaster) this.bindCubeMap(index+6);
     }
     deferredPass(bind){
         if (bind && this.isShadowCaster) {
@@ -138,7 +142,7 @@ class PointLight extends Light{
     if (Renderer.getCurrentShader() !== Renderer.getShader(Renderer.FBO_COPY_DEPTH)) {
       Renderer.switchShader(Renderer.FBO_COPY_DEPTH);
     }
-    this.staticFBO[0].bindCubeMapTexture(0);
+    this.staticFBO[0].bindCubeMapTexture(4);
     for (let f=0; f<6; ++f) {
       Renderer.currentShader.setUniform("currentFace", f, UniformTypes.u1i);
       this.fbo[f].bind([], false, true);
@@ -162,7 +166,12 @@ class PointLight extends Light{
   }
 
   bindCubeMap(slot) {
-    this.fbo[0].bindCubeMapTexture(slot);
+    if (false || !this.isStatic) {
+      //TODO This is causing the crashing somehow - why does staticFBO work fine?
+      this.fbo[0].bindCubeMapTexture(slot);
+    } else {
+      this.staticFBO[0].bindCubeMapTexture(slot);
+    }
   }
 
   getShadowMode() {
@@ -207,11 +216,21 @@ class DirectionalLight extends Light{
             let posData = vec4.create(); vec4.set(posData, this.gameObject.transform.getForward()[0],
                 this.gameObject.transform.getForward()[1], this.gameObject.transform.getForward()[2], this.radius);
             let colourData = vec4.create(); vec4.set(colourData, this.color[0], this.color[1], this.color[2], 0.0);
-            let metaData = vec4.create(); vec4.set(metaData, this.constantFalloff, 0,0, 1);
+            let metaData = vec4.create(); vec4.set(metaData, 0, 0,0, 1);
 
             Renderer.getShader(shaderId).setUniform("uLightData[" + (3*index) + "]", posData, UniformTypes.vec4);
             Renderer.getShader(shaderId).setUniform("uLightData[" + (3*index+1) + "]", colourData, UniformTypes.vec4);
             Renderer.getShader(shaderId).setUniform("uLightData[" + (3*index+2) + "]", metaData, UniformTypes.vec4);
+
+
+            let shadowMat = mat4.create();
+            mat4.invert(shadowMat, this.transform.getTransformMatrix());
+            mat4.multiply(shadowMat, DirectionalLight.prototype.shadowMatrix, shadowMat);
+            mat4.multiply(shadowMat, DeferredPass.prototype.bias, shadowMat);
+
+            Renderer.getShader(shaderId).setUniform('uShadow_Matrix', shadowMat, UniformTypes.mat4);
+
+            this.fbo.bindDepthTexture(3);
         }
     }
     deferredPass(bind){

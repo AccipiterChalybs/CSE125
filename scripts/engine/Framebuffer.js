@@ -234,6 +234,8 @@ class Framebuffer {
       GL.activeTexture(GL.TEXTURE0);
       let cubeTex = GL.createTexture();
       GL.bindTexture(GL.TEXTURE_CUBE_MAP, cubeTex);
+      GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_WRAP_S, GL.CLAMP_TO_EDGE);
+      GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_WRAP_T, GL.CLAMP_TO_EDGE);
       GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MIN_FILTER, GL.NEAREST);
       GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MAG_FILTER, GL.NEAREST);
 
