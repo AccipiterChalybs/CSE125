@@ -21,7 +21,8 @@ class Sing extends Component{
 
   start(){
     this._pointLight = GameObject.prototype.SerializeMap[this._lightIndex].getComponent("Light");
-    this._pointLight.setColor(vec3.scale(vec3.create(), this._pointLight.color, LIGHT_INTENSITY_SCALE));
+    if(this._pointLight && this._pointLight !== null)
+      this._pointLight.setColor(vec3.scale(vec3.create(), this._pointLight.color, LIGHT_INTENSITY_SCALE));
     //console.log(PhysicsEngine.sphereChecks);
   }
 
