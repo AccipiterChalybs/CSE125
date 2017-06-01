@@ -15,12 +15,12 @@ class GameScene {
 
     for (let animationName of Object.keys(animationFiles)) {
       let index = 0;
-      for (let animFilename of Object.keys(animationFiles[animationName])) {
+      for (let animInfo of animationFiles[animationName].info) {
         let indexMap = {};
-        for (let loadIndex of animationFiles[animationName][animFilename]) {
+        for (let loadIndex of animInfo[1]) {
           indexMap[loadIndex] = index++;
         }
-        ObjectLoader.loadAnimation(animationName, animFilename, indexMap);
+        ObjectLoader.loadAnimation(animationName, animInfo[0], indexMap, animationFiles[animationName].metaData);
       }
     }
 

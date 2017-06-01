@@ -99,14 +99,21 @@ GameEngine.init = function () {
     'assets/meshes/Wall_simple.1.json'];
   let animationFiles = {
     'OctopusCharacterAnim' : {
-        'assets/meshes/octo_idle.json' : [0, 1],
-        'assets/meshes/octo_walking.json' : [1],
-        'assets/meshes/octo_run.json' : [1]
+      metaData: {root: "metarig", rootAxisLocked: [true, true, false]},
+      info: [
+        ['assets/meshes/octo_idle.json', [0, 1]],
+        ['assets/meshes/octo_walking.json', [1]],
+        ['assets/meshes/octo_run.json', [1]]
+      ]
     },
     'RedRobesCharacterAnim' : {
-      'assets/meshes/RedRobedFemale_idle.json' : [0, 1],
-      'assets/meshes/RedRobedFemale_walk.json' : [1],
-      'assets/meshes/RedRobedFemale_run.json' : [1]
+      metaData: {root: "hips", rootAxisLocked: [true, false, true]},
+      info: [
+        ['assets/meshes/RedRobedFemale_idle.json' , [0]],
+        ['assets/meshes/RedRobedFemale_idle.json' , [0]],
+        ['assets/meshes/RedRobedFemale_walk.json' , [0]],
+        ['assets/meshes/RedRobedFemale_run.json' , [0]]
+      ]
     }
   };
   GameEngine.currentScene = new GameScene(sceneFile, meshFiles, animationFiles);
