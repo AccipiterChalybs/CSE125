@@ -1,14 +1,25 @@
 /**
  * Created by Accipiter Chalybs on 5/10/2017.
  */
+const c = {
+  AIController, Animation, AudioListener, AudioSource, BoxCollider, Camera,
+  ClientStickTo, Collider, CompoundCollider, Decal, Light, ParticleSystem,
+  SphereCollider, Transform, StatueController,
+  AnimationGraph, AnimationState, DoorEvent, Event, EvilController, HealEvent,
+  KeyEvent, Listenable, Look, ObjectLogicState, PlayerController,
+  PlayerLogicState, PlayerTable, RaycastSwitch, RotateArrowKey, RotateMouse,
+  RotateOverTime, Sing, SingingSwitch, TriggerTest, Viewable, ZoomMouse,
+};
 
 const SceneLoader = {
 
   materialMap: {},
-  //Ignore these in general pass, likely because they are already handled specially
-  ignoreComponents: ["name", "index", "static", "Animator", "AnimatorJS", "SkinnedMeshRenderer", "MeshFilter", "MeshRenderer",
+  // All components we load into gameObject
+  components: c,
+  // Ignore these in general pass, likely because they are already handled specially
+  ignoreComponents: ["name", "index", "static", "Kinematic", "Animator", "AnimatorJS", "SkinnedMeshRenderer", "MeshFilter", "MeshRenderer",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
-  shadowLightsAvailable: 7,
+  shadowLightsAvailable: 0,
   tone: 0,
 
   loadScene: function(filename) {
@@ -48,7 +59,7 @@ const SceneLoader = {
   },
 
   _parseNode: function(parent,  currentNode, filename, loadingAcceleration, lights) {
-    let nodeObject = new GameObject();
+    let nodeObject = new GameObject({id: currentNode.index});
     parent.addChild(nodeObject);
 
     let name = currentNode.name;
@@ -100,9 +111,15 @@ const SceneLoader = {
         vec3.scale(colliderOffset, colliderOffset, scale);
         vec3.scale(colliderSize, colliderSize, scale);
 
+        collider.setTrigger(colliderData.isTrigger);
         collider.addShape(colliderType, colliderSize, colliderOffset);
       }
-      collider.setLayer(FILTER_LEVEL_GEOMETRY);
+
+      if(currentNode["Kinematic"] !== undefined){
+        collider.setLayer(FILTER_KINEMATIC);
+      }else {
+        collider.setLayer(FILTER_LEVEL_GEOMETRY);
+      }
     }
 
     if ('Light' in currentNode) {
@@ -148,46 +165,30 @@ const SceneLoader = {
       if (SceneLoader.ignoreComponents.indexOf(generalCompName) >= 0) continue;
       let compData = currentNode[generalCompName];
       // Debug.log(currentNode, generalCompName, compData);
-
-      // switch(generalCompName){
-      //   case "Static":
-      //     break;
-      //   default:
-      //     nodeObject.addComponent(new map["PlayerController"](options));
-      //     break;
-      // }
-
+      // Debug.log(c[generalCompName]);
+      // Debug.log(compData);
 
       switch (generalCompName) {
         case "PlayerController":
           PlayerTable.addPlayer(nodeObject);
-          nodeObject.addComponent(new Sing({}));
-          nodeObject.addComponent(new Look({}));
-
-          nodeObject.getComponent("Collider").freezeRotation = true;
-
-          //TODO attach to body instead
-          let lightHolder = new GameObject();
-          lightHolder.transform.setPosition(vec3.fromValues(0, 1.32, 0));
-          lightHolder.addComponent(new PointLight(true));
-          nodeObject.addChild(lightHolder);
 
           if(Debug.clientUpdate){
             if(this.tone===0){
-              let pc = new PlayerController({lightColor:vec3.fromValues(3.6,12.1,2),lightRange:1,singingCooldown:COOLDOWN_SINGING});
+              let pc = new PlayerController();
               nodeObject.addComponent(pc);
             }
           }else{
-            let pc = new PlayerController({lightColor:vec3.fromValues(3.6,12.1,2),lightRange:1,singingCooldown:COOLDOWN_SINGING});
+            let pc = new PlayerController();
             nodeObject.addComponent(pc);
           }
 
           nodeObject.addComponent(new AudioSource("Tone0"+this.tone));
           this.tone+=1;
           break;
+        default:
+          nodeObject.addComponent(new c[generalCompName](compData));
+          break;
       }
-
-      // new map["PC"](options);
     }
 
     //TODO there's probably a better way to do this...

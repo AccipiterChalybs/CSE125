@@ -3,14 +3,14 @@
  */
 
 class Decal extends Component {
-  constructor({scale = 1, color, texture, normal}){
+  constructor(params = {scale: 1, color: null, texture: null, normal: null}){
     super();
     this.componentType = "Decal";
 
-    this.scale = vec3.fromValues(scale, scale, scale);
-    this.color = color;
-    this.texture = texture;
-    this.normalTexture = normal;
+    this.scale = vec3.fromValues(params.scale, params.scale, params.scale);
+    this.color = params.color;
+    this.texture = params.texture;
+    this.normalTexture = params.normal;
   }
 
   startClient() {

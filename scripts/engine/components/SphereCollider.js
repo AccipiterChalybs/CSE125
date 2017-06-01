@@ -3,10 +3,10 @@
  */
 
 class SphereCollider extends Collider{
-  constructor({mass = 0, trigger = false, scale = 1}){
-    super({mass: mass, trigger: trigger});
+  constructor(params = {mass: 0, trigger: false, scale: 1}){
+    super({mass: params.mass, trigger: params.trigger});
 
-    this.scale = scale;
+    this.scale = params.scale;
   }
 
   _setGameObject(go){

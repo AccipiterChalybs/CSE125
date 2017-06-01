@@ -4,7 +4,6 @@ class CheckpointEvent extends Event{
     super();
     // this.movementSpeed = REGULAR_SPEED;
     this.setCurrentState(EventState.uncharged);
-    this._unlocked = false;
   }
 
   start(){
