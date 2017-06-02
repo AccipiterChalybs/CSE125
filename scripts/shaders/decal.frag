@@ -10,9 +10,12 @@ uniform sampler2D positionBuffer;
 
 uniform sampler2D inputColorTex;
 uniform sampler2D inputNormalTex;
+uniform sampler2D inputEmissionTex;
 
 uniform mat4 uInvM_Matrix;
 uniform vec3 uForwardNormal;
+
+uniform vec3 cameraPos;
 
 uniform float uSizeZ;
 
@@ -24,12 +27,13 @@ in vec4 vPerspectivePosition;
 
 layout(location = 0) out vec4 fragColor;
 layout(location = 1) out vec4 fragNormal;
+layout(location = 3) out vec4 fragEmission;
 
 
 void main() {
     vec2 normalizedPos = vPerspectivePosition.xy / vPerspectivePosition.w;
     vec2 texCoord = normalizedPos * 0.5 + 0.5;
-    vec3 worldPos = texture(positionBuffer, texCoord).rgb;
+    vec3 worldPos = texture(positionBuffer, texCoord).rgb + cameraPos;
     vec3 objPos = (uInvM_Matrix * vec4(worldPos, 1.0)).xyz;
 
 
@@ -60,7 +64,9 @@ void main() {
 
     //need to flip y of images
     vec4 color = texture(inputColorTex, vec2(objPos.x + 0.5, 0.5 - objPos.y)) * uDecalColor;
+    vec4 emission = texture(inputEmissionTex, vec2(objPos.x + 0.5, 0.5 - objPos.y)) * uDecalColor;
 
     fragColor = vec4((color.rgb * color.a) + (destColour.rgb * (1.0-color.a)), 1.0);
     fragNormal = vec4((decalNormal.rgb * color.a) + (destNormal.rgb * (1.0-color.a)), destNormal.a);
+    fragEmission = vec4(emission.rgb * emission.a, 1.0);
 }

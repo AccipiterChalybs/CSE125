@@ -73,7 +73,7 @@ const Renderer  = {
       /* Renderer.PARTICLE_TRAIL_SHADER, Renderer.BASIC_SHADER,
             Renderer.FORWARD_EMISSIVE ];*/
 
-      Renderer.shaderCameraPosList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.FBO_SSAO, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM,
+      Renderer.shaderCameraPosList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.FBO_SSAO, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM, Renderer.DEFERRED_DECAL,
         Renderer.DEFERRED_SHADER_LIGHTING_ENVIRONMENT, Renderer.DEFERRED_SHADER_LIGHTING_DIRECTIONAL_SHADOW, Renderer.DEFERRED_SHADER_LIGHTING_POINT_NORMAL, Renderer.DEFERRED_SHADER_LIGHTING_POINT_DEBUG, Renderer.DEFERRED_SHADER_LIGHTING_POINT_SHADOW];
 
       Renderer.shaderEnvironmentList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM,
@@ -490,6 +490,7 @@ const Renderer  = {
       Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("positionBuffer", 2, UniformTypes.u1i);
       Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("inputColorTex", 3, UniformTypes.u1i);
       Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("inputNormalTex", 4, UniformTypes.u1i);
+      Renderer.getShader(Renderer.DEFERRED_DECAL).setUniform("inputEmissionTex", 5, UniformTypes.u1i);
 
 
       Renderer.getShader(Renderer.FORWARD_SHADOW_SHADER).setUniform("inputTex", 0, UniformTypes.u1i);

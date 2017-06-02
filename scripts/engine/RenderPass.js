@@ -80,10 +80,11 @@ class DecalPass extends RenderPass
 
     Renderer.switchShader(Renderer.DEFERRED_DECAL);
 
+    //TODO per obj
     Renderer.currentShader.setUniform("uSizeZ", Decal.prototype.sizeZ, UniformTypes.u1f);
 
     //Bind deferred buffers to render to
-    let buffers = [GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2];
+    let buffers = [GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.NONE, GL.COLOR_ATTACHMENT3];
     GL.bindFramebuffer(GL.FRAMEBUFFER, Renderer.deferredPass.buffers.id);
     GL.drawBuffers(buffers);
     GL.viewport(0,0,Renderer.deferredPass.buffers.width, Renderer.deferredPass.buffers.height);
@@ -244,6 +245,8 @@ class DeferredPrePass extends RenderPass
       mesh.material.bind();
       mesh.draw();
     }
+    GL.drawBuffers([GL.NONE, GL.NONE, GL.NONE, GL.COLOR_ATTACHMENT3]);
+    GL.clear(GL.COLOR_BUFFER_BIT);
     Debug.Profiler.endTimer("DeferredPrePass", 2);
   }
 }
@@ -254,7 +257,7 @@ class DeferredPass extends RenderPass
 {
     constructor(){
         super();
-        this.buffers = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 3, false, true, [GL.RGBA8, GL.RGBA16F/*TODO should be RGBA16 - is this ok*/, GL.RGBA16F], false, true);
+        this.buffers = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 4, false, true, [GL.RGBA8, GL.RGBA16F, GL.RGBA16F, GL.RGBA16F], false, true);
         this.fbo = new Framebuffer(Renderer.getWindowWidth(), Renderer.getWindowHeight(), 1, false, true, [GL.RGBA16F], false, true);
     }
 
@@ -277,6 +280,14 @@ class DeferredPass extends RenderPass
                             GL.DEPTH_BUFFER_BIT,
                             GL.NEAREST);
         GL.bindFramebuffer(GL.READ_FRAMEBUFFER, null);
+
+
+        let s5 = Renderer.getShader(Renderer.FBO_DEBUG_CHANNEL);
+        s5.use();
+        this.buffers.bindTexture(0, 3);
+        s5.setUniform("rgbOutput", 1, UniformTypes.u1i);
+        this.buffers.draw();
+        //return;
 
 
         this.buffers.bindTexture(0, 0);
@@ -437,7 +448,7 @@ class BloomPass extends RenderPass
 
         let buffers = [ GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2, GL.COLOR_ATTACHMENT3 ];
 
-        this._deferredPass.fbo.bindTexture(0, 0); //TODO use (0, 3)
+        this._deferredPass.fbo.bindTexture(0, 0);
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.LINEAR_MIPMAP_NEAREST);
         GL.generateMipmap(GL.TEXTURE_2D);
 
@@ -556,7 +567,7 @@ class BloomPass extends RenderPass
             this._deferredPass.buffers.draw();
             break;
           case Debug.BUFFERTYPE_NORMAL:
-            this._deferredPass.buffers.bindTexture(0, 1);
+            this._deferredPass.buffers.bindTexture(0, 3);
             s5.setUniform("rgbOutput", 1, UniformTypes.u1i);
             this._deferredPass.buffers.draw();
             break;

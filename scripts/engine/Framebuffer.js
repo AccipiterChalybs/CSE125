@@ -31,6 +31,8 @@ class Framebuffer {
             for (let x = 0; x < this.numColorTex; ++x) {
               this.colorFormats[x] = (this.hdrEnabled) ? GL.RGBA16F : GL.RGBA;
             }
+          } else {
+            Debug.assert(numColorTexture === colorFormats.length, 'Mismatch between colorFormat length and num textures');
           }
 
         if (!manualSetup) {

@@ -3,14 +3,16 @@
  */
 
 class Decal extends Component {
-  constructor(params = {scale: 1, color: null, texture: null, normal: null}){
+  constructor(params = {scale: 1, color: null, texture: null, normal: null, emission: null}){
     super();
     this.componentType = "Decal";
 
+    //TODO Scale Z set-able
     this.scale = vec3.fromValues(params.scale, params.scale, params.scale);
-    this.color = params.color;
-    this.texture = params.texture;
-    this.normalTexture = params.normal;
+    this.color = vec4.fromValues(5, 3, 0.5, 1);//params.color;
+    this.texture =  new Texture(params.emission);//Texture.makeColorTex(vec4.fromValues(0,0,0,1));//TODO params.texture;
+    this.normalTexture = Texture.makeColorTex(vec4.fromValues(0.5,0.5,1.0,0));//TODO params.normal;
+    this.emissionTexture = new Texture(params.emission); //this should auto-reuse textures
   }
 
   startClient() {
@@ -30,6 +32,7 @@ class Decal extends Component {
 
     this.texture.bindTexture(3);
     this.normalTexture.bindTexture(4);
+    this.emissionTexture.bindTexture(5);
 
     let forward = vec3.create();
     vec3.scale(forward,this.transform.getForward(),-1);
@@ -93,4 +96,4 @@ class Decal extends Component {
 }
 Decal.prototype._isLoaded = false;
 Decal.prototype._meshData = {};
-Decal.prototype.sizeZ = 0.05;
+Decal.prototype.sizeZ = 0.5;
