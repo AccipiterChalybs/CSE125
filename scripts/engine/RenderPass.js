@@ -419,6 +419,12 @@ class BloomPass extends RenderPass
                                  new Framebuffer(screenWidth / 16, screenHeight / 16, 1, false, true)];
         this._blurBuffers[4] = [new Framebuffer(screenWidth / 32, screenHeight / 32, 1, false, true),
                                  new Framebuffer(screenWidth / 32, screenHeight / 32, 1, false, true)];
+
+        this.ssao_res = 0.5;
+        this.ssao_blur_res = 0.5;
+        this._ssaoBuffer = new Framebuffer(screenWidth * this.ssao_res, screenHeight * this.ssao_res, 1, false, false);
+        this._ssaoBufferBlur = [new Framebuffer(screenWidth * this.ssao_blur_res, screenHeight * this.ssao_blur_res, 1, false, false),
+          new Framebuffer(screenWidth * this.ssao_blur_res, screenHeight * this.ssao_blur_res, 1, false, false)];
     }
     
     render() {
@@ -491,21 +497,45 @@ class BloomPass extends RenderPass
             s2.setUniform("direction", new Float32Array([0, 1]), UniformTypes.vec2);
             this._deferredPass.fbo.draw();
         }
+
+
+
+
+      //SSAO--------------------------------
+      let ssao = Renderer.getShader(Renderer.FBO_SSAO);
+      ssao.use();
+      this._ssaoBuffer.bind([buffers[0]], false);
+      this._deferredPass.buffers.bindTexture(2, 2);
+      ssao.setUniform('uScreenSize', vec2.fromValues(Renderer.getWindowWidth() * this.ssao_res, Renderer.getWindowHeight() * this.ssao_res), UniformTypes.vec2 );
+      this._deferredPass.fbo.draw();
+
+      s2.setUniform("level", 1, UniformTypes.u1f);
+      s2.setUniform("width", (Renderer.getWindowWidth() * this.ssao_blur_res), UniformTypes.u1f);
+      s2.setUniform("height", (Renderer.getWindowHeight() * this.ssao_blur_res), UniformTypes.u1f);
+      this._ssaoBuffer.bindTexture(0, 0);
+      this._ssaoBufferBlur[0].bind([buffers[0]], false);
+      s2.setUniform("direction", new Float32Array([1, 0]), UniformTypes.vec2);
+      this._deferredPass.fbo.draw();
+
+      s2.setUniform("level", 1, UniformTypes.u1f);
+      this._ssaoBufferBlur[0].bindTexture(0, 0);
+      this._ssaoBufferBlur[1].bind([buffers[0]], false );
+      s2.setUniform("direction", new Float32Array([0, 1]), UniformTypes.vec2);
+      this._deferredPass.fbo.draw();
+
+      //-------------------------------------
+
+
         Framebuffer.unbind();
         s3.use();
 
-        this._deferredPass.fbo.bindTexture(0, 0); //TODO switch to (0, 3)
+        this._deferredPass.fbo.bindTexture(0, 0);
         this._blurBuffers[0][1].bindTexture(1, 0);
         this._blurBuffers[1][1].bindTexture(2, 0);
         this._blurBuffers[2][1].bindTexture(3, 0);
         this._blurBuffers[3][1].bindTexture(4, 0);
         this._blurBuffers[4][1].bindTexture(5, 0);
-        s3.setUniform("inputTex", 0, UniformTypes.u1i);
-        s3.setUniform("addTex1", 1, UniformTypes.u1i);
-        s3.setUniform("addTex2", 2, UniformTypes.u1i);
-        s3.setUniform("addTex3", 3, UniformTypes.u1i);
-        s3.setUniform("addTex4", 4, UniformTypes.u1i);
-        s3.setUniform("addTex5", 5, UniformTypes.u1i);
+        this._ssaoBufferBlur[1].bindTexture(6, 0);
 
         s3.setUniform("exposure", this.averageExposure, UniformTypes.u1f);
 
@@ -572,6 +602,11 @@ class BloomPass extends RenderPass
               GL.viewport(0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight()); //reset viewport
             }
             Renderer.DEFERRED_SHADER_LIGHTING_POINT = Renderer.DEFERRED_SHADER_LIGHTING_POINT_DEBUG;
+            break;
+          case Debug.BUFFERTYPE_SSAO:
+            this._ssaoBufferBlur[1].bindTexture(0, 0);
+            s5.setUniform("rgbOutput", 1, UniformTypes.u1i);
+            this._deferredPass.buffers.draw();
             break;
           default:
             break;

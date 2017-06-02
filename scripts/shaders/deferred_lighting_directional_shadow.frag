@@ -65,7 +65,7 @@ void main () {
   vec2 screenTexCoord = gl_FragCoord.xy / uScreenSize;
   vec4 albedo = texture(colorTex, screenTexCoord);
   if(albedo.xyz == vec3(0.0)) discard; //TODO does this actually provide a performance boost?
-  vec4 pos = texture(posTex, screenTexCoord);
+  vec4 pos = texture(posTex, screenTexCoord) + vec4(cameraPos,0);
   vec4 normal = texture(normalTex, screenTexCoord);
   vec3 mat = vec3(normal.a, pos.w, 0.0);
   normal.xyz = normal.xyz * 2.0 - 1.0;
