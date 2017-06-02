@@ -121,7 +121,6 @@ GameEngine.loop = function () {
   Input.update();
 
   // send data
-  // Debug.log(GameObject.prototype.SceneRoot.transform.children[2].position);
 
   if (!Debug.clientUpdate){
     Networking.update();
