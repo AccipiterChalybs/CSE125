@@ -120,8 +120,8 @@ class Animation extends Component
 
       //Root Motion (need to reapply this transform's transformations (i.e. rotation & scale)
       vec3.scale(rootResults, rootResults, this.transform.getScale()[0]);
-      vec3.transformQuat(rootResults, rootResults, this.boneMap[Animation.prototype._animMetaData[this.animationName].rootName].getWorldRotation());
-      vec3.scale(rootResults, rootResults, -60);
+      vec3.transformQuat(rootResults, rootResults, this.boneMap[Animation.prototype._animMetaData[this.animationName].rootName].getParent().getWorldRotation());
+      vec3.scale(rootResults, rootResults, Animation.prototype.ANIM_ROOT_MULT);
   //    this.transform.translate(rootResults);
 
       let body = this.gameObject.getComponent('Collider').body;
@@ -137,7 +137,7 @@ class Animation extends Component
       body.velocity.z *= 0.1;
 
       body.velocity.x += rootResults[0];
-      //body.velocity.y += rootResults[1]; //TODO FIX this is still getting input!
+      //body.velocity.y += rootResults[1];
       body.velocity.z += rootResults[2];
      //body.applyImpulse(new CANNON.Vec3(rootResults[0], rootResults[1],rootResults[2]), body.position);
 
@@ -319,4 +319,5 @@ class Animation extends Component
 }
 Animation.prototype._animData = {};
 Animation.prototype._animMetaData = {};
+Animation.prototype.ANIM_ROOT_MULT = 60;
 Animation.prototype.BLEND_RATE = 2.5;//TODO: should probably be property of animation
