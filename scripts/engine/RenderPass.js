@@ -4,6 +4,7 @@
 class RenderPass
 {
     render(){}
+    resize(){}
 }
 
 class ForwardPass extends RenderPass
@@ -57,9 +58,8 @@ class DecalPass extends RenderPass
     super();
     //This is just because we can't render to textures in the bound FBO, and so need to copy them out of it.
     //TODO maybe try editing the scale for faster speed?
-    let decalBufferScale = 1;
-    let width = Renderer.getWindowWidth() * decalBufferScale;
-    let height = Renderer.getWindowHeight() * decalBufferScale;
+    let width = Renderer.getWindowWidth() * DecalPass.prototype.decalBufferScale ;
+    let height = Renderer.getWindowHeight() * DecalPass.prototype.decalBufferScale ;
     this.copyBuffers = new Framebuffer(width, height, 3, false, true, [GL.RGBA8, GL.RGBA16F, GL.RGBA16F]);
 
   }
@@ -101,7 +101,14 @@ class DecalPass extends RenderPass
     GL.depthMask(true);
     Debug.Profiler.endTimer("DecalPass", 2);
   }
+
+  resize() {
+    let width = Renderer.getWindowWidth() * DecalPass.prototype.decalBufferScale ;
+    let height = Renderer.getWindowHeight() * DecalPass.prototype.decalBufferScale ;
+    this.copyBuffers.resize(width, height);
+  }
 }
+DecalPass.prototype.decalBufferScale = 1;
 
 
 
@@ -246,6 +253,10 @@ class DeferredPrePass extends RenderPass
     }
     Debug.Profiler.endTimer("DeferredPrePass", 2);
   }
+
+  resize() {
+    //Do resize in the main DeferredPass
+  }
 }
 
 
@@ -364,6 +375,13 @@ class DeferredPass extends RenderPass
         GL.cullFace(GL.BACK);
         GL.blendFunc(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA);
         Debug.Profiler.endTimer("DeferredMainPass", 2);
+    }
+
+    resize() {
+      let width = Renderer.getWindowWidth();
+      let height = Renderer.getWindowHeight();
+      this.buffers.resize(width, height);
+      this.fbo.resize(width, height);
     }
 }
 
@@ -613,5 +631,31 @@ class BloomPass extends RenderPass
         }
       }
       Debug.Profiler.endTimer("PostProcessingPass", 2);
+    }
+
+
+    resize() {
+      let screenWidth = Renderer.getWindowWidth();
+      let screenHeight = Renderer.getWindowHeight();
+
+      this._averagePass.resize(this._averageSize, this._averageSize);
+
+      this._brightPass.resize(screenWidth, screenHeight);
+      this._blurBuffers[0][0].resize(screenWidth  / 2, screenHeight / 2);
+      this._blurBuffers[0][1].resize(screenWidth  / 2, screenHeight / 2);
+      this._blurBuffers[1][0].resize(screenWidth / 4, screenHeight / 4);
+      this._blurBuffers[1][1].resize(screenWidth / 4, screenHeight / 4);
+      this._blurBuffers[2][0].resize(screenWidth/ 8, screenHeight / 8);
+      this._blurBuffers[2][1].resize(screenWidth/ 8, screenHeight / 8);
+      this._blurBuffers[3][0].resize(screenWidth / 16, screenHeight / 16);
+      this._blurBuffers[3][1].resize(screenWidth / 16, screenHeight / 16);
+      this._blurBuffers[4][0].resize(screenWidth / 32, screenHeight / 32);
+      this._blurBuffers[4][1].resize(screenWidth / 32, screenHeight / 32);
+
+      this.ssao_res = 0.5;
+      this.ssao_blur_res = 0.5;
+      this._ssaoBuffer.resize(screenWidth * this.ssao_res, screenHeight * this.ssao_res);
+      this._ssaoBufferBlur[0].resize(screenWidth * this.ssao_blur_res, screenHeight * this.ssao_blur_res);
+      this._ssaoBufferBlur[1].resize(screenWidth * this.ssao_blur_res, screenHeight * this.ssao_blur_res);
     }
 }

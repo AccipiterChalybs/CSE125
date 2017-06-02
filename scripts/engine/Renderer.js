@@ -649,6 +649,11 @@ const Renderer  = {
     Renderer.lastHeight = height;
 
 
+    for (let pass of Renderer.passes) {
+      pass.resize();
+    }
+
+
     let screenSize = vec2.create(); vec2.set(screenSize, Renderer.getWindowWidth(), Renderer.getWindowHeight());
     Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING_ENVIRONMENT).setUniform("uScreenSize", screenSize, UniformTypes.vec2);
     Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING_POINT_NORMAL).setUniform("uScreenSize", screenSize, UniformTypes.vec2);
