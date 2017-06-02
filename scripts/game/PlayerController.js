@@ -176,6 +176,7 @@ class PlayerController extends Component {
     vec3.scale(move, move, this.state.moveSpeed);
 
     if (vec3.length(move) > 0.0005) {
+      // TODO set this.state.movedot and movecrossy instead
       this.transform.setRotation(quat.create());
       this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
     }

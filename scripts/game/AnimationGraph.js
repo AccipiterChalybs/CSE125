@@ -58,15 +58,6 @@ class AnimationGraph {
       'sneakL',     // 9
       'sneakR'      // 10
     ];
-    /*
-    State vars required:
-      moveAmt         (for idle walk run)
-      moveDot         (for turn)
-      slide           (for slide)
-      sneak           (for sneak)
-      wallNdot        (for sneak)
-      rand            (for look back)
-    */
 
     const name = 'player'; // name of graph
     const g = new AnimationGraph();

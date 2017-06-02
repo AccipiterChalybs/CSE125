@@ -313,7 +313,8 @@ class AnimationState {
     const animationIndex = 9;
     const stateName = 'sneakL';
     const isSatisfied = (objState) => {
-      return objState.wallNCrossY < 0 &&
+      return objState.sneak           &&
+             objState.wallNCrossY < 0 &&
              objState.wallNDot > -.2  &&
              objState.wallNDot < .5;
     };
@@ -333,7 +334,8 @@ class AnimationState {
     const animationIndex = 10;
     const stateName = 'sneakR';
     const isSatisfied = (objState) => {
-      return objState.wallNCrossY > 0 &&
+      return objState.sneak           &&
+             objState.wallNCrossY > 0 &&
              objState.wallNDot > -.2  &&
              objState.wallNDot < .5;
     };
