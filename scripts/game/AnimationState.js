@@ -7,12 +7,13 @@ class AnimationState {
       // state name: { state, transition(this is an anim index) || null }
     };
 
-    this.loops = false;         // set optionally
-    this.minTime = 0;           // set optionally
+    this.loops = true;         // set optionally
+    this.minTime = 0;          // set optionally, [0..1]
     // returns true if objState props satisfies condition
     this.isSatisfied = function (objState) { // set optionally
       return false;
     };
+    this.priority = 0;        // set optionally
 
     this.componentType = 'AnimationState';
   }
@@ -35,19 +36,20 @@ class AnimationState {
     this.isSatisfied = animStateData.isSatisfied || this.isSatisfied;
     this.loops = animStateData.loops || this.loops;
     this.minTime = animStateData.minTime || this.minTime;
+    this.priority = animStateData.priority || this.priority;
   }
 
   // returns: true if trigger happened
-  // TODO truncate triggers once in a while
-  // TODO discard repeat triggers (?)
   resolveTrigger(objState) {
     if (objState.triggers.length > 0) {
-      const nextStateName = objState.triggers[0];
+      const nextStateName = objState.triggers[0].name;
       const nextState = this.neighbors[nextStateName].state;
       if (!nextState) {
         // trigger didnt resolve
         return false;
       }
+      window.clearTimeout(objState.triggers[0].timeoutID);
+      objState.triggers.shift();
       this.playState(objState, nextState);
       return true;
     }
@@ -57,6 +59,7 @@ class AnimationState {
   // returns: true if a state passively changes
   // finds first state to change to
   passiveStateChange(objState) {
+    const satisfied = [];
     for (let k in objState.state.neighbors) {
       if (k === undefined) {
         continue;
@@ -64,16 +67,25 @@ class AnimationState {
       // careful, possible thrashing between states
       const neighbor = objState.state.neighbors[k];
       if (neighbor.state.isSatisfied(objState)) {
-        if (neighbor.transition != null) {
-          objState.nextState = neighbor.state;
-          objState.animation.play(neighbor.transition, false);
-        } else {
-          this.playState(objState, neighbor.state);
-        }
-        return true;
+        satisfied.push(neighbor);
       }
     }
-    return false;
+
+    if (satisfied.length === 0) { // no nodes satisfied
+      return false;
+    }
+
+    satisfied.sort((a, b) => { return b.state.priority - a.state.priority; });
+    // descending
+    const neighbor = satisfied[0]; // take highest priority node
+    if (neighbor.transition != null) {
+      objState.nextState = neighbor.state;
+      objState.animation.play(neighbor.transition, false);
+    } else {
+      this.playState(objState, neighbor.state);
+    }
+
+    return true;
   }
 
   // object needs to call this to update its animations!!
@@ -89,7 +101,7 @@ class AnimationState {
       }
       return;
     }
-    if (objState.animation._currentTime < this.minTime) {
+    if (objState.animation.getAnimationProgress() < this.minTime) {
       // mintime not satisfied
       return;
     }
@@ -98,7 +110,7 @@ class AnimationState {
     are 1st to resolve
     dont have state requirements
     */
-    if(this.resolveTrigger(objState)) {
+    if (this.resolveTrigger(objState)) {
       return;
     }
 
@@ -106,15 +118,13 @@ class AnimationState {
     changes are 2nd to resolve
     uses obj state to determine possible next state
     */
-    if(this.passiveStateChange(objState)) {
+    if (this.passiveStateChange(objState)) {
       return;
     }
   }
 
   // use this to set next state, does the boilerplate stuff
   playState(objState, nextState) {
-    // console.log(objState);
-    // console.log(nextState);
     objState.state = nextState;
     objState.nextState = null;
     objState.animation.play(nextState.animationIndex, nextState.loops);
@@ -130,7 +140,7 @@ class AnimationState {
       }
     */
     const nextState = this.parentGraph.animStates[nextStateName];
-    if(!nextState) {
+    if (!nextState) {
       console.log(`Illegal setState from ${objState.name}): doesnt exist`);
       return false;
     }
@@ -143,43 +153,215 @@ class AnimationState {
     objState.triggers = [];
   }
 
-  // returns pre defined construct for an idle state
-  static idleDataConstruct(parent, neighbors) {
-    const idleAnimIndex = 1; // assumes idle animation at index 1
+  // =============== player animation graph statics ==============
 
-    const idleData = {
-      parentGraph: parent,
-      name: 'idle',
-      animationIndex: idleAnimIndex,
-      neighbors,
-      isSatisfied: (objState) => {
-        if (objState.moveAmt < 0.005)
-          return true;
-        return false;
-      },
-      loops: true,
+  // returns wrapper for pre defined construct of an idle state
+  static idleDataConstruct(parentGraph, neighbors) {
+    const animationIndex = 1; // assumes idle animation at index 1
+    const name = 'idle';
+    const isSatisfied = (objState) => {
+      return objState.moveSpeed < 0.005;
     };
 
-    return idleData;
+    const data = {
+      parentGraph,
+      name,
+      animationIndex,
+      neighbors,
+      isSatisfied,
+    };
+    return data;
   }
 
-  // returns pre defined construct for walking state
-  static walkingDataConstruct(parent, neighbors) {
-    const walkingAnimIndex = 2; // assumes walking animation at index 1
-
-    const walkingData = {
-      parentGraph: parent,
-      name: 'walking',
-      animationIndex: walkingAnimIndex,
-      neighbors,
-      isSatisfied: (objState) => {
-        if (objState.moveAmt > 0.010)
-          return true;
-        return false;
-      },
-      loops: true,
+  // returns wrapper for pre defined construct of a walk state
+  static walkDataConstruct(parentGraph, neighbors) {
+    const animationIndex = 2; // assumes walk animation at index 2
+    const name = 'walk';
+    const isSatisfied = (objState) => {
+      return objState.moveSpeed > 0.010 && objState.moveSpeed < 1.8;
     };
 
-    return walkingData;
+    const data = {
+      parentGraph,
+      name,
+      animationIndex,
+      neighbors,
+      isSatisfied,
+    };
+    return data;
+  }
+
+  static runDataConstruct(parentGraph, neighbors) {
+    const animationIndex = 3;
+    const name = 'run';
+    const isSatisfied = (objState) => {
+      return objState.moveSpeed > 2.2;
+    };
+
+    const data = {
+      parentGraph,
+      name,
+      animationIndex,
+      neighbors,
+      isSatisfied,
+    };
+    return data;
+  }
+
+  static turn180DataConstruct(parentGraph, neighbors) {
+    const animationIndex = 4;
+    const name = 'turn180';
+    const isSatisfied = (objState) => {
+      return objState.moveDot < - 0.2;
+    };
+
+    const data = {
+      parentGraph,
+      name,
+      animationIndex,
+      neighbors,
+      isSatisfied,
+      loop: false,
+      priority: 5,
+    };
+    return data;
+  }
+
+  static turn90LDataConstruct(parentGraph, neighbors) {
+    const animationIndex = 5;
+    const name = 'turn90L';
+    const isSatisfied = (objState) => {
+      return objState.moveCrossY > 0 &&
+             objState.moveDot > -.2  &&
+             objState.moveDot < .5;
+    };
+
+    const data = {
+      parentGraph,
+      name,
+      animationIndex,
+      neighbors,
+      isSatisfied,
+      loop: false,
+      priority: 5,
+    };
+    return data;
+  }
+
+    static turn90RDataConstruct(parentGraph, neighbors) {
+    const animationIndex = 6;
+    const name = 'turn90R';
+    const isSatisfied = (objState) => {
+      return objState.moveCrossY < 0 &&
+             objState.moveDot > -.2  &&
+             objState.moveDot < .5;
+    };
+
+    const data = {
+      parentGraph,
+      name,
+      animationIndex,
+      neighbors,
+      isSatisfied,
+      loop: false,
+      priority: 5,
+    };
+    return data;
+  }
+
+    static slideDataConstruct(parentGraph, neighbors) {
+    const animationIndex = 7;
+    const mame = 'slide';
+    const isSatisfied = (objState) => {
+      // expects on trigger
+    };
+
+    const data = {
+      parentGraph,
+      name,
+      animationIndex,
+      neighbors,
+      isSatisfied,
+      loop: false,
+      minTime: .8,
+      priority: 3,
+    };
+    return data;
+  }
+
+    static lookBackDataConstruct(parentGraph, neighbors) {
+    const animationIndex = 8;
+    const name = 'lookBack';
+    const isSatisfied = (objState) => {
+      return; // nothing for now TODO
+    };
+
+    const data = {
+      parentGraph,
+      name,
+      animationIndex,
+      neighbors,
+      isSatisfied,
+      loop: false,
+      minTime: 1,
+      priority: 100,
+    };
+    return data;
+  }
+
+    static sneakLDataConstruct(parentGraph, neighbors) {
+    const animationIndex = 9;
+    const name = 'sneakL';
+    const isSatisfied = (objState) => {
+      return objState.sneak           &&
+             objState.wallNCrossY < 0 &&
+             objState.wallNDot > -.2  &&
+             objState.wallNDot < .5;
+    };
+
+    const data = {
+      parentGraph,
+      name,
+      animationIndex,
+      neighbors,
+      isSatisfied,
+      priority: 10,
+    };
+    return data;
+  }
+
+    static sneakRDataConstruct(parentGraph, neighbors) {
+    const animationIndex = 10;
+    const stateName = 'sneakR';
+    const isSatisfied = (objState) => {
+      return objState.sneak           &&
+             objState.wallNCrossY > 0 &&
+             objState.wallNDot > -.2  &&
+             objState.wallNDot < .5;
+    };
+
+    const data = {
+      parentGraph,
+      name,
+      animationIndex,
+      neighbors,
+      isSatisfied,
+      priority: 10,
+    };
+    return data;
   }
 }
+
+AnimationState.playerDataConstruct = {
+  bind: AnimationState.idleDataConstruct, // not really used
+  idle: AnimationState.idleDataConstruct,
+  walk: AnimationState.walkDataConstruct,
+  run: AnimationState.runDataConstruct,
+  turn180: AnimationState.turn180DataConstruct,
+  turn90L: AnimationState.turn90LDataConstruct,
+  turn90R: AnimationState.turn90RDataConstruct,
+  slide: AnimationState.slideDataConstruct,
+  lookBack: AnimationState.lookBackDataConstruct,
+  sneakL: AnimationState.sneakLDataConstruct,
+  sneakR: AnimationState.sneakRDataConstruct,
+};

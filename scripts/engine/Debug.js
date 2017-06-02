@@ -119,7 +119,7 @@ Debug.logAnimationState = () => {/*
   const o = PlayerTable.getPlayer();
   const ls = o.getComponent('PlayerController').state;
   const s = ls.state.name;
-  const m = ls.moveAmt;
+  const m = ls.moveSpeed;
   const l = ls.status;
   Debug.animationStateElement.innerText = `Player ${p} is ${s} with ms ${m} and status ${l}`;*/
 };

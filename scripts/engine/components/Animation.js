@@ -67,6 +67,11 @@ class Animation extends Component
         return Animation.prototype._animData[this.animationName][this._currentAnimIndex].boneData;
     }
 
+    getAnimationProgress(index=this._currentAnimIndex) {
+      const currAnim = Animation.prototype._animData[this.animationName][index];
+      return this._currentTime[index] / currAnim.animationTime;
+    }
+
     updateComponent() {
       let weightSum =0;
       for (let i=0; i<Animation.prototype._animData[this.animationName].length; ++i) {

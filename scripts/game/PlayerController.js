@@ -22,36 +22,73 @@ const PlayerState = {
 };
 
 // Requires a collider, sing
-class PlayerController extends Playerable{
+class PlayerController extends Component {
   constructor({injured}){
-    super({singingCooldown: COOLDOWN_SINGING});
+    super();
+    // init
     this._looker = null;
-    this.checkpoint = vec3.create();
-    this.keys = 0;
-    this.injured = injured;
+
+    // space
+    this.x = 0;
+    this.y = 0;
+    this.z = 0;
     this.forward = vec3.create(); vec3.set(this.forward, 0, 0, -1);
     this.cameraPos = vec3.create(); vec3.set(this.cameraPos, 0, 0, -1);
 
-    this.state = new PlayerLogicState();
-    this.state.status = 'default';
-    this.state.moveSpeed = REGULAR_SPEED;
+    // input
+    this.singing = 0;
+    this.walking = 0;
+    this.action = 0;
 
-    this._respawnTime = 0;
+    // physics
+    this._colliders = [];
     this._collider = null;
+
+    // singing
+    this._singer = null;
+    this._singingSrc = null;
+    this._nextSingTime = 0;
+    this._lastSingInput = 0;
+    this._singingCooldown = COOLDOWN_SINGING;
+    this._respawnTime = 0;
+
+    // game state
+    this.state = new PlayerLogicState();
+    this.state.status = PlayerState.default;
+    this.keys = 0;
+    this.injured = false;
+    this.checkpoint = null;
+
+    // meta
+    this.componentType = 'PlayerController';
   }
 
-  start(){
-    super.start();
+  start() {
+    // object refs
+    this._singer = this.transform.gameObject.getComponent('Sing');
     this._looker = this.transform.gameObject.getComponent("Look");
-    this.state.start(this.gameObject);
-    this._collider = this.transform.gameObject.getComponent("Collider");
-    this._collider.setLayer(FILTER_PLAYER);
+
+    // physics init
+    this.transform.gameObject.getComponent('Collider').setLayer(FILTER_PLAYER);
+    this.transform.gameObject.findComponents('Collider', this._colliders);
+    for(let i = 0; i < this._colliders.length; ++i) {
+      this._colliders[i].setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
+      this._colliders[i].setFreezeRotation(true);
+    }
+
+    // game state
     this.checkpoint = this.transform.getWorldPosition();
 
+    // network
+    this.gameObject.addComponentToSerializeableList(this);
+
+    // start anim
+    this.state.start(this.gameObject);
   }
 
   startClient(){
-    super.startClient();
+    this.gameObject.addComponentToSerializeableList(this);
+    this._singingSrc = this.transform.gameObject.getComponent('AudioSource');
   }
 
   updateComponentClient(){
@@ -69,8 +106,7 @@ class PlayerController extends Playerable{
       return;
 
     // Add if loop to enable client side testing w/o server
-    if(Debug.clientUpdate && !IS_SERVER)
-    {
+    if (Debug.clientUpdate && !IS_SERVER) {
       this.x = Input.getAxis('horizontal');
       this.z = Input.getAxis('vertical');
       this.walking = Input.getAxis('walk');
@@ -81,34 +117,37 @@ class PlayerController extends Playerable{
       this.cameraPos = Renderer.camera.transform.getWorldPosition();
     }
 
-    if(this.singing === 0 && this._lastSingInput === 1){
+    if (this.singing === 0 && this._lastSingInput === 1) {
       this._nextSingTime = Time.time + this._singingCooldown;
     }
 
     this._lastSingInput = this.singing;
 
-    if(this.state.status === 'cantMove'){
+    if (this.state.status === PlayerState.cantMove){
 
-    }else if(!this.injured && this.singing === 1 && Time.time >= this._nextSingTime) {
-      this.state.status = 'singing';
-    }else if(this.walking === 1){
-      this.state.status = 'walking';
-    }else{
-      this.state.status = 'default';
+    } else if (!this.injured && this.singing === 1 && Time.time >= this._nextSingTime) {
+      this.state.status = PlayerState.singing;
+      //if !injured
+
+      // if(!IS_SERVER) this._singingSrc.resumeSound();
+    } else if (this.walking === 1) {
+      this.state.status = PlayerState.walking;
+    } else {
+      this.state.status = PlayerState.default;
     }
 
-    if(this.state.status !== 'cantMove') {
+    if(this.state.status !== PlayerState.cantMove) {
       this.movement();
     }
 
-    if(this.state.status === 'singing'){
+    if(this.state.status === PlayerState.singing) {
       PlayerTable.increaseHate(PlayerTable.currentPlayer, HATE_SING);
       this._singer.sing();
     }else{
       this._singer.quiet();
     }
 
-    if(this.action === 1){
+    if(this.action === 1) {
       this._looker.look();
     }
 
@@ -117,12 +156,12 @@ class PlayerController extends Playerable{
 
 
   movement(){
-    if(this.state.status === 'singing'){
+    if(this.state.status === PlayerState.singing) {
       this.state.moveSpeed = Utility.moveTowards(this.state.moveSpeed, SING_SPEED, 4 * PLAYER_ACCELERATION * Time.deltaTime);
-    } else if(this.state.status === 'walking'){
+    } else if(this.state.status === PlayerState.walking) {
       this.state.moveSpeed = Utility.moveTowards(this.state.moveSpeed, WALK_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
-    } else if(this.state.status === 'default'){
-      this.state.moveSpeed = Utility.moveTowards(this.state.moveSpeed, REGULAR_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
+    } else if(this.state.status === PlayerState.default) {
+      this.state.moveSpeed = Utility.moveTowards(this.state.moveSpeed, 0.001, PLAYER_ACCELERATION * Time.deltaTime);
     }
 
     let up = vec3.create(); vec3.set(up, 0, 1, 0);
@@ -137,24 +176,11 @@ class PlayerController extends Playerable{
     vec3.normalize(move, move);
     vec3.scale(move, move, this.state.moveSpeed);
 
-    this.state.moveAmt = vec3.length(move);
-
-    if (this.state.moveAmt > 0.01) {
+    if (vec3.length(move) > 0.0005) {
+      // TODO set this.state.movedot and movecrossy instead
       this.transform.setRotation(quat.create());
       this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
-      let animState = (this.state.status === 'singing') ? 2 : 3;
-      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(3, true);
-      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').resume();
-    } else {
-      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').stop();
-      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(1, true);
     }
-
-
-    /*let body = this._collider.body;
-     body.velocity.x = move[0];
-     body.velocity.z = move[2];*/
-    //col.setRotation(this.forward);
   }
 
   heal(){
@@ -188,27 +214,36 @@ class PlayerController extends Playerable{
   }
 
 
-  getCurrentState(){
+  getCurrentState() {
     return this.state.status;
   }
 
-  setCurrentState(newState){
+  setCurrentState(newState) {
     this.state.status = newState;
   }
 
+  // eg slide, happens once
+  triggerAnimation(animState) {
+    this.state.setTrigger(animName);
+  }
+
   serialize() {
-    let data = super.serialize();
-    data.i = this.injured;
-    data.k = this.keys;
+    const data = {
+      a: this.action,
+      s: this.singing,
+      st: this._nextSingTime,
+      i: this.injured,
+      k: this.keys,
+    };
     return data;
   }
 
   applySerializedData(data) {
     // Debug.log(this);
-    super.applySerializedData(data);
+    this.action = data.a;
+    this.singing = data.s;
+    this._nextSingTime = data.st;
     this.injured = data.i;
     this.keys = data.k;
   }
-
-
 }
