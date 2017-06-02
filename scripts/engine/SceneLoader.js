@@ -41,7 +41,7 @@ const SceneLoader = {
         let forwardShaders = (matData.animated) ? Renderer.FORWARD_PBR_SHADER_ANIM : Renderer.FORWARD_PBR_SHADER;
         let deferredShaders = (matData.animated) ? Renderer.DEFERRED_PBR_SHADER_ANIM : Renderer.DEFERRED_PBR_SHADER;
         let shaderId = (matData.forward) ? forwardShaders : deferredShaders;
-        console.log(shaderId, Renderer.FORWARD_PBR_SHADER);
+        // console.log(shaderId, Renderer.FORWARD_PBR_SHADER);
         let mat = new Material(Renderer.getShader(shaderId), !!(matData.forward));
         mat.setTexture(MaterialTexture.COLOR, new Texture(matData.color));
         mat.setTexture(MaterialTexture.MAT, new Texture(matData.mat, false));
