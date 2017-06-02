@@ -25,9 +25,7 @@ class DoorEvent extends SingingEvent{
   }
 
   updateComponent() {
-    if (this._unlocked){
-      super.updateComponent();
-    }
+    super.updateComponent();
   }
 
   onUncharged() {
@@ -51,17 +49,17 @@ class DoorEvent extends SingingEvent{
     let newPos = vec3.scale(vec3.create(), this.openPos, this.currentCharge / this.maximumCharge);
     this.transform.setPosition(newPos);
   }
-  onRaycast(interactingObj) {
-    let pController = interactingObj.getComponent('PlayerController');
-    // Debug.log(this._unlocked,pController.keys);
-    if (!this._unlocked && pController && pController !== null && pController.keys > 0) {
-      Debug.log('unlocking');
-      let audio = this.gameObject.getComponent('AudioSource');
-      if (audio && audio !== null) audio.setState(AudioState.playSound);
-      this._unlocked = true;
-      pController.keys--; //Becareful in future here is HACK what if has lots of keys
-      // interactingObj.transform.children.splice(0, 1);
-    }
-  }
+  // onRaycast(interactingObj) {
+  //   let pController = interactingObj.getComponent('PlayerController');
+  //   // Debug.log(this._unlocked,pController.keys);
+  //   if (!this._unlocked && pController && pController !== null && pController.keys > 0) {
+  //     Debug.log('unlocking');
+  //     let audio = this.gameObject.getComponent('AudioSource');
+  //     if (audio && audio !== null) audio.setState(AudioState.playSound);
+  //     this._unlocked = true;
+  //     pController.keys--; //Becareful in future here is HACK what if has lots of keys
+  //     // interactingObj.transform.children.splice(0, 1);
+  //   }
+  // }
 
 }
