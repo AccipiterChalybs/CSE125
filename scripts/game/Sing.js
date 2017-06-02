@@ -31,7 +31,7 @@ class Sing extends Component{
 
   sing(){
     // Debug.log("singing with range: ", this.range);
-    if(this._pointLight !== null)
+    if(this._pointLight !== null && this._pointLight)
       this._pointLight.setRange(Utility.moveTowards(this._pointLight.range,MAX_LIGHT_RANGE,LIGHT_EXPAND_RATE*Time.deltaTime));
 
     let hitColliders = PhysicsEngine.overlapSphere(this.transform.getWorldPosition(), this.range);
@@ -43,7 +43,7 @@ class Sing extends Component{
 
   quiet(){
     // Debug.log("i am quiet");
-    if(this._pointLight !== null)
+    if(this._pointLight !== null && this._pointLight)
       this._pointLight.setRange(Utility.moveTowards(this._pointLight.range,MIN_LIGHT_RANGE,LIGHT_DIMINISH_RATE*Time.deltaTime));
   }
 }

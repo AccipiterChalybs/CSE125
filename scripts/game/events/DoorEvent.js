@@ -4,7 +4,10 @@
 // const PLAYER_ACCELERATION = 4;
 // const COOLDOWN_SINGING = 0.1;   // In seconds
 
-class DoorEvent extends Event{
+const OPEN_SPEED = 0.5;
+const CLOSE_SPEED = 0.5;
+
+class DoorEvent extends SingingEvent{
   constructor(params = {maximumCharge: 3, _unlocked: true, openPos: vec3.create(), closePos: vec3.create()}){
     super({maximumCharge: params.maximumCharge});
 
@@ -48,7 +51,6 @@ class DoorEvent extends Event{
     let newPos = vec3.scale(vec3.create(), this.openPos, this.currentCharge / this.maximumCharge);
     this.transform.setPosition(newPos);
   }
-
   onRaycast(interactingObj) {
     let pController = interactingObj.getComponent('PlayerController');
     // Debug.log(this._unlocked,pController.keys);
