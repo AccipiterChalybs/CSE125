@@ -39,6 +39,7 @@ const Renderer  = {
       Renderer.FBO_COPY=19;
       Renderer.FBO_COPY_DEPTH=20;
       Renderer.FBO_SSAO=21;
+      Renderer.FBO_FOG=22;
 
       Renderer.DEFERRED_DECAL=25;
 
@@ -73,7 +74,7 @@ const Renderer  = {
       /* Renderer.PARTICLE_TRAIL_SHADER, Renderer.BASIC_SHADER,
             Renderer.FORWARD_EMISSIVE ];*/
 
-      Renderer.shaderCameraPosList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.FBO_SSAO, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM,
+      Renderer.shaderCameraPosList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.FBO_SSAO, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM, Renderer.FBO_FOG,
         Renderer.DEFERRED_SHADER_LIGHTING_ENVIRONMENT, Renderer.DEFERRED_SHADER_LIGHTING_DIRECTIONAL_SHADOW, Renderer.DEFERRED_SHADER_LIGHTING_POINT_NORMAL, Renderer.DEFERRED_SHADER_LIGHTING_POINT_DEBUG, Renderer.DEFERRED_SHADER_LIGHTING_POINT_SHADOW];
 
       Renderer.shaderEnvironmentList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM,
@@ -189,6 +190,10 @@ const Renderer  = {
 
       Renderer.shaderList[Renderer.FBO_SSAO] = new Shader(
         Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_ssao.frag"
+      );
+
+      Renderer.shaderList[Renderer.FBO_FOG] = new Shader(
+        Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_fog.frag"
       );
 
 
@@ -503,6 +508,12 @@ const Renderer  = {
       Renderer.getShader(Renderer.FBO_COPY_DEPTH).setUniform("inputDepth", 4, UniformTypes.u1i);
 
 
+      Renderer.getShader(Renderer.FBO_FOG).setUniform("positionTex", 2, UniformTypes.u1i);
+      Renderer.getShader(Renderer.FBO_FOG).setUniform("uFogPower", 0.32, UniformTypes.u1f);
+      Renderer.getShader(Renderer.FBO_FOG).setUniform("uPowerB", 0.1, UniformTypes.u1f);
+      Renderer.getShader(Renderer.FBO_FOG).setUniform("uFogColor", vec3.fromValues(0.42, 0.61, 0.72), UniformTypes.vec3);
+
+
 
       let ssao = Renderer.getShader(Renderer.FBO_SSAO);
       ssao.setUniform('normalTex', 1, UniformTypes.u1i );
@@ -519,6 +530,7 @@ const Renderer  = {
       s3.setUniform("addTex4", 4, UniformTypes.u1i);
       s3.setUniform("addTex5", 5, UniformTypes.u1i);
       s3.setUniform("ssao", 6, UniformTypes.u1i);
+      s3.setUniform("fog", 7, UniformTypes.u1i);
   },
 
   loop: function () {
@@ -660,6 +672,9 @@ const Renderer  = {
     Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING_POINT_DEBUG).setUniform("uScreenSize", screenSize, UniformTypes.vec2);
     Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING_POINT_SHADOW).setUniform("uScreenSize", screenSize, UniformTypes.vec2);
     Renderer.getShader(Renderer.DEFERRED_SHADER_LIGHTING_DIRECTIONAL_SHADOW).setUniform("uScreenSize", screenSize, UniformTypes.vec2);
+
+    Renderer.getShader(Renderer.FBO_SSAO).setUniform('uScreenSize', vec2.fromValues(Renderer.getWindowWidth() * Renderer.postPass.ssao_res, Renderer.getWindowHeight() * Renderer.postPass.ssao_res), UniformTypes.vec2 );
+    Renderer.getShader(Renderer.FBO_FOG).setUniform("uScreenSize", screenSize, UniformTypes.vec2);
   },
 
   getWindowWidth: function() {
