@@ -103,7 +103,7 @@
 }
 
 .title-img {
-  content: url(/assets/images/voiceless_title.png);
+  content: url(../assets/images/voiceless_title.png);
   max-width: 909px;
   width: 100%;
   margin: auto;
