@@ -4,7 +4,7 @@ class RaycastSwitch extends Viewable{
     this._events = [];
     this._unparsedEvents = events;
     this.charged = false;
-    this._currentCharge = 0;
+    this._currentOutput = 0;
   }
 
   start() {

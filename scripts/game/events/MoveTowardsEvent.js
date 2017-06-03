@@ -4,9 +4,9 @@
 // const PLAYER_ACCELERATION = 4;
 // const COOLDOWN_SINGING = 0.1;   // In seconds
 
-class MoveTowardsEvent extends Event{
-  constructor({target}) {
-    super();
+class MoveTowardsEvent extends SingingEvent{
+  constructor({target,maximumCharge}) {
+    super({maximumCharge: maximumCharge});
     this.target = target;
     // this.movementSpeed = REGULAR_SPEED;
     this.setCurrentState(EventState.uncharged);
@@ -17,10 +17,6 @@ class MoveTowardsEvent extends Event{
     //this._singer = this.transform.gameObject.getComponent("Sing");
     this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
     this._collider.setFreezeRotation(true);
-  }
-
-  startClient() {
-    // this._singingSrc = this.transform.gameObject.getComponent("AudioSource");
   }
 
   updateComponent() {
@@ -45,9 +41,6 @@ class MoveTowardsEvent extends Event{
   }
 
   onCharging() {
-  }
-
-  onRaycast(interactingObj) {
   }
 
 }

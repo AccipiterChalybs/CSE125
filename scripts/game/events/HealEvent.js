@@ -1,39 +1,7 @@
-class HealEvent extends Event{
+class HealEvent extends RaycastEvent{
 
   constructor() {
-    super();
-    this.setCurrentState(EventState.uncharged);
-  }
-
-  // start() {
-  //   this._collider = this.transform.gameObject.getComponent('Collider');
-  //   this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
-  //   this._collider.setFreezeRotation(true);
-  // }
-  //
-  // startClient() {
-  //   // this._singingSrc = this.transform.gameObject.getComponent("AudioSource");
-  // }
-
-  // updateComponent(){
-  //   if (this._unlocked)
-  //   {
-  //     super.updateComponent();
-  //   }
-  // }
-
-  onUncharged() {
-
-  }
-
-  onCharged() {
-  }
-
-  onDischarging() {
-
-  }
-
-  onCharging() {
+    super({});
 
   }
 
