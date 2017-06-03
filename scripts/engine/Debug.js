@@ -128,9 +128,10 @@ Debug.logAnimationState = () => {
 Debug.log = console.log;
 Debug.error = console.error;
 
-Debug.assert = function(shouldBeTrue) {
+Debug.assert = function(shouldBeTrue, message) {
   if (shouldBeTrue === false) {
-    throw new Error("Assertion Failed");
+    if (!message) message = '';
+    throw new Error("Assertion Failed" + message);
   }
 };
 

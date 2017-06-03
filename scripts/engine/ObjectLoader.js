@@ -9,9 +9,9 @@ class ObjectLoader {
     JsonLoader.loadJSON(filename, ObjectLoader._finishLoadScene.bind(this, loadId, filename));
   }
 
-  static loadAnimation(animationName, filename, indexList) {
+  static loadAnimation(animationName, filename, indexList, rootNode) {
     let loadId = GameEngine.registerLoading();
-    JsonLoader.loadJSON(filename, ObjectLoader._finishLoadAnim.bind(this, loadId, animationName, filename, indexList));
+    JsonLoader.loadJSON(filename, ObjectLoader._finishLoadAnim.bind(this, loadId, animationName, filename, indexList, rootNode));
   }
 
   static _finishLoadScene(loadId, filename, scene) {
@@ -23,19 +23,19 @@ class ObjectLoader {
   }
 
 
-  static _finishLoadAnim(loadId, animationName, filename, indexMap, scene) {
+  static _finishLoadAnim(loadId, animationName, filename, indexMap, metaData, scene) {
     if (scene === null) {
       return;
     }
 
     if ("animations" in scene) {
-      let rootName = "No Root Name";
+     /* let rootName = "No Root Name";
       for (let child of scene.rootnode.children) {
         if (child.children && child.children !== null && child.children.length > 0) {
           rootName = child.name;
         }
-      }
-      Animation.loadAnimationData(animationName, scene, rootName, indexMap);
+      }*/
+      Animation.loadAnimationData(animationName, scene, metaData, indexMap);
     }
     GameEngine.completeLoading(loadId);
   }
@@ -51,7 +51,7 @@ class ObjectLoader {
           }*/
 
           if ("meshes" in currentNode) {
-            Debug.assert(currentNode.meshes.length <= 1);
+            Debug.assert(currentNode.meshes.length <= 1, filename);
             if (!(name in Mesh.prototype.meshMap)) {
               let meshIndex = currentNode.meshes[0];
               Mesh.loadMesh(name, scene.meshes[meshIndex]);

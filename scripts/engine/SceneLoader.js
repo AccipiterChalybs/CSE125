@@ -20,7 +20,7 @@ const SceneLoader = {
   // Ignore these in general pass, likely because they are already handled specially
   ignoreComponents: ["name", "index", "static", "Kinematic", "Animator", "AnimatorJS", "SkinnedMeshRenderer", "MeshFilter", "MeshRenderer",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
-  shadowLightsAvailable: 0,
+  shadowLightsAvailable: 10,
   tone: 0,
 
   loadScene: function(filename) {
