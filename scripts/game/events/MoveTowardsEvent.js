@@ -1,3 +1,7 @@
+/**
+ * Created by Stephen on 6/3/2017.
+ */
+
 class MoveTowardsEvent extends TriggerEvent{
   constructor(params = {endPos: vec3.create(), timeToTake: 3}) {
     super();

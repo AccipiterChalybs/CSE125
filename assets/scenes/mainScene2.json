@@ -846,7 +846,7 @@
         "index": "49",
         "static": false,
         "Transform": {
-          "position": [40.022, 0.865, -18.972],
+          "position": [39.648, -1.19, -13.7],
           "rotation": [0, 90, 0],
           "scaleFactor": 0.3
         },
@@ -880,7 +880,7 @@
             "index": "50",
             "static": false,
             "Transform": {
-              "position": [40.022, 0.865, -18.972],
+              "position": [39.648, -1.19, -13.7],
               "rotation": [270, 90, 0],
               "scaleFactor": 1
             },
@@ -894,7 +894,7 @@
             "index": "51",
             "static": false,
             "Transform": {
-              "position": [40.0125, 0.8532006, -18.97793],
+              "position": [39.6385, -1.2018, -13.70593],
               "rotation": [272.1246, 63.90548, 24.12019],
               "scaleFactor": 1
             },
@@ -904,7 +904,7 @@
                 "index": "52",
                 "static": false,
                 "Transform": {
-                  "position": [40.00505, 1.203573, -18.97288],
+                  "position": [39.63105, -0.8514272, -13.70088],
                   "rotation": [14.2708, 88.23178, 0.8957102],
                   "scaleFactor": 1
                 },
@@ -914,7 +914,7 @@
                     "index": "53",
                     "static": false,
                     "Transform": {
-                      "position": [40.02021, 1.263314, -18.97145],
+                      "position": [39.64621, -0.7916864, -13.69944],
                       "rotation": [11.70589, 90.02175, 358.9318],
                       "scaleFactor": 1
                     },
@@ -924,7 +924,7 @@
                         "index": "54",
                         "static": false,
                         "Transform": {
-                          "position": [40.03138, 1.317254, -18.97248],
+                          "position": [39.65738, -0.737746, -13.70048],
                           "rotation": [10.53347, 94.31126, 358.6709],
                           "scaleFactor": 1
                         },
@@ -934,7 +934,7 @@
                             "index": "55",
                             "static": false,
                             "Transform": {
-                              "position": [40.05436, 1.442363, -18.97717],
+                              "position": [39.68036, -0.6126369, -13.70517],
                               "rotation": [25.22184, 91.69904, 358.2996],
                               "scaleFactor": 1
                             },
@@ -944,7 +944,7 @@
                                 "index": "56",
                                 "static": false,
                                 "Transform": {
-                                  "position": [40.07643, 1.489347, -18.97937],
+                                  "position": [39.70243, -0.5656534, -13.70737],
                                   "rotation": [20.04188, 89.63861, 358.1127],
                                   "scaleFactor": 1
                                 },
@@ -954,7 +954,7 @@
                                     "index": "57",
                                     "static": false,
                                     "Transform": {
-                                      "position": [40.11669, 1.599629, -18.98298],
+                                      "position": [39.74269, -0.4553706, -13.71098],
                                       "rotation": [20.04188, 89.63861, 358.1127],
                                       "scaleFactor": 1
                                     }
@@ -968,7 +968,7 @@
                             "index": "58",
                             "static": false,
                             "Transform": {
-                              "position": [40.07546, 1.400861, -18.97154],
+                              "position": [39.70146, -0.6541391, -13.69954],
                               "rotation": [289.367, 56.53955, 104.9902],
                               "scaleFactor": 1
                             },
@@ -978,7 +978,7 @@
                                 "index": "59",
                                 "static": false,
                                 "Transform": {
-                                  "position": [40.05061, 1.388228, -18.90739],
+                                  "position": [39.67661, -0.6667718, -13.63539],
                                   "rotation": [14.47275, 135.6583, 172.4205],
                                   "scaleFactor": 0.9999999
                                 },
@@ -988,7 +988,7 @@
                                     "index": "60",
                                     "static": false,
                                     "Transform": {
-                                      "position": [40.03901, 1.246977, -18.86775],
+                                      "position": [39.66501, -0.8080229, -13.59575],
                                       "rotation": [2.077247, 127.371, 171.1793],
                                       "scaleFactor": 1
                                     },
@@ -998,7 +998,7 @@
                                         "index": "61",
                                         "static": false,
                                         "Transform": {
-                                          "position": [40.04629, 1.135723, -18.85157],
+                                          "position": [39.67229, -0.9192775, -13.57957],
                                           "rotation": [358.2546, 221.723, 186.9121],
                                           "scaleFactor": 0.9999999
                                         },
@@ -1008,7 +1008,7 @@
                                             "index": "62",
                                             "static": false,
                                             "Transform": {
-                                              "position": [40.03614, 1.044153, -18.84626],
+                                              "position": [39.66214, -1.010847, -13.57426],
                                               "rotation": [358.2546, 221.723, 186.9121],
                                               "scaleFactor": 1
                                             }
@@ -1026,7 +1026,7 @@
                             "index": "63",
                             "static": false,
                             "Transform": {
-                              "position": [40.07445, 1.400572, -18.98418],
+                              "position": [39.70045, -0.6544284, -13.71218],
                               "rotation": [291.4854, 142.4807, 249.9898],
                               "scaleFactor": 0.9999999
                             },
@@ -1036,7 +1036,7 @@
                                 "index": "64",
                                 "static": false,
                                 "Transform": {
-                                  "position": [40.03451, 1.385278, -19.03952],
+                                  "position": [39.66051, -0.6697223, -13.76752],
                                   "rotation": [7.122828, 57.14896, 196.5564],
                                   "scaleFactor": 0.9999999
                                 },
@@ -1046,7 +1046,7 @@
                                     "index": "65",
                                     "static": false,
                                     "Transform": {
-                                      "position": [40.04257, 1.245302, -19.08423],
+                                      "position": [39.66857, -0.8096982, -13.81223],
                                       "rotation": [342.0675, 59.9476, 196.3696],
                                       "scaleFactor": 1
                                     },
@@ -1056,7 +1056,7 @@
                                         "index": "66",
                                         "static": false,
                                         "Transform": {
-                                          "position": [40.08728, 1.14246, -19.09505],
+                                          "position": [39.71328, -0.9125406, -13.82305],
                                           "rotation": [10.11142, 332.5838, 198.6905],
                                           "scaleFactor": 0.9999999
                                         },
@@ -1066,7 +1066,7 @@
                                             "index": "67",
                                             "static": false,
                                             "Transform": {
-                                              "position": [40.12059, 1.056401, -19.09506],
+                                              "position": [39.74659, -0.9985987, -13.82306],
                                               "rotation": [10.11142, 332.5838, 198.6905],
                                               "scaleFactor": 1
                                             }
@@ -1088,7 +1088,7 @@
                     "index": "68",
                     "static": false,
                     "Transform": {
-                      "position": [40.0194, 1.224062, -18.93808],
+                      "position": [39.6454, -0.8309385, -13.66608],
                       "rotation": [25.3412, 257.6977, 180.0035],
                       "scaleFactor": 1
                     },
@@ -1098,7 +1098,7 @@
                         "index": "69",
                         "static": false,
                         "Transform": {
-                          "position": [40.09713, 1.056076, -18.92112],
+                          "position": [39.72313, -0.9989237, -13.64912],
                           "rotation": [319.5383, 263.8517, 175.9217],
                           "scaleFactor": 1
                         },
@@ -1108,7 +1108,7 @@
                             "index": "70",
                             "static": false,
                             "Transform": {
-                              "position": [39.99702, 0.9366224, -18.94316],
+                              "position": [39.62302, -1.118378, -13.67116],
                               "rotation": [26.96255, 258.5912, 175.5391],
                               "scaleFactor": 1
                             },
@@ -1118,7 +1118,7 @@
                                 "index": "71",
                                 "static": false,
                                 "Transform": {
-                                  "position": [40.01756, 0.8968237, -18.94257],
+                                  "position": [39.64356, -1.158176, -13.67057],
                                   "rotation": [293.084, 71.23333, 190.184],
                                   "scaleFactor": 1
                                 },
@@ -1128,7 +1128,7 @@
                                     "index": "72",
                                     "static": false,
                                     "Transform": {
-                                      "position": [40.03885, 0.8878371, -18.93969],
+                                      "position": [39.66485, -1.167163, -13.66769],
                                       "rotation": [293.084, 71.23333, 190.184],
                                       "scaleFactor": 1
                                     }
@@ -1142,7 +1142,7 @@
                             "index": "73",
                             "static": false,
                             "Transform": {
-                              "position": [39.99702, 0.9366224, -18.94316],
+                              "position": [39.62302, -1.118378, -13.67116],
                               "rotation": [74.76167, 92.67496, 191.879],
                               "scaleFactor": 1
                             },
@@ -1152,7 +1152,7 @@
                                 "index": "74",
                                 "static": false,
                                 "Transform": {
-                                  "position": [39.98713, 0.9099426, -18.9595],
+                                  "position": [39.61313, -1.145057, -13.6875],
                                   "rotation": [304.9934, 76.76261, 95.41423],
                                   "scaleFactor": 0.9999999
                                 },
@@ -1162,7 +1162,7 @@
                                     "index": "75",
                                     "static": false,
                                     "Transform": {
-                                      "position": [39.9829, 0.9084426, -18.93215],
+                                      "position": [39.6089, -1.146557, -13.66015],
                                       "rotation": [304.9934, 76.76261, 95.41423],
                                       "scaleFactor": 1
                                     }
@@ -1180,7 +1180,7 @@
                     "index": "76",
                     "static": false,
                     "Transform": {
-                      "position": [40.02176, 1.225091, -19.00596],
+                      "position": [39.64775, -0.8299094, -13.73396],
                       "rotation": [13.92808, 275.7378, 183.2028],
                       "scaleFactor": 1
                     },
@@ -1190,7 +1190,7 @@
                         "index": "77",
                         "static": false,
                         "Transform": {
-                          "position": [40.06724, 1.044967, -19.00009],
+                          "position": [39.69324, -1.010033, -13.72809],
                           "rotation": [342.552, 271.788, 179.5675],
                           "scaleFactor": 1
                         },
@@ -1200,7 +1200,7 @@
                             "index": "78",
                             "static": false,
                             "Transform": {
-                              "position": [40.02003, 0.8948117, -18.9998],
+                              "position": [39.64603, -1.160188, -13.7278],
                               "rotation": [58.87246, 271.696, 180.0001],
                               "scaleFactor": 1
                             },
@@ -1210,7 +1210,7 @@
                                 "index": "79",
                                 "static": false,
                                 "Transform": {
-                                  "position": [40.05835, 0.8716589, -19.00094],
+                                  "position": [39.68435, -1.183341, -13.72894],
                                   "rotation": [275.8496, 271.6955, 0.0004858686],
                                   "scaleFactor": 1
                                 },
@@ -1220,7 +1220,7 @@
                                     "index": "80",
                                     "static": false,
                                     "Transform": {
-                                      "position": [40.08151, 0.8740322, -19.00163],
+                                      "position": [39.70751, -1.180968, -13.72962],
                                       "rotation": [275.8496, 271.6955, 0.0004858686],
                                       "scaleFactor": 1
                                     }
@@ -1234,7 +1234,7 @@
                             "index": "81",
                             "static": false,
                             "Transform": {
-                              "position": [40.02003, 0.8948117, -18.9998],
+                              "position": [39.64603, -1.160188, -13.7278],
                               "rotation": [51.98639, 92.18683, 180.6705],
                               "scaleFactor": 1
                             },
@@ -1244,7 +1244,7 @@
                                 "index": "82",
                                 "static": false,
                                 "Transform": {
-                                  "position": [40.01987, 0.8646687, -18.98684],
+                                  "position": [39.64587, -1.190331, -13.71484],
                                   "rotation": [281.7953, 89.68201, 272.0189],
                                   "scaleFactor": 0.9999999
                                 },
@@ -1254,7 +1254,7 @@
                                     "index": "83",
                                     "static": false,
                                     "Transform": {
-                                      "position": [40.01907, 0.8648683, -19.01455],
+                                      "position": [39.64507, -1.190132, -13.74255],
                                       "rotation": [281.7953, 89.68201, 272.0189],
                                       "scaleFactor": 1
                                     }
@@ -1276,7 +1276,7 @@
             "index": "84",
             "static": false,
             "Transform": {
-              "position": [40.1816, 1.2697, -18.972],
+              "position": [39.8076, -0.7853, -13.7],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -4410,7 +4410,7 @@
           "rotation": [0, 180.0001, 0],
           "scaleFactor": 1
         },
-        "StatueController": {
+        "SingingStatueController": {
           "singingDelay": 0,
           "singingDuration": 0
         },
@@ -18463,7 +18463,7 @@
           "rotation": [0, 90.00003, 0],
           "scaleFactor": 1
         },
-        "StatueController": {
+        "SingingStatueController": {
           "singingDelay": 0,
           "singingDuration": 0
         },
@@ -20382,7 +20382,7 @@
           "rotation": [29.07985, 30.8631, 267.1851],
           "scaleFactor": 1
         },
-        "StatueController": {
+        "SingingStatueController": {
           "singingDelay": 6,
           "singingDuration": 2
         },
@@ -25115,16 +25115,15 @@
           "rotation": [0, 119.9999, 0],
           "scaleFactor": 1
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 1669,
           "lightIntensity": 8,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
         },
         "children": [
           {
@@ -25204,16 +25203,15 @@
           "rotation": [0, 240, 0],
           "scaleFactor": 1
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 1674,
           "lightIntensity": 8,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
         },
         "children": [
           {
@@ -25327,7 +25325,7 @@
             "MeshRenderer": "carvedlimestoneground1_Base_Color",
             "SingingSwitch": {
               "events": [1761],
-              "maximumOutput": 3,
+              "maximumOutput": 5,
               "lossRate": 0.5,
               "timeBeforeLoss": 2
             },
@@ -25451,7 +25449,7 @@
             "MeshRenderer": "carvedlimestoneground1_Base_Color",
             "SingingSwitch": {
               "events": [1761],
-              "maximumOutput": 3,
+              "maximumOutput": 5,
               "lossRate": 0.5,
               "timeBeforeLoss": 2
             },
@@ -25657,16 +25655,15 @@
           "rotation": [0, 90, 0],
           "scaleFactor": 2
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 1699,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
         },
         "children": [
           {
@@ -25746,16 +25743,15 @@
           "rotation": [0, 90, 0],
           "scaleFactor": 2
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 1704,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
         },
         "children": [
           {
@@ -25835,16 +25831,15 @@
           "rotation": [0, 90, 0],
           "scaleFactor": 2
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 1709,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
         },
         "children": [
           {
@@ -25924,16 +25919,15 @@
           "rotation": [0, 270, 0],
           "scaleFactor": 2
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 1714,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
         },
         "children": [
           {
@@ -26013,16 +26007,15 @@
           "rotation": [0, 270, 0],
           "scaleFactor": 2
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 1719,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
         },
         "children": [
           {
@@ -26102,16 +26095,15 @@
           "rotation": [0, 270, 0],
           "scaleFactor": 2
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 1724,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
         },
         "children": [
           {
@@ -26191,16 +26183,15 @@
           "rotation": [0, 90, 0],
           "scaleFactor": 2.000001
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 1729,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
         },
         "children": [
           {
@@ -26280,16 +26271,15 @@
           "rotation": [0, 90, 0],
           "scaleFactor": 2.000001
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 1734,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
         },
         "children": [
           {
@@ -26403,16 +26393,15 @@
           "rotation": [0, 270, 0],
           "scaleFactor": 2.000001
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 1741,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
         },
         "children": [
           {
@@ -26813,7 +26802,7 @@
             "MeshFilter": "Door.000",
             "MeshRenderer": "dungeon-stone1-albedo2",
             "DoorEvent": {
-              "maximumCharge": 6,
+              "maximumCharge": 10,
               "_unlocked": true,
               "openPos": [0, 1.5, 0],
               "closePos": [0, 0, 0]
@@ -26856,16 +26845,15 @@
           "rotation": [0, 270, 0],
           "scaleFactor": 2.000001
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 1767,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
         },
         "children": [
           {
@@ -27321,105 +27309,8 @@
         ]
       },
       {
-        "name": "Healing Basin",
-        "index": "1792",
-        "static": true,
-        "Transform": {
-          "position": [40, 0.5, -50.003],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 1
-        },
-        "children": [
-          {
-            "name": "Pot.2",
-            "index": "1793",
-            "static": true,
-            "Transform": {
-              "position": [40, 0.5, -50.003],
-              "rotation": [270, 0, 0],
-              "scaleFactor": 1
-            },
-            "MeshFilter": "Pot.2",
-            "MeshRenderer": "pockedconcrete1-albedo"
-          },
-          {
-            "name": "Collider",
-            "index": "1794",
-            "static": true,
-            "Transform": {
-              "position": [40, 0.702, -50.003],
-              "rotation": [0, 0, 0],
-              "scaleFactor": 1
-            },
-            "HealEvent": {
-            },
-            "Light": {
-              "type": "Point",
-              "color": [1, 1, 1, 1],
-              "intensity": 3,
-              "range": 5
-            },
-            "RaycastSwitch": {
-              "events": [1794]
-            },
-            "colliders": [
-              {
-                "type": "sphere",
-                "isTrigger": false,
-                "scale": 0.25,
-                "offset": [0, 0, 0]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "Altar_2",
-        "index": "1795",
-        "static": true,
-        "Transform": {
-          "position": [40, 0, -50.003],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 1
-        },
-        "children": [
-          {
-            "name": "Altar.2",
-            "index": "1796",
-            "static": true,
-            "Transform": {
-              "position": [40, 0, -50.003],
-              "rotation": [270, 0, 0],
-              "scaleFactor": 0.5
-            },
-            "MeshFilter": "Altar.2",
-            "MeshRenderer": "dungeon-stone1-albedo2"
-          },
-          {
-            "name": "Collider (Box)",
-            "index": "1797",
-            "static": true,
-            "Transform": {
-              "position": [40, 0.285, -50.003],
-              "rotation": [0, 0, 0],
-              "scaleFactor": 1
-            },
-            "colliders": [
-              {
-                "type": "box",
-                "isTrigger": false,
-                "scaleX": 1,
-                "scaleY": 1.5,
-                "scaleZ": 1,
-                "offset": [0, 0, 0]
-              }
-            ]
-          }
-        ]
-      },
-      {
         "name": "Block_Large_1",
-        "index": "1798",
+        "index": "1792",
         "static": false,
         "Transform": {
           "position": [40, -1, -23.003],
@@ -27431,7 +27322,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1799",
+            "index": "1793",
             "static": false,
             "Transform": {
               "position": [40, -1, -23.003],
@@ -27445,7 +27336,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1800",
+                "index": "1794",
                 "static": false,
                 "Transform": {
                   "position": [40, -1, -22.003],
@@ -27471,7 +27362,7 @@
       },
       {
         "name": "Block_Large_1 (1)",
-        "index": "1801",
+        "index": "1795",
         "static": false,
         "Transform": {
           "position": [42, -1, -23.003],
@@ -27483,7 +27374,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1802",
+            "index": "1796",
             "static": false,
             "Transform": {
               "position": [42, -1, -23.003],
@@ -27497,7 +27388,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1803",
+                "index": "1797",
                 "static": false,
                 "Transform": {
                   "position": [42, -1, -22.003],
@@ -27523,7 +27414,7 @@
       },
       {
         "name": "Block_Large_1 (2)",
-        "index": "1804",
+        "index": "1798",
         "static": false,
         "Transform": {
           "position": [38, -0.972, -23.003],
@@ -27535,7 +27426,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1805",
+            "index": "1799",
             "static": false,
             "Transform": {
               "position": [38, -0.972, -23.003],
@@ -27549,7 +27440,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1806",
+                "index": "1800",
                 "static": false,
                 "Transform": {
                   "position": [38, -0.972, -22.003],
@@ -27575,7 +27466,7 @@
       },
       {
         "name": "Block_Large_1 (10)",
-        "index": "1807",
+        "index": "1801",
         "static": false,
         "Transform": {
           "position": [36, -1, -27.003],
@@ -27587,7 +27478,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1808",
+            "index": "1802",
             "static": false,
             "Transform": {
               "position": [36, -1, -27.003],
@@ -27601,7 +27492,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1809",
+                "index": "1803",
                 "static": false,
                 "Transform": {
                   "position": [36, -1, -26.003],
@@ -27627,7 +27518,7 @@
       },
       {
         "name": "Block_Large_1 (11)",
-        "index": "1810",
+        "index": "1804",
         "static": false,
         "Transform": {
           "position": [36, -1, -29.003],
@@ -27639,7 +27530,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1811",
+            "index": "1805",
             "static": false,
             "Transform": {
               "position": [36, -1, -29.003],
@@ -27653,7 +27544,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1812",
+                "index": "1806",
                 "static": false,
                 "Transform": {
                   "position": [36, -1, -28.003],
@@ -27679,7 +27570,7 @@
       },
       {
         "name": "Block_Large_1 (14)",
-        "index": "1813",
+        "index": "1807",
         "static": false,
         "Transform": {
           "position": [44, -1, -27.003],
@@ -27691,7 +27582,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1814",
+            "index": "1808",
             "static": false,
             "Transform": {
               "position": [44, -1, -27.003],
@@ -27705,7 +27596,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1815",
+                "index": "1809",
                 "static": false,
                 "Transform": {
                   "position": [44, -1, -26.003],
@@ -27731,7 +27622,7 @@
       },
       {
         "name": "Block_Large_1 (15)",
-        "index": "1816",
+        "index": "1810",
         "static": false,
         "Transform": {
           "position": [44, -1, -29.003],
@@ -27743,7 +27634,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1817",
+            "index": "1811",
             "static": false,
             "Transform": {
               "position": [44, -1, -29.003],
@@ -27757,7 +27648,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1818",
+                "index": "1812",
                 "static": false,
                 "Transform": {
                   "position": [44, -1, -28.003],
@@ -27783,7 +27674,7 @@
       },
       {
         "name": "Block_Large_1 (16)",
-        "index": "1819",
+        "index": "1813",
         "static": false,
         "Transform": {
           "position": [44, -1, -37.003],
@@ -27795,7 +27686,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1820",
+            "index": "1814",
             "static": false,
             "Transform": {
               "position": [44, -1, -37.003],
@@ -27809,7 +27700,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1821",
+                "index": "1815",
                 "static": false,
                 "Transform": {
                   "position": [44, -1, -36.003],
@@ -27835,7 +27726,7 @@
       },
       {
         "name": "Block_Large_1 (17)",
-        "index": "1822",
+        "index": "1816",
         "static": false,
         "Transform": {
           "position": [44, -1, -35.003],
@@ -27847,7 +27738,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1823",
+            "index": "1817",
             "static": false,
             "Transform": {
               "position": [44, -1, -35.003],
@@ -27861,7 +27752,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1824",
+                "index": "1818",
                 "static": false,
                 "Transform": {
                   "position": [44, -1, -34.003],
@@ -27887,7 +27778,7 @@
       },
       {
         "name": "Block_Large_1 (18)",
-        "index": "1825",
+        "index": "1819",
         "static": false,
         "Transform": {
           "position": [44, -1, -31.003],
@@ -27899,7 +27790,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1826",
+            "index": "1820",
             "static": false,
             "Transform": {
               "position": [44, -1, -31.003],
@@ -27913,7 +27804,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1827",
+                "index": "1821",
                 "static": false,
                 "Transform": {
                   "position": [44, -1, -30.003],
@@ -27939,7 +27830,7 @@
       },
       {
         "name": "Block_Large_1 (19)",
-        "index": "1828",
+        "index": "1822",
         "static": false,
         "Transform": {
           "position": [44, -1, -33.003],
@@ -27951,7 +27842,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1829",
+            "index": "1823",
             "static": false,
             "Transform": {
               "position": [44, -1, -33.003],
@@ -27965,7 +27856,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1830",
+                "index": "1824",
                 "static": false,
                 "Transform": {
                   "position": [44, -1, -32.003],
@@ -27991,7 +27882,7 @@
       },
       {
         "name": "Block_Large_1 (20)",
-        "index": "1831",
+        "index": "1825",
         "static": false,
         "Transform": {
           "position": [36, -1, -37.003],
@@ -28003,7 +27894,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1832",
+            "index": "1826",
             "static": false,
             "Transform": {
               "position": [36, -1, -37.003],
@@ -28017,7 +27908,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1833",
+                "index": "1827",
                 "static": false,
                 "Transform": {
                   "position": [36, -1, -36.003],
@@ -28043,7 +27934,7 @@
       },
       {
         "name": "Block_Large_1 (21)",
-        "index": "1834",
+        "index": "1828",
         "static": false,
         "Transform": {
           "position": [36, -1, -35.003],
@@ -28055,7 +27946,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1835",
+            "index": "1829",
             "static": false,
             "Transform": {
               "position": [36, -1, -35.003],
@@ -28069,7 +27960,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1836",
+                "index": "1830",
                 "static": false,
                 "Transform": {
                   "position": [36, -1, -34.003],
@@ -28095,7 +27986,7 @@
       },
       {
         "name": "Block_Large_1 (22)",
-        "index": "1837",
+        "index": "1831",
         "static": false,
         "Transform": {
           "position": [36, -1, -31.003],
@@ -28107,7 +27998,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1838",
+            "index": "1832",
             "static": false,
             "Transform": {
               "position": [36, -1, -31.003],
@@ -28121,7 +28012,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1839",
+                "index": "1833",
                 "static": false,
                 "Transform": {
                   "position": [36, -1, -30.003],
@@ -28147,7 +28038,7 @@
       },
       {
         "name": "Block_Large_1 (23)",
-        "index": "1840",
+        "index": "1834",
         "static": false,
         "Transform": {
           "position": [36, -1, -33.003],
@@ -28159,7 +28050,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1841",
+            "index": "1835",
             "static": false,
             "Transform": {
               "position": [36, -1, -33.003],
@@ -28173,7 +28064,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1842",
+                "index": "1836",
                 "static": false,
                 "Transform": {
                   "position": [36, -1, -32.003],
@@ -28199,7 +28090,7 @@
       },
       {
         "name": "Block_Large_1 (28)",
-        "index": "1843",
+        "index": "1837",
         "static": false,
         "Transform": {
           "position": [44, -1, -39.003],
@@ -28211,7 +28102,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1844",
+            "index": "1838",
             "static": false,
             "Transform": {
               "position": [44, -1, -39.003],
@@ -28225,7 +28116,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1845",
+                "index": "1839",
                 "static": false,
                 "Transform": {
                   "position": [44, -1, -38.003],
@@ -28251,7 +28142,7 @@
       },
       {
         "name": "Block_Large_1 (29)",
-        "index": "1846",
+        "index": "1840",
         "static": false,
         "Transform": {
           "position": [44, -1, -41.003],
@@ -28263,7 +28154,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1847",
+            "index": "1841",
             "static": false,
             "Transform": {
               "position": [44, -1, -41.003],
@@ -28277,7 +28168,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1848",
+                "index": "1842",
                 "static": false,
                 "Transform": {
                   "position": [44, -1, -40.003],
@@ -28303,7 +28194,7 @@
       },
       {
         "name": "Block_Large_1 (30)",
-        "index": "1849",
+        "index": "1843",
         "static": false,
         "Transform": {
           "position": [44, -1, -43.003],
@@ -28315,7 +28206,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1850",
+            "index": "1844",
             "static": false,
             "Transform": {
               "position": [44, -1, -43.003],
@@ -28329,7 +28220,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1851",
+                "index": "1845",
                 "static": false,
                 "Transform": {
                   "position": [44, -1, -42.003],
@@ -28355,7 +28246,7 @@
       },
       {
         "name": "Block_Large_1 (23)",
-        "index": "1852",
+        "index": "1846",
         "static": false,
         "Transform": {
           "position": [36, -1, -41.003],
@@ -28367,7 +28258,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1853",
+            "index": "1847",
             "static": false,
             "Transform": {
               "position": [36, -1, -41.003],
@@ -28381,7 +28272,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1854",
+                "index": "1848",
                 "static": false,
                 "Transform": {
                   "position": [36, -1, -40.003],
@@ -28407,7 +28298,7 @@
       },
       {
         "name": "Block_Large_1 (22)",
-        "index": "1855",
+        "index": "1849",
         "static": false,
         "Transform": {
           "position": [36, -1, -39.003],
@@ -28419,7 +28310,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1856",
+            "index": "1850",
             "static": false,
             "Transform": {
               "position": [36, -1, -39.003],
@@ -28433,7 +28324,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1857",
+                "index": "1851",
                 "static": false,
                 "Transform": {
                   "position": [36, -1, -38.003],
@@ -28459,7 +28350,7 @@
       },
       {
         "name": "Block_Large_1 (21)",
-        "index": "1858",
+        "index": "1852",
         "static": false,
         "Transform": {
           "position": [36, -1, -43.003],
@@ -28471,7 +28362,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1859",
+            "index": "1853",
             "static": false,
             "Transform": {
               "position": [36, -1, -43.003],
@@ -28485,7 +28376,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1860",
+                "index": "1854",
                 "static": false,
                 "Transform": {
                   "position": [36, -1, -42.003],
@@ -28511,7 +28402,7 @@
       },
       {
         "name": "Block_Large_1 (42)",
-        "index": "1861",
+        "index": "1855",
         "static": false,
         "Transform": {
           "position": [40, -1, -51.003],
@@ -28523,10 +28414,10 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1862",
+            "index": "1856",
             "static": false,
             "Transform": {
-              "position": [40, -1, -51.003],
+              "position": [40, -4.95, -51.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -28534,13 +28425,17 @@
             "MeshRenderer": "dungeon-stone1-albedo2",
             "Kinematic": {
             },
+            "MoveTowardsEvent": {
+              "endPos": [0, 0, 0],
+              "timeToTake": 6
+            },
             "children": [
               {
                 "name": "Collider",
-                "index": "1863",
+                "index": "1857",
                 "static": false,
                 "Transform": {
-                  "position": [40, -1, -50.003],
+                  "position": [40, -4.95, -50.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -28554,6 +28449,103 @@
                     "scaleY": 2,
                     "scaleZ": 2,
                     "offset": [0, 0, 0]
+                  }
+                ]
+              },
+              {
+                "name": "Altar_2",
+                "index": "1858",
+                "static": true,
+                "Transform": {
+                  "position": [40, -3.95, -50.003],
+                  "rotation": [0, 0, 0],
+                  "scaleFactor": 1
+                },
+                "children": [
+                  {
+                    "name": "Altar.2",
+                    "index": "1859",
+                    "static": true,
+                    "Transform": {
+                      "position": [40, -3.95, -50.003],
+                      "rotation": [270, 0, 0],
+                      "scaleFactor": 0.5
+                    },
+                    "MeshFilter": "Altar.2",
+                    "MeshRenderer": "dungeon-stone1-albedo2"
+                  },
+                  {
+                    "name": "Collider (Box)",
+                    "index": "1860",
+                    "static": true,
+                    "Transform": {
+                      "position": [40, -3.624, -50.003],
+                      "rotation": [0, 0, 0],
+                      "scaleFactor": 1
+                    },
+                    "colliders": [
+                      {
+                        "type": "box",
+                        "isTrigger": false,
+                        "scaleX": 0.52,
+                        "scaleY": 0.4,
+                        "scaleZ": 0.52,
+                        "offset": [0, 0, 0]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Healing Basin",
+                    "index": "1861",
+                    "static": true,
+                    "Transform": {
+                      "position": [40, -3.45, -50.003],
+                      "rotation": [0, 0, 0],
+                      "scaleFactor": 1
+                    },
+                    "children": [
+                      {
+                        "name": "Pot.2",
+                        "index": "1862",
+                        "static": true,
+                        "Transform": {
+                          "position": [40, -3.45, -50.003],
+                          "rotation": [270, 0, 0],
+                          "scaleFactor": 1
+                        },
+                        "MeshFilter": "Pot.2",
+                        "MeshRenderer": "pockedconcrete1-albedo"
+                      },
+                      {
+                        "name": "Collider",
+                        "index": "1863",
+                        "static": true,
+                        "Transform": {
+                          "position": [40, -3.248, -50.003],
+                          "rotation": [0, 0, 0],
+                          "scaleFactor": 1
+                        },
+                        "HealEvent": {
+                        },
+                        "Light": {
+                          "type": "Point",
+                          "color": [1, 1, 1, 1],
+                          "intensity": 3,
+                          "range": 5
+                        },
+                        "RaycastSwitch": {
+                          "events": [1863]
+                        },
+                        "colliders": [
+                          {
+                            "type": "sphere",
+                            "isTrigger": false,
+                            "scale": 0.25,
+                            "offset": [0, 0, 0]
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               }
@@ -31284,16 +31276,15 @@
           "rotation": [0, 90, 0],
           "scaleFactor": 2.000001
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 2049,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
         },
         "children": [
           {
@@ -31373,16 +31364,15 @@
           "rotation": [0, 270, 0],
           "scaleFactor": 2.000001
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 2054,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
         },
         "children": [
           {
@@ -31462,16 +31452,15 @@
           "rotation": [0, 90, 0],
           "scaleFactor": 2.000001
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 2059,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 2
         },
         "children": [
           {
@@ -31551,16 +31540,15 @@
           "rotation": [0, 150, 0],
           "scaleFactor": 2.000001
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 2064,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 4
         },
         "children": [
           {
@@ -31640,16 +31628,15 @@
           "rotation": [0, 180, 0],
           "scaleFactor": 2.000001
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 2069,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 6
         },
         "children": [
           {
@@ -31729,16 +31716,15 @@
           "rotation": [0, 225, 0],
           "scaleFactor": 2.000001
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 2074,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 4
         },
         "children": [
           {
@@ -31818,16 +31804,15 @@
           "rotation": [0, 270, 0],
           "scaleFactor": 2.000001
         },
-        "StatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 2079,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 2
         },
         "children": [
           {
@@ -31899,8 +31884,29 @@
         ]
       },
       {
-        "name": "Block_Large_1_Moving",
+        "name": "TriggerSwitch",
         "index": "2080",
+        "static": true,
+        "Transform": {
+          "position": [40, 0, -22.701],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "TriggerSwitch": {
+          "events": [1720, 1695]
+        },
+        "colliders": [
+          {
+            "type": "sphere",
+            "isTrigger": true,
+            "scale": 1,
+            "offset": [0, 0, 0]
+          }
+        ]
+      },
+      {
+        "name": "Block_Large_1_Moving",
+        "index": "2081",
         "static": false,
         "Transform": {
           "position": [40, -1, -25.003],
@@ -31912,7 +31918,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2081",
+            "index": "2082",
             "static": false,
             "Transform": {
               "position": [40, -3, -25.003],
@@ -31930,7 +31936,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2082",
+                "index": "2083",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -24.003],
@@ -31956,7 +31962,7 @@
       },
       {
         "name": "Block_Large_1_Moving (1)",
-        "index": "2083",
+        "index": "2084",
         "static": false,
         "Transform": {
           "position": [40, -1, -27],
@@ -31968,7 +31974,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2084",
+            "index": "2085",
             "static": false,
             "Transform": {
               "position": [40, -3, -27],
@@ -31986,7 +31992,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2085",
+                "index": "2086",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -26],
@@ -32005,6 +32011,29 @@
                     "offset": [0, 0, 0]
                   }
                 ]
+              },
+              {
+                "name": "TriggerSwitch (1)",
+                "index": "2087",
+                "static": false,
+                "Transform": {
+                  "position": [39.97321, -2, -25.46],
+                  "rotation": [0, 0, 0],
+                  "scaleFactor": 1
+                },
+                "TriggerSwitch": {
+                  "events": [1715, 1700]
+                },
+                "Kinematic": {
+                },
+                "colliders": [
+                  {
+                    "type": "sphere",
+                    "isTrigger": true,
+                    "scale": 1,
+                    "offset": [0, 0, 0]
+                  }
+                ]
               }
             ]
           }
@@ -32012,7 +32041,7 @@
       },
       {
         "name": "Block_Large_1_Moving (2)",
-        "index": "2086",
+        "index": "2088",
         "static": false,
         "Transform": {
           "position": [40, -1, -29],
@@ -32024,7 +32053,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2087",
+            "index": "2089",
             "static": false,
             "Transform": {
               "position": [40, -3, -29],
@@ -32042,7 +32071,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2088",
+                "index": "2090",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -28],
@@ -32068,7 +32097,7 @@
       },
       {
         "name": "Block_Large_1_Moving (3)",
-        "index": "2089",
+        "index": "2091",
         "static": false,
         "Transform": {
           "position": [40, -1, -31],
@@ -32080,7 +32109,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2090",
+            "index": "2092",
             "static": false,
             "Transform": {
               "position": [40, -3, -31],
@@ -32098,7 +32127,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2091",
+                "index": "2093",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -30],
@@ -32117,6 +32146,29 @@
                     "offset": [0, 0, 0]
                   }
                 ]
+              },
+              {
+                "name": "TriggerSwitch (2)",
+                "index": "2094",
+                "static": false,
+                "Transform": {
+                  "position": [39.97321, -2, -29.46],
+                  "rotation": [0, 0, 0],
+                  "scaleFactor": 1
+                },
+                "TriggerSwitch": {
+                  "events": [1710, 1705]
+                },
+                "Kinematic": {
+                },
+                "colliders": [
+                  {
+                    "type": "sphere",
+                    "isTrigger": true,
+                    "scale": 1,
+                    "offset": [0, 0, 0]
+                  }
+                ]
               }
             ]
           }
@@ -32124,7 +32176,7 @@
       },
       {
         "name": "Block_Large_1_Moving (4)",
-        "index": "2092",
+        "index": "2095",
         "static": false,
         "Transform": {
           "position": [40, -1, -33],
@@ -32136,7 +32188,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2093",
+            "index": "2096",
             "static": false,
             "Transform": {
               "position": [40, -3, -33],
@@ -32154,7 +32206,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2094",
+                "index": "2097",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -32],
@@ -32180,7 +32232,7 @@
       },
       {
         "name": "Block_Large_1_Moving (5)",
-        "index": "2095",
+        "index": "2098",
         "static": false,
         "Transform": {
           "position": [40, -1, -35],
@@ -32192,7 +32244,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2096",
+            "index": "2099",
             "static": false,
             "Transform": {
               "position": [40, -3, -35],
@@ -32210,7 +32262,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2097",
+                "index": "2100",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -34],
@@ -32229,6 +32281,29 @@
                     "offset": [0, 0, 0]
                   }
                 ]
+              },
+              {
+                "name": "TriggerSwitch (3)",
+                "index": "2101",
+                "static": false,
+                "Transform": {
+                  "position": [39.97321, -2, -33.46],
+                  "rotation": [0, 0, 0],
+                  "scaleFactor": 1
+                },
+                "TriggerSwitch": {
+                  "events": [1763, 1725]
+                },
+                "Kinematic": {
+                },
+                "colliders": [
+                  {
+                    "type": "sphere",
+                    "isTrigger": true,
+                    "scale": 1,
+                    "offset": [0, 0, 0]
+                  }
+                ]
               }
             ]
           }
@@ -32236,7 +32311,7 @@
       },
       {
         "name": "Block_Large_1_Moving (6)",
-        "index": "2098",
+        "index": "2102",
         "static": false,
         "Transform": {
           "position": [40, -1, -37],
@@ -32248,7 +32323,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2099",
+            "index": "2103",
             "static": false,
             "Transform": {
               "position": [40, -3, -37],
@@ -32266,7 +32341,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2100",
+                "index": "2104",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -36],
@@ -32292,7 +32367,7 @@
       },
       {
         "name": "Block_Large_1_Moving (7)",
-        "index": "2101",
+        "index": "2105",
         "static": false,
         "Transform": {
           "position": [40, -1, -39],
@@ -32304,7 +32379,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2102",
+            "index": "2106",
             "static": false,
             "Transform": {
               "position": [40, -3, -39],
@@ -32322,7 +32397,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2103",
+                "index": "2107",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -38],
@@ -32341,6 +32416,52 @@
                     "offset": [0, 0, 0]
                   }
                 ]
+              },
+              {
+                "name": "TriggerSwitch",
+                "index": "2108",
+                "static": false,
+                "Transform": {
+                  "position": [40, -2, -37.95],
+                  "rotation": [0, 0, 0],
+                  "scaleFactor": 1
+                },
+                "TriggerSwitch": {
+                  "events": [2167, 2185, 2182, 2191, 2188, 2170, 2194, 2197, 2179, 2173, 2212, 2209, 2176, 2200, 2203, 2206, 1856]
+                },
+                "Kinematic": {
+                },
+                "colliders": [
+                  {
+                    "type": "sphere",
+                    "isTrigger": true,
+                    "scale": 1,
+                    "offset": [0, 0, 0]
+                  }
+                ]
+              },
+              {
+                "name": "TriggerSwitch (4)",
+                "index": "2109",
+                "static": false,
+                "Transform": {
+                  "position": [39.97321, -2, -37.46],
+                  "rotation": [0, 0, 0],
+                  "scaleFactor": 1
+                },
+                "TriggerSwitch": {
+                  "events": [1737, 1730]
+                },
+                "Kinematic": {
+                },
+                "colliders": [
+                  {
+                    "type": "sphere",
+                    "isTrigger": true,
+                    "scale": 1,
+                    "offset": [0, 0, 0]
+                  }
+                ]
               }
             ]
           }
@@ -32348,7 +32469,7 @@
       },
       {
         "name": "Block_Large_1_Moving (8)",
-        "index": "2104",
+        "index": "2110",
         "static": false,
         "Transform": {
           "position": [40, -1, -41],
@@ -32360,7 +32481,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2105",
+            "index": "2111",
             "static": false,
             "Transform": {
               "position": [40, -3, -41],
@@ -32378,7 +32499,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2106",
+                "index": "2112",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -40],
@@ -32404,7 +32525,7 @@
       },
       {
         "name": "Block_Large_1_Moving (9)",
-        "index": "2107",
+        "index": "2113",
         "static": false,
         "Transform": {
           "position": [40, -1, -43],
@@ -32416,7 +32537,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2108",
+            "index": "2114",
             "static": false,
             "Transform": {
               "position": [40, -3, -43],
@@ -32434,7 +32555,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2109",
+                "index": "2115",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -42],
@@ -32453,6 +32574,29 @@
                     "offset": [0, 0, 0]
                   }
                 ]
+              },
+              {
+                "name": "TriggerSwitch (5)",
+                "index": "2116",
+                "static": false,
+                "Transform": {
+                  "position": [39.97321, -2, -41.46],
+                  "rotation": [0, 0, 0],
+                  "scaleFactor": 1
+                },
+                "TriggerSwitch": {
+                  "events": [2050, 2045, 2075, 2055, 2060, 2070, 2065]
+                },
+                "Kinematic": {
+                },
+                "colliders": [
+                  {
+                    "type": "sphere",
+                    "isTrigger": true,
+                    "scale": 1,
+                    "offset": [0, 0, 0]
+                  }
+                ]
               }
             ]
           }
@@ -32460,7 +32604,7 @@
       },
       {
         "name": "Block_Large_1_Moving (10)",
-        "index": "2110",
+        "index": "2117",
         "static": false,
         "Transform": {
           "position": [40, -1, -45],
@@ -32472,7 +32616,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2111",
+            "index": "2118",
             "static": false,
             "Transform": {
               "position": [40, -3, -45],
@@ -32490,7 +32634,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2112",
+                "index": "2119",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -44],
@@ -32509,29 +32653,6 @@
                     "offset": [0, 0, 0]
                   }
                 ]
-              },
-              {
-                "name": "TriggerSwitch",
-                "index": "2113",
-                "static": false,
-                "Transform": {
-                  "position": [40, -2, -37.95],
-                  "rotation": [0, 0, 0],
-                  "scaleFactor": 1
-                },
-                "TriggerSwitch": {
-                  "events": [2161, 2179, 2176, 2185, 2182, 2164, 2188, 2191, 2173, 2167, 2206, 2203, 2170, 2194, 2197, 2200]
-                },
-                "Kinematic": {
-                },
-                "colliders": [
-                  {
-                    "type": "sphere",
-                    "isTrigger": true,
-                    "scale": 1,
-                    "offset": [0, 0, 0]
-                  }
-                ]
               }
             ]
           }
@@ -32539,7 +32660,7 @@
       },
       {
         "name": "Door_Frame_2",
-        "index": "2114",
+        "index": "2120",
         "static": true,
         "Transform": {
           "position": [45, -1.5, -6],
@@ -32549,7 +32670,7 @@
         "children": [
           {
             "name": "DoorFrame.2",
-            "index": "2115",
+            "index": "2121",
             "static": true,
             "Transform": {
               "position": [45, -1.5, -6],
@@ -32563,7 +32684,7 @@
       },
       {
         "name": "TriggerSwitch",
-        "index": "2116",
+        "index": "2122",
         "static": true,
         "Transform": {
           "position": [40, 0, -22],
@@ -32571,7 +32692,7 @@
           "scaleFactor": 1
         },
         "TriggerSwitch": {
-          "events": [2081, 2084, 2087, 2090, 2093, 2096, 2099, 2102, 2105, 2108, 2111]
+          "events": [2082, 2085, 2089, 2092, 2096, 2099, 2103, 2106, 2111, 2114, 2118]
         },
         "colliders": [
           {
@@ -32584,7 +32705,7 @@
       },
       {
         "name": "Wall_Invisible (1)",
-        "index": "2117",
+        "index": "2123",
         "static": true,
         "Transform": {
           "position": [36, 0.677, -20],
@@ -32604,7 +32725,7 @@
       },
       {
         "name": "Wall_Invisible (2)",
-        "index": "2118",
+        "index": "2124",
         "static": true,
         "Transform": {
           "position": [36, 0.677, -24],
@@ -32624,7 +32745,7 @@
       },
       {
         "name": "Wall_Invisible (3)",
-        "index": "2119",
+        "index": "2125",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -24],
@@ -32644,7 +32765,7 @@
       },
       {
         "name": "Wall_Invisible (4)",
-        "index": "2120",
+        "index": "2126",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -24],
@@ -32664,7 +32785,7 @@
       },
       {
         "name": "Wall_Invisible (5)",
-        "index": "2121",
+        "index": "2127",
         "static": true,
         "Transform": {
           "position": [44, 0.677, -24],
@@ -32684,7 +32805,7 @@
       },
       {
         "name": "Wall_Invisible (6)",
-        "index": "2122",
+        "index": "2128",
         "static": true,
         "Transform": {
           "position": [46, 0.677, -22],
@@ -32704,7 +32825,7 @@
       },
       {
         "name": "Wall_Invisible (7)",
-        "index": "2123",
+        "index": "2129",
         "static": true,
         "Transform": {
           "position": [44, 0.677, -20],
@@ -32724,7 +32845,7 @@
       },
       {
         "name": "Wall_Invisible (8)",
-        "index": "2124",
+        "index": "2130",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -26],
@@ -32744,7 +32865,7 @@
       },
       {
         "name": "Wall_Invisible (9)",
-        "index": "2125",
+        "index": "2131",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -28],
@@ -32764,7 +32885,7 @@
       },
       {
         "name": "Wall_Invisible (10)",
-        "index": "2126",
+        "index": "2132",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -30],
@@ -32784,7 +32905,7 @@
       },
       {
         "name": "Wall_Invisible (11)",
-        "index": "2127",
+        "index": "2133",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -32],
@@ -32804,7 +32925,7 @@
       },
       {
         "name": "Wall_Invisible (12)",
-        "index": "2128",
+        "index": "2134",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -34],
@@ -32824,7 +32945,7 @@
       },
       {
         "name": "Wall_Invisible (13)",
-        "index": "2129",
+        "index": "2135",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -36],
@@ -32844,7 +32965,7 @@
       },
       {
         "name": "Wall_Invisible (14)",
-        "index": "2130",
+        "index": "2136",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -38],
@@ -32864,7 +32985,7 @@
       },
       {
         "name": "Wall_Invisible (15)",
-        "index": "2131",
+        "index": "2137",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -40],
@@ -32884,7 +33005,7 @@
       },
       {
         "name": "Wall_Invisible (16)",
-        "index": "2132",
+        "index": "2138",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -42],
@@ -32904,7 +33025,7 @@
       },
       {
         "name": "Wall_Invisible (17)",
-        "index": "2133",
+        "index": "2139",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -44],
@@ -32924,7 +33045,7 @@
       },
       {
         "name": "Wall_Invisible (18)",
-        "index": "2134",
+        "index": "2140",
         "static": true,
         "Transform": {
           "position": [44, 0.677, -44],
@@ -32944,7 +33065,7 @@
       },
       {
         "name": "Wall_Invisible (19)",
-        "index": "2135",
+        "index": "2141",
         "static": true,
         "Transform": {
           "position": [46, 0.677, -44],
@@ -32964,7 +33085,7 @@
       },
       {
         "name": "Wall_Invisible (20)",
-        "index": "2136",
+        "index": "2142",
         "static": true,
         "Transform": {
           "position": [46, 0.677, -46],
@@ -32984,7 +33105,7 @@
       },
       {
         "name": "Wall_Invisible (21)",
-        "index": "2137",
+        "index": "2143",
         "static": true,
         "Transform": {
           "position": [46, 0.677, -48],
@@ -33004,7 +33125,7 @@
       },
       {
         "name": "Wall_Invisible (22)",
-        "index": "2138",
+        "index": "2144",
         "static": true,
         "Transform": {
           "position": [46, 0.677, -50],
@@ -33024,7 +33145,7 @@
       },
       {
         "name": "Wall_Invisible (23)",
-        "index": "2139",
+        "index": "2145",
         "static": true,
         "Transform": {
           "position": [46, 0.677, -52],
@@ -33044,7 +33165,7 @@
       },
       {
         "name": "Wall_Invisible (24)",
-        "index": "2140",
+        "index": "2146",
         "static": true,
         "Transform": {
           "position": [44, 0.677, -54],
@@ -33064,7 +33185,7 @@
       },
       {
         "name": "Wall_Invisible (25)",
-        "index": "2141",
+        "index": "2147",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -56],
@@ -33084,7 +33205,7 @@
       },
       {
         "name": "Wall_Invisible (26)",
-        "index": "2142",
+        "index": "2148",
         "static": true,
         "Transform": {
           "position": [40, 0.677, -58],
@@ -33104,7 +33225,7 @@
       },
       {
         "name": "Wall_Invisible (27)",
-        "index": "2143",
+        "index": "2149",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -56],
@@ -33124,7 +33245,7 @@
       },
       {
         "name": "Wall_Invisible (28)",
-        "index": "2144",
+        "index": "2150",
         "static": true,
         "Transform": {
           "position": [36, 0.677, -54],
@@ -33144,7 +33265,7 @@
       },
       {
         "name": "Wall_Invisible (29)",
-        "index": "2145",
+        "index": "2151",
         "static": true,
         "Transform": {
           "position": [34, 0.677, -52],
@@ -33164,7 +33285,7 @@
       },
       {
         "name": "Wall_Invisible (30)",
-        "index": "2146",
+        "index": "2152",
         "static": true,
         "Transform": {
           "position": [34, 0.677, -50],
@@ -33184,7 +33305,7 @@
       },
       {
         "name": "Wall_Invisible (31)",
-        "index": "2147",
+        "index": "2153",
         "static": true,
         "Transform": {
           "position": [34, 0.677, -48],
@@ -33204,7 +33325,7 @@
       },
       {
         "name": "Wall_Invisible (32)",
-        "index": "2148",
+        "index": "2154",
         "static": true,
         "Transform": {
           "position": [34, 0.677, -46],
@@ -33224,7 +33345,7 @@
       },
       {
         "name": "Wall_Invisible (33)",
-        "index": "2149",
+        "index": "2155",
         "static": true,
         "Transform": {
           "position": [36, 0.677, -44],
@@ -33244,7 +33365,7 @@
       },
       {
         "name": "Wall_Invisible (34)",
-        "index": "2150",
+        "index": "2156",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -44],
@@ -33264,7 +33385,7 @@
       },
       {
         "name": "Wall_Invisible (35)",
-        "index": "2151",
+        "index": "2157",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -42],
@@ -33284,7 +33405,7 @@
       },
       {
         "name": "Wall_Invisible (36)",
-        "index": "2152",
+        "index": "2158",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -40],
@@ -33304,7 +33425,7 @@
       },
       {
         "name": "Wall_Invisible (37)",
-        "index": "2153",
+        "index": "2159",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -38],
@@ -33324,7 +33445,7 @@
       },
       {
         "name": "Wall_Invisible (38)",
-        "index": "2154",
+        "index": "2160",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -36],
@@ -33344,7 +33465,7 @@
       },
       {
         "name": "Wall_Invisible (39)",
-        "index": "2155",
+        "index": "2161",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -34],
@@ -33364,7 +33485,7 @@
       },
       {
         "name": "Wall_Invisible (40)",
-        "index": "2156",
+        "index": "2162",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -32],
@@ -33384,7 +33505,7 @@
       },
       {
         "name": "Wall_Invisible (41)",
-        "index": "2157",
+        "index": "2163",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -30],
@@ -33404,7 +33525,7 @@
       },
       {
         "name": "Wall_Invisible (42)",
-        "index": "2158",
+        "index": "2164",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -28],
@@ -33424,7 +33545,7 @@
       },
       {
         "name": "Wall_Invisible (43)",
-        "index": "2159",
+        "index": "2165",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -26],
@@ -33444,7 +33565,7 @@
       },
       {
         "name": "Block_Large_1_Moving (11)",
-        "index": "2160",
+        "index": "2166",
         "static": false,
         "Transform": {
           "position": [40, -1, -47],
@@ -33456,7 +33577,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2161",
+            "index": "2167",
             "static": false,
             "Transform": {
               "position": [40, -3, -47],
@@ -33474,7 +33595,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2162",
+                "index": "2168",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -46],
@@ -33500,7 +33621,7 @@
       },
       {
         "name": "Block_Large_1_Moving (12)",
-        "index": "2163",
+        "index": "2169",
         "static": false,
         "Transform": {
           "position": [40, -1, -49],
@@ -33512,7 +33633,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2164",
+            "index": "2170",
             "static": false,
             "Transform": {
               "position": [40, -3, -49],
@@ -33530,7 +33651,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2165",
+                "index": "2171",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -48],
@@ -33556,7 +33677,7 @@
       },
       {
         "name": "Block_Large_1_Moving (13)",
-        "index": "2166",
+        "index": "2172",
         "static": false,
         "Transform": {
           "position": [42, -1, -51],
@@ -33568,7 +33689,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2167",
+            "index": "2173",
             "static": false,
             "Transform": {
               "position": [42, -3, -51],
@@ -33586,7 +33707,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2168",
+                "index": "2174",
                 "static": false,
                 "Transform": {
                   "position": [42, -3, -50],
@@ -33612,7 +33733,7 @@
       },
       {
         "name": "Block_Large_1_Moving (14)",
-        "index": "2169",
+        "index": "2175",
         "static": false,
         "Transform": {
           "position": [40, -1, -53],
@@ -33624,7 +33745,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2170",
+            "index": "2176",
             "static": false,
             "Transform": {
               "position": [40, -3, -53],
@@ -33642,7 +33763,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2171",
+                "index": "2177",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -52],
@@ -33668,7 +33789,7 @@
       },
       {
         "name": "Block_Large_1_Moving (15)",
-        "index": "2172",
+        "index": "2178",
         "static": false,
         "Transform": {
           "position": [38, -0.98, -51],
@@ -33680,7 +33801,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2173",
+            "index": "2179",
             "static": false,
             "Transform": {
               "position": [38, -2.98, -51],
@@ -33698,7 +33819,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2174",
+                "index": "2180",
                 "static": false,
                 "Transform": {
                   "position": [38, -2.98, -50],
@@ -33724,10 +33845,10 @@
       },
       {
         "name": "Block_Large_1_Moving (16)",
-        "index": "2175",
+        "index": "2181",
         "static": false,
         "Transform": {
-          "position": [38, -0.75, -47],
+          "position": [38, -0.892, -47],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -33736,10 +33857,10 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2176",
+            "index": "2182",
             "static": false,
             "Transform": {
-              "position": [38, -2.75, -47],
+              "position": [38, -2.892, -47],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -33754,10 +33875,10 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2177",
+                "index": "2183",
                 "static": false,
                 "Transform": {
-                  "position": [38, -2.75, -46],
+                  "position": [38, -2.892, -46],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -33780,10 +33901,10 @@
       },
       {
         "name": "Block_Large_1_Moving (17)",
-        "index": "2178",
+        "index": "2184",
         "static": false,
         "Transform": {
-          "position": [42, -0.85, -47],
+          "position": [42, -0.964, -47],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -33792,10 +33913,10 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2179",
+            "index": "2185",
             "static": false,
             "Transform": {
-              "position": [42, -2.85, -47],
+              "position": [42, -2.964, -47],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -33810,10 +33931,10 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2180",
+                "index": "2186",
                 "static": false,
                 "Transform": {
-                  "position": [42, -2.85, -46],
+                  "position": [42, -2.964, -46],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -33836,7 +33957,7 @@
       },
       {
         "name": "Block_Large_1_Moving (18)",
-        "index": "2181",
+        "index": "2187",
         "static": false,
         "Transform": {
           "position": [38, -0.88, -49],
@@ -33848,7 +33969,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2182",
+            "index": "2188",
             "static": false,
             "Transform": {
               "position": [38, -2.88, -49],
@@ -33866,7 +33987,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2183",
+                "index": "2189",
                 "static": false,
                 "Transform": {
                   "position": [38, -2.88, -48],
@@ -33892,7 +34013,7 @@
       },
       {
         "name": "Block_Large_1_Moving (19)",
-        "index": "2184",
+        "index": "2190",
         "static": false,
         "Transform": {
           "position": [36, -0.9, -49],
@@ -33904,7 +34025,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2185",
+            "index": "2191",
             "static": false,
             "Transform": {
               "position": [36, -2.9, -49],
@@ -33922,7 +34043,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2186",
+                "index": "2192",
                 "static": false,
                 "Transform": {
                   "position": [36, -2.9, -48],
@@ -33948,7 +34069,7 @@
       },
       {
         "name": "Block_Large_1_Moving (20)",
-        "index": "2187",
+        "index": "2193",
         "static": false,
         "Transform": {
           "position": [42, -0.94, -49],
@@ -33960,7 +34081,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2188",
+            "index": "2194",
             "static": false,
             "Transform": {
               "position": [42, -2.94, -49],
@@ -33978,7 +34099,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2189",
+                "index": "2195",
                 "static": false,
                 "Transform": {
                   "position": [42, -2.94, -48],
@@ -34004,7 +34125,7 @@
       },
       {
         "name": "Block_Large_1_Moving (21)",
-        "index": "2190",
+        "index": "2196",
         "static": false,
         "Transform": {
           "position": [44, -0.93, -49],
@@ -34016,7 +34137,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2191",
+            "index": "2197",
             "static": false,
             "Transform": {
               "position": [44, -2.93, -49],
@@ -34034,7 +34155,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2192",
+                "index": "2198",
                 "static": false,
                 "Transform": {
                   "position": [44, -2.93, -48],
@@ -34060,7 +34181,7 @@
       },
       {
         "name": "Block_Large_1_Moving (22)",
-        "index": "2193",
+        "index": "2199",
         "static": false,
         "Transform": {
           "position": [42, -0.97, -53],
@@ -34072,7 +34193,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2194",
+            "index": "2200",
             "static": false,
             "Transform": {
               "position": [42, -2.97, -53],
@@ -34090,7 +34211,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2195",
+                "index": "2201",
                 "static": false,
                 "Transform": {
                   "position": [42, -2.97, -52],
@@ -34116,7 +34237,7 @@
       },
       {
         "name": "Block_Large_1_Moving (23)",
-        "index": "2196",
+        "index": "2202",
         "static": false,
         "Transform": {
           "position": [44, -0.95, -53],
@@ -34128,7 +34249,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2197",
+            "index": "2203",
             "static": false,
             "Transform": {
               "position": [44, -2.95, -53],
@@ -34146,7 +34267,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2198",
+                "index": "2204",
                 "static": false,
                 "Transform": {
                   "position": [44, -2.95, -52],
@@ -34172,7 +34293,7 @@
       },
       {
         "name": "Block_Large_1_Moving (24)",
-        "index": "2199",
+        "index": "2205",
         "static": false,
         "Transform": {
           "position": [40, -0.93, -55],
@@ -34184,7 +34305,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2200",
+            "index": "2206",
             "static": false,
             "Transform": {
               "position": [40, -2.93, -55],
@@ -34202,7 +34323,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2201",
+                "index": "2207",
                 "static": false,
                 "Transform": {
                   "position": [40, -2.93, -54],
@@ -34228,7 +34349,7 @@
       },
       {
         "name": "Block_Large_1_Moving (25)",
-        "index": "2202",
+        "index": "2208",
         "static": false,
         "Transform": {
           "position": [38, -0.79, -53],
@@ -34240,7 +34361,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2203",
+            "index": "2209",
             "static": false,
             "Transform": {
               "position": [38, -2.79, -53],
@@ -34258,7 +34379,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2204",
+                "index": "2210",
                 "static": false,
                 "Transform": {
                   "position": [38, -2.79, -52],
@@ -34284,7 +34405,7 @@
       },
       {
         "name": "Block_Large_1_Moving (26)",
-        "index": "2205",
+        "index": "2211",
         "static": false,
         "Transform": {
           "position": [36, -0.62, -53],
@@ -34296,7 +34417,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2206",
+            "index": "2212",
             "static": false,
             "Transform": {
               "position": [36, -2.62, -53],
@@ -34314,7 +34435,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2207",
+                "index": "2213",
                 "static": false,
                 "Transform": {
                   "position": [36, -2.62, -52],
@@ -34335,6 +34456,95 @@
                 ]
               }
             ]
+          }
+        ]
+      },
+      {
+        "name": "Wall_Ornate_3 (124)",
+        "index": "2214",
+        "static": true,
+        "Transform": {
+          "position": [41.214, -3.066, -17],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Wall_ornate.3",
+            "index": "2215",
+            "static": true,
+            "Transform": {
+              "position": [41.214, -3.066, -17],
+              "rotation": [270, 0, 0],
+              "scaleFactor": 0.535
+            },
+            "MeshFilter": "Wall_ornate.3",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "isTrigger": false,
+                "scaleX": 3.728509,
+                "scaleY": 0.7680848,
+                "scaleZ": 5.726395,
+                "offset": [0, 0.2861431, 2.863198]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Wall_Ornate_3 (125)",
+        "index": "2216",
+        "static": true,
+        "Transform": {
+          "position": [39.214, -3.066, -17],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Wall_ornate.3",
+            "index": "2217",
+            "static": true,
+            "Transform": {
+              "position": [39.214, -3.066, -17],
+              "rotation": [270, 0, 0],
+              "scaleFactor": 0.535
+            },
+            "MeshFilter": "Wall_ornate.3",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "isTrigger": false,
+                "scaleX": 3.728509,
+                "scaleY": 0.7680848,
+                "scaleZ": 5.726395,
+                "offset": [0, 0.2861431, 2.863198]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "TriggerSwitch",
+        "index": "2218",
+        "static": true,
+        "Transform": {
+          "position": [39.93361, 0.001000047, -17.903],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "TriggerSwitch": {
+          "events": [1670, 1665]
+        },
+        "colliders": [
+          {
+            "type": "sphere",
+            "isTrigger": true,
+            "scale": 1,
+            "offset": [0, 0, 0]
           }
         ]
       }

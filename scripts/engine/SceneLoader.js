@@ -4,7 +4,8 @@
 const c = {
   AIController, Animation, AudioListener, AudioSource, BoxCollider, Camera,
   ClientStickTo, Collider, CompoundCollider, Decal, Light, ParticleSystem,
-  SphereCollider, Transform, StatueController, TriggerSwitch, MoveTowardsEvent,
+  SphereCollider, Transform, SingingStatueController, TriggerSwitch, MoveTowardsEvent,
+  SingStatueEvent,
   AnimationGraph, AnimationState, DoorEvent, Event, EvilController, HealEvent,
   KeyEvent, Listenable, Look, ObjectLogicState, PlayerController,
   PlayerLogicState, PlayerTable, RaycastSwitch, RotateArrowKey, RotateMouse,

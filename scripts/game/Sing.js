@@ -2,11 +2,8 @@
  * Created by Stephen on 5/2/2017.
  */
 
-const MAX_LIGHT_RANGE = 8;
-const MIN_LIGHT_RANGE = 1;
-const LIGHT_EXPAND_RATE = 10;
+const LIGHT_EXPAND_RATE = 5;
 const LIGHT_DIMINISH_RATE = 15;
-const LIGHT_INTENSITY_SCALE = 10;
 
 class Sing extends Component{
   constructor(params = {range: 2, light: -1, lightIntensity: 10, maxLightRange: 8, minLightRange: 1}){

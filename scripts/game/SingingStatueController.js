@@ -1,7 +1,7 @@
 /**
  * Created by ajermaky on 5/22/17.
  */
-class StatueController extends Component{
+class SingingStatueController extends Component{
   constructor(params = {singingDelay: 0, singingDuration: 3}) {
     super();
     this.componentType = 'StatueController';
