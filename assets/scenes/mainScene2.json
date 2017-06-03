@@ -28312,11 +28312,13 @@
                   {
                     "name": "Collider (Box)",
                     "index": "1845",
-                    "static": true,
+                    "static": false,
                     "Transform": {
                       "position": [40, -3.624, -50.003],
                       "rotation": [0, 0, 0],
                       "scaleFactor": 1
+                    },
+                    "Kinematic": {
                     },
                     "colliders": [
                       {
@@ -28354,7 +28356,7 @@
                       {
                         "name": "Collider",
                         "index": "1848",
-                        "static": true,
+                        "static": false,
                         "Transform": {
                           "position": [40, -3.248, -50.003],
                           "rotation": [0, 0, 0],
@@ -28370,6 +28372,8 @@
                         },
                         "RaycastSwitch": {
                           "events": [1848]
+                        },
+                        "Kinematic": {
                         },
                         "colliders": [
                           {

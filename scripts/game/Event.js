@@ -1,5 +1,5 @@
 class Event extends Component{
-  constructor({maximumCharge}){
+  constructor(){
     super();
     this.componentType = "Event";
   }

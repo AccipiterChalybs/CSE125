@@ -1,9 +1,10 @@
-{"Tone1.wav_0":{
-  "src": "assets/audio/Tone1.wav",
-  "loop": true,
-  "type": 1,
-  "space": 3
-},"Tone1.wav_1":{
+{
+  "Tone1.wav_0":{
+    "src": "assets/audio/Tone1.wav",
+    "loop": true,
+    "type": 1,
+    "space": 3
+  },"Tone1.wav_1":{
   "src": "assets/audio/Tone1.wav",
   "loop": true,
   "type": 1,
@@ -113,4 +114,5 @@
   "loop": true,
   "type": 1,
   "space": 3
-}}
+}
+}
