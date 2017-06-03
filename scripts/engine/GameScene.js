@@ -32,6 +32,7 @@ class GameScene {
     // TODO REMOVE ME LATER
     NavMesh.prototype.currentNavMesh = new NavMesh();
 
+
     if (!IS_SERVER) {
       decalTex = new Texture('assets/texture/test_decal2.png');
       decalNormal = new Texture('assets/texture/test_decal_normal.png', false);
@@ -54,7 +55,6 @@ class GameScene {
       camera.gameObject.addComponent(new RotateMouse());
     }
 
-
     //TODO make true and make clientside objects work
     let directionalLight = new GameObject({clientSideOnly: false});
 
@@ -75,10 +75,12 @@ class GameScene {
     evilTeapot.addComponent(new EvilController());
 
     GameObject.prototype.SceneRoot.findComponents("Listenable", PhysicsEngine.sphereChecks);
+
   }
 
   update() {
     // -- Physics update call will likely go here --
+
     if(Debug.clientUpdate)
     {
       Debug.Profiler.startTimer('Physics', 2);

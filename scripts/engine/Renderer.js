@@ -38,6 +38,7 @@ const Renderer  = {
       Renderer.FBO_DEBUG_CHANNEL=18;
       Renderer.FBO_COPY=19;
       Renderer.FBO_COPY_DEPTH=20;
+      Renderer.FBO_SSAO=21;
 
       Renderer.DEFERRED_DECAL=25;
 
@@ -72,7 +73,7 @@ const Renderer  = {
       /* Renderer.PARTICLE_TRAIL_SHADER, Renderer.BASIC_SHADER,
             Renderer.FORWARD_EMISSIVE ];*/
 
-      Renderer.shaderCameraPosList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM,
+      Renderer.shaderCameraPosList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.FBO_SSAO, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM,
         Renderer.DEFERRED_SHADER_LIGHTING_ENVIRONMENT, Renderer.DEFERRED_SHADER_LIGHTING_DIRECTIONAL_SHADOW, Renderer.DEFERRED_SHADER_LIGHTING_POINT_NORMAL, Renderer.DEFERRED_SHADER_LIGHTING_POINT_DEBUG, Renderer.DEFERRED_SHADER_LIGHTING_POINT_SHADOW];
 
       Renderer.shaderEnvironmentList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM,
@@ -184,6 +185,10 @@ const Renderer  = {
 
       Renderer.shaderList[Renderer.FBO_COPY_DEPTH] = new Shader(
         Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_copy_depth.frag"
+      );
+
+      Renderer.shaderList[Renderer.FBO_SSAO] = new Shader(
+        Renderer.shaderPath + "fbo.vert", Renderer.shaderPath + "fbo_ssao.frag"
       );
 
 
@@ -496,6 +501,24 @@ const Renderer  = {
       Renderer.getShader(Renderer.FBO_COPY).setUniform("inputTex3", 2, UniformTypes.u1i);
 
       Renderer.getShader(Renderer.FBO_COPY_DEPTH).setUniform("inputDepth", 4, UniformTypes.u1i);
+
+
+
+      let ssao = Renderer.getShader(Renderer.FBO_SSAO);
+      ssao.setUniform('normalTex', 1, UniformTypes.u1i );
+      ssao.setUniform('positionTex', 2, UniformTypes.u1i );
+      ssao.setUniform('uRadius', 7.2, UniformTypes.u1f );
+      ssao.setUniform('uSigma', 0.125, UniformTypes.u1f );
+      ssao.setUniform('uK', 1, UniformTypes.u1f );
+
+      let s3 = Renderer.getShader(Renderer.FBO_HDR);
+      s3.setUniform("inputTex", 0, UniformTypes.u1i);
+      s3.setUniform("addTex1", 1, UniformTypes.u1i);
+      s3.setUniform("addTex2", 2, UniformTypes.u1i);
+      s3.setUniform("addTex3", 3, UniformTypes.u1i);
+      s3.setUniform("addTex4", 4, UniformTypes.u1i);
+      s3.setUniform("addTex5", 5, UniformTypes.u1i);
+      s3.setUniform("ssao", 6, UniformTypes.u1i);
   },
 
   loop: function () {
@@ -624,6 +647,11 @@ const Renderer  = {
 
     Renderer.lastWidth = width;
     Renderer.lastHeight = height;
+
+
+    for (let pass of Renderer.passes) {
+      pass.resize();
+    }
 
 
     let screenSize = vec2.create(); vec2.set(screenSize, Renderer.getWindowWidth(), Renderer.getWindowHeight());
