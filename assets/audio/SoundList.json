@@ -1,104 +1,118 @@
 {
-  "Tone00":{
-    "src": "assets/audio/tone.wav",
-    "loop": true,
-    "type": 0,
-    "space": 3
-  },
-  "MainTheme":{
-    "src": "assets/audio/cruelangel.mp3",
-    "loop": false,
-    "type": 1,
-    "space": 2
-  },
-  "DoorOpen":{
-    "src": "assets/audio/crypt-door-open.mp3",
-    "loop": false,
-    "type": 1,
-    "space": 2
-  },
-  "DoorClose":{
-    "src": "assets/audio/crypt-door-close.mp3",
-    "loop": false,
-    "type": 1,
-    "space": 2
-  },
-  "Heal":{
-    "src": "assets/audio/healmag.wav",
-    "loop": false,
-    "type": 1,
-    "space": 2
-  },
-  "Victory":{
-    "src": "assets/audio/you_won.mp3",
-    "loop": false,
-    "type": 1,
-    "space": 2
-  },
-  "Item":{
-    "src": "assets/audio/get_item.mp3",
-    "loop": false,
-    "type": 1,
-    "space": 2
-  },
-  "Tone1":{
+  "Tone1.wav_0":{
     "src": "assets/audio/Tone1.wav",
     "loop": true,
     "type": 1,
     "space": 3
-  },
-  "Tone2":{
-    "src": "assets/audio/Tone2.wav",
-    "loop": true,
-    "type": 1,
-    "space": 3
-  },
-  "Tone3":{
-    "src": "assets/audio/Tone3.wav",
-    "loop": true,
-    "type": 1,
-    "space": 3
-  },
-  "Tone4":{
-    "src": "assets/audio/Tone4.wav",
-    "loop": true,
-    "type": 1,
-    "space": 3
-  },
-  "get_item":{
-    "src": "assets/audio/get_item.mp3",
-    "loop": false,
-    "type": 0,
-    "space": 2
-  },
-  "door_unlocked":{
-    "src": "assets/audio/door_unlocked.mp3",
-    "loop": false,
-    "type": 0,
-    "space": 2
-  },
-  "heal":{
-    "src": "assets/audio/healmag.wav",
-    "loop": false,
-    "type": 0,
-    "space": 2
-  },
-  "Tone01":{
-    "src": "assets/audio/tone.wav",
-    "loop": true,
-    "type": 0,
-    "space": 3
-  },
-  "Tone02":{
-    "src": "assets/audio/tone.wav",
-    "loop": true,
-    "type": 0,
-    "space": 3
-  },
-  "Tone03":{
-    "src": "assets/audio/tone.wav",
-    "loop": true,
-    "type": 0,
-    "space": 3
-  }
+  },"Tone1.wav_1":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_2":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_3":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_4":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_5":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_6":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_7":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_8":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_9":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_10":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_11":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_12":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_13":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_14":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_15":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_16":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_17":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_18":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_19":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_20":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_21":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_22":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+}
 }

@@ -866,6 +866,12 @@
           "maxLightRange": 8,
           "minLightRange": 1
         },
+        "AudioSource": {
+          "audioName": "Tone1.wav_0",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
+        },
         "colliders": [
           {
             "type": "sphere",
@@ -4410,16 +4416,21 @@
           "rotation": [0, 180.0001, 0],
           "scaleFactor": 1
         },
-        "SingingStatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 273,
           "lightIntensity": 8,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_1",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
         },
         "children": [
           {
@@ -18463,16 +18474,21 @@
           "rotation": [0, 90.00003, 0],
           "scaleFactor": 1
         },
-        "SingingStatueController": {
-          "singingDelay": 0,
-          "singingDuration": 0
-        },
         "Sing": {
           "range": 3,
           "light": 1273,
           "lightIntensity": 8,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_2",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
         },
         "children": [
           {
@@ -20382,16 +20398,21 @@
           "rotation": [29.07985, 30.8631, 267.1851],
           "scaleFactor": 1
         },
-        "SingingStatueController": {
-          "singingDelay": 6,
-          "singingDuration": 2
-        },
         "Sing": {
           "range": 3,
           "light": 1385,
           "lightIntensity": 4,
           "maxLightRange": 4,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_3",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
         },
         "children": [
           {
@@ -25125,6 +25146,15 @@
         "SingStatueEvent": {
           "delay": 0
         },
+        "AudioSource": {
+          "audioName": "Tone1.wav_4",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
         "children": [
           {
             "name": "Statue.3",
@@ -25212,6 +25242,12 @@
         },
         "SingStatueEvent": {
           "delay": 0
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_5",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
         },
         "children": [
           {
@@ -25665,6 +25701,15 @@
         "SingStatueEvent": {
           "delay": 0
         },
+        "AudioSource": {
+          "audioName": "Tone1.wav_6",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
         "children": [
           {
             "name": "Statue.3",
@@ -25749,6 +25794,15 @@
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_7",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
         },
         "SingStatueEvent": {
           "delay": 0
@@ -25841,6 +25895,15 @@
         "SingStatueEvent": {
           "delay": 0
         },
+        "AudioSource": {
+          "audioName": "Tone1.wav_8",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
         "children": [
           {
             "name": "Statue.3",
@@ -25925,6 +25988,15 @@
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_9",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
         },
         "SingStatueEvent": {
           "delay": 0
@@ -26017,6 +26089,15 @@
         "SingStatueEvent": {
           "delay": 0
         },
+        "AudioSource": {
+          "audioName": "Tone1.wav_10",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
         "children": [
           {
             "name": "Statue.3",
@@ -26101,6 +26182,15 @@
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_11",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
         },
         "SingStatueEvent": {
           "delay": 0
@@ -26193,6 +26283,15 @@
         "SingStatueEvent": {
           "delay": 0
         },
+        "AudioSource": {
+          "audioName": "Tone1.wav_12",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
         "children": [
           {
             "name": "Statue.3",
@@ -26277,6 +26376,15 @@
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_13",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
         },
         "SingStatueEvent": {
           "delay": 0
@@ -26399,6 +26507,15 @@
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_14",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
         },
         "SingStatueEvent": {
           "delay": 0
@@ -26851,6 +26968,15 @@
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_15",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
         },
         "SingStatueEvent": {
           "delay": 0
@@ -31286,6 +31412,15 @@
         "SingStatueEvent": {
           "delay": 0
         },
+        "AudioSource": {
+          "audioName": "Tone1.wav_16",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
         "children": [
           {
             "name": "Statue.3",
@@ -31370,6 +31505,15 @@
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_17",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
         },
         "SingStatueEvent": {
           "delay": 0
@@ -31460,6 +31604,15 @@
           "minLightRange": 1
         },
         "SingStatueEvent": {
+          "delay": 0
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_18",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
+        },
+        "SingStatueEvent": {
           "delay": 2
         },
         "children": [
@@ -31546,6 +31699,15 @@
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_19",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
         },
         "SingStatueEvent": {
           "delay": 4
@@ -31636,6 +31798,15 @@
           "minLightRange": 1
         },
         "SingStatueEvent": {
+          "delay": 0
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_20",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
+        },
+        "SingStatueEvent": {
           "delay": 6
         },
         "children": [
@@ -31724,6 +31895,15 @@
           "minLightRange": 1
         },
         "SingStatueEvent": {
+          "delay": 0
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_21",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
+        },
+        "SingStatueEvent": {
           "delay": 4
         },
         "children": [
@@ -31810,6 +31990,15 @@
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "SingStatueEvent": {
+          "delay": 0
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_22",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
         },
         "SingStatueEvent": {
           "delay": 2

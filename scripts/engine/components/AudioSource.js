@@ -6,7 +6,7 @@ const AudioState = {
 };
 
 class AudioSource extends Component {
-    constructor(name) {
+    constructor({audioName}) {
         super();
         this.componentType = 'AudioSource';
         this.state = AudioState.noSound;
@@ -14,11 +14,11 @@ class AudioSource extends Component {
         this.sound3D = false;
         this.sound = null;
         if(!IS_SERVER) {
-          if (AudioEngine.soundArr[name].G_SSpace === 3) {
+          if (AudioEngine.soundArr[audioName].G_SSpace === 3) {
             this.sound3D = true;
-            this.sound = AudioEngine.playSound3d(name);
+            this.sound = AudioEngine.playSound3d(audioName);
           } else {
-            this.sound = AudioEngine.playSound2d(name);
+            this.sound = AudioEngine.playSound2d(audioName);
           }
           AudioEngine.stopAudio(this.sound[0], this.sound[1])
         }

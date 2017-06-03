@@ -173,12 +173,7 @@ const SceneLoader = {
       switch (generalCompName) {
         case "PlayerController":
           PlayerTable.addPlayer(nodeObject);
-
-          let pc = new PlayerController();
-          nodeObject.addComponent(pc);
-
-          nodeObject.addComponent(new AudioSource("Tone0"+this.tone));
-          this.tone+=1;
+          nodeObject.addComponent(new PlayerController());
           break;
         default:
           nodeObject.addComponent(new c[generalCompName](compData));
