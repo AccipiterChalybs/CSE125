@@ -195,7 +195,11 @@ class ShadowPass extends ForwardPass
 
         let mat = mesh.material;
         let s = null;
-        if (mat.shader === Renderer.getShader(Renderer.DEFERRED_PBR_SHADER_ANIM)) s = Renderer.getShader(animShader);
+        if (mat.shader === Renderer.getShader(Renderer.DEFERRED_PBR_SHADER_CUTOUT)) {
+          mat._useTexture(MaterialTexture.COLOR, 0);
+          s = Renderer.getShader(forwardShader);
+        }
+        else if (mat.shader === Renderer.getShader(Renderer.DEFERRED_PBR_SHADER_ANIM)) s = Renderer.getShader(animShader);
         else s = Renderer.getShader(regShader);
         if (s !== Renderer.currentShader) {
           s.use();
@@ -634,8 +638,7 @@ class BloomPass extends RenderPass
             Renderer.DEFERRED_SHADER_LIGHTING_POINT = Renderer.DEFERRED_SHADER_LIGHTING_POINT_DEBUG;
             break;
           case Debug.BUFFERTYPE_SSAO:
-            //this._ssaoBufferBlur[1].bindTexture(0, 0);
-            this._fogBuffer.bindTexture(0, 0);
+            this._ssaoBufferBlur[1].bindTexture(0, 0);
             s5.setUniform("rgbOutput", 1, UniformTypes.u1i);
             this._deferredPass.buffers.draw();
             break;

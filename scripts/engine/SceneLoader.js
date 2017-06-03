@@ -19,7 +19,7 @@ const SceneLoader = {
   // Ignore these in general pass, likely because they are already handled specially
   ignoreComponents: ["name", "index", "static", "Kinematic", "Animator", "AnimatorJS", "SkinnedMeshRenderer", "MeshFilter", "MeshRenderer",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
-  shadowLightsAvailable: 0,
+  shadowLightsAvailable: 3,
   tone: 0,
 
   loadScene: function(filename) {
@@ -38,10 +38,9 @@ const SceneLoader = {
 
       for (let matData of scene.materialList) {
         //TODO support more shaders (e.g. animation)
-        let forwardShaders = (matData.animated) ? Renderer.FORWARD_PBR_SHADER_ANIM : Renderer.FORWARD_PBR_SHADER;
+        let transparentShader = Renderer.DEFERRED_PBR_SHADER_CUTOUT;
         let deferredShaders = (matData.animated) ? Renderer.DEFERRED_PBR_SHADER_ANIM : Renderer.DEFERRED_PBR_SHADER;
-        let shaderId = (matData.forward) ? forwardShaders : deferredShaders;
-        console.log(shaderId, Renderer.FORWARD_PBR_SHADER);
+        let shaderId = (matData.transparent) ? transparentShader : deferredShaders;
         let mat = new Material(Renderer.getShader(shaderId), !!(matData.forward));
         mat.setTexture(MaterialTexture.COLOR, new Texture(matData.color));
         mat.setTexture(MaterialTexture.MAT, new Texture(matData.mat, false));
