@@ -19,7 +19,6 @@ class Animation extends Component
       this._playing = [];
       this._looping = [];
       this._animWeight = [];
-      this.rootAxisLocked = [true, true, false];
       this.lastRootMotion = vec3.create();
     }
 
@@ -39,7 +38,7 @@ class Animation extends Component
 
       let currentAnim = Animation.prototype._animData[this.animationName][this._currentAnimIndex];
       for (let node of currentAnim.boneData) {
-        this.boneMap[node.name].setPosition(Animation._interpolateKeyframes(node.keyframes.position, 0, node.isRoot));
+        this.boneMap[node.name].setPosition(Animation._interpolateKeyframes(node.keyframes.position, 0, this.isRoot(node)));
         this.boneMap[node.name].setRotation(Animation._interpolateQuaternions(node.keyframes.rotation, 0));
         // node.object.scale = node.keyframes.scale[scaleIndex].second;
       }
@@ -105,7 +104,7 @@ class Animation extends Component
               animResults[node.name][1] = boneResults[1];
             }
 
-            if (node.isRoot) {
+            if (this.isRoot(node)) {
               vec3.add(rootResults, rootResults, vec3.scale(boneResults[2], boneResults[2], normalizedWeight));
             }
             animResults[node.name][2] += normalizedWeight;
@@ -119,11 +118,10 @@ class Animation extends Component
         this.boneMap[nodeName].setRotation(animResults[nodeName][1]);
       }
 
-
       //Root Motion (need to reapply this transform's transformations (i.e. rotation & scale)
       vec3.scale(rootResults, rootResults, this.transform.getScale()[0]);
-      vec3.transformQuat(rootResults, rootResults, this.transform.rotation);
-      vec3.scale(rootResults, rootResults, -60);
+      vec3.transformQuat(rootResults, rootResults, this.boneMap[Animation.prototype._animMetaData[this.animationName].rootName].getParent().getWorldRotation());
+      vec3.scale(rootResults, rootResults, Animation.prototype.ANIM_ROOT_MULT);
   //    this.transform.translate(rootResults);
 
       let body = this.gameObject.getComponent('Collider').body;
@@ -164,23 +162,23 @@ class Animation extends Component
 
     getAnimData(node, index) {
       let currentAnim = Animation.prototype._animData[this.animationName][index];
-      if (node.isRoot) {
+      if (this.isRoot(node)) {
         let motion = vec3.create();
         let newPosition = null;
         if (this._lastTime[index] > this._currentTime[index]) {
-          let lastPosition = Animation._interpolateKeyframes(node.keyframes.position, this._lastTime[index], node.isRoot);
-          newPosition = Animation._interpolateKeyframes(node.keyframes.position, currentAnim.animationTime-0.1, node.isRoot);
+          let lastPosition = Animation._interpolateKeyframes(node.keyframes.position, this._lastTime[index], node.name==='metarig');
+          newPosition = Animation._interpolateKeyframes(node.keyframes.position, currentAnim.animationTime-0.1, node.name==='metarig');
           vec3.subtract(motion, newPosition, lastPosition);
-          lastPosition = Animation._interpolateKeyframes(node.keyframes.position, 0, node.isRoot);
-          newPosition = Animation._interpolateKeyframes(node.keyframes.position, this._currentTime[index], node.isRoot);
+          lastPosition = Animation._interpolateKeyframes(node.keyframes.position, 0, node.name==='metarig');
+          newPosition = Animation._interpolateKeyframes(node.keyframes.position, this._currentTime[index], node.name==='metarig');
           vec3.add(motion, motion, vec3.subtract(vec3.create(), newPosition, lastPosition));
         } else {
-          let lastPosition = Animation._interpolateKeyframes(node.keyframes.position, this._lastTime[index], node.isRoot);
-          newPosition = Animation._interpolateKeyframes(node.keyframes.position, this._currentTime[index], node.isRoot);
+          let lastPosition = Animation._interpolateKeyframes(node.keyframes.position, this._lastTime[index], node.name==='metarig');
+          newPosition = Animation._interpolateKeyframes(node.keyframes.position, this._currentTime[index], node.name==='metarig');
           vec3.subtract(motion, newPosition, lastPosition);
         }
         for (let rootAxis=0; rootAxis<3; ++rootAxis) {
-          if (this.rootAxisLocked[rootAxis]) {
+          if (Animation.prototype._animMetaData[this.animationName].rootAxisLocked[rootAxis]) {
             motion[rootAxis] = 0;
           } else {
             newPosition[rootAxis] = 0;
@@ -192,7 +190,7 @@ class Animation extends Component
                 Animation._interpolateQuaternions(node.keyframes.rotation, this._currentTime[index]),
                 motion];
       } else {
-        return [Animation._interpolateKeyframes(node.keyframes.position, this._currentTime[index], node.isRoot),
+        return [Animation._interpolateKeyframes(node.keyframes.position, this._currentTime[index], node.name==='metarig'),
                 Animation._interpolateQuaternions(node.keyframes.rotation, this._currentTime[index])];
       }
     }
@@ -201,6 +199,9 @@ class Animation extends Component
       this.boneMap = loadingAcceleration;
     }
 
+    isRoot(node) {
+      return (node.name === Animation.prototype._animMetaData[this.animationName].rootName);
+    }
 
 
     //data = pair(float, vec3)[]
@@ -260,10 +261,14 @@ class Animation extends Component
         return retVal;
     }
 
-  static loadAnimationData(animName, scene, rootName, indexList) {
+  static loadAnimationData(animName, scene, metaData, indexList) {
       if (!Animation.prototype._animData[animName]) {
         Animation.prototype._animData[animName] = [];
       }
+
+      Animation.prototype._animMetaData[animName] = {};
+      Animation.prototype._animMetaData[animName].rootName = metaData.root;
+      Animation.prototype._animMetaData[animName].rootAxisLocked = metaData.rootAxisLocked;
 
       for (let a = 0; a < scene.animations.length; ++a) { //separate animations (e.g. run, jump)
         if (! (a in indexList)) {
@@ -282,7 +287,6 @@ class Animation extends Component
 
           let newData = {};
           newData.name = name;
-          newData.isRoot = (name === rootName);
           newData.keyframes = {position:[], rotation:[], scale:[]};
           for (let keyframe = 0; keyframe < channel.positionkeys.length; ++keyframe) {
             let pair = {first: channel.positionkeys[keyframe][0],  second:  Animation._convertVec(channel.positionkeys[keyframe][1])};
@@ -314,4 +318,6 @@ class Animation extends Component
 
 }
 Animation.prototype._animData = {};
+Animation.prototype._animMetaData = {};
+Animation.prototype.ANIM_ROOT_MULT = 60;
 Animation.prototype.BLEND_RATE = 2.5;//TODO: should probably be property of animation
