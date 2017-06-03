@@ -174,15 +174,8 @@ const SceneLoader = {
         case "PlayerController":
           PlayerTable.addPlayer(nodeObject);
 
-          if(Debug.clientUpdate){
-            if(this.tone===0){
-              let pc = new PlayerController();
-              nodeObject.addComponent(pc);
-            }
-          }else{
-            let pc = new PlayerController();
-            nodeObject.addComponent(pc);
-          }
+          let pc = new PlayerController();
+          nodeObject.addComponent(pc);
 
           nodeObject.addComponent(new AudioSource("Tone0"+this.tone));
           this.tone+=1;

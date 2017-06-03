@@ -25,6 +25,10 @@ class SingStatueEvent extends TriggerEvent{
     }
   }
 
+  deactivate(){
+    this.activated = false;
+  }
+
   triggered(){
     if(!this.activated) {
       this.activated = true;
