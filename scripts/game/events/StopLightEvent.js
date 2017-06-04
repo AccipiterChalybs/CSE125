@@ -23,7 +23,7 @@ class StopLightEvent extends RaycastEvent{
     if (player && player !== null) {
       for(let i =0; i < this._lights.length; ++i) {
         this._lights[i].setRange(0);
-        Debug.log("stopped light");
+        // Debug.log("stopped light");
       }
     }
   }

@@ -23,7 +23,7 @@ class StopSingStatueEvent extends RaycastEvent{
     if (player && player !== null) {
       for(let i = 0; i < this._singStatueEvents.length; ++i){
         this._singStatueEvents[i].deactivate();
-        Debug.log("stopping statue");
+        // Debug.log("stopping statue");
       }
     }
   }

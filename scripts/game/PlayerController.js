@@ -27,7 +27,7 @@ class PlayerController extends Playerable{
     this._looker = null;
     this.checkpoint = null;
     this.keys = 0;
-    this.injured = false;
+    this.injured = true;
     this.forward = vec3.create(); vec3.set(this.forward, 0, 0, -1);
     this.cameraPos = vec3.create(); vec3.set(this.cameraPos, 0, 0, -1);
 
@@ -106,7 +106,7 @@ class PlayerController extends Playerable{
       this._looker.look();
     }
 
-    // this.state.update();
+    this.state.update();
   }
 
 
@@ -137,11 +137,11 @@ class PlayerController extends Playerable{
       this.transform.setRotation(quat.create());
       this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
       let animState = (this.state.status === 'singing') ? 2 : 3;
-      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(3, true);
-      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').resume();
+      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(3, true);
+      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').resume();
     } else {
-      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').stop();
-      if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(1, true);
+      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').stop();
+      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(1, true);
     }
 
 

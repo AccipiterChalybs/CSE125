@@ -34788,63 +34788,6 @@
             }
           }
         ]
-      },
-      {
-        "name": "Healing Basin",
-        "index": "2221",
-        "static": false,
-        "Transform": {
-          "position": [41.06241, 0.086, -18.42686],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 1
-        },
-        "Kinematic": {
-        },
-        "children": [
-          {
-            "name": "Pot.2",
-            "index": "2222",
-            "static": true,
-            "Transform": {
-              "position": [41.06241, 0.086, -18.42686],
-              "rotation": [270, 0, 0],
-              "scaleFactor": 1
-            },
-            "MeshFilter": "Pot.2",
-            "MeshRenderer": "pockedconcrete1-albedo"
-          },
-          {
-            "name": "Collider",
-            "index": "2223",
-            "static": false,
-            "Transform": {
-              "position": [41.06241, 0.288, -18.42686],
-              "rotation": [0, 0, 0],
-              "scaleFactor": 1
-            },
-            "HealEvent": {
-            },
-            "Light": {
-              "type": "Point",
-              "color": [1, 1, 1, 1],
-              "intensity": 12,
-              "range": 10
-            },
-            "RaycastSwitch": {
-              "events": [2223]
-            },
-            "Kinematic": {
-            },
-            "colliders": [
-              {
-                "type": "sphere",
-                "isTrigger": false,
-                "scale": 0.75,
-                "offset": [0, 0, 0]
-              }
-            ]
-          }
-        ]
       }
     ]
   }
