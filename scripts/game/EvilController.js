@@ -2,7 +2,11 @@
  * Created by Stephen on 4/25/2017.
  */
 
-const EVIL_MOVEMENTSPEED = 4.1;
+const EVIL_MOVEMENTSPEED = 2;
+const ATTACK_RANGE = 1.0;
+const ATTACK_COOLDOWN = 3.0;
+const LISTEN_RANGE = 3.0;
+const TARGET_PLAYER_INITIAL_HATE = 50;
 
 class EvilController extends AIController{
   constructor() {
@@ -13,13 +17,8 @@ class EvilController extends AIController{
     this.data = {
       destination: vec3.create(),
       player: null,
+      playerToTarget: null
     };
-
-    // this.lastFaceIndex = -1;
-    // this.oldTeapot = [];
-    // this.oldTeapot[0] = Debug.drawTeapot([0,0,0]);
-    // this.oldTeapot[1] = Debug.drawTeapot([0,0,0]);
-    // this.oldTeapot[2] = Debug.drawTeapot([0,0,0]);
 
     let pt0 = vec3.create(); vec3.set(pt0, -27, 0, -9);
     this.patrolPath = [[-27, 0, -9],
@@ -38,54 +37,55 @@ class EvilController extends AIController{
 
   updateComponent() {
     super.updateComponent();
-
-    // NAVMESH
-    // test/debugging zone
-
-
-    // if(currFaceIndex !== this.lastFaceIndex && currFaceIndex !== -1){
-    //   this.oldTeapot[0].removeComponent("Mesh");
-    //   this.oldTeapot[1].removeComponent("Mesh");
-    //   this.oldTeapot[2].removeComponent("Mesh");
-    //   this.oldTeapot[0] = Debug.drawTeapot(this.navMesh.faceList[currFaceIndex].vert[0]);
-    //   this.oldTeapot[1] = Debug.drawTeapot(this.navMesh.faceList[currFaceIndex].vert[1]);
-    //   this.oldTeapot[2] = Debug.drawTeapot(this.navMesh.faceList[currFaceIndex].vert[2]);
-    //   this.lastFaceIndex = currFaceIndex;
-    // }
-  }
-
-  chase() {
-    // Determine which triangle it's in and player
-    // Do A*
-    // Clean A* path
   }
 
   _buildBehaviorTree() {
-    let root = new PrioritySelector('chase');
+    let root = new PrioritySelector("root");
 
-    let pickPlayer = new ConcurrentSelector('pickPlayer');
-    pickPlayer.addNode(new CountdownTimer(this, 5));
-    pickPlayer.addNode(new PickRandomPlayer(this));
+    let attackClosest = new ConcurrentSelector("Attack closest player");
 
-    let goGo = new PrioritySelector('goGo');
+    attackClosest.addNode(new CountdownTimer(this, 1));
+    attackClosest.addNode(new CheckForPlayerWithinRange(this, ATTACK_RANGE));
+    attackClosest.addNode(new TargetPlayer(this));
+    attackClosest.addNode(new AttackPlayer(this, ATTACK_COOLDOWN));
 
-    let setPlayerDest = new ConcurrentSelector('setPlayerDest');
-    setPlayerDest.addNode(new CountdownTimer(this, 0.25));
-    setPlayerDest.addNode(new SetDestinationPlayer(this));
+    root.addNode(attackClosest);
 
-    let pathToPlayer = new PathToPoint(this, EVIL_MOVEMENTSPEED);
-    let findPath = new FindPath(this, pathToPlayer);
+    //
+    let moveNearby = new ConcurrentSelector("Move to nearby player");
 
-    let moveToPlayer = new ConcurrentSelector('moveToPlayer');
-    moveToPlayer.addNode(findPath);
-    moveToPlayer.addNode(new Inverter(new DestinationCheck(this)));
-    moveToPlayer.addNode(pathToPlayer);
+    moveNearby.addNode(new CheckForPlayerWithinRange(this, LISTEN_RANGE));
+    moveNearby.addNode(new TargetPlayer(this));
+    moveNearby.addNode(new CountdownTimer(this, 0.25));
+    moveNearby.addNode(new SetDestinationPlayer(this));
+    moveNearby.addNode(new Inverter(new DestinationCheck(this, ATTACK_RANGE)));
+    moveNearby.addNode(new MoveToDestination(this, EVIL_MOVEMENTSPEED));
 
-    goGo.addNode(setPlayerDest);
-    goGo.addNode(moveToPlayer);
+    root.addNode(moveNearby);
 
-    root.addNode(pickPlayer);
-    root.addNode(goGo);
+    // let pickPlayer = new ConcurrentSelector('pickPlayer');
+    // pickPlayer.addNode(new CountdownTimer(this, 5));
+    // pickPlayer.addNode(new PickRandomPlayer(this));
+    //
+    // let goGo = new PrioritySelector('goGo');
+    //
+    // let setPlayerDest = new ConcurrentSelector('setPlayerDest');
+    // setPlayerDest.addNode(new CountdownTimer(this, 0.25));
+    // setPlayerDest.addNode(new SetDestinationPlayer(this));
+    //
+    // let pathToPlayer = new PathToPoint(this, EVIL_MOVEMENTSPEED);
+    // let findPath = new FindPath(this, pathToPlayer);
+    //
+    // let moveToPlayer = new ConcurrentSelector('moveToPlayer');
+    // moveToPlayer.addNode(findPath);
+    // moveToPlayer.addNode(new Inverter(new DestinationCheck(this)));
+    // moveToPlayer.addNode(pathToPlayer);
+    //
+    // goGo.addNode(setPlayerDest);
+    // goGo.addNode(moveToPlayer);
+    //
+    // root.addNode(pickPlayer);
+    // root.addNode(goGo);
 
     // Debug.log(root);
 

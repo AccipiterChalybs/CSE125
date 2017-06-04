@@ -9,6 +9,8 @@ const PLAYER_ACCELERATION = 4;
 const CHAR_NAME = "CAIN"; // CUZ I GOT 1 KEY and 0 bombs
 const COOLDOWN_SINGING = 0.1;   // In seconds
 
+const HATE_SING = 1;
+
 const PlayerState = {
   default: "default",
   walking: "walking",
@@ -104,6 +106,7 @@ class PlayerController extends Playerable{
     }
 
     if(this.state.status === 'singing'){
+      PlayerTable.increaseHate(PlayerTable.currentPlayer, HATE_SING);
       this._singer.sing();
     }else{
       this._singer.quiet();
@@ -156,6 +159,25 @@ class PlayerController extends Playerable{
      body.velocity.x = move[0];
      body.velocity.z = move[2];*/
     //col.setRotation(this.forward);
+  }
+
+  heal(){
+    this.injured = false;
+  }
+
+  takeDamage(){
+    if(this.injured === true){
+      this.die();
+      return;
+    }
+
+    Debug.log("ow");
+
+    this.injured = true;
+  }
+
+  die(){
+    Debug.log("I die.");
   }
 
 
