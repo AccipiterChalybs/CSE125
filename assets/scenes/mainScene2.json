@@ -40,7 +40,7 @@
       "color": "assets/texture/IvyC/ivy_leaves_c.png",
       "mat": "assets/texture/dungeon-stone1-mat.png",
       "normal" : "assets/texture/IvyC/ivy_leaves_n2.png",
-      "forward" : true,
+      "transparent" : true,
       "animated" : false
     }
   ],
