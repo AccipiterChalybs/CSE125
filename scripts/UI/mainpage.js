@@ -1,5 +1,3 @@
-
-
 function quit() {
   window.open('', '_self', ''); window.close();
 }

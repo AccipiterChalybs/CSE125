@@ -5,7 +5,7 @@
 const REGULAR_SPEED = 4;
 const WALK_SPEED = 2;
 const SING_SPEED = 0.8;
-const PLAYER_ACCELERATION = 4;
+const PLAYER_ACCELERATION = 20;
 const CHAR_NAME = "CAIN"; // CUZ I GOT 1 KEY and 0 bombs
 const COOLDOWN_SINGING = 0.1;   // In seconds
 const TIME_TO_RESPAWN = 3;
@@ -21,6 +21,12 @@ const PlayerState = {
   dead: "dead"
 };
 
+const PlayerStateSpeed = {
+  default: REGULAR_SPEED,
+  walking: WALK_SPEED,
+  singing: SING_SPEED,
+};
+
 // Requires a collider, sing
 class PlayerController extends Component {
   constructor({injured}){
@@ -32,10 +38,12 @@ class PlayerController extends Component {
     this.x = 0;
     this.y = 0;
     this.z = 0;
-    this.forward = vec3.create(); vec3.set(this.forward, 0, 0, -1);
+    this.camForward = vec3.create(); vec3.set(this.camForward, 0, 0, -1);
     this.cameraPos = vec3.create(); vec3.set(this.cameraPos, 0, 0, -1);
 
     // input
+    this.x = 0;
+    this.z = 0;
     this.singing = 0;
     this.walking = 0;
     this.action = 0;
@@ -113,8 +121,8 @@ class PlayerController extends Component {
       this.singing = Input.getAxis('sing');
       this.action = Input.getAxis("action");
 
-      this.forward = Renderer.camera.transform.getForward();
       this.cameraPos = Renderer.camera.transform.getWorldPosition();
+      this.camForward = Renderer.camera.transform.getForward();
     }
 
     if (this.singing === 0 && this._lastSingInput === 1) {
@@ -155,32 +163,50 @@ class PlayerController extends Component {
   }
 
 
-  movement(){
-    if(this.state.status === PlayerState.singing) {
-      this.state.moveSpeed = Utility.moveTowards(this.state.moveSpeed, SING_SPEED, 4 * PLAYER_ACCELERATION * Time.deltaTime);
-    } else if(this.state.status === PlayerState.walking) {
-      this.state.moveSpeed = Utility.moveTowards(this.state.moveSpeed, WALK_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
-    } else if(this.state.status === PlayerState.default) {
-      this.state.moveSpeed = Utility.moveTowards(this.state.moveSpeed, 0.001, PLAYER_ACCELERATION * Time.deltaTime);
+  movement() {
+    let speed = this.state.moveSpeed;
+    if (this.singing) {
+      speed = SING_SPEED;
+    } else if (this.walking) {
+      speed = WALK_SPEED;
+    } else if (!(this.x || this.z)) {
+      speed = 0;
+    } else {
+      speed = REGULAR_SPEED;
+    }
+    this.state.moveSpeed = Utility.moveTowards(this.state.moveSpeed, speed, PLAYER_ACCELERATION * Time.deltaTime);
+
+    if (!this.state.moveSpeed) {
+      return;
     }
 
-    let up = vec3.create(); vec3.set(up, 0, 1, 0);
-    let move = vec3.create();
-    let moveX = vec3.create(); vec3.cross(moveX, this.forward, up);
-    let moveZ = vec3.create(); vec3.cross(moveZ, up, moveX);
+    const up = vec3.create(); vec3.set(up, 0, 1, 0);
+    const moveX = vec3.create(); vec3.cross(moveX, this.camForward, up);
+    const moveZ = vec3.create(); vec3.cross(moveZ, up, moveX);
     vec3.normalize(moveX, moveX);
     vec3.normalize(moveZ, moveZ);
-    vec3.scale(moveX, moveX, this.x * this.state.moveSpeed);
-    vec3.scale(moveZ, moveZ, this.z * this.state.moveSpeed);
+    vec3.scale(moveX, moveX, this.x);
+    vec3.scale(moveZ, moveZ, this.z);
+    const move = vec3.create();
     vec3.add(move, moveX, moveZ);
     vec3.normalize(move, move);
-    vec3.scale(move, move, this.state.moveSpeed);
+    // vec3.scale(move, move, this.state.moveSpeed);
 
-    if (vec3.length(move) > 0.0005) {
-      // TODO set this.state.movedot and movecrossy instead
-      this.transform.setRotation(quat.create());
-      this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
-    }
+    const playerForward = this.transform.getForward();
+    vec3.normalize(playerForward, playerForward);
+    const moveDotPlayer = -vec3.dot(move, playerForward);
+    this.state.moveDot = moveDotPlayer;
+    const playerXMove = vec3.create();
+    vec3.cross(playerXMove, playerForward, move);
+    this.state.moveCrossY = playerXMove[1];
+
+
+
+    // if (vec3.length(move) > 0.0005) {
+    //   // TODO set this.state.movedot and movecrossy instead
+    //   this.transform.setRotation(quat.create());
+    //   this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
+    // }
   }
 
   heal(){

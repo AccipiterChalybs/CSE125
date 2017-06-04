@@ -212,7 +212,7 @@ class AnimationState {
     const animationIndex = 4;
     const name = 'turn180';
     const isSatisfied = (objState) => {
-      return objState.moveDot < - 0.2;
+      return objState.moveDot < -.2;
     };
 
     const data = {
@@ -223,6 +223,7 @@ class AnimationState {
       isSatisfied,
       loop: false,
       priority: 5,
+      minTime: .3,
     };
     return data;
   }
@@ -230,27 +231,6 @@ class AnimationState {
   static turn90LDataConstruct(parentGraph, neighbors) {
     const animationIndex = 5;
     const name = 'turn90L';
-    const isSatisfied = (objState) => {
-      return objState.moveCrossY > 0 &&
-             objState.moveDot > -.2  &&
-             objState.moveDot < .5;
-    };
-
-    const data = {
-      parentGraph,
-      name,
-      animationIndex,
-      neighbors,
-      isSatisfied,
-      loop: false,
-      priority: 5,
-    };
-    return data;
-  }
-
-    static turn90RDataConstruct(parentGraph, neighbors) {
-    const animationIndex = 6;
-    const name = 'turn90R';
     const isSatisfied = (objState) => {
       return objState.moveCrossY < 0 &&
              objState.moveDot > -.2  &&
@@ -265,6 +245,29 @@ class AnimationState {
       isSatisfied,
       loop: false,
       priority: 5,
+      minTime: .3,
+    };
+    return data;
+  }
+
+    static turn90RDataConstruct(parentGraph, neighbors) {
+    const animationIndex = 6;
+    const name = 'turn90R';
+    const isSatisfied = (objState) => {
+      return objState.moveCrossY > 0 &&
+             objState.moveDot > -.2  &&
+             objState.moveDot < .3;
+    };
+
+    const data = {
+      parentGraph,
+      name,
+      animationIndex,
+      neighbors,
+      isSatisfied,
+      loop: false,
+      priority: 5,
+      minTime: .9,
     };
     return data;
   }

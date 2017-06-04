@@ -172,7 +172,12 @@ GameEngine.init = function () {
       info: [
         ['assets/meshes/octo_idle.json', [0, 1]],
         ['assets/meshes/octo_walking.json', [1]],
-        ['assets/meshes/octo_run.json', [1]]
+        ['assets/meshes/octo_run.json', [1]],
+        ['assets/meshes/octo_running_turn_180.json', [1]],
+        ['assets/meshes/octo_left_turn_90.json', [1]],
+        ['assets/meshes/octo_right_turn_90.json', [1]],
+        ['assets/meshes/octo_running_slide.json', [1]],
+        ['assets/meshes/octo_looking_behind.json', [1]]
       ]
     },
     'RedRobesCharacterAnim' : {
@@ -201,7 +206,7 @@ GameEngine.init = function () {
         ['assets/meshes/senate_walking.json' , [0]],
         ['assets/meshes/senate_walking.json' , [0]]
       ]
-    }
+    },
   };
   GameEngine.currentScene = new GameScene(GameEngine.sceneFile, meshFiles, animationFiles);
 };
