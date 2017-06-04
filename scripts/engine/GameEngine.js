@@ -87,7 +87,12 @@ GameEngine.init = function () {
     'OctopusCharacterAnim' : {
         'assets/meshes/octo_idle.json' : [0, 1],
         'assets/meshes/octo_walking.json' : [1],
-        'assets/meshes/octo_run.json' : [1]
+        'assets/meshes/octo_run.json' : [1],
+        'assets/meshes/octo_running_turn_180.json' : [1],
+        'assets/meshes/octo_left_turn_90.json' : [1],
+        'assets/meshes/octo_right_turn_90.json' : [1],
+        'assets/meshes/octo_running_slide.json' : [1],
+        'assets/meshes/octo_looking_behind.json' : [1]
     }
   };
   GameEngine.currentScene = new GameScene(sceneFile, meshFiles, animationFiles);
