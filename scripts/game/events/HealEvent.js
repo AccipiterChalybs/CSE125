@@ -11,7 +11,7 @@ class HealEvent extends RaycastEvent{
     if (player && player !== null) {
       // Debug.log("hello");
       if (player.injured) {
-        player.injured = false;
+        player.heal();
         Debug.log('HEALING');
         let audio = this.gameObject.getComponent('AudioSource');
         if (audio && audio !== null) {
