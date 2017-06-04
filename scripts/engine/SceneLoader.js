@@ -3,7 +3,7 @@
  */
 const c = {
   AIController, Animation, AudioListener, AudioSource, BoxCollider, Camera,
-  ClientStickTo, Collider, CompoundCollider, Decal, Light, ParticleSystem,
+  ClientStickTo, Collider, CompoundCollider, Decal, Foot, Light, ParticleSystem,
   SphereCollider, Transform, StatueController,
   AnimationGraph, AnimationState, DoorEvent, Event, EvilController, HealEvent,
   KeyEvent, Listenable, Look, ObjectLogicState, PlayerController,
@@ -19,7 +19,7 @@ const SceneLoader = {
   // Ignore these in general pass, likely because they are already handled specially
   ignoreComponents: ["name", "index", "static", "Kinematic", "Animator", "AnimatorJS", "SkinnedMeshRenderer", "MeshFilter", "MeshRenderer",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
-  shadowLightsAvailable: 10,
+  shadowLightsAvailable: 0,
   tone: 0,
 
   loadScene: function(filename) {

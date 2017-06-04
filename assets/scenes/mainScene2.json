@@ -1104,6 +1104,9 @@
                             "name": "foot.L",
                             "index": "70",
                             "static": false,
+                            "Foot" : {
+                              "left" : true
+                            },
                             "Transform": {
                               "position": [14.64602, 0.2206224, -11.60916],
                               "rotation": [26.96255, 258.5912, 175.5391],
@@ -1196,6 +1199,9 @@
                             "name": "foot.R",
                             "index": "78",
                             "static": false,
+                            "Foot" : {
+                              "left" : false
+                            },
                             "Transform": {
                               "position": [14.66903, 0.1788117, -11.6658],
                               "rotation": [58.87246, 271.696, 180.0001],
