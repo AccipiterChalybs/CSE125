@@ -93,7 +93,7 @@ class AnimationGraph {
     animIdx.map((name, i) => {
       // replaces 1s with the names of the neighbor
       const nbrList = adjMtx[i]
-        .map((edge) => { return edge ? name : 0; })
+        .map((edge, j) => { return edge ? animIdx[j] : 0; })
         .filter((edge) => { return edge; })
       ;
       // put all neighbor represenations for a list of neighbors into object
@@ -106,6 +106,8 @@ class AnimationGraph {
     for (let name in states) {
       states[name].loadAnimationState(dataConstruct[name]);
     }
+
+    console.log(states);
 
     AnimationGraph.loadAnimationGraph(name, states, g);
   }

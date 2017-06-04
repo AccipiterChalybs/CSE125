@@ -178,7 +178,7 @@ class AnimationState {
     const animationIndex = 2; // assumes walk animation at index 2
     const name = 'walk';
     const isSatisfied = (objState) => {
-      return objState.moveSpeed > 0.010 && objState.moveSpeed < 2.2;
+      return objState.moveSpeed > 0.010 && objState.moveSpeed < 1.8;
     };
 
     const data = {
@@ -193,9 +193,9 @@ class AnimationState {
 
   static runDataConstruct(parentGraph, neighbors) {
     const animationIndex = 3;
-    const stateName = 'run';
+    const name = 'run';
     const isSatisfied = (objState) => {
-      return objState.moveSpeed > 1.8;
+      return objState.moveSpeed > 2.2;
     };
 
     const data = {
@@ -210,7 +210,7 @@ class AnimationState {
 
   static turn180DataConstruct(parentGraph, neighbors) {
     const animationIndex = 4;
-    const stateName = 'turn180';
+    const name = 'turn180';
     const isSatisfied = (objState) => {
       return objState.moveDot < - 0.2;
     };
@@ -229,7 +229,7 @@ class AnimationState {
 
   static turn90LDataConstruct(parentGraph, neighbors) {
     const animationIndex = 5;
-    const stateName = 'turn90L';
+    const name = 'turn90L';
     const isSatisfied = (objState) => {
       return objState.moveCrossY > 0 &&
              objState.moveDot > -.2  &&
@@ -250,7 +250,7 @@ class AnimationState {
 
     static turn90RDataConstruct(parentGraph, neighbors) {
     const animationIndex = 6;
-    const stateName = 'turn90R';
+    const name = 'turn90R';
     const isSatisfied = (objState) => {
       return objState.moveCrossY < 0 &&
              objState.moveDot > -.2  &&
@@ -271,7 +271,7 @@ class AnimationState {
 
     static slideDataConstruct(parentGraph, neighbors) {
     const animationIndex = 7;
-    const stateName = 'slide';
+    const mame = 'slide';
     const isSatisfied = (objState) => {
       // expects on trigger
     };
@@ -291,7 +291,7 @@ class AnimationState {
 
     static lookBackDataConstruct(parentGraph, neighbors) {
     const animationIndex = 8;
-    const stateName = 'lookBack';
+    const name = 'lookBack';
     const isSatisfied = (objState) => {
       return; // nothing for now TODO
     };
@@ -311,7 +311,7 @@ class AnimationState {
 
     static sneakLDataConstruct(parentGraph, neighbors) {
     const animationIndex = 9;
-    const stateName = 'sneakL';
+    const name = 'sneakL';
     const isSatisfied = (objState) => {
       return objState.sneak           &&
              objState.wallNCrossY < 0 &&
@@ -353,15 +353,15 @@ class AnimationState {
 }
 
 AnimationState.playerDataConstruct = {
-  bind: idleDataConstruct, // not really used
-  idle: idleDataConstruct,
-  walk: walkDataConstruct,
-  run: runDataConstruct,
-  turn180: turn180DataConstruct,
-  turn90L: turn90LDataConstruct,
-  turn90R: turn90RDataConstruct,
-  slide: slideDataConstruct,
-  lookBack: lookBackDataConstruct,
-  sneakL: sneakLDataConstruct,
-  sneakR: sneakRDataConstruct,
+  bind: AnimationState.idleDataConstruct, // not really used
+  idle: AnimationState.idleDataConstruct,
+  walk: AnimationState.walkDataConstruct,
+  run: AnimationState.runDataConstruct,
+  turn180: AnimationState.turn180DataConstruct,
+  turn90L: AnimationState.turn90LDataConstruct,
+  turn90R: AnimationState.turn90RDataConstruct,
+  slide: AnimationState.slideDataConstruct,
+  lookBack: AnimationState.lookBackDataConstruct,
+  sneakL: AnimationState.sneakLDataConstruct,
+  sneakR: AnimationState.sneakRDataConstruct,
 };
