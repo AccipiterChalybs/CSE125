@@ -231,7 +231,7 @@ class AnimationState {
     const animationIndex = 5;
     const name = 'turn90L';
     const isSatisfied = (objState) => {
-      return objState.moveCrossY > 0 &&
+      return objState.moveCrossY < 0 &&
              objState.moveDot > -.2  &&
              objState.moveDot < .5;
     };
@@ -252,7 +252,7 @@ class AnimationState {
     const animationIndex = 6;
     const name = 'turn90R';
     const isSatisfied = (objState) => {
-      return objState.moveCrossY < 0 &&
+      return objState.moveCrossY > 0 &&
              objState.moveDot > -.2  &&
              objState.moveDot < .5;
     };

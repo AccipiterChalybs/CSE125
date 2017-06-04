@@ -7,7 +7,6 @@ class PlayerLogicState extends ObjectLogicState {
     this.moveSpeed = 0;
     this.moveDot = 0;
     this.moveCrossY = 0;
-    // this.slide = false;
     this.sneak = false;
     this.wallNDot = 0;
     this.wallNCrossY = 0;
