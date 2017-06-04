@@ -21,13 +21,12 @@ class RaycastSwitch extends Viewable{
   }
 
   updateComponent() {
-
+    // Debug.log(this.transform.getWorldPosition());
   }
 
   view(interactingObj) {
-    Debug.log("Viewable object has been viewed");
-    for(let event of this._events)
-    {
+    // Debug.log("Viewable object has been viewed");
+    for(let event of this._events) {
       event.onRaycast(interactingObj);
     }
   }

@@ -13325,7 +13325,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -28236,8 +28236,39 @@
         ]
       },
       {
-        "name": "Block_Large_1 (42)",
+        "name": "Collider",
         "index": "1840",
+        "static": false,
+        "Transform": {
+          "position": [40, 1.06, -50.003],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "HealEvent": {
+        },
+        "Light": {
+          "type": "Point",
+          "color": [1, 1, 1, 1],
+          "intensity": 12,
+          "range": 10
+        },
+        "RaycastSwitch": {
+          "events": [1840]
+        },
+        "Kinematic": {
+        },
+        "colliders": [
+          {
+            "type": "sphere",
+            "isTrigger": false,
+            "scale": 0.75,
+            "offset": [0, 0, 0]
+          }
+        ]
+      },
+      {
+        "name": "Block_Large_1 (42)",
+        "index": "1841",
         "static": false,
         "Transform": {
           "position": [40, -1, -51.003],
@@ -28249,10 +28280,10 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1841",
+            "index": "1842",
             "static": false,
             "Transform": {
-              "position": [40, -4.95, -51.003],
+              "position": [40, -5, -51.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -28267,10 +28298,10 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1842",
+                "index": "1843",
                 "static": false,
                 "Transform": {
-                  "position": [40, -4.95, -50.003],
+                  "position": [40, -5, -50.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -28289,20 +28320,20 @@
               },
               {
                 "name": "Altar_2",
-                "index": "1843",
+                "index": "1844",
                 "static": true,
                 "Transform": {
-                  "position": [40, -3.95, -50.003],
+                  "position": [40, -4, -50.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
                 "children": [
                   {
                     "name": "Altar.2",
-                    "index": "1844",
+                    "index": "1845",
                     "static": true,
                     "Transform": {
-                      "position": [40, -3.95, -50.003],
+                      "position": [40, -4, -50.003],
                       "rotation": [270, 0, 0],
                       "scaleFactor": 0.5
                     },
@@ -28311,10 +28342,10 @@
                   },
                   {
                     "name": "Collider (Box)",
-                    "index": "1845",
+                    "index": "1846",
                     "static": false,
                     "Transform": {
-                      "position": [40, -3.624, -50.003],
+                      "position": [40, -3.674, -50.003],
                       "rotation": [0, 0, 0],
                       "scaleFactor": 1
                     },
@@ -28330,61 +28361,32 @@
                         "offset": [0, 0, 0]
                       }
                     ]
-                  },
+                  }
+                ]
+              },
+              {
+                "name": "Healing Basin",
+                "index": "1847",
+                "static": false,
+                "Transform": {
+                  "position": [40, -3.142, -50.003],
+                  "rotation": [0, 0, 0],
+                  "scaleFactor": 1
+                },
+                "Kinematic": {
+                },
+                "children": [
                   {
-                    "name": "Healing Basin",
-                    "index": "1846",
+                    "name": "Pot.2",
+                    "index": "1848",
                     "static": true,
                     "Transform": {
-                      "position": [40, -3.45, -50.003],
-                      "rotation": [0, 0, 0],
+                      "position": [40, -3.142, -50.003],
+                      "rotation": [270, 0, 0],
                       "scaleFactor": 1
                     },
-                    "children": [
-                      {
-                        "name": "Pot.2",
-                        "index": "1847",
-                        "static": true,
-                        "Transform": {
-                          "position": [40, -3.45, -50.003],
-                          "rotation": [270, 0, 0],
-                          "scaleFactor": 1
-                        },
-                        "MeshFilter": "Pot.2",
-                        "MeshRenderer": "pockedconcrete1-albedo"
-                      },
-                      {
-                        "name": "Collider",
-                        "index": "1848",
-                        "static": false,
-                        "Transform": {
-                          "position": [40, -3.248, -50.003],
-                          "rotation": [0, 0, 0],
-                          "scaleFactor": 1
-                        },
-                        "HealEvent": {
-                        },
-                        "Light": {
-                          "type": "Point",
-                          "color": [1, 1, 1, 1],
-                          "intensity": 3,
-                          "range": 5
-                        },
-                        "RaycastSwitch": {
-                          "events": [1848]
-                        },
-                        "Kinematic": {
-                        },
-                        "colliders": [
-                          {
-                            "type": "sphere",
-                            "isTrigger": false,
-                            "scale": 0.25,
-                            "offset": [0, 0, 0]
-                          }
-                        ]
-                      }
-                    ]
+                    "MeshFilter": "Pot.2",
+                    "MeshRenderer": "pockedconcrete1-albedo"
                   }
                 ]
               }
@@ -32329,7 +32331,7 @@
                   "scaleFactor": 1
                 },
                 "TriggerSwitch": {
-                  "events": [2152, 2170, 2167, 2176, 2173, 2155, 2179, 2182, 2164, 2158, 2197, 2194, 2161, 2185, 2188, 2191, 1841]
+                  "events": [2152, 2170, 2167, 2176, 2173, 2155, 2179, 2182, 2164, 2158, 2197, 2194, 2161, 2185, 2188, 2191, 1842]
                 },
                 "Kinematic": {
                 },
@@ -32619,7 +32621,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32639,7 +32641,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32659,7 +32661,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32679,7 +32681,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32699,7 +32701,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32719,7 +32721,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32739,7 +32741,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32759,7 +32761,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32779,7 +32781,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32799,7 +32801,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32819,7 +32821,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32839,7 +32841,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32859,7 +32861,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32879,7 +32881,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32899,7 +32901,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32919,7 +32921,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32939,7 +32941,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32959,7 +32961,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32979,7 +32981,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -32999,7 +33001,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33019,7 +33021,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33039,7 +33041,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33059,7 +33061,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33079,7 +33081,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33099,7 +33101,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33119,7 +33121,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33139,7 +33141,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33159,7 +33161,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33179,7 +33181,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33199,7 +33201,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33219,7 +33221,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33239,7 +33241,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33259,7 +33261,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33279,7 +33281,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33299,7 +33301,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33319,7 +33321,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33339,7 +33341,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33359,7 +33361,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33379,7 +33381,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33399,7 +33401,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33419,7 +33421,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33439,7 +33441,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -33459,7 +33461,7 @@
             "type": "box",
             "isTrigger": false,
             "scaleX": 2,
-            "scaleY": 2,
+            "scaleY": 6,
             "scaleZ": 2,
             "offset": [0, 0, 0]
           }
@@ -34738,6 +34740,63 @@
               "intensity": 1,
               "range": 1
             }
+          }
+        ]
+      },
+      {
+        "name": "Healing Basin",
+        "index": "2219",
+        "static": false,
+        "Transform": {
+          "position": [41.06241, 0.086, -18.42686],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "Kinematic": {
+        },
+        "children": [
+          {
+            "name": "Pot.2",
+            "index": "2220",
+            "static": true,
+            "Transform": {
+              "position": [41.06241, 0.086, -18.42686],
+              "rotation": [270, 0, 0],
+              "scaleFactor": 1
+            },
+            "MeshFilter": "Pot.2",
+            "MeshRenderer": "pockedconcrete1-albedo"
+          },
+          {
+            "name": "Collider",
+            "index": "2221",
+            "static": false,
+            "Transform": {
+              "position": [41.06241, 0.288, -18.42686],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 1
+            },
+            "HealEvent": {
+            },
+            "Light": {
+              "type": "Point",
+              "color": [1, 1, 1, 1],
+              "intensity": 12,
+              "range": 10
+            },
+            "RaycastSwitch": {
+              "events": [2221]
+            },
+            "Kinematic": {
+            },
+            "colliders": [
+              {
+                "type": "sphere",
+                "isTrigger": false,
+                "scale": 0.75,
+                "offset": [0, 0, 0]
+              }
+            ]
           }
         ]
       }

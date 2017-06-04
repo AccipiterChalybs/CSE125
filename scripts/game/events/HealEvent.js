@@ -7,9 +7,9 @@ class HealEvent extends RaycastEvent{
     //TODO Make this cleaner! Or maybe add to playerobject
     // // this.transform.gameObject.parent=null;
     // this.transform._parent.children[]
-    Debug.log("hello");
     let player = interactingObj.getComponent('PlayerController');
     if (player && player !== null) {
+      // Debug.log("hello");
       if (player.injured) {
         player.injured = false;
         Debug.log('HEALING');
