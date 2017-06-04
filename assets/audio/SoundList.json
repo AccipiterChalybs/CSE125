@@ -34,13 +34,13 @@
   "loop": true,
   "type": 1,
   "space": 3
-},"Tone2.wav_7":{
-  "src": "assets/audio/Tone2.wav",
+},"Tone1.wav_7":{
+  "src": "assets/audio/Tone1.wav",
   "loop": true,
   "type": 1,
   "space": 3
-},"Tone3.wav_8":{
-  "src": "assets/audio/Tone3.wav",
+},"Tone1.wav_8":{
+  "src": "assets/audio/Tone1.wav",
   "loop": true,
   "type": 1,
   "space": 3
@@ -49,13 +49,13 @@
   "loop": true,
   "type": 1,
   "space": 3
-},"Tone4.wav_10":{
-  "src": "assets/audio/Tone4.wav",
+},"Tone2.wav_10":{
+  "src": "assets/audio/Tone2.wav",
   "loop": true,
   "type": 1,
   "space": 3
-},"Tone1.wav_11":{
-  "src": "assets/audio/Tone1.wav",
+},"Tone3.wav_11":{
+  "src": "assets/audio/Tone3.wav",
   "loop": true,
   "type": 1,
   "space": 3
@@ -64,8 +64,8 @@
   "loop": true,
   "type": 1,
   "space": 3
-},"Tone1.wav_13":{
-  "src": "assets/audio/Tone1.wav",
+},"Tone4.wav_13":{
+  "src": "assets/audio/Tone4.wav",
   "loop": true,
   "type": 1,
   "space": 3
@@ -99,17 +99,32 @@
   "loop": true,
   "type": 1,
   "space": 3
-},"Tone2.wav_20":{
+},"Tone1.wav_20":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_21":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_22":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone2.wav_23":{
   "src": "assets/audio/Tone2.wav",
   "loop": true,
   "type": 1,
   "space": 3
-},"Tone3.wav_21":{
+},"Tone3.wav_24":{
   "src": "assets/audio/Tone3.wav",
   "loop": true,
   "type": 1,
   "space": 3
-},"Tone4.wav_22":{
+},"Tone4.wav_25":{
   "src": "assets/audio/Tone4.wav",
   "loop": true,
   "type": 1,

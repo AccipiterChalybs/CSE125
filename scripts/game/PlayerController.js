@@ -152,6 +152,7 @@ class PlayerController extends Playerable{
   }
 
   heal(){
+    // Debug.log("Healed");
     this.injured = false;
   }
 

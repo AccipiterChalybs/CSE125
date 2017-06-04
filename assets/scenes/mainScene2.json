@@ -857,7 +857,7 @@
           "animationName": "OctopusCharacterAnim"
         },
         "Look": {
-          "range": 5
+          "range": 1
         },
         "Sing": {
           "range": 2,
@@ -13617,7 +13617,7 @@
           "animationName": "OctopusCharacterAnim"
         },
         "Look": {
-          "range": 5
+          "range": 1
         },
         "Sing": {
           "range": 2,
@@ -13625,6 +13625,12 @@
           "lightIntensity": 10,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_2",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
         },
         "colliders": [
           {
@@ -14065,7 +14071,7 @@
           "animationName": "OctopusCharacterAnim"
         },
         "Look": {
-          "range": 5
+          "range": 1
         },
         "Sing": {
           "range": 2,
@@ -14073,6 +14079,12 @@
           "lightIntensity": 10,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_3",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
         },
         "colliders": [
           {
@@ -15035,7 +15047,7 @@
           "animationName": "OctopusCharacterAnim"
         },
         "Look": {
-          "range": 5
+          "range": 1
         },
         "Sing": {
           "range": 2,
@@ -15043,6 +15055,12 @@
           "lightIntensity": 10,
           "maxLightRange": 8,
           "minLightRange": 1
+        },
+        "AudioSource": {
+          "audioName": "Tone1.wav_4",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
         },
         "colliders": [
           {
@@ -18485,7 +18503,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_2",
+          "audioName": "Tone1.wav_5",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -20409,7 +20427,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_3",
+          "audioName": "Tone1.wav_6",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -25147,7 +25165,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_4",
+          "audioName": "Tone1.wav_7",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -25244,7 +25262,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_5",
+          "audioName": "Tone1.wav_8",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -25702,7 +25720,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_6",
+          "audioName": "Tone1.wav_9",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -25799,7 +25817,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone2.wav_7",
+          "audioName": "Tone2.wav_10",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -25896,7 +25914,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone3.wav_8",
+          "audioName": "Tone3.wav_11",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -25993,7 +26011,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_9",
+          "audioName": "Tone1.wav_12",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -26090,7 +26108,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone4.wav_10",
+          "audioName": "Tone4.wav_13",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -26187,7 +26205,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_11",
+          "audioName": "Tone1.wav_14",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -26318,7 +26336,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_12",
+          "audioName": "Tone1.wav_15",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -28246,14 +28264,8 @@
         },
         "HealEvent": {
         },
-        "Light": {
-          "type": "Point",
-          "color": [1, 1, 1, 1],
-          "intensity": 12,
-          "range": 10
-        },
         "RaycastSwitch": {
-          "events": [1840]
+          "events": [1840, 1841, 1842]
         },
         "Kinematic": {
         },
@@ -28264,11 +28276,39 @@
             "scale": 0.75,
             "offset": [0, 0, 0]
           }
+        ],
+        "children": [
+          {
+            "name": "StopLight",
+            "index": "1841",
+            "static": true,
+            "Transform": {
+              "position": [40, 1.06, -50.003],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 1
+            },
+            "StopLightEvent": {
+              "lights": [1850]
+            }
+          },
+          {
+            "name": "StopSingStatue",
+            "index": "1842",
+            "static": true,
+            "Transform": {
+              "position": [40, 1.06, -50.003],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 1
+            },
+            "StopSingStatueEvent": {
+              "singStatueEvents": [2032, 2037, 2042, 2062, 2047, 2057, 2052, 1695, 1700, 1705, 1710, 1715, 1720, 1727, 2206, 2211, 2216]
+            }
+          }
         ]
       },
       {
         "name": "Block_Large_1 (42)",
-        "index": "1841",
+        "index": "1843",
         "static": false,
         "Transform": {
           "position": [40, -1, -51.003],
@@ -28280,7 +28320,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1842",
+            "index": "1844",
             "static": false,
             "Transform": {
               "position": [40, -5, -51.003],
@@ -28298,7 +28338,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1843",
+                "index": "1845",
                 "static": false,
                 "Transform": {
                   "position": [40, -5, -50.003],
@@ -28320,7 +28360,7 @@
               },
               {
                 "name": "Altar_2",
-                "index": "1844",
+                "index": "1846",
                 "static": true,
                 "Transform": {
                   "position": [40, -4, -50.003],
@@ -28330,7 +28370,7 @@
                 "children": [
                   {
                     "name": "Altar.2",
-                    "index": "1845",
+                    "index": "1847",
                     "static": true,
                     "Transform": {
                       "position": [40, -4, -50.003],
@@ -28342,7 +28382,7 @@
                   },
                   {
                     "name": "Collider (Box)",
-                    "index": "1846",
+                    "index": "1848",
                     "static": false,
                     "Transform": {
                       "position": [40, -3.674, -50.003],
@@ -28366,7 +28406,7 @@
               },
               {
                 "name": "Healing Basin",
-                "index": "1847",
+                "index": "1849",
                 "static": false,
                 "Transform": {
                   "position": [40, -3.142, -50.003],
@@ -28378,7 +28418,7 @@
                 "children": [
                   {
                     "name": "Pot.2",
-                    "index": "1848",
+                    "index": "1850",
                     "static": true,
                     "Transform": {
                       "position": [40, -3.142, -50.003],
@@ -28386,7 +28426,13 @@
                       "scaleFactor": 1
                     },
                     "MeshFilter": "Pot.2",
-                    "MeshRenderer": "pockedconcrete1-albedo"
+                    "MeshRenderer": "pockedconcrete1-albedo",
+                    "Light": {
+                      "type": "Point",
+                      "color": [1, 1, 1, 1],
+                      "intensity": 12,
+                      "range": 10
+                    }
                   }
                 ]
               }
@@ -28396,7 +28442,7 @@
       },
       {
         "name": "Block_Large_1 (44)",
-        "index": "1849",
+        "index": "1851",
         "static": false,
         "Transform": {
           "position": [36, -0.86, -51.003],
@@ -28408,7 +28454,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1850",
+            "index": "1852",
             "static": false,
             "Transform": {
               "position": [36, -0.86, -51.003],
@@ -28422,7 +28468,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1851",
+                "index": "1853",
                 "static": false,
                 "Transform": {
                   "position": [36, -0.86, -50.003],
@@ -28448,7 +28494,7 @@
       },
       {
         "name": "Block_Large_1 (46)",
-        "index": "1852",
+        "index": "1854",
         "static": false,
         "Transform": {
           "position": [36, -0.69, -47.003],
@@ -28460,7 +28506,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1853",
+            "index": "1855",
             "static": false,
             "Transform": {
               "position": [36, -0.69, -47.003],
@@ -28474,7 +28520,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1854",
+                "index": "1856",
                 "static": false,
                 "Transform": {
                   "position": [36, -0.69, -46.003],
@@ -28500,7 +28546,7 @@
       },
       {
         "name": "Block_Large_1 (47)",
-        "index": "1855",
+        "index": "1857",
         "static": false,
         "Transform": {
           "position": [44, -0.57, -47.003],
@@ -28512,7 +28558,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1856",
+            "index": "1858",
             "static": false,
             "Transform": {
               "position": [44, -0.57, -47.003],
@@ -28526,7 +28572,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1857",
+                "index": "1859",
                 "static": false,
                 "Transform": {
                   "position": [44, -0.57, -46.003],
@@ -28552,7 +28598,7 @@
       },
       {
         "name": "Block_Large_1 (49)",
-        "index": "1858",
+        "index": "1860",
         "static": false,
         "Transform": {
           "position": [44, -0.63, -51.003],
@@ -28564,7 +28610,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1859",
+            "index": "1861",
             "static": false,
             "Transform": {
               "position": [44, -0.63, -51.003],
@@ -28578,7 +28624,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1860",
+                "index": "1862",
                 "static": false,
                 "Transform": {
                   "position": [44, -0.63, -50.003],
@@ -28604,7 +28650,7 @@
       },
       {
         "name": "Staircase (1)",
-        "index": "1861",
+        "index": "1863",
         "static": true,
         "Transform": {
           "position": [40, -1.5, 1.997],
@@ -28614,7 +28660,7 @@
         "children": [
           {
             "name": "Step.1",
-            "index": "1862",
+            "index": "1864",
             "static": true,
             "Transform": {
               "position": [40, -1.5, 2.879],
@@ -28626,7 +28672,7 @@
           },
           {
             "name": "Step.1 (1)",
-            "index": "1863",
+            "index": "1865",
             "static": true,
             "Transform": {
               "position": [40, -1.4, 3.027],
@@ -28638,7 +28684,7 @@
           },
           {
             "name": "Step.1 (2)",
-            "index": "1864",
+            "index": "1866",
             "static": true,
             "Transform": {
               "position": [40, -1.3, 3.177],
@@ -28650,7 +28696,7 @@
           },
           {
             "name": "Step.1 (3)",
-            "index": "1865",
+            "index": "1867",
             "static": true,
             "Transform": {
               "position": [40, -1.2, 3.327],
@@ -28662,7 +28708,7 @@
           },
           {
             "name": "Step.1 (4)",
-            "index": "1866",
+            "index": "1868",
             "static": true,
             "Transform": {
               "position": [40, -1.1, 3.477],
@@ -28674,7 +28720,7 @@
           },
           {
             "name": "Step.1 (5)",
-            "index": "1867",
+            "index": "1869",
             "static": true,
             "Transform": {
               "position": [40, -1, 3.627],
@@ -28686,7 +28732,7 @@
           },
           {
             "name": "Step.1 (6)",
-            "index": "1868",
+            "index": "1870",
             "static": true,
             "Transform": {
               "position": [40, -0.9, 3.777],
@@ -28698,7 +28744,7 @@
           },
           {
             "name": "Step.1 (7)",
-            "index": "1869",
+            "index": "1871",
             "static": true,
             "Transform": {
               "position": [40, -0.8, 3.927],
@@ -28710,7 +28756,7 @@
           },
           {
             "name": "Step.1 (8)",
-            "index": "1870",
+            "index": "1872",
             "static": true,
             "Transform": {
               "position": [40, -0.7, 4.077],
@@ -28722,7 +28768,7 @@
           },
           {
             "name": "Step.1 (9)",
-            "index": "1871",
+            "index": "1873",
             "static": true,
             "Transform": {
               "position": [40, -0.6, 4.227],
@@ -28734,7 +28780,7 @@
           },
           {
             "name": "Step.1 (10)",
-            "index": "1872",
+            "index": "1874",
             "static": true,
             "Transform": {
               "position": [40, -0.5, 4.377],
@@ -28746,7 +28792,7 @@
           },
           {
             "name": "Step.1 (11)",
-            "index": "1873",
+            "index": "1875",
             "static": true,
             "Transform": {
               "position": [40, -0.4, 4.527],
@@ -28758,7 +28804,7 @@
           },
           {
             "name": "Step.1 (12)",
-            "index": "1874",
+            "index": "1876",
             "static": true,
             "Transform": {
               "position": [40, -0.3, 4.677],
@@ -28770,7 +28816,7 @@
           },
           {
             "name": "Step.1 (13)",
-            "index": "1875",
+            "index": "1877",
             "static": true,
             "Transform": {
               "position": [40, -0.2, 4.827],
@@ -28782,7 +28828,7 @@
           },
           {
             "name": "Step.1 (14)",
-            "index": "1876",
+            "index": "1878",
             "static": true,
             "Transform": {
               "position": [40, -0.1, 4.977],
@@ -28794,7 +28840,7 @@
           },
           {
             "name": "Collision (Top)",
-            "index": "1877",
+            "index": "1879",
             "static": true,
             "Transform": {
               "position": [40, -0.06799996, 5.047],
@@ -28814,7 +28860,7 @@
           },
           {
             "name": "Collision",
-            "index": "1878",
+            "index": "1880",
             "static": true,
             "Transform": {
               "position": [40, -0.867, 3.748],
@@ -28836,7 +28882,7 @@
       },
       {
         "name": "Block_Large_1 (3)",
-        "index": "1879",
+        "index": "1881",
         "static": false,
         "Transform": {
           "position": [44, -0.963, -23.003],
@@ -28848,7 +28894,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1880",
+            "index": "1882",
             "static": false,
             "Transform": {
               "position": [44, -0.963, -23.003],
@@ -28862,7 +28908,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1881",
+                "index": "1883",
                 "static": false,
                 "Transform": {
                   "position": [44, -0.963, -22.003],
@@ -28888,7 +28934,7 @@
       },
       {
         "name": "Block_Large_1 (4)",
-        "index": "1882",
+        "index": "1884",
         "static": false,
         "Transform": {
           "position": [36, -0.807, -23.003],
@@ -28900,7 +28946,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "1883",
+            "index": "1885",
             "static": false,
             "Transform": {
               "position": [36, -0.807, -23.003],
@@ -28914,7 +28960,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1884",
+                "index": "1886",
                 "static": false,
                 "Transform": {
                   "position": [36, -0.807, -22.003],
@@ -28940,7 +28986,7 @@
       },
       {
         "name": "Staircase",
-        "index": "1885",
+        "index": "1887",
         "static": true,
         "Transform": {
           "position": [40, -1.5, -14.003],
@@ -28950,7 +28996,7 @@
         "children": [
           {
             "name": "Step.1",
-            "index": "1886",
+            "index": "1888",
             "static": true,
             "Transform": {
               "position": [40, -1.5, -14.885],
@@ -28962,7 +29008,7 @@
           },
           {
             "name": "Step.1 (1)",
-            "index": "1887",
+            "index": "1889",
             "static": true,
             "Transform": {
               "position": [40, -1.4, -15.033],
@@ -28974,7 +29020,7 @@
           },
           {
             "name": "Step.1 (2)",
-            "index": "1888",
+            "index": "1890",
             "static": true,
             "Transform": {
               "position": [40, -1.3, -15.183],
@@ -28986,7 +29032,7 @@
           },
           {
             "name": "Step.1 (3)",
-            "index": "1889",
+            "index": "1891",
             "static": true,
             "Transform": {
               "position": [40, -1.2, -15.333],
@@ -28998,7 +29044,7 @@
           },
           {
             "name": "Step.1 (4)",
-            "index": "1890",
+            "index": "1892",
             "static": true,
             "Transform": {
               "position": [40, -1.1, -15.483],
@@ -29010,7 +29056,7 @@
           },
           {
             "name": "Step.1 (5)",
-            "index": "1891",
+            "index": "1893",
             "static": true,
             "Transform": {
               "position": [40, -1, -15.633],
@@ -29022,7 +29068,7 @@
           },
           {
             "name": "Step.1 (6)",
-            "index": "1892",
+            "index": "1894",
             "static": true,
             "Transform": {
               "position": [40, -0.9, -15.783],
@@ -29034,7 +29080,7 @@
           },
           {
             "name": "Step.1 (7)",
-            "index": "1893",
+            "index": "1895",
             "static": true,
             "Transform": {
               "position": [40, -0.8, -15.933],
@@ -29046,7 +29092,7 @@
           },
           {
             "name": "Step.1 (8)",
-            "index": "1894",
+            "index": "1896",
             "static": true,
             "Transform": {
               "position": [40, -0.7, -16.083],
@@ -29058,7 +29104,7 @@
           },
           {
             "name": "Step.1 (9)",
-            "index": "1895",
+            "index": "1897",
             "static": true,
             "Transform": {
               "position": [40, -0.6, -16.233],
@@ -29070,7 +29116,7 @@
           },
           {
             "name": "Step.1 (10)",
-            "index": "1896",
+            "index": "1898",
             "static": true,
             "Transform": {
               "position": [40, -0.5, -16.383],
@@ -29082,7 +29128,7 @@
           },
           {
             "name": "Step.1 (11)",
-            "index": "1897",
+            "index": "1899",
             "static": true,
             "Transform": {
               "position": [40, -0.4, -16.533],
@@ -29094,7 +29140,7 @@
           },
           {
             "name": "Step.1 (12)",
-            "index": "1898",
+            "index": "1900",
             "static": true,
             "Transform": {
               "position": [40, -0.3, -16.683],
@@ -29106,7 +29152,7 @@
           },
           {
             "name": "Step.1 (13)",
-            "index": "1899",
+            "index": "1901",
             "static": true,
             "Transform": {
               "position": [40, -0.2, -16.833],
@@ -29118,7 +29164,7 @@
           },
           {
             "name": "Step.1 (14)",
-            "index": "1900",
+            "index": "1902",
             "static": true,
             "Transform": {
               "position": [40, -0.1, -16.983],
@@ -29130,7 +29176,7 @@
           },
           {
             "name": "Collision (Top)",
-            "index": "1901",
+            "index": "1903",
             "static": true,
             "Transform": {
               "position": [40, -0.06799996, -17.053],
@@ -29150,7 +29196,7 @@
           },
           {
             "name": "Collision",
-            "index": "1902",
+            "index": "1904",
             "static": true,
             "Transform": {
               "position": [40, -0.867, -15.754],
@@ -29172,7 +29218,7 @@
       },
       {
         "name": "Floor (78)",
-        "index": "1903",
+        "index": "1905",
         "static": true,
         "Transform": {
           "position": [20, -1.5, 0],
@@ -29182,7 +29228,7 @@
         "children": [
           {
             "name": "Ground_tiled.1",
-            "index": "1904",
+            "index": "1906",
             "static": true,
             "Transform": {
               "position": [20, -1.5, 0],
@@ -29204,7 +29250,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "1905",
+                "index": "1907",
                 "static": true,
                 "Transform": {
                   "position": [20, -1.999, 5.960464E-08],
@@ -29228,7 +29274,7 @@
       },
       {
         "name": "Wall_Ornate_3 (126)",
-        "index": "1906",
+        "index": "1908",
         "static": true,
         "Transform": {
           "position": [20, -1.5, 1],
@@ -29238,7 +29284,7 @@
         "children": [
           {
             "name": "Wall_ornate.3",
-            "index": "1907",
+            "index": "1909",
             "static": true,
             "Transform": {
               "position": [20, -1.5, 1],
@@ -29262,7 +29308,7 @@
       },
       {
         "name": "Wall_Ornate_3 (127)",
-        "index": "1908",
+        "index": "1910",
         "static": true,
         "Transform": {
           "position": [20, -1.5, -1],
@@ -29272,7 +29318,7 @@
         "children": [
           {
             "name": "Wall_ornate.3",
-            "index": "1909",
+            "index": "1911",
             "static": true,
             "Transform": {
               "position": [20, -1.5, -1],
@@ -29296,7 +29342,7 @@
       },
       {
         "name": "Ceiling_Flat (114)",
-        "index": "1910",
+        "index": "1912",
         "static": true,
         "Transform": {
           "position": [20.148, 1.355, 0],
@@ -29306,7 +29352,7 @@
         "children": [
           {
             "name": "Ceiling.2",
-            "index": "1911",
+            "index": "1913",
             "static": true,
             "Transform": {
               "position": [20.148, 1.355, 0],
@@ -29330,7 +29376,7 @@
       },
       {
         "name": "Ceiling_Flat (115)",
-        "index": "1912",
+        "index": "1914",
         "static": true,
         "Transform": {
           "position": [20, 2.384259, -0.9657409],
@@ -29340,7 +29386,7 @@
         "children": [
           {
             "name": "Ceiling.2",
-            "index": "1913",
+            "index": "1915",
             "static": true,
             "Transform": {
               "position": [20, 2.384259, -0.9657409],
@@ -29364,7 +29410,7 @@
       },
       {
         "name": "Ceiling_Flat (116)",
-        "index": "1914",
+        "index": "1916",
         "static": true,
         "Transform": {
           "position": [20, 2.384259, 1.034],
@@ -29374,7 +29420,7 @@
         "children": [
           {
             "name": "Ceiling.2",
-            "index": "1915",
+            "index": "1917",
             "static": true,
             "Transform": {
               "position": [20, 2.384259, 1.034],
@@ -29398,7 +29444,7 @@
       },
       {
         "name": "Ceiling_Flat (117)",
-        "index": "1916",
+        "index": "1918",
         "static": true,
         "Transform": {
           "position": [21.03426, 1.889, 0],
@@ -29408,7 +29454,7 @@
         "children": [
           {
             "name": "Ceiling.2",
-            "index": "1917",
+            "index": "1919",
             "static": true,
             "Transform": {
               "position": [21.03426, 1.889, 0],
@@ -29432,7 +29478,7 @@
       },
       {
         "name": "Ceiling_Flat (119)",
-        "index": "1918",
+        "index": "1920",
         "static": true,
         "Transform": {
           "position": [22.107, 0.689, -6],
@@ -29442,7 +29488,7 @@
         "children": [
           {
             "name": "Ceiling.2",
-            "index": "1919",
+            "index": "1921",
             "static": true,
             "Transform": {
               "position": [22.107, 0.689, -6],
@@ -29466,7 +29512,7 @@
       },
       {
         "name": "Ceiling_Flat (118)",
-        "index": "1920",
+        "index": "1922",
         "static": true,
         "Transform": {
           "position": [18.416, 2.355, 0],
@@ -29476,7 +29522,7 @@
         "children": [
           {
             "name": "Ceiling.2",
-            "index": "1921",
+            "index": "1923",
             "static": true,
             "Transform": {
               "position": [18.416, 2.355, 0],
@@ -29500,7 +29546,7 @@
       },
       {
         "name": "Ceiling_Flat (120)",
-        "index": "1922",
+        "index": "1924",
         "static": true,
         "Transform": {
           "position": [20, 2.38, -4.97],
@@ -29510,7 +29556,7 @@
         "children": [
           {
             "name": "Ceiling.2",
-            "index": "1923",
+            "index": "1925",
             "static": true,
             "Transform": {
               "position": [20, 2.38, -4.97],
@@ -29534,7 +29580,7 @@
       },
       {
         "name": "Ceiling_Flat (121)",
-        "index": "1924",
+        "index": "1926",
         "static": true,
         "Transform": {
           "position": [20, 2.38, -6.97],
@@ -29544,7 +29590,7 @@
         "children": [
           {
             "name": "Ceiling.2",
-            "index": "1925",
+            "index": "1927",
             "static": true,
             "Transform": {
               "position": [20, 2.38, -6.97],
@@ -29568,7 +29614,7 @@
       },
       {
         "name": "Ceiling_Flat (122)",
-        "index": "1926",
+        "index": "1928",
         "static": true,
         "Transform": {
           "position": [20.228, 1.373, -6],
@@ -29578,7 +29624,7 @@
         "children": [
           {
             "name": "Ceiling.2",
-            "index": "1927",
+            "index": "1929",
             "static": true,
             "Transform": {
               "position": [20.228, 1.373, -6],
@@ -29602,7 +29648,7 @@
       },
       {
         "name": "Wall_Ornate_3 (128)",
-        "index": "1928",
+        "index": "1930",
         "static": true,
         "Transform": {
           "position": [20, -1.5, -7],
@@ -29612,7 +29658,7 @@
         "children": [
           {
             "name": "Wall_ornate.3",
-            "index": "1929",
+            "index": "1931",
             "static": true,
             "Transform": {
               "position": [20, -1.5, -7],
@@ -29636,7 +29682,7 @@
       },
       {
         "name": "Staircase",
-        "index": "1930",
+        "index": "1932",
         "static": true,
         "Transform": {
           "position": [22, -1.5, 0],
@@ -29646,7 +29692,7 @@
         "children": [
           {
             "name": "Step.1",
-            "index": "1931",
+            "index": "1933",
             "static": true,
             "Transform": {
               "position": [21.118, -1.5, -2.980232E-07],
@@ -29658,7 +29704,7 @@
           },
           {
             "name": "Step.1 (1)",
-            "index": "1932",
+            "index": "1934",
             "static": true,
             "Transform": {
               "position": [20.97, -1.4, -3.576279E-07],
@@ -29670,7 +29716,7 @@
           },
           {
             "name": "Step.1 (2)",
-            "index": "1933",
+            "index": "1935",
             "static": true,
             "Transform": {
               "position": [20.82, -1.3, -4.768372E-07],
@@ -29682,7 +29728,7 @@
           },
           {
             "name": "Step.1 (3)",
-            "index": "1934",
+            "index": "1936",
             "static": true,
             "Transform": {
               "position": [20.67, -1.2, -4.768372E-07],
@@ -29694,7 +29740,7 @@
           },
           {
             "name": "Step.1 (4)",
-            "index": "1935",
+            "index": "1937",
             "static": true,
             "Transform": {
               "position": [20.52, -1.1, -4.768372E-07],
@@ -29706,7 +29752,7 @@
           },
           {
             "name": "Step.1 (5)",
-            "index": "1936",
+            "index": "1938",
             "static": true,
             "Transform": {
               "position": [20.37, -1, -5.960464E-07],
@@ -29718,7 +29764,7 @@
           },
           {
             "name": "Step.1 (6)",
-            "index": "1937",
+            "index": "1939",
             "static": true,
             "Transform": {
               "position": [20.22, -0.9, -5.960464E-07],
@@ -29730,7 +29776,7 @@
           },
           {
             "name": "Step.1 (7)",
-            "index": "1938",
+            "index": "1940",
             "static": true,
             "Transform": {
               "position": [20.07, -0.8, -7.152557E-07],
@@ -29742,7 +29788,7 @@
           },
           {
             "name": "Step.1 (8)",
-            "index": "1939",
+            "index": "1941",
             "static": true,
             "Transform": {
               "position": [19.92, -0.7, -7.152557E-07],
@@ -29754,7 +29800,7 @@
           },
           {
             "name": "Step.1 (9)",
-            "index": "1940",
+            "index": "1942",
             "static": true,
             "Transform": {
               "position": [19.77, -0.6, -7.152557E-07],
@@ -29766,7 +29812,7 @@
           },
           {
             "name": "Step.1 (10)",
-            "index": "1941",
+            "index": "1943",
             "static": true,
             "Transform": {
               "position": [19.62, -0.5, -9.536743E-07],
@@ -29778,7 +29824,7 @@
           },
           {
             "name": "Step.1 (11)",
-            "index": "1942",
+            "index": "1944",
             "static": true,
             "Transform": {
               "position": [19.47, -0.4, -9.536743E-07],
@@ -29790,7 +29836,7 @@
           },
           {
             "name": "Step.1 (12)",
-            "index": "1943",
+            "index": "1945",
             "static": true,
             "Transform": {
               "position": [19.32, -0.3, -9.536743E-07],
@@ -29802,7 +29848,7 @@
           },
           {
             "name": "Step.1 (13)",
-            "index": "1944",
+            "index": "1946",
             "static": true,
             "Transform": {
               "position": [19.17, -0.2, -9.536743E-07],
@@ -29814,7 +29860,7 @@
           },
           {
             "name": "Step.1 (14)",
-            "index": "1945",
+            "index": "1947",
             "static": true,
             "Transform": {
               "position": [19.02, -0.1, -9.536743E-07],
@@ -29826,7 +29872,7 @@
           },
           {
             "name": "Collision (Top)",
-            "index": "1946",
+            "index": "1948",
             "static": true,
             "Transform": {
               "position": [18.95, -0.06799996, -1.192093E-06],
@@ -29846,7 +29892,7 @@
           },
           {
             "name": "Collision",
-            "index": "1947",
+            "index": "1949",
             "static": true,
             "Transform": {
               "position": [20.249, -0.867, -5.960464E-07],
@@ -29868,7 +29914,7 @@
       },
       {
         "name": "Ceiling_Flat (123)",
-        "index": "1948",
+        "index": "1950",
         "static": true,
         "Transform": {
           "position": [18.349, 2.057, -6],
@@ -29878,7 +29924,7 @@
         "children": [
           {
             "name": "Ceiling.2",
-            "index": "1949",
+            "index": "1951",
             "static": true,
             "Transform": {
               "position": [18.349, 2.057, -6],
@@ -29902,7 +29948,7 @@
       },
       {
         "name": "Wall_Ornate_3 (129)",
-        "index": "1950",
+        "index": "1952",
         "static": true,
         "Transform": {
           "position": [20, -1.5, -5],
@@ -29912,7 +29958,7 @@
         "children": [
           {
             "name": "Wall_ornate.3",
-            "index": "1951",
+            "index": "1953",
             "static": true,
             "Transform": {
               "position": [20, -1.5, -5],
@@ -29936,7 +29982,7 @@
       },
       {
         "name": "Pillar_Round_1 (88)",
-        "index": "1952",
+        "index": "1954",
         "static": true,
         "Transform": {
           "position": [21, -2.336, -3.003],
@@ -29946,7 +29992,7 @@
         "children": [
           {
             "name": "Pillar_round.1",
-            "index": "1953",
+            "index": "1955",
             "static": true,
             "Transform": {
               "position": [21, -2.336, -3.003],
@@ -29958,7 +30004,7 @@
           },
           {
             "name": "Collider (Sphere)",
-            "index": "1954",
+            "index": "1956",
             "static": true,
             "Transform": {
               "position": [21, -2.336, -3.003],
@@ -29976,7 +30022,7 @@
           },
           {
             "name": "Collider (Cube)",
-            "index": "1955",
+            "index": "1957",
             "static": true,
             "Transform": {
               "position": [21, -0.383, -3.003],
@@ -29998,7 +30044,7 @@
       },
       {
         "name": "Pillar_Round_1 (89)",
-        "index": "1956",
+        "index": "1958",
         "static": true,
         "Transform": {
           "position": [21, -2.336, 2.997],
@@ -30008,7 +30054,7 @@
         "children": [
           {
             "name": "Pillar_round.1",
-            "index": "1957",
+            "index": "1959",
             "static": true,
             "Transform": {
               "position": [21, -2.336, 2.997],
@@ -30020,7 +30066,7 @@
           },
           {
             "name": "Collider (Sphere)",
-            "index": "1958",
+            "index": "1960",
             "static": true,
             "Transform": {
               "position": [21, -2.336, 2.997],
@@ -30038,7 +30084,7 @@
           },
           {
             "name": "Collider (Cube)",
-            "index": "1959",
+            "index": "1961",
             "static": true,
             "Transform": {
               "position": [21, -0.383, 2.997],
@@ -30060,7 +30106,7 @@
       },
       {
         "name": "Torch",
-        "index": "1960",
+        "index": "1962",
         "static": true,
         "Transform": {
           "position": [37, -0.5, -3.003],
@@ -30070,7 +30116,7 @@
         "children": [
           {
             "name": "Torch.1",
-            "index": "1961",
+            "index": "1963",
             "static": true,
             "Transform": {
               "position": [37, -0.5, -3.003],
@@ -30082,7 +30128,7 @@
           },
           {
             "name": "Light",
-            "index": "1962",
+            "index": "1964",
             "static": true,
             "Transform": {
               "position": [37, 0.6629748, -3.314618],
@@ -30100,7 +30146,7 @@
       },
       {
         "name": "Wall_Ornate_3 (107)",
-        "index": "1963",
+        "index": "1965",
         "static": true,
         "Transform": {
           "position": [35, -1.5, -8.003],
@@ -30110,7 +30156,7 @@
         "children": [
           {
             "name": "Wall_ornate.3",
-            "index": "1964",
+            "index": "1966",
             "static": true,
             "Transform": {
               "position": [35, -1.5, -8.003],
@@ -30134,7 +30180,7 @@
       },
       {
         "name": "Wall_Ornate_3 (109)",
-        "index": "1965",
+        "index": "1967",
         "static": true,
         "Transform": {
           "position": [35, -1.5, -4],
@@ -30144,7 +30190,7 @@
         "children": [
           {
             "name": "Wall_ornate.3",
-            "index": "1966",
+            "index": "1968",
             "static": true,
             "Transform": {
               "position": [35, -1.5, -4],
@@ -30168,7 +30214,7 @@
       },
       {
         "name": "Torch (1)",
-        "index": "1967",
+        "index": "1969",
         "static": true,
         "Transform": {
           "position": [37, -0.5, -9.003],
@@ -30178,7 +30224,7 @@
         "children": [
           {
             "name": "Torch.1",
-            "index": "1968",
+            "index": "1970",
             "static": true,
             "Transform": {
               "position": [37, -0.5, -9.003],
@@ -30190,7 +30236,7 @@
           },
           {
             "name": "Light",
-            "index": "1969",
+            "index": "1971",
             "static": true,
             "Transform": {
               "position": [37, 0.6629748, -8.691382],
@@ -30208,7 +30254,7 @@
       },
       {
         "name": "Ceiling_Flat (65)",
-        "index": "1970",
+        "index": "1972",
         "static": true,
         "Transform": {
           "position": [35, 2.35, -4],
@@ -30218,7 +30264,7 @@
         "children": [
           {
             "name": "Ceiling.2",
-            "index": "1971",
+            "index": "1973",
             "static": true,
             "Transform": {
               "position": [35, 2.35, -4],
@@ -30242,7 +30288,7 @@
       },
       {
         "name": "Torch (2)",
-        "index": "1972",
+        "index": "1974",
         "static": true,
         "Transform": {
           "position": [43, -0.5, -9.003],
@@ -30252,7 +30298,7 @@
         "children": [
           {
             "name": "Torch.1",
-            "index": "1973",
+            "index": "1975",
             "static": true,
             "Transform": {
               "position": [43, -0.5, -9.003],
@@ -30264,7 +30310,7 @@
           },
           {
             "name": "Light",
-            "index": "1974",
+            "index": "1976",
             "static": true,
             "Transform": {
               "position": [43, 0.6629748, -8.691382],
@@ -30282,7 +30328,7 @@
       },
       {
         "name": "Ceiling_Flat (66)",
-        "index": "1975",
+        "index": "1977",
         "static": true,
         "Transform": {
           "position": [35, 2.35, -8],
@@ -30292,7 +30338,7 @@
         "children": [
           {
             "name": "Ceiling.2",
-            "index": "1976",
+            "index": "1978",
             "static": true,
             "Transform": {
               "position": [35, 2.35, -8],
@@ -30316,7 +30362,7 @@
       },
       {
         "name": "Torch (3)",
-        "index": "1977",
+        "index": "1979",
         "static": true,
         "Transform": {
           "position": [43, -0.5, -3.003],
@@ -30326,7 +30372,7 @@
         "children": [
           {
             "name": "Torch.1",
-            "index": "1978",
+            "index": "1980",
             "static": true,
             "Transform": {
               "position": [43, -0.5, -3.003],
@@ -30338,7 +30384,7 @@
           },
           {
             "name": "Light",
-            "index": "1979",
+            "index": "1981",
             "static": true,
             "Transform": {
               "position": [43, 0.6629748, -3.314618],
@@ -30356,7 +30402,7 @@
       },
       {
         "name": "Ceiling_Flat (67)",
-        "index": "1980",
+        "index": "1982",
         "static": true,
         "Transform": {
           "position": [35, 3.35, -6.003],
@@ -30366,7 +30412,7 @@
         "children": [
           {
             "name": "Ceiling.2",
-            "index": "1981",
+            "index": "1983",
             "static": true,
             "Transform": {
               "position": [35, 3.35, -6.003],
@@ -30390,7 +30436,7 @@
       },
       {
         "name": "Staircase (2)",
-        "index": "1982",
+        "index": "1984",
         "static": true,
         "Transform": {
           "position": [22, -1.5, -6],
@@ -30400,7 +30446,7 @@
         "children": [
           {
             "name": "Step.1",
-            "index": "1983",
+            "index": "1985",
             "static": true,
             "Transform": {
               "position": [21.118, -1.5, -6],
@@ -30412,7 +30458,7 @@
           },
           {
             "name": "Step.1 (1)",
-            "index": "1984",
+            "index": "1986",
             "static": true,
             "Transform": {
               "position": [20.97, -1.4, -6],
@@ -30424,7 +30470,7 @@
           },
           {
             "name": "Step.1 (2)",
-            "index": "1985",
+            "index": "1987",
             "static": true,
             "Transform": {
               "position": [20.82, -1.3, -6],
@@ -30436,7 +30482,7 @@
           },
           {
             "name": "Step.1 (3)",
-            "index": "1986",
+            "index": "1988",
             "static": true,
             "Transform": {
               "position": [20.67, -1.2, -6],
@@ -30448,7 +30494,7 @@
           },
           {
             "name": "Step.1 (4)",
-            "index": "1987",
+            "index": "1989",
             "static": true,
             "Transform": {
               "position": [20.52, -1.1, -6],
@@ -30460,7 +30506,7 @@
           },
           {
             "name": "Step.1 (5)",
-            "index": "1988",
+            "index": "1990",
             "static": true,
             "Transform": {
               "position": [20.37, -1, -6],
@@ -30472,7 +30518,7 @@
           },
           {
             "name": "Step.1 (6)",
-            "index": "1989",
+            "index": "1991",
             "static": true,
             "Transform": {
               "position": [20.22, -0.9, -6],
@@ -30484,7 +30530,7 @@
           },
           {
             "name": "Step.1 (7)",
-            "index": "1990",
+            "index": "1992",
             "static": true,
             "Transform": {
               "position": [20.07, -0.8, -6.000001],
@@ -30496,7 +30542,7 @@
           },
           {
             "name": "Step.1 (8)",
-            "index": "1991",
+            "index": "1993",
             "static": true,
             "Transform": {
               "position": [19.92, -0.7, -6.000001],
@@ -30508,7 +30554,7 @@
           },
           {
             "name": "Step.1 (9)",
-            "index": "1992",
+            "index": "1994",
             "static": true,
             "Transform": {
               "position": [19.77, -0.6, -6.000001],
@@ -30520,7 +30566,7 @@
           },
           {
             "name": "Step.1 (10)",
-            "index": "1993",
+            "index": "1995",
             "static": true,
             "Transform": {
               "position": [19.62, -0.5, -6.000001],
@@ -30532,7 +30578,7 @@
           },
           {
             "name": "Step.1 (11)",
-            "index": "1994",
+            "index": "1996",
             "static": true,
             "Transform": {
               "position": [19.47, -0.4, -6.000001],
@@ -30544,7 +30590,7 @@
           },
           {
             "name": "Step.1 (12)",
-            "index": "1995",
+            "index": "1997",
             "static": true,
             "Transform": {
               "position": [19.32, -0.3, -6.000001],
@@ -30556,7 +30602,7 @@
           },
           {
             "name": "Step.1 (13)",
-            "index": "1996",
+            "index": "1998",
             "static": true,
             "Transform": {
               "position": [19.17, -0.2, -6.000001],
@@ -30568,7 +30614,7 @@
           },
           {
             "name": "Step.1 (14)",
-            "index": "1997",
+            "index": "1999",
             "static": true,
             "Transform": {
               "position": [19.02, -0.1, -6.000001],
@@ -30580,7 +30626,7 @@
           },
           {
             "name": "Collision (Top)",
-            "index": "1998",
+            "index": "2000",
             "static": true,
             "Transform": {
               "position": [18.95, -0.06799996, -6.000001],
@@ -30600,7 +30646,7 @@
           },
           {
             "name": "Collision",
-            "index": "1999",
+            "index": "2001",
             "static": true,
             "Transform": {
               "position": [20.249, -0.867, -6],
@@ -30622,7 +30668,7 @@
       },
       {
         "name": "Wall_Ornate_3 (117)",
-        "index": "2000",
+        "index": "2002",
         "static": true,
         "Transform": {
           "position": [45, -1.5, -8],
@@ -30632,7 +30678,7 @@
         "children": [
           {
             "name": "Wall_ornate.3",
-            "index": "2001",
+            "index": "2003",
             "static": true,
             "Transform": {
               "position": [45, -1.5, -8],
@@ -30656,7 +30702,7 @@
       },
       {
         "name": "Wall_Ornate_3 (119)",
-        "index": "2002",
+        "index": "2004",
         "static": true,
         "Transform": {
           "position": [45, -1.5, -4],
@@ -30666,7 +30712,7 @@
         "children": [
           {
             "name": "Wall_ornate.3",
-            "index": "2003",
+            "index": "2005",
             "static": true,
             "Transform": {
               "position": [45, -1.5, -4],
@@ -30690,7 +30736,7 @@
       },
       {
         "name": "Light_Point_Dark_Blue (6)",
-        "index": "2004",
+        "index": "2006",
         "static": true,
         "Transform": {
           "position": [42.87, 2.039, -6.003],
@@ -30706,7 +30752,7 @@
       },
       {
         "name": "Pillar_Round_1 (90)",
-        "index": "2005",
+        "index": "2007",
         "static": true,
         "Transform": {
           "position": [35, 15.44, -59],
@@ -30716,7 +30762,7 @@
         "children": [
           {
             "name": "Pillar_round.1",
-            "index": "2006",
+            "index": "2008",
             "static": true,
             "Transform": {
               "position": [35, 15.44, -59],
@@ -30728,7 +30774,7 @@
           },
           {
             "name": "Collider (Sphere)",
-            "index": "2007",
+            "index": "2009",
             "static": true,
             "Transform": {
               "position": [35, 15.44, -59],
@@ -30746,7 +30792,7 @@
           },
           {
             "name": "Collider (Cube)",
-            "index": "2008",
+            "index": "2010",
             "static": true,
             "Transform": {
               "position": [35, 9.580999, -59],
@@ -30768,7 +30814,7 @@
       },
       {
         "name": "Pillar_Round_1 (91)",
-        "index": "2009",
+        "index": "2011",
         "static": true,
         "Transform": {
           "position": [35, -4.59, -59],
@@ -30778,7 +30824,7 @@
         "children": [
           {
             "name": "Pillar_round.1",
-            "index": "2010",
+            "index": "2012",
             "static": true,
             "Transform": {
               "position": [35, -4.59, -59],
@@ -30790,7 +30836,7 @@
           },
           {
             "name": "Collider (Sphere)",
-            "index": "2011",
+            "index": "2013",
             "static": true,
             "Transform": {
               "position": [35, -4.59, -59],
@@ -30808,7 +30854,7 @@
           },
           {
             "name": "Collider (Cube)",
-            "index": "2012",
+            "index": "2014",
             "static": true,
             "Transform": {
               "position": [35, 1.269, -59],
@@ -30830,7 +30876,7 @@
       },
       {
         "name": "Pillar_Round_1 (92)",
-        "index": "2013",
+        "index": "2015",
         "static": true,
         "Transform": {
           "position": [45, -4.59, -59],
@@ -30840,7 +30886,7 @@
         "children": [
           {
             "name": "Pillar_round.1",
-            "index": "2014",
+            "index": "2016",
             "static": true,
             "Transform": {
               "position": [45, -4.59, -59],
@@ -30852,7 +30898,7 @@
           },
           {
             "name": "Collider (Sphere)",
-            "index": "2015",
+            "index": "2017",
             "static": true,
             "Transform": {
               "position": [45, -4.59, -59],
@@ -30870,7 +30916,7 @@
           },
           {
             "name": "Collider (Cube)",
-            "index": "2016",
+            "index": "2018",
             "static": true,
             "Transform": {
               "position": [45, 1.269, -59],
@@ -30892,7 +30938,7 @@
       },
       {
         "name": "Pillar_Round_1 (93)",
-        "index": "2017",
+        "index": "2019",
         "static": true,
         "Transform": {
           "position": [45, 15.44, -59],
@@ -30902,7 +30948,7 @@
         "children": [
           {
             "name": "Pillar_round.1",
-            "index": "2018",
+            "index": "2020",
             "static": true,
             "Transform": {
               "position": [45, 15.44, -59],
@@ -30914,7 +30960,7 @@
           },
           {
             "name": "Collider (Sphere)",
-            "index": "2019",
+            "index": "2021",
             "static": true,
             "Transform": {
               "position": [45, 15.44, -59],
@@ -30932,7 +30978,7 @@
           },
           {
             "name": "Collider (Cube)",
-            "index": "2020",
+            "index": "2022",
             "static": true,
             "Transform": {
               "position": [45, 9.580999, -59],
@@ -30954,7 +31000,7 @@
       },
       {
         "name": "Block_Large_1 (54)",
-        "index": "2021",
+        "index": "2023",
         "static": false,
         "Transform": {
           "position": [38, -0.88, -55],
@@ -30966,7 +31012,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2022",
+            "index": "2024",
             "static": false,
             "Transform": {
               "position": [38, -0.88, -55],
@@ -30980,7 +31026,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2023",
+                "index": "2025",
                 "static": false,
                 "Transform": {
                   "position": [38, -0.88, -54],
@@ -31006,7 +31052,7 @@
       },
       {
         "name": "Block_Large_1 (55)",
-        "index": "2024",
+        "index": "2026",
         "static": false,
         "Transform": {
           "position": [40, -0.73, -57],
@@ -31018,7 +31064,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2025",
+            "index": "2027",
             "static": false,
             "Transform": {
               "position": [40, -0.73, -57],
@@ -31032,7 +31078,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2026",
+                "index": "2028",
                 "static": false,
                 "Transform": {
                   "position": [40, -0.73, -56],
@@ -31058,7 +31104,7 @@
       },
       {
         "name": "Block_Large_1 (56)",
-        "index": "2027",
+        "index": "2029",
         "static": false,
         "Transform": {
           "position": [42, -0.9, -55],
@@ -31070,7 +31116,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2028",
+            "index": "2030",
             "static": false,
             "Transform": {
               "position": [42, -0.9, -55],
@@ -31084,7 +31130,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2029",
+                "index": "2031",
                 "static": false,
                 "Transform": {
                   "position": [42, -0.9, -54],
@@ -31110,7 +31156,7 @@
       },
       {
         "name": "Statue_3 (16)",
-        "index": "2030",
+        "index": "2032",
         "static": true,
         "Transform": {
           "position": [44, 0.29, -46],
@@ -31119,7 +31165,7 @@
         },
         "Sing": {
           "range": 3,
-          "light": 2034,
+          "light": 2036,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
@@ -31128,7 +31174,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_13",
+          "audioName": "Tone1.wav_16",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -31139,7 +31185,7 @@
         "children": [
           {
             "name": "Statue.3",
-            "index": "2031",
+            "index": "2033",
             "static": true,
             "Transform": {
               "position": [44, 0.29, -46],
@@ -31151,7 +31197,7 @@
           },
           {
             "name": "Collider (Sphere)",
-            "index": "2032",
+            "index": "2034",
             "static": true,
             "Transform": {
               "position": [44, 0.29, -46],
@@ -31169,7 +31215,7 @@
           },
           {
             "name": "Collider (Box)",
-            "index": "2033",
+            "index": "2035",
             "static": true,
             "Transform": {
               "position": [43.838, 1.808, -46],
@@ -31189,7 +31235,7 @@
           },
           {
             "name": "Light (Player0)",
-            "index": "2034",
+            "index": "2036",
             "static": false,
             "Transform": {
               "position": [43.2, 3.282, -46],
@@ -31207,7 +31253,7 @@
       },
       {
         "name": "Statue_3 (17)",
-        "index": "2035",
+        "index": "2037",
         "static": true,
         "Transform": {
           "position": [36, 0.261, -46],
@@ -31216,7 +31262,7 @@
         },
         "Sing": {
           "range": 3,
-          "light": 2039,
+          "light": 2041,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
@@ -31225,7 +31271,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_14",
+          "audioName": "Tone1.wav_17",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -31236,7 +31282,7 @@
         "children": [
           {
             "name": "Statue.3",
-            "index": "2036",
+            "index": "2038",
             "static": true,
             "Transform": {
               "position": [36, 0.261, -46],
@@ -31248,7 +31294,7 @@
           },
           {
             "name": "Collider (Sphere)",
-            "index": "2037",
+            "index": "2039",
             "static": true,
             "Transform": {
               "position": [36, 0.261, -46],
@@ -31266,7 +31312,7 @@
           },
           {
             "name": "Collider (Box)",
-            "index": "2038",
+            "index": "2040",
             "static": true,
             "Transform": {
               "position": [36.162, 1.779, -46],
@@ -31286,7 +31332,7 @@
           },
           {
             "name": "Light (Player0)",
-            "index": "2039",
+            "index": "2041",
             "static": false,
             "Transform": {
               "position": [36.8, 3.253, -46],
@@ -31304,7 +31350,7 @@
       },
       {
         "name": "Statue_3 (18)",
-        "index": "2040",
+        "index": "2042",
         "static": true,
         "Transform": {
           "position": [44, 0.23, -50.2],
@@ -31313,7 +31359,7 @@
         },
         "Sing": {
           "range": 3,
-          "light": 2044,
+          "light": 2046,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
@@ -31322,7 +31368,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_15",
+          "audioName": "Tone1.wav_18",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -31333,7 +31379,7 @@
         "children": [
           {
             "name": "Statue.3",
-            "index": "2041",
+            "index": "2043",
             "static": true,
             "Transform": {
               "position": [44, 0.23, -50.2],
@@ -31345,7 +31391,7 @@
           },
           {
             "name": "Collider (Sphere)",
-            "index": "2042",
+            "index": "2044",
             "static": true,
             "Transform": {
               "position": [44, 0.23, -50.2],
@@ -31363,7 +31409,7 @@
           },
           {
             "name": "Collider (Box)",
-            "index": "2043",
+            "index": "2045",
             "static": true,
             "Transform": {
               "position": [43.838, 1.748, -50.2],
@@ -31383,7 +31429,7 @@
           },
           {
             "name": "Light (Player0)",
-            "index": "2044",
+            "index": "2046",
             "static": false,
             "Transform": {
               "position": [43.2, 3.222, -50.2],
@@ -31401,7 +31447,7 @@
       },
       {
         "name": "Statue_3 (19)",
-        "index": "2045",
+        "index": "2047",
         "static": true,
         "Transform": {
           "position": [42, 0.029, -54],
@@ -31410,7 +31456,7 @@
         },
         "Sing": {
           "range": 3,
-          "light": 2049,
+          "light": 2051,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
@@ -31419,7 +31465,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_16",
+          "audioName": "Tone1.wav_19",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -31430,7 +31476,7 @@
         "children": [
           {
             "name": "Statue.3",
-            "index": "2046",
+            "index": "2048",
             "static": true,
             "Transform": {
               "position": [42, 0.029, -54],
@@ -31442,7 +31488,7 @@
           },
           {
             "name": "Collider (Sphere)",
-            "index": "2047",
+            "index": "2049",
             "static": true,
             "Transform": {
               "position": [42, 0.029, -54],
@@ -31460,7 +31506,7 @@
           },
           {
             "name": "Collider (Box)",
-            "index": "2048",
+            "index": "2050",
             "static": true,
             "Transform": {
               "position": [41.919, 1.547, -53.8597],
@@ -31480,7 +31526,7 @@
           },
           {
             "name": "Light (Player0)",
-            "index": "2049",
+            "index": "2051",
             "static": false,
             "Transform": {
               "position": [41.6, 3.021, -53.30718],
@@ -31498,7 +31544,7 @@
       },
       {
         "name": "Statue_3 (20)",
-        "index": "2050",
+        "index": "2052",
         "static": true,
         "Transform": {
           "position": [40, 0.22, -56],
@@ -31507,7 +31553,7 @@
         },
         "Sing": {
           "range": 3,
-          "light": 2054,
+          "light": 2056,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
@@ -31516,7 +31562,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_17",
+          "audioName": "Tone1.wav_20",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -31527,7 +31573,7 @@
         "children": [
           {
             "name": "Statue.3",
-            "index": "2051",
+            "index": "2053",
             "static": true,
             "Transform": {
               "position": [40, 0.22, -56],
@@ -31539,7 +31585,7 @@
           },
           {
             "name": "Collider (Sphere)",
-            "index": "2052",
+            "index": "2054",
             "static": true,
             "Transform": {
               "position": [40, 0.22, -56],
@@ -31557,7 +31603,7 @@
           },
           {
             "name": "Collider (Box)",
-            "index": "2053",
+            "index": "2055",
             "static": true,
             "Transform": {
               "position": [40, 1.738, -55.838],
@@ -31577,7 +31623,7 @@
           },
           {
             "name": "Light (Player0)",
-            "index": "2054",
+            "index": "2056",
             "static": false,
             "Transform": {
               "position": [40, 3.212, -55.2],
@@ -31595,7 +31641,7 @@
       },
       {
         "name": "Statue_3 (21)",
-        "index": "2055",
+        "index": "2057",
         "static": true,
         "Transform": {
           "position": [38, 0.077, -54],
@@ -31604,7 +31650,7 @@
         },
         "Sing": {
           "range": 3,
-          "light": 2059,
+          "light": 2061,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
@@ -31613,7 +31659,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_18",
+          "audioName": "Tone1.wav_21",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -31624,7 +31670,7 @@
         "children": [
           {
             "name": "Statue.3",
-            "index": "2056",
+            "index": "2058",
             "static": true,
             "Transform": {
               "position": [38, 0.077, -54],
@@ -31636,7 +31682,7 @@
           },
           {
             "name": "Collider (Sphere)",
-            "index": "2057",
+            "index": "2059",
             "static": true,
             "Transform": {
               "position": [38, 0.077, -54],
@@ -31654,7 +31700,7 @@
           },
           {
             "name": "Collider (Box)",
-            "index": "2058",
+            "index": "2060",
             "static": true,
             "Transform": {
               "position": [38.11455, 1.595, -53.88545],
@@ -31674,7 +31720,7 @@
           },
           {
             "name": "Light (Player0)",
-            "index": "2059",
+            "index": "2061",
             "static": false,
             "Transform": {
               "position": [38.56569, 3.069, -53.43431],
@@ -31692,7 +31738,7 @@
       },
       {
         "name": "Statue_3 (22)",
-        "index": "2060",
+        "index": "2062",
         "static": true,
         "Transform": {
           "position": [36, 0.1, -50],
@@ -31701,7 +31747,7 @@
         },
         "Sing": {
           "range": 3,
-          "light": 2064,
+          "light": 2066,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
@@ -31710,7 +31756,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_19",
+          "audioName": "Tone1.wav_22",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -31721,7 +31767,7 @@
         "children": [
           {
             "name": "Statue.3",
-            "index": "2061",
+            "index": "2063",
             "static": true,
             "Transform": {
               "position": [36, 0.1, -50],
@@ -31733,7 +31779,7 @@
           },
           {
             "name": "Collider (Sphere)",
-            "index": "2062",
+            "index": "2064",
             "static": true,
             "Transform": {
               "position": [36, 0.1, -50],
@@ -31751,7 +31797,7 @@
           },
           {
             "name": "Collider (Box)",
-            "index": "2063",
+            "index": "2065",
             "static": true,
             "Transform": {
               "position": [36.162, 1.618, -50],
@@ -31771,7 +31817,7 @@
           },
           {
             "name": "Light (Player0)",
-            "index": "2064",
+            "index": "2066",
             "static": false,
             "Transform": {
               "position": [36.8, 3.092, -50],
@@ -31789,7 +31835,7 @@
       },
       {
         "name": "TriggerSwitch",
-        "index": "2065",
+        "index": "2067",
         "static": true,
         "Transform": {
           "position": [40, 0, -22.701],
@@ -31810,7 +31856,7 @@
       },
       {
         "name": "Block_Large_1_Moving",
-        "index": "2066",
+        "index": "2068",
         "static": false,
         "Transform": {
           "position": [40, -1, -25.003],
@@ -31822,7 +31868,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2067",
+            "index": "2069",
             "static": false,
             "Transform": {
               "position": [40, -3, -25.003],
@@ -31840,7 +31886,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2068",
+                "index": "2070",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -24.003],
@@ -31866,7 +31912,7 @@
       },
       {
         "name": "Block_Large_1_Moving (1)",
-        "index": "2069",
+        "index": "2071",
         "static": false,
         "Transform": {
           "position": [40, -1, -27],
@@ -31878,7 +31924,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2070",
+            "index": "2072",
             "static": false,
             "Transform": {
               "position": [40, -3, -27],
@@ -31896,7 +31942,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2071",
+                "index": "2073",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -26],
@@ -31918,7 +31964,7 @@
               },
               {
                 "name": "TriggerSwitch (1)",
-                "index": "2072",
+                "index": "2074",
                 "static": false,
                 "Transform": {
                   "position": [39.97321, -2, -33.46],
@@ -31926,7 +31972,7 @@
                   "scaleFactor": 1
                 },
                 "TriggerSwitch": {
-                  "events": [2204, 1700]
+                  "events": [2206, 1700]
                 },
                 "Kinematic": {
                 },
@@ -31945,7 +31991,7 @@
       },
       {
         "name": "Block_Large_1_Moving (2)",
-        "index": "2073",
+        "index": "2075",
         "static": false,
         "Transform": {
           "position": [40, -1, -29],
@@ -31957,7 +32003,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2074",
+            "index": "2076",
             "static": false,
             "Transform": {
               "position": [40, -3, -29],
@@ -31975,7 +32021,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2075",
+                "index": "2077",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -28],
@@ -32001,7 +32047,7 @@
       },
       {
         "name": "Block_Large_1_Moving (3)",
-        "index": "2076",
+        "index": "2078",
         "static": false,
         "Transform": {
           "position": [40, -1, -31],
@@ -32013,7 +32059,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2077",
+            "index": "2079",
             "static": false,
             "Transform": {
               "position": [40, -3, -31],
@@ -32031,7 +32077,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2078",
+                "index": "2080",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -30],
@@ -32053,7 +32099,7 @@
               },
               {
                 "name": "TriggerSwitch (2)",
-                "index": "2079",
+                "index": "2081",
                 "static": false,
                 "Transform": {
                   "position": [39.97321, -2, -29.46],
@@ -32061,7 +32107,7 @@
                   "scaleFactor": 1
                 },
                 "TriggerSwitch": {
-                  "events": [2209, 1705]
+                  "events": [2211, 1705]
                 },
                 "Kinematic": {
                 },
@@ -32080,7 +32126,7 @@
       },
       {
         "name": "Block_Large_1_Moving (4)",
-        "index": "2080",
+        "index": "2082",
         "static": false,
         "Transform": {
           "position": [40, -1, -33],
@@ -32092,7 +32138,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2081",
+            "index": "2083",
             "static": false,
             "Transform": {
               "position": [40, -3, -33],
@@ -32110,7 +32156,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2082",
+                "index": "2084",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -32],
@@ -32136,7 +32182,7 @@
       },
       {
         "name": "Block_Large_1_Moving (5)",
-        "index": "2083",
+        "index": "2085",
         "static": false,
         "Transform": {
           "position": [40, -1, -35],
@@ -32148,7 +32194,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2084",
+            "index": "2086",
             "static": false,
             "Transform": {
               "position": [40, -3, -35],
@@ -32166,7 +32212,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2085",
+                "index": "2087",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -34],
@@ -32188,7 +32234,7 @@
               },
               {
                 "name": "TriggerSwitch (3)",
-                "index": "2086",
+                "index": "2088",
                 "static": false,
                 "Transform": {
                   "position": [39.97321, -2, -25.46],
@@ -32196,7 +32242,7 @@
                   "scaleFactor": 1
                 },
                 "TriggerSwitch": {
-                  "events": [2214, 1715]
+                  "events": [2216, 1715]
                 },
                 "Kinematic": {
                 },
@@ -32215,7 +32261,7 @@
       },
       {
         "name": "Block_Large_1_Moving (6)",
-        "index": "2087",
+        "index": "2089",
         "static": false,
         "Transform": {
           "position": [40, -1, -37],
@@ -32227,7 +32273,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2088",
+            "index": "2090",
             "static": false,
             "Transform": {
               "position": [40, -3, -37],
@@ -32245,7 +32291,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2089",
+                "index": "2091",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -36],
@@ -32271,7 +32317,7 @@
       },
       {
         "name": "Block_Large_1_Moving (7)",
-        "index": "2090",
+        "index": "2092",
         "static": false,
         "Transform": {
           "position": [40, -1, -39],
@@ -32283,7 +32329,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2091",
+            "index": "2093",
             "static": false,
             "Transform": {
               "position": [40, -3, -39],
@@ -32301,7 +32347,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2092",
+                "index": "2094",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -38],
@@ -32323,7 +32369,7 @@
               },
               {
                 "name": "TriggerSwitch",
-                "index": "2093",
+                "index": "2095",
                 "static": false,
                 "Transform": {
                   "position": [40, -2, -37.95],
@@ -32331,7 +32377,7 @@
                   "scaleFactor": 1
                 },
                 "TriggerSwitch": {
-                  "events": [2152, 2170, 2167, 2176, 2173, 2155, 2179, 2182, 2164, 2158, 2197, 2194, 2161, 2185, 2188, 2191, 1842]
+                  "events": [2154, 2172, 2169, 2178, 2175, 2157, 2181, 2184, 2166, 2160, 2199, 2196, 2163, 2187, 2190, 2193, 1844]
                 },
                 "Kinematic": {
                 },
@@ -32346,7 +32392,7 @@
               },
               {
                 "name": "TriggerSwitch (4)",
-                "index": "2094",
+                "index": "2096",
                 "static": false,
                 "Transform": {
                   "position": [39.97321, -2, -37.46],
@@ -32373,7 +32419,7 @@
       },
       {
         "name": "Block_Large_1_Moving (8)",
-        "index": "2095",
+        "index": "2097",
         "static": false,
         "Transform": {
           "position": [40, -1, -41],
@@ -32385,7 +32431,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2096",
+            "index": "2098",
             "static": false,
             "Transform": {
               "position": [40, -3, -41],
@@ -32403,7 +32449,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2097",
+                "index": "2099",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -40],
@@ -32429,7 +32475,7 @@
       },
       {
         "name": "Block_Large_1_Moving (9)",
-        "index": "2098",
+        "index": "2100",
         "static": false,
         "Transform": {
           "position": [40, -1, -43],
@@ -32441,7 +32487,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2099",
+            "index": "2101",
             "static": false,
             "Transform": {
               "position": [40, -3, -43],
@@ -32459,7 +32505,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2100",
+                "index": "2102",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -42],
@@ -32481,7 +32527,7 @@
               },
               {
                 "name": "TriggerSwitch (5)",
-                "index": "2101",
+                "index": "2103",
                 "static": false,
                 "Transform": {
                   "position": [39.97321, -2, -41.46],
@@ -32489,7 +32535,7 @@
                   "scaleFactor": 1
                 },
                 "TriggerSwitch": {
-                  "events": [2035, 2030, 2060, 2040, 2045, 2055, 2050]
+                  "events": [2037, 2032, 2062, 2042, 2047, 2057, 2052]
                 },
                 "Kinematic": {
                 },
@@ -32508,7 +32554,7 @@
       },
       {
         "name": "Block_Large_1_Moving (10)",
-        "index": "2102",
+        "index": "2104",
         "static": false,
         "Transform": {
           "position": [40, -1, -45],
@@ -32520,7 +32566,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2103",
+            "index": "2105",
             "static": false,
             "Transform": {
               "position": [40, -3, -45],
@@ -32538,7 +32584,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2104",
+                "index": "2106",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -44],
@@ -32564,7 +32610,7 @@
       },
       {
         "name": "Door_Frame_2",
-        "index": "2105",
+        "index": "2107",
         "static": true,
         "Transform": {
           "position": [45, -1.5, -6],
@@ -32574,7 +32620,7 @@
         "children": [
           {
             "name": "DoorFrame.2",
-            "index": "2106",
+            "index": "2108",
             "static": true,
             "Transform": {
               "position": [45, -1.5, -6],
@@ -32588,7 +32634,7 @@
       },
       {
         "name": "TriggerSwitch",
-        "index": "2107",
+        "index": "2109",
         "static": true,
         "Transform": {
           "position": [40, 0, -22],
@@ -32596,7 +32642,7 @@
           "scaleFactor": 1
         },
         "TriggerSwitch": {
-          "events": [2067, 2070, 2074, 2077, 2081, 2084, 2088, 2091, 2096, 2099, 2103]
+          "events": [2069, 2072, 2076, 2079, 2083, 2086, 2090, 2093, 2098, 2101, 2105]
         },
         "colliders": [
           {
@@ -32609,7 +32655,7 @@
       },
       {
         "name": "Wall_Invisible (1)",
-        "index": "2108",
+        "index": "2110",
         "static": true,
         "Transform": {
           "position": [36, 0.677, -20],
@@ -32629,7 +32675,7 @@
       },
       {
         "name": "Wall_Invisible (2)",
-        "index": "2109",
+        "index": "2111",
         "static": true,
         "Transform": {
           "position": [36, 0.677, -24],
@@ -32649,7 +32695,7 @@
       },
       {
         "name": "Wall_Invisible (3)",
-        "index": "2110",
+        "index": "2112",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -24],
@@ -32669,7 +32715,7 @@
       },
       {
         "name": "Wall_Invisible (4)",
-        "index": "2111",
+        "index": "2113",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -24],
@@ -32689,7 +32735,7 @@
       },
       {
         "name": "Wall_Invisible (5)",
-        "index": "2112",
+        "index": "2114",
         "static": true,
         "Transform": {
           "position": [44, 0.677, -24],
@@ -32709,7 +32755,7 @@
       },
       {
         "name": "Wall_Invisible (6)",
-        "index": "2113",
+        "index": "2115",
         "static": true,
         "Transform": {
           "position": [46, 0.677, -22],
@@ -32729,7 +32775,7 @@
       },
       {
         "name": "Wall_Invisible (7)",
-        "index": "2114",
+        "index": "2116",
         "static": true,
         "Transform": {
           "position": [44, 0.677, -20],
@@ -32749,7 +32795,7 @@
       },
       {
         "name": "Wall_Invisible (8)",
-        "index": "2115",
+        "index": "2117",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -26],
@@ -32769,7 +32815,7 @@
       },
       {
         "name": "Wall_Invisible (9)",
-        "index": "2116",
+        "index": "2118",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -28],
@@ -32789,7 +32835,7 @@
       },
       {
         "name": "Wall_Invisible (10)",
-        "index": "2117",
+        "index": "2119",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -30],
@@ -32809,7 +32855,7 @@
       },
       {
         "name": "Wall_Invisible (11)",
-        "index": "2118",
+        "index": "2120",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -32],
@@ -32829,7 +32875,7 @@
       },
       {
         "name": "Wall_Invisible (12)",
-        "index": "2119",
+        "index": "2121",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -34],
@@ -32849,7 +32895,7 @@
       },
       {
         "name": "Wall_Invisible (13)",
-        "index": "2120",
+        "index": "2122",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -36],
@@ -32869,7 +32915,7 @@
       },
       {
         "name": "Wall_Invisible (14)",
-        "index": "2121",
+        "index": "2123",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -38],
@@ -32889,7 +32935,7 @@
       },
       {
         "name": "Wall_Invisible (15)",
-        "index": "2122",
+        "index": "2124",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -40],
@@ -32909,7 +32955,7 @@
       },
       {
         "name": "Wall_Invisible (16)",
-        "index": "2123",
+        "index": "2125",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -42],
@@ -32929,7 +32975,7 @@
       },
       {
         "name": "Wall_Invisible (17)",
-        "index": "2124",
+        "index": "2126",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -44],
@@ -32949,7 +32995,7 @@
       },
       {
         "name": "Wall_Invisible (18)",
-        "index": "2125",
+        "index": "2127",
         "static": true,
         "Transform": {
           "position": [44, 0.677, -44],
@@ -32969,7 +33015,7 @@
       },
       {
         "name": "Wall_Invisible (19)",
-        "index": "2126",
+        "index": "2128",
         "static": true,
         "Transform": {
           "position": [46, 0.677, -44],
@@ -32989,7 +33035,7 @@
       },
       {
         "name": "Wall_Invisible (20)",
-        "index": "2127",
+        "index": "2129",
         "static": true,
         "Transform": {
           "position": [46, 0.677, -46],
@@ -33009,7 +33055,7 @@
       },
       {
         "name": "Wall_Invisible (21)",
-        "index": "2128",
+        "index": "2130",
         "static": true,
         "Transform": {
           "position": [46, 0.677, -48],
@@ -33029,7 +33075,7 @@
       },
       {
         "name": "Wall_Invisible (22)",
-        "index": "2129",
+        "index": "2131",
         "static": true,
         "Transform": {
           "position": [46, 0.677, -50],
@@ -33049,7 +33095,7 @@
       },
       {
         "name": "Wall_Invisible (23)",
-        "index": "2130",
+        "index": "2132",
         "static": true,
         "Transform": {
           "position": [46, 0.677, -52],
@@ -33069,7 +33115,7 @@
       },
       {
         "name": "Wall_Invisible (24)",
-        "index": "2131",
+        "index": "2133",
         "static": true,
         "Transform": {
           "position": [44, 0.677, -54],
@@ -33089,7 +33135,7 @@
       },
       {
         "name": "Wall_Invisible (25)",
-        "index": "2132",
+        "index": "2134",
         "static": true,
         "Transform": {
           "position": [42, 0.677, -56],
@@ -33109,7 +33155,7 @@
       },
       {
         "name": "Wall_Invisible (26)",
-        "index": "2133",
+        "index": "2135",
         "static": true,
         "Transform": {
           "position": [40, 0.677, -58],
@@ -33129,7 +33175,7 @@
       },
       {
         "name": "Wall_Invisible (27)",
-        "index": "2134",
+        "index": "2136",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -56],
@@ -33149,7 +33195,7 @@
       },
       {
         "name": "Wall_Invisible (28)",
-        "index": "2135",
+        "index": "2137",
         "static": true,
         "Transform": {
           "position": [36, 0.677, -54],
@@ -33169,7 +33215,7 @@
       },
       {
         "name": "Wall_Invisible (29)",
-        "index": "2136",
+        "index": "2138",
         "static": true,
         "Transform": {
           "position": [34, 0.677, -52],
@@ -33189,7 +33235,7 @@
       },
       {
         "name": "Wall_Invisible (30)",
-        "index": "2137",
+        "index": "2139",
         "static": true,
         "Transform": {
           "position": [34, 0.677, -50],
@@ -33209,7 +33255,7 @@
       },
       {
         "name": "Wall_Invisible (31)",
-        "index": "2138",
+        "index": "2140",
         "static": true,
         "Transform": {
           "position": [34, 0.677, -48],
@@ -33229,7 +33275,7 @@
       },
       {
         "name": "Wall_Invisible (32)",
-        "index": "2139",
+        "index": "2141",
         "static": true,
         "Transform": {
           "position": [34, 0.677, -46],
@@ -33249,7 +33295,7 @@
       },
       {
         "name": "Wall_Invisible (33)",
-        "index": "2140",
+        "index": "2142",
         "static": true,
         "Transform": {
           "position": [36, 0.677, -44],
@@ -33269,7 +33315,7 @@
       },
       {
         "name": "Wall_Invisible (34)",
-        "index": "2141",
+        "index": "2143",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -44],
@@ -33289,7 +33335,7 @@
       },
       {
         "name": "Wall_Invisible (35)",
-        "index": "2142",
+        "index": "2144",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -42],
@@ -33309,7 +33355,7 @@
       },
       {
         "name": "Wall_Invisible (36)",
-        "index": "2143",
+        "index": "2145",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -40],
@@ -33329,7 +33375,7 @@
       },
       {
         "name": "Wall_Invisible (37)",
-        "index": "2144",
+        "index": "2146",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -38],
@@ -33349,7 +33395,7 @@
       },
       {
         "name": "Wall_Invisible (38)",
-        "index": "2145",
+        "index": "2147",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -36],
@@ -33369,7 +33415,7 @@
       },
       {
         "name": "Wall_Invisible (39)",
-        "index": "2146",
+        "index": "2148",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -34],
@@ -33389,7 +33435,7 @@
       },
       {
         "name": "Wall_Invisible (40)",
-        "index": "2147",
+        "index": "2149",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -32],
@@ -33409,7 +33455,7 @@
       },
       {
         "name": "Wall_Invisible (41)",
-        "index": "2148",
+        "index": "2150",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -30],
@@ -33429,7 +33475,7 @@
       },
       {
         "name": "Wall_Invisible (42)",
-        "index": "2149",
+        "index": "2151",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -28],
@@ -33449,7 +33495,7 @@
       },
       {
         "name": "Wall_Invisible (43)",
-        "index": "2150",
+        "index": "2152",
         "static": true,
         "Transform": {
           "position": [38, 0.677, -26],
@@ -33469,7 +33515,7 @@
       },
       {
         "name": "Block_Large_1_Moving (11)",
-        "index": "2151",
+        "index": "2153",
         "static": false,
         "Transform": {
           "position": [40, -1, -47],
@@ -33481,7 +33527,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2152",
+            "index": "2154",
             "static": false,
             "Transform": {
               "position": [40, -3, -47],
@@ -33499,7 +33545,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2153",
+                "index": "2155",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -46],
@@ -33525,7 +33571,7 @@
       },
       {
         "name": "Block_Large_1_Moving (12)",
-        "index": "2154",
+        "index": "2156",
         "static": false,
         "Transform": {
           "position": [40, -1, -49],
@@ -33537,7 +33583,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2155",
+            "index": "2157",
             "static": false,
             "Transform": {
               "position": [40, -3, -49],
@@ -33555,7 +33601,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2156",
+                "index": "2158",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -48],
@@ -33581,7 +33627,7 @@
       },
       {
         "name": "Block_Large_1_Moving (13)",
-        "index": "2157",
+        "index": "2159",
         "static": false,
         "Transform": {
           "position": [42, -1, -51],
@@ -33593,7 +33639,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2158",
+            "index": "2160",
             "static": false,
             "Transform": {
               "position": [42, -3, -51],
@@ -33611,7 +33657,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2159",
+                "index": "2161",
                 "static": false,
                 "Transform": {
                   "position": [42, -3, -50],
@@ -33637,7 +33683,7 @@
       },
       {
         "name": "Block_Large_1_Moving (14)",
-        "index": "2160",
+        "index": "2162",
         "static": false,
         "Transform": {
           "position": [40, -1, -53],
@@ -33649,7 +33695,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2161",
+            "index": "2163",
             "static": false,
             "Transform": {
               "position": [40, -3, -53],
@@ -33667,7 +33713,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2162",
+                "index": "2164",
                 "static": false,
                 "Transform": {
                   "position": [40, -3, -52],
@@ -33693,7 +33739,7 @@
       },
       {
         "name": "Block_Large_1_Moving (15)",
-        "index": "2163",
+        "index": "2165",
         "static": false,
         "Transform": {
           "position": [38, -0.98, -51],
@@ -33705,7 +33751,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2164",
+            "index": "2166",
             "static": false,
             "Transform": {
               "position": [38, -2.98, -51],
@@ -33723,7 +33769,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2165",
+                "index": "2167",
                 "static": false,
                 "Transform": {
                   "position": [38, -2.98, -50],
@@ -33749,7 +33795,7 @@
       },
       {
         "name": "Block_Large_1_Moving (16)",
-        "index": "2166",
+        "index": "2168",
         "static": false,
         "Transform": {
           "position": [38, -0.892, -47],
@@ -33761,7 +33807,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2167",
+            "index": "2169",
             "static": false,
             "Transform": {
               "position": [38, -2.892, -47],
@@ -33779,7 +33825,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2168",
+                "index": "2170",
                 "static": false,
                 "Transform": {
                   "position": [38, -2.892, -46],
@@ -33805,7 +33851,7 @@
       },
       {
         "name": "Block_Large_1_Moving (17)",
-        "index": "2169",
+        "index": "2171",
         "static": false,
         "Transform": {
           "position": [42, -0.964, -47],
@@ -33817,7 +33863,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2170",
+            "index": "2172",
             "static": false,
             "Transform": {
               "position": [42, -2.964, -47],
@@ -33835,7 +33881,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2171",
+                "index": "2173",
                 "static": false,
                 "Transform": {
                   "position": [42, -2.964, -46],
@@ -33861,7 +33907,7 @@
       },
       {
         "name": "Block_Large_1_Moving (18)",
-        "index": "2172",
+        "index": "2174",
         "static": false,
         "Transform": {
           "position": [38, -0.88, -49],
@@ -33873,7 +33919,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2173",
+            "index": "2175",
             "static": false,
             "Transform": {
               "position": [38, -2.88, -49],
@@ -33891,7 +33937,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2174",
+                "index": "2176",
                 "static": false,
                 "Transform": {
                   "position": [38, -2.88, -48],
@@ -33917,7 +33963,7 @@
       },
       {
         "name": "Block_Large_1_Moving (19)",
-        "index": "2175",
+        "index": "2177",
         "static": false,
         "Transform": {
           "position": [36, -0.9, -49],
@@ -33929,7 +33975,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2176",
+            "index": "2178",
             "static": false,
             "Transform": {
               "position": [36, -2.9, -49],
@@ -33947,7 +33993,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2177",
+                "index": "2179",
                 "static": false,
                 "Transform": {
                   "position": [36, -2.9, -48],
@@ -33973,7 +34019,7 @@
       },
       {
         "name": "Block_Large_1_Moving (20)",
-        "index": "2178",
+        "index": "2180",
         "static": false,
         "Transform": {
           "position": [42, -0.94, -49],
@@ -33985,7 +34031,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2179",
+            "index": "2181",
             "static": false,
             "Transform": {
               "position": [42, -2.94, -49],
@@ -34003,7 +34049,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2180",
+                "index": "2182",
                 "static": false,
                 "Transform": {
                   "position": [42, -2.94, -48],
@@ -34029,7 +34075,7 @@
       },
       {
         "name": "Block_Large_1_Moving (21)",
-        "index": "2181",
+        "index": "2183",
         "static": false,
         "Transform": {
           "position": [44, -0.93, -49],
@@ -34041,7 +34087,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2182",
+            "index": "2184",
             "static": false,
             "Transform": {
               "position": [44, -2.93, -49],
@@ -34059,7 +34105,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2183",
+                "index": "2185",
                 "static": false,
                 "Transform": {
                   "position": [44, -2.93, -48],
@@ -34085,7 +34131,7 @@
       },
       {
         "name": "Block_Large_1_Moving (22)",
-        "index": "2184",
+        "index": "2186",
         "static": false,
         "Transform": {
           "position": [42, -0.97, -53],
@@ -34097,7 +34143,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2185",
+            "index": "2187",
             "static": false,
             "Transform": {
               "position": [42, -2.97, -53],
@@ -34115,7 +34161,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2186",
+                "index": "2188",
                 "static": false,
                 "Transform": {
                   "position": [42, -2.97, -52],
@@ -34141,7 +34187,7 @@
       },
       {
         "name": "Block_Large_1_Moving (23)",
-        "index": "2187",
+        "index": "2189",
         "static": false,
         "Transform": {
           "position": [44, -0.95, -53],
@@ -34153,7 +34199,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2188",
+            "index": "2190",
             "static": false,
             "Transform": {
               "position": [44, -2.95, -53],
@@ -34171,7 +34217,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2189",
+                "index": "2191",
                 "static": false,
                 "Transform": {
                   "position": [44, -2.95, -52],
@@ -34197,7 +34243,7 @@
       },
       {
         "name": "Block_Large_1_Moving (24)",
-        "index": "2190",
+        "index": "2192",
         "static": false,
         "Transform": {
           "position": [40, -0.93, -55],
@@ -34209,7 +34255,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2191",
+            "index": "2193",
             "static": false,
             "Transform": {
               "position": [40, -2.93, -55],
@@ -34227,7 +34273,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2192",
+                "index": "2194",
                 "static": false,
                 "Transform": {
                   "position": [40, -2.93, -54],
@@ -34253,7 +34299,7 @@
       },
       {
         "name": "Block_Large_1_Moving (25)",
-        "index": "2193",
+        "index": "2195",
         "static": false,
         "Transform": {
           "position": [38, -0.79, -53],
@@ -34265,7 +34311,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2194",
+            "index": "2196",
             "static": false,
             "Transform": {
               "position": [38, -2.79, -53],
@@ -34283,7 +34329,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2195",
+                "index": "2197",
                 "static": false,
                 "Transform": {
                   "position": [38, -2.79, -52],
@@ -34309,7 +34355,7 @@
       },
       {
         "name": "Block_Large_1_Moving (26)",
-        "index": "2196",
+        "index": "2198",
         "static": false,
         "Transform": {
           "position": [36, -0.62, -53],
@@ -34321,7 +34367,7 @@
         "children": [
           {
             "name": "Block.Large.1",
-            "index": "2197",
+            "index": "2199",
             "static": false,
             "Transform": {
               "position": [36, -2.62, -53],
@@ -34339,7 +34385,7 @@
             "children": [
               {
                 "name": "Collider",
-                "index": "2198",
+                "index": "2200",
                 "static": false,
                 "Transform": {
                   "position": [36, -2.62, -52],
@@ -34365,7 +34411,7 @@
       },
       {
         "name": "Wall_Ornate_3 (124)",
-        "index": "2199",
+        "index": "2201",
         "static": true,
         "Transform": {
           "position": [41.214, -3.066, -17],
@@ -34375,7 +34421,7 @@
         "children": [
           {
             "name": "Wall_ornate.3",
-            "index": "2200",
+            "index": "2202",
             "static": true,
             "Transform": {
               "position": [41.214, -3.066, -17],
@@ -34399,7 +34445,7 @@
       },
       {
         "name": "Wall_Ornate_3 (125)",
-        "index": "2201",
+        "index": "2203",
         "static": true,
         "Transform": {
           "position": [39.214, -3.066, -17],
@@ -34409,7 +34455,7 @@
         "children": [
           {
             "name": "Wall_ornate.3",
-            "index": "2202",
+            "index": "2204",
             "static": true,
             "Transform": {
               "position": [39.214, -3.066, -17],
@@ -34433,7 +34479,7 @@
       },
       {
         "name": "TriggerSwitch",
-        "index": "2203",
+        "index": "2205",
         "static": true,
         "Transform": {
           "position": [39.93361, 0.001000047, -17.903],
@@ -34454,7 +34500,7 @@
       },
       {
         "name": "Statue_3 (Player1) (1)",
-        "index": "2204",
+        "index": "2206",
         "static": true,
         "Transform": {
           "position": [35.9, 0, -38],
@@ -34463,7 +34509,7 @@
         },
         "Sing": {
           "range": 3,
-          "light": 2208,
+          "light": 2210,
           "lightIntensity": 15,
           "maxLightRange": 8,
           "minLightRange": 1
@@ -34472,7 +34518,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone2.wav_20",
+          "audioName": "Tone2.wav_23",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -34483,7 +34529,7 @@
         "children": [
           {
             "name": "Statue.3",
-            "index": "2205",
+            "index": "2207",
             "static": true,
             "Transform": {
               "position": [35.9, 0, -38],
@@ -34495,7 +34541,7 @@
           },
           {
             "name": "Collider (Sphere)",
-            "index": "2206",
+            "index": "2208",
             "static": true,
             "Transform": {
               "position": [35.9, 0, -38],
@@ -34513,7 +34559,7 @@
           },
           {
             "name": "Collider (Box)",
-            "index": "2207",
+            "index": "2209",
             "static": true,
             "Transform": {
               "position": [36.062, 1.518, -38],
@@ -34533,7 +34579,7 @@
           },
           {
             "name": "Light (Player1)",
-            "index": "2208",
+            "index": "2210",
             "static": false,
             "Transform": {
               "position": [36.7, 2.992, -38],
@@ -34551,7 +34597,7 @@
       },
       {
         "name": "Statue_3 (Player2) (1)",
-        "index": "2209",
+        "index": "2211",
         "static": true,
         "Transform": {
           "position": [35.9, 0, -34.003],
@@ -34560,7 +34606,7 @@
         },
         "Sing": {
           "range": 3,
-          "light": 2213,
+          "light": 2215,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
@@ -34569,7 +34615,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone3.wav_21",
+          "audioName": "Tone3.wav_24",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -34580,7 +34626,7 @@
         "children": [
           {
             "name": "Statue.3",
-            "index": "2210",
+            "index": "2212",
             "static": true,
             "Transform": {
               "position": [35.9, 0, -34.003],
@@ -34592,7 +34638,7 @@
           },
           {
             "name": "Collider (Sphere)",
-            "index": "2211",
+            "index": "2213",
             "static": true,
             "Transform": {
               "position": [35.9, 0, -34.003],
@@ -34610,7 +34656,7 @@
           },
           {
             "name": "Collider (Box)",
-            "index": "2212",
+            "index": "2214",
             "static": true,
             "Transform": {
               "position": [36.062, 1.518, -34.003],
@@ -34630,7 +34676,7 @@
           },
           {
             "name": "Light (Player2)",
-            "index": "2213",
+            "index": "2215",
             "static": false,
             "Transform": {
               "position": [36.7, 2.992, -34.003],
@@ -34648,7 +34694,7 @@
       },
       {
         "name": "Statue_3 (Player3) (1)",
-        "index": "2214",
+        "index": "2216",
         "static": true,
         "Transform": {
           "position": [35.9, 0, -30],
@@ -34657,7 +34703,7 @@
         },
         "Sing": {
           "range": 3,
-          "light": 2218,
+          "light": 2220,
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
@@ -34666,7 +34712,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone4.wav_22",
+          "audioName": "Tone4.wav_25",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -34677,7 +34723,7 @@
         "children": [
           {
             "name": "Statue.3",
-            "index": "2215",
+            "index": "2217",
             "static": true,
             "Transform": {
               "position": [35.9, 0, -30],
@@ -34689,7 +34735,7 @@
           },
           {
             "name": "Collider (Sphere)",
-            "index": "2216",
+            "index": "2218",
             "static": true,
             "Transform": {
               "position": [35.9, 0, -30],
@@ -34707,7 +34753,7 @@
           },
           {
             "name": "Collider (Box)",
-            "index": "2217",
+            "index": "2219",
             "static": true,
             "Transform": {
               "position": [36.062, 1.518, -30],
@@ -34727,7 +34773,7 @@
           },
           {
             "name": "Light (Player3)",
-            "index": "2218",
+            "index": "2220",
             "static": false,
             "Transform": {
               "position": [36.7, 2.992, -30],
@@ -34745,7 +34791,7 @@
       },
       {
         "name": "Healing Basin",
-        "index": "2219",
+        "index": "2221",
         "static": false,
         "Transform": {
           "position": [41.06241, 0.086, -18.42686],
@@ -34757,7 +34803,7 @@
         "children": [
           {
             "name": "Pot.2",
-            "index": "2220",
+            "index": "2222",
             "static": true,
             "Transform": {
               "position": [41.06241, 0.086, -18.42686],
@@ -34769,7 +34815,7 @@
           },
           {
             "name": "Collider",
-            "index": "2221",
+            "index": "2223",
             "static": false,
             "Transform": {
               "position": [41.06241, 0.288, -18.42686],
@@ -34785,7 +34831,7 @@
               "range": 10
             },
             "RaycastSwitch": {
-              "events": [2221]
+              "events": [2223]
             },
             "Kinematic": {
             },

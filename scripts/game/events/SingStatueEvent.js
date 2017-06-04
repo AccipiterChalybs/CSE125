@@ -11,6 +11,7 @@ class SingStatueEvent extends TriggerEvent{
     this._delay = params.delay;
     this._singer = null;
     this._timeToStart = Number.POSITIVE_INFINITY;
+    this._deactivated = false;
   }
 
   start() {
@@ -27,10 +28,11 @@ class SingStatueEvent extends TriggerEvent{
 
   deactivate(){
     this.activated = false;
+    this._deactivated = true;
   }
 
   triggered(){
-    if(!this.activated) {
+    if(!this.activated && !this._deactivated) {
       this.activated = true;
       this._timeToStart = Time.time + this._delay;
     }
