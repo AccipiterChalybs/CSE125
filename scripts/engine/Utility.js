@@ -37,6 +37,11 @@ Utility.moveTowards = function(a, b, delta){
   return val;
 };
 
+/**
+ * Returns a random integer in the range min inclusive to max inclusive.
+ * @param min - lowest possible integer to return
+ * @param max - highest possible integer to return (*note: this is an inclusive bound*)
+ */
 Utility.randomIntFromInterval = function(min,max)
 {
   // Code from http://stackoverflow.com/questions/4959975/generate-random-number-between-two-numbers-in-javascript

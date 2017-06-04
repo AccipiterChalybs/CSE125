@@ -100,5 +100,41 @@
     "loop": true,
     "type": 0,
     "space": 3
+  },
+  "footstep0":{
+    "src": "assets/audio/footstep22.wav",
+    "loop": false,
+    "type": 0,
+    "space": 3
+  },
+  "footstep1":{
+    "src": "assets/audio/footstep32.wav",
+    "loop": false,
+    "type": 0,
+    "space": 3
+  },
+  "footstep2":{
+    "src": "assets/audio/footstep42.wav",
+    "loop": false,
+    "type": 0,
+    "space": 3
+  },
+  "footstep3":{
+    "src": "assets/audio/footstep52.wav",
+    "loop": false,
+    "type": 0,
+    "space": 3
+  },
+  "footstep4":{
+    "src": "assets/audio/footstep_indoor.wav",
+    "loop": false,
+    "type": 0,
+    "space": 3
+  },
+  "footstep5":{
+    "src": "assets/audio/footstep_jg.wav",
+    "loop": false,
+    "type": 0,
+    "space": 3
   }
 }

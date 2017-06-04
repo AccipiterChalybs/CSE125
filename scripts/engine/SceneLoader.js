@@ -3,7 +3,7 @@
  */
 const c = {
   AIController, Animation, AudioListener, AudioSource, BoxCollider, Camera,
-  ClientStickTo, Collider, CompoundCollider, Decal, Foot, Light, ParticleSystem,
+  ClientStickTo, Collider, CompoundCollider, Decal, Foot, Floor, Light, ParticleSystem,
   SphereCollider, Transform, StatueController,
   AnimationGraph, AnimationState, DoorEvent, Event, EvilController, HealEvent,
   KeyEvent, Listenable, Look, ObjectLogicState, PlayerController,

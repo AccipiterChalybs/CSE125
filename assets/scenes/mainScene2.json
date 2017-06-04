@@ -3680,6 +3680,9 @@
                 "name": "Collider",
                 "index": "225",
                 "static": true,
+                "Floor" : {
+                  "surfaceType" : "soft"
+                },
                 "Transform": {
                   "position": [14, -0.4990001, -8],
                   "rotation": [270, 0, 0],

@@ -7,13 +7,10 @@ class Foot extends Component {
     super();
     this.componentType = "Foot";
 
+    this.left = params.left;
     this.rayDistance = 1.0;
     this.stepReady = false;
   }
-
-  start() {
-  }
-
 
   updateComponentClient() {
     let result = {};
@@ -33,8 +30,21 @@ class Foot extends Component {
 
   footstep(otherCollider) {
     console.log("Footstep", otherCollider.gameObject.name);
+    let soundName = this.getFootstepSoundName(otherCollider);
+    AudioEngine.soundArr[soundName].play();
+  }
+
+  getFootstepSoundName(otherCollider) {
+    let surfaceType = "hard";
+    let floorComp = otherCollider.gameObject.getComponent('Floor');
+    if (!!floorComp) {
+      surfaceType = floorComp.surfaceType;
+    }
+    let index = Utility.randomIntFromInterval(0, Foot.prototype.FOOTSTEP_SOUNDS[surfaceType].length-1);
+    return Foot.prototype.FOOTSTEP_SOUNDS[surfaceType][index];
   }
 }
 Foot.prototype.downVector = vec3.fromValues(0,-1,0);
-Foot.prototype.STEP_HEIGHT_READY = 0.19;
-Foot.prototype.STEP_HEIGHT_COMPLETE = 0.18;
+Foot.prototype.STEP_HEIGHT_READY = 0.185;
+Foot.prototype.STEP_HEIGHT_COMPLETE = 0.185;
+Foot.prototype.FOOTSTEP_SOUNDS = {"soft":['footstep0', 'footstep1', 'footstep2', 'footstep3'],"hard":['footstep4', 'footstep5']};
