@@ -4,7 +4,9 @@
 const c = {
   AIController, Animation, AudioListener, AudioSource, BoxCollider, Camera,
   ClientStickTo, Collider, CompoundCollider, Decal, Light, ParticleSystem,
-  SphereCollider, Transform, StatueController,
+  SphereCollider, Transform, SingingStatueController, TriggerSwitch, MoveTowardsEvent,
+  SingStatueEvent, StopSingStatueEvent, StopLightEvent, PlayAudio, PlayAudioEvent,
+  FadeInAudioEvent,
   AnimationGraph, AnimationState, DoorEvent, Event, EvilController, HealEvent,
   KeyEvent, Listenable, Look, ObjectLogicState, PlayerController,
   PlayerLogicState, PlayerTable, RaycastSwitch, RotateArrowKey, RotateMouse,
@@ -19,7 +21,7 @@ const SceneLoader = {
   // Ignore these in general pass, likely because they are already handled specially
   ignoreComponents: ["name", "index", "static", "Kinematic", "Animator", "AnimatorJS", "SkinnedMeshRenderer", "MeshFilter", "MeshRenderer",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
-  shadowLightsAvailable: 10,
+  shadowLightsAvailable: 0,
   tone: 0,
 
   loadScene: function(filename) {
@@ -172,19 +174,7 @@ const SceneLoader = {
       switch (generalCompName) {
         case "PlayerController":
           PlayerTable.addPlayer(nodeObject);
-
-          if(Debug.clientUpdate){
-            if(this.tone===0){
-              let pc = new PlayerController();
-              nodeObject.addComponent(pc);
-            }
-          }else{
-            let pc = new PlayerController();
-            nodeObject.addComponent(pc);
-          }
-
-          nodeObject.addComponent(new AudioSource("Tone0"+this.tone));
-          this.tone+=1;
+          nodeObject.addComponent(new PlayerController());
           break;
         default:
           nodeObject.addComponent(new c[generalCompName](compData));
