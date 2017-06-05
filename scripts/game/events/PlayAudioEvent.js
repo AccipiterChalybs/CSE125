@@ -50,6 +50,9 @@ class PlayAudioEvent extends TriggerEvent{
 
   triggered(){
     this._triggerClient=true;
+    if(Debug.clientUpdate){
+      this.triggeredClient();
+    }
   }
   triggeredClient(){
     if(!this.activated && !this._deactivated) {
