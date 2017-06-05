@@ -34786,7 +34786,7 @@
         "FadeInAudioEvent": {
           "delay": 0,
           "fadeTime": 3,
-          "volume": 0.4,
+          "volume": 0.025,
           "rate": 1
         }
       },
