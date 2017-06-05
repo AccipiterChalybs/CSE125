@@ -539,6 +539,8 @@ const Renderer  = {
       s3.setUniform("addTex5", 5, UniformTypes.u1i);
       s3.setUniform("ssao", 6, UniformTypes.u1i);
       s3.setUniform("fog", 7, UniformTypes.u1i);
+
+      s3.setUniform("exposure", 1, UniformTypes.u1f);
   },
 
   loop: function () {
@@ -691,5 +693,12 @@ const Renderer  = {
 
   getWindowHeight: function() {
       return Renderer.height;
+  },
+
+  setGamma: function(gamma) {
+    Renderer.getShader(Renderer.FBO_HDR).setUniform('gamma', gamma, UniformTypes.u1f);
+  },
+  setExposure: function(exposure) {
+    Renderer.getShader(Renderer.FBO_HDR).setUniform('exposure', exposure, UniformTypes.u1f);
   }
 };
