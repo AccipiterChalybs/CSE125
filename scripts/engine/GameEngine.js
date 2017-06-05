@@ -243,6 +243,9 @@ GameEngine.stop = function (){
   PlayerTable.players = [];
   PlayerTable.hate=[];
 
+  if(!IS_SERVER){
+    Howler.unload();
+  }
 }
 
 GameEngine.restart = function () {
@@ -256,6 +259,9 @@ GameEngine.restart = function () {
     } else {
       GL = glCanvas.getContext('webgl2');
     }
+    Input.init();
+    AudioEngine.init();
+
   }
 
   //glCanvas.getContext("webgl") || glCanvas.getContext("experimental-webgl");
