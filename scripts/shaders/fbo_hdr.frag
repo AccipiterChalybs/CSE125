@@ -11,6 +11,7 @@ uniform sampler2D addTex5;
 uniform sampler2D ssao; //I know this should only be applied to ambient, but doing it here for artistic style.
 uniform sampler2D fog;
 
+uniform float gamma;
 uniform float exposure;
 
 layout(location = 0) out vec4 fragColor;
@@ -47,5 +48,5 @@ void main() {
 	color *= scale;
 
 	color = pow(color, vec3(1.0/2.2)); //linear to gamma correction
-    fragColor =  vec4(color,1);
+    fragColor =  vec4(color + gamma,1);
 }

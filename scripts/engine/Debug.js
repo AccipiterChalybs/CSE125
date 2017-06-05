@@ -376,6 +376,7 @@ Debug.Profiler.setUniform = function() {
     let checkIndex = Debug.Profiler.index - 1;
     while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
       checkIndex--;
+      if (checkIndex < 0) { console.log("ERR: stage not found!"); return; }
     }
     Debug.Profiler.data[Debug.Profiler.map[checkIndex]].uniforms++;
   }
@@ -386,6 +387,7 @@ Debug.Profiler.useShader = function() {
     let checkIndex = Debug.Profiler.index - 1;
     while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
       checkIndex--;
+      if (checkIndex < 0) { console.log("ERR: stage not found!"); return; }
     }
     Debug.Profiler.data[Debug.Profiler.map[checkIndex]].shaderUses++;
   }
@@ -396,6 +398,7 @@ Debug.Profiler.drawCall = function() {
     let checkIndex = Debug.Profiler.index - 1;
     while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
       checkIndex--;
+      if (checkIndex < 0) { console.log("ERR: stage not found!"); return; }
     }
     Debug.Profiler.data[Debug.Profiler.map[checkIndex]].draws++;
   }
