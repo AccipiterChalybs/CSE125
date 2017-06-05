@@ -1113,6 +1113,9 @@
                             "name": "foot.L",
                             "index": "70",
                             "static": false,
+                            "Foot" : {
+                              "left" : true
+                            },
                             "Transform": {
                               "position": [1.267024, 0.2776224, -0.02016412],
                               "rotation": [26.96255, 258.5912, 175.5391],
@@ -1205,6 +1208,9 @@
                             "name": "foot.R",
                             "index": "78",
                             "static": false,
+                            "Foot" : {
+                              "left" : false
+                            },
                             "Transform": {
                               "position": [1.290033, 0.2358117, -0.0768041],
                               "rotation": [58.87246, 271.696, 180.0001],
@@ -3235,6 +3241,9 @@
                 "name": "Collider",
                 "index": "198",
                 "static": true,
+                "Floor" : {
+                  "surfaceType" : "soft"
+                },
                 "Transform": {
                   "position": [14, -0.4990001, -8],
                   "rotation": [270, 0, 0],
