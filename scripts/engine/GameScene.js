@@ -55,24 +55,6 @@ class GameScene {
       camera.gameObject.addComponent(new RotateMouse());
     }
 
-    let cloth = new GameObject();
-    cloth.addComponent(new ClothMesh("TEST"));
-    GameObject.prototype.SceneRoot.addChild(cloth);
-    let mat = new Material(Renderer.getShader(Renderer.DEFERRED_PBR_SHADER));
-
-    let colorTest = vec4.create();
-    vec4.set(colorTest, 1, 0.5, 0.1, 1);
-    mat.setTexture(MaterialTexture.COLOR, new Texture('assets/texture/Banners/banner.png'));
-
-    vec4.set(colorTest, 0.5, 0.5, 1, 1);
-    mat.setTexture(MaterialTexture.NORMAL, Texture.makeColorTex(colorTest));
-
-    vec4.set(colorTest, 1, 0, 0.25, 1); //metalness, blank, roughness
-    mat.setTexture(MaterialTexture.MAT, Texture.makeColorTex(colorTest));
-
-    cloth.getComponent('Mesh').setMaterial(mat);
-    cloth.transform.setPosition(vec3.fromValues(14, 0.5, 10));
-
     //TODO make true and make clientside objects work
     let directionalLight = new GameObject({clientSideOnly: false});
 
@@ -87,7 +69,7 @@ class GameScene {
       Renderer.directionalLight.getComponent("Light").color = vec3.fromValues(1.6, 3.2, 6.4);
     }
 
-    let pos = vec3.create(); vec3.set(pos, -27, 0, -9);
+    let pos = vec3.create(); vec3.set(pos, 26, 0, 18);
     let color = vec4.create(); vec4.set(color, 1, 0, 0, 1);
     let evilTeapot = Debug.drawTeapot(pos, color);
     evilTeapot.addComponent(new EvilController());

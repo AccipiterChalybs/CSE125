@@ -4,11 +4,11 @@
 
 let Debug = {};
 
-Debug.clientUpdate = false; //Run the client in standalone mode, so it doesn't need a server - good for testing!
+Debug.clientUpdate = true; //Run the client in standalone mode, so it doesn't need a server - good for testing!
 Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
 Debug.debugDisplay = true;
 Debug.quickLoad = true;
-Debug.autoStart = false;
+Debug.autoStart = true;
 Debug.tmp_shadowTwoSideRender = true; //Var to remind me to remove this when we get in new level geometry
 
 Debug.drawColliders = false;
@@ -301,7 +301,7 @@ Debug.drawTeapot = function(pos, color = null) {
 
   teapot.transform.setPosition(pos);
   teapot.transform.setRotation(rotation);
-  teapot.transform.scale((.05));
+  teapot.transform.scale(0.05);
 
   GameObject.prototype.SceneRoot.addChild(teapot);
 

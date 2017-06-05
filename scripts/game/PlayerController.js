@@ -9,6 +9,8 @@ const PLAYER_ACCELERATION = 4;
 const CHAR_NAME = "CAIN"; // CUZ I GOT 1 KEY and 0 bombs
 const COOLDOWN_SINGING = 0.1;   // In seconds
 
+const HATE_SING = 1;
+
 const PlayerState = {
   default: "default",
   walking: "walking",
@@ -25,7 +27,7 @@ class PlayerController extends Playerable{
     this._looker = null;
     this.checkpoint = null;
     this.keys = 0;
-    this.injured = false;
+    this.injured = true;
     this.forward = vec3.create(); vec3.set(this.forward, 0, 0, -1);
     this.cameraPos = vec3.create(); vec3.set(this.cameraPos, 0, 0, -1);
 
@@ -48,11 +50,6 @@ class PlayerController extends Playerable{
   }
 
   updateComponentClient(){
-    if(!this.injured&& this.singing === 1 && Time.time >= this._nextSingTime) {
-      this._singingSrc.playSound();
-    }else{
-      this._singingSrc.pauseSound();
-    }
   }
 
   updateComponent(){
@@ -80,7 +77,6 @@ class PlayerController extends Playerable{
 
     if(this.singing === 0 && this._lastSingInput === 1){
       this._nextSingTime = Time.time + this._singingCooldown;
-      // if(!IS_SERVER) this._singingSrc.pauseSound();
     }
 
     this._lastSingInput = this.singing;
@@ -89,10 +85,6 @@ class PlayerController extends Playerable{
 
     }else if(!this.injured && this.singing === 1 && Time.time >= this._nextSingTime) {
       this.state.status = 'singing';
-      //if !injured
-
-      // if(!IS_SERVER) this._singingSrc.resumeSound();
-      //
     }else if(this.walking === 1){
       this.state.status = 'walking';
     }else{
@@ -104,6 +96,7 @@ class PlayerController extends Playerable{
     }
 
     if(this.state.status === 'singing'){
+      PlayerTable.increaseHate(PlayerTable.currentPlayer, HATE_SING);
       this._singer.sing();
     }else{
       this._singer.quiet();
@@ -144,7 +137,7 @@ class PlayerController extends Playerable{
       this.transform.setRotation(quat.create());
       this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
       let animState = (this.state.status === 'singing') ? 2 : 3;
-      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(2, true);
+      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(3, true);
       // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').resume();
     } else {
       // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').stop();
@@ -156,6 +149,26 @@ class PlayerController extends Playerable{
      body.velocity.x = move[0];
      body.velocity.z = move[2];*/
     //col.setRotation(this.forward);
+  }
+
+  heal(){
+    // Debug.log("Healed");
+    this.injured = false;
+  }
+
+  takeDamage(){
+    if(this.injured === true){
+      this.die();
+      return;
+    }
+
+    Debug.log("ow");
+
+    this.injured = true;
+  }
+
+  die(){
+    Debug.log("I die.");
   }
 
 
