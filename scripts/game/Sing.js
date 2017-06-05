@@ -23,6 +23,8 @@ class Sing extends Component{
   }
 
   start(){
+    this.gameObject.addComponentToSerializeableList(this);
+    this._audioSrc = this.transform.gameObject.getComponent('AudioSource');
     this._pointLight = GameObject.prototype.SerializeMap[this._lightIndex].getComponent("Light");
     if(this._pointLight && this._pointLight !== null) {
       this._pointLight.setColor(vec3.scale(vec3.create(), this._pointLight.color, this._lightIntensity));
@@ -32,20 +34,23 @@ class Sing extends Component{
 
   startClient() {
     this.gameObject.addComponentToSerializeableList(this);
-    this._audioSrc = this.transform.gameObject.getComponent('AudioSource');
   }
 
   updateComponent(){
+    if(this._audioSrc && this._audioSrc !== null) {
+      if (this._singing === 1) {
+        this._audioSrc.setState(AudioState.playSound)
+        // this._audioSrc.playSound();
+      } else {
+        this._audioSrc.setState(AudioState.pause)
+
+        // this._audioSrc.pauseSound();
+      }
+    }
   }
 
   updateComponentClient(){
-    if(this._audioSrc && this._audioSrc !== null) {
-      if (this._singing === 1) {
-        this._audioSrc.playSound();
-      } else {
-        this._audioSrc.pauseSound();
-      }
-    }
+
   }
 
   sing(){
@@ -73,13 +78,13 @@ class Sing extends Component{
 
   serialize() {
     let data = {};
-    data.s = this.singing;
+    data.s = this._singing;
 
     return data;
   }
 
   applySerializedData(data) {
     // Debug.log(this);
-    this.singing = data.s;
+    this._singing = data.s;
   }
 }

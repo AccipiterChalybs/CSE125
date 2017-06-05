@@ -12,12 +12,17 @@ class PlayAudioEvent extends TriggerEvent{
     this._volume = params.volume;
     this._rate = params.rate;
     this._audioSrc = null;
+    this._triggerClient=false;
   }
 
   start() {
+    this.gameObject.addComponentToSerializeableList(this);
+
   }
 
   startClient(){
+    this.gameObject.addComponentToSerializeableList(this);
+
     this._audioSrc = this.transform.gameObject.getComponent('AudioSource');
     if(this._audioSrc && this._audioSrc !== null) {
       this._audioSrc.changeVolume(this._volume);
@@ -44,9 +49,26 @@ class PlayAudioEvent extends TriggerEvent{
   }
 
   triggered(){
+    this._triggerClient=true;
+  }
+  triggeredClient(){
     if(!this.activated && !this._deactivated) {
       this.activated = true;
       this._timeToStart = Time.time + this._delay;
+    }
+  }
+
+  serialize(){
+    let data = {};
+    data.t = this._triggerClient;
+    this._triggerClient = false;
+    return data;
+
+  }
+
+  applySerializedData(data){
+    if(!!data.t){
+      this.triggeredClient();
     }
   }
 }

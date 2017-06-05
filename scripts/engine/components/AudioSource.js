@@ -88,7 +88,7 @@ class AudioSource extends Component {
     }
 
     applySerializedData(data) {
-        this.queue.push(data.s);
+      this.queue.push(data.s);
     }
 
     //Sound Stuff

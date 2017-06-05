@@ -17,24 +17,27 @@ class DoorEvent extends SingingEvent{
   }
 
   start() {
+    this._audioSrc = this.transform.gameObject.getComponent('AudioSource');
   }
 
   startClient() {
-    this._audioSrc = this.transform.gameObject.getComponent('AudioSource');
   }
 
   updateComponent() {
     super.updateComponent();
+    if(this._audioSrc && this._audioSrc !== null) {
+      if (this._currentState === EventState.discharging || this._currentState === EventState.charging) {
+        // this._audioSrc.playSound();
+        this._audioSrc.setState(AudioState.playSound);
+      } else {
+        // this._audioSrc.pauseSound();
+        this._audioSrc.setState(AudioState.pause);
+      }
+    }
   }
 
   updateComponentClient(){
-    if(this._audioSrc && this._audioSrc !== null) {
-      if (this._currentState === EventState.discharging || this._currentState === EventState.charging) {
-        this._audioSrc.playSound();
-      } else {
-        this._audioSrc.pauseSound();
-      }
-    }
+
   }
 
   onUncharged() {
