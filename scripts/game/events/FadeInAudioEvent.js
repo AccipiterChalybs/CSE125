@@ -56,6 +56,9 @@ class FadeInAudioEvent extends TriggerEvent{
 
   triggered(){
     this._triggerClient = true;
+    if(Debug.clientUpdate){
+      this.triggeredClient();
+    }
   }
 
   triggeredClient(){
