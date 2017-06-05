@@ -846,7 +846,7 @@
         "index": "49",
         "static": false,
         "Transform": {
-          "position": [39.648, -1.19, -13.7],
+          "position": [1.292, 0.206, -0.049],
           "rotation": [0, 90, 0],
           "scaleFactor": 0.3
         },
@@ -886,7 +886,7 @@
             "index": "50",
             "static": false,
             "Transform": {
-              "position": [39.648, -1.19, -13.7],
+              "position": [1.292, 0.206, -0.049],
               "rotation": [270, 90, 0],
               "scaleFactor": 1
             },
@@ -900,7 +900,7 @@
             "index": "51",
             "static": false,
             "Transform": {
-              "position": [39.6385, -1.2018, -13.70593],
+              "position": [1.282502, 0.1942006, -0.0549306],
               "rotation": [272.1246, 63.90548, 24.12019],
               "scaleFactor": 1
             },
@@ -910,7 +910,7 @@
                 "index": "52",
                 "static": false,
                 "Transform": {
-                  "position": [39.63105, -0.8514272, -13.70088],
+                  "position": [1.275048, 0.5445729, -0.04987752],
                   "rotation": [14.2708, 88.23178, 0.8957102],
                   "scaleFactor": 1
                 },
@@ -920,7 +920,7 @@
                     "index": "53",
                     "static": false,
                     "Transform": {
-                      "position": [39.64621, -0.7916864, -13.69944],
+                      "position": [1.290206, 0.6043137, -0.04844537],
                       "rotation": [11.70589, 90.02175, 358.9318],
                       "scaleFactor": 1
                     },
@@ -930,7 +930,7 @@
                         "index": "54",
                         "static": false,
                         "Transform": {
-                          "position": [39.65738, -0.737746, -13.70048],
+                          "position": [1.301382, 0.658254, -0.04947671],
                           "rotation": [10.53347, 94.31126, 358.6709],
                           "scaleFactor": 1
                         },
@@ -940,7 +940,7 @@
                             "index": "55",
                             "static": false,
                             "Transform": {
-                              "position": [39.68036, -0.6126369, -13.70517],
+                              "position": [1.324357, 0.7833632, -0.05416962],
                               "rotation": [25.22184, 91.69904, 358.2996],
                               "scaleFactor": 1
                             },
@@ -950,7 +950,7 @@
                                 "index": "56",
                                 "static": false,
                                 "Transform": {
-                                  "position": [39.70243, -0.5656534, -13.70737],
+                                  "position": [1.346432, 0.8303467, -0.0563669],
                                   "rotation": [20.04188, 89.63861, 358.1127],
                                   "scaleFactor": 1
                                 },
@@ -960,7 +960,7 @@
                                     "index": "57",
                                     "static": false,
                                     "Transform": {
-                                      "position": [39.74269, -0.4553706, -13.71098],
+                                      "position": [1.386687, 0.9406295, -0.05998126],
                                       "rotation": [20.04188, 89.63861, 358.1127],
                                       "scaleFactor": 1
                                     }
@@ -974,7 +974,7 @@
                             "index": "58",
                             "static": false,
                             "Transform": {
-                              "position": [39.70146, -0.6541391, -13.69954],
+                              "position": [1.34546, 0.741861, -0.04853754],
                               "rotation": [289.367, 56.53955, 104.9902],
                               "scaleFactor": 1
                             },
@@ -984,7 +984,7 @@
                                 "index": "59",
                                 "static": false,
                                 "Transform": {
-                                  "position": [39.67661, -0.6667718, -13.63539],
+                                  "position": [1.320612, 0.7292283, 0.0156062],
                                   "rotation": [14.47275, 135.6583, 172.4205],
                                   "scaleFactor": 0.9999999
                                 },
@@ -994,7 +994,7 @@
                                     "index": "60",
                                     "static": false,
                                     "Transform": {
-                                      "position": [39.66501, -0.8080229, -13.59575],
+                                      "position": [1.309012, 0.5879772, 0.05524806],
                                       "rotation": [2.077247, 127.371, 171.1793],
                                       "scaleFactor": 1
                                     },
@@ -1004,7 +1004,7 @@
                                         "index": "61",
                                         "static": false,
                                         "Transform": {
-                                          "position": [39.67229, -0.9192775, -13.57957],
+                                          "position": [1.316291, 0.4767225, 0.07142669],
                                           "rotation": [358.2546, 221.723, 186.9121],
                                           "scaleFactor": 0.9999999
                                         },
@@ -1014,7 +1014,7 @@
                                             "index": "62",
                                             "static": false,
                                             "Transform": {
-                                              "position": [39.66214, -1.010847, -13.57426],
+                                              "position": [1.306145, 0.3851532, 0.07673539],
                                               "rotation": [358.2546, 221.723, 186.9121],
                                               "scaleFactor": 1
                                             }
@@ -1032,7 +1032,7 @@
                             "index": "63",
                             "static": false,
                             "Transform": {
-                              "position": [39.70045, -0.6544284, -13.71218],
+                              "position": [1.344453, 0.7415717, -0.06117738],
                               "rotation": [291.4854, 142.4807, 249.9898],
                               "scaleFactor": 0.9999999
                             },
@@ -1042,7 +1042,7 @@
                                 "index": "64",
                                 "static": false,
                                 "Transform": {
-                                  "position": [39.66051, -0.6697223, -13.76752],
+                                  "position": [1.304514, 0.7262778, -0.1165163],
                                   "rotation": [7.122828, 57.14896, 196.5564],
                                   "scaleFactor": 0.9999999
                                 },
@@ -1052,7 +1052,7 @@
                                     "index": "65",
                                     "static": false,
                                     "Transform": {
-                                      "position": [39.66857, -0.8096982, -13.81223],
+                                      "position": [1.312568, 0.5863019, -0.1612346],
                                       "rotation": [342.0675, 59.9476, 196.3696],
                                       "scaleFactor": 1
                                     },
@@ -1062,7 +1062,7 @@
                                         "index": "66",
                                         "static": false,
                                         "Transform": {
-                                          "position": [39.71328, -0.9125406, -13.82305],
+                                          "position": [1.357276, 0.4834595, -0.1720505],
                                           "rotation": [10.11142, 332.5838, 198.6905],
                                           "scaleFactor": 0.9999999
                                         },
@@ -1072,7 +1072,7 @@
                                             "index": "67",
                                             "static": false,
                                             "Transform": {
-                                              "position": [39.74659, -0.9985987, -13.82306],
+                                              "position": [1.390594, 0.3974014, -0.1720571],
                                               "rotation": [10.11142, 332.5838, 198.6905],
                                               "scaleFactor": 1
                                             }
@@ -1094,7 +1094,7 @@
                     "index": "68",
                     "static": false,
                     "Transform": {
-                      "position": [39.6454, -0.8309385, -13.66608],
+                      "position": [1.2894, 0.5650616, -0.01508365],
                       "rotation": [25.3412, 257.6977, 180.0035],
                       "scaleFactor": 1
                     },
@@ -1104,7 +1104,7 @@
                         "index": "69",
                         "static": false,
                         "Transform": {
-                          "position": [39.72313, -0.9989237, -13.64912],
+                          "position": [1.367125, 0.3970763, 0.001878072],
                           "rotation": [319.5383, 263.8517, 175.9217],
                           "scaleFactor": 1
                         },
@@ -1114,7 +1114,7 @@
                             "index": "70",
                             "static": false,
                             "Transform": {
-                              "position": [39.62302, -1.118378, -13.67116],
+                              "position": [1.267024, 0.2776224, -0.02016412],
                               "rotation": [26.96255, 258.5912, 175.5391],
                               "scaleFactor": 1
                             },
@@ -1124,7 +1124,7 @@
                                 "index": "71",
                                 "static": false,
                                 "Transform": {
-                                  "position": [39.64356, -1.158176, -13.67057],
+                                  "position": [1.287559, 0.2378237, -0.01957409],
                                   "rotation": [293.084, 71.23333, 190.184],
                                   "scaleFactor": 1
                                 },
@@ -1134,7 +1134,7 @@
                                     "index": "72",
                                     "static": false,
                                     "Transform": {
-                                      "position": [39.66485, -1.167163, -13.66769],
+                                      "position": [1.308848, 0.228837, -0.01668923],
                                       "rotation": [293.084, 71.23333, 190.184],
                                       "scaleFactor": 1
                                     }
@@ -1148,7 +1148,7 @@
                             "index": "73",
                             "static": false,
                             "Transform": {
-                              "position": [39.62302, -1.118378, -13.67116],
+                              "position": [1.267024, 0.2776224, -0.02016412],
                               "rotation": [74.76167, 92.67496, 191.879],
                               "scaleFactor": 1
                             },
@@ -1158,7 +1158,7 @@
                                 "index": "74",
                                 "static": false,
                                 "Transform": {
-                                  "position": [39.61313, -1.145057, -13.6875],
+                                  "position": [1.257132, 0.2509426, -0.03650284],
                                   "rotation": [304.9934, 76.76261, 95.41423],
                                   "scaleFactor": 0.9999999
                                 },
@@ -1168,7 +1168,7 @@
                                     "index": "75",
                                     "static": false,
                                     "Transform": {
-                                      "position": [39.6089, -1.146557, -13.66015],
+                                      "position": [1.252898, 0.2494426, -0.009146359],
                                       "rotation": [304.9934, 76.76261, 95.41423],
                                       "scaleFactor": 1
                                     }
@@ -1186,7 +1186,7 @@
                     "index": "76",
                     "static": false,
                     "Transform": {
-                      "position": [39.64775, -0.8299094, -13.73396],
+                      "position": [1.291757, 0.5660906, -0.08295579],
                       "rotation": [13.92808, 275.7378, 183.2028],
                       "scaleFactor": 1
                     },
@@ -1196,7 +1196,7 @@
                         "index": "77",
                         "static": false,
                         "Transform": {
-                          "position": [39.69324, -1.010033, -13.72809],
+                          "position": [1.337241, 0.3859666, -0.07708906],
                           "rotation": [342.552, 271.788, 179.5675],
                           "scaleFactor": 1
                         },
@@ -1206,7 +1206,7 @@
                             "index": "78",
                             "static": false,
                             "Transform": {
-                              "position": [39.64603, -1.160188, -13.7278],
+                              "position": [1.290033, 0.2358117, -0.0768041],
                               "rotation": [58.87246, 271.696, 180.0001],
                               "scaleFactor": 1
                             },
@@ -1216,7 +1216,7 @@
                                 "index": "79",
                                 "static": false,
                                 "Transform": {
-                                  "position": [39.68435, -1.183341, -13.72894],
+                                  "position": [1.328356, 0.2126588, -0.07793876],
                                   "rotation": [275.8496, 271.6955, 0.0004858686],
                                   "scaleFactor": 1
                                 },
@@ -1226,7 +1226,7 @@
                                     "index": "80",
                                     "static": false,
                                     "Transform": {
-                                      "position": [39.70751, -1.180968, -13.72962],
+                                      "position": [1.351512, 0.2150322, -0.07862438],
                                       "rotation": [275.8496, 271.6955, 0.0004858686],
                                       "scaleFactor": 1
                                     }
@@ -1240,7 +1240,7 @@
                             "index": "81",
                             "static": false,
                             "Transform": {
-                              "position": [39.64603, -1.160188, -13.7278],
+                              "position": [1.290033, 0.2358117, -0.0768041],
                               "rotation": [51.98639, 92.18683, 180.6705],
                               "scaleFactor": 1
                             },
@@ -1250,7 +1250,7 @@
                                 "index": "82",
                                 "static": false,
                                 "Transform": {
-                                  "position": [39.64587, -1.190331, -13.71484],
+                                  "position": [1.289872, 0.2056687, -0.06384239],
                                   "rotation": [281.7953, 89.68201, 272.0189],
                                   "scaleFactor": 0.9999999
                                 },
@@ -1260,7 +1260,7 @@
                                     "index": "83",
                                     "static": false,
                                     "Transform": {
-                                      "position": [39.64507, -1.190132, -13.74255],
+                                      "position": [1.28907, 0.2058683, -0.09155285],
                                       "rotation": [281.7953, 89.68201, 272.0189],
                                       "scaleFactor": 1
                                     }
@@ -1282,7 +1282,7 @@
             "index": "84",
             "static": false,
             "Transform": {
-              "position": [39.8076, -0.7853, -13.7],
+              "position": [1.4516, 0.6107, -0.04900001],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -4423,14 +4423,15 @@
           "maxLightRange": 8,
           "minLightRange": 1
         },
-        "SingStatueEvent": {
-          "delay": 0
-        },
         "AudioSource": {
           "audioName": "Tone1.wav_1",
           "loop": true,
           "isSFX": true,
           "is3D": true
+        },
+        "SingingStatueController": {
+          "singingDelay": 0,
+          "singingDuration": 0
         },
         "children": [
           {
@@ -14060,7 +14061,7 @@
         "index": "990",
         "static": false,
         "Transform": {
-          "position": [1.809176, 0.216, 0.2448816],
+          "position": [23.11, -1.597, -1.27],
           "rotation": [0, 90, 0],
           "scaleFactor": 0.3000001
         },
@@ -14100,7 +14101,7 @@
             "index": "991",
             "static": false,
             "Transform": {
-              "position": [1.809176, 0.216, 0.2448816],
+              "position": [23.11, -1.597, -1.27],
               "rotation": [270, 90, 0],
               "scaleFactor": 1
             },
@@ -14114,7 +14115,7 @@
             "index": "992",
             "static": false,
             "Transform": {
-              "position": [1.799678, 0.2042006, 0.238951],
+              "position": [23.1005, -1.608799, -1.275931],
               "rotation": [272.1246, 63.90548, 24.12019],
               "scaleFactor": 1
             },
@@ -14124,7 +14125,7 @@
                 "index": "993",
                 "static": false,
                 "Transform": {
-                  "position": [1.792223, 0.5545729, 0.244004],
+                  "position": [23.09305, -1.258427, -1.270877],
                   "rotation": [14.2708, 88.23178, 0.8957102],
                   "scaleFactor": 1
                 },
@@ -14134,7 +14135,7 @@
                     "index": "994",
                     "static": false,
                     "Transform": {
-                      "position": [1.807382, 0.6143137, 0.2454362],
+                      "position": [23.10821, -1.198686, -1.269445],
                       "rotation": [11.70589, 90.02175, 358.9318],
                       "scaleFactor": 1
                     },
@@ -14144,7 +14145,7 @@
                         "index": "995",
                         "static": false,
                         "Transform": {
-                          "position": [1.818558, 0.668254, 0.2444048],
+                          "position": [23.11938, -1.144746, -1.270477],
                           "rotation": [10.53347, 94.31126, 358.6709],
                           "scaleFactor": 1
                         },
@@ -14154,7 +14155,7 @@
                             "index": "996",
                             "static": false,
                             "Transform": {
-                              "position": [1.841533, 0.7933632, 0.2397119],
+                              "position": [23.14236, -1.019637, -1.27517],
                               "rotation": [25.22184, 91.69904, 358.2996],
                               "scaleFactor": 1
                             },
@@ -14164,7 +14165,7 @@
                                 "index": "997",
                                 "static": false,
                                 "Transform": {
-                                  "position": [1.863608, 0.8403467, 0.2375146],
+                                  "position": [23.16443, -0.9726533, -1.277367],
                                   "rotation": [20.04188, 89.63861, 358.1127],
                                   "scaleFactor": 1
                                 },
@@ -14174,7 +14175,7 @@
                                     "index": "998",
                                     "static": false,
                                     "Transform": {
-                                      "position": [1.903863, 0.9506295, 0.2339003],
+                                      "position": [23.20469, -0.8623706, -1.280981],
                                       "rotation": [20.04188, 89.63861, 358.1127],
                                       "scaleFactor": 1
                                     }
@@ -14188,7 +14189,7 @@
                             "index": "999",
                             "static": false,
                             "Transform": {
-                              "position": [1.862635, 0.751861, 0.245344],
+                              "position": [23.16346, -1.061139, -1.269538],
                               "rotation": [289.367, 56.53955, 104.9902],
                               "scaleFactor": 1
                             },
@@ -14198,7 +14199,7 @@
                                 "index": "1000",
                                 "static": false,
                                 "Transform": {
-                                  "position": [1.837788, 0.7392283, 0.3094878],
+                                  "position": [23.13861, -1.073772, -1.205394],
                                   "rotation": [14.47275, 135.6583, 172.4205],
                                   "scaleFactor": 0.9999999
                                 },
@@ -14208,7 +14209,7 @@
                                     "index": "1001",
                                     "static": false,
                                     "Transform": {
-                                      "position": [1.826188, 0.5979772, 0.3491296],
+                                      "position": [23.12701, -1.215023, -1.165752],
                                       "rotation": [2.077247, 127.371, 171.1793],
                                       "scaleFactor": 1
                                     },
@@ -14218,7 +14219,7 @@
                                         "index": "1002",
                                         "static": false,
                                         "Transform": {
-                                          "position": [1.833467, 0.4867225, 0.3653083],
+                                          "position": [23.13429, -1.326277, -1.149573],
                                           "rotation": [358.2546, 221.723, 186.9121],
                                           "scaleFactor": 0.9999999
                                         },
@@ -14228,7 +14229,7 @@
                                             "index": "1003",
                                             "static": false,
                                             "Transform": {
-                                              "position": [1.823321, 0.3951532, 0.370617],
+                                              "position": [23.12415, -1.417847, -1.144265],
                                               "rotation": [358.2546, 221.723, 186.9121],
                                               "scaleFactor": 1
                                             }
@@ -14246,7 +14247,7 @@
                             "index": "1004",
                             "static": false,
                             "Transform": {
-                              "position": [1.861629, 0.7515717, 0.2327042],
+                              "position": [23.16245, -1.061428, -1.282177],
                               "rotation": [291.4854, 142.4807, 249.9898],
                               "scaleFactor": 0.9999999
                             },
@@ -14256,7 +14257,7 @@
                                 "index": "1005",
                                 "static": false,
                                 "Transform": {
-                                  "position": [1.82169, 0.7362778, 0.1773653],
+                                  "position": [23.12251, -1.076722, -1.337516],
                                   "rotation": [7.122828, 57.14896, 196.5564],
                                   "scaleFactor": 0.9999999
                                 },
@@ -14266,7 +14267,7 @@
                                     "index": "1006",
                                     "static": false,
                                     "Transform": {
-                                      "position": [1.829744, 0.5963019, 0.1326469],
+                                      "position": [23.13057, -1.216698, -1.382235],
                                       "rotation": [342.0675, 59.9476, 196.3696],
                                       "scaleFactor": 1
                                     },
@@ -14276,7 +14277,7 @@
                                         "index": "1007",
                                         "static": false,
                                         "Transform": {
-                                          "position": [1.874452, 0.4934595, 0.121831],
+                                          "position": [23.17528, -1.319541, -1.393051],
                                           "rotation": [10.11142, 332.5838, 198.6905],
                                           "scaleFactor": 0.9999999
                                         },
@@ -14286,7 +14287,7 @@
                                             "index": "1008",
                                             "static": false,
                                             "Transform": {
-                                              "position": [1.90777, 0.4074014, 0.1218244],
+                                              "position": [23.2086, -1.405599, -1.393057],
                                               "rotation": [10.11142, 332.5838, 198.6905],
                                               "scaleFactor": 1
                                             }
@@ -14308,7 +14309,7 @@
                     "index": "1009",
                     "static": false,
                     "Transform": {
-                      "position": [1.806576, 0.5750616, 0.2787979],
+                      "position": [23.1074, -1.237938, -1.236084],
                       "rotation": [25.3412, 257.6977, 180.0035],
                       "scaleFactor": 1
                     },
@@ -14318,7 +14319,7 @@
                         "index": "1010",
                         "static": false,
                         "Transform": {
-                          "position": [1.884301, 0.4070763, 0.2957596],
+                          "position": [23.18513, -1.405924, -1.219122],
                           "rotation": [319.5383, 263.8517, 175.9217],
                           "scaleFactor": 1
                         },
@@ -14328,7 +14329,7 @@
                             "index": "1011",
                             "static": false,
                             "Transform": {
-                              "position": [1.7842, 0.2876224, 0.2737174],
+                              "position": [23.08503, -1.525378, -1.241164],
                               "rotation": [26.96255, 258.5912, 175.5391],
                               "scaleFactor": 1
                             },
@@ -14338,7 +14339,7 @@
                                 "index": "1012",
                                 "static": false,
                                 "Transform": {
-                                  "position": [1.804735, 0.2478237, 0.2743075],
+                                  "position": [23.10556, -1.565176, -1.240574],
                                   "rotation": [293.084, 71.23333, 190.184],
                                   "scaleFactor": 1
                                 },
@@ -14348,7 +14349,7 @@
                                     "index": "1013",
                                     "static": false,
                                     "Transform": {
-                                      "position": [1.826024, 0.238837, 0.2771924],
+                                      "position": [23.12685, -1.574163, -1.237689],
                                       "rotation": [293.084, 71.23333, 190.184],
                                       "scaleFactor": 1
                                     }
@@ -14362,7 +14363,7 @@
                             "index": "1014",
                             "static": false,
                             "Transform": {
-                              "position": [1.7842, 0.2876224, 0.2737174],
+                              "position": [23.08503, -1.525378, -1.241164],
                               "rotation": [74.76167, 92.67496, 191.879],
                               "scaleFactor": 1
                             },
@@ -14372,7 +14373,7 @@
                                 "index": "1015",
                                 "static": false,
                                 "Transform": {
-                                  "position": [1.774307, 0.2609426, 0.2573787],
+                                  "position": [23.07513, -1.552057, -1.257503],
                                   "rotation": [304.9934, 76.76261, 95.41423],
                                   "scaleFactor": 0.9999999
                                 },
@@ -14382,7 +14383,7 @@
                                     "index": "1016",
                                     "static": false,
                                     "Transform": {
-                                      "position": [1.770074, 0.2594426, 0.2847352],
+                                      "position": [23.0709, -1.553557, -1.230146],
                                       "rotation": [304.9934, 76.76261, 95.41423],
                                       "scaleFactor": 1
                                     }
@@ -14400,7 +14401,7 @@
                     "index": "1017",
                     "static": false,
                     "Transform": {
-                      "position": [1.808933, 0.5760906, 0.2109258],
+                      "position": [23.10976, -1.236909, -1.303956],
                       "rotation": [13.92808, 275.7378, 183.2028],
                       "scaleFactor": 1
                     },
@@ -14410,7 +14411,7 @@
                         "index": "1018",
                         "static": false,
                         "Transform": {
-                          "position": [1.854417, 0.3959666, 0.2167925],
+                          "position": [23.15524, -1.417033, -1.298089],
                           "rotation": [342.552, 271.788, 179.5675],
                           "scaleFactor": 1
                         },
@@ -14420,7 +14421,7 @@
                             "index": "1019",
                             "static": false,
                             "Transform": {
-                              "position": [1.807209, 0.2458117, 0.2170774],
+                              "position": [23.10803, -1.567188, -1.297804],
                               "rotation": [58.87246, 271.696, 180.0001],
                               "scaleFactor": 1
                             },
@@ -14430,7 +14431,7 @@
                                 "index": "1020",
                                 "static": false,
                                 "Transform": {
-                                  "position": [1.845532, 0.2226588, 0.2159428],
+                                  "position": [23.14636, -1.590341, -1.298939],
                                   "rotation": [275.8496, 271.6955, 0.0004858686],
                                   "scaleFactor": 1
                                 },
@@ -14440,7 +14441,7 @@
                                     "index": "1021",
                                     "static": false,
                                     "Transform": {
-                                      "position": [1.868688, 0.2250322, 0.2152572],
+                                      "position": [23.16951, -1.587968, -1.299624],
                                       "rotation": [275.8496, 271.6955, 0.0004858686],
                                       "scaleFactor": 1
                                     }
@@ -14454,7 +14455,7 @@
                             "index": "1022",
                             "static": false,
                             "Transform": {
-                              "position": [1.807209, 0.2458117, 0.2170774],
+                              "position": [23.10803, -1.567188, -1.297804],
                               "rotation": [51.98639, 92.18683, 180.6705],
                               "scaleFactor": 1
                             },
@@ -14464,7 +14465,7 @@
                                 "index": "1023",
                                 "static": false,
                                 "Transform": {
-                                  "position": [1.807048, 0.2156687, 0.2300392],
+                                  "position": [23.10787, -1.597331, -1.284842],
                                   "rotation": [281.7953, 89.68201, 272.0189],
                                   "scaleFactor": 0.9999999
                                 },
@@ -14474,7 +14475,7 @@
                                     "index": "1024",
                                     "static": false,
                                     "Transform": {
-                                      "position": [1.806246, 0.2158683, 0.2023287],
+                                      "position": [23.10707, -1.597132, -1.312553],
                                       "rotation": [281.7953, 89.68201, 272.0189],
                                       "scaleFactor": 1
                                     }
@@ -14496,7 +14497,7 @@
             "index": "1025",
             "static": false,
             "Transform": {
-              "position": [1.968776, 0.6207, 0.2448815],
+              "position": [23.2696, -1.1923, -1.27],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -18499,14 +18500,15 @@
           "maxLightRange": 8,
           "minLightRange": 1
         },
-        "SingStatueEvent": {
-          "delay": 0
-        },
         "AudioSource": {
           "audioName": "Tone1.wav_5",
           "loop": true,
           "isSFX": true,
           "is3D": true
+        },
+        "SingingStatueController": {
+          "singingDelay": 0,
+          "singingDuration": 0
         },
         "children": [
           {
@@ -20423,14 +20425,15 @@
           "maxLightRange": 4,
           "minLightRange": 1
         },
-        "SingStatueEvent": {
-          "delay": 0
-        },
         "AudioSource": {
           "audioName": "Tone1.wav_6",
           "loop": true,
           "isSFX": true,
           "is3D": true
+        },
+        "SingingStatueController": {
+          "singingDelay": 6,
+          "singingDuration": 2
         },
         "children": [
           {
@@ -25170,9 +25173,6 @@
           "isSFX": true,
           "is3D": true
         },
-        "SingStatueEvent": {
-          "delay": 0
-        },
         "children": [
           {
             "name": "Statue.3",
@@ -25705,7 +25705,7 @@
         "index": "1695",
         "static": true,
         "Transform": {
-          "position": [44, 0, -26.003],
+          "position": [44, 1, -26.003],
           "rotation": [0, 90, 0],
           "scaleFactor": 2
         },
@@ -25725,16 +25725,13 @@
           "isSFX": true,
           "is3D": true
         },
-        "SingStatueEvent": {
-          "delay": 0
-        },
         "children": [
           {
             "name": "Statue.3",
             "index": "1696",
             "static": true,
             "Transform": {
-              "position": [44, 0, -26.003],
+              "position": [44, 1, -26.003],
               "rotation": [270, 180, 0],
               "scaleFactor": 0.5
             },
@@ -25746,7 +25743,7 @@
             "index": "1697",
             "static": true,
             "Transform": {
-              "position": [44, 0, -26.003],
+              "position": [44, 1, -26.003],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -25764,7 +25761,7 @@
             "index": "1698",
             "static": true,
             "Transform": {
-              "position": [43.838, 1.518, -26.003],
+              "position": [43.838, 2.518, -26.003],
               "rotation": [0, 90, 0],
               "scaleFactor": 2.467386
             },
@@ -25784,7 +25781,7 @@
             "index": "1699",
             "static": false,
             "Transform": {
-              "position": [43.2, 2.992, -26.003],
+              "position": [43.2, 3.992, -26.003],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -25802,14 +25799,14 @@
         "index": "1700",
         "static": true,
         "Transform": {
-          "position": [44, 0, -38],
+          "position": [44, 1, -38],
           "rotation": [0, 90, 0],
           "scaleFactor": 2
         },
         "Sing": {
           "range": 3,
           "light": 1704,
-          "lightIntensity": 15,
+          "lightIntensity": 8,
           "maxLightRange": 8,
           "minLightRange": 1
         },
@@ -25822,16 +25819,13 @@
           "isSFX": true,
           "is3D": true
         },
-        "SingStatueEvent": {
-          "delay": 0
-        },
         "children": [
           {
             "name": "Statue.3",
             "index": "1701",
             "static": true,
             "Transform": {
-              "position": [44, 0, -38],
+              "position": [44, 1, -38],
               "rotation": [270, 180, 0],
               "scaleFactor": 0.5
             },
@@ -25843,7 +25837,7 @@
             "index": "1702",
             "static": true,
             "Transform": {
-              "position": [44, 0, -38],
+              "position": [44, 1, -38],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -25861,7 +25855,7 @@
             "index": "1703",
             "static": true,
             "Transform": {
-              "position": [43.838, 1.518, -38],
+              "position": [43.838, 2.518, -38],
               "rotation": [0, 90, 0],
               "scaleFactor": 2.467386
             },
@@ -25881,7 +25875,7 @@
             "index": "1704",
             "static": false,
             "Transform": {
-              "position": [43.2, 2.992, -38],
+              "position": [43.2, 3.992, -38],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -25899,7 +25893,7 @@
         "index": "1705",
         "static": true,
         "Transform": {
-          "position": [44, 0, -34.003],
+          "position": [44, 1, -34.003],
           "rotation": [0, 90, 0],
           "scaleFactor": 2
         },
@@ -25919,16 +25913,13 @@
           "isSFX": true,
           "is3D": true
         },
-        "SingStatueEvent": {
-          "delay": 0
-        },
         "children": [
           {
             "name": "Statue.3",
             "index": "1706",
             "static": true,
             "Transform": {
-              "position": [44, 0, -34.003],
+              "position": [44, 1, -34.003],
               "rotation": [270, 180, 0],
               "scaleFactor": 0.5
             },
@@ -25940,7 +25931,7 @@
             "index": "1707",
             "static": true,
             "Transform": {
-              "position": [44, 0, -34.003],
+              "position": [44, 1, -34.003],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -25958,7 +25949,7 @@
             "index": "1708",
             "static": true,
             "Transform": {
-              "position": [43.838, 1.518, -34.003],
+              "position": [43.838, 2.518, -34.003],
               "rotation": [0, 90, 0],
               "scaleFactor": 2.467386
             },
@@ -25978,7 +25969,7 @@
             "index": "1709",
             "static": false,
             "Transform": {
-              "position": [43.2, 2.992, -34.003],
+              "position": [43.2, 3.992, -34.003],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -25996,7 +25987,7 @@
         "index": "1710",
         "static": true,
         "Transform": {
-          "position": [36, 0, -26.003],
+          "position": [36, 1, -26.003],
           "rotation": [0, 270, 0],
           "scaleFactor": 2
         },
@@ -26016,16 +26007,13 @@
           "isSFX": true,
           "is3D": true
         },
-        "SingStatueEvent": {
-          "delay": 0
-        },
         "children": [
           {
             "name": "Statue.3",
             "index": "1711",
             "static": true,
             "Transform": {
-              "position": [36, 0, -26.003],
+              "position": [36, 1, -26.003],
               "rotation": [270, 9.659345E-06, 0],
               "scaleFactor": 0.5
             },
@@ -26037,7 +26025,7 @@
             "index": "1712",
             "static": true,
             "Transform": {
-              "position": [36, 0, -26.003],
+              "position": [36, 1, -26.003],
               "rotation": [0, 270, 0],
               "scaleFactor": 1
             },
@@ -26055,7 +26043,7 @@
             "index": "1713",
             "static": true,
             "Transform": {
-              "position": [36.162, 1.518, -26.003],
+              "position": [36.162, 2.518, -26.003],
               "rotation": [0, 270, 0],
               "scaleFactor": 2.467386
             },
@@ -26075,7 +26063,7 @@
             "index": "1714",
             "static": false,
             "Transform": {
-              "position": [36.8, 2.992, -26.003],
+              "position": [36.8, 3.992, -26.003],
               "rotation": [0, 270, 0],
               "scaleFactor": 1
             },
@@ -26093,9 +26081,9 @@
         "index": "1715",
         "static": true,
         "Transform": {
-          "position": [44, 0, -30],
+          "position": [44, 1, -30],
           "rotation": [0, 90, 0],
-          "scaleFactor": 2.000001
+          "scaleFactor": 2
         },
         "Sing": {
           "range": 3,
@@ -26113,16 +26101,13 @@
           "isSFX": true,
           "is3D": true
         },
-        "SingStatueEvent": {
-          "delay": 0
-        },
         "children": [
           {
             "name": "Statue.3",
             "index": "1716",
             "static": true,
             "Transform": {
-              "position": [44, 0, -30],
+              "position": [44, 1, -30],
               "rotation": [270, 180, 0],
               "scaleFactor": 0.5
             },
@@ -26134,7 +26119,7 @@
             "index": "1717",
             "static": true,
             "Transform": {
-              "position": [44, 0, -30],
+              "position": [44, 1, -30],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -26152,7 +26137,7 @@
             "index": "1718",
             "static": true,
             "Transform": {
-              "position": [43.838, 1.518, -30],
+              "position": [43.838, 2.518, -30],
               "rotation": [0, 90, 0],
               "scaleFactor": 2.467386
             },
@@ -26172,7 +26157,7 @@
             "index": "1719",
             "static": false,
             "Transform": {
-              "position": [43.2, 2.992, -30],
+              "position": [43.2, 3.992, -30],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -26190,7 +26175,7 @@
         "index": "1720",
         "static": true,
         "Transform": {
-          "position": [44, 0, -42.003],
+          "position": [44, 1, -42.003],
           "rotation": [0, 90, 0],
           "scaleFactor": 2.000001
         },
@@ -26210,16 +26195,13 @@
           "isSFX": true,
           "is3D": true
         },
-        "SingStatueEvent": {
-          "delay": 0
-        },
         "children": [
           {
             "name": "Statue.3",
             "index": "1721",
             "static": true,
             "Transform": {
-              "position": [44, 0, -42.003],
+              "position": [44, 1, -42.003],
               "rotation": [270, 180, 0],
               "scaleFactor": 0.5
             },
@@ -26231,7 +26213,7 @@
             "index": "1722",
             "static": true,
             "Transform": {
-              "position": [44, 0, -42.003],
+              "position": [44, 1, -42.003],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -26249,7 +26231,7 @@
             "index": "1723",
             "static": true,
             "Transform": {
-              "position": [43.838, 1.518, -42.003],
+              "position": [43.838, 2.518, -42.003],
               "rotation": [0, 90, 0],
               "scaleFactor": 2.467386
             },
@@ -26269,7 +26251,7 @@
             "index": "1724",
             "static": false,
             "Transform": {
-              "position": [43.2, 2.992, -42.003],
+              "position": [43.2, 3.992, -42.003],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -26321,7 +26303,7 @@
         "index": "1727",
         "static": true,
         "Transform": {
-          "position": [36, 0, -42.003],
+          "position": [36, 1, -42.003],
           "rotation": [0, 270, 0],
           "scaleFactor": 2.000001
         },
@@ -26341,16 +26323,13 @@
           "isSFX": true,
           "is3D": true
         },
-        "SingStatueEvent": {
-          "delay": 0
-        },
         "children": [
           {
             "name": "Statue.3",
             "index": "1728",
             "static": true,
             "Transform": {
-              "position": [36, 0, -42.003],
+              "position": [36, 1, -42.003],
               "rotation": [270, 9.659345E-06, 0],
               "scaleFactor": 0.5
             },
@@ -26362,7 +26341,7 @@
             "index": "1729",
             "static": true,
             "Transform": {
-              "position": [36, 0, -42.003],
+              "position": [36, 1, -42.003],
               "rotation": [0, 270, 0],
               "scaleFactor": 1
             },
@@ -26380,7 +26359,7 @@
             "index": "1730",
             "static": true,
             "Transform": {
-              "position": [36.162, 1.518, -42.003],
+              "position": [36.162, 2.518, -42.003],
               "rotation": [0, 270, 0],
               "scaleFactor": 2.467386
             },
@@ -26400,7 +26379,7 @@
             "index": "1731",
             "static": false,
             "Transform": {
-              "position": [36.8, 2.992, -42.003],
+              "position": [36.8, 3.992, -42.003],
               "rotation": [0, 270, 0],
               "scaleFactor": 1
             },
@@ -27322,7 +27301,7 @@
         "index": "1786",
         "static": false,
         "Transform": {
-          "position": [36, -1, -27.003],
+          "position": [36, 0, -27.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -27334,7 +27313,7 @@
             "index": "1787",
             "static": false,
             "Transform": {
-              "position": [36, -1, -27.003],
+              "position": [36, 0, -27.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -27348,7 +27327,7 @@
                 "index": "1788",
                 "static": false,
                 "Transform": {
-                  "position": [36, -1, -26.003],
+                  "position": [36, 0, -26.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -27374,7 +27353,7 @@
         "index": "1789",
         "static": false,
         "Transform": {
-          "position": [36, -1, -29.003],
+          "position": [36, 0, -29.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -27386,7 +27365,7 @@
             "index": "1790",
             "static": false,
             "Transform": {
-              "position": [36, -1, -29.003],
+              "position": [36, 0, -29.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -27400,7 +27379,7 @@
                 "index": "1791",
                 "static": false,
                 "Transform": {
-                  "position": [36, -1, -28.003],
+                  "position": [36, 0, -28.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -27426,7 +27405,7 @@
         "index": "1792",
         "static": false,
         "Transform": {
-          "position": [44, -1, -27.003],
+          "position": [44, 0, -27.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -27438,7 +27417,7 @@
             "index": "1793",
             "static": false,
             "Transform": {
-              "position": [44, -1, -27.003],
+              "position": [44, 0, -27.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -27452,7 +27431,7 @@
                 "index": "1794",
                 "static": false,
                 "Transform": {
-                  "position": [44, -1, -26.003],
+                  "position": [44, 0, -26.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -27478,7 +27457,7 @@
         "index": "1795",
         "static": false,
         "Transform": {
-          "position": [44, -1, -29.003],
+          "position": [44, 0, -29.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -27490,7 +27469,7 @@
             "index": "1796",
             "static": false,
             "Transform": {
-              "position": [44, -1, -29.003],
+              "position": [44, 0, -29.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -27504,7 +27483,7 @@
                 "index": "1797",
                 "static": false,
                 "Transform": {
-                  "position": [44, -1, -28.003],
+                  "position": [44, 0, -28.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -27530,7 +27509,7 @@
         "index": "1798",
         "static": false,
         "Transform": {
-          "position": [44, -1, -37.003],
+          "position": [44, 0, -37.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -27542,7 +27521,7 @@
             "index": "1799",
             "static": false,
             "Transform": {
-              "position": [44, -1, -37.003],
+              "position": [44, 0, -37.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -27556,7 +27535,7 @@
                 "index": "1800",
                 "static": false,
                 "Transform": {
-                  "position": [44, -1, -36.003],
+                  "position": [44, 0, -36.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -27582,7 +27561,7 @@
         "index": "1801",
         "static": false,
         "Transform": {
-          "position": [44, -1, -35.003],
+          "position": [44, 0, -35.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -27594,7 +27573,7 @@
             "index": "1802",
             "static": false,
             "Transform": {
-              "position": [44, -1, -35.003],
+              "position": [44, 0, -35.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -27608,7 +27587,7 @@
                 "index": "1803",
                 "static": false,
                 "Transform": {
-                  "position": [44, -1, -34.003],
+                  "position": [44, 0, -34.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -27634,7 +27613,7 @@
         "index": "1804",
         "static": false,
         "Transform": {
-          "position": [44, -1, -31.003],
+          "position": [44, 0, -31.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -27646,7 +27625,7 @@
             "index": "1805",
             "static": false,
             "Transform": {
-              "position": [44, -1, -31.003],
+              "position": [44, 0, -31.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -27660,7 +27639,7 @@
                 "index": "1806",
                 "static": false,
                 "Transform": {
-                  "position": [44, -1, -30.003],
+                  "position": [44, 0, -30.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -27686,7 +27665,7 @@
         "index": "1807",
         "static": false,
         "Transform": {
-          "position": [44, -1, -33.003],
+          "position": [44, 0, -33.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -27698,7 +27677,7 @@
             "index": "1808",
             "static": false,
             "Transform": {
-              "position": [44, -1, -33.003],
+              "position": [44, 0, -33.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -27712,7 +27691,7 @@
                 "index": "1809",
                 "static": false,
                 "Transform": {
-                  "position": [44, -1, -32.003],
+                  "position": [44, 0, -32.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -27738,7 +27717,7 @@
         "index": "1810",
         "static": false,
         "Transform": {
-          "position": [36, -1, -37.003],
+          "position": [36, 0, -37.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -27750,7 +27729,7 @@
             "index": "1811",
             "static": false,
             "Transform": {
-              "position": [36, -1, -37.003],
+              "position": [36, 0, -37.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -27764,7 +27743,7 @@
                 "index": "1812",
                 "static": false,
                 "Transform": {
-                  "position": [36, -1, -36.003],
+                  "position": [36, 0, -36.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -27790,7 +27769,7 @@
         "index": "1813",
         "static": false,
         "Transform": {
-          "position": [36, -1, -35.003],
+          "position": [36, 0, -35.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -27802,7 +27781,7 @@
             "index": "1814",
             "static": false,
             "Transform": {
-              "position": [36, -1, -35.003],
+              "position": [36, 0, -35.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -27816,7 +27795,7 @@
                 "index": "1815",
                 "static": false,
                 "Transform": {
-                  "position": [36, -1, -34.003],
+                  "position": [36, 0, -34.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -27842,7 +27821,7 @@
         "index": "1816",
         "static": false,
         "Transform": {
-          "position": [36, -1, -31.003],
+          "position": [36, 0, -31.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -27854,7 +27833,7 @@
             "index": "1817",
             "static": false,
             "Transform": {
-              "position": [36, -1, -31.003],
+              "position": [36, 0, -31.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -27868,7 +27847,7 @@
                 "index": "1818",
                 "static": false,
                 "Transform": {
-                  "position": [36, -1, -30.003],
+                  "position": [36, 0, -30.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -27894,7 +27873,7 @@
         "index": "1819",
         "static": false,
         "Transform": {
-          "position": [36, -1, -33.003],
+          "position": [36, 0, -33.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -27906,7 +27885,7 @@
             "index": "1820",
             "static": false,
             "Transform": {
-              "position": [36, -1, -33.003],
+              "position": [36, 0, -33.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -27920,7 +27899,7 @@
                 "index": "1821",
                 "static": false,
                 "Transform": {
-                  "position": [36, -1, -32.003],
+                  "position": [36, 0, -32.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -27946,7 +27925,7 @@
         "index": "1822",
         "static": false,
         "Transform": {
-          "position": [44, -1, -39.003],
+          "position": [44, 0, -39.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -27958,7 +27937,7 @@
             "index": "1823",
             "static": false,
             "Transform": {
-              "position": [44, -1, -39.003],
+              "position": [44, 0, -39.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -27972,7 +27951,7 @@
                 "index": "1824",
                 "static": false,
                 "Transform": {
-                  "position": [44, -1, -38.003],
+                  "position": [44, 0, -38.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -27998,7 +27977,7 @@
         "index": "1825",
         "static": false,
         "Transform": {
-          "position": [44, -1, -41.003],
+          "position": [44, 0, -41.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -28010,7 +27989,7 @@
             "index": "1826",
             "static": false,
             "Transform": {
-              "position": [44, -1, -41.003],
+              "position": [44, 0, -41.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -28024,7 +28003,7 @@
                 "index": "1827",
                 "static": false,
                 "Transform": {
-                  "position": [44, -1, -40.003],
+                  "position": [44, 0, -40.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -28050,7 +28029,7 @@
         "index": "1828",
         "static": false,
         "Transform": {
-          "position": [44, -1, -43.003],
+          "position": [44, 0, -43.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -28062,7 +28041,7 @@
             "index": "1829",
             "static": false,
             "Transform": {
-              "position": [44, -1, -43.003],
+              "position": [44, 0, -43.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -28076,7 +28055,7 @@
                 "index": "1830",
                 "static": false,
                 "Transform": {
-                  "position": [44, -1, -42.003],
+                  "position": [44, 0, -42.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -28102,7 +28081,7 @@
         "index": "1831",
         "static": false,
         "Transform": {
-          "position": [36, -1, -41.003],
+          "position": [36, 0, -41.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -28114,7 +28093,7 @@
             "index": "1832",
             "static": false,
             "Transform": {
-              "position": [36, -1, -41.003],
+              "position": [36, 0, -41.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -28128,7 +28107,7 @@
                 "index": "1833",
                 "static": false,
                 "Transform": {
-                  "position": [36, -1, -40.003],
+                  "position": [36, 0, -40.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -28154,7 +28133,7 @@
         "index": "1834",
         "static": false,
         "Transform": {
-          "position": [36, -1, -39.003],
+          "position": [36, 0, -39.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -28166,7 +28145,7 @@
             "index": "1835",
             "static": false,
             "Transform": {
-              "position": [36, -1, -39.003],
+              "position": [36, 0, -39.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -28180,7 +28159,7 @@
                 "index": "1836",
                 "static": false,
                 "Transform": {
-                  "position": [36, -1, -38.003],
+                  "position": [36, 0, -38.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -28206,7 +28185,7 @@
         "index": "1837",
         "static": false,
         "Transform": {
-          "position": [36, -1, -43.003],
+          "position": [36, 0, -43.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -28218,7 +28197,7 @@
             "index": "1838",
             "static": false,
             "Transform": {
-              "position": [36, -1, -43.003],
+              "position": [36, 0, -43.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -28232,7 +28211,7 @@
                 "index": "1839",
                 "static": false,
                 "Transform": {
-                  "position": [36, -1, -42.003],
+                  "position": [36, 0, -42.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -28445,7 +28424,7 @@
         "index": "1851",
         "static": false,
         "Transform": {
-          "position": [36, -0.86, -51.003],
+          "position": [36, 0.14, -51.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -28457,7 +28436,7 @@
             "index": "1852",
             "static": false,
             "Transform": {
-              "position": [36, -0.86, -51.003],
+              "position": [36, 0.14, -51.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -28471,7 +28450,7 @@
                 "index": "1853",
                 "static": false,
                 "Transform": {
-                  "position": [36, -0.86, -50.003],
+                  "position": [36, 0.14, -50.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -28497,7 +28476,7 @@
         "index": "1854",
         "static": false,
         "Transform": {
-          "position": [36, -0.69, -47.003],
+          "position": [36, 0.31, -47.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -28509,7 +28488,7 @@
             "index": "1855",
             "static": false,
             "Transform": {
-              "position": [36, -0.69, -47.003],
+              "position": [36, 0.31, -47.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -28523,7 +28502,7 @@
                 "index": "1856",
                 "static": false,
                 "Transform": {
-                  "position": [36, -0.69, -46.003],
+                  "position": [36, 0.31, -46.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -28549,7 +28528,7 @@
         "index": "1857",
         "static": false,
         "Transform": {
-          "position": [44, -0.57, -47.003],
+          "position": [44, 0.43, -47.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -28561,7 +28540,7 @@
             "index": "1858",
             "static": false,
             "Transform": {
-              "position": [44, -0.57, -47.003],
+              "position": [44, 0.43, -47.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -28575,7 +28554,7 @@
                 "index": "1859",
                 "static": false,
                 "Transform": {
-                  "position": [44, -0.57, -46.003],
+                  "position": [44, 0.43, -46.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -28601,7 +28580,7 @@
         "index": "1860",
         "static": false,
         "Transform": {
-          "position": [44, -0.63, -51.003],
+          "position": [44, 0.37, -51.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -28613,7 +28592,7 @@
             "index": "1861",
             "static": false,
             "Transform": {
-              "position": [44, -0.63, -51.003],
+              "position": [44, 0.37, -51.003],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -28627,7 +28606,7 @@
                 "index": "1862",
                 "static": false,
                 "Transform": {
-                  "position": [44, -0.63, -50.003],
+                  "position": [44, 0.37, -50.003],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -31003,7 +30982,7 @@
         "index": "2023",
         "static": false,
         "Transform": {
-          "position": [38, -0.88, -55],
+          "position": [38, 0.12, -55],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -31015,7 +30994,7 @@
             "index": "2024",
             "static": false,
             "Transform": {
-              "position": [38, -0.88, -55],
+              "position": [38, 0.12, -55],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -31029,7 +31008,7 @@
                 "index": "2025",
                 "static": false,
                 "Transform": {
-                  "position": [38, -0.88, -54],
+                  "position": [38, 0.12, -54],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -31055,7 +31034,7 @@
         "index": "2026",
         "static": false,
         "Transform": {
-          "position": [40, -0.73, -57],
+          "position": [40, 0.27, -57],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -31067,7 +31046,7 @@
             "index": "2027",
             "static": false,
             "Transform": {
-              "position": [40, -0.73, -57],
+              "position": [40, 0.27, -57],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -31081,7 +31060,7 @@
                 "index": "2028",
                 "static": false,
                 "Transform": {
-                  "position": [40, -0.73, -56],
+                  "position": [40, 0.27, -56],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -31107,7 +31086,7 @@
         "index": "2029",
         "static": false,
         "Transform": {
-          "position": [42, -0.9, -55],
+          "position": [42, 0.1, -55],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -31119,7 +31098,7 @@
             "index": "2030",
             "static": false,
             "Transform": {
-              "position": [42, -0.9, -55],
+              "position": [42, 0.1, -55],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -31133,7 +31112,7 @@
                 "index": "2031",
                 "static": false,
                 "Transform": {
-                  "position": [42, -0.9, -54],
+                  "position": [42, 0.1, -54],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -31159,7 +31138,7 @@
         "index": "2032",
         "static": true,
         "Transform": {
-          "position": [44, 0.29, -46],
+          "position": [44, 1.29, -46],
           "rotation": [0, 90, 0],
           "scaleFactor": 2.000001
         },
@@ -31169,9 +31148,6 @@
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
-        },
-        "SingStatueEvent": {
-          "delay": 0
         },
         "AudioSource": {
           "audioName": "Tone1.wav_16",
@@ -31188,7 +31164,7 @@
             "index": "2033",
             "static": true,
             "Transform": {
-              "position": [44, 0.29, -46],
+              "position": [44, 1.29, -46],
               "rotation": [270, 180, 0],
               "scaleFactor": 0.5
             },
@@ -31200,7 +31176,7 @@
             "index": "2034",
             "static": true,
             "Transform": {
-              "position": [44, 0.29, -46],
+              "position": [44, 1.29, -46],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -31218,7 +31194,7 @@
             "index": "2035",
             "static": true,
             "Transform": {
-              "position": [43.838, 1.808, -46],
+              "position": [43.838, 2.808, -46],
               "rotation": [0, 90, 0],
               "scaleFactor": 2.467386
             },
@@ -31238,7 +31214,7 @@
             "index": "2036",
             "static": false,
             "Transform": {
-              "position": [43.2, 3.282, -46],
+              "position": [43.2, 4.282, -46],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -31256,7 +31232,7 @@
         "index": "2037",
         "static": true,
         "Transform": {
-          "position": [36, 0.261, -46],
+          "position": [36, 1.26, -46],
           "rotation": [0, 270, 0],
           "scaleFactor": 2.000001
         },
@@ -31266,9 +31242,6 @@
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
-        },
-        "SingStatueEvent": {
-          "delay": 0
         },
         "AudioSource": {
           "audioName": "Tone1.wav_17",
@@ -31285,7 +31258,7 @@
             "index": "2038",
             "static": true,
             "Transform": {
-              "position": [36, 0.261, -46],
+              "position": [36, 1.26, -46],
               "rotation": [270, -9.659345E-06, 0],
               "scaleFactor": 0.5
             },
@@ -31297,7 +31270,7 @@
             "index": "2039",
             "static": true,
             "Transform": {
-              "position": [36, 0.261, -46],
+              "position": [36, 1.26, -46],
               "rotation": [0, 270, 0],
               "scaleFactor": 1
             },
@@ -31315,7 +31288,7 @@
             "index": "2040",
             "static": true,
             "Transform": {
-              "position": [36.162, 1.779, -46],
+              "position": [36.162, 2.778, -46],
               "rotation": [0, 270, 0],
               "scaleFactor": 2.467386
             },
@@ -31335,7 +31308,7 @@
             "index": "2041",
             "static": false,
             "Transform": {
-              "position": [36.8, 3.253, -46],
+              "position": [36.8, 4.252, -46],
               "rotation": [0, 270, 0],
               "scaleFactor": 1
             },
@@ -31353,7 +31326,7 @@
         "index": "2042",
         "static": true,
         "Transform": {
-          "position": [44, 0.23, -50.2],
+          "position": [44, 1.23, -50.2],
           "rotation": [0, 90, 0],
           "scaleFactor": 2.000001
         },
@@ -31363,9 +31336,6 @@
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
-        },
-        "SingStatueEvent": {
-          "delay": 0
         },
         "AudioSource": {
           "audioName": "Tone1.wav_18",
@@ -31382,7 +31352,7 @@
             "index": "2043",
             "static": true,
             "Transform": {
-              "position": [44, 0.23, -50.2],
+              "position": [44, 1.23, -50.2],
               "rotation": [270, 180, 0],
               "scaleFactor": 0.5
             },
@@ -31394,7 +31364,7 @@
             "index": "2044",
             "static": true,
             "Transform": {
-              "position": [44, 0.23, -50.2],
+              "position": [44, 1.23, -50.2],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -31412,7 +31382,7 @@
             "index": "2045",
             "static": true,
             "Transform": {
-              "position": [43.838, 1.748, -50.2],
+              "position": [43.838, 2.748, -50.2],
               "rotation": [0, 90, 0],
               "scaleFactor": 2.467386
             },
@@ -31432,7 +31402,7 @@
             "index": "2046",
             "static": false,
             "Transform": {
-              "position": [43.2, 3.222, -50.2],
+              "position": [43.2, 4.222, -50.2],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -31450,7 +31420,7 @@
         "index": "2047",
         "static": true,
         "Transform": {
-          "position": [42, 0.029, -54],
+          "position": [42, 1.03, -54],
           "rotation": [0, 150, 0],
           "scaleFactor": 2.000001
         },
@@ -31460,9 +31430,6 @@
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
-        },
-        "SingStatueEvent": {
-          "delay": 0
         },
         "AudioSource": {
           "audioName": "Tone1.wav_19",
@@ -31479,7 +31446,7 @@
             "index": "2048",
             "static": true,
             "Transform": {
-              "position": [42, 0.029, -54],
+              "position": [42, 1.03, -54],
               "rotation": [270, 240, 0],
               "scaleFactor": 0.5
             },
@@ -31491,7 +31458,7 @@
             "index": "2049",
             "static": true,
             "Transform": {
-              "position": [42, 0.029, -54],
+              "position": [42, 1.03, -54],
               "rotation": [0, 150, 0],
               "scaleFactor": 1
             },
@@ -31509,7 +31476,7 @@
             "index": "2050",
             "static": true,
             "Transform": {
-              "position": [41.919, 1.547, -53.8597],
+              "position": [41.919, 2.548, -53.8597],
               "rotation": [0, 150, 0],
               "scaleFactor": 2.467386
             },
@@ -31529,7 +31496,7 @@
             "index": "2051",
             "static": false,
             "Transform": {
-              "position": [41.6, 3.021, -53.30718],
+              "position": [41.6, 4.022, -53.30718],
               "rotation": [0, 150, 0],
               "scaleFactor": 1
             },
@@ -31547,7 +31514,7 @@
         "index": "2052",
         "static": true,
         "Transform": {
-          "position": [40, 0.22, -56],
+          "position": [40, 1.22, -56],
           "rotation": [0, 180, 0],
           "scaleFactor": 2.000001
         },
@@ -31557,9 +31524,6 @@
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
-        },
-        "SingStatueEvent": {
-          "delay": 0
         },
         "AudioSource": {
           "audioName": "Tone1.wav_20",
@@ -31576,7 +31540,7 @@
             "index": "2053",
             "static": true,
             "Transform": {
-              "position": [40, 0.22, -56],
+              "position": [40, 1.22, -56],
               "rotation": [270, 269.9999, 0],
               "scaleFactor": 0.5
             },
@@ -31588,7 +31552,7 @@
             "index": "2054",
             "static": true,
             "Transform": {
-              "position": [40, 0.22, -56],
+              "position": [40, 1.22, -56],
               "rotation": [0, 180, 0],
               "scaleFactor": 1
             },
@@ -31606,7 +31570,7 @@
             "index": "2055",
             "static": true,
             "Transform": {
-              "position": [40, 1.738, -55.838],
+              "position": [40, 2.738, -55.838],
               "rotation": [0, 180, 0],
               "scaleFactor": 2.467386
             },
@@ -31626,7 +31590,7 @@
             "index": "2056",
             "static": false,
             "Transform": {
-              "position": [40, 3.212, -55.2],
+              "position": [40, 4.212, -55.2],
               "rotation": [0, 180, 0],
               "scaleFactor": 1
             },
@@ -31644,7 +31608,7 @@
         "index": "2057",
         "static": true,
         "Transform": {
-          "position": [38, 0.077, -54],
+          "position": [38, 1.08, -54],
           "rotation": [0, 225, 0],
           "scaleFactor": 2.000001
         },
@@ -31654,9 +31618,6 @@
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
-        },
-        "SingStatueEvent": {
-          "delay": 0
         },
         "AudioSource": {
           "audioName": "Tone1.wav_21",
@@ -31673,7 +31634,7 @@
             "index": "2058",
             "static": true,
             "Transform": {
-              "position": [38, 0.077, -54],
+              "position": [38, 1.08, -54],
               "rotation": [270, 315, 0],
               "scaleFactor": 0.5
             },
@@ -31685,7 +31646,7 @@
             "index": "2059",
             "static": true,
             "Transform": {
-              "position": [38, 0.077, -54],
+              "position": [38, 1.08, -54],
               "rotation": [0, 225, 0],
               "scaleFactor": 1
             },
@@ -31703,7 +31664,7 @@
             "index": "2060",
             "static": true,
             "Transform": {
-              "position": [38.11455, 1.595, -53.88545],
+              "position": [38.11455, 2.598, -53.88545],
               "rotation": [0, 225, 0],
               "scaleFactor": 2.467386
             },
@@ -31723,7 +31684,7 @@
             "index": "2061",
             "static": false,
             "Transform": {
-              "position": [38.56569, 3.069, -53.43431],
+              "position": [38.56569, 4.072, -53.43431],
               "rotation": [0, 225, 0],
               "scaleFactor": 1
             },
@@ -31741,7 +31702,7 @@
         "index": "2062",
         "static": true,
         "Transform": {
-          "position": [36, 0.1, -50],
+          "position": [36, 1.1, -50],
           "rotation": [0, 270, 0],
           "scaleFactor": 2.000001
         },
@@ -31751,9 +31712,6 @@
           "lightIntensity": 12,
           "maxLightRange": 8,
           "minLightRange": 1
-        },
-        "SingStatueEvent": {
-          "delay": 0
         },
         "AudioSource": {
           "audioName": "Tone1.wav_22",
@@ -31770,7 +31728,7 @@
             "index": "2063",
             "static": true,
             "Transform": {
-              "position": [36, 0.1, -50],
+              "position": [36, 1.1, -50],
               "rotation": [270, -2.414836E-05, 0],
               "scaleFactor": 0.5
             },
@@ -31782,7 +31740,7 @@
             "index": "2064",
             "static": true,
             "Transform": {
-              "position": [36, 0.1, -50],
+              "position": [36, 1.1, -50],
               "rotation": [0, 270, 0],
               "scaleFactor": 1
             },
@@ -31800,7 +31758,7 @@
             "index": "2065",
             "static": true,
             "Transform": {
-              "position": [36.162, 1.618, -50],
+              "position": [36.162, 2.618, -50],
               "rotation": [0, 270, 0],
               "scaleFactor": 2.467386
             },
@@ -31820,7 +31778,7 @@
             "index": "2066",
             "static": false,
             "Transform": {
-              "position": [36.8, 3.092, -50],
+              "position": [36.8, 4.092, -50],
               "rotation": [0, 270, 0],
               "scaleFactor": 1
             },
@@ -34503,14 +34461,14 @@
         "index": "2206",
         "static": true,
         "Transform": {
-          "position": [35.9, 0, -38],
+          "position": [35.9, 1, -38],
           "rotation": [0, 270, 0],
           "scaleFactor": 2
         },
         "Sing": {
           "range": 3,
           "light": 2210,
-          "lightIntensity": 15,
+          "lightIntensity": 8,
           "maxLightRange": 8,
           "minLightRange": 1
         },
@@ -34523,16 +34481,13 @@
           "isSFX": true,
           "is3D": true
         },
-        "SingStatueEvent": {
-          "delay": 0
-        },
         "children": [
           {
             "name": "Statue.3",
             "index": "2207",
             "static": true,
             "Transform": {
-              "position": [35.9, 0, -38],
+              "position": [35.9, 1, -38],
               "rotation": [270, 9.659345E-06, 0],
               "scaleFactor": 0.5
             },
@@ -34544,7 +34499,7 @@
             "index": "2208",
             "static": true,
             "Transform": {
-              "position": [35.9, 0, -38],
+              "position": [35.9, 1, -38],
               "rotation": [0, 270, 0],
               "scaleFactor": 1
             },
@@ -34562,7 +34517,7 @@
             "index": "2209",
             "static": true,
             "Transform": {
-              "position": [36.062, 1.518, -38],
+              "position": [36.062, 2.518, -38],
               "rotation": [0, 270, 0],
               "scaleFactor": 2.467386
             },
@@ -34582,7 +34537,7 @@
             "index": "2210",
             "static": false,
             "Transform": {
-              "position": [36.7, 2.992, -38],
+              "position": [36.7, 3.992, -38],
               "rotation": [0, 270, 0],
               "scaleFactor": 1
             },
@@ -34600,7 +34555,7 @@
         "index": "2211",
         "static": true,
         "Transform": {
-          "position": [35.9, 0, -34.003],
+          "position": [35.9, 1, -34.003],
           "rotation": [0, 270, 0],
           "scaleFactor": 2
         },
@@ -34620,16 +34575,13 @@
           "isSFX": true,
           "is3D": true
         },
-        "SingStatueEvent": {
-          "delay": 0
-        },
         "children": [
           {
             "name": "Statue.3",
             "index": "2212",
             "static": true,
             "Transform": {
-              "position": [35.9, 0, -34.003],
+              "position": [35.9, 1, -34.003],
               "rotation": [270, 9.659345E-06, 0],
               "scaleFactor": 0.5
             },
@@ -34641,7 +34593,7 @@
             "index": "2213",
             "static": true,
             "Transform": {
-              "position": [35.9, 0, -34.003],
+              "position": [35.9, 1, -34.003],
               "rotation": [0, 270, 0],
               "scaleFactor": 1
             },
@@ -34659,7 +34611,7 @@
             "index": "2214",
             "static": true,
             "Transform": {
-              "position": [36.062, 1.518, -34.003],
+              "position": [36.062, 2.518, -34.003],
               "rotation": [0, 270, 0],
               "scaleFactor": 2.467386
             },
@@ -34679,7 +34631,7 @@
             "index": "2215",
             "static": false,
             "Transform": {
-              "position": [36.7, 2.992, -34.003],
+              "position": [36.7, 3.992, -34.003],
               "rotation": [0, 270, 0],
               "scaleFactor": 1
             },
@@ -34697,7 +34649,7 @@
         "index": "2216",
         "static": true,
         "Transform": {
-          "position": [35.9, 0, -30],
+          "position": [35.9, 1, -30],
           "rotation": [0, 270.0001, 0],
           "scaleFactor": 2.000001
         },
@@ -34717,16 +34669,13 @@
           "isSFX": true,
           "is3D": true
         },
-        "SingStatueEvent": {
-          "delay": 0
-        },
         "children": [
           {
             "name": "Statue.3",
             "index": "2217",
             "static": true,
             "Transform": {
-              "position": [35.9, 0, -30],
+              "position": [35.9, 1, -30],
               "rotation": [270, 4.829673E-05, 0],
               "scaleFactor": 0.5
             },
@@ -34738,7 +34687,7 @@
             "index": "2218",
             "static": true,
             "Transform": {
-              "position": [35.9, 0, -30],
+              "position": [35.9, 1, -30],
               "rotation": [0, 270.0001, 0],
               "scaleFactor": 1
             },
@@ -34756,7 +34705,7 @@
             "index": "2219",
             "static": true,
             "Transform": {
-              "position": [36.062, 1.518, -30],
+              "position": [36.062, 2.518, -30],
               "rotation": [0, 270.0001, 0],
               "scaleFactor": 2.467386
             },
@@ -34776,7 +34725,7 @@
             "index": "2220",
             "static": false,
             "Transform": {
-              "position": [36.7, 2.992, -30],
+              "position": [36.7, 3.992, -30],
               "rotation": [0, 270.0001, 0],
               "scaleFactor": 1
             },
