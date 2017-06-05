@@ -32,9 +32,8 @@ class PlayerController extends Component {
     this._looker = null;
 
     // space
-    this.oldx = 0;
-    this.oldz = 0;
-    this.forward = vec3.create();
+    this.camForward = vec3.create(); // camera direction
+    this.playerForward = vec3.create(); // player model direction
 
     // input
     this.x = 0;
@@ -120,7 +119,7 @@ class PlayerController extends Component {
       this.singing = Input.getAxis('sing');
       this.action = Input.getAxis("action");
 
-      this.forward = Renderer.camera.transform.getForward();
+      this.camForward = Renderer.camera.transform.getForward();
     }
 
     if (this.singing === 0 && this._lastSingInput === 1) {
@@ -174,35 +173,37 @@ class PlayerController extends Component {
     }
     this.state.moveSpeed = Utility.moveTowards(this.state.moveSpeed, speed, PLAYER_ACCELERATION * Time.deltaTime);
 
-    const oldDir = vec3.fromValues(this.oldx, 0, this.oldz);
-    const newDir = vec3.fromValues(this.x, 0, this.z);
-    const oldCrossNew = vec3.create();
-    vec3.cross(oldCrossNew, oldDir, newDir);
-    this.state.moveDot = vec3.dot(oldDir, newDir);
-    this.state.moveCrossY = oldCrossNew[1];
+    if (!this.state.moveSpeed) {
+      return;
+    }
 
-    // let up = vec3.create(); vec3.set(up, 0, 1, 0);
-    // let move = vec3.create();
-    // let moveX = vec3.create(); vec3.cross(moveX, this.forward, up);
-    // let moveZ = vec3.create(); vec3.cross(moveZ, up, moveX);
-    // vec3.normalize(moveX, moveX);
-    // vec3.normalize(moveZ, moveZ);
-    // vec3.scale(moveX, moveX, this.x);
-    // vec3.scale(moveZ, moveZ, this.z);
-    // vec3.add(move, moveX, moveZ);
-    // vec3.normalize(move, move);
+    const up = vec3.create(); vec3.set(up, 0, 1, 0);
+    const moveX = vec3.create(); vec3.cross(moveX, this.camForward, up);
+    const moveZ = vec3.create(); vec3.cross(moveZ, up, moveX);
+    vec3.normalize(moveX, moveX);
+    vec3.normalize(moveZ, moveZ);
+    vec3.scale(moveX, moveX, this.x);
+    vec3.scale(moveZ, moveZ, this.z);
+    const move = vec3.create();
+    vec3.add(move, moveX, moveZ);
+    vec3.normalize(move, move);
     // vec3.scale(move, move, this.state.moveSpeed);
+
+    const playerForward = this.transform.getForward();
+    vec3.normalize(playerForward, playerForward);
+    const moveDotPlayer = -vec3.dot(move, playerForward);
+    this.state.moveDot = moveDotPlayer;
+    const playerXMove = vec3.create();
+    vec3.cross(playerXMove, playerForward, move);
+    this.state.moveCrossY = playerXMove[1];
+
+
 
     // if (vec3.length(move) > 0.0005) {
     //   // TODO set this.state.movedot and movecrossy instead
     //   this.transform.setRotation(quat.create());
     //   this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
     // }
-
-    if (this.x || this.z) {
-      this.oldx = this.x;
-      this.oldz = this.z;
-    }
   }
 
   getCurrentState() {

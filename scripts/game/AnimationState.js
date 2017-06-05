@@ -212,7 +212,7 @@ class AnimationState {
     const animationIndex = 4;
     const name = 'turn180';
     const isSatisfied = (objState) => {
-      return objState.moveDot < - 0.2;
+      return objState.moveDot < -.2;
     };
 
     const data = {
@@ -223,6 +223,7 @@ class AnimationState {
       isSatisfied,
       loop: false,
       priority: 5,
+      minTime: .3,
     };
     return data;
   }
@@ -244,6 +245,7 @@ class AnimationState {
       isSatisfied,
       loop: false,
       priority: 5,
+      minTime: .3,
     };
     return data;
   }
@@ -254,7 +256,7 @@ class AnimationState {
     const isSatisfied = (objState) => {
       return objState.moveCrossY > 0 &&
              objState.moveDot > -.2  &&
-             objState.moveDot < .5;
+             objState.moveDot < .3;
     };
 
     const data = {
@@ -265,6 +267,7 @@ class AnimationState {
       isSatisfied,
       loop: false,
       priority: 5,
+      minTime: .9,
     };
     return data;
   }

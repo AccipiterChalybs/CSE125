@@ -125,7 +125,7 @@ Debug.logAnimationState = () => {
   const m = ls.moveSpeed.toFixed(3);
   const l = ls.status;
   const d = ls.moveDot.toFixed(3);
-  const y = ls.moveDot.toFixed(3);
+  const y = ls.moveCrossY.toFixed(3);
   Debug.animationStateElement.innerText =
     `Player ${p} is ${s} with status ${l}:` +
     `\n..ms ${m}\n..movedot ${d}\n..movecrossy ${y}`;
