@@ -12565,8 +12565,8 @@
                 "index": "889",
                 "static": true,
                 "Transform": {
-                  "position": [5.119, 1.584, 1.02],
-                  "rotation": [0, 180, 180],
+                  "position": [5.119, 0.95, 0.02],
+                  "rotation": [0, 250, 180],
                   "scaleFactor": 0.2
                 },
                 "ClothMesh" : {

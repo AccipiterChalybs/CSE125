@@ -10,6 +10,11 @@ class ClothMesh extends Mesh {
     this.name = "Cloth001"; //TODO make this dynamic
 
     this.startTime = 0;
+    this.sizeX = 5.0;
+    this.sizeY = 5.0;
+    this.sizeZ = 0.5;
+    this.width = 20;
+    this.height = 10;
 
     this.makeCloth();
 
@@ -33,8 +38,8 @@ class ClothMesh extends Mesh {
                                      inputPositions[3 * i + 1],
                                      inputPositions[3 * i + 2]);
 
-      let pinning = (9.0/10.0- 1/2.0) - position[1];
-      position[2] = pinning * Math.cos(5*position[0] + Time.time)*0.2;
+      let pinning = (-position[1]) / (this.sizeY*((this.height-1)/this.height));
+      position[2] = (1-pinning) * this.sizeZ*Math.cos(5*position[0]/this.sizeX + Time.time);
 
       for (let p = 0; p < 3; ++p) {
         outputPositions[i*3 +p] = position[p];
@@ -50,51 +55,47 @@ class ClothMesh extends Mesh {
     let staticData = [];
     let indices = [];
 
-    let width = 10;
-    let height = 10;
-    let sizeX = 1;
-    let sizeY = 1;
-    for (let y = 0; y < height; ++y) {
-      for (let x = 0; x < width; ++x) {
-        this.vertPos.push(sizeX*x/width - sizeX/2.0, sizeY*y/height - sizeY/2.0, 0);
+    for (let y = 0; y < this.height; ++y) {
+      for (let x = 0; x < this.width; ++x) {
+        this.vertPos.push(this.sizeX*x/this.width - this.sizeX/2.0, this.sizeY*y/this.height - this.sizeY*(this.height-1)/this.height, 0);
 
-        let ptX = (x + 1) + y * width;
-        let ptY = x + (y + 1) * width;
+        let ptX = (x + 1) + y * this.width;
+        let ptY = x + (y + 1) * this.width;
         let multiplierX = 1;
         let multiplierY = 1;
 
-        if (x === width-1) {
+        if (x === this.width-1) {
           multiplierX = -1;
-          ptX = (x - 1) + y * width;
+          ptX = (x - 1) + y * this.width;
         }
-        if (y === height-1) {
+        if (y === this.height-1) {
           multiplierY = -1;
-          ptY = x + (y - 1) * width;
+          ptY = x + (y - 1) * this.width;
         }
 
-        this.adj[x + y * width] = [ptX, ptY, multiplierX, multiplierY];
+        this.adj[x + y * this.width] = [ptX, ptY, multiplierX, multiplierY];
 
-        staticData.push(x / (width-1), y / (height-1)); //texture coordinates
+        staticData.push(x / (this.width-1), 1 - (y / (this.height-1)) ); //texture coordinates
       }
     }
 
-    for (let y = 0; y < height - 1; ++y) {
-      for (let x = 0; x < width - 1; ++x) {
-        let ptIndex0 = x + (y * width);
-        let ptIndex1 = (x + 1) + (y * width);
-        let ptIndex2 = x + ((y + 1) * width);
+    for (let y = 0; y < this.height - 1; ++y) {
+      for (let x = 0; x < this.width - 1; ++x) {
+        let ptIndex0 = x + (y * this.width);
+        let ptIndex1 = (x + 1) + (y * this.width);
+        let ptIndex2 = x + ((y + 1) * this.width);
         indices.push(ptIndex0, ptIndex1, ptIndex2);
 
-        let ptIndex3 = (x + 1) + ((y + 1) * width);
-        let ptIndex4 = x + ((y + 1) * width);
-        let ptIndex5 = (x + 1) + (y * width);
+        let ptIndex3 = (x + 1) + ((y + 1) * this.width);
+        let ptIndex4 = x + ((y + 1) * this.width);
+        let ptIndex5 = (x + 1) + (y * this.width);
         indices.push(ptIndex3, ptIndex4, ptIndex5);
       }
     }
 
     this.outPos = new Float32Array(this.vertPos);
 
-    this.clothArray = new Float32Array((4 * 3) * width * height);
+    this.clothArray = new Float32Array((4 * 3) * this.width * this.height);
     this.initializeCloth(staticData, indices);
     this.uploadVertexData();
   }

@@ -22,7 +22,7 @@ const SceneLoader = {
   ignoreComponents: ["name", "index", "static", "Kinematic", "Animator", "AnimatorJS", "SkinnedMeshRenderer",
                      "ClothMesh", "MeshFilter", "MeshRenderer",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
-  shadowLightsAvailable: 3,
+  shadowLightsAvailable: 0,
   tone: 0,
 
   loadScene: function(filename) {
