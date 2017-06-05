@@ -13,6 +13,7 @@ class SingingEvent extends Event{
     this.currentCharge = 0;
 
     this._lastCharge = 0;
+    this._currentState = EventState.uncharged;
   }
 
   start(){

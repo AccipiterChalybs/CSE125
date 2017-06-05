@@ -13,16 +13,28 @@ class DoorEvent extends SingingEvent{
     this.closePos = vec3.copy(vec3.create(), params.closePos);
 
     this._unlocked = params._unlocked;
+    this._audioSrc = null;
   }
 
   start() {
   }
 
   startClient() {
+    this._audioSrc = this.transform.gameObject.getComponent('AudioSource');
   }
 
   updateComponent() {
     super.updateComponent();
+  }
+
+  updateComponentClient(){
+    if(this._audioSrc && this._audioSrc !== null) {
+      if (this._currentState === EventState.discharging || this._currentState === EventState.charging) {
+        this._audioSrc.playSound();
+      } else {
+        this._audioSrc.pauseSound();
+      }
+    }
   }
 
   onUncharged() {

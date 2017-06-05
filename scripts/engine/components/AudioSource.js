@@ -100,6 +100,7 @@ class AudioSource extends Component {
         AudioEngine.resumeAudio(this.sound[0], this.sound[1]);
     }
 
+    // volume: 0 - 1
     changeVolume(volume) {
         if (this.sound === null) {
             console.error('no sound has been set');
@@ -141,6 +142,7 @@ class AudioSource extends Component {
         AudioEngine.setOrientation(this.sound[0], this.sound[1], x, y, z);
     }
 
+    // rate: 0.5 - 4
     setRate(rate) {
         if (this.sound === null) {
             console.error('no sound has been set');

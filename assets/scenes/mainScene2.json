@@ -13251,6 +13251,12 @@
             },
             "Kinematic": {
             },
+            "AudioSource": {
+              "audioName": "crypt-door-close.mp3_2",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
+            },
             "children": [
               {
                 "name": "Collider",
@@ -13362,6 +13368,12 @@
               "closePos": [0, 0, 0]
             },
             "Kinematic": {
+            },
+            "AudioSource": {
+              "audioName": "crypt-door-close.mp3_3",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
             },
             "children": [
               {
@@ -13628,7 +13640,7 @@
           "minLightRange": 1
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_2",
+          "audioName": "Tone1.wav_4",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -14082,7 +14094,7 @@
           "minLightRange": 1
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_3",
+          "audioName": "Tone1.wav_5",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -15058,7 +15070,7 @@
           "minLightRange": 1
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_4",
+          "audioName": "Tone1.wav_6",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -16413,6 +16425,12 @@
             },
             "Kinematic": {
             },
+            "AudioSource": {
+              "audioName": "crypt-door-close.mp3_7",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
+            },
             "children": [
               {
                 "name": "Collider",
@@ -16534,6 +16552,12 @@
               "closePos": [0, 0, 0]
             },
             "Kinematic": {
+            },
+            "AudioSource": {
+              "audioName": "crypt-door-close.mp3_8",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
             },
             "children": [
               {
@@ -18501,7 +18525,7 @@
           "minLightRange": 1
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_5",
+          "audioName": "Tone1.wav_9",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -20426,7 +20450,7 @@
           "minLightRange": 1
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_6",
+          "audioName": "Tone1.wav_10",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -25168,7 +25192,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_7",
+          "audioName": "Tone1.wav_11",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -25262,7 +25286,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_8",
+          "audioName": "Tone1.wav_12",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -25720,7 +25744,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_9",
+          "audioName": "Tone1.wav_13",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -25814,7 +25838,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone2.wav_10",
+          "audioName": "Tone2.wav_14",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -25908,7 +25932,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone3.wav_11",
+          "audioName": "Tone3.wav_15",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -26002,7 +26026,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_12",
+          "audioName": "Tone1.wav_16",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -26096,7 +26120,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone4.wav_13",
+          "audioName": "Tone4.wav_17",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -26190,7 +26214,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_14",
+          "audioName": "Tone1.wav_18",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -26318,7 +26342,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_15",
+          "audioName": "Tone1.wav_19",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -26728,6 +26752,12 @@
               "closePos": [0, 0, 0]
             },
             "Kinematic": {
+            },
+            "AudioSource": {
+              "audioName": "crypt-door-close.mp3_20",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
             },
             "children": [
               {
@@ -31150,7 +31180,7 @@
           "minLightRange": 1
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_16",
+          "audioName": "Tone1.wav_21",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -31244,7 +31274,7 @@
           "minLightRange": 1
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_17",
+          "audioName": "Tone1.wav_22",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -31338,7 +31368,7 @@
           "minLightRange": 1
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_18",
+          "audioName": "Tone1.wav_23",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -31432,7 +31462,7 @@
           "minLightRange": 1
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_19",
+          "audioName": "Tone1.wav_24",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -31526,7 +31556,7 @@
           "minLightRange": 1
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_20",
+          "audioName": "Tone1.wav_25",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -31620,7 +31650,7 @@
           "minLightRange": 1
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_21",
+          "audioName": "Tone1.wav_26",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -31714,7 +31744,7 @@
           "minLightRange": 1
         },
         "AudioSource": {
-          "audioName": "Tone1.wav_22",
+          "audioName": "Tone1.wav_27",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -34476,7 +34506,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone2.wav_23",
+          "audioName": "Tone2.wav_28",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -34570,7 +34600,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone3.wav_24",
+          "audioName": "Tone3.wav_29",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -34664,7 +34694,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone4.wav_25",
+          "audioName": "Tone4.wav_30",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -34735,6 +34765,49 @@
               "intensity": 1,
               "range": 1
             }
+          }
+        ]
+      },
+      {
+        "name": "BGM",
+        "index": "2221",
+        "static": true,
+        "Transform": {
+          "position": [8.911058, 1.534087, -14.43383],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "AudioSource": {
+          "audioName": "cine_ambience.wav_31",
+          "loop": false,
+          "isSFX": false,
+          "is3D": false
+        },
+        "FadeInAudioEvent": {
+          "delay": 0,
+          "fadeTime": 3,
+          "volume": 0.4,
+          "rate": 1
+        }
+      },
+      {
+        "name": "TriggerSwitch",
+        "index": "2222",
+        "static": true,
+        "Transform": {
+          "position": [7.399, 0.001000106, -0.005654496],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "TriggerSwitch": {
+          "events": [2221]
+        },
+        "colliders": [
+          {
+            "type": "sphere",
+            "isTrigger": true,
+            "scale": 1,
+            "offset": [0, 0, 0]
           }
         ]
       }
