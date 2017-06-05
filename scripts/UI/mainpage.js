@@ -8,6 +8,7 @@ function startGame() {
   document.getElementById("progress").style.visibility="visible";
   document.getElementById("mainMenu").style.visibility="hidden";
   initialize();
+  loadOptionsGraphics();
 }
 
 function nameEq(check, axis) {
@@ -80,6 +81,37 @@ function loadOptionsControls() {
     controlRowsBtn[i].innerHTML = controlsToInput(controlRows[i].id);
     controlRowsBtn[i].onclick = changeControls.bind(controlRows[i]);
   }
+}
+
+function togglePointShadows(e) {
+  e.stopPropagation();
+  if (this.innerHTML === 'Off') {
+    this.innerHTML = 'On';
+  } else {
+    this.innerHTML = 'Off';
+    const lightList = []
+    GameObject.prototype.SceneRoot.findComponents('Light', lightList);
+    for (let light of lightList) {
+      if (light instanceof PointLight) {
+        light.isShadowCaster = false;
+      }
+    }
+  }
+}
+
+function loadOptionsGraphics() {
+  const graphics = $('#graphics');
+  graphics.css('opacity', '1');
+  const toggleBtn = graphics.find('.toggle');
+  toggleBtn[0].onclick = togglePointShadows;
+}
+
+function openOptionsModal() {
+  $('#options').modal('show');
+}
+
+function closeOptionsModal() {
+  $('#options').modal('hide');
 }
 
 function menuStart() {
