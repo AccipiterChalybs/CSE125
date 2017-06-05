@@ -22,6 +22,7 @@ layout (location = 2) out vec4 PosOut; //position texture - rgb: position | a: r
 void main()
 {
     vec4 color = texture(colorTex, vTexCoord);
+    if (color.a < 0.5) discard;
 	vec3 mat = texture(matTex, vTexCoord).xyz;
 
     vec3 norm = normalize(vNormal);
