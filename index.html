@@ -9,6 +9,8 @@
   <link href="styles/bootstrap.css" rel="stylesheet">
   <script src="scripts/bootstrap.min.js"></script>
   <link href="styles/menu.css" rel="stylesheet">
+  <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+  <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
 <!--<body onload="initialize()" style="background-image: url('assets/images/concept_environment_chamber_medival-spikes-statues.jpg');background-size: cover">-->
 <body onload="menuStart()">
@@ -100,7 +102,7 @@
           <h1 class="modal-title">Options</h1>
         </div>
         <div class="modal-body">
-          <div id="controls">
+          <div class="half-panel" id="controls">
             <h2>Controls</h2>
             <div class="modal-row" id="forward">
               <div class="text"></div><div class="btn btn-default"></div>
@@ -119,6 +121,15 @@
             </div>
             <div class="modal-row" id="action">
               <div class="text"></div><div class="btn btn-default"></div>
+            </div>
+          </div>
+          <div class="half-panel" id="graphics">
+            <h2>Graphics</h2>
+            <div class="modal-row" id="point-shadows">
+              <div class="text">shadows</div>
+              <div class="help" id="count"></div>
+              <div class="slider"></div>
+              <div class="toggle btn btn-default">Off</div>
             </div>
           </div>
         </div>

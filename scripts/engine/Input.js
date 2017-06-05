@@ -236,7 +236,9 @@ const Input = {
     document.body.requestPointerLock = document.body.requestPointerLock ||
                                         document.body.mozRequestPointerLock;
 
-    document.exitPointerLock = document.exitPointerLock || document.mozExitPointerLock;
+    document.exitPointerLock = (e) => {
+      document.exitPointerLock();
+    }
 
     document.body.onclick =  function() {
       document.body.requestPointerLock();
@@ -255,6 +257,8 @@ const Input = {
         document.addEventListener("mouseup", releasedMouse, false);
         document.addEventListener("wheel", mouseWheel, false);
         Input.enabled = true;
+
+        closeOptionsModal();
       } else {
         //console.log('The pointer lock status is now unlocked');
         document.removeEventListener("mousemove", updatePosition, false);
@@ -264,6 +268,8 @@ const Input = {
         Input._options.axes.filter((axis)=>axis.name === 'mouseHorizontal')[0].value = 0;
         Input._options.axes.filter((axis)=>axis.name === 'mouseVertical')[0].value = 0;
         Input.enabled = false;
+
+        openOptionsModal();
       }
     }
 
@@ -301,12 +307,16 @@ const Input = {
     document.body.oncontextmenu = ()=>false;
 
     // Keyboard buttons
-    document.body.onkeyup = (e)=> Input._options.axes.filter(
-        (axis)=>axis.type === InputType.keyboard)
+    document.body.onkeyup = (e) => {
+      Input._options.axes
+        .filter((axis)=>axis.type === InputType.keyboard)
         .forEach((axis)=>updateAxisInt(axis, e.which, true));
-    document.body.onkeydown = (e)=> Input._options.axes.filter(
-        (axis)=>axis.type === InputType.keyboard)
+    }
+    document.body.onkeydown = (e) => {
+      Input._options.axes
+        .filter((axis)=>axis.type === InputType.keyboard)
         .forEach((axis)=>updateAxisInt(axis, e.which));
+    }
 
     // Mouse Movement
     //document.body.onmousemove = (e)=> Input._options.axes.filter(

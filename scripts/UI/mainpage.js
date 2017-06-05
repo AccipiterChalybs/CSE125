@@ -82,9 +82,82 @@ function loadOptionsControls() {
   }
 }
 
+function toggleShadows(lightList, update, e) {
+  e.stopPropagation();
+  if (this.innerHTML === 'Off') {
+    this.innerHTML = 'On';
+    update(lightList.length);
+  } else {
+    this.innerHTML = 'Off';
+    update(0);
+  }
+}
+
+function loadOptionsGraphics() {
+  const graphics = $('#graphics');
+  graphics.css('opacity', '1');
+  $('#graphics .slider').slider('enable');
+
+  const lightList = [];
+  GameObject.prototype.SceneRoot.findComponents('Light', lightList);
+  const pointLightList =
+    lightList.filter((l) => { return l instanceof PointLight; });
+  const onPointLightList =
+    pointLightList.filter((l) => { return l.isShadowCaster; });
+
+
+  const countTxt = graphics.find('#count');
+  const toggleBtn = graphics.find('.toggle');
+  const slider = graphics.find('.slider');
+
+  countTxt[0].innerHTML = `${onPointLightList.length}/${lightList.length}`;
+  toggleBtn[0].onclick =
+    toggleShadows.bind(
+      toggleBtn[0],
+      pointLightList,
+      slider.slider.bind(slider, 'option', 'value') // current update function
+    );
+  slider.slider('option', 'max', lightList.length);
+  slider.slider('option', 'value', onPointLightList.length);
+  slider.on('slidechange',
+    handleSliderChange.bind(null, countTxt[0], pointLightList)
+  );
+}
+
+function handleSliderChange(helpEle, lightList, e, ui) {
+  const s = helpEle.innerHTML;
+  const max = s.slice(s.search('/') + 1);
+  helpEle.innerHTML = `${ui.value}/${max}`;
+
+  let c = 0;
+  for (let light of lightList) {
+    if (light) {
+      light.isShadowCaster = c < ui.value;
+      c += 1;
+    }
+  }
+}
+
+function startOptionsGraphics() {
+  $('#graphics .slider').slider();
+  $('#graphics .slider').slider('disable');
+  const countEle = $('#graphics .help#count')[0];
+  countEle.innerHTML = '0/0';
+}
+
+function openOptionsModal() {
+  $('#options').modal('show');
+  loadOptionsGraphics();
+}
+
+function closeOptionsModal() {
+  $('#options').modal('hide');
+}
+
 function menuStart() {
   if(Debug.autoStart){
       startGame();
   }
   loadOptionsControls();
+  startOptionsGraphics();
 }
