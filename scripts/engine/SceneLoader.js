@@ -26,6 +26,7 @@ const SceneLoader = {
   tone: 0,
 
   loadScene: function(filename) {
+    this.tone=0;
     let loadId = GameEngine.registerLoading();
     JsonLoader.loadJSON(filename, SceneLoader._finishLoadScene.bind(this, loadId, filename));
   },
