@@ -62,4 +62,5 @@ class Foot extends Component {
 Foot.prototype.downVector = vec3.fromValues(0,-1,0);
 Foot.prototype.STEP_HEIGHT_READY = 0.185;
 Foot.prototype.STEP_HEIGHT_COMPLETE = 0.185;
-Foot.prototype.FOOTSTEP_SOUNDS = {"soft":['footstep0', 'footstep1', 'footstep2', 'footstep3'],"hard":['footstep4', 'footstep5']};
+Foot.prototype.FOOTSTEP_SOUNDS = {"soft":['footstepS1', 'footstepS2', 'footstepS3', 'footstepS4', 'footstepS5', 'footstepS6', 'footstepS7', 'footstepS8', 'footstepS9', 'footstepS10', 'footstepS11'],
+"hard":['footstepC1', 'footstepC2', 'footstepC3', 'footstepC4', 'footstepC5', 'footstepC6', 'footstepC7', 'footstepC8', 'footstepC9', 'footstepC10', 'footstepC11', 'footstepC12', 'footstepC13']};
