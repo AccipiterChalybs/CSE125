@@ -23,23 +23,38 @@ class Foot extends Component {
         this.stepReady = true;
       } else if (this.stepReady && distance < Foot.prototype.STEP_HEIGHT_COMPLETE) {
         this.stepReady = false;
-        this.footstep(result.collider);
+        this.footstep(result.collider, distance);
       }
     }
   }
 
-  footstep(otherCollider) {
-    console.log("Footstep", otherCollider.gameObject.name);
-    let soundName = this.getFootstepSoundName(otherCollider);
-    AudioEngine.soundArr[soundName].play();
-  }
-
-  getFootstepSoundName(otherCollider) {
+  footstep(otherCollider, distance) {
     let surfaceType = "hard";
     let floorComp = otherCollider.gameObject.getComponent('Floor');
     if (!!floorComp) {
       surfaceType = floorComp.surfaceType;
     }
+
+    //Sound Effect
+    let soundName = this.getFootstepSoundName(surfaceType);
+    AudioEngine.soundArr[soundName].play();
+
+
+    //Floor Decal
+    if (surfaceType === 'soft') {
+      let footstepDecal = PrefabFactory.makeFootstepDecal(this.left);
+      let floorPos = vec3.fromValues(0, -distance, 0);
+      vec3.add(floorPos, this.transform.getWorldPosition(), floorPos);
+      footstepDecal.transform.setPosition(floorPos);
+
+      let yAngle = Utility.quatToAngleY(this.transform.getWorldRotation());
+      footstepDecal.transform.rotateY(yAngle + Math.PI / 2);
+      footstepDecal.transform.rotateX(-Math.PI / 2);
+      GameObject.prototype.SceneRoot.addChild(footstepDecal);
+    }
+  }
+
+  getFootstepSoundName(surfaceType) {
     let index = Utility.randomIntFromInterval(0, Foot.prototype.FOOTSTEP_SOUNDS[surfaceType].length-1);
     return Foot.prototype.FOOTSTEP_SOUNDS[surfaceType][index];
   }

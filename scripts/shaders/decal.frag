@@ -13,6 +13,9 @@ uniform sampler2D inputNormalTex;
 
 uniform mat4 uInvM_Matrix;
 uniform vec3 uForwardNormal;
+uniform vec3 uRight;
+
+uniform vec3 cameraPos;
 
 uniform float uSizeZ;
 
@@ -29,8 +32,9 @@ layout(location = 1) out vec4 fragNormal;
 void main() {
     vec2 normalizedPos = vPerspectivePosition.xy / vPerspectivePosition.w;
     vec2 texCoord = normalizedPos * 0.5 + 0.5;
-    vec3 worldPos = texture(positionBuffer, texCoord).rgb;
+    vec3 worldPos = texture(positionBuffer, texCoord).rgb + cameraPos;
     vec3 objPos = (uInvM_Matrix * vec4(worldPos, 1.0)).xyz;
+
 
 
     //partial derivative idea from http://martindevans.me/game-development/2015/02/27/Drawing-Stuff-On-Other-Stuff-With-Deferred-Screenspace-Decals/
@@ -45,14 +49,14 @@ void main() {
 
     if (dot( normal.xyz * 2.0 - 1.0, uForwardNormal) <= 0.1) discard;
 
-    vec3 tangent = normalize(dWdx);
-    vec3 bitangent = normalize(dWdy);
-    mat3 view = transpose(mat3(uV_Matrix));
+    vec3 tangent = normalize(uRight);
+    vec3 bitangent = cross(normal, tangent);
 
     vec4 decalNormal = texture(inputNormalTex, vec2(objPos.x + 0.5, 0.5 - objPos.y));
-    decalNormal = decalNormal *2.0 -1.0;
-    decalNormal.xyz = normalize(tangent * decalNormal.x + bitangent * decalNormal.y + normal * decalNormal.z);
-    decalNormal = decalNormal * 0.5 + 0.5;
+    decalNormal.xyz = decalNormal.xyz *2.0 -1.0;
+    decalNormal.xyz = (tangent * decalNormal.x + bitangent * decalNormal.y + normal * decalNormal.z);
+    decalNormal.xyz = decalNormal.xyz * 0.5 + 0.5;
+    decalNormal.a *= uDecalColor.a;
 
 
     vec3 destColour = texture(colourBuffer, texCoord).rgb;
@@ -62,5 +66,5 @@ void main() {
     vec4 color = texture(inputColorTex, vec2(objPos.x + 0.5, 0.5 - objPos.y)) * uDecalColor;
 
     fragColor = vec4((color.rgb * color.a) + (destColour.rgb * (1.0-color.a)), 1.0);
-    fragNormal = vec4((decalNormal.rgb * color.a) + (destNormal.rgb * (1.0-color.a)), destNormal.a);
+    fragNormal = vec4((decalNormal.rgb * decalNormal.a) + (destNormal.rgb * (1.0-decalNormal.a)), destNormal.a);
 }

@@ -63,3 +63,10 @@ Utility.vec3.moveTowards = function(a, b, delta){
 
   return dir;
 };
+
+Utility.quatToAngleY = function(inQuat) {
+  let testVec = vec3.fromValues(0, 0, 1);
+  vec3.transformQuat(testVec, testVec, inQuat);
+  testVec[0]*=-1;
+  return Math.atan2(testVec[2], testVec[0]);
+};

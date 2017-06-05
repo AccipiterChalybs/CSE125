@@ -34,6 +34,7 @@ class GameScene {
 
 
     if (!IS_SERVER) {
+      PrefabFactory.init();
       decalTex = new Texture('assets/texture/test_decal2.png');
       decalNormal = new Texture('assets/texture/test_decal_normal.png', false);
       particleTex = new Texture('assets/texture/particle_fire_test.png');
