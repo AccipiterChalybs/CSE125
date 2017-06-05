@@ -19,9 +19,10 @@ const SceneLoader = {
   // All components we load into gameObject
   components: c,
   // Ignore these in general pass, likely because they are already handled specially
-  ignoreComponents: ["name", "index", "static", "Kinematic", "Animator", "AnimatorJS", "SkinnedMeshRenderer", "MeshFilter", "MeshRenderer",
+  ignoreComponents: ["name", "index", "static", "Kinematic", "Animator", "AnimatorJS", "SkinnedMeshRenderer",
+                     "ClothMesh", "MeshFilter", "MeshRenderer",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
-  shadowLightsAvailable: 3,
+  shadowLightsAvailable: 0,
   tone: 0,
 
   loadScene: function(filename) {
@@ -141,14 +142,15 @@ const SceneLoader = {
     if (!IS_SERVER) {
 
       //TODO check spelling of SkinnedMeshRenderer
-      if ("MeshFilter" in currentNode || "SkinnedMeshRenderer" in currentNode) {
-        let meshName = currentNode["MeshFilter"] || currentNode["SkinnedMeshRenderer"].name;
+      if ("MeshFilter" in currentNode || "SkinnedMeshRenderer" in currentNode || "ClothMesh" in currentNode) {
+        let isCloth = "ClothMesh" in currentNode;
+        let meshName = (isCloth) ? "TEST" : currentNode["MeshFilter"] || currentNode["SkinnedMeshRenderer"].name;
         if (meshName === 'Plane' || meshName === 'Cube' || meshName === 'Sphere' || meshName === 'Capsule') {
           console.log(meshName = 'SceneLoader');
         //  nodeObject.transform.scale(5);
           nodeObject.transform.rotateX(Math.PI/2);
         }
-        let mesh = new Mesh(meshName);
+        let mesh = (isCloth) ? new ClothMesh(meshName) : new Mesh(meshName);
 
 //TEMP
         let materialName = currentNode["MeshRenderer"] || currentNode["SkinnedMeshRenderer"].material;
