@@ -82,6 +82,50 @@ function loadOptionsControls() {
   }
 }
 
+function toggleShadows(lightList, e) {
+  e.stopPropagation();
+  if (this.innerHTML === 'Off') {
+    this.innerHTML = 'On';
+    for (let light of lightList) {
+      if (light) {
+        light.isShadowCaster = true;
+      }
+    }
+  } else {
+    this.innerHTML = 'Off';
+    for (let light of lightList) {
+      if (light) {
+        light.isShadowCaster = false;
+      }
+    }
+  }
+}
+
+function loadOptionsGraphics() {
+  const graphics = $('#graphics');
+  graphics.css('opacity', '1');
+
+  const lightList = [];
+  GameObject.prototype.SceneRoot.findComponents('Light', lightList);
+  const pointLightList =
+    lightList.map((l) => { return l instanceof PointLight; });
+
+  const toggleBtn = graphics.find('.toggle');
+  toggleBtn[0].onclick = toggleShadows.bind(toggleBtn[0], pointLightList);
+
+  const slider = graphics.find('.slider');
+  slider[0].innerHTML = `${lightList.length}`;
+}
+
+function openOptionsModal() {
+  $('#options').modal('show');
+  loadOptionsGraphics();
+}
+
+function closeOptionsModal() {
+  $('#options').modal('hide');
+}
+
 function menuStart() {
   if(Debug.autoStart){
       startGame();
