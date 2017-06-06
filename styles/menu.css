@@ -93,16 +93,22 @@
   opacity: .7;
 }
 
-.modal-row div + div {
-  margin-left: 10px;
-}
-
 .modal-row .btn:active,
 .modal-row .btn:focus,
 .modal-row .btn.focus {
   background-color: #e6e6e6;
   box-shadow: inset 4px 4px 4px 0px rgba(0, 0, 0, .3);
   outline: 0;
+}
+
+.modal-row input.number {
+  width: 50px;
+  background-color: white;
+  color: black;
+}
+
+.modal-row div + div {
+  margin-left: 10px;
 }
 
 .help {
@@ -137,4 +143,8 @@
 
 #graphics {
   opacity: .3;
+}
+
+#cu-msg {
+  color: darkred;
 }
