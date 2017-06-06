@@ -489,7 +489,7 @@ class BloomPass extends RenderPass
         }
         lumen /= this._averageSize*this._averageSize;
 
-        lumen=1; //TODO remove to re-enable expsoure adjustment
+        lumen=1; //TODO remove to re-enable exposure adjustment
         if (!isNaN(lumen)) {
             this.averageExposure = this.averageExposure * (1 - newDataWeight) + lumen * (newDataWeight);
         }
@@ -571,7 +571,7 @@ class BloomPass extends RenderPass
         this._ssaoBufferBlur[1].bindTexture(6, 0);
         this._fogBuffer.bindTexture(7, 0);
 
-        s3.setUniform("exposure", this.averageExposure, UniformTypes.u1f);
+        //TODO re-enable this when ready: //s3.setUniform("exposure", this.averageExposure, UniformTypes.u1f);
 
         this._deferredPass.fbo.draw();
 

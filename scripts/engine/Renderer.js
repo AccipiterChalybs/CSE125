@@ -75,7 +75,7 @@ const Renderer  = {
       /* Renderer.PARTICLE_TRAIL_SHADER, Renderer.BASIC_SHADER,
             Renderer.FORWARD_EMISSIVE ];*/
 
-      Renderer.shaderCameraPosList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.FBO_SSAO, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM, Renderer.FBO_FOG,  Renderer.DEFERRED_PBR_SHADER_CUTOUT,
+      Renderer.shaderCameraPosList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM, Renderer.FBO_SSAO, Renderer.DEFERRED_PBR_SHADER, Renderer.DEFERRED_PBR_SHADER_ANIM, Renderer.DEFERRED_DECAL, Renderer.FBO_FOG,  Renderer.DEFERRED_PBR_SHADER_CUTOUT,
         Renderer.DEFERRED_SHADER_LIGHTING_ENVIRONMENT, Renderer.DEFERRED_SHADER_LIGHTING_DIRECTIONAL_SHADOW, Renderer.DEFERRED_SHADER_LIGHTING_POINT_NORMAL, Renderer.DEFERRED_SHADER_LIGHTING_POINT_DEBUG, Renderer.DEFERRED_SHADER_LIGHTING_POINT_SHADOW];
 
       Renderer.shaderEnvironmentList = [Renderer.FORWARD_PBR_SHADER, Renderer.FORWARD_PBR_SHADER_ANIM,
@@ -539,6 +539,8 @@ const Renderer  = {
       s3.setUniform("addTex5", 5, UniformTypes.u1i);
       s3.setUniform("ssao", 6, UniformTypes.u1i);
       s3.setUniform("fog", 7, UniformTypes.u1i);
+
+      s3.setUniform("exposure", 1, UniformTypes.u1f);
   },
 
   loop: function () {
@@ -691,5 +693,12 @@ const Renderer  = {
 
   getWindowHeight: function() {
       return Renderer.height;
+  },
+
+  setGamma: function(gamma) {
+    Renderer.getShader(Renderer.FBO_HDR).setUniform('gamma', gamma, UniformTypes.u1f);
+  },
+  setExposure: function(exposure) {
+    Renderer.getShader(Renderer.FBO_HDR).setUniform('exposure', exposure, UniformTypes.u1f);
   }
 };

@@ -3,7 +3,7 @@
  */
 const c = {
   AIController, Animation, AudioListener, AudioSource, BoxCollider, Camera,
-  ClientStickTo, Collider, CompoundCollider, Decal, Light, ParticleSystem,
+  ClientStickTo, Collider, CompoundCollider, Decal, Foot, Floor, Light, ParticleSystem,
   SphereCollider, Transform, SingingStatueController, TriggerSwitch, MoveTowardsEvent,
   SingStatueEvent, StopSingStatueEvent, StopLightEvent, PlayAudio, PlayAudioEvent,
   FadeInAudioEvent,
