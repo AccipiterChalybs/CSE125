@@ -437,7 +437,20 @@ const Renderer  = {
 
         lastTime = Time.time();
 */
-    },
+      //Culling Variables
+      Renderer.c_Ratio=0;
+      Renderer.c_CamRef=[0,0,0];
+      Renderer.c_NearD=0;
+      Renderer.c_FarD=0;
+      Renderer.c_Width=0;
+      Renderer.c_Height=0;
+      Renderer.c_sphereFactorX=0;
+      Renderer.c_sphereFactorY=0;
+      Renderer.c_Z=[0,0,0];
+      Renderer.c_X=[0,0,0];
+      Renderer.c_Y=[0,0,0];
+      Renderer.c_angleTangent=0;
+  },
 
 
   //Runs after everything is loaded, before loop
@@ -668,5 +681,57 @@ const Renderer  = {
 
   getWindowHeight: function() {
       return Renderer.height;
+  },
+  //culling stuff
+  setCamInternal: function (angle,ratio, nearD, farD) {
+    Renderer.c_Ratio=ratio;
+    Renderer.c_FarD=farD;
+    Renderer.c_NearD=nearD;
+    let tanAngle = Math.tan(angle);
+    Renderer.c_angleTangent=tanAngle;
+    Renderer.c_sphereFactorY=1/Math.cos(angle);
+    let angleX = Math.atan(tanAngle*ratio);
+    Renderer.c_sphereFactorX = 1/Math.cos(angleX);
+  },
+  setCamDef: function (p,l,up ) {
+    //l&u are arrays
+    let z = [l[0]-p[0],l[1]-p[1],l[2]-p[2]];
+    let tempLength = Math.sqrt(z[0]*z[0]+z[1]*z[1]+z[2]*z[2]);
+    z = [z[0]/tempLength, z[1]/tempLength,z[2]/tempLength];
+    Renderer.c_Z=z;
+    //X axis is crossproduct of z axis given and up
+    let x = z[0]*up[0]+z[1]*up[1]+z[2]*up[2];
+    tempLength = Math.sqrt(x[0]*x[0]+x[1]*x[1]+x[2]*x[2]);
+    x = [x[0]/tempLength, x[1]/tempLength, x[2]/tempLength];
+    Renderer.c_X=x;
+    let y = z[0]*x[0]+z[1]*x[1]+z[2]*x[2];
+    Renderer.c_Y=y;
+  },
+  pointInFrustum: function (x,y,z) {
+      
+  },
+  sphereInFrustum: function (p,radius) {
+    //p is an array of xyz
+    let result=0;
+    let camPos=Renderer.camera.gameObject.transform.getWorldPosition();
+    let v = [p[0]-camPos[0], p[1]-camPos[1],p[2]-camPos[2]];
+    //inner product
+    let az = [v[0]*(-Renderer.c_Z[0]), v[1]*(-Renderer.c_Z[1]),v[2]*(-Renderer.c_Z[2])]
+    if(az> Renderer.c_FarD+radius || az< Renderer.c_NearD-radius){
+        return "outside";
+    }
+    if(az>Renderer.c_FarD-radius||az<Renderer.c_NearD-radius){
+        result="intersect";
+    }
+    let ay= [v[0]-Renderer.c_Y[0], v[1]-Renderer.c_Y[1],v[2]-Renderer.c_Y[2]];
+    let d = Renderer.c_sphereFactorY;
+    az *= Renderer.c_angleTangent;
+    if (ay > az+d || ay < -az-d){
+        return "outside";
+    }
+    if (ay > az-d || ay < -az+d){
+        result = "intersect";
+    }
+    
   }
 };
