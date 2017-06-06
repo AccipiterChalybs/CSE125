@@ -4,7 +4,7 @@ class RaycastSwitch extends Viewable{
     this._events = [];
     this._unparsedEvents = events;
     this.charged = false;
-    this._currentCharge = 0;
+    this._currentOutput = 0;
   }
 
   start() {
@@ -12,8 +12,10 @@ class RaycastSwitch extends Viewable{
     for(let i = 0; i < this._unparsedEvents.length; ++i){
       // Debug.log(GameObject.prototype.SerializeMap[events[i]]);
       // Debug.log(this._unparsedEvents[i]);
+      GameObject.prototype.SerializeMap[this._unparsedEvents[i]].getComponent("Event")
       this._events.push(GameObject.prototype.SerializeMap[this._unparsedEvents[i]].getComponent("Event"));
     }
+    // Debug.log(this._events);
 
     // this._collider = this.transform.gameObject.getComponent('Collider');
     // this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
@@ -21,13 +23,12 @@ class RaycastSwitch extends Viewable{
   }
 
   updateComponent() {
-
+    // Debug.log(this.transform.getWorldPosition());
   }
 
   view(interactingObj) {
-    Debug.log("Viewable object has been viewed");
-    for(let event of this._events)
-    {
+    // Debug.log("Viewable object has been viewed");
+    for(let event of this._events) {
       event.onRaycast(interactingObj);
     }
   }

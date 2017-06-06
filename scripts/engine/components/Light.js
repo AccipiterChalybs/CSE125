@@ -136,6 +136,10 @@ class PointLight extends Light{
     Renderer.shaderList[Renderer.POINT_SHADOW_SHADER].setUniform("uP_Matrix", PointLight.prototype.shadowMatrix, UniformTypes.mat4);
     Renderer.shaderList[Renderer.POINT_SHADOW_SHADER].setUniform("uLightPosition",this.gameObject.transform.getWorldPosition(),UniformTypes.vec3);
     Renderer.shaderList[Renderer.POINT_SHADOW_SHADER].setUniform("uFarDepth", PointLight.prototype.FAR_DEPTH, UniformTypes.u1f);
+
+    Renderer.shaderList[Renderer.FORWARD_POINT_SHADOW_SHADER].setUniform("uP_Matrix", PointLight.prototype.shadowMatrix, UniformTypes.mat4);
+    Renderer.shaderList[Renderer.FORWARD_POINT_SHADOW_SHADER].setUniform("uLightPosition",this.gameObject.transform.getWorldPosition(),UniformTypes.vec3);
+    Renderer.shaderList[Renderer.FORWARD_POINT_SHADOW_SHADER].setUniform("uFarDepth", PointLight.prototype.FAR_DEPTH, UniformTypes.u1f);
   }
 
   copyShadowMap() {
@@ -162,6 +166,7 @@ class PointLight extends Light{
       mat4.multiply(mat, PointLight.prototype.viewMatrixArray[pass], mat);
       Renderer.getShader(Renderer.POINT_SHADOW_SHADER_ANIM).setUniform("uV_Matrix",mat,UniformTypes.mat4);
       Renderer.getShader(Renderer.POINT_SHADOW_SHADER).setUniform("uV_Matrix",mat,UniformTypes.mat4);
+      Renderer.getShader(Renderer.FORWARD_POINT_SHADOW_SHADER).setUniform("uV_Matrix",mat,UniformTypes.mat4);
     }
   }
 

@@ -35,12 +35,18 @@ class Decal extends Component {
     vec3.scale(forward,this.transform.getForward(),-1);
     vec3.normalize(forward, forward);
 
+    let right4 = vec4.fromValues(1,0,0,0);
+    vec4.transformMat4(right4, right4, this.transform.getTransformMatrix());
+    let right = vec3.fromValues(right4[0], right4[1], right4[2]);
+    vec3.normalize(right, right);
+
     let transformMatrix = mat4.create();
     mat4.scale(transformMatrix, this.gameObject.transform.getTransformMatrix(), this.scale);
 
     Renderer.setModelMatrix(transformMatrix);
     Renderer.currentShader.setUniform('uInvM_Matrix', mat4.invert(transformMatrix, transformMatrix), UniformTypes.mat4);
     Renderer.currentShader.setUniform('uForwardNormal', forward, UniformTypes.vec3);
+    Renderer.currentShader.setUniform('uRight', right, UniformTypes.vec3);
     Renderer.currentShader.setUniform('decalWorldPosition', this.transform.getWorldPosition(), UniformTypes.vec3);
 
     Renderer.currentShader.setUniform('uDecalColor', this.color, UniformTypes.vec4);

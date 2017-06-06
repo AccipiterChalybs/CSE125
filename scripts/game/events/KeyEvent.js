@@ -1,10 +1,8 @@
-class KeyEvent extends Event{
+class KeyEvent extends RaycastEvent{
 
   constructor() {
     super();
     // this.movementSpeed = REGULAR_SPEED;
-    this.setCurrentState(EventState.uncharged);
-    this._unlocked = false;
   }
 
   start() {
@@ -12,32 +10,6 @@ class KeyEvent extends Event{
     //this._singer = this.transform.gameObject.getComponent("Sing");
     this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
     this._collider.setFreezeRotation(true);
-  }
-
-  startClient() {
-    // this._singingSrc = this.transform.gameObject.getComponent("AudioSource");
-  }
-
-  // updateComponent(){
-  //   if (this._unlocked)
-  //   {
-  //     super.updateComponent();
-  //   }
-  // }
-
-  onUncharged() {
-
-  }
-
-  onCharged() {
-  }
-
-  onDischarging() {
-
-  }
-
-  onCharging() {
-
   }
 
   onRaycast(interactingObj) {

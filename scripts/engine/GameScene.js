@@ -15,14 +15,12 @@ class GameScene {
 
     for (let animationName of Object.keys(animationFiles)) {
       let index = 0;
-      for (let animFilename of Object.keys(animationFiles[animationName])) {
+      for (let animInfo of animationFiles[animationName].info) {
         let indexMap = {};
-        for (let loadIndex of animationFiles[animationName][animFilename]) {
+        for (let loadIndex of animInfo[1]) {
           indexMap[loadIndex] = index++;
         }
-        ObjectLoader.loadAnimation(animationName, animFilename, indexMap);
-        // console.log(`${animFilename} loaded in ...`);
-        // console.log(indexMap);
+        ObjectLoader.loadAnimation(animationName, animInfo[0], indexMap, animationFiles[animationName].metaData);
       }
     }
 
@@ -34,7 +32,9 @@ class GameScene {
     // TODO REMOVE ME LATER
     NavMesh.prototype.currentNavMesh = new NavMesh();
 
+
     if (!IS_SERVER) {
+      PrefabFactory.init();
       decalTex = new Texture('assets/texture/test_decal2.png');
       decalNormal = new Texture('assets/texture/test_decal_normal.png', false);
       particleTex = new Texture('assets/texture/particle_fire_test.png');
@@ -56,7 +56,6 @@ class GameScene {
       camera.gameObject.addComponent(new RotateMouse());
     }
 
-
     //TODO make true and make clientside objects work
     let directionalLight = new GameObject({clientSideOnly: false});
 
@@ -71,16 +70,18 @@ class GameScene {
       Renderer.directionalLight.getComponent("Light").color = vec3.fromValues(1.6, 3.2, 6.4);
     }
 
-    let pos = vec3.create(); vec3.set(pos, -27, 0, -9);
+    let pos = vec3.create(); vec3.set(pos, 26, 0, 18);
     let color = vec4.create(); vec4.set(color, 1, 0, 0, 1);
     let evilTeapot = Debug.drawTeapot(pos, color);
     evilTeapot.addComponent(new EvilController());
 
     GameObject.prototype.SceneRoot.findComponents("Listenable", PhysicsEngine.sphereChecks);
+
   }
 
   update() {
     // -- Physics update call will likely go here --
+
     if(Debug.clientUpdate)
     {
       Debug.Profiler.startTimer('Physics', 2);

@@ -6,9 +6,9 @@ let Debug = {};
 
 Debug.clientUpdate = true; //Run the client in standalone mode, so it doesn't need a server - good for testing!
 Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
-Debug.debugDisplay = true;
+Debug.debugDisplay = true
 Debug.quickLoad = true;
-Debug.autoStart = true;
+Debug.autoStart = false;
 Debug.tmp_shadowTwoSideRender = true; //Var to remind me to remove this when we get in new level geometry
 
 Debug.drawColliders = false;
@@ -70,7 +70,7 @@ Debug.update = function() {
       Debug.currentBuffer = Debug.BUFFERTYPE_SHADOW;
     }
     if (Input.getAxis("debugButton_Buffer9")) {
-      Debug.currentBuffer = 0;
+      Debug.currentBuffer = Debug.BUFFERTYPE_SSAO;
     }
     if (Input.getAxis("debugButton_Buffer0")) {
       Debug.currentBuffer = 0;
@@ -87,6 +87,7 @@ Debug.BUFFERTYPE_ROUGH = 4;
 Debug.BUFFERTYPE_METAL = 5;
 Debug.BUFFERTYPE_BLOOM = 6;
 Debug.BUFFERTYPE_SHADOW = 7;
+Debug.BUFFERTYPE_SSAO = 8;
 Debug.currentBuffer = Debug.BUFFERTYPE_NONE;
 
 Debug.currentLightIndex = 1; //TODO make this switchable with input
@@ -141,9 +142,10 @@ Debug.logInput = () => {
 Debug.log = console.log;
 Debug.error = console.error;
 
-Debug.assert = function(shouldBeTrue) {
+Debug.assert = function(shouldBeTrue, message) {
   if (shouldBeTrue === false) {
-    throw new Error("Assertion Failed");
+    if (!message) message = '';
+    throw new Error("Assertion Failed" + message);
   }
 };
 
@@ -313,7 +315,7 @@ Debug.drawTeapot = function(pos, color = null) {
 
   teapot.transform.setPosition(pos);
   teapot.transform.setRotation(rotation);
-  teapot.transform.scale((.05));
+  teapot.transform.scale(0.05);
 
   GameObject.prototype.SceneRoot.addChild(teapot);
 
@@ -388,6 +390,7 @@ Debug.Profiler.setUniform = function() {
     let checkIndex = Debug.Profiler.index - 1;
     while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
       checkIndex--;
+      if (checkIndex < 0) { console.log("ERR: stage not found!"); return; }
     }
     Debug.Profiler.data[Debug.Profiler.map[checkIndex]].uniforms++;
   }
@@ -398,6 +401,7 @@ Debug.Profiler.useShader = function() {
     let checkIndex = Debug.Profiler.index - 1;
     while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
       checkIndex--;
+      if (checkIndex < 0) { console.log("ERR: stage not found!"); return; }
     }
     Debug.Profiler.data[Debug.Profiler.map[checkIndex]].shaderUses++;
   }
@@ -408,6 +412,7 @@ Debug.Profiler.drawCall = function() {
     let checkIndex = Debug.Profiler.index - 1;
     while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
       checkIndex--;
+      if (checkIndex < 0) { console.log("ERR: stage not found!"); return; }
     }
     Debug.Profiler.data[Debug.Profiler.map[checkIndex]].draws++;
   }

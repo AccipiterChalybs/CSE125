@@ -2,33 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
-  <script src="scripts/glMatrix-2.3.2.min.js">
-  </script>
-  <script src="scripts/cannon.min.js">
-  </script>
-  <script src="scripts/jquery.min.js">
-  </script>
-  <!-- Latest compiled and minified CSS -->
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Optional theme -->
-  <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet"><!-- Latest compiled and minified JavaScript -->
-
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
-  </script>
+  <title>Voiceless</title>
+  <script src="scripts/glMatrix-2.3.2.min.js"></script>
+  <script src="scripts/cannon.min.js"></script>
+  <script src="scripts/jquery.min.js"></script>
+  <link href="styles/bootstrap.css" rel="stylesheet">
+  <script src="scripts/bootstrap.min.js"></script>
   <link href="styles/menu.css" rel="stylesheet">
 </head>
 <!--<body onload="initialize()" style="background-image: url('assets/images/concept_environment_chamber_medival-spikes-statues.jpg');background-size: cover">-->
-<body onload="menuStart()" style="background-image: url('assets/images/concept_environment_chamber_medival-spikes-statues.jpg');background-size: cover">
+<body onload="menuStart()">
 <div id="mainMenu" class="container menu" style="margin-top: 40vh">
   <div class="row">
-    <div class="col-md-4">
-      <h1>Song of the Voiceless</h1>
-      <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="startGame()">Start</button>
-      <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="$('#options').modal('show');">Options</button>
-      <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="quit()">Quit</button>
-    </div>
+    <!-- <h1 class="text-center">Song of the Voiceless</h1> -->
+    <div class="title-img"></div>
+  </div>
+  <div class="row">
     <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="startGame()">START</button>
+      <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="$('#options').modal('show');">OPTIONS</button>
+      <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="$('#lose').modal('show');">WIN</button>
+      <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="$('#lose').modal('show');">LOSE</button>
+      <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="quit()">QUIT</button>
+    </div>
     <div class="col-md-4"></div>
   </div>
 </div>
@@ -38,9 +35,9 @@
   <div id="exposureLog"></div>
   <div id="profilerLog"></div>
 </div>
-<div id="progress" class="container" style="margin-top: 30vh;visibility: hidden">
+<div id="progress" class="container" style="  visibility: hidden">
   <div class="progress">
-    <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" class="progress-bar progress-bar-success" id="progressBar" role="progressbar" style="width: 0%">
+    <div class="progress-bar progress-bar-success" id="progressBar" role="progressbar" style="width: 0%">
       <span id="progressBarText">Loading Progress: (0/0)</span>
     </div>
   </div>
@@ -81,12 +78,13 @@
   <div class="modal fade" id="lose" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
+        <!-- <div class="modal-header">
           <button class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-          <h1 class="modal-title" id="loseLabel">YOU DIED</h1>
-        </div>
+        </div -->
         <div class="modal-body">
-          <h1>You Lose</h1>
+          <div class="lose-screen">
+            <div class="lose-text">YOU DIED</div>
+          </div>
         </div>
       </div>
     </div>
@@ -102,9 +100,33 @@
           <h1 class="modal-title">Options</h1>
         </div>
         <div class="modal-body">
-          <h1>somebody once told me</h1>
-          <h1>the world is gonna roll me</h1>
-          <h1>what is love</h1>
+          <div class="half-panel" id="controls">
+            <h2>Controls</h2>
+            <div class="modal-row" id="forward">
+              <div class="text"></div><div class="btn btn-default"></div>
+            </div>
+            <div class="modal-row" id="left">
+              <div class="text"></div><div class="btn btn-default"></div>
+            </div>
+            <div class="modal-row" id="backward">
+              <div class="text"></div><div class="btn btn-default"></div>
+            </div>
+            <div class="modal-row" id="right">
+              <div class="text"></div><div class="btn btn-default"></div>
+            </div>
+            <div class="modal-row" id="walk">
+              <div class="text"></div><div class="btn btn-default"></div>
+            </div>
+            <div class="modal-row" id="action">
+              <div class="text"></div><div class="btn btn-default"></div>
+            </div>
+          </div>
+          <div class="half-panel" id="graphics">
+            <h2>Graphics</h2>
+            <div class="modal-row" id="point-shadows">
+              <div class="text">shadows</div><div class="toggle btn btn-default">Off</div><div class="slider btn btn-default">slider</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -118,7 +140,9 @@
 <script src="scripts/engine/components/Collider.js"></script>
 <script src="scripts/game/Event.js"></script>
 <script src="scripts/game/EventContainer.js"></script>
-
+<script src="scripts/engine/Mesh.js"></script>
+<script src="scripts/game/events/RaycastEvent.js"></script>
+<script src="scripts/game/events/SingingEvent.js"></script>
 <script src="scripts/engine/Utility.js"></script>
 <script src="scripts/howler.core.min.js"></script>
 <script src="scripts/howler.spatial.min.js"></script>
@@ -140,6 +164,10 @@
 <script src="scripts/engine/ai/behaviorNodes/actions/ReturnTrue.js"></script>
 <script src="scripts/engine/ai/behaviorNodes/actions/PickRandomPlayer.js"></script>
 <script src="scripts/engine/ai/behaviorNodes/actions/SetDestinationPlayer.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/actions/AttackPlayer.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/actions/TargetPlayer.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/actions/CheckForPlayerWithinRange.js"></script>
+<script src="scripts/engine/ai/behaviorNodes/actions/MoveToDestination.js"></script>
 <script src="scripts/engine/ai/behaviorNodes/conditions/ProximityCheck.js"></script>
 <script src="scripts/engine/ai/behaviorNodes/conditions/DestinationCheck.js"></script>
 <script src="scripts/engine/ai/behaviorNodes/conditions/CountdownTimer.js"></script>
@@ -151,18 +179,28 @@
 <script src="scripts/game/ZoomMouse.js"></script>
 <script src="scripts/game/Playerable.js"></script>
 <script src="scripts/game/PlayerController.js"></script>
-<script src="scripts/game/StatueController.js"></script>
+<script src="scripts/game/SingingStatueController.js"></script>
 <script src="scripts/game/Sing.js"></script>
 <script src="scripts/game/Listenable.js"></script>
 <script src="scripts/game/Look.js"></script>
 <script src="scripts/game/Viewable.js"></script>
+<script src="scripts/game/Foot.js"></script>
+<script src="scripts/game/Floor.js"></script>
 <script src="scripts/game/SingingSwitch.js"></script>
 <script src="scripts/game/RaycastSwitch.js"></script>
+<script src="scripts/game/TriggerSwitch.js"></script>
+<script src="scripts/game/TriggerEvent.js"></script>
+<script src="scripts/game/PlayAudio.js"></script>
 <script src="scripts/game/events/DoorEvent.js"></script>
 <script src="scripts/game/events/KeyEvent.js"></script>
 <script src="scripts/game/events/HealEvent.js"></script>
 <script src="scripts/game/events/CheckpointEvent.js"></script>
 <script src="scripts/game/events/MoveTowardsEvent.js"></script>
+<script src="scripts/game/events/SingStatueEvent.js"></script>
+<script src="scripts/game/events/StopSingStatueEvent.js"></script>
+<script src="scripts/game/events/StopLightEvent.js"></script>
+<script src="scripts/game/events/PlayAudioEvent.js"></script>
+<script src="scripts/game/events/FadeInAudioEvent.js"></script>
 <script src="scripts/game/TriggerTest.js"></script>
 <script src="scripts/game/RotateOverTime.js"></script>
 <script src="scripts/game/RotateArrowKey.js"></script>
@@ -175,6 +213,8 @@
 <script src="scripts/game/AnimationState.js"></script>
 <script src="scripts/game/ObjectLogicState.js"></script>
 <script src="scripts/game/PlayerLogicState.js"></script>
+<script src="scripts/engine/PrefabFactory.js"></script>
+<script src="scripts/engine/components/ClothMesh.js"></script>
 <script src="scripts/engine/components/Decal.js"></script>
 <script src="scripts/engine/components/Animation.js"></script>
 <script src="scripts/engine/components/ParticleSystem.js"></script>
@@ -192,7 +232,6 @@
 <script src="scripts/engine/GLExtensions.js"></script>
 <script src="scripts/engine/Input.js"></script>
 <script src="scripts/engine/Material.js"></script>
-<script src="scripts/engine/Mesh.js"></script>
 <script src="scripts/engine/ObjectLoader.js"></script>
 <script src="scripts/engine/SceneLoader.js"></script>
 <script src="scripts/engine/RenderPass.js"></script>

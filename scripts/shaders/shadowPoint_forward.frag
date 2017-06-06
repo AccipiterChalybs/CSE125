@@ -11,7 +11,7 @@ uniform sampler2D inputTex;
 
 void main()
 {
-    if (texture(inputTex, vTexCoord).a > 0.25) discard;
+    if (texture(inputTex, vTexCoord).a < 0.5) discard;
     float bias = 0.0001;
     gl_FragDepth = length(vPosition.xyz - uLightPosition)/uFarDepth + bias;
 }

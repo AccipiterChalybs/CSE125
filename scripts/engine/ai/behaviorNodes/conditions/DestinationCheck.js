@@ -3,8 +3,13 @@
  */
 
 class DestinationCheck extends BehaviorTreeLeaf{
-  constructor(ai){
+  constructor(ai, minDistance){
     super("CondtionalLeaf", "DestinationCheck", ai);
+
+    this.minDistance = Number.EPSILON;
+    if(minDistance !== undefined){
+      this.minDistance = minDistance;
+    }
   }
 
   updateNode(){
@@ -12,7 +17,7 @@ class DestinationCheck extends BehaviorTreeLeaf{
 
     //console.log(distance);
 
-    if(distance < Number.EPSILON){
+    if(distance < this.minDistance){
       this._currentState = BehaviorState.success;
     }else{
       this._currentState = BehaviorState.failure;

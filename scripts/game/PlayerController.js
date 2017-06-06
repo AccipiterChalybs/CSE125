@@ -9,6 +9,8 @@ const PLAYER_ACCELERATION = 20;
 const CHAR_NAME = "CAIN"; // CUZ I GOT 1 KEY and 0 bombs
 const COOLDOWN_SINGING = 0.1;   // In seconds
 
+const HATE_SING = 1;
+
 const PlayerState = {
   default: "default",
   walking: "walking",
@@ -32,7 +34,6 @@ class PlayerController extends Component {
     this._looker = null;
 
     // space
-    this.camForward = vec3.create(); // camera direction
     this.playerForward = vec3.create(); // player model direction
 
     // input
@@ -56,8 +57,9 @@ class PlayerController extends Component {
     this.state = new PlayerLogicState();
     this.state.status = PlayerState.default;
     this.keys = 0;
-    this.injured = false;
-    this.checkpoint = null;
+    this.injured = true;
+    this.forward = vec3.create(); vec3.set(this.forward, 0, 0, -1);
+    this.cameraPos = vec3.create(); vec3.set(this.cameraPos, 0, 0, -1);
 
     // meta
     this.componentType = 'PlayerController';
@@ -92,11 +94,6 @@ class PlayerController extends Component {
   }
 
   updateComponentClient(){
-    if(!this.injured&& this.singing === 1 && Time.time >= this._nextSingTime) {
-      this._singingSrc.playSound();
-    }else{
-      this._singingSrc.pauseSound();
-    }
   }
 
   updateComponent(){
@@ -119,12 +116,12 @@ class PlayerController extends Component {
       this.singing = Input.getAxis('sing');
       this.action = Input.getAxis("action");
 
-      this.camForward = Renderer.camera.transform.getForward();
+      this.forward = Renderer.camera.transform.getForward();
+      this.cameraPos = Renderer.camera.transform.getWorldPosition();
     }
 
     if (this.singing === 0 && this._lastSingInput === 1) {
       this._nextSingTime = Time.time + this._singingCooldown;
-      // if(!IS_SERVER) this._singingSrc.pauseSound();
     }
 
     this._lastSingInput = this.singing;
@@ -147,6 +144,7 @@ class PlayerController extends Component {
     }
 
     if(this.state.status === PlayerState.singing) {
+      PlayerTable.increaseHate(PlayerTable.currentPlayer, HATE_SING);
       this._singer.sing();
     }else{
       this._singer.quiet();
@@ -178,7 +176,7 @@ class PlayerController extends Component {
     }
 
     const up = vec3.create(); vec3.set(up, 0, 1, 0);
-    const moveX = vec3.create(); vec3.cross(moveX, this.camForward, up);
+    const moveX = vec3.create(); vec3.cross(moveX, this.forward, up);
     const moveZ = vec3.create(); vec3.cross(moveZ, up, moveX);
     vec3.normalize(moveX, moveX);
     vec3.normalize(moveZ, moveZ);
@@ -198,7 +196,6 @@ class PlayerController extends Component {
     this.state.moveCrossY = playerXMove[1];
 
 
-
     // if (vec3.length(move) > 0.0005) {
     //   // TODO set this.state.movedot and movecrossy instead
     //   this.transform.setRotation(quat.create());
@@ -206,7 +203,28 @@ class PlayerController extends Component {
     // }
   }
 
-  getCurrentState() {
+  heal(){
+    // Debug.log("Healed");
+    this.injured = false;
+  }
+
+  takeDamage(){
+    if(this.injured === true){
+      this.die();
+      return;
+    }
+
+    Debug.log("ow");
+
+    this.injured = true;
+  }
+
+  die(){
+    Debug.log("I die.");
+  }
+
+
+  getCurrentState(){
     return this.state.status;
   }
 

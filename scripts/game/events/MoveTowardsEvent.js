@@ -1,53 +1,33 @@
-// const REGULAR_SPEED = 4;
-// const WALK_SPEED = 2;
-// const SING_SPEED = 0.8;
-// const PLAYER_ACCELERATION = 4;
-// const COOLDOWN_SINGING = 0.1;   // In seconds
+/**
+ * Created by Stephen on 6/3/2017.
+ */
 
-class MoveTowardsEvent extends Event{
-  constructor({target}) {
+class MoveTowardsEvent extends TriggerEvent{
+  constructor(params = {endPos: vec3.create(), timeToTake: 3}) {
     super();
-    this.target = target;
-    // this.movementSpeed = REGULAR_SPEED;
-    this.setCurrentState(EventState.uncharged);
+
+    this.endPos = params.endPos;
+    this.timeToTake = params.timeToTake;
+
+    this.activated = false;
+
+    this._startPos = vec3.create();
+    this._endTime = 0;
   }
 
-  start() {
-    this._collider = this.transform.gameObject.getComponent('Collider');
-    //this._singer = this.transform.gameObject.getComponent("Sing");
-    this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
-    this._collider.setFreezeRotation(true);
+  updateComponent(){
+    if(this.activated && Time.time <= this._endTime){
+      let newPos = vec3.create();
+      vec3.lerp(newPos, this._startPos, this.endPos, 1 - (this._endTime - Time.time) / this.timeToTake);
+      this.transform.setPosition(newPos);
+    }
   }
 
-  startClient() {
-    // this._singingSrc = this.transform.gameObject.getComponent("AudioSource");
+  triggered(){
+    if(!this.activated) {
+      this.activated = true;
+      this._startPos = this.transform.getPosition();
+      this._endTime = Time.time + this.timeToTake;
+    }
   }
-
-  updateComponent() {
-    super.updateComponent();
-  }
-
-  onUncharged() {
-
-  }
-
-  onCharged() {
-    let pos = vec3.create();
-    let targetpos = this.target.transform.getWorldPosition();
-    pos[0] = Utility.moveTowards(this.transform.position[0], targetpos[0], Time.deltaTime);
-    pos[1] = Utility.moveTowards(this.transform.position[1], targetpos[1], Time.deltaTime);
-    pos[2] = Utility.moveTowards(this.transform.position[2], targetpos[2], Time.deltaTime);
-    this.transform.setWorldPosition(pos);
-
-  }
-
-  onDischarging() {
-  }
-
-  onCharging() {
-  }
-
-  onRaycast(interactingObj) {
-  }
-
 }

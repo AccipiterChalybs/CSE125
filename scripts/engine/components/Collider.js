@@ -114,6 +114,14 @@ class Collider extends Component{
 
   setTrigger(isTrigger) {
     this.trigger = isTrigger;
+    if (this.trigger) {
+      this.body.collisionResponse = 0;
+      this.body.addEventListener('collide', this._onTriggerEnter.bind(this));
+      this.body.removeEventListener('collide', this._onCollisionEnter.bind(this));
+    } else {
+      this.body.addEventListener('collide', this._onCollisionEnter.bind(this));
+      this.body.removeEventListener('collide', this._onTriggerEnter.bind(this));
+    }
   }
 
   setFreezeRotation(freezeRot) {

@@ -17,6 +17,8 @@ class Framebuffer {
         this.width = w;
         this.height = h;
 
+        this.stencil = stencil;
+
         //static meshdata
         //static bool loaded
 
@@ -34,26 +36,30 @@ class Framebuffer {
           }
 
         if (!manualSetup) {
-          for (let x = 0; x < this.numColorTex; ++x) {
-            this._addColorTexture(x);
-          }
-
-          if (this.accessibleDepth) {
-            this._addDepthTexture();
-          } else {
-            this._addDepthBuffer(stencil);
-          }
-
-          GL.bindFramebuffer(GL.FRAMEBUFFER, null);
+            this.initializeFramebuffer();
         }
+    }
+
+    initializeFramebuffer() {
+      for (let x = 0; x < this.numColorTex; ++x) {
+        this._addColorTexture(x);
+      }
+
+      if (this.accessibleDepth) {
+        this._addDepthTexture();
+      } else {
+        this._addDepthBuffer(this.stencil);
+      }
+
+      GL.bindFramebuffer(GL.FRAMEBUFFER, null);
     }
 
     deleteTextures() {
         for (let t=0; t<this.numColorTex; ++t) {
-            GL.deleteTextures(this.colorTex[t]);
+            GL.deleteTexture(this.colorTex[t]);
         }
         if (this.accessibleDepth) {
-            GL.deleteTextures(this.depthTex);
+            GL.deleteTexture(this.depthTex);
         } else {
             GL.deleteRenderbuffer(this.depthTex);
         }
@@ -66,16 +72,7 @@ class Framebuffer {
         this.deleteTextures();
 
         GL.bindFramebuffer(GL.FRAMEBUFFER, this.id);
-        for (let x = 0; x < this.numColorTex; ++x) {
-            this._addColorTexture(x);
-        }
-
-        if (this.accessibleDepth) {
-            this._addDepthTexture();
-        } else {
-            this._addDepthBuffer();
-        }
-        GL.bindFramebuffer(GL.FRAMEBUFFER, null);
+        this.initializeFramebuffer();
     }
 
     static resizeRenderDimensions(updatePerspective, width, height) {
