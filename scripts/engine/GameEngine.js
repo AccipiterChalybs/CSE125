@@ -17,7 +17,7 @@ GameEngine._StartGame = false;
 GameEngine.init = function () {
   PhysicsEngine.init();
 
-  let sceneFile = 'assets/scenes/mainScene2.json';
+  let sceneFile = 'assets/scenes/mainScene.json';
   let meshFiles = ['assets/scenes/Primatives.json','assets/scenes/teapots.json', 'assets/scenes/ExampleLevel.json',
     'assets/meshes/Altar.1.json',
     'assets/meshes/Altar.2.json',
