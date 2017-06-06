@@ -70,9 +70,17 @@
   width: 120px;
 }
 
+.modal-row .slider {
+  margin-top: 4px;
+  display: inline-block;
+  text-align: right;
+  width: 120px;
+}
+
+
 .modal-row .text::after {
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
 /*  content: "|";*/
   content: "";
 }
@@ -85,8 +93,8 @@
   opacity: .7;
 }
 
-.modal-row .btn + .btn {
-  margin-left: 20px;
+.modal-row div + div {
+  margin-left: 10px;
 }
 
 .modal-row .btn:active,
@@ -97,8 +105,13 @@
   outline: 0;
 }
 
+.help {
+  display: inline;
+}
+
 .lose-screen {
   height: 60vh;
+  width: 100%;
 }
 
 .lose-screen .lose-text {
