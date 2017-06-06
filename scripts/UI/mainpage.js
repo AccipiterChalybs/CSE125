@@ -117,7 +117,7 @@ function loadOptionsGraphics() {
     toggleShadows.bind(
       toggleBtn[0],
       pointLightList,
-      sliderDiv.slider.bind(sliderDiv, 'option', 'value') // current update function
+      sliderDiv.slider.bind(sliderDiv, 'option', 'value') // update function
     );
   sliderDiv.slider('option', 'max', lightList.length);
   sliderDiv.slider('option', 'value', onPointLightList.length);
