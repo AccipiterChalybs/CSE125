@@ -120,9 +120,9 @@ class Animation extends Component
 
       //Root Motion (need to reapply this transform's transformations (i.e. rotation & scale)
       vec3.scale(rootResults, rootResults, this.transform.getScale()[0]);
+      this.transform.translate(rootResults); //TODO Becareful about this
       vec3.transformQuat(rootResults, rootResults, this.boneMap[Animation.prototype._animMetaData[this.animationName].rootName].getParent().getWorldRotation());
       vec3.scale(rootResults, rootResults, Animation.prototype.ANIM_ROOT_MULT);
-  //    this.transform.translate(rootResults);
 
       let body = this.gameObject.getComponent('Collider').body;
 /*

@@ -10,7 +10,7 @@ const c = {
   AnimationGraph, AnimationState, DoorEvent, Event, EvilController, HealEvent,
   KeyEvent, Listenable, Look, ObjectLogicState, PlayerController,
   PlayerLogicState, PlayerTable, RaycastSwitch, RotateArrowKey, RotateMouse,
-  RotateOverTime, Sing, SingingSwitch, TriggerTest, Viewable, ZoomMouse,
+  RotateOverTime, RotatingEvent, Sing, SingingSwitch, TriggerTest, Viewable, ZoomMouse,
 };
 
 const SceneLoader = {

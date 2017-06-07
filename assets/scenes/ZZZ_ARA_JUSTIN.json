@@ -80,6 +80,11 @@
             "MeshRenderer": "dungeon-stone1-albedo2",
             "Kinematic": {
             },
+            "RotatingEvent": {
+              "maximumCharge": 1000,
+              "angularVelocity": 1,
+              "radius": 1
+            },
             "children": [
               {
                 "name": "Collider",
@@ -127,31 +132,7 @@
                     "MeshFilter": "Block.Large.1",
                     "MeshRenderer": "dungeon-stone1-albedo2",
                     "Kinematic": {
-                    },
-                    "children": [
-                      {
-                        "name": "Collider",
-                        "index": "6",
-                        "static": false,
-                        "Transform": {
-                          "position": [-2, 0, 1.999964],
-                          "rotation": [0, 0, 0],
-                          "scaleFactor": 1
-                        },
-                        "Kinematic": {
-                        },
-                        "colliders": [
-                          {
-                            "type": "box",
-                            "isTrigger": false,
-                            "scaleX": 2,
-                            "scaleY": 2,
-                            "scaleZ": 2,
-                            "offset": [0, 0, 0]
-                          }
-                        ]
-                      }
-                    ]
+                    }
                   }
                 ]
               }
@@ -216,7 +197,7 @@
         "index": "10",
         "static": false,
         "Transform": {
-          "position": [0, 0.262, 0],
+          "position": [0, 5.262, 0],
           "rotation": [0, 90, 0],
           "scaleFactor": 0.3
         },
@@ -1001,8 +982,8 @@
             "SingingSwitch": {
               "events": [2],
               "maximumOutput": 3,
-              "lossRate": 0.5,
-              "timeBeforeLoss": 2
+              "lossRate": 100,
+              "timeBeforeLoss": 0.1
             },
             "colliders": [
               {
