@@ -8,7 +8,7 @@ const AudioState = {
 class AudioSource extends Component {
     constructor({audioName}) {
         super();
-        this.componentType = 'AudioSource';
+       this.componentType = 'AudioSource';
         this.state = AudioState.noSound;
         this.queue = [];
         this.sound3D = false;
