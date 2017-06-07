@@ -16,7 +16,11 @@ const PrefabFactory = {
   updateClient: function(){
     for(let i=0;i<PrefabFactory.tempParticles.length;i++){
       let tempParticle=  this.tempParticles[i];
-      if(tempParticle[1] < Time.time){
+
+      let alpha = 1-((Time.time - tempParticle[1]) / (tempParticle[2] - tempParticle[1]));
+      vec4.set(tempParticle[0].components["ParticleSystem"].uColor ,1,1,1,alpha);
+
+      if(tempParticle[2] < Time.time){
         tempParticle[0].components["ParticleSystem"] = null;
         GameObject.prototype.SerializeMap[tempParticle[0].id] = null;
         tempParticle[0].removeChildFromParent();
@@ -53,7 +57,7 @@ const PrefabFactory = {
     }));
 
     if(temp){
-      PrefabFactory.tempParticles.push([dustParticle,Time.time+tempDuration]);
+      PrefabFactory.tempParticles.push([dustParticle,Time.time, Time.time+tempDuration]);
     }
 
     return dustParticle;
@@ -67,7 +71,7 @@ const PrefabFactory = {
     }));
 
     if(temp){
-      PrefabFactory.tempParticles.push([fireParticle,Time.time+tempDuration]);
+      PrefabFactory.tempParticles.push([fireParticle,Time.time, Time.time+tempDuration]);
     }
 
     return fireParticle;
