@@ -17,6 +17,7 @@ class Sing extends Component{
     this._maxLightRange = params.maxLightRange;
     this._minLightRange = params.minLightRange;
 
+
     this._pointLight = null;
     this._lightIndex = params.light;
     this._audioSrc = null;
@@ -39,13 +40,19 @@ class Sing extends Component{
   updateComponent(){
     if(this._audioSrc && this._audioSrc !== null) {
       if (this._singing === 1) {
-        this._audioSrc.setState(AudioState.playSound)
+        this._audioSrc.setState(AudioState.playSound);
+        if(this._pointLight && this._pointLight !== null) {
+          this._pointLight.setRange(Utility.moveTowards(this._pointLight.range, this._maxLightRange, LIGHT_EXPAND_RATE * Time.deltaTime));
+        }
         // this._audioSrc.playSound();
       } else {
-        this._audioSrc.setState(AudioState.pause)
+        this._audioSrc.setState(AudioState.pause);
+        if(this._pointLight && this._pointLight !== null)
+          this._pointLight.setRange(Utility.moveTowards(this._pointLight.range,this._minLightRange,LIGHT_DIMINISH_RATE*Time.deltaTime));
 
         // this._audioSrc.pauseSound();
       }
+
     }
   }
 
@@ -57,9 +64,7 @@ class Sing extends Component{
     // Debug.log("singing with range: ", this.range);
     this._singing = 1;
 
-    if(this._pointLight !== null) {
-      this._pointLight.setRange(Utility.moveTowards(this._pointLight.range, this._maxLightRange, LIGHT_EXPAND_RATE * Time.deltaTime));
-    }
+
 
     let hitColliders = PhysicsEngine.overlapSphere(this.transform.getWorldPosition(), this.range);
 
@@ -72,8 +77,7 @@ class Sing extends Component{
     // Debug.log("i am quiet");
     this._singing = 0;
 
-    if(this._pointLight !== null)
-      this._pointLight.setRange(Utility.moveTowards(this._pointLight.range,this._minLightRange,LIGHT_DIMINISH_RATE*Time.deltaTime));
+
   }
 
   serialize() {
