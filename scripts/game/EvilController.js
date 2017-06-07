@@ -115,6 +115,7 @@ class EvilController extends AIController{
   }
 
   setDestination(destination) {
+    Debug.log("destination is being set");
     this.data['destination'] = destination;
     this.serializeDirty = true;
   }

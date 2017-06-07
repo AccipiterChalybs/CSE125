@@ -9,7 +9,8 @@ class SetDestinationPlayer extends BehaviorTreeLeaf{
 
   updateNode(){
     if(this.ai.data["player"] && this.ai.data["player"] !== null) {
-      this.ai.setDestination(this.ai.data["player"].transform.getWorldPosition());
+      let playerPos = vec3.create(); vec3.copy(playerPos, this.ai.data["player"].transform.getWorldPosition());
+      this.ai.setDestination(playerPos);
       this._currentState = BehaviorTreeNode.success;
       //Debug.log(this.ai.data["player"].transform.getPosition());
     }else{
