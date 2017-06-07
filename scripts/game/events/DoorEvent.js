@@ -26,8 +26,10 @@ class DoorEvent extends SingingEvent{
   updateComponent() {
     super.updateComponent();
     if(this._audioSrc && this._audioSrc !== null) {
+      // Debug.log(this._currentState);
       if (this._currentState === EventState.discharging || this._currentState === EventState.charging) {
         // this._audioSrc.playSound();
+        // Debug.log("DOSHDE");
         this._audioSrc.setState(AudioState.playSound);
       } else {
         // this._audioSrc.pauseSound();

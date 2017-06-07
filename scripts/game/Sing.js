@@ -79,12 +79,10 @@ class Sing extends Component{
   serialize() {
     let data = {};
     data.s = this._singing;
-
     return data;
   }
 
   applySerializedData(data) {
-    // Debug.log(this);
     this._singing = data.s;
   }
 }
