@@ -115,6 +115,13 @@ class GameScene {
     // GameObject.prototype.SceneRoot.addChild(container);
 
     GameObject.prototype.SceneRoot.findComponents('Listenable', PhysicsEngine.sphereChecks);
+    let player = PlayerTable.getPlayer().transform.children[1].children[0].children[0].children[0].children[0].children[0].gameObject;
+    let fireParticle = PrefabFactory.makeFireParticleSystem();
+    fireParticle.transform.setPosition([0,.5,0]);
+    player.addChild(fireParticle);
+
+
+
 
   }
 
@@ -130,6 +137,7 @@ class GameScene {
 
     if (!IS_SERVER) {
       Debug.Profiler.startTimer('GameLogic', 2);
+      PrefabFactory.updateClient();
       Renderer.camera.transform.getParent().getParent().gameObject.updateClient();
       if (Renderer.directionalLight) Renderer.directionalLight.updateClient();
       Debug.Profiler.endTimer('GameLogic', 2);
