@@ -4,7 +4,6 @@ class CheckDestination extends BehaviorTreeLeaf{
     }
 
     updateNode(){
-        console.log("Check Destination");
         if(this.ai.data['destination']==null){
             this._currentState=BehaviorState.failure;
         }
