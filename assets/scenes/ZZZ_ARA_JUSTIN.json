@@ -102,54 +102,54 @@
                     "offset": [0, 0, 0]
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Rotating_Indicator",
-            "index": "4",
-            "static": false,
-            "Transform": {
-              "position": [-2, 0, 1.7439],
-              "rotation": [0, 0, 0],
-              "scaleFactor": 0.2560641
-            },
-            "Kinematic": {
-            },
-            "children": [
+              },
               {
-                "name": "Block.Large.1",
-                "index": "5",
+                "name": "Rotating_Indicator",
+                "index": "4",
                 "static": false,
                 "Transform": {
                   "position": [-2, 0, 1.7439],
                   "rotation": [0, 0, 0],
-                  "scaleFactor": 1
+                  "scaleFactor": 0.2560641
                 },
-                "MeshFilter": "Block.Large.1",
-                "MeshRenderer": "dungeon-stone1-albedo2",
                 "Kinematic": {
                 },
                 "children": [
                   {
-                    "name": "Collider",
-                    "index": "6",
+                    "name": "Block.Large.1",
+                    "index": "5",
                     "static": false,
                     "Transform": {
-                      "position": [-2, 0, 1.999964],
+                      "position": [-2, 0, 1.7439],
                       "rotation": [0, 0, 0],
                       "scaleFactor": 1
                     },
+                    "MeshFilter": "Block.Large.1",
+                    "MeshRenderer": "dungeon-stone1-albedo2",
                     "Kinematic": {
                     },
-                    "colliders": [
+                    "children": [
                       {
-                        "type": "box",
-                        "isTrigger": false,
-                        "scaleX": 2,
-                        "scaleY": 2,
-                        "scaleZ": 2,
-                        "offset": [0, 0, 0]
+                        "name": "Collider",
+                        "index": "6",
+                        "static": false,
+                        "Transform": {
+                          "position": [-2, 0, 1.999964],
+                          "rotation": [0, 0, 0],
+                          "scaleFactor": 1
+                        },
+                        "Kinematic": {
+                        },
+                        "colliders": [
+                          {
+                            "type": "box",
+                            "isTrigger": false,
+                            "scaleX": 2,
+                            "scaleY": 2,
+                            "scaleZ": 2,
+                            "offset": [0, 0, 0]
+                          }
+                        ]
                       }
                     ]
                   }
