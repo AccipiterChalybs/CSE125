@@ -23,7 +23,9 @@ class RayCastPlayer extends BehaviorTreeLeaf{
         let hit={};
         if (PhysicsEngine.raycastClosest(currPos,sub , dist, 63 - FILTER_TRIGGER-FILTER_DEFAULT-FILTER_PLAYER, hit))
         {
+            //console.log("hello world");
             this._currentState=BehaviorState.failure;
+            //this.ai.data['destination'] = null;
         }
         else {
             this._currentState = BehaviorState.success

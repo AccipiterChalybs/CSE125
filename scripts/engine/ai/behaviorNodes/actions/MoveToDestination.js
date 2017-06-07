@@ -11,18 +11,19 @@ class MoveToDestination extends BehaviorTreeLeaf{
   }
 
   updateNode(){
-    let currPos = this.ai.transform.getPosition();
-    let newPos = Utility.vec3.moveTowards(currPos, this.ai.data["destination"], Time.deltaTime * this.moveSpeed);
-    this.ai.transform.setPosition(newPos);
-
-    // console.log(this.ai);
-    // console.log("currPos: ", currPos);
-    // console.log("dest: ", this.ai.data["destination"]);
-    // console.log("newPos: ", newPos);
-    // console.log("delta: ", Time.deltaTime * this.moveSpeed);
-    //
-    // throw new Error();
-
+    if(this.ai.data["destination"]!==null) {
+        console.log(this.moveSpeed);
+        let currPos = this.ai.transform.getPosition();
+        let newPos = Utility.vec3.moveTowards(currPos, this.ai.data["destination"], Time.deltaTime * this.moveSpeed);
+        this.ai.transform.setPosition(newPos);
+        // console.log(this.ai);
+        // console.log("currPos: ", currPos);
+        // console.log("dest: ", this.ai.data["destination"]);
+        // console.log("newPos: ", newPos);
+        // console.log("delta: ", Time.deltaTime * this.moveSpeed);
+        //
+        // throw new Error();
+    }
     return this._currentState;
   }
 }

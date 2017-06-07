@@ -19,6 +19,7 @@ class DestinationCheck extends BehaviorTreeLeaf{
 
     if(distance < this.minDistance){
       this._currentState = BehaviorState.success;
+      this.ai.data["destination"]=null;
     }else{
       this._currentState = BehaviorState.failure;
     }

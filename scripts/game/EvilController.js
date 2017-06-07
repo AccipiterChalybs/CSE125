@@ -51,10 +51,10 @@ class EvilController extends AIController{
 
     root.addNode(attackClosest);
 
-    //
+    /*
     let moveNearby = new ConcurrentSelector("Move to nearby player");
 
-    moveNearby.addNode(new CheckForPlayerWithinRange(this, LISTEN_RANGE));
+    moveNearby.addNode(new CheckForPlayerWithinRange(this, LISTEN_RANGE+300));
     moveNearby.addNode(new TargetPlayer(this));
     moveNearby.addNode(new CountdownTimer(this, 0.25));
     moveNearby.addNode(new RayCastPlayer(this));
@@ -62,6 +62,28 @@ class EvilController extends AIController{
     moveNearby.addNode(new Inverter(new DestinationCheck(this, ATTACK_RANGE)));
     moveNearby.addNode(new MoveToDestination(this, EVIL_MOVEMENTSPEED));
     root.addNode(moveNearby);
+    */
+
+      let moveNearby = new ConcurrentSelector("Move to nearby player");
+      let checkVision = new PrioritySelector("Check Vision");
+      let seePlayer = new ConcurrentSelector("SeePlayer");
+      seePlayer.addNode(new RayCastPlayer(this));
+      seePlayer.addNode(new CountdownTimer(this, 0.25));
+      seePlayer.addNode(new SetDestinationPlayer(this));
+      let missPlayer = new ConcurrentSelector("MissPlayer");
+      missPlayer.addNode(new CheckDestination(this));
+      missPlayer.addNode(new Inverter(new DestinationCheck(this,ATTACK_RANGE)));
+      checkVision.addNode(seePlayer);
+      checkVision.addNode(missPlayer);
+
+      moveNearby.addNode(new CheckForPlayerWithinRange(this, LISTEN_RANGE+300));
+      moveNearby.addNode(new TargetPlayer(this));
+      moveNearby.addNode(checkVision);
+      //moveNearby.addNode(new RayCastPlayer(this));
+      //moveNearby.addNode(new SetDestinationPlayer(this));
+      //moveNearby.addNode(new Inverter(new DestinationCheck(this, ATTACK_RANGE)));
+      moveNearby.addNode(new MoveToDestination(this, EVIL_MOVEMENTSPEED/5));
+      root.addNode(moveNearby);
 
     // let pickPlayer = new ConcurrentSelector('pickPlayer');
     // pickPlayer.addNode(new CountdownTimer(this, 5));
