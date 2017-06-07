@@ -45,8 +45,8 @@ Networking.serverListener = {
     // console.log(data.transformTree.c[1].c[58].p);
     //GameObject.prototype.SceneRoot.applySerializedData(data.transformTree);
     // Debug.log(data.gameObjectTree[36]);
-    // Debug.log(data);Ø
-    if (!Debug.clientUpdate && GameEngine._started) {
+
+    if(GameEngine._started && !Debug.clientUpdate) {
       for (let key in data.gameObjectTree) {
         let gameobject = GameObject.prototype.SerializeMap[key];
         if (gameobject && gameobject !== null) {
@@ -57,7 +57,13 @@ Networking.serverListener = {
       // Debug.log(Date.now()-t);
     }
   },
-  // PlayerTable.applySerialize(data.players);
+
+  client_get_new_scene:(socket,data)=>{
+    Debug.log("Baby got back");
+    GameEngine.sceneFile = data.s;
+    Debug.clientUpdate = data.c;
+    GameEngine.restart();
+  }
 };
 
 Networking.init = function () {
