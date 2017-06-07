@@ -7,8 +7,11 @@ class TutorialSingEvent extends RaycastEvent {
 
   updateComponentClient() {
     if (this.triggerBool) {
-      window.setTimeout(displayTutorialBanner.bind(null, this.name), 2)
-      window.setTimeout(displayTutorialBanner.bind(null, this.name, false), 7);
+      window.setTimeout(displayTutorialBanner.bind(null, this.name), 2000)
+      window.setTimeout(
+        displayTutorialBanner.bind(null, this.name, false),
+        7000
+      );
     }
 
     this.updateComponentClient = () => {};

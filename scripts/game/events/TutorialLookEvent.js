@@ -8,7 +8,10 @@ class TutorialLookEvent extends TriggerEvent {
   updateComponentClient() {
     if (this.triggerBool) {
       displayTutorialBanner(this.name);
-      window.setTimeout(displayTutorialBanner.bind(null, this.name, false), 5);
+      window.setTimeout(
+        displayTutorialBanner.bind(null, this.name, false),
+        5000
+      );
     }
 
     this.updateComponentClient = () => {};
