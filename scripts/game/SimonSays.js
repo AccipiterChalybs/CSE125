@@ -24,10 +24,14 @@ class SimonSays extends Event{
     for (let i = 0; i < this._unparsedStatues.length; ++i) {
       this._statues.push(GameObject.prototype.SerializeMap[this._unparsedStatues[i]]);
     }
+
   }
 
   updateComponent() {
     // Debug.log(this._listenedOrder);
+    if(this._simonLock && this._currentTime +this._cycleDuration <Time.time){
+      this._simonLock = false;
+    }
     if(!this._simonLock && this._listenedOrder.length>0){
       this._currentTime = Time.time;
       let currentStatue = this._statues[this._order[this._currentIndex]];
@@ -42,11 +46,13 @@ class SimonSays extends Event{
         if(JSON.stringify(this._listenedOrder) === JSON.stringify(this._order)){
           Debug.log("BIG WINNER");
           this._listenedOrder = [];
+          this._simonLock=true;
         }
         else
         {
           Debug.log("SO SORRY");
           this._listenedOrder = [];
+          this._currentTime = Time.time;
           this._simonLock = true;
         }
       }
@@ -64,9 +70,7 @@ class SimonSays extends Event{
 
     }
 
-    if(this._currentTime +3 <Time.time){
-      this._simonLock = false;
-    }
+
   }
 
   simonHeard(statue_id){
@@ -110,6 +114,7 @@ class SimonSays extends Event{
         }
       }
     } else if (this._currentTime + this._cycleDuration < Time.time) {
+      Debug.log("are we ever here");
       this._cycle = true;
       this._currentTime = Time.time;
       this._currentIndex = 0;

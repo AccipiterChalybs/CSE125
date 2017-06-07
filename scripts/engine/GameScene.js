@@ -84,7 +84,8 @@ class GameScene {
       a.addComponent(new PointLight())
       // a.addComponent(new SingingStatueController({singingDelay: 0, singingDuration: 3}));
       a.addComponent(new Sing({range: 2, light: a.id, lightIntensity: 1, maxLightRange: 3, minLightRange: 0}));
-      a.getComponent("Light").setColor([1-(.25*i),.25*i,0,1]);
+      a.getComponent("Light").setColor([1-(.25*i),.25*i,0]);
+      a.getComponent("Light").setRange(0);
       if(!IS_SERVER) {
         let mesh = new Mesh("Teapot02");
         let mat = new Material(Renderer.getShader(Renderer.DEFERRED_PBR_SHADER));
@@ -103,7 +104,7 @@ class GameScene {
       let idx = i+9;
       a.addComponent(new AudioSource({audioName:'Tone1.wav_'+idx}));
       a.addComponent(new SimonSaysSwitch({events : [container.id], maximumOutput: 5, lossRate: 0.5, timeBeforeLoss: 2}))
-      a.transform.setPosition([50*i, 0, i*.25]);
+      a.transform.setPosition([30*i, 0, i*.25]);
       container.addChild(a);
       ids.push(a.id);
     }
