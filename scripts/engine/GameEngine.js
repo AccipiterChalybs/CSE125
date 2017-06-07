@@ -81,6 +81,7 @@ GameEngine.init = function () {
     'assets/meshes/Step.1.json',
     //'assets/meshes/Tree.1.json',
     //'assets/meshes/Tree.2.json',
+    'assets/meshes/TribalCharacter_walk.json',
     'assets/meshes/unitCube.json',
     'assets/meshes/Vine.1.json',
     'assets/meshes/Vine.2.json',
@@ -112,7 +113,16 @@ GameEngine.init = function () {
         ['assets/meshes/RedRobedFemale_idle.json' , [0]],
         ['assets/meshes/RedRobedFemale_idle.json' , [0]],
         ['assets/meshes/RedRobedFemale_walk.json' , [0]],
-        ['assets/meshes/RedRobedFemale_run.json' , [0]]
+        ['assets/meshes/RedRobedFemale_run.json'  , [0]]
+      ]
+    },
+    'TribalCharacterAnim' : {
+      metaData: {root: "root", rootAxisLocked: [true, false, true]},
+      info: [
+        ['assets/meshes/TribalCharacter_idle.json' , [0]],
+        ['assets/meshes/TribalCharacter_idle.json' , [0]],
+        ['assets/meshes/TribalCharacter_walk.json' , [0]],
+        ['assets/meshes/TribalCharacter_walk.json' , [0]]
       ]
     }
   };
