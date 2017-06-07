@@ -57,10 +57,10 @@ class EvilController extends AIController{
     moveNearby.addNode(new CheckForPlayerWithinRange(this, LISTEN_RANGE));
     moveNearby.addNode(new TargetPlayer(this));
     moveNearby.addNode(new CountdownTimer(this, 0.25));
+    moveNearby.addNode(new RayCastPlayer(this));
     moveNearby.addNode(new SetDestinationPlayer(this));
     moveNearby.addNode(new Inverter(new DestinationCheck(this, ATTACK_RANGE)));
     moveNearby.addNode(new MoveToDestination(this, EVIL_MOVEMENTSPEED));
-
     root.addNode(moveNearby);
 
     // let pickPlayer = new ConcurrentSelector('pickPlayer');
@@ -100,6 +100,9 @@ class EvilController extends AIController{
   setPlayer(player) {
     this.data['player'] = player;
     this.serializeDirty = true;
+  }
+  getPlayer(){
+    return this.data['player'];
   }
 
   // _buildBehaviorTree(){
