@@ -7,14 +7,21 @@
   color: white;
   opacity: .6;
   display: flex;
+  align-items: center;
 }
 
-.tutorial-banner div + .text {
+.tutorial-banner .key-img + .text,
+.tutorial-banner .invertedT + .text {
   margin-left: 20px;
 }
 
 .tutorial-banner .text {
   font-size: 35px;
+}
+
+.tutorial-banner .img {
+  max-height: 50px;
+  max-width: 50px;
 }
 
 .key-img {
@@ -27,7 +34,8 @@
 
 .invertedT {
   position: relative;
-  top: 25px;
+  top: 50px;
+  height: 100px;
   width: 150px;  /* 3 times .key-img width */
   display: flex;
 }
