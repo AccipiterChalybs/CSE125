@@ -8,7 +8,7 @@ Debug.clientUpdate = true; //Run the client in standalone mode, so it doesn't ne
 Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
 Debug.debugDisplay = true;
 Debug.quickLoad = true;
-Debug.autoStart = false;
+Debug.autoStart = true;
 Debug.tmp_shadowTwoSideRender = true; //Var to remind me to remove this when we get in new level geometry
 
 Debug.drawColliders = false;
