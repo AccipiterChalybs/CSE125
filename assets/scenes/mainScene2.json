@@ -38,49 +38,79 @@
     {
       "name": "tribal_skin",
       "color": "assets/texture/Character_Tribal/tribal_skin.png",
-      "mat": "assets/texture/Octopus-Character/DefaultMaterial_Roughness.png",
+      "mat": "assets/texture/blank_mat.png",
       "normal" : "assets/texture/tmp_blank_normal.png",
       "animated" : true
     },
     {
       "name": "TribalCharacter_Detail_diffuse",
       "color": "assets/texture/Character_Tribal/TribalCharacter_Detail_diffuse.png",
-      "mat": "assets/texture/Octopus-Character/DefaultMaterial_Roughness.png",
+      "mat": "assets/texture/Character_Tribal/TribalCharacter_Detail_mat.png",
       "normal" : "assets/texture/tmp_blank_normal.png",
       "animated" : true
     },
+
     {
       "name": "Robe",
       "color": "assets/texture/Character_RedRobes/Robe.png",
-      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "mat": "assets/texture/Character_RedRobes/Robe_mat.png",
       "normal" : "assets/texture/tmp_blank_normal.png",
       "animated" : true
     },
     {
       "name": "W_face",
       "color": "assets/texture/Character_RedRobes/W_face.jpg",
-      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "mat": "assets/texture/blank_mat.png",
       "normal" : "assets/texture/tmp_blank_normal.png",
       "animated" : true
     },
     {
       "name": "W_Hair",
       "color": "assets/texture/Character_RedRobes/W_Hair.png",
-      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "mat": "assets/texture/blank_mat.png",
       "normal" : "assets/texture/tmp_blank_normal.png",
       "animated" : true
     },
     {
       "name": "W_leg_hand",
       "color": "assets/texture/Character_RedRobes/W_leg_hand.jpg",
-      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "mat": "assets/texture/blank_mat.png",
+      "normal" : "assets/texture/tmp_blank_normal.png",
+      "animated" : true
+    },
+
+    {
+      "name": "SenateRobe",
+      "color": "assets/texture/Senate/Robe.png",
+      "mat": "assets/texture/blank_mat.png",
+      "normal" : "assets/texture/tmp_blank_normal.png",
+      "animated" : true
+    },
+    {
+      "name": "M_face_west",
+      "color": "assets/texture/Senate/M_face_west.jpg",
+      "mat": "assets/texture/blank_mat.png",
+      "normal" : "assets/texture/tmp_blank_normal.png",
+      "animated" : true
+    },
+    {
+      "name": "M_leg_hand_west",
+      "color": "assets/texture/Senate/M_leg_hand_west.jpg",
+      "mat": "assets/texture/blank_mat.png",
+      "normal" : "assets/texture/tmp_blank_normal.png",
+      "animated" : true
+    },
+    {
+      "name": "eye_1",
+      "color": "assets/texture/Senate/eye_1.jpg",
+      "mat": "assets/texture/blank_mat.png",
       "normal" : "assets/texture/tmp_blank_normal.png",
       "animated" : true
     },
     {
       "name": "ivy_leaves_c",
       "color": "assets/texture/IvyC/ivy_leaves_c.png",
-      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "mat": "assets/texture/blank_mat.png",
       "normal" : "assets/texture/IvyC/ivy_leaves_n2.png",
       "transparent" : true,
       "animated" : false
