@@ -6,7 +6,7 @@ const c = {
   ClientStickTo, Collider, CompoundCollider, Decal, Foot, Floor, Light, ParticleSystem,
   SphereCollider, Transform, SingingStatueController, TriggerSwitch, MoveTowardsEvent,
   SingStatueEvent, StopSingStatueEvent, StopLightEvent, PlayAudio, PlayAudioEvent,
-  FadeInAudioEvent,
+  FadeInAudioEvent, CheckpointEvent,
   AnimationGraph, AnimationState, DoorEvent, Event, EvilController, HealEvent,
   KeyEvent, Listenable, Look, ObjectLogicState, PlayerController,
   PlayerLogicState, PlayerTable, RaycastSwitch, RotateArrowKey, RotateMouse,
@@ -22,7 +22,7 @@ const SceneLoader = {
   ignoreComponents: ["name", "index", "static", "Kinematic", "Animator", "AnimatorJS", "SkinnedMeshRenderer",
                      "ClothMesh", "MeshFilter", "MeshRenderer",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
-  shadowLightsAvailable: 0,
+  shadowLightsAvailable: 1,
   tone: 0,
 
   loadScene: function(filename) {
@@ -176,7 +176,7 @@ const SceneLoader = {
       switch (generalCompName) {
         case "PlayerController":
           PlayerTable.addPlayer(nodeObject);
-          nodeObject.addComponent(new PlayerController());
+          nodeObject.addComponent(new PlayerController(compData));
           break;
         default:
           nodeObject.addComponent(new c[generalCompName](compData));

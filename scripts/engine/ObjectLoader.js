@@ -51,7 +51,9 @@ class ObjectLoader {
           }*/
 
           if ("meshes" in currentNode) {
-            Debug.assert(currentNode.meshes.length <= 1, filename);
+            if(currentNode.meshes.length > 1) {
+              Debug.error("WARNING! Extra material on: "+filename);
+            }
             if (!(name in Mesh.prototype.meshMap)) {
               let meshIndex = currentNode.meshes[0];
               Mesh.loadMesh(name, scene.meshes[meshIndex]);
