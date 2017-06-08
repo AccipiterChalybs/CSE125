@@ -22,10 +22,101 @@
       "animated" : false
     },
     {
+      "name": "Rock 01 diffuse",
+      "color": "assets/texture/Rocks/Rock-01-diffuse.png",
+      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "normal" : "assets/texture/Rocks/Rock-01-normal.png",
+      "animated" : false
+    },
+    {
       "name": "Rock 02 diffuse",
       "color": "assets/texture/Rocks/Rock-02-diffuse.png",
       "mat": "assets/texture/dungeon-stone1-mat.png",
       "normal" : "assets/texture/Rocks/Rock-02-normal.png",
+      "animated" : false
+    },
+    {
+      "name": "Rock 03 diffuse",
+      "color": "assets/texture/Rocks/Rock-03-diffuse.png",
+      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "normal" : "assets/texture/Rocks/Rock-03-normal.png",
+      "animated" : false
+    },
+    {
+      "name": "Rock 04 diffuse",
+      "color": "assets/texture/Rocks/Rock-04-diffuse.png",
+      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "normal" : "assets/texture/Rocks/Rock-04-normal.png",
+      "animated" : false
+    },
+    {
+      "name": "pockedconcrete1-albedo",
+      "color": "assets/texture/pockedConcrete1/pockedconcrete1-albedo.png",
+      "mat": "assets/texture/pockedConcrete1/pockedconcrete1-mat.png",
+      "normal" : "assets/texture/pockedConcrete1/pockedconcrete1-normal.png",
+      "animated" : false
+    },
+    {
+      "name": "Bark",
+      "color": "assets/texture/Roots/bark-oldbrown-c.png",
+      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "normal" : "assets/texture/Roots/bark-oldbrown-n.png",
+      "animated" : false
+    },
+    {
+      "name": "pot1",
+      "color": "assets/texture/pots/Archmodels57_018_diffuse0.jpg",
+      "mat": "assets/texture/pots/pot_mat2.png",
+      "normal" : "assets/texture/pockedConcrete1/pockedconcrete1-normal.png",
+      "animated" : false
+    },
+    {
+      "name": "pot2",
+      "color": "assets/texture/pots/Tr_Pot001.jpg",
+      "mat": "assets/texture/pots/pot_mat2.png",
+      "normal" : "assets/texture/pockedConcrete1/pockedconcrete1-normal.png",
+      "animated" : false
+    },
+    {
+      "name": "crate2",
+      "color": "assets/texture/crate/crate2.n.png",
+      "mat": "assets/texture/blank_mat.png",
+      "normal" : "assets/texture/tmp_blank_normal.png",
+      "animated" : false
+    },
+    {
+      "name": "crate3",
+      "color": "assets/texture/crate/crate2.n.png",
+      "mat": "assets/texture/blank_mat.png",
+      "normal" : "assets/texture/tmp_blank_normal.png",
+      "animated" : false
+    },
+    {
+      "name": "chains1",
+      "color": "assets/texture/crate/chains1.png",
+      "mat": "assets/texture/blank_mat.png",
+      "normal" : "assets/texture/tmp_blank_normal.png",
+      "animated" : false
+    },
+    {
+      "name": "torch",
+      "color": "assets/texture/torch/torch.png",
+      "mat": "assets/texture/torch/torch_mat.png",
+      "normal" : "assets/texture/tmp_blank_normal.png",
+      "animated" : false
+    },
+    {
+      "name": "barrel",
+      "color": "assets/texture/barrel/barrel.n.png",
+      "mat": "assets/texture/blank_mat.png",
+      "normal" : "assets/texture/tmp_blank_normal.png",
+      "animated" : false
+    },
+    {
+      "name": "oldWood",
+      "color": "assets/texture/misc/oldWood.jpg",
+      "mat": "assets/texture/blank_mat.png",
+      "normal" : "assets/texture/tmp_blank_normal.png",
       "animated" : false
     },
     {
