@@ -4,207 +4,205 @@
       "name": "dungeon-stone1-albedo2",
       "color": "assets/texture/dungeon-stone1-albedo2.png",
       "mat": "assets/texture/dungeon-stone1-mat.png",
-      "normal" : "assets/texture/dungeon-stone1-normal.png",
-      "animated" : false
+      "normal": "assets/texture/dungeon-stone1-normal.png",
+      "animated": false
     },
     {
       "name": "spaced-tiles1-albedo",
       "color": "assets/texture/spaced-tiles1-Unreal-Engine/spaced-tiles1-albedo.png",
       "mat": "assets/texture/spaced-tiles1-Unreal-Engine/spaced-tiles1-rough.png",
-      "normal" : "assets/texture/spaced-tiles1-Unreal-Engine/spaced-tiles1-normal.png",
-      "animated" : false
+      "normal": "assets/texture/spaced-tiles1-Unreal-Engine/spaced-tiles1-normal.png",
+      "animated": false
     },
     {
       "name": "carvedlimestoneground1_Base_Color",
       "color": "assets/texture/carvedlimestone-Unreal-Engine/carvedlimestoneground1_Base_Color.png",
       "mat": "assets/texture/carvedlimestone-Unreal-Engine/carvedlimestoneground1_Roughness.png",
-      "normal" : "assets/texture/carvedlimestone-Unreal-Engine/carvedlimestoneground1_Normal.png",
-      "animated" : false
+      "normal": "assets/texture/carvedlimestone-Unreal-Engine/carvedlimestoneground1_Normal.png",
+      "animated": false
     },
     {
       "name": "Rock 01 diffuse",
       "color": "assets/texture/Rocks/Rock-01-diffuse.png",
       "mat": "assets/texture/dungeon-stone1-mat.png",
-      "normal" : "assets/texture/Rocks/Rock-01-normal.png",
-      "animated" : false
+      "normal": "assets/texture/Rocks/Rock-01-normal.png",
+      "animated": false
     },
     {
       "name": "Rock 02 diffuse",
       "color": "assets/texture/Rocks/Rock-02-diffuse.png",
       "mat": "assets/texture/dungeon-stone1-mat.png",
-      "normal" : "assets/texture/Rocks/Rock-02-normal.png",
-      "animated" : false
+      "normal": "assets/texture/Rocks/Rock-02-normal.png",
+      "animated": false
     },
     {
       "name": "Rock 03 diffuse",
       "color": "assets/texture/Rocks/Rock-03-diffuse.png",
       "mat": "assets/texture/dungeon-stone1-mat.png",
-      "normal" : "assets/texture/Rocks/Rock-03-normal.png",
-      "animated" : false
+      "normal": "assets/texture/Rocks/Rock-03-normal.png",
+      "animated": false
     },
     {
       "name": "Rock 04 diffuse",
       "color": "assets/texture/Rocks/Rock-04-diffuse.png",
       "mat": "assets/texture/dungeon-stone1-mat.png",
-      "normal" : "assets/texture/Rocks/Rock-04-normal.png",
-      "animated" : false
+      "normal": "assets/texture/Rocks/Rock-04-normal.png",
+      "animated": false
     },
     {
       "name": "pockedconcrete1-albedo",
       "color": "assets/texture/pockedConcrete1/pockedconcrete1-albedo.png",
       "mat": "assets/texture/pockedConcrete1/pockedconcrete1-mat.png",
-      "normal" : "assets/texture/pockedConcrete1/pockedconcrete1-normal.png",
-      "animated" : false
+      "normal": "assets/texture/pockedConcrete1/pockedconcrete1-normal.png",
+      "animated": false
     },
     {
       "name": "Bark",
       "color": "assets/texture/Roots/bark-oldbrown-c.png",
       "mat": "assets/texture/dungeon-stone1-mat.png",
-      "normal" : "assets/texture/Roots/bark-oldbrown-n.png",
-      "animated" : false
+      "normal": "assets/texture/Roots/bark-oldbrown-n.png",
+      "animated": false
     },
     {
       "name": "pot1",
       "color": "assets/texture/pots/Archmodels57_018_diffuse0.jpg",
       "mat": "assets/texture/pots/pot_mat2.png",
-      "normal" : "assets/texture/pockedConcrete1/pockedconcrete1-normal.png",
-      "animated" : false
+      "normal": "assets/texture/pockedConcrete1/pockedconcrete1-normal.png",
+      "animated": false
     },
     {
       "name": "pot2",
       "color": "assets/texture/pots/Tr_Pot001.jpg",
       "mat": "assets/texture/pots/pot_mat2.png",
-      "normal" : "assets/texture/pockedConcrete1/pockedconcrete1-normal.png",
-      "animated" : false
+      "normal": "assets/texture/pockedConcrete1/pockedconcrete1-normal.png",
+      "animated": false
     },
     {
       "name": "crate2",
       "color": "assets/texture/crate/crate2.n.png",
       "mat": "assets/texture/blank_mat.png",
-      "normal" : "assets/texture/tmp_blank_normal.png",
-      "animated" : false
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "animated": false
     },
     {
       "name": "crate3",
       "color": "assets/texture/crate/crate2.n.png",
       "mat": "assets/texture/blank_mat.png",
-      "normal" : "assets/texture/tmp_blank_normal.png",
-      "animated" : false
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "animated": false
     },
     {
       "name": "chains1",
       "color": "assets/texture/crate/chains1.png",
       "mat": "assets/texture/blank_mat.png",
-      "normal" : "assets/texture/tmp_blank_normal.png",
-      "animated" : false
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "animated": false
     },
     {
       "name": "torch",
       "color": "assets/texture/torch/torch.png",
       "mat": "assets/texture/torch/torch_mat.png",
-      "normal" : "assets/texture/tmp_blank_normal.png",
-      "animated" : false
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "animated": false
     },
     {
       "name": "barrel",
       "color": "assets/texture/barrel/barrel.n.png",
       "mat": "assets/texture/blank_mat.png",
-      "normal" : "assets/texture/tmp_blank_normal.png",
-      "animated" : false
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "animated": false
     },
     {
       "name": "oldWood",
       "color": "assets/texture/misc/oldWood.jpg",
       "mat": "assets/texture/blank_mat.png",
-      "normal" : "assets/texture/tmp_blank_normal.png",
-      "animated" : false
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "animated": false
     },
     {
       "name": "OctopusCharacterMaterial",
       "color": "assets/texture/Octopus-Character/DefaultMaterial_Base_Color.png",
       "mat": "assets/texture/Octopus-Character/DefaultMaterial_Roughness.png",
-      "normal" : "assets/texture/Octopus-Character/DefaultMaterial_Normal.png",
-      "animated" : true
+      "normal": "assets/texture/Octopus-Character/DefaultMaterial_Normal.png",
+      "animated": true
     },
     {
       "name": "tribal_skin",
       "color": "assets/texture/Character_Tribal/tribal_skin.png",
       "mat": "assets/texture/blank_mat.png",
-      "normal" : "assets/texture/tmp_blank_normal.png",
-      "animated" : true
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "animated": true
     },
     {
       "name": "TribalCharacter_Detail_diffuse",
       "color": "assets/texture/Character_Tribal/TribalCharacter_Detail_diffuse.png",
       "mat": "assets/texture/Character_Tribal/TribalCharacter_Detail_mat.png",
-      "normal" : "assets/texture/tmp_blank_normal.png",
-      "animated" : true
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "animated": true
     },
-
     {
       "name": "Robe",
       "color": "assets/texture/Character_RedRobes/Robe.png",
       "mat": "assets/texture/Character_RedRobes/Robe_mat.png",
-      "normal" : "assets/texture/tmp_blank_normal.png",
-      "animated" : true
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "animated": true
     },
     {
       "name": "W_face",
       "color": "assets/texture/Character_RedRobes/W_face.jpg",
       "mat": "assets/texture/blank_mat.png",
-      "normal" : "assets/texture/tmp_blank_normal.png",
-      "animated" : true
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "animated": true
     },
     {
       "name": "W_Hair",
       "color": "assets/texture/Character_RedRobes/W_Hair.png",
       "mat": "assets/texture/blank_mat.png",
-      "normal" : "assets/texture/tmp_blank_normal.png",
-      "animated" : true
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "animated": true
     },
     {
       "name": "W_leg_hand",
       "color": "assets/texture/Character_RedRobes/W_leg_hand.jpg",
       "mat": "assets/texture/blank_mat.png",
-      "normal" : "assets/texture/tmp_blank_normal.png",
-      "animated" : true
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "animated": true
     },
-
     {
       "name": "SenateRobe",
       "color": "assets/texture/Senate/Robe.png",
       "mat": "assets/texture/blank_mat.png",
-      "normal" : "assets/texture/tmp_blank_normal.png",
-      "animated" : true
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "animated": true
     },
     {
       "name": "M_face_west",
       "color": "assets/texture/Senate/M_face_west.jpg",
       "mat": "assets/texture/blank_mat.png",
-      "normal" : "assets/texture/tmp_blank_normal.png",
-      "animated" : true
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "animated": true
     },
     {
       "name": "M_leg_hand_west",
       "color": "assets/texture/Senate/M_leg_hand_west.jpg",
       "mat": "assets/texture/blank_mat.png",
-      "normal" : "assets/texture/tmp_blank_normal.png",
-      "animated" : true
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "animated": true
     },
     {
       "name": "eye_1",
       "color": "assets/texture/Senate/eye_1.jpg",
       "mat": "assets/texture/blank_mat.png",
-      "normal" : "assets/texture/tmp_blank_normal.png",
-      "animated" : true
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "animated": true
     },
     {
       "name": "ivy_leaves_c",
       "color": "assets/texture/IvyC/ivy_leaves_c.png",
       "mat": "assets/texture/blank_mat.png",
-      "normal" : "assets/texture/IvyC/ivy_leaves_n2.png",
-      "transparent" : true,
-      "animated" : false
+      "normal": "assets/texture/IvyC/ivy_leaves_n2.png",
+      "transparent": true,
+      "animated": false
     }
   ],
   "hierarchy":
@@ -35053,7 +35051,7 @@
         "index": "2626",
         "static": false,
         "Transform": {
-          "position": [1.689, 0.027, 0.414],
+          "position": [39.878, 0.027, -13.53],
           "rotation": [0, 90, 0],
           "scaleFactor": 0.3
         },
@@ -35094,7 +35092,7 @@
             "index": "2627",
             "static": false,
             "Transform": {
-              "position": [1.689, 0.027, 0.414],
+              "position": [39.878, 0.027, -13.53],
               "rotation": [270, 90, 0],
               "scaleFactor": 1
             },
@@ -35108,7 +35106,7 @@
             "index": "2628",
             "static": false,
             "Transform": {
-              "position": [1.679502, 0.01520057, 0.4080694],
+              "position": [39.8685, 0.01520057, -13.53593],
               "rotation": [272.1246, 63.90548, 24.12019],
               "scaleFactor": 1
             },
@@ -35118,7 +35116,7 @@
                 "index": "2629",
                 "static": false,
                 "Transform": {
-                  "position": [1.672047, 0.3655729, 0.4131225],
+                  "position": [39.86105, 0.3655729, -13.53088],
                   "rotation": [14.2708, 88.23178, 0.8957102],
                   "scaleFactor": 1
                 },
@@ -35128,7 +35126,7 @@
                     "index": "2630",
                     "static": false,
                     "Transform": {
-                      "position": [1.687206, 0.4253137, 0.4145546],
+                      "position": [39.87621, 0.4253137, -13.52944],
                       "rotation": [11.70589, 90.02175, 358.9318],
                       "scaleFactor": 1
                     },
@@ -35138,7 +35136,7 @@
                         "index": "2631",
                         "static": false,
                         "Transform": {
-                          "position": [1.698382, 0.479254, 0.4135233],
+                          "position": [39.88738, 0.479254, -13.53048],
                           "rotation": [10.53347, 94.31126, 358.6709],
                           "scaleFactor": 1
                         },
@@ -35148,7 +35146,7 @@
                             "index": "2632",
                             "static": false,
                             "Transform": {
-                              "position": [1.721357, 0.6043632, 0.4088304],
+                              "position": [39.91035, 0.6043632, -13.53517],
                               "rotation": [25.22184, 91.69904, 358.2996],
                               "scaleFactor": 1
                             },
@@ -35158,7 +35156,7 @@
                                 "index": "2633",
                                 "static": false,
                                 "Transform": {
-                                  "position": [1.743432, 0.6513467, 0.4066331],
+                                  "position": [39.93243, 0.6513467, -13.53737],
                                   "rotation": [20.04188, 89.63861, 358.1127],
                                   "scaleFactor": 1
                                 },
@@ -35168,7 +35166,7 @@
                                     "index": "2634",
                                     "static": false,
                                     "Transform": {
-                                      "position": [1.783687, 0.7616295, 0.4030187],
+                                      "position": [39.97269, 0.7616295, -13.54098],
                                       "rotation": [20.04188, 89.63861, 358.1127],
                                       "scaleFactor": 1
                                     }
@@ -35182,7 +35180,7 @@
                             "index": "2635",
                             "static": false,
                             "Transform": {
-                              "position": [1.74246, 0.562861, 0.4144625],
+                              "position": [39.93146, 0.562861, -13.52954],
                               "rotation": [289.367, 56.53955, 104.9902],
                               "scaleFactor": 1
                             },
@@ -35192,7 +35190,7 @@
                                 "index": "2636",
                                 "static": false,
                                 "Transform": {
-                                  "position": [1.717612, 0.5502283, 0.4786062],
+                                  "position": [39.90661, 0.5502283, -13.46539],
                                   "rotation": [14.47275, 135.6583, 172.4205],
                                   "scaleFactor": 0.9999999
                                 },
@@ -35202,7 +35200,7 @@
                                     "index": "2637",
                                     "static": false,
                                     "Transform": {
-                                      "position": [1.706012, 0.4089772, 0.5182481],
+                                      "position": [39.89501, 0.4089772, -13.42575],
                                       "rotation": [2.077247, 127.371, 171.1793],
                                       "scaleFactor": 1
                                     },
@@ -35212,7 +35210,7 @@
                                         "index": "2638",
                                         "static": false,
                                         "Transform": {
-                                          "position": [1.713291, 0.2977225, 0.5344267],
+                                          "position": [39.90229, 0.2977225, -13.40957],
                                           "rotation": [358.2546, 221.723, 186.9121],
                                           "scaleFactor": 0.9999999
                                         },
@@ -35222,7 +35220,7 @@
                                             "index": "2639",
                                             "static": false,
                                             "Transform": {
-                                              "position": [1.703145, 0.2061532, 0.5397354],
+                                              "position": [39.89214, 0.2061532, -13.40426],
                                               "rotation": [358.2546, 221.723, 186.9121],
                                               "scaleFactor": 1
                                             }
@@ -35240,7 +35238,7 @@
                             "index": "2640",
                             "static": false,
                             "Transform": {
-                              "position": [1.741453, 0.5625717, 0.4018226],
+                              "position": [39.93045, 0.5625717, -13.54218],
                               "rotation": [291.4854, 142.4807, 249.9898],
                               "scaleFactor": 0.9999999
                             },
@@ -35250,7 +35248,7 @@
                                 "index": "2641",
                                 "static": false,
                                 "Transform": {
-                                  "position": [1.701514, 0.5472778, 0.3464837],
+                                  "position": [39.89051, 0.5472778, -13.59752],
                                   "rotation": [7.122828, 57.14896, 196.5564],
                                   "scaleFactor": 0.9999999
                                 },
@@ -35260,7 +35258,7 @@
                                     "index": "2642",
                                     "static": false,
                                     "Transform": {
-                                      "position": [1.709568, 0.4073019, 0.3017654],
+                                      "position": [39.89857, 0.4073019, -13.64223],
                                       "rotation": [342.0675, 59.9476, 196.3696],
                                       "scaleFactor": 1
                                     },
@@ -35270,7 +35268,7 @@
                                         "index": "2643",
                                         "static": false,
                                         "Transform": {
-                                          "position": [1.754276, 0.3044595, 0.2909495],
+                                          "position": [39.94328, 0.3044595, -13.65305],
                                           "rotation": [10.11142, 332.5838, 198.6905],
                                           "scaleFactor": 0.9999999
                                         },
@@ -35280,7 +35278,7 @@
                                             "index": "2644",
                                             "static": false,
                                             "Transform": {
-                                              "position": [1.787594, 0.2184014, 0.2909429],
+                                              "position": [39.97659, 0.2184014, -13.65306],
                                               "rotation": [10.11142, 332.5838, 198.6905],
                                               "scaleFactor": 1
                                             }
@@ -35302,7 +35300,7 @@
                     "index": "2645",
                     "static": false,
                     "Transform": {
-                      "position": [1.6864, 0.3860616, 0.4479164],
+                      "position": [39.8754, 0.3860616, -13.49608],
                       "rotation": [25.3412, 257.6977, 180.0035],
                       "scaleFactor": 1
                     },
@@ -35312,7 +35310,7 @@
                         "index": "2646",
                         "static": false,
                         "Transform": {
-                          "position": [1.764125, 0.2180763, 0.4648781],
+                          "position": [39.95313, 0.2180763, -13.47912],
                           "rotation": [319.5383, 263.8517, 175.9217],
                           "scaleFactor": 1
                         },
@@ -35322,7 +35320,7 @@
                             "index": "2647",
                             "static": false,
                             "Transform": {
-                              "position": [1.664024, 0.09862237, 0.4428359],
+                              "position": [39.85302, 0.09862237, -13.50116],
                               "rotation": [26.96255, 258.5912, 175.5391],
                               "scaleFactor": 1
                             },
@@ -35335,7 +35333,7 @@
                                 "index": "2648",
                                 "static": false,
                                 "Transform": {
-                                  "position": [1.684559, 0.05882367, 0.4434259],
+                                  "position": [39.87356, 0.05882367, -13.50057],
                                   "rotation": [293.084, 71.23333, 190.184],
                                   "scaleFactor": 1
                                 },
@@ -35345,7 +35343,7 @@
                                     "index": "2649",
                                     "static": false,
                                     "Transform": {
-                                      "position": [1.705848, 0.04983704, 0.4463108],
+                                      "position": [39.89485, 0.04983704, -13.49769],
                                       "rotation": [293.084, 71.23333, 190.184],
                                       "scaleFactor": 1
                                     }
@@ -35359,7 +35357,7 @@
                             "index": "2650",
                             "static": false,
                             "Transform": {
-                              "position": [1.664024, 0.09862237, 0.4428359],
+                              "position": [39.85302, 0.09862237, -13.50116],
                               "rotation": [74.76167, 92.67496, 191.879],
                               "scaleFactor": 1
                             },
@@ -35369,7 +35367,7 @@
                                 "index": "2651",
                                 "static": false,
                                 "Transform": {
-                                  "position": [1.654132, 0.07194263, 0.4264972],
+                                  "position": [39.84313, 0.07194263, -13.5175],
                                   "rotation": [304.9934, 76.76261, 95.41423],
                                   "scaleFactor": 0.9999999
                                 },
@@ -35379,7 +35377,7 @@
                                     "index": "2652",
                                     "static": false,
                                     "Transform": {
-                                      "position": [1.649898, 0.07044256, 0.4538536],
+                                      "position": [39.8389, 0.07044256, -13.49015],
                                       "rotation": [304.9934, 76.76261, 95.41423],
                                       "scaleFactor": 1
                                     }
@@ -35397,7 +35395,7 @@
                     "index": "2653",
                     "static": false,
                     "Transform": {
-                      "position": [1.688757, 0.3870906, 0.3800442],
+                      "position": [39.87775, 0.3870906, -13.56396],
                       "rotation": [13.92808, 275.7378, 183.2028],
                       "scaleFactor": 1
                     },
@@ -35407,7 +35405,7 @@
                         "index": "2654",
                         "static": false,
                         "Transform": {
-                          "position": [1.734241, 0.2069666, 0.385911],
+                          "position": [39.92324, 0.2069666, -13.55809],
                           "rotation": [342.552, 271.788, 179.5675],
                           "scaleFactor": 1
                         },
@@ -35417,7 +35415,7 @@
                             "index": "2655",
                             "static": false,
                             "Transform": {
-                              "position": [1.687033, 0.05681174, 0.3861959],
+                              "position": [39.87603, 0.05681174, -13.5578],
                               "rotation": [58.87246, 271.696, 180.0001],
                               "scaleFactor": 1
                             },
@@ -35430,7 +35428,7 @@
                                 "index": "2656",
                                 "static": false,
                                 "Transform": {
-                                  "position": [1.725356, 0.03365883, 0.3850612],
+                                  "position": [39.91435, 0.03365883, -13.55894],
                                   "rotation": [275.8496, 271.6955, 0.0004858686],
                                   "scaleFactor": 1
                                 },
@@ -35440,7 +35438,7 @@
                                     "index": "2657",
                                     "static": false,
                                     "Transform": {
-                                      "position": [1.748512, 0.03603218, 0.3843756],
+                                      "position": [39.93751, 0.03603218, -13.55962],
                                       "rotation": [275.8496, 271.6955, 0.0004858686],
                                       "scaleFactor": 1
                                     }
@@ -35454,7 +35452,7 @@
                             "index": "2658",
                             "static": false,
                             "Transform": {
-                              "position": [1.687033, 0.05681174, 0.3861959],
+                              "position": [39.87603, 0.05681174, -13.5578],
                               "rotation": [51.98639, 92.18683, 180.6705],
                               "scaleFactor": 1
                             },
@@ -35464,7 +35462,7 @@
                                 "index": "2659",
                                 "static": false,
                                 "Transform": {
-                                  "position": [1.686872, 0.02666873, 0.3991576],
+                                  "position": [39.87587, 0.02666873, -13.54484],
                                   "rotation": [281.7953, 89.68201, 272.0189],
                                   "scaleFactor": 0.9999999
                                 },
@@ -35474,7 +35472,7 @@
                                     "index": "2660",
                                     "static": false,
                                     "Transform": {
-                                      "position": [1.68607, 0.02686832, 0.3714471],
+                                      "position": [39.87507, 0.02686832, -13.57255],
                                       "rotation": [281.7953, 89.68201, 272.0189],
                                       "scaleFactor": 1
                                     }
@@ -35496,7 +35494,7 @@
             "index": "2661",
             "static": false,
             "Transform": {
-              "position": [1.8486, 0.4317, 0.414],
+              "position": [40.0376, 0.4317, -13.53],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -57093,6 +57091,12 @@
               "endPos": [0, 0, 0],
               "timeToTake": 5
             },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_25",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
+            },
             "children": [
               {
                 "name": "Collider",
@@ -57148,6 +57152,12 @@
             "MoveTowardsEvent": {
               "endPos": [0, 0, 0],
               "timeToTake": 7
+            },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_26",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
             },
             "children": [
               {
@@ -57228,6 +57238,12 @@
               "endPos": [0, 0, 0],
               "timeToTake": 9
             },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_27",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
+            },
             "children": [
               {
                 "name": "Collider",
@@ -57283,6 +57299,12 @@
             "MoveTowardsEvent": {
               "endPos": [0, 0, 0],
               "timeToTake": 11
+            },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_28",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
             },
             "children": [
               {
@@ -57363,6 +57385,12 @@
               "endPos": [0, 0, 0],
               "timeToTake": 13
             },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_29",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
+            },
             "children": [
               {
                 "name": "Collider",
@@ -57418,6 +57446,12 @@
             "MoveTowardsEvent": {
               "endPos": [0, 0, 0],
               "timeToTake": 15
+            },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_30",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
             },
             "children": [
               {
@@ -57498,6 +57532,12 @@
               "endPos": [0, 0, 0],
               "timeToTake": 17
             },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_31",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
+            },
             "children": [
               {
                 "name": "Collider",
@@ -57553,6 +57593,12 @@
             "MoveTowardsEvent": {
               "endPos": [0, 0, 0],
               "timeToTake": 19
+            },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_32",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
             },
             "children": [
               {
@@ -57656,6 +57702,12 @@
               "endPos": [0, 0, 0],
               "timeToTake": 21
             },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_33",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
+            },
             "children": [
               {
                 "name": "Collider",
@@ -57711,6 +57763,12 @@
             "MoveTowardsEvent": {
               "endPos": [0, 0, 0],
               "timeToTake": 23
+            },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_34",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
             },
             "children": [
               {
@@ -57790,6 +57848,12 @@
             "MoveTowardsEvent": {
               "endPos": [0, 0, 0],
               "timeToTake": 25
+            },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_35",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
             },
             "children": [
               {
@@ -58752,6 +58816,12 @@
               "endPos": [0, 0, 0],
               "timeToTake": 3
             },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_36",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
+            },
             "children": [
               {
                 "name": "Collider",
@@ -58807,6 +58877,12 @@
             "MoveTowardsEvent": {
               "endPos": [0, 0, 0],
               "timeToTake": 5
+            },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_37",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
             },
             "children": [
               {
@@ -58864,6 +58940,12 @@
               "endPos": [0, 0, 0],
               "timeToTake": 9
             },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_38",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
+            },
             "children": [
               {
                 "name": "Collider",
@@ -58919,6 +59001,12 @@
             "MoveTowardsEvent": {
               "endPos": [0, 0, 0],
               "timeToTake": 13
+            },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_39",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
             },
             "children": [
               {
@@ -58976,6 +59064,12 @@
               "endPos": [0, 0, 0],
               "timeToTake": 9
             },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_40",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
+            },
             "children": [
               {
                 "name": "Collider",
@@ -59031,6 +59125,12 @@
             "MoveTowardsEvent": {
               "endPos": [0, 0, 0],
               "timeToTake": 5
+            },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_41",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
             },
             "children": [
               {
@@ -59088,6 +59188,12 @@
               "endPos": [0, 0, 0],
               "timeToTake": 5
             },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_42",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
+            },
             "children": [
               {
                 "name": "Collider",
@@ -59143,6 +59249,12 @@
             "MoveTowardsEvent": {
               "endPos": [0, 0, 0],
               "timeToTake": 7
+            },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_43",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
             },
             "children": [
               {
@@ -59200,6 +59312,12 @@
               "endPos": [0, 0, 0],
               "timeToTake": 9
             },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_44",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
+            },
             "children": [
               {
                 "name": "Collider",
@@ -59255,6 +59373,12 @@
             "MoveTowardsEvent": {
               "endPos": [0, 0, 0],
               "timeToTake": 7
+            },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_45",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
             },
             "children": [
               {
@@ -59312,6 +59436,12 @@
               "endPos": [0, 0, 0],
               "timeToTake": 9
             },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_46",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
+            },
             "children": [
               {
                 "name": "Collider",
@@ -59367,6 +59497,12 @@
             "MoveTowardsEvent": {
               "endPos": [0, 0, 0],
               "timeToTake": 11
+            },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_47",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
             },
             "children": [
               {
@@ -59424,6 +59560,12 @@
               "endPos": [0, 0, 0],
               "timeToTake": 13
             },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_48",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
+            },
             "children": [
               {
                 "name": "Collider",
@@ -59479,6 +59621,12 @@
             "MoveTowardsEvent": {
               "endPos": [0, 0, 0],
               "timeToTake": 15
+            },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_49",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
             },
             "children": [
               {
@@ -59536,6 +59684,12 @@
               "endPos": [0, 0, 0],
               "timeToTake": 11
             },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_50",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
+            },
             "children": [
               {
                 "name": "Collider",
@@ -59591,6 +59745,12 @@
             "MoveTowardsEvent": {
               "endPos": [0, 0, 0],
               "timeToTake": 13
+            },
+            "AudioSource": {
+              "audioName": "crypt-door-open.mp3_51",
+              "loop": true,
+              "isSFX": true,
+              "is3D": true
             },
             "children": [
               {
@@ -59728,7 +59888,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone2.wav_25",
+          "audioName": "Tone2.wav_52",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -59822,7 +59982,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone3.wav_26",
+          "audioName": "Tone3.wav_53",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -59916,7 +60076,7 @@
           "delay": 0
         },
         "AudioSource": {
-          "audioName": "Tone4.wav_27",
+          "audioName": "Tone4.wav_54",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -60000,7 +60160,7 @@
           "scaleFactor": 1
         },
         "AudioSource": {
-          "audioName": "cine_ambience.wav_28",
+          "audioName": "cine_ambience.wav_55",
           "loop": false,
           "isSFX": false,
           "is3D": false
@@ -60008,7 +60168,7 @@
         "FadeInAudioEvent": {
           "delay": 0,
           "fadeTime": 3,
-          "volume": 0.025,
+          "volume": 0.1,
           "rate": 1
         }
       },
@@ -60216,7 +60376,7 @@
           "minLightRange": 1
         },
         "AudioSource": {
-          "audioName": "Tone2.wav_29",
+          "audioName": "Tone2.wav_56",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -60747,7 +60907,7 @@
           "injured": true
         },
         "AudioSource": {
-          "audioName": "Tone3.wav_30",
+          "audioName": "Tone3.wav_57",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -61714,7 +61874,7 @@
           "injured": true
         },
         "AudioSource": {
-          "audioName": "Tone4.wav_31",
+          "audioName": "Tone4.wav_58",
           "loop": true,
           "isSFX": true,
           "is3D": true
@@ -62265,6 +62425,16 @@
           "rotation": [0, 89.99976, 0],
           "scaleFactor": 1
         },
+        "AudioSource": {
+          "audioName": "fire_crackle.mp3_59",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
+        },
+        "PlayAudio": {
+          "volume": 0.3,
+          "rate": 1
+        },
         "children": [
           {
             "name": "Torch.1",
@@ -62305,6 +62475,16 @@
           "rotation": [0, 180.0003, 0],
           "scaleFactor": 1
         },
+        "AudioSource": {
+          "audioName": "fire_crackle.mp3_60",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
+        },
+        "PlayAudio": {
+          "volume": 0.3,
+          "rate": 1
+        },
         "children": [
           {
             "name": "Torch.1",
@@ -62344,6 +62524,16 @@
           "position": [43.09568, -0.2713354, -9.067],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
+        },
+        "AudioSource": {
+          "audioName": "fire_crackle.mp3_61",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
+        },
+        "PlayAudio": {
+          "volume": 0.3,
+          "rate": 1
         },
         "children": [
           {

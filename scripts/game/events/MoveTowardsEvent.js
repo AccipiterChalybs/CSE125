@@ -13,13 +13,26 @@ class MoveTowardsEvent extends TriggerEvent{
 
     this._startPos = vec3.create();
     this._endTime = 0;
+
+    this._audioSrc = null;
+  }
+
+  start(){
+    this._audioSrc = this.transform.gameObject.getComponent('AudioSource');
   }
 
   updateComponent(){
     if(this.activated && Time.time <= this._endTime){
+      if(this._audioSrc && this._audioSrc !== null){
+        this._audioSrc.setState(AudioState.playSound);
+      }
       let newPos = vec3.create();
       vec3.lerp(newPos, this._startPos, this.endPos, 1 - (this._endTime - Time.time) / this.timeToTake);
       this.transform.setPosition(newPos);
+    }else{
+      if(this._audioSrc && this._audioSrc !== null) {
+        this._audioSrc.setState(AudioState.pause);
+      }
     }
   }
 
