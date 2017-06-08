@@ -6,7 +6,7 @@ const c = {
   ClientStickTo, Collider, CompoundCollider, Decal, Foot, Floor, Light, ParticleSystem,
   SphereCollider, Transform, SingingStatueController, TriggerSwitch, MoveTowardsEvent,
   SingStatueEvent, StopSingStatueEvent, StopLightEvent, PlayAudio, PlayAudioEvent,
-  FadeInAudioEvent,
+  FadeInAudioEvent, CheckpointEvent,
   AnimationGraph, AnimationState, DoorEvent, Event, EvilController, HealEvent,
   KeyEvent, Listenable, Look, ObjectLogicState, PlayerController,
   PlayerLogicState, PlayerTable, RaycastSwitch, RotateArrowKey, RotateMouse,
