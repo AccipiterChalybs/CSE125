@@ -1,10 +1,10 @@
 {
-  "Tone1.wav_0":{
-  "src": "assets/audio/Tone1.wav",
-  "loop": true,
-  "type": 1,
-  "space": 3
-},"Tone1.wav_1":{
+  "crypt-door-close.mp3_0":{
+    "src": "assets/audio/crypt-door-close.mp3",
+    "loop": true,
+    "type": 1,
+    "space": 3
+  },"Tone1.wav_1":{
   "src": "assets/audio/Tone1.wav",
   "loop": true,
   "type": 1,
@@ -14,33 +14,23 @@
   "loop": true,
   "type": 1,
   "space": 3
-},"crypt-door-close.mp3_3":{
-  "src": "assets/audio/crypt-door-close.mp3",
+},"Tone2.wav_3":{
+  "src": "assets/audio/Tone2.wav",
   "loop": true,
   "type": 1,
   "space": 3
-},"Tone1.wav_4":{
-  "src": "assets/audio/Tone1.wav",
+},"Tone4.wav_4":{
+  "src": "assets/audio/Tone4.wav",
   "loop": true,
   "type": 1,
   "space": 3
-},"Tone1.wav_5":{
-  "src": "assets/audio/Tone1.wav",
+},"Tone3.wav_5":{
+  "src": "assets/audio/Tone3.wav",
   "loop": true,
   "type": 1,
   "space": 3
 },"Tone1.wav_6":{
   "src": "assets/audio/Tone1.wav",
-  "loop": true,
-  "type": 1,
-  "space": 3
-},"crypt-door-close.mp3_7":{
-  "src": "assets/audio/crypt-door-close.mp3",
-  "loop": true,
-  "type": 1,
-  "space": 3
-},"crypt-door-close.mp3_8":{
-  "src": "assets/audio/crypt-door-close.mp3",
   "loop": true,
   "type": 1,
   "space": 3
@@ -64,8 +54,38 @@
   "loop": true,
   "type": 1,
   "space": 3
-},"Tone1.wav_13":{
-  "src": "assets/audio/Tone1.wav",
+},"crypt-door-close.mp3_7":{
+  "src": "assets/audio/crypt-door-close.mp3",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"crypt-door-close.mp3_8":{
+  "src": "assets/audio/crypt-door-close.mp3",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"crypt-door-close.mp3_9":{
+  "src": "assets/audio/crypt-door-close.mp3",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"crypt-door-close.mp3_10":{
+  "src": "assets/audio/crypt-door-close.mp3",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"crypt-door-close.mp3_11":{
+  "src": "assets/audio/crypt-door-close.mp3",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"crypt-door-close.mp3_12":{
+  "src": "assets/audio/crypt-door-close.mp3",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"crypt-door-close.mp3_13":{
+  "src": "assets/audio/crypt-door-close.mp3",
   "loop": true,
   "type": 1,
   "space": 3
@@ -74,18 +94,18 @@
   "loop": true,
   "type": 1,
   "space": 3
-},"Tone3.wav_15":{
+},"Tone4.wav_15":{
+  "src": "assets/audio/Tone4.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone3.wav_16":{
   "src": "assets/audio/Tone3.wav",
   "loop": true,
   "type": 1,
   "space": 3
-},"Tone1.wav_16":{
+},"Tone1.wav_17":{
   "src": "assets/audio/Tone1.wav",
-  "loop": true,
-  "type": 1,
-  "space": 3
-},"Tone4.wav_17":{
-  "src": "assets/audio/Tone4.wav",
   "loop": true,
   "type": 1,
   "space": 3
@@ -94,71 +114,26 @@
   "loop": true,
   "type": 1,
   "space": 3
-},"Tone1.wav_19":{
-  "src": "assets/audio/Tone1.wav",
-  "loop": true,
-  "type": 1,
-  "space": 3
-},"crypt-door-close.mp3_20":{
-  "src": "assets/audio/crypt-door-close.mp3",
-  "loop": true,
-  "type": 1,
-  "space": 3
-},"Tone1.wav_21":{
-  "src": "assets/audio/Tone1.wav",
-  "loop": true,
-  "type": 1,
-  "space": 3
-},"Tone1.wav_22":{
-  "src": "assets/audio/Tone1.wav",
-  "loop": true,
-  "type": 1,
-  "space": 3
-},"Tone1.wav_23":{
-  "src": "assets/audio/Tone1.wav",
-  "loop": true,
-  "type": 1,
-  "space": 3
-},"Tone1.wav_24":{
-  "src": "assets/audio/Tone1.wav",
-  "loop": true,
-  "type": 1,
-  "space": 3
-},"Tone1.wav_25":{
-  "src": "assets/audio/Tone1.wav",
-  "loop": true,
-  "type": 1,
-  "space": 3
-},"Tone1.wav_26":{
-  "src": "assets/audio/Tone1.wav",
-  "loop": true,
-  "type": 1,
-  "space": 3
-},"Tone1.wav_27":{
-  "src": "assets/audio/Tone1.wav",
-  "loop": true,
-  "type": 1,
-  "space": 3
-},"Tone2.wav_28":{
-  "src": "assets/audio/Tone2.wav",
-  "loop": true,
-  "type": 1,
-  "space": 3
-},"Tone3.wav_29":{
+},"Tone3.wav_19":{
   "src": "assets/audio/Tone3.wav",
   "loop": true,
   "type": 1,
   "space": 3
-},"Tone4.wav_30":{
+},"Tone4.wav_20":{
   "src": "assets/audio/Tone4.wav",
   "loop": true,
   "type": 1,
   "space": 3
-},"cine_ambience.wav_31":{
-  "src": "assets/audio/cine_ambience.wav",
-  "loop": false,
-  "type": 0,
-  "space": 2
+},"Tone2.wav_21":{
+  "src": "assets/audio/Tone2.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"crypt-door-close.mp3_22":{
+  "src": "assets/audio/crypt-door-close.mp3",
+  "loop": true,
+  "type": 1,
+  "space": 3
 },
   "footstepS1":{
     "src": "assets/audio/Snow1.wav",
