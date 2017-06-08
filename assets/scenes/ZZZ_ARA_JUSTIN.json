@@ -82,7 +82,7 @@
             },
             "RotatingEvent": {
               "maximumCharge": 12,
-              "angularVelocity": 1,
+              "angularVelocity": 0.5,
               "radius": 1
             },
             "children": [

@@ -2,11 +2,11 @@
  * Created by ajermaky on 6/7/17.
  */
 class RotatingEvent extends SingingEvent{
-  constructor(params = {maximumCharge,angularVelocity,radius}){
+  constructor(params = {maximumCharge:12,angularVelocity:.5,radius:1}){
     super(params);
     this._angularVelocity = params.angularVelocity;
     this._radiusSquared= params.radius*params.radius;
-    this._circum = 2*params.radius*Math.PI;
+    this._circum = 2*Math.PI;
   }
 
   start(){
@@ -27,6 +27,7 @@ class RotatingEvent extends SingingEvent{
   onDischarging(){
     if(this._arcDistTravelled > 0 && ((this._arcDistTravelled) >= (this._circum * (this.currentCharge / this.maximumCharge))))
     {
+      Debug.log("welp");
       let deltaY = -this._angularVelocity*Time.deltaTime;
       this.transform.rotateY(deltaY);
       for (let player of PlayerTable.players) {
@@ -44,11 +45,13 @@ class RotatingEvent extends SingingEvent{
         }
       }
       this._arcDistTravelled += deltaY;
+    }else{
+      Debug.log("Here")
     }
   }
 
   onCharging(){
-    if(this._arcDistTravelled < this._circum && ((this._arcDistTravelled) <= (this._circum * (this.currentCharge / this.maximumCharge))))
+    if(this._arcDistTravelled < this._circum && ((this._arcDistTravelled < (this._circum * (this.currentCharge / this.maximumCharge)))))
     {
       let deltaY = this._angularVelocity*Time.deltaTime;
       this.transform.rotateY(deltaY);
@@ -67,6 +70,8 @@ class RotatingEvent extends SingingEvent{
         }
       }
       this._arcDistTravelled += deltaY;
+    }else{
+
     }
   }
 }
