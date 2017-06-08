@@ -23,12 +23,12 @@ const PlayerState = {
 
 // Requires a collider, sing
 class PlayerController extends Playerable{
-  constructor(){
+  constructor({injured}){
     super({singingCooldown: COOLDOWN_SINGING});
     this._looker = null;
     this.checkpoint = vec3.create();
     this.keys = 0;
-    this.injured = false;
+    this.injured = injured;
     this.forward = vec3.create(); vec3.set(this.forward, 0, 0, -1);
     this.cameraPos = vec3.create(); vec3.set(this.cameraPos, 0, 0, -1);
 

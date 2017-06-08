@@ -176,7 +176,7 @@ const SceneLoader = {
       switch (generalCompName) {
         case "PlayerController":
           PlayerTable.addPlayer(nodeObject);
-          nodeObject.addComponent(new PlayerController());
+          nodeObject.addComponent(new PlayerController(compData));
           break;
         default:
           nodeObject.addComponent(new c[generalCompName](compData));
