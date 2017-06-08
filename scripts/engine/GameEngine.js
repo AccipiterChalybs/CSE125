@@ -12,7 +12,7 @@ GameEngine._loadHandles = [];   //handles of currently loading objects
 GameEngine._nextLoadHandle = 0; //next load handle to return
 GameEngine.currentScene = null;
 GameEngine._StartGame = false;
-GameEngine.sceneFile = 'assets/scenes/mainScene2.json';
+GameEngine.sceneFile = 'assets/scenes/ZZZ_ARA_JUSTIN.json';
 
 /** Init: starts loading objects */
 GameEngine.init = function () {

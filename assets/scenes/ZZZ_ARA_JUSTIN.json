@@ -81,7 +81,7 @@
             "Kinematic": {
             },
             "RotatingEvent": {
-              "maximumCharge": 1000,
+              "maximumCharge": 12,
               "angularVelocity": 1,
               "radius": 1
             },
@@ -982,7 +982,7 @@
             "SingingSwitch": {
               "events": [2],
               "maximumOutput": 3,
-              "lossRate": 100,
+              "lossRate": 1,
               "timeBeforeLoss": 0.1
             },
             "colliders": [
