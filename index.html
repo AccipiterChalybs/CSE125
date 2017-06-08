@@ -9,6 +9,7 @@
   <link href="styles/bootstrap.css" rel="stylesheet">
   <script src="scripts/bootstrap.min.js"></script>
   <link href="styles/menu.css" rel="stylesheet">
+  <link href="styles/tutorial.css" rel="stylesheet">
   <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
   <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
@@ -148,6 +149,42 @@
 </div>
 <canvas style="width:100%; height:100%; position: absolute; top:0;left:0;z-index:-1;"></canvas>
 
+<div class="tutorial-banner" id="movement-tutorial" style="display:none;">
+  <div class="invertedT">
+    <div class="key-img"></div>
+    <div class="key-img"></div>
+    <div class="key-img"></div>
+    <div class="key-img"></div>
+  </div>
+  <div class="text">to move</div>
+</div>
+
+<div class="tutorial-banner" id="action-tutorial" style="display:none;">
+  <div class="key-img"></div>
+  <div class="text">to do an action</div>
+</div>
+
+<div class="tutorial-banner" id="sing-tutorial" style="display:none;">
+  <div class="key-img">left click</div>
+  <div class="text">to sing</div>
+</div>
+
+<div class="tutorial-banner" id="dontsing-tutorial" style="display:none;">
+  <div class="text">don't sing when the evil is around!</div>
+</div>
+
+<div class="tutorial-banner" id="walk-tutorial" style="display:none;">
+  <div class="key-img"></div>
+  <div class="text">to walk</div>
+</div>
+
+<div class="tutorial-banner" id="look-tutorial" style="display:none;">
+  <div class="text">move</div>
+  <div class="img mouse-img.png"></div>
+  <div class="text">to look around</div>
+</div>
+
+
 <script src="scripts/engine/PhysicsEngine.js"></script>
 <script src="https://cdn-orig.socket.io/socket.io-1.2.1.js"></script>
 <script src="scripts/engine/Component.js"></script>
@@ -194,6 +231,7 @@
 <script src="scripts/game/Playerable.js"></script>
 <script src="scripts/game/PlayerController.js"></script>
 <script src="scripts/game/SingingStatueController.js"></script>
+<script src="scripts/game/SimonSays.js"></script>
 <script src="scripts/game/Sing.js"></script>
 <script src="scripts/game/Listenable.js"></script>
 <script src="scripts/game/Look.js"></script>
@@ -201,6 +239,7 @@
 <script src="scripts/game/Foot.js"></script>
 <script src="scripts/game/Floor.js"></script>
 <script src="scripts/game/SingingSwitch.js"></script>
+<script src="scripts/game/SimonSaysSwitch.js"></script>
 <script src="scripts/game/RaycastSwitch.js"></script>
 <script src="scripts/game/TriggerSwitch.js"></script>
 <script src="scripts/game/TriggerEvent.js"></script>
@@ -258,6 +297,7 @@
 
 <script src="scripts/engine/main.js"></script>
 <script src="scripts/UI/utilities.js"></script>
+<script src="scripts/UI/tutorial.js"></script>
 <script src="scripts/UI/mainpage.js"></script>
 <script>
   var test= function () {

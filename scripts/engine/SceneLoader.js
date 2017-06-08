@@ -6,7 +6,7 @@ const c = {
   ClientStickTo, Collider, CompoundCollider, Decal, Foot, Floor, Light, ParticleSystem,
   SphereCollider, Transform, SingingStatueController, TriggerSwitch, MoveTowardsEvent,
   SingStatueEvent, StopSingStatueEvent, StopLightEvent, PlayAudio, PlayAudioEvent,
-  FadeInAudioEvent,
+  FadeInAudioEvent, CheckpointEvent,
   AnimationGraph, AnimationState, DoorEvent, Event, EvilController, HealEvent,
   KeyEvent, Listenable, Look, ObjectLogicState, PlayerController,
   PlayerLogicState, PlayerTable, RaycastSwitch, RotateArrowKey, RotateMouse,
@@ -26,6 +26,7 @@ const SceneLoader = {
   tone: 0,
 
   loadScene: function(filename) {
+    this.tone=0;
     let loadId = GameEngine.registerLoading();
     JsonLoader.loadJSON(filename, SceneLoader._finishLoadScene.bind(this, loadId, filename));
   },
