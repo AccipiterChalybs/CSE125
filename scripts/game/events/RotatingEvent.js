@@ -29,7 +29,7 @@ class RotatingEvent extends SingingEvent{
     {
       Debug.log("welp");
       let deltaY = -this._angularVelocity*Time.deltaTime;
-      this.transform.rotateY(deltaY);
+      this.transform.rotateZ(deltaY);
       for (let player of PlayerTable.players) {
         let playPos = player.transform.getWorldPosition();
         let distance = vec3.create();
@@ -54,7 +54,7 @@ class RotatingEvent extends SingingEvent{
     if(this._arcDistTravelled < this._circum && ((this._arcDistTravelled < (this._circum * (this.currentCharge / this.maximumCharge)))))
     {
       let deltaY = this._angularVelocity*Time.deltaTime;
-      this.transform.rotateY(deltaY);
+      this.transform.rotateZ(deltaY);
       for(let player of PlayerTable.players){
         let playPos = player.transform.getWorldPosition();
         let distance = vec3.create();

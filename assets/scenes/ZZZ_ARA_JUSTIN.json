@@ -60,7 +60,7 @@
         "index": "1",
         "static": false,
         "Transform": {
-          "position": [0, -1, 1],
+          "position": [0, 0, 0],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -72,11 +72,11 @@
             "index": "2",
             "static": false,
             "Transform": {
-              "position": [0, -1, 1],
-              "rotation": [0, 0, 0],
+              "position": [0, 0, 0],
+              "rotation": [270, 0, 0],
               "scaleFactor": 1
             },
-            "MeshFilter": "Block.Large.1",
+            "MeshFilter": "Ceiling.2",
             "MeshRenderer": "dungeon-stone1-albedo2",
             "Kinematic": {
             },
@@ -91,7 +91,7 @@
                 "index": "3",
                 "static": false,
                 "Transform": {
-                  "position": [0, -1, 2],
+                  "position": [0, 0, 0],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -101,90 +101,354 @@
                   {
                     "type": "box",
                     "isTrigger": false,
-                    "scaleX": 2,
-                    "scaleY": 2,
-                    "scaleZ": 2,
+                    "scaleX": 8.03,
+                    "scaleY": 0.09,
+                    "scaleZ": 8.32,
                     "offset": [0, 0, 0]
                   }
                 ]
               },
               {
-                "name": "Rotating_Indicator",
+                "name": "Statue_2",
                 "index": "4",
+                "static": true,
+                "Transform": {
+                  "position": [0.01398089, -0.009999037, 2.44],
+                  "rotation": [0, 0, 0],
+                  "scaleFactor": 1
+                },
+                "children": [
+                  {
+                    "name": "Altar.2",
+                    "index": "5",
+                    "static": true,
+                    "Transform": {
+                      "position": [0.01398089, -0.009999037, 2.44],
+                      "rotation": [270, 270, 0],
+                      "scaleFactor": 0.4
+                    },
+                    "MeshFilter": "Altar.2",
+                    "MeshRenderer": "dungeon-stone1-albedo2",
+                    "colliders": [
+                      {
+                        "type": "sphere",
+                        "isTrigger": false,
+                        "scale": 1.32,
+                        "offset": [7.450581E-09, 3.725291E-09, 0]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Statue.2",
+                    "index": "6",
+                    "static": true,
+                    "Transform": {
+                      "position": [0.01398089, 0.348001, 2.507],
+                      "rotation": [0, 270, 0],
+                      "scaleFactor": 0.4
+                    },
+                    "MeshFilter": "Statue.2",
+                    "MeshRenderer": "carvedlimestoneground1_Base_Color",
+                    "SingingSwitch": {
+                      "events": [2],
+                      "maximumOutput": 3,
+                      "lossRate": 0.5,
+                      "timeBeforeLoss": 2
+                    },
+                    "colliders": [
+                      {
+                        "type": "box",
+                        "isTrigger": false,
+                        "scaleX": 0.970925,
+                        "scaleY": 2.429153,
+                        "scaleZ": 1.087409,
+                        "offset": [-0.1420816, 1.212189, -0.1047038]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Statue_2 (1)",
+                "index": "7",
+                "static": true,
+                "Transform": {
+                  "position": [0.01398089, -0.01000094, -2.56],
+                  "rotation": [0, 0, 0],
+                  "scaleFactor": 1
+                },
+                "children": [
+                  {
+                    "name": "Altar.2",
+                    "index": "8",
+                    "static": true,
+                    "Transform": {
+                      "position": [0.01398089, -0.01000094, -2.56],
+                      "rotation": [270, 270, 0],
+                      "scaleFactor": 0.4
+                    },
+                    "MeshFilter": "Altar.2",
+                    "MeshRenderer": "dungeon-stone1-albedo2",
+                    "colliders": [
+                      {
+                        "type": "sphere",
+                        "isTrigger": false,
+                        "scale": 1.32,
+                        "offset": [7.450581E-09, 3.725291E-09, 0]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Statue.2",
+                    "index": "9",
+                    "static": true,
+                    "Transform": {
+                      "position": [0.01398089, 0.3479991, -2.493],
+                      "rotation": [0, 270, 0],
+                      "scaleFactor": 0.4
+                    },
+                    "MeshFilter": "Statue.2",
+                    "MeshRenderer": "carvedlimestoneground1_Base_Color",
+                    "SingingSwitch": {
+                      "events": [2],
+                      "maximumOutput": 3,
+                      "lossRate": 0.5,
+                      "timeBeforeLoss": 2
+                    },
+                    "colliders": [
+                      {
+                        "type": "box",
+                        "isTrigger": false,
+                        "scaleX": 0.970925,
+                        "scaleY": 2.429153,
+                        "scaleZ": 1.087409,
+                        "offset": [-0.1420816, 1.212189, -0.1047038]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Statue_2 (2)",
+                "index": "10",
+                "static": true,
+                "Transform": {
+                  "position": [-2, -0.01000001, -0.02],
+                  "rotation": [0, 0, 0],
+                  "scaleFactor": 1
+                },
+                "children": [
+                  {
+                    "name": "Altar.2",
+                    "index": "11",
+                    "static": true,
+                    "Transform": {
+                      "position": [-2, -0.01000001, -0.02],
+                      "rotation": [270, 270, 0],
+                      "scaleFactor": 0.4
+                    },
+                    "MeshFilter": "Altar.2",
+                    "MeshRenderer": "dungeon-stone1-albedo2",
+                    "colliders": [
+                      {
+                        "type": "sphere",
+                        "isTrigger": false,
+                        "scale": 1.32,
+                        "offset": [7.450581E-09, 3.725291E-09, 0]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Statue.2",
+                    "index": "12",
+                    "static": true,
+                    "Transform": {
+                      "position": [-2, 0.348, 0.04699993],
+                      "rotation": [0, 270, 0],
+                      "scaleFactor": 0.4
+                    },
+                    "MeshFilter": "Statue.2",
+                    "MeshRenderer": "carvedlimestoneground1_Base_Color",
+                    "SingingSwitch": {
+                      "events": [2],
+                      "maximumOutput": 3,
+                      "lossRate": 0.5,
+                      "timeBeforeLoss": 2
+                    },
+                    "colliders": [
+                      {
+                        "type": "box",
+                        "isTrigger": false,
+                        "scaleX": 0.970925,
+                        "scaleY": 2.429153,
+                        "scaleZ": 1.087409,
+                        "offset": [-0.1420816, 1.212189, -0.1047038]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Statue_2 (3)",
+                "index": "13",
+                "static": true,
+                "Transform": {
+                  "position": [2, -0.01000001, -0.01999999],
+                  "rotation": [0, 0, 0],
+                  "scaleFactor": 1
+                },
+                "children": [
+                  {
+                    "name": "Altar.2",
+                    "index": "14",
+                    "static": true,
+                    "Transform": {
+                      "position": [2, -0.01000001, -0.01999999],
+                      "rotation": [270, 270, 0],
+                      "scaleFactor": 0.4
+                    },
+                    "MeshFilter": "Altar.2",
+                    "MeshRenderer": "dungeon-stone1-albedo2",
+                    "colliders": [
+                      {
+                        "type": "sphere",
+                        "isTrigger": false,
+                        "scale": 1.32,
+                        "offset": [7.450581E-09, 3.725291E-09, 0]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Statue.2",
+                    "index": "15",
+                    "static": true,
+                    "Transform": {
+                      "position": [2, 0.348, 0.04699993],
+                      "rotation": [0, 270, 0],
+                      "scaleFactor": 0.4
+                    },
+                    "MeshFilter": "Statue.2",
+                    "MeshRenderer": "carvedlimestoneground1_Base_Color",
+                    "SingingSwitch": {
+                      "events": [2],
+                      "maximumOutput": 3,
+                      "lossRate": 0.5,
+                      "timeBeforeLoss": 2
+                    },
+                    "colliders": [
+                      {
+                        "type": "box",
+                        "isTrigger": false,
+                        "scaleX": 0.970925,
+                        "scaleY": 2.429153,
+                        "scaleZ": 1.087409,
+                        "offset": [-0.1420816, 1.212189, -0.1047038]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Block_Large_1 (1)",
+                "index": "16",
                 "static": false,
                 "Transform": {
-                  "position": [-2, 0, 1.7439],
+                  "position": [5.21, 0.7899998, -1],
                   "rotation": [0, 0, 0],
-                  "scaleFactor": 0.2560641
+                  "scaleFactor": 1
                 },
                 "Kinematic": {
                 },
                 "children": [
                   {
                     "name": "Block.Large.1",
-                    "index": "5",
+                    "index": "17",
                     "static": false,
                     "Transform": {
-                      "position": [-2, 0, 1.7439],
+                      "position": [5.21, 0.7899998, -1],
                       "rotation": [0, 0, 0],
                       "scaleFactor": 1
                     },
                     "MeshFilter": "Block.Large.1",
                     "MeshRenderer": "dungeon-stone1-albedo2",
                     "Kinematic": {
-                    }
+                    },
+                    "children": [
+                      {
+                        "name": "Collider",
+                        "index": "18",
+                        "static": false,
+                        "Transform": {
+                          "position": [5.21, 0.7900001, -3.576279E-07],
+                          "rotation": [0, 0, 0],
+                          "scaleFactor": 1
+                        },
+                        "Kinematic": {
+                        },
+                        "colliders": [
+                          {
+                            "type": "box",
+                            "isTrigger": false,
+                            "scaleX": 2,
+                            "scaleY": 2,
+                            "scaleZ": 2,
+                            "offset": [0, 0, 0]
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "Block_Large_1 (1)",
-        "index": "7",
-        "static": false,
-        "Transform": {
-          "position": [0, -1, -1],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 1
-        },
-        "Kinematic": {
-        },
-        "children": [
-          {
-            "name": "Block.Large.1",
-            "index": "8",
-            "static": false,
-            "Transform": {
-              "position": [0, -1, -1],
-              "rotation": [0, 0, 0],
-              "scaleFactor": 1
-            },
-            "MeshFilter": "Block.Large.1",
-            "MeshRenderer": "dungeon-stone1-albedo2",
-            "Kinematic": {
-            },
-            "children": [
+              },
               {
-                "name": "Collider",
-                "index": "9",
+                "name": "Block_Large_1 (2)",
+                "index": "19",
                 "static": false,
                 "Transform": {
-                  "position": [0, -1, 0],
+                  "position": [-0.14, -0.6699991, 4.18],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
                 "Kinematic": {
                 },
-                "colliders": [
+                "children": [
                   {
-                    "type": "box",
-                    "isTrigger": false,
-                    "scaleX": 2,
-                    "scaleY": 2,
-                    "scaleZ": 2,
-                    "offset": [0, 0, 0]
+                    "name": "Block.Large.1",
+                    "index": "20",
+                    "static": false,
+                    "Transform": {
+                      "position": [-0.14, -0.6699991, 4.18],
+                      "rotation": [0, 0, 0],
+                      "scaleFactor": 1
+                    },
+                    "MeshFilter": "Block.Large.1",
+                    "MeshRenderer": "dungeon-stone1-albedo2",
+                    "Kinematic": {
+                    },
+                    "children": [
+                      {
+                        "name": "Collider",
+                        "index": "21",
+                        "static": false,
+                        "Transform": {
+                          "position": [-0.14, -0.6699986, 5.18],
+                          "rotation": [0, 0, 0],
+                          "scaleFactor": 1
+                        },
+                        "Kinematic": {
+                        },
+                        "colliders": [
+                          {
+                            "type": "box",
+                            "isTrigger": false,
+                            "scaleX": 2,
+                            "scaleY": 2,
+                            "scaleZ": 2,
+                            "offset": [0, 0, 0]
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               }
@@ -194,10 +458,10 @@
       },
       {
         "name": "Player",
-        "index": "10",
+        "index": "22",
         "static": false,
         "Transform": {
-          "position": [0, 5.262, 0],
+          "position": [0, 0.474, 1.51],
           "rotation": [0, 90, 0],
           "scaleFactor": 0.3
         },
@@ -212,7 +476,7 @@
         },
         "Sing": {
           "range": 2,
-          "light": 45,
+          "light": 57,
           "lightIntensity": 10,
           "maxLightRange": 8,
           "minLightRange": 1
@@ -234,10 +498,10 @@
         "children": [
           {
             "name": "BezierCurve.008",
-            "index": "11",
+            "index": "23",
             "static": false,
             "Transform": {
-              "position": [0, 0.262, 0],
+              "position": [0, 0.474, 1.51],
               "rotation": [270, 90, 0],
               "scaleFactor": 1
             },
@@ -248,70 +512,70 @@
           },
           {
             "name": "metarig",
-            "index": "12",
+            "index": "24",
             "static": false,
             "Transform": {
-              "position": [-0.009497756, 0.2502006, -0.005930603],
+              "position": [-0.009497756, 0.4622006, 1.504069],
               "rotation": [272.1246, 63.90548, 24.12019],
               "scaleFactor": 1
             },
             "children": [
               {
                 "name": "hips",
-                "index": "13",
+                "index": "25",
                 "static": false,
                 "Transform": {
-                  "position": [-0.01695251, 0.6005729, -0.0008775257],
+                  "position": [-0.01695251, 0.8125729, 1.509122],
                   "rotation": [14.2708, 88.23178, 0.8957102],
                   "scaleFactor": 1
                 },
                 "children": [
                   {
                     "name": "spine",
-                    "index": "14",
+                    "index": "26",
                     "static": false,
                     "Transform": {
-                      "position": [-0.001794163, 0.6603137, 0.0005546341],
+                      "position": [-0.001794163, 0.8723137, 1.510555],
                       "rotation": [11.70589, 90.02175, 358.9318],
                       "scaleFactor": 1
                     },
                     "children": [
                       {
                         "name": "chest",
-                        "index": "15",
+                        "index": "27",
                         "static": false,
                         "Transform": {
-                          "position": [0.009381745, 0.714254, -0.0004767142],
+                          "position": [0.009381745, 0.926254, 1.509523],
                           "rotation": [10.53347, 94.31126, 358.6709],
                           "scaleFactor": 1
                         },
                         "children": [
                           {
                             "name": "neck",
-                            "index": "16",
+                            "index": "28",
                             "static": false,
                             "Transform": {
-                              "position": [0.03235716, 0.8393632, -0.005169623],
+                              "position": [0.03235716, 1.051363, 1.50483],
                               "rotation": [25.22184, 91.69904, 358.2996],
                               "scaleFactor": 1
                             },
                             "children": [
                               {
                                 "name": "head",
-                                "index": "17",
+                                "index": "29",
                                 "static": false,
                                 "Transform": {
-                                  "position": [0.05443231, 0.8863467, -0.007366903],
+                                  "position": [0.05443231, 1.098347, 1.502633],
                                   "rotation": [20.04188, 89.63861, 358.1127],
                                   "scaleFactor": 1
                                 },
                                 "children": [
                                   {
                                     "name": "head_end",
-                                    "index": "18",
+                                    "index": "30",
                                     "static": false,
                                     "Transform": {
-                                      "position": [0.09468699, 0.9966295, -0.01098126],
+                                      "position": [0.09468699, 1.208629, 1.499019],
                                       "rotation": [20.04188, 89.63861, 358.1127],
                                       "scaleFactor": 1
                                     }
@@ -322,50 +586,50 @@
                           },
                           {
                             "name": "shoulder.L",
-                            "index": "19",
+                            "index": "31",
                             "static": false,
                             "Transform": {
-                              "position": [0.05345953, 0.797861, 0.0004624613],
+                              "position": [0.05345953, 1.009861, 1.510462],
                               "rotation": [289.367, 56.53955, 104.9902],
                               "scaleFactor": 1
                             },
                             "children": [
                               {
                                 "name": "upper_arm.L",
-                                "index": "20",
+                                "index": "32",
                                 "static": false,
                                 "Transform": {
-                                  "position": [0.02861151, 0.7852283, 0.0646062],
+                                  "position": [0.02861151, 0.9972283, 1.574606],
                                   "rotation": [14.47275, 135.6583, 172.4205],
                                   "scaleFactor": 0.9999999
                                 },
                                 "children": [
                                   {
                                     "name": "forearm.L",
-                                    "index": "21",
+                                    "index": "33",
                                     "static": false,
                                     "Transform": {
-                                      "position": [0.01701236, 0.6439772, 0.1042481],
+                                      "position": [0.01701236, 0.8559772, 1.614248],
                                       "rotation": [2.077247, 127.371, 171.1793],
                                       "scaleFactor": 1
                                     },
                                     "children": [
                                       {
                                         "name": "hand.L",
-                                        "index": "22",
+                                        "index": "34",
                                         "static": false,
                                         "Transform": {
-                                          "position": [0.02429127, 0.5327225, 0.1204267],
+                                          "position": [0.02429127, 0.7447225, 1.630427],
                                           "rotation": [358.2546, 221.723, 186.9121],
                                           "scaleFactor": 0.9999999
                                         },
                                         "children": [
                                           {
                                             "name": "hand.L_end",
-                                            "index": "23",
+                                            "index": "35",
                                             "static": false,
                                             "Transform": {
-                                              "position": [0.01414515, 0.4411532, 0.1257354],
+                                              "position": [0.01414515, 0.6531532, 1.635735],
                                               "rotation": [358.2546, 221.723, 186.9121],
                                               "scaleFactor": 1
                                             }
@@ -380,50 +644,50 @@
                           },
                           {
                             "name": "shoulder.R",
-                            "index": "24",
+                            "index": "36",
                             "static": false,
                             "Transform": {
-                              "position": [0.05245274, 0.7975717, -0.01217738],
+                              "position": [0.05245274, 1.009572, 1.497823],
                               "rotation": [291.4854, 142.4807, 249.9898],
                               "scaleFactor": 0.9999999
                             },
                             "children": [
                               {
                                 "name": "upper_arm.R",
-                                "index": "25",
+                                "index": "37",
                                 "static": false,
                                 "Transform": {
-                                  "position": [0.01251363, 0.7822778, -0.06751626],
+                                  "position": [0.01251363, 0.9942778, 1.442484],
                                   "rotation": [7.122828, 57.14896, 196.5564],
                                   "scaleFactor": 0.9999999
                                 },
                                 "children": [
                                   {
                                     "name": "forearm.R",
-                                    "index": "26",
+                                    "index": "38",
                                     "static": false,
                                     "Transform": {
-                                      "position": [0.02056783, 0.6423019, -0.1122347],
+                                      "position": [0.02056783, 0.8543019, 1.397765],
                                       "rotation": [342.0675, 59.9476, 196.3696],
                                       "scaleFactor": 1
                                     },
                                     "children": [
                                       {
                                         "name": "hand.R",
-                                        "index": "27",
+                                        "index": "39",
                                         "static": false,
                                         "Transform": {
-                                          "position": [0.06527613, 0.5394595, -0.1230505],
+                                          "position": [0.06527613, 0.7514595, 1.38695],
                                           "rotation": [10.11142, 332.5838, 198.6905],
                                           "scaleFactor": 0.9999999
                                         },
                                         "children": [
                                           {
                                             "name": "hand.R_end",
-                                            "index": "28",
+                                            "index": "40",
                                             "static": false,
                                             "Transform": {
-                                              "position": [0.09859378, 0.4534014, -0.1230571],
+                                              "position": [0.09859378, 0.6654014, 1.386943],
                                               "rotation": [10.11142, 332.5838, 198.6905],
                                               "scaleFactor": 1
                                             }
@@ -442,50 +706,53 @@
                   },
                   {
                     "name": "thigh.L",
-                    "index": "29",
+                    "index": "41",
                     "static": false,
                     "Transform": {
-                      "position": [-0.002600003, 0.6210616, 0.03391635],
+                      "position": [-0.002600003, 0.8330616, 1.543916],
                       "rotation": [25.3412, 257.6977, 180.0035],
                       "scaleFactor": 1
                     },
                     "children": [
                       {
                         "name": "shin.L",
-                        "index": "30",
+                        "index": "42",
                         "static": false,
                         "Transform": {
-                          "position": [0.07512486, 0.4530763, 0.05087807],
+                          "position": [0.07512486, 0.6650763, 1.560878],
                           "rotation": [319.5383, 263.8517, 175.9217],
                           "scaleFactor": 1
                         },
                         "children": [
                           {
                             "name": "foot.L",
-                            "index": "31",
+                            "index": "43",
                             "static": false,
                             "Transform": {
-                              "position": [-0.02497566, 0.3336224, 0.02883587],
+                              "position": [-0.02497566, 0.5456223, 1.538836],
                               "rotation": [26.96255, 258.5912, 175.5391],
                               "scaleFactor": 1
+                            },
+                            "Foot": {
+                              "left": true
                             },
                             "children": [
                               {
                                 "name": "toe.L",
-                                "index": "32",
+                                "index": "44",
                                 "static": false,
                                 "Transform": {
-                                  "position": [-0.004440861, 0.2938237, 0.02942591],
+                                  "position": [-0.004440861, 0.5058237, 1.539426],
                                   "rotation": [293.084, 71.23333, 190.184],
                                   "scaleFactor": 1
                                 },
                                 "children": [
                                   {
                                     "name": "toe.L_end",
-                                    "index": "33",
+                                    "index": "45",
                                     "static": false,
                                     "Transform": {
-                                      "position": [0.01684789, 0.284837, 0.03231077],
+                                      "position": [0.01684789, 0.496837, 1.542311],
                                       "rotation": [293.084, 71.23333, 190.184],
                                       "scaleFactor": 1
                                     }
@@ -496,30 +763,30 @@
                           },
                           {
                             "name": "heel.L",
-                            "index": "34",
+                            "index": "46",
                             "static": false,
                             "Transform": {
-                              "position": [-0.02497566, 0.3336224, 0.02883587],
+                              "position": [-0.02497566, 0.5456223, 1.538836],
                               "rotation": [74.76167, 92.67496, 191.879],
                               "scaleFactor": 1
                             },
                             "children": [
                               {
                                 "name": "heel.02.L",
-                                "index": "35",
+                                "index": "47",
                                 "static": false,
                                 "Transform": {
-                                  "position": [-0.03486852, 0.3069426, 0.01249716],
+                                  "position": [-0.03486852, 0.5189427, 1.522497],
                                   "rotation": [304.9934, 76.76261, 95.41423],
                                   "scaleFactor": 0.9999999
                                 },
                                 "children": [
                                   {
                                     "name": "heel.02.L_end",
-                                    "index": "36",
+                                    "index": "48",
                                     "static": false,
                                     "Transform": {
-                                      "position": [-0.0391024, 0.3054426, 0.03985364],
+                                      "position": [-0.0391024, 0.5174426, 1.549854],
                                       "rotation": [304.9934, 76.76261, 95.41423],
                                       "scaleFactor": 1
                                     }
@@ -534,50 +801,53 @@
                   },
                   {
                     "name": "thigh.R",
-                    "index": "37",
+                    "index": "49",
                     "static": false,
                     "Transform": {
-                      "position": [-0.0002428845, 0.6220906, -0.03395579],
+                      "position": [-0.0002428845, 0.8340906, 1.476044],
                       "rotation": [13.92808, 275.7378, 183.2028],
                       "scaleFactor": 1
                     },
                     "children": [
                       {
                         "name": "shin.R",
-                        "index": "38",
+                        "index": "50",
                         "static": false,
                         "Transform": {
-                          "position": [0.04524139, 0.4419666, -0.02808906],
+                          "position": [0.04524139, 0.6539665, 1.481911],
                           "rotation": [342.552, 271.788, 179.5675],
                           "scaleFactor": 1
                         },
                         "children": [
                           {
                             "name": "foot.R",
-                            "index": "39",
+                            "index": "51",
                             "static": false,
                             "Transform": {
-                              "position": [-0.001966763, 0.2918117, -0.0278041],
+                              "position": [-0.001966763, 0.5038117, 1.482196],
                               "rotation": [58.87246, 271.696, 180.0001],
                               "scaleFactor": 1
+                            },
+                            "Foot": {
+                              "left": false
                             },
                             "children": [
                               {
                                 "name": "toe.R",
-                                "index": "40",
+                                "index": "52",
                                 "static": false,
                                 "Transform": {
-                                  "position": [0.03635591, 0.2686588, -0.02893876],
+                                  "position": [0.03635591, 0.4806588, 1.481061],
                                   "rotation": [275.8496, 271.6955, 0.0004858686],
                                   "scaleFactor": 1
                                 },
                                 "children": [
                                   {
                                     "name": "toe.R_end",
-                                    "index": "41",
+                                    "index": "53",
                                     "static": false,
                                     "Transform": {
-                                      "position": [0.05951169, 0.2710322, -0.02962438],
+                                      "position": [0.05951169, 0.4830322, 1.480376],
                                       "rotation": [275.8496, 271.6955, 0.0004858686],
                                       "scaleFactor": 1
                                     }
@@ -588,30 +858,30 @@
                           },
                           {
                             "name": "heel.R",
-                            "index": "42",
+                            "index": "54",
                             "static": false,
                             "Transform": {
-                              "position": [-0.001966763, 0.2918117, -0.0278041],
+                              "position": [-0.001966763, 0.5038117, 1.482196],
                               "rotation": [51.98639, 92.18683, 180.6705],
                               "scaleFactor": 1
                             },
                             "children": [
                               {
                                 "name": "heel.02.R",
-                                "index": "43",
+                                "index": "55",
                                 "static": false,
                                 "Transform": {
-                                  "position": [-0.002127976, 0.2616687, -0.01484239],
+                                  "position": [-0.002127976, 0.4736687, 1.495158],
                                   "rotation": [281.7953, 89.68201, 272.0189],
                                   "scaleFactor": 0.9999999
                                 },
                                 "children": [
                                   {
                                     "name": "heel.02.R_end",
-                                    "index": "44",
+                                    "index": "56",
                                     "static": false,
                                     "Transform": {
-                                      "position": [-0.002930236, 0.2618683, -0.04255286],
+                                      "position": [-0.002930236, 0.4738683, 1.467447],
                                       "rotation": [281.7953, 89.68201, 272.0189],
                                       "scaleFactor": 1
                                     }
@@ -630,10 +900,10 @@
           },
           {
             "name": "Light (Player0)",
-            "index": "45",
+            "index": "57",
             "static": false,
             "Transform": {
-              "position": [0.1596, 0.6667, -1.490116E-08],
+              "position": [0.1596, 0.8787, 1.51],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -647,221 +917,13 @@
         ]
       },
       {
-        "name": "Block_Large_1 (2)",
-        "index": "46",
-        "static": false,
-        "Transform": {
-          "position": [-1, -1, -8.28],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 3.186162
-        },
-        "Kinematic": {
-        },
-        "children": [
-          {
-            "name": "Block.Large.1",
-            "index": "47",
-            "static": false,
-            "Transform": {
-              "position": [-1, -1, -8.28],
-              "rotation": [0, 0, 0],
-              "scaleFactor": 1
-            },
-            "MeshFilter": "Block.Large.1",
-            "MeshRenderer": "dungeon-stone1-albedo2",
-            "Kinematic": {
-            },
-            "children": [
-              {
-                "name": "Collider",
-                "index": "48",
-                "static": false,
-                "Transform": {
-                  "position": [-1, -1, -5.093836],
-                  "rotation": [0, 0, 0],
-                  "scaleFactor": 1
-                },
-                "Kinematic": {
-                },
-                "colliders": [
-                  {
-                    "type": "box",
-                    "isTrigger": false,
-                    "scaleX": 2,
-                    "scaleY": 2,
-                    "scaleZ": 2,
-                    "offset": [0, 0, 0]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "Block_Large_1 (3)",
-        "index": "49",
-        "static": false,
-        "Transform": {
-          "position": [-1, 5, -2.28],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 3.18616
-        },
-        "Kinematic": {
-        },
-        "children": [
-          {
-            "name": "Block.Large.1",
-            "index": "50",
-            "static": false,
-            "Transform": {
-              "position": [-1, 5, -2.28],
-              "rotation": [0, 0, 0],
-              "scaleFactor": 1
-            },
-            "MeshFilter": "Block.Large.1",
-            "MeshRenderer": "dungeon-stone1-albedo2",
-            "Kinematic": {
-            },
-            "children": [
-              {
-                "name": "Collider",
-                "index": "51",
-                "static": false,
-                "Transform": {
-                  "position": [-1, 5, 0.9061599],
-                  "rotation": [0, 0, 0],
-                  "scaleFactor": 1
-                },
-                "Kinematic": {
-                },
-                "colliders": [
-                  {
-                    "type": "box",
-                    "isTrigger": false,
-                    "scaleX": 2,
-                    "scaleY": 2,
-                    "scaleZ": 2,
-                    "offset": [0, 0, 0]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
         "name": "Block_Large_1 (4)",
-        "index": "52",
-        "static": false,
-        "Transform": {
-          "position": [5, -1, -2.28],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 3.18616
-        },
-        "Kinematic": {
-        },
-        "children": [
-          {
-            "name": "Block.Large.1",
-            "index": "53",
-            "static": false,
-            "Transform": {
-              "position": [5, -1, -2.28],
-              "rotation": [0, 0, 0],
-              "scaleFactor": 1
-            },
-            "MeshFilter": "Block.Large.1",
-            "MeshRenderer": "dungeon-stone1-albedo2",
-            "Kinematic": {
-            },
-            "children": [
-              {
-                "name": "Collider",
-                "index": "54",
-                "static": false,
-                "Transform": {
-                  "position": [5, -1, 0.9061599],
-                  "rotation": [0, 0, 0],
-                  "scaleFactor": 1
-                },
-                "Kinematic": {
-                },
-                "colliders": [
-                  {
-                    "type": "box",
-                    "isTrigger": false,
-                    "scaleX": 2,
-                    "scaleY": 2,
-                    "scaleZ": 2,
-                    "offset": [0, 0, 0]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "Block_Large_1 (5)",
-        "index": "55",
-        "static": false,
-        "Transform": {
-          "position": [-7, -1, -2.28],
-          "rotation": [0, 0, 0],
-          "scaleFactor": 3.18616
-        },
-        "Kinematic": {
-        },
-        "children": [
-          {
-            "name": "Block.Large.1",
-            "index": "56",
-            "static": false,
-            "Transform": {
-              "position": [-7, -1, -2.28],
-              "rotation": [0, 0, 0],
-              "scaleFactor": 1
-            },
-            "MeshFilter": "Block.Large.1",
-            "MeshRenderer": "dungeon-stone1-albedo2",
-            "Kinematic": {
-            },
-            "children": [
-              {
-                "name": "Collider",
-                "index": "57",
-                "static": false,
-                "Transform": {
-                  "position": [-7, -1, 0.9061599],
-                  "rotation": [0, 0, 0],
-                  "scaleFactor": 1
-                },
-                "Kinematic": {
-                },
-                "colliders": [
-                  {
-                    "type": "box",
-                    "isTrigger": false,
-                    "scaleX": 2,
-                    "scaleY": 2,
-                    "scaleZ": 2,
-                    "offset": [0, 0, 0]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "Block_Large_1 (6)",
         "index": "58",
         "static": false,
         "Transform": {
-          "position": [-1, -1, 3.72],
+          "position": [2.1, -1, 10.5],
           "rotation": [0, 0, 0],
-          "scaleFactor": 3.18616
+          "scaleFactor": 15.19936
         },
         "Kinematic": {
         },
@@ -871,7 +933,7 @@
             "index": "59",
             "static": false,
             "Transform": {
-              "position": [-1, -1, 3.72],
+              "position": [2.1, -1, 10.5],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -885,7 +947,7 @@
                 "index": "60",
                 "static": false,
                 "Transform": {
-                  "position": [-1, -1, 6.90616],
+                  "position": [2.1, -1, 25.69936],
                   "rotation": [0, 0, 0],
                   "scaleFactor": 1
                 },
@@ -911,7 +973,7 @@
         "index": "61",
         "static": true,
         "Transform": {
-          "position": [-1.97, 1.252, 2.02],
+          "position": [2.6, 1.252, 0.41],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -927,7 +989,7 @@
         "index": "62",
         "static": true,
         "Transform": {
-          "position": [-2.545, 1.252, -0.195],
+          "position": [-2.545, 1.96, -0.195],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -939,60 +1001,208 @@
         }
       },
       {
-        "name": "Statue_2",
+        "name": "Block_Large_1 (5)",
         "index": "63",
-        "static": true,
+        "static": false,
         "Transform": {
-          "position": [0.01398089, 0, 2.437],
+          "position": [-22.5, -1, -12.4],
           "rotation": [0, 0, 0],
-          "scaleFactor": 1
+          "scaleFactor": 15.19936
+        },
+        "Kinematic": {
         },
         "children": [
           {
-            "name": "Altar.2",
+            "name": "Block.Large.1",
             "index": "64",
-            "static": true,
+            "static": false,
             "Transform": {
-              "position": [0.01398089, 0, 2.437],
-              "rotation": [270, 270, 0],
-              "scaleFactor": 0.4
+              "position": [-22.5, -1, -12.4],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 1
             },
-            "MeshFilter": "Altar.2",
+            "MeshFilter": "Block.Large.1",
             "MeshRenderer": "dungeon-stone1-albedo2",
-            "colliders": [
+            "Kinematic": {
+            },
+            "children": [
               {
-                "type": "sphere",
-                "isTrigger": false,
-                "scale": 1.32,
-                "offset": [7.450581E-09, 3.725291E-09, 0]
+                "name": "Collider",
+                "index": "65",
+                "static": false,
+                "Transform": {
+                  "position": [-22.5, -1, 2.79936],
+                  "rotation": [0, 0, 0],
+                  "scaleFactor": 1
+                },
+                "Kinematic": {
+                },
+                "colliders": [
+                  {
+                    "type": "box",
+                    "isTrigger": false,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "scaleZ": 2,
+                    "offset": [0, 0, 0]
+                  }
+                ]
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "name": "Block_Large_1 (6)",
+        "index": "66",
+        "static": false,
+        "Transform": {
+          "position": [24.11, -1, -12.4],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 15.19936
+        },
+        "Kinematic": {
+        },
+        "children": [
           {
-            "name": "Statue.2",
-            "index": "65",
-            "static": true,
+            "name": "Block.Large.1",
+            "index": "67",
+            "static": false,
             "Transform": {
-              "position": [0.01398089, 0.358, 2.504],
-              "rotation": [0, 270, 0],
-              "scaleFactor": 0.4
+              "position": [24.11, -1, -12.4],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 1
             },
-            "MeshFilter": "Statue.2",
-            "MeshRenderer": "carvedlimestoneground1_Base_Color",
-            "SingingSwitch": {
-              "events": [2],
-              "maximumOutput": 3,
-              "lossRate": 1,
-              "timeBeforeLoss": 0.1
+            "MeshFilter": "Block.Large.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "Kinematic": {
             },
-            "colliders": [
+            "children": [
               {
-                "type": "box",
-                "isTrigger": false,
-                "scaleX": 0.970925,
-                "scaleY": 2.429153,
-                "scaleZ": 1.087409,
-                "offset": [-0.1420816, 1.212189, -0.1047038]
+                "name": "Collider",
+                "index": "68",
+                "static": false,
+                "Transform": {
+                  "position": [24.11, -1, 2.79936],
+                  "rotation": [0, 0, 0],
+                  "scaleFactor": 1
+                },
+                "Kinematic": {
+                },
+                "colliders": [
+                  {
+                    "type": "box",
+                    "isTrigger": false,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "scaleZ": 2,
+                    "offset": [0, 0, 0]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Block_Large_1 (7)",
+        "index": "69",
+        "static": false,
+        "Transform": {
+          "position": [0.94, -1, -40.08],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 15.19936
+        },
+        "Kinematic": {
+        },
+        "children": [
+          {
+            "name": "Block.Large.1",
+            "index": "70",
+            "static": false,
+            "Transform": {
+              "position": [0.94, -1, -40.08],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 1
+            },
+            "MeshFilter": "Block.Large.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "Kinematic": {
+            },
+            "children": [
+              {
+                "name": "Collider",
+                "index": "71",
+                "static": false,
+                "Transform": {
+                  "position": [0.94, -1, -24.88064],
+                  "rotation": [0, 0, 0],
+                  "scaleFactor": 1
+                },
+                "Kinematic": {
+                },
+                "colliders": [
+                  {
+                    "type": "box",
+                    "isTrigger": false,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "scaleZ": 2,
+                    "offset": [0, 0, 0]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Block_Large_1 (8)",
+        "index": "72",
+        "static": false,
+        "Transform": {
+          "position": [0.94, 23.96, -7.1],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 15.19936
+        },
+        "Kinematic": {
+        },
+        "children": [
+          {
+            "name": "Block.Large.1",
+            "index": "73",
+            "static": false,
+            "Transform": {
+              "position": [0.94, 23.96, -7.1],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 1
+            },
+            "MeshFilter": "Block.Large.1",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "Kinematic": {
+            },
+            "children": [
+              {
+                "name": "Collider",
+                "index": "74",
+                "static": false,
+                "Transform": {
+                  "position": [0.94, 23.96, 8.09936],
+                  "rotation": [0, 0, 0],
+                  "scaleFactor": 1
+                },
+                "Kinematic": {
+                },
+                "colliders": [
+                  {
+                    "type": "box",
+                    "isTrigger": false,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "scaleZ": 2,
+                    "offset": [0, 0, 0]
+                  }
+                ]
               }
             ]
           }
