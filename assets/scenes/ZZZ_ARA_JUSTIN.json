@@ -83,7 +83,7 @@
             "RotatingEvent": {
               "maximumCharge": 12,
               "angularVelocity": 0.5,
-              "radius": 1
+              "radius": 20
             },
             "children": [
               {
@@ -128,15 +128,8 @@
                       "scaleFactor": 0.4
                     },
                     "MeshFilter": "Altar.2",
-                    "MeshRenderer": "dungeon-stone1-albedo2",
-                    "colliders": [
-                      {
-                        "type": "sphere",
-                        "isTrigger": false,
-                        "scale": 1.32,
-                        "offset": [7.450581E-09, 3.725291E-09, 0]
-                      }
-                    ]
+                    "MeshRenderer": "dungeon-stone1-albedo2"
+
                   },
                   {
                     "name": "Statue.2",
@@ -152,19 +145,11 @@
                     "SingingSwitch": {
                       "events": [2],
                       "maximumOutput": 3,
-                      "lossRate": 0.5,
+                      "lossRate": 1,
                       "timeBeforeLoss": 2
-                    },
-                    "colliders": [
-                      {
-                        "type": "box",
-                        "isTrigger": false,
-                        "scaleX": 0.970925,
-                        "scaleY": 2.429153,
-                        "scaleZ": 1.087409,
-                        "offset": [-0.1420816, 1.212189, -0.1047038]
-                      }
-                    ]
+                    }
+
+
                   }
                 ]
               },
@@ -188,15 +173,8 @@
                       "scaleFactor": 0.4
                     },
                     "MeshFilter": "Altar.2",
-                    "MeshRenderer": "dungeon-stone1-albedo2",
-                    "colliders": [
-                      {
-                        "type": "sphere",
-                        "isTrigger": false,
-                        "scale": 1.32,
-                        "offset": [7.450581E-09, 3.725291E-09, 0]
-                      }
-                    ]
+                    "MeshRenderer": "dungeon-stone1-albedo2"
+
                   },
                   {
                     "name": "Statue.2",
@@ -212,19 +190,10 @@
                     "SingingSwitch": {
                       "events": [2],
                       "maximumOutput": 3,
-                      "lossRate": 0.5,
+                      "lossRate": 1,
                       "timeBeforeLoss": 2
-                    },
-                    "colliders": [
-                      {
-                        "type": "box",
-                        "isTrigger": false,
-                        "scaleX": 0.970925,
-                        "scaleY": 2.429153,
-                        "scaleZ": 1.087409,
-                        "offset": [-0.1420816, 1.212189, -0.1047038]
-                      }
-                    ]
+                    }
+
                   }
                 ]
               },
@@ -248,15 +217,8 @@
                       "scaleFactor": 0.4
                     },
                     "MeshFilter": "Altar.2",
-                    "MeshRenderer": "dungeon-stone1-albedo2",
-                    "colliders": [
-                      {
-                        "type": "sphere",
-                        "isTrigger": false,
-                        "scale": 1.32,
-                        "offset": [7.450581E-09, 3.725291E-09, 0]
-                      }
-                    ]
+                    "MeshRenderer": "dungeon-stone1-albedo2"
+
                   },
                   {
                     "name": "Statue.2",
@@ -272,19 +234,10 @@
                     "SingingSwitch": {
                       "events": [2],
                       "maximumOutput": 3,
-                      "lossRate": 0.5,
+                      "lossRate": 1,
                       "timeBeforeLoss": 2
-                    },
-                    "colliders": [
-                      {
-                        "type": "box",
-                        "isTrigger": false,
-                        "scaleX": 0.970925,
-                        "scaleY": 2.429153,
-                        "scaleZ": 1.087409,
-                        "offset": [-0.1420816, 1.212189, -0.1047038]
-                      }
-                    ]
+                    }
+
                   }
                 ]
               },
@@ -308,15 +261,8 @@
                       "scaleFactor": 0.4
                     },
                     "MeshFilter": "Altar.2",
-                    "MeshRenderer": "dungeon-stone1-albedo2",
-                    "colliders": [
-                      {
-                        "type": "sphere",
-                        "isTrigger": false,
-                        "scale": 1.32,
-                        "offset": [7.450581E-09, 3.725291E-09, 0]
-                      }
-                    ]
+                    "MeshRenderer": "dungeon-stone1-albedo2"
+
                   },
                   {
                     "name": "Statue.2",
@@ -332,123 +278,10 @@
                     "SingingSwitch": {
                       "events": [2],
                       "maximumOutput": 3,
-                      "lossRate": 0.5,
+                      "lossRate": 1,
                       "timeBeforeLoss": 2
-                    },
-                    "colliders": [
-                      {
-                        "type": "box",
-                        "isTrigger": false,
-                        "scaleX": 0.970925,
-                        "scaleY": 2.429153,
-                        "scaleZ": 1.087409,
-                        "offset": [-0.1420816, 1.212189, -0.1047038]
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "name": "Block_Large_1 (1)",
-                "index": "16",
-                "static": false,
-                "Transform": {
-                  "position": [5.21, 0.7899998, -1],
-                  "rotation": [0, 0, 0],
-                  "scaleFactor": 1
-                },
-                "Kinematic": {
-                },
-                "children": [
-                  {
-                    "name": "Block.Large.1",
-                    "index": "17",
-                    "static": false,
-                    "Transform": {
-                      "position": [5.21, 0.7899998, -1],
-                      "rotation": [0, 0, 0],
-                      "scaleFactor": 1
-                    },
-                    "MeshFilter": "Block.Large.1",
-                    "MeshRenderer": "dungeon-stone1-albedo2",
-                    "Kinematic": {
-                    },
-                    "children": [
-                      {
-                        "name": "Collider",
-                        "index": "18",
-                        "static": false,
-                        "Transform": {
-                          "position": [5.21, 0.7900001, -3.576279E-07],
-                          "rotation": [0, 0, 0],
-                          "scaleFactor": 1
-                        },
-                        "Kinematic": {
-                        },
-                        "colliders": [
-                          {
-                            "type": "box",
-                            "isTrigger": false,
-                            "scaleX": 2,
-                            "scaleY": 2,
-                            "scaleZ": 2,
-                            "offset": [0, 0, 0]
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "name": "Block_Large_1 (2)",
-                "index": "19",
-                "static": false,
-                "Transform": {
-                  "position": [-0.14, -0.6699991, 4.18],
-                  "rotation": [0, 0, 0],
-                  "scaleFactor": 1
-                },
-                "Kinematic": {
-                },
-                "children": [
-                  {
-                    "name": "Block.Large.1",
-                    "index": "20",
-                    "static": false,
-                    "Transform": {
-                      "position": [-0.14, -0.6699991, 4.18],
-                      "rotation": [0, 0, 0],
-                      "scaleFactor": 1
-                    },
-                    "MeshFilter": "Block.Large.1",
-                    "MeshRenderer": "dungeon-stone1-albedo2",
-                    "Kinematic": {
-                    },
-                    "children": [
-                      {
-                        "name": "Collider",
-                        "index": "21",
-                        "static": false,
-                        "Transform": {
-                          "position": [-0.14, -0.6699986, 5.18],
-                          "rotation": [0, 0, 0],
-                          "scaleFactor": 1
-                        },
-                        "Kinematic": {
-                        },
-                        "colliders": [
-                          {
-                            "type": "box",
-                            "isTrigger": false,
-                            "scaleX": 2,
-                            "scaleY": 2,
-                            "scaleZ": 2,
-                            "offset": [0, 0, 0]
-                          }
-                        ]
-                      }
-                    ]
+                    }
+
                   }
                 ]
               }
