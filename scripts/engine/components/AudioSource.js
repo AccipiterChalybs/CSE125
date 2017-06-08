@@ -6,19 +6,19 @@ const AudioState = {
 };
 
 class AudioSource extends Component {
-    constructor(name) {
+    constructor({audioName}) {
         super();
-        this.componentType = 'AudioSource';
+       this.componentType = 'AudioSource';
         this.state = AudioState.noSound;
         this.queue = [];
         this.sound3D = false;
         this.sound = null;
         if(!IS_SERVER) {
-          if (AudioEngine.soundArr[name].G_SSpace === 3) {
+          if (AudioEngine.soundArr[audioName].G_SSpace === 3) {
             this.sound3D = true;
-            this.sound = AudioEngine.playSound3d(name);
+            this.sound = AudioEngine.playSound3d(audioName);
           } else {
-            this.sound = AudioEngine.playSound2d(name);
+            this.sound = AudioEngine.playSound2d(audioName);
           }
           AudioEngine.stopAudio(this.sound[0], this.sound[1])
         }
@@ -88,7 +88,7 @@ class AudioSource extends Component {
     }
 
     applySerializedData(data) {
-        this.queue.push(data.s);
+      this.queue.push(data.s);
     }
 
     //Sound Stuff
@@ -100,6 +100,7 @@ class AudioSource extends Component {
         AudioEngine.resumeAudio(this.sound[0], this.sound[1]);
     }
 
+    // volume: 0 - 1
     changeVolume(volume) {
         if (this.sound === null) {
             console.error('no sound has been set');
@@ -141,6 +142,7 @@ class AudioSource extends Component {
         AudioEngine.setOrientation(this.sound[0], this.sound[1], x, y, z);
     }
 
+    // rate: 0.5 - 4
     setRate(rate) {
         if (this.sound === null) {
             console.error('no sound has been set');

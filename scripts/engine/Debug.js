@@ -8,7 +8,7 @@ Debug.clientUpdate = true; //Run the client in standalone mode, so it doesn't ne
 Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
 Debug.debugDisplay = true;
 Debug.quickLoad = true;
-Debug.autoStart = false;
+Debug.autoStart = true;
 Debug.tmp_shadowTwoSideRender = false; //Var to remind me to remove this when we get in new level geometry
 
 Debug.drawColliders = false;
@@ -376,6 +376,7 @@ Debug.Profiler.setUniform = function() {
     let checkIndex = Debug.Profiler.index - 1;
     while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
       checkIndex--;
+      if (checkIndex < 0) { console.log("ERR: stage not found!"); return; }
     }
     Debug.Profiler.data[Debug.Profiler.map[checkIndex]].uniforms++;
   }
@@ -386,6 +387,7 @@ Debug.Profiler.useShader = function() {
     let checkIndex = Debug.Profiler.index - 1;
     while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
       checkIndex--;
+      if (checkIndex < 0) { console.log("ERR: stage not found!"); return; }
     }
     Debug.Profiler.data[Debug.Profiler.map[checkIndex]].shaderUses++;
   }
@@ -396,6 +398,7 @@ Debug.Profiler.drawCall = function() {
     let checkIndex = Debug.Profiler.index - 1;
     while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
       checkIndex--;
+      if (checkIndex < 0) { console.log("ERR: stage not found!"); return; }
     }
     Debug.Profiler.data[Debug.Profiler.map[checkIndex]].draws++;
   }

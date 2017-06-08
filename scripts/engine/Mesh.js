@@ -13,7 +13,7 @@ class Mesh extends Component {
 
     draw() {
         let currentEntry = Mesh.prototype.meshMap[this.name];
-        if (!currentEntry) {console.log(this.name); return; }
+        if (!currentEntry) {/*console.log(this.name);*/ return; }
         if (Renderer.gpuData.vaoHandle !== currentEntry.vaoHandle) {
             GL.bindVertexArray(currentEntry.vaoHandle);
             Renderer.gpuData.vaoHandle = currentEntry.vaoHandle;

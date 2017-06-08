@@ -21,15 +21,16 @@ class Look extends Component{
   look() {
     //HACK need more robust but is dank
     let hit = {};
-    if (PhysicsEngine.raycastClosest(this.transform.gameObject.getComponent('PlayerController').cameraPos, this.transform.gameObject.getComponent('PlayerController').forward, this.range, 63 - FILTER_PLAYER - FILTER_LEVEL_GEOMETRY, hit))
+    if (PhysicsEngine.raycastClosest(this.transform.gameObject.getComponent('PlayerController').cameraPos,
+        this.transform.gameObject.getComponent('PlayerController').forward, this.range, 63 - FILTER_PLAYER, hit))
     {
-      // Debug.log("hello ", hit.collider.gameObject.id, hit.position);
+      // Debug.log("hello ", hit.collider.gameObject.name, hit.position);
       // Debug.drawTeapot(hit.position);
       let seen = hit.collider.gameObject.getComponent('Viewable');
       // Debug.log(hit);
       if (seen && seen !== null)
       {
-        Debug.log("I SAW HERE THERE SHE GOES");
+        // Debug.log("I SAW HERE THERE SHE GOES");
         seen.view(this.transform.gameObject);
       }
     }

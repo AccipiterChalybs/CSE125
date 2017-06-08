@@ -21,6 +21,7 @@ layout (location = 2) out vec4 PosOut; //position texture - rgb: position | a: r
 
 void main()
 {
+    vec4 color = texture(colorTex, vTexCoord);
 	vec3 mat = texture(matTex, vTexCoord).xyz;
 
     vec3 norm = normalize(vNormal);
@@ -29,7 +30,7 @@ void main()
     vec3 binormal = cross(tangent, norm);
     mat3 model = mat3(tangent, binormal, norm);
 
-	vec4 color = texture(colorTex, vTexCoord);
+
     ColorOut = vec4(teamColor * (1.0-color.a) + color.rgb, 1.0);
 
     norm = 2.0 * texture(normalTex, vTexCoord).xyz - vec3(1.0);

@@ -9,6 +9,9 @@
   <link href="styles/bootstrap.css" rel="stylesheet">
   <script src="scripts/bootstrap.min.js"></script>
   <link href="styles/menu.css" rel="stylesheet">
+  <link href="styles/tutorial.css" rel="stylesheet">
+  <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+  <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
 <!--<body onload="initialize()" style="background-image: url('assets/images/concept_environment_chamber_medival-spikes-statues.jpg');background-size: cover">-->
 <body onload="menuStart()">
@@ -98,9 +101,10 @@
         <div class="modal-header">
           <button class="close" data-dismiss="modal" type="button"><span>&times;</span></button>
           <h1 class="modal-title">Options</h1>
+          <p id="cu-msg">Client update is on</p>
         </div>
         <div class="modal-body">
-          <div id="controls">
+          <div class="half-panel" id="controls">
             <h2>Controls</h2>
             <div class="modal-row" id="forward">
               <div class="text"></div><div class="btn btn-default"></div>
@@ -121,6 +125,23 @@
               <div class="text"></div><div class="btn btn-default"></div>
             </div>
           </div>
+          <div class="half-panel" id="graphics">
+            <h2>Graphics</h2>
+            <div class="modal-row" id="point-shadows">
+              <div class="text">shadows</div>
+              <div class="help" id="count"></div>
+              <div class="slider"></div>
+              <div class="toggle btn btn-default">Off</div>
+            </div>
+            <div class="modal-row" id="gamma">
+              <div class="text">set gamma</div>
+              <input class="number" type="text" placeholder=""></input>
+            </div>
+            <div class="modal-row" id="exposure">
+              <div class="text">set exposure</div>
+              <input class="number" type="text" placeholder=""></input>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -128,16 +149,51 @@
 </div>
 <canvas style="width:100%; height:100%; position: absolute; top:0;left:0;z-index:-1;"></canvas>
 
+<div class="tutorial-banner" id="movement-tutorial" style="display:none;">
+  <div class="invertedT">
+    <div class="key-img"></div>
+    <div class="key-img"></div>
+    <div class="key-img"></div>
+    <div class="key-img"></div>
+  </div>
+  <div class="text">to move</div>
+</div>
+
+<div class="tutorial-banner" id="action-tutorial" style="display:none;">
+  <div class="key-img"></div>
+  <div class="text">to do an action</div>
+</div>
+
+<div class="tutorial-banner" id="sing-tutorial" style="display:none;">
+  <div class="key-img">left click</div>
+  <div class="text">to sing</div>
+</div>
+
+<div class="tutorial-banner" id="dontsing-tutorial" style="display:none;">
+  <div class="text">don't sing when the evil is around!</div>
+</div>
+
+<div class="tutorial-banner" id="walk-tutorial" style="display:none;">
+  <div class="key-img"></div>
+  <div class="text">to walk</div>
+</div>
+
+<div class="tutorial-banner" id="look-tutorial" style="display:none;">
+  <div class="text">move</div>
+  <div class="img mouse-img.png"></div>
+  <div class="text">to look around</div>
+</div>
+
+
 <script src="scripts/engine/PhysicsEngine.js"></script>
 <script src="https://cdn-orig.socket.io/socket.io-1.2.1.js"></script>
 <script src="scripts/engine/Component.js"></script>
 <script src="scripts/engine/components/Collider.js"></script>
 <script src="scripts/game/Event.js"></script>
 <script src="scripts/game/EventContainer.js"></script>
+<script src="scripts/engine/Mesh.js"></script>
 <script src="scripts/game/events/RaycastEvent.js"></script>
 <script src="scripts/game/events/SingingEvent.js"></script>
-
-
 <script src="scripts/engine/Utility.js"></script>
 <script src="scripts/howler.core.min.js"></script>
 <script src="scripts/howler.spatial.min.js"></script>
@@ -174,18 +230,30 @@
 <script src="scripts/game/ZoomMouse.js"></script>
 <script src="scripts/game/Playerable.js"></script>
 <script src="scripts/game/PlayerController.js"></script>
-<script src="scripts/game/StatueController.js"></script>
+<script src="scripts/game/SingingStatueController.js"></script>
+<script src="scripts/game/SimonSays.js"></script>
 <script src="scripts/game/Sing.js"></script>
 <script src="scripts/game/Listenable.js"></script>
 <script src="scripts/game/Look.js"></script>
 <script src="scripts/game/Viewable.js"></script>
+<script src="scripts/game/Foot.js"></script>
+<script src="scripts/game/Floor.js"></script>
 <script src="scripts/game/SingingSwitch.js"></script>
+<script src="scripts/game/SimonSaysSwitch.js"></script>
 <script src="scripts/game/RaycastSwitch.js"></script>
+<script src="scripts/game/TriggerSwitch.js"></script>
+<script src="scripts/game/TriggerEvent.js"></script>
+<script src="scripts/game/PlayAudio.js"></script>
 <script src="scripts/game/events/DoorEvent.js"></script>
 <script src="scripts/game/events/KeyEvent.js"></script>
 <script src="scripts/game/events/HealEvent.js"></script>
 <script src="scripts/game/events/CheckpointEvent.js"></script>
 <script src="scripts/game/events/MoveTowardsEvent.js"></script>
+<script src="scripts/game/events/SingStatueEvent.js"></script>
+<script src="scripts/game/events/StopSingStatueEvent.js"></script>
+<script src="scripts/game/events/StopLightEvent.js"></script>
+<script src="scripts/game/events/PlayAudioEvent.js"></script>
+<script src="scripts/game/events/FadeInAudioEvent.js"></script>
 <script src="scripts/game/TriggerTest.js"></script>
 <script src="scripts/game/RotateOverTime.js"></script>
 <script src="scripts/game/RotateArrowKey.js"></script>
@@ -198,6 +266,8 @@
 <script src="scripts/game/AnimationState.js"></script>
 <script src="scripts/game/ObjectLogicState.js"></script>
 <script src="scripts/game/PlayerLogicState.js"></script>
+<script src="scripts/engine/PrefabFactory.js"></script>
+<script src="scripts/engine/components/ClothMesh.js"></script>
 <script src="scripts/engine/components/Decal.js"></script>
 <script src="scripts/engine/components/Animation.js"></script>
 <script src="scripts/engine/components/ParticleSystem.js"></script>
@@ -215,7 +285,6 @@
 <script src="scripts/engine/GLExtensions.js"></script>
 <script src="scripts/engine/Input.js"></script>
 <script src="scripts/engine/Material.js"></script>
-<script src="scripts/engine/Mesh.js"></script>
 <script src="scripts/engine/ObjectLoader.js"></script>
 <script src="scripts/engine/SceneLoader.js"></script>
 <script src="scripts/engine/RenderPass.js"></script>
@@ -228,6 +297,7 @@
 
 <script src="scripts/engine/main.js"></script>
 <script src="scripts/UI/utilities.js"></script>
+<script src="scripts/UI/tutorial.js"></script>
 <script src="scripts/UI/mainpage.js"></script>
 <script>
   var test= function () {

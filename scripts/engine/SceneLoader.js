@@ -3,8 +3,10 @@
  */
 const c = {
   AIController, Animation, AudioListener, AudioSource, BoxCollider, Camera,
-  ClientStickTo, Collider, CompoundCollider, Decal, Light, ParticleSystem,
-  SphereCollider, Transform, StatueController,
+  ClientStickTo, Collider, CompoundCollider, Decal, Foot, Floor, Light, ParticleSystem,
+  SphereCollider, Transform, SingingStatueController, TriggerSwitch, MoveTowardsEvent,
+  SingStatueEvent, StopSingStatueEvent, StopLightEvent, PlayAudio, PlayAudioEvent,
+  FadeInAudioEvent,
   AnimationGraph, AnimationState, DoorEvent, Event, EvilController, HealEvent,
   KeyEvent, Listenable, Look, ObjectLogicState, PlayerController,
   PlayerLogicState, PlayerTable, RaycastSwitch, RotateArrowKey, RotateMouse,
@@ -17,12 +19,14 @@ const SceneLoader = {
   // All components we load into gameObject
   components: c,
   // Ignore these in general pass, likely because they are already handled specially
-  ignoreComponents: ["name", "index", "static", "Kinematic", "Animator", "AnimatorJS", "SkinnedMeshRenderer", "MeshFilter", "MeshRenderer",
+  ignoreComponents: ["name", "index", "static", "Kinematic", "Animator", "AnimatorJS", "SkinnedMeshRenderer",
+                     "ClothMesh", "MeshFilter", "MeshRenderer",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
   shadowLightsAvailable: 1,
   tone: 0,
 
   loadScene: function(filename) {
+    this.tone=0;
     let loadId = GameEngine.registerLoading();
     JsonLoader.loadJSON(filename, SceneLoader._finishLoadScene.bind(this, loadId, filename));
   },
@@ -38,10 +42,9 @@ const SceneLoader = {
 
       for (let matData of scene.materialList) {
         //TODO support more shaders (e.g. animation)
-        let forwardShaders = (matData.animated) ? Renderer.FORWARD_PBR_SHADER_ANIM : Renderer.FORWARD_PBR_SHADER;
+        let transparentShader = Renderer.DEFERRED_PBR_SHADER_CUTOUT;
         let deferredShaders = (matData.animated) ? Renderer.DEFERRED_PBR_SHADER_ANIM : Renderer.DEFERRED_PBR_SHADER;
-        let shaderId = (matData.forward) ? forwardShaders : deferredShaders;
-        console.log(shaderId, Renderer.FORWARD_PBR_SHADER);
+        let shaderId = (matData.transparent) ? transparentShader : deferredShaders;
         let mat = new Material(Renderer.getShader(shaderId), !!(matData.forward));
         mat.setTexture(MaterialTexture.COLOR, new Texture(matData.color));
         mat.setTexture(MaterialTexture.MAT, new Texture(matData.mat, false));
@@ -140,14 +143,15 @@ const SceneLoader = {
     if (!IS_SERVER) {
 
       //TODO check spelling of SkinnedMeshRenderer
-      if ("MeshFilter" in currentNode || "SkinnedMeshRenderer" in currentNode) {
-        let meshName = currentNode["MeshFilter"] || currentNode["SkinnedMeshRenderer"].name;
+      if ("MeshFilter" in currentNode || "SkinnedMeshRenderer" in currentNode || "ClothMesh" in currentNode) {
+        let isCloth = "ClothMesh" in currentNode;
+        let meshName = (isCloth) ? "TEST" : currentNode["MeshFilter"] || currentNode["SkinnedMeshRenderer"].name;
         if (meshName === 'Plane' || meshName === 'Cube' || meshName === 'Sphere' || meshName === 'Capsule') {
           console.log(meshName = 'SceneLoader');
         //  nodeObject.transform.scale(5);
           nodeObject.transform.rotateX(Math.PI/2);
         }
-        let mesh = new Mesh(meshName);
+        let mesh = (isCloth) ? new ClothMesh(meshName) : new Mesh(meshName);
 
 //TEMP
         let materialName = currentNode["MeshRenderer"] || currentNode["SkinnedMeshRenderer"].material;
@@ -172,19 +176,7 @@ const SceneLoader = {
       switch (generalCompName) {
         case "PlayerController":
           PlayerTable.addPlayer(nodeObject);
-
-          if(Debug.clientUpdate){
-            if(this.tone===0){
-              let pc = new PlayerController();
-              nodeObject.addComponent(pc);
-            }
-          }else{
-            let pc = new PlayerController();
-            nodeObject.addComponent(pc);
-          }
-
-          nodeObject.addComponent(new AudioSource("Tone0"+this.tone));
-          this.tone+=1;
+          nodeObject.addComponent(new PlayerController());
           break;
         default:
           nodeObject.addComponent(new c[generalCompName](compData));

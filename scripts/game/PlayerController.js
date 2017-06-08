@@ -50,11 +50,6 @@ class PlayerController extends Playerable{
   }
 
   updateComponentClient(){
-    if(!this.injured&& this.singing === 1 && Time.time >= this._nextSingTime) {
-      this._singingSrc.playSound();
-    }else{
-      this._singingSrc.pauseSound();
-    }
   }
 
   updateComponent(){
@@ -82,7 +77,6 @@ class PlayerController extends Playerable{
 
     if(this.singing === 0 && this._lastSingInput === 1){
       this._nextSingTime = Time.time + this._singingCooldown;
-      // if(!IS_SERVER) this._singingSrc.pauseSound();
     }
 
     this._lastSingInput = this.singing;
@@ -91,10 +85,6 @@ class PlayerController extends Playerable{
 
     }else if(!this.injured && this.singing === 1 && Time.time >= this._nextSingTime) {
       this.state.status = 'singing';
-      //if !injured
-
-      // if(!IS_SERVER) this._singingSrc.resumeSound();
-      //
     }else if(this.walking === 1){
       this.state.status = 'walking';
     }else{
@@ -147,7 +137,7 @@ class PlayerController extends Playerable{
       this.transform.setRotation(quat.create());
       this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
       let animState = (this.state.status === 'singing') ? 2 : 3;
-      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(2, true);
+      // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').play(3, true);
       // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').resume();
     } else {
       // if (this.gameObject.getComponent('Animation'))this.gameObject.getComponent('Animation').stop();
@@ -162,6 +152,7 @@ class PlayerController extends Playerable{
   }
 
   heal(){
+    // Debug.log("Healed");
     this.injured = false;
   }
 

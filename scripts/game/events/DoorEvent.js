@@ -4,9 +4,6 @@
 // const PLAYER_ACCELERATION = 4;
 // const COOLDOWN_SINGING = 0.1;   // In seconds
 
-const OPEN_SPEED = 0.5;
-const CLOSE_SPEED = 0.5;
-
 class DoorEvent extends SingingEvent{
   constructor(params = {maximumCharge: 3, _unlocked: true, openPos: vec3.create(), closePos: vec3.create()}){
     super({maximumCharge: params.maximumCharge});
@@ -16,9 +13,11 @@ class DoorEvent extends SingingEvent{
     this.closePos = vec3.copy(vec3.create(), params.closePos);
 
     this._unlocked = params._unlocked;
+    this._audioSrc = null;
   }
 
   start() {
+    this._audioSrc = this.transform.gameObject.getComponent('AudioSource');
   }
 
   startClient() {
@@ -26,6 +25,21 @@ class DoorEvent extends SingingEvent{
 
   updateComponent() {
     super.updateComponent();
+    if(this._audioSrc && this._audioSrc !== null) {
+      // Debug.log(this._currentState);
+      if (this._currentState === EventState.discharging || this._currentState === EventState.charging) {
+        // this._audioSrc.playSound();
+        // Debug.log("DOSHDE");
+        this._audioSrc.setState(AudioState.playSound);
+      } else {
+        // this._audioSrc.pauseSound();
+        this._audioSrc.setState(AudioState.pause);
+      }
+    }
+  }
+
+  updateComponentClient(){
+
   }
 
   onUncharged() {
@@ -49,17 +63,4 @@ class DoorEvent extends SingingEvent{
     let newPos = vec3.scale(vec3.create(), this.openPos, this.currentCharge / this.maximumCharge);
     this.transform.setPosition(newPos);
   }
-  // onRaycast(interactingObj) {
-  //   let pController = interactingObj.getComponent('PlayerController');
-  //   // Debug.log(this._unlocked,pController.keys);
-  //   if (!this._unlocked && pController && pController !== null && pController.keys > 0) {
-  //     Debug.log('unlocking');
-  //     let audio = this.gameObject.getComponent('AudioSource');
-  //     if (audio && audio !== null) audio.setState(AudioState.playSound);
-  //     this._unlocked = true;
-  //     pController.keys--; //Becareful in future here is HACK what if has lots of keys
-  //     // interactingObj.transform.children.splice(0, 1);
-  //   }
-  // }
-
 }

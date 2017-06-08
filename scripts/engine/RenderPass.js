@@ -200,7 +200,11 @@ class ShadowPass extends ForwardPass
 
         let mat = mesh.material;
         let s = null;
-        if (mat.shader === Renderer.getShader(Renderer.DEFERRED_PBR_SHADER_ANIM)) s = Renderer.getShader(animShader);
+        if (mat.shader === Renderer.getShader(Renderer.DEFERRED_PBR_SHADER_CUTOUT)) {
+          mat._useTexture(MaterialTexture.COLOR, 0);
+          s = Renderer.getShader(forwardShader);
+        }
+        else if (mat.shader === Renderer.getShader(Renderer.DEFERRED_PBR_SHADER_ANIM)) s = Renderer.getShader(animShader);
         else s = Renderer.getShader(regShader);
         if (s !== Renderer.currentShader) {
           s.use();
@@ -450,6 +454,10 @@ class BloomPass extends RenderPass
         this._ssaoBuffer = new Framebuffer(screenWidth * this.ssao_res, screenHeight * this.ssao_res, 1, false, false);
         this._ssaoBufferBlur = [new Framebuffer(screenWidth * this.ssao_blur_res, screenHeight * this.ssao_blur_res, 1, false, false),
           new Framebuffer(screenWidth * this.ssao_blur_res, screenHeight * this.ssao_blur_res, 1, false, false)];
+
+
+        this._fogBuffer = new Framebuffer(screenWidth, screenHeight, 1, false, false, [GL.RGBA]);
+
     }
     
     render() {
@@ -488,7 +496,7 @@ class BloomPass extends RenderPass
         }
         lumen /= this._averageSize*this._averageSize;
 
-        lumen=1; //TODO remove to re-enable expsoure adjustment
+        lumen=1; //TODO remove to re-enable exposure adjustment
         if (!isNaN(lumen)) {
             this.averageExposure = this.averageExposure * (1 - newDataWeight) + lumen * (newDataWeight);
         }
@@ -524,6 +532,11 @@ class BloomPass extends RenderPass
         }
 
 
+      //Render Post-Process Fog
+      this._fogBuffer.bind([buffers[0]], false, true);
+      Renderer.getShader(Renderer.FBO_FOG).use();
+      this._deferredPass.buffers.bindTexture(2, 2);
+      this._deferredPass.fbo.draw();
 
 
       //SSAO--------------------------------
@@ -531,7 +544,6 @@ class BloomPass extends RenderPass
       ssao.use();
       this._ssaoBuffer.bind([buffers[0]], false);
       this._deferredPass.buffers.bindTexture(2, 2);
-      ssao.setUniform('uScreenSize', vec2.fromValues(Renderer.getWindowWidth() * this.ssao_res, Renderer.getWindowHeight() * this.ssao_res), UniformTypes.vec2 );
       this._deferredPass.fbo.draw();
 
       s2.setUniform("level", 1, UniformTypes.u1f);
@@ -551,6 +563,9 @@ class BloomPass extends RenderPass
       //-------------------------------------
 
 
+
+
+
         Framebuffer.unbind();
         s3.use();
 
@@ -561,8 +576,9 @@ class BloomPass extends RenderPass
         this._blurBuffers[3][1].bindTexture(4, 0);
         this._blurBuffers[4][1].bindTexture(5, 0);
         this._ssaoBufferBlur[1].bindTexture(6, 0);
+        this._fogBuffer.bindTexture(7, 0);
 
-        s3.setUniform("exposure", this.averageExposure, UniformTypes.u1f);
+        //TODO re-enable this when ready: //s3.setUniform("exposure", this.averageExposure, UniformTypes.u1f);
 
         this._deferredPass.fbo.draw();
 
@@ -645,8 +661,6 @@ class BloomPass extends RenderPass
       let screenWidth = Renderer.getWindowWidth();
       let screenHeight = Renderer.getWindowHeight();
 
-      this._averagePass.resize(this._averageSize, this._averageSize);
-
       this._brightPass.resize(screenWidth, screenHeight);
       this._blurBuffers[0][0].resize(screenWidth  / 2, screenHeight / 2);
       this._blurBuffers[0][1].resize(screenWidth  / 2, screenHeight / 2);
@@ -664,5 +678,7 @@ class BloomPass extends RenderPass
       this._ssaoBuffer.resize(screenWidth * this.ssao_res, screenHeight * this.ssao_res);
       this._ssaoBufferBlur[0].resize(screenWidth * this.ssao_blur_res, screenHeight * this.ssao_blur_res);
       this._ssaoBufferBlur[1].resize(screenWidth * this.ssao_blur_res, screenHeight * this.ssao_blur_res);
+
+      this._fogBuffer.resize(screenWidth, screenHeight);
     }
 }
