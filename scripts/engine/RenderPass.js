@@ -247,7 +247,9 @@ class DeferredPrePass extends RenderPass
 
     let buffers = [GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2];
     this.buffers.bind(buffers);
+    Renderer.prepareMainFrustumCulling();
     for (let mesh of Renderer.renderBuffer.deferred) {
+      if (!Renderer.sphereInFrustum(mesh.getSphereCenter(), mesh.getSphereRadius())) {continue;}
       mesh.material.bind();
       mesh.draw();
     }

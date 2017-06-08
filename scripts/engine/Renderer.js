@@ -682,56 +682,82 @@ const Renderer  = {
   getWindowHeight: function() {
       return Renderer.height;
   },
+
+
+  FrustumCulling: {},
+  prepareFrustumCulling: function (angle, ratio, nearD, farD, p, l, up) {
+    Renderer.setCamInternal(angle, ratio, nearD, farD);
+    Renderer.setCamDef(p, l, up)
+  },
+
+  prepareMainFrustumCulling: function () {
+    let angle = Renderer.camera.getFOV();
+    let ratio = Renderer.getWindowWidth() / Renderer.getWindowHeight();
+    let nearD = Renderer.NEAR_DEPTH;
+    let farD = Renderer.FAR_DEPTH;
+    Renderer.setCamInternal(angle, ratio, nearD, farD);
+    Renderer.setCamDef(Renderer.camera.transform.getWorldPosition(), Renderer.camera.transform.getForward(), Renderer.camera._up)
+  },
+
   //culling stuff
   setCamInternal: function (angle,ratio, nearD, farD) {
-    Renderer.c_Ratio=ratio;
-    Renderer.c_FarD=farD;
-    Renderer.c_NearD=nearD;
+    Renderer.FrustumCulling.c_Ratio=ratio;
+    Renderer.FrustumCulling.c_FarD=farD;
+    Renderer.FrustumCulling.c_NearD=nearD;
     let tanAngle = Math.tan(angle);
-    Renderer.c_angleTangent=tanAngle;
-    Renderer.c_sphereFactorY=1/Math.cos(angle);
+    Renderer.FrustumCulling.c_angleTangent=tanAngle;
+    Renderer.FrustumCulling.c_sphereFactorY=1/Math.cos(angle);
     let angleX = Math.atan(tanAngle*ratio);
-    Renderer.c_sphereFactorX = 1/Math.cos(angleX);
+    Renderer.FrustumCulling.c_sphereFactorX = 1/Math.cos(angleX);
   },
-  setCamDef: function (p,l,up ) {
+  setCamDef: function (p,ldir,up ) {
     //l&u are arrays
-    let z = [l[0]-p[0],l[1]-p[1],l[2]-p[2]];
-    let tempLength = Math.sqrt(z[0]*z[0]+z[1]*z[1]+z[2]*z[2]);
-    z = [z[0]/tempLength, z[1]/tempLength,z[2]/tempLength];
-    Renderer.c_Z=z;
+    let z = vec3.copy(vec3.create(),ldir)
+    vec3.normalize(z, z);
+    Renderer.FrustumCulling.c_Z=z;
     //X axis is crossproduct of z axis given and up
     let x = z[0]*up[0]+z[1]*up[1]+z[2]*up[2];
-    tempLength = Math.sqrt(x[0]*x[0]+x[1]*x[1]+x[2]*x[2]);
+    let tempLength = Math.sqrt(x[0]*x[0]+x[1]*x[1]+x[2]*x[2]);
     x = [x[0]/tempLength, x[1]/tempLength, x[2]/tempLength];
-    Renderer.c_X=x;
+    Renderer.FrustumCulling.c_X=x;
     let y = z[0]*x[0]+z[1]*x[1]+z[2]*x[2];
-    Renderer.c_Y=y;
+    Renderer.FrustumCulling.c_Y=y;
+    Renderer.FrustumCulling.camWorldPos = p;
+
+    //save on some garbage collection
+    Renderer.FrustumCulling.tmp1 = vec3.create();
   },
   pointInFrustum: function (x,y,z) {
       
   },
   sphereInFrustum: function (p,radius) {
     //p is an array of xyz
-    let result=0;
-    let camPos=Renderer.camera.gameObject.transform.getWorldPosition();
-    let v = [p[0]-camPos[0], p[1]-camPos[1],p[2]-camPos[2]];
-    //inner product
-    let az = [v[0]*(-Renderer.c_Z[0]), v[1]*(-Renderer.c_Z[1]),v[2]*(-Renderer.c_Z[2])]
-    if(az> Renderer.c_FarD+radius || az< Renderer.c_NearD-radius){
-        return "outside";
+    let v = vec3.sub(Renderer.FrustumCulling.tmp1, p, Renderer.FrustumCulling.camWorldPos);
+    let az = vec3.dot(v, Renderer.FrustumCulling.c_Z);
+
+    if (az > Renderer.FrustumCulling.c_FarD + radius || az < Renderer.FrustumCulling.c_NearD - radius) {
+      return false;
     }
-    if(az>Renderer.c_FarD-radius||az<Renderer.c_NearD-radius){
-        result="intersect";
+    if (az > Renderer.FrustumCulling.c_FarD - radius || az < Renderer.FrustumCulling.c_NearD - radius) {
+      //return true;
     }
-    let ay= [v[0]-Renderer.c_Y[0], v[1]-Renderer.c_Y[1],v[2]-Renderer.c_Y[2]];
-    let d = Renderer.c_sphereFactorY;
-    az *= Renderer.c_angleTangent;
-    if (ay > az+d || ay < -az-d){
-        return "outside";
+    let ay = vec3.dot(v, Renderer.c_Y);
+    let d = Renderer.FrustumCulling.c_sphereFactorY * radius;
+    az *= Renderer.FrustumCulling.c_angleTangent;
+    if (ay > az + d || ay < -az - d) {
+      return false;
     }
-    if (ay > az-d || ay < -az+d){
-        result = "intersect";
+    if (ay > az - d || ay < -az + d) {
+      //return true;
     }
+
+    let ax = vec3.dot(v, Renderer.c_X);
+    az *= Renderer.FrustumCulling.c_Ratio;
+    d = Renderer.FrustumCulling.c_sphereFactorX * radius;
+    if (ax > az + d || ax < -az - d) {
+      return false;
+    }
+    return true;
     
   }
 };
