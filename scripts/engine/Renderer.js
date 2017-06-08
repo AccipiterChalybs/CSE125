@@ -450,18 +450,18 @@ const Renderer  = {
         lastTime = Time.time();
 */
       //Culling Variables
-      Renderer.c_Ratio=0;
-      Renderer.c_CamRef=[0,0,0];
-      Renderer.c_NearD=0;
-      Renderer.c_FarD=0;
-      Renderer.c_Width=0;
-      Renderer.c_Height=0;
-      Renderer.c_sphereFactorX=0;
-      Renderer.c_sphereFactorY=0;
-      Renderer.c_Z=[0,0,0];
-      Renderer.c_X=[0,0,0];
-      Renderer.c_Y=[0,0,0];
-      Renderer.c_angleTangent=0;
+      Renderer.FrustumCulling.c_Ratio=0;
+      Renderer.FrustumCulling.c_CamRef=[0,0,0];
+      Renderer.FrustumCulling.c_NearD=0;
+      Renderer.FrustumCulling.c_FarD=0;
+      Renderer.FrustumCulling.c_Width=0;
+      Renderer.FrustumCulling.c_Height=0;
+      Renderer.FrustumCulling.c_sphereFactorX=0;
+      Renderer.FrustumCulling.c_sphereFactorY=0;
+      Renderer.FrustumCulling.c_Z=[0,0,0];
+      Renderer.FrustumCulling.c_X=[0,0,0];
+      Renderer.FrustumCulling.c_Y=[0,0,0];
+      Renderer.FrustumCulling.c_angleTangent=0;
   },
 
 
