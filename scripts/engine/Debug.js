@@ -9,7 +9,7 @@ Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that
 Debug.debugDisplay = true;
 Debug.quickLoad = true;
 Debug.autoStart = true;
-Debug.tmp_shadowTwoSideRender = true; //Var to remind me to remove this when we get in new level geometry
+Debug.tmp_shadowTwoSideRender = false; //Var to remind me to remove this when we get in new level geometry
 
 Debug.drawColliders = false;
 
@@ -114,14 +114,14 @@ Debug.logExposure = function() {
   Debug.exposureElement.innerText = "Exposure: " + Renderer.postPass.averageExposure;
 };
 
-Debug.logAnimationState = () => {
+Debug.logAnimationState = () => {/*
   const p = PlayerTable.currentPlayer;
   const o = PlayerTable.getPlayer();
   const ls = o.getComponent('PlayerController').state;
   const s = ls.state.name;
   const m = ls.moveAmt;
   const l = ls.status;
-  Debug.animationStateElement.innerText = `Player ${p} is ${s} with ms ${m} and status ${l}`;
+  Debug.animationStateElement.innerText = `Player ${p} is ${s} with ms ${m} and status ${l}`;*/
 };
 
 //Go through Debug, so easier to find and remove;

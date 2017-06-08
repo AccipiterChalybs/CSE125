@@ -449,7 +449,20 @@ const Renderer  = {
 
         lastTime = Time.time();
 */
-    },
+      //Culling Variables
+      Renderer.FrustumCulling.c_Ratio=0;
+      Renderer.FrustumCulling.c_CamRef=[0,0,0];
+      Renderer.FrustumCulling.c_NearD=0;
+      Renderer.FrustumCulling.c_FarD=0;
+      Renderer.FrustumCulling.c_Width=0;
+      Renderer.FrustumCulling.c_Height=0;
+      Renderer.FrustumCulling.c_sphereFactorX=0;
+      Renderer.FrustumCulling.c_sphereFactorY=0;
+      Renderer.FrustumCulling.c_Z=[0,0,0];
+      Renderer.FrustumCulling.c_X=[0,0,0];
+      Renderer.FrustumCulling.c_Y=[0,0,0];
+      Renderer.FrustumCulling.c_angleTangent=0;
+  },
 
 
   //Runs after everything is loaded, before loop
@@ -693,6 +706,82 @@ const Renderer  = {
 
   getWindowHeight: function() {
       return Renderer.height;
+  },
+
+  FrustumCulling: {},
+  prepareFrustumCulling: function (angle, ratio, nearD, farD, p, l, up) {
+    Renderer.setCamInternal(angle, ratio, nearD, farD);
+    Renderer.setCamDef(p, l, up)
+  },
+
+  prepareMainFrustumCulling: function () {
+    let angle = Renderer.camera.getFOV();
+    let ratio = Renderer.getWindowWidth() / Renderer.getWindowHeight();
+    let nearD = Renderer.NEAR_DEPTH;
+    let farD = Renderer.FAR_DEPTH;
+    Renderer.setCamInternal(angle, ratio, nearD, farD);
+    Renderer.setCamDef(Renderer.camera.transform.getWorldPosition(), Renderer.camera.transform.getForward(), Renderer.camera._up)
+  },
+
+  //culling stuff
+  setCamInternal: function (angle,ratio, nearD, farD) {
+    Renderer.FrustumCulling.c_Ratio=ratio;
+    Renderer.FrustumCulling.c_FarD=farD;
+    Renderer.FrustumCulling.c_NearD=nearD;
+    let tanAngle = Math.tan(angle);
+    Renderer.FrustumCulling.c_angleTangent=tanAngle;
+    Renderer.FrustumCulling.c_sphereFactorY=1/Math.cos(angle);
+    let angleX = Math.atan(tanAngle*ratio);
+    Renderer.FrustumCulling.c_sphereFactorX = 1/Math.cos(angleX);
+  },
+  setCamDef: function (p,ldir,up ) {
+    //l&u are arrays
+    let z = vec3.copy(vec3.create(),ldir)
+    vec3.normalize(z, z);
+    Renderer.FrustumCulling.c_Z=z;
+    //X axis is crossproduct of z axis given and up
+    let x = z[0]*up[0]+z[1]*up[1]+z[2]*up[2];
+    let tempLength = Math.sqrt(x[0]*x[0]+x[1]*x[1]+x[2]*x[2]);
+    x = [x[0]/tempLength, x[1]/tempLength, x[2]/tempLength];
+    Renderer.FrustumCulling.c_X=x;
+    let y = z[0]*x[0]+z[1]*x[1]+z[2]*x[2];
+    Renderer.FrustumCulling.c_Y=y;
+    Renderer.FrustumCulling.camWorldPos = p;
+
+    //save on some garbage collection
+    Renderer.FrustumCulling.tmp1 = vec3.create();
+  },
+  pointInFrustum: function (x,y,z) {
+      
+  },
+  sphereInFrustum: function (p,radius) {
+    //p is an array of xyz
+    let v = vec3.sub(Renderer.FrustumCulling.tmp1, p, Renderer.FrustumCulling.camWorldPos);
+    let az = vec3.dot(v, Renderer.FrustumCulling.c_Z);
+
+    if (az > Renderer.FrustumCulling.c_FarD + radius || az < Renderer.FrustumCulling.c_NearD - radius) {
+      return false;
+    }
+    if (az > Renderer.FrustumCulling.c_FarD - radius || az < Renderer.FrustumCulling.c_NearD - radius) {
+      //return true;
+    }
+    let ay = vec3.dot(v, Renderer.c_Y);
+    let d = Renderer.FrustumCulling.c_sphereFactorY * radius;
+    az *= Renderer.FrustumCulling.c_angleTangent;
+    if (ay > az + d || ay < -az - d) {
+      return false;
+    }
+    if (ay > az - d || ay < -az + d) {
+      //return true;
+    }
+
+    let ax = vec3.dot(v, Renderer.c_X);
+    d = Renderer.FrustumCulling.c_sphereFactorX * radius;
+    az *= Renderer.FrustumCulling.c_Ratio;
+    if (ax > az + d || ax < -az - d) {
+      return false;
+    }
+    return true;
   },
 
   setGamma: function(gamma) {
