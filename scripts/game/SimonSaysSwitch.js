@@ -5,7 +5,7 @@
 class SimonSaysSwitch extends SingingSwitch {
   constructor(params = {events : null, maximumOutput: 5, lossRate: 0.5, timeBeforeLoss: 2}) {
     super(params);
-    this.componentType = "SimonSaysSwitch";
+    // this.componentType = "SimonSaysSwitch";
   }
 
   start() {
@@ -27,7 +27,6 @@ class SimonSaysSwitch extends SingingSwitch {
   }
 
   listen(interactingObj) {
-
     let singer = interactingObj.getComponent('Sing');
     let player = interactingObj.getComponent('PlayerController');
     // console.log("player is interacting with me. ", this.gameObject);

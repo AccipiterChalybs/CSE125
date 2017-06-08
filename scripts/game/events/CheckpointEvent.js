@@ -5,10 +5,6 @@ class CheckpointEvent extends RaycastEvent{
   }
 
   start(){
-    this._collider = this.transform.gameObject.getComponent("Collider");
-    //this._singer = this.transform.gameObject.getComponent("Sing");
-    this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
-    this._collider.setFreezeRotation(true);
   }
 
   onRaycast(interactingObj){

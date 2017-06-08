@@ -75,46 +75,19 @@ class GameScene {
     let evilTeapot = Debug.drawTeapot(pos, color);
     evilTeapot.addComponent(new EvilController());
 
-    let container = new GameObject();
-    let ids = [];
-    container.transform.scale(.05);
-
-    for (let i = 0; i < 4; i++) {
-      let a = new GameObject({clientSideOnly:false});
-      a.addComponent(new PointLight())
-      // a.addComponent(new SingingStatueController({singingDelay: 0, singingDuration: 3}));
-      a.addComponent(new Sing({range: 2, light: a.id, lightIntensity: 1, maxLightRange: 3, minLightRange: 0}));
-      a.getComponent("Light").setColor([1-(.25*i),.25*i,0]);
-      a.getComponent("Light").setRange(0);
-      if(!IS_SERVER) {
-        let mesh = new Mesh("Teapot02");
-        let mat = new Material(Renderer.getShader(Renderer.DEFERRED_PBR_SHADER));
-        let color = vec4.create();
-        vec4.set(color, 0.81, 0.81, 0.81, 1);
-        mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
-
-        vec4.set(color, 0.5, 0.5, 1, 1);
-        mat.setTexture(MaterialTexture.NORMAL, Texture.makeColorTex(color));
-
-        vec4.set(color, 0, 0, 0, 1); //metalness, blank, roughness
-        mat.setTexture(MaterialTexture.MAT, Texture.makeColorTex(color));
-        mesh.setMaterial(mat);
-        a.addComponent(mesh);
-      }
-      let idx = i+9;
-      a.addComponent(new AudioSource({audioName:'Tone1.wav_'+idx}));
-      a.addComponent(new SimonSaysSwitch({events : [container.id], maximumOutput: 5, lossRate: 0.5, timeBeforeLoss: 2}))
-      a.transform.setPosition([30*i, 0, i*.25]);
-      container.addChild(a);
-      ids.push(a.id);
-    }
-
-    container.addComponent(new SimonSays({ unparsedStatues: ids, order: [0, 1, 2, 3],singDuration:5,cycleDuration:5 }));
-
-    container.transform.setPosition( [12.319365501403809, 0.15055914223194122, 0.757758617401123]);
-    GameObject.prototype.SceneRoot.addChild(container);
+    // for (let i = 0; i < 4; i++) {
+    //   let a = new GameObject({clientSideOnly:false});
+    //   a.addComponent(new PointLight())
+    //   a.addComponent(new Sing({range: 2, light: a.id, lightIntensity: 1, maxLightRange: 3, minLightRange: 0}));
+    //   a.addComponent(new SimonSaysSwitch({events : [container.id], maximumOutput: 5, lossRate: 0.5, timeBeforeLoss: 2}))
+    //   container.addChild(a);
+    //   ids.push(a.id);
+    // }
+    //
+    // container.addComponent(new SimonSays({ unparsedStatues: ids, order: [0, 1, 2, 3],singDuration:5,cycleDuration:5 }));
 
     GameObject.prototype.SceneRoot.findComponents('Listenable', PhysicsEngine.sphereChecks);
+    // GameObject.prototype.SceneRoot.findComponents('SimonSaysSwitch', PhysicsEngine.sphereChecks);
 
   }
 

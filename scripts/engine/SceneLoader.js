@@ -6,7 +6,7 @@ const c = {
   ClientStickTo, Collider, CompoundCollider, Decal, Foot, Floor, Light, ParticleSystem,
   SphereCollider, Transform, SingingStatueController, TriggerSwitch, MoveTowardsEvent,
   SingStatueEvent, StopSingStatueEvent, StopLightEvent, PlayAudio, PlayAudioEvent,
-  FadeInAudioEvent,
+  FadeInAudioEvent, SimonSays, SimonSaysSwitch, CheckpointEvent,
   AnimationGraph, AnimationState, DoorEvent, Event, EvilController, HealEvent,
   KeyEvent, Listenable, Look, ObjectLogicState, PlayerController,
   PlayerLogicState, PlayerTable, RaycastSwitch, RotateArrowKey, RotateMouse,
@@ -179,7 +179,11 @@ const SceneLoader = {
           nodeObject.addComponent(new PlayerController());
           break;
         default:
+          if(c[generalCompName] === undefined) {Debug.log(generalCompName)}
+          else
+        {
           nodeObject.addComponent(new c[generalCompName](compData));
+        }
           break;
       }
     }

@@ -75,7 +75,7 @@ class SimonSays extends Event{
 
   simonHeard(statue_id){
     if(!this._simonLock) {
-      let id = this._unparsedStatues.indexOf(statue_id);
+      let id = this._unparsedStatues.indexOf(Number(statue_id));
       if (!this.simonHasHeard(id)) {
         this._listenedOrder.push(id);
       }
