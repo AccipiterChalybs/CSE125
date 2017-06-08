@@ -1,0 +1,246 @@
+{
+	 "rootnode": {
+		 "name": "RootNode"
+		,"transformation": [
+			 1
+			,0
+			,0
+			,0
+			,0
+			,1
+			,0
+			,0
+			,0
+			,0
+			,1
+			,0
+			,0
+			,0
+			,0
+			,1
+		]
+		,"children": [
+			{
+				 "name": "OLI_TREE_LINE_1"
+				,"transformation": [
+					 1
+					,0
+					,0
+					,-1.89335
+					,0
+					,-1.62921e-007
+					,1
+					,0
+					,0
+					,-1
+					,-1.62921e-007
+					,-2.79738
+					,0
+					,0
+					,0
+					,1
+				]
+				,"meshes": [
+					 0
+				]
+			}
+		]
+	}
+	,"flags": 8
+	,"meshes": [
+		{
+			 "name": "OLI_TREE_LINE_1"
+			,"materialindex": 0
+			,"primitivetypes": 4
+			,"vertices": [
+				 -2.72109
+				,2.98023e-006
+				,0
+				,2.72109
+				,2.98023e-006
+				,0
+				,2.72109
+				,1
+				,0
+				,-2.72109
+				,1
+				,0
+			]
+			,"normals": [
+				 0
+				,0
+				,1
+				,0
+				,0
+				,1
+				,0
+				,0
+				,1
+				,0
+				,0
+				,1
+			]
+			,"tangents": [
+				 1
+				,0
+				,0
+				,1
+				,0
+				,0
+				,1
+				,0
+				,0
+				,1
+				,0
+				,0
+			]
+			,"bitangents": [
+				 0
+				,-1
+				,0
+				,0
+				,-1
+				,0
+				,0
+				,-1
+				,0
+				,0
+				,-1
+				,0
+			]
+			,"numuvcomponents": [
+				 2
+			]
+			,"texturecoords": [
+				[
+					 0
+					,0
+					,1
+					,0
+					,1
+					,1
+					,0
+					,1
+				]
+			]
+			,"faces": [
+				[
+					 0
+					,1
+					,2
+				]
+				,[
+					 0
+					,2
+					,3
+				]
+			]
+		}
+	]
+	,"materials": [
+		{
+			 "properties": [
+				{
+					 "key": "?mat.name"
+					,"semantic": 0
+					,"index": 0
+					,"type": 3
+					,"value": "OLI_TREE_LINE_1"
+				}
+				,{
+					 "key": "$clr.diffuse"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0.64
+						,0.64
+						,0.64
+					]
+				}
+				,{
+					 "key": "$clr.emissive"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,0
+					]
+				}
+				,{
+					 "key": "$clr.ambient"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,0
+					]
+				}
+				,{
+					 "key": "$clr.specular"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0.25
+						,0.25
+						,0.25
+					]
+				}
+				,{
+					 "key": "$mat.opacity"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": 0
+				}
+				,{
+					 "key": "$mat.shinpercent"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": 9.60784
+				}
+				,{
+					 "key": "$mat.shininess"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": 9.60784
+				}
+				,{
+					 "key": "$tex.file"
+					,"semantic": 1
+					,"index": 0
+					,"type": 3
+					,"value": "/Users/johnpallag/Pictures/Textures/TreeBackgrounds/OLI_TREE_LINE_1.png"
+				}
+				,{
+					 "key": "$tex.uvtrafo"
+					,"semantic": 1
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,1
+						,1
+						,0
+					]
+				}
+				,{
+					 "key": "$tex.uvwsrc"
+					,"semantic": 1
+					,"index": 0
+					,"type": 4
+					,"value": 0
+				}
+			]
+		}
+	]
+}
+
