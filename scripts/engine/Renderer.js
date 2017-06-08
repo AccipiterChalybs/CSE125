@@ -765,7 +765,7 @@ const Renderer  = {
     if (az > Renderer.FrustumCulling.c_FarD - radius || az < Renderer.FrustumCulling.c_NearD - radius) {
       //return true;
     }
-    let ay = vec3.dot(v, Renderer.c_Y);
+    let ay = vec3.dot(v, Renderer.FrustumCulling.c_Y);
     let d = Renderer.FrustumCulling.c_sphereFactorY * radius;
     az *= Renderer.FrustumCulling.c_angleTangent;
     if (ay > az + d || ay < -az - d) {
@@ -775,7 +775,7 @@ const Renderer  = {
       //return true;
     }
 
-    let ax = vec3.dot(v, Renderer.c_X);
+    let ax = vec3.dot(v, Renderer.FrustumCulling.c_X);
     d = Renderer.FrustumCulling.c_sphereFactorX * radius;
     az *= Renderer.FrustumCulling.c_Ratio;
     if (ax > az + d || ax < -az - d) {
