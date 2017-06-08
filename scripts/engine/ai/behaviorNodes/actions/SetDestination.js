@@ -11,7 +11,6 @@ class SetDestination extends BehaviorTreeLeaf{
 
   updateNode(){
     this.ai.setDestination(this._destinationToSet);
-
     this._currentState = BehaviorTreeNode.success;
     return this._currentState;
   }
