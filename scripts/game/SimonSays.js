@@ -3,21 +3,26 @@
  */
 class SimonSays extends Event{
 
-  constructor(params = { unparsedStatues:null, order: null, singDuration: 5, cycleDuration: 5 }) {
+  constructor(params = { unparsedStatues:null, order: null, singDuration: 5, cycleDuration: 5, unparsedEvents:null }) {
     super();
     this.componentType = 'SimonSays';
 
     this._statues = [];
+    this._events = [];
     this._unparsedStatues = params.unparsedStatues;
+    this._unparsedEvents = params.unparsedEvents;
     this._order = params.order;
     this._currentIndex = 0;
     this._currentTime = 0;
     this._singDuration = params.singDuration;
     this._cycleDuration = params.cycleDuration;
     this._cycle = false;
+    this._complete = false;
 
     this._simonLock = false;
     this._listenedOrder = [];
+
+    this._orderIndex =0;
   }
 
   start() {
@@ -25,10 +30,17 @@ class SimonSays extends Event{
       this._statues.push(GameObject.prototype.SerializeMap[this._unparsedStatues[i]]);
     }
 
+    for (let i = 0; i < this._unparsedEvents.length; ++i) {
+      this._events.push(GameObject.prototype.SerializeMap[this._unparsedEvents[i]].getComponent("Event"));
+    }
+
   }
 
   updateComponent() {
     // Debug.log(this._listenedOrder);
+    if(this._complete){
+      return;
+    }
     if(this._simonLock && this._currentTime +this._cycleDuration <Time.time){
       this._simonLock = false;
     }
@@ -42,11 +54,21 @@ class SimonSays extends Event{
         }
       }
 
-      if(this._listenedOrder.length === this._order.length){
-        if(JSON.stringify(this._listenedOrder) === JSON.stringify(this._order)){
-          Debug.log("BIG WINNER");
-          this._listenedOrder = [];
+      if(this._listenedOrder.length === this._order[this._orderIndex].length){
+        if(JSON.stringify(this._listenedOrder) === JSON.stringify(this._order[this._orderIndex])){
+
+          this._orderIndex+=1;
           this._simonLock=true;
+
+          if(this._orderIndex===this._order.length){
+            for(event of this._events){
+              event.triggered();
+              this._complete=true;
+              Debug.log("OH BIG BOY DO THE BIG DATA");
+            }
+          }else{
+            this._listenedOrder = [];
+          }
         }
         else
         {
@@ -92,7 +114,7 @@ class SimonSays extends Event{
     if (this._cycle) {
       if (this._currentTime + this._singDuration < Time.time) {
         this._currentTime = Time.time;
-        let currentStatue = this._statues[this._order[this._currentIndex]];
+        let currentStatue = this._statues[this._order[this._orderIndex][this._currentIndex]];
         if (currentStatue && currentStatue !== null) {
           let sing = currentStatue.getComponent('Sing');
           if (sing && sing !== null) {
@@ -101,10 +123,10 @@ class SimonSays extends Event{
         }
 
         this._currentIndex += 1;
-        if (this._currentIndex === this._order.length) {
+        if (this._currentIndex === this._order[this._orderIndex].length) {
           this._cycle = false;
         } else {
-          currentStatue = this._statues[this._order[this._currentIndex]];
+          currentStatue = this._statues[this._order[this._orderIndex][this._currentIndex]];
           if (currentStatue && currentStatue !== null) {
             let sing = currentStatue.getComponent('Sing');
             if (sing && sing !== null) {
@@ -114,11 +136,10 @@ class SimonSays extends Event{
         }
       }
     } else if (this._currentTime + this._cycleDuration < Time.time) {
-      Debug.log("are we ever here");
       this._cycle = true;
       this._currentTime = Time.time;
       this._currentIndex = 0;
-      let currentStatue = this._statues[this._order[this._currentIndex]];
+      let currentStatue = this._statues[this._order[this._orderIndex][this._currentIndex]];
       if (currentStatue && currentStatue !== null) {
         let sing = currentStatue.getComponent('Sing');
         if (sing && sing !== null) {

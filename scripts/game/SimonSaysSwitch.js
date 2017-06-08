@@ -5,7 +5,6 @@
 class SimonSaysSwitch extends SingingSwitch {
   constructor(params = {events : null, maximumOutput: 5, lossRate: 0.5, timeBeforeLoss: 2}) {
     super(params);
-    this.componentType = "SimonSaysSwitch";
   }
 
   start() {
