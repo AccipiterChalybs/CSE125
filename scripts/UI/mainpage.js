@@ -156,15 +156,27 @@ function handleOninputSetter(setter, e) {
     this.value = this.value.slice(0, this.value.length - 1);
   }
 
-  // const intInput = parseInt(this.value);
-  // if (intInput < 0) {
-  //   this.value = '0';
-  // } else if (intInput > 100) {
-  //   this.value = '100';
-  // }
-
   if (parseFloat(this.value)) {
     setter(this.value);
+  }
+}
+
+function startPickplayer() {
+  for (row of $('#pickplayer .modal-row')) {
+    const id = row.getAttribute('id');
+    row.children[0].onclick = (e) => {
+      const title = $('#pickplayer .modal-title');
+      title[0].innerHTML = `Player ${id}`;
+      title[0].classList.add('highlight');
+      PlayerTable.requestId = parseInt(id);
+      window.setTimeout(
+        () => {
+          $('#pickplayer').modal('hide');
+          title[0].classList.remove('highlight');
+        },
+        700
+      );
+    };
   }
 }
 
@@ -212,4 +224,5 @@ function menuStart() {
     $('#options #cu-msg').show() : $('#options #cu-msg').hide();
   startOptionsControls();
   startOptionsGraphics();
+  startPickplayer();
 }
