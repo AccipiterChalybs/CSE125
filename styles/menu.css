@@ -158,3 +158,16 @@
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+@keyframes highlight {
+  0% {
+    text-shadow: 0 0 20px #ffff99; /* lovely yellow colour */
+  }
+  100% {
+    text-shadow: 0 0 1px #ffff99;
+  }
+}
+
+.highlight {
+  animation: highlight 1s;
+}

@@ -34,11 +34,15 @@ Networking.listeners = {
       }
     }
     // PlayerTable.applySerialize(data.players);
-
   },
   client_get_playerId: (socket, data)=> {
+    console.log('network listen client_get_playerId');
     PlayerTable.currentPlayer = data.playerId;
   },
+  client_init: (socket, data) => {
+    console.log('network listen client_init');
+    Networking.socket.emit('request_playerId', { id: PlayerTable.requestId });
+  }
 };
 
 Networking.init = function () {
