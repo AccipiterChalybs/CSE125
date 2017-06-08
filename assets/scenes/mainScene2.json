@@ -60236,7 +60236,7 @@
         "index": "4117",
         "static": false,
         "Transform": {
-          "position": [0.5472901, 0.001000047, 0.2785932],
+          "position": [1.016, 0.001000047, 0.279],
           "rotation": [0, 90, 0],
           "scaleFactor": 0.3600001
         },
@@ -60276,7 +60276,7 @@
             "index": "4118",
             "static": false,
             "Transform": {
-              "position": [0.5472901, 0.001000047, 0.2801965],
+              "position": [1.016, 0.001000047, 0.2806033],
               "rotation": [9.334669E-06, 90, 0],
               "scaleFactor": 1.333334
             },
@@ -60290,7 +60290,7 @@
             "index": "4119",
             "static": false,
             "Transform": {
-              "position": [0.5472901, 0.001000047, 0.2801965],
+              "position": [1.016, 0.001000047, 0.2806033],
               "rotation": [9.334669E-06, 90, 0],
               "scaleFactor": 1.333334
             },
@@ -60304,7 +60304,7 @@
             "index": "4120",
             "static": false,
             "Transform": {
-              "position": [0.5472901, 0.001000047, 0.2801965],
+              "position": [1.016, 0.001000047, 0.2806033],
               "rotation": [9.33467E-06, 90, 0],
               "scaleFactor": 0.001140542
             },
@@ -60318,7 +60318,7 @@
             "index": "4121",
             "static": false,
             "Transform": {
-              "position": [0.5472901, 0.001000047, 0.2801965],
+              "position": [1.016, 0.001000047, 0.2806033],
               "rotation": [9.33467E-06, 90, 0],
               "scaleFactor": 0.001140542
             },
@@ -60332,7 +60332,7 @@
             "index": "4122",
             "static": false,
             "Transform": {
-              "position": [0.5472901, 0.001000047, 0.2801965],
+              "position": [1.016, 0.001000047, 0.2806033],
               "rotation": [9.33467E-06, 90, 0],
               "scaleFactor": 0.001140542
             },
@@ -60346,7 +60346,7 @@
             "index": "4123",
             "static": false,
             "Transform": {
-              "position": [0.5472901, 0.001000047, 0.2801965],
+              "position": [1.016, 0.001000047, 0.2806033],
               "rotation": [9.334669E-06, 90, 0],
               "scaleFactor": 1.333334
             },
@@ -60360,7 +60360,7 @@
             "index": "4124",
             "static": false,
             "Transform": {
-              "position": [0.5472901, 0.001000047, 0.2785932],
+              "position": [1.016, 0.001000047, 0.279],
               "rotation": [270, 90, 0],
               "scaleFactor": 1.077174
             },
@@ -60370,7 +60370,7 @@
                 "index": "4125",
                 "static": false,
                 "Transform": {
-                  "position": [0.5295058, 0.3803503, 0.2774979],
+                  "position": [0.9982158, 0.3803503, 0.2779047],
                   "rotation": [14.26958, 88.34692, 1.196843],
                   "scaleFactor": 1
                 },
@@ -60380,7 +60380,7 @@
                     "index": "4126",
                     "static": false,
                     "Transform": {
-                      "position": [0.5464581, 0.4471959, 0.2794287],
+                      "position": [1.015168, 0.4471959, 0.2798356],
                       "rotation": [14.17494, 89.39027, 0.2370705],
                       "scaleFactor": 1
                     },
@@ -60390,7 +60390,7 @@
                         "index": "4127",
                         "static": false,
                         "Transform": {
-                          "position": [0.5615523, 0.5069718, 0.2798444],
+                          "position": [1.030262, 0.5069718, 0.2802513],
                           "rotation": [6.268905, 89.35746, 0.2312347],
                           "scaleFactor": 1
                         },
@@ -60400,7 +60400,7 @@
                             "index": "4128",
                             "static": false,
                             "Transform": {
-                              "position": [0.5760477, 0.6389884, 0.280543],
+                              "position": [1.044758, 0.6389884, 0.2809499],
                               "rotation": [32.09311, 91.45882, 358.1841],
                               "scaleFactor": 1
                             },
@@ -60410,7 +60410,7 @@
                                 "index": "4129",
                                 "static": false,
                                 "Transform": {
-                                  "position": [0.5948959, 0.6690986, 0.2789359],
+                                  "position": [1.063606, 0.6690986, 0.2793427],
                                   "rotation": [10.49234, 87.57253, 359.5768],
                                   "scaleFactor": 1
                                 },
@@ -60420,7 +60420,7 @@
                                     "index": "4130",
                                     "static": false,
                                     "Transform": {
-                                      "position": [0.6116741, 0.7596192, 0.2789665],
+                                      "position": [1.080384, 0.7596192, 0.2793733],
                                       "rotation": [10.49234, 87.57253, 359.5768],
                                       "scaleFactor": 1
                                     }
@@ -60434,7 +60434,7 @@
                             "index": "4131",
                             "static": false,
                             "Transform": {
-                              "position": [0.6034425, 0.6124356, 0.2878528],
+                              "position": [1.072152, 0.6124356, 0.2882596],
                               "rotation": [284.4445, 81.86086, 80.71037],
                               "scaleFactor": 1
                             },
@@ -60444,7 +60444,7 @@
                                 "index": "4132",
                                 "static": false,
                                 "Transform": {
-                                  "position": [0.5821944, 0.605465, 0.3591483],
+                                  "position": [1.050904, 0.605465, 0.3595552],
                                   "rotation": [13.10098, 126.4284, 170.2162],
                                   "scaleFactor": 0.9999999
                                 },
@@ -60454,7 +60454,7 @@
                                     "index": "4133",
                                     "static": false,
                                     "Transform": {
-                                      "position": [0.5738032, 0.5032787, 0.3878267],
+                                      "position": [1.042513, 0.5032787, 0.3882336],
                                       "rotation": [3.137837, 134.3312, 171.4964],
                                       "scaleFactor": 0.9999999
                                     },
@@ -60464,7 +60464,7 @@
                                         "index": "4134",
                                         "static": false,
                                         "Transform": {
-                                          "position": [0.5805689, 0.3998686, 0.4028646],
+                                          "position": [1.049279, 0.3998686, 0.4032715],
                                           "rotation": [4.318159, 227.8429, 188.5338],
                                           "scaleFactor": 1
                                         },
@@ -60474,7 +60474,7 @@
                                             "index": "4135",
                                             "static": false,
                                             "Transform": {
-                                              "position": [0.5768657, 0.317616, 0.4162087],
+                                              "position": [1.045576, 0.317616, 0.4166155],
                                               "rotation": [4.318159, 227.8429, 188.5338],
                                               "scaleFactor": 1
                                             }
@@ -60492,7 +60492,7 @@
                             "index": "4136",
                             "static": false,
                             "Transform": {
-                              "position": [0.6036079, 0.6124925, 0.273661],
+                              "position": [1.072318, 0.6124925, 0.2740679],
                               "rotation": [285.7067, 121.5321, 269.8899],
                               "scaleFactor": 1
                             },
@@ -60502,7 +60502,7 @@
                                 "index": "4137",
                                 "static": false,
                                 "Transform": {
-                                  "position": [0.5653899, 0.602479, 0.2102399],
+                                  "position": [1.0341, 0.602479, 0.2106468],
                                   "rotation": [4.466974, 65.86426, 197.4383],
                                   "scaleFactor": 0.9999999
                                 },
@@ -60512,7 +60512,7 @@
                                     "index": "4138",
                                     "static": false,
                                     "Transform": {
-                                      "position": [0.5712167, 0.501215, 0.177889],
+                                      "position": [1.039927, 0.501215, 0.1782958],
                                       "rotation": [344.1723, 52.9335, 198.409],
                                       "scaleFactor": 0.9999999
                                     },
@@ -60522,7 +60522,7 @@
                                         "index": "4139",
                                         "static": false,
                                         "Transform": {
-                                          "position": [0.6127727, 0.4056243, 0.1678357],
+                                          "position": [1.081483, 0.4056243, 0.1682425],
                                           "rotation": [18.20527, 329.5485, 196.4621],
                                           "scaleFactor": 1
                                         },
@@ -60532,7 +60532,7 @@
                                             "index": "4140",
                                             "static": false,
                                             "Transform": {
-                                              "position": [0.6458147, 0.3296373, 0.1582713],
+                                              "position": [1.114525, 0.3296373, 0.1586781],
                                               "rotation": [18.20527, 329.5485, 196.4621],
                                               "scaleFactor": 1
                                             }
@@ -60554,7 +60554,7 @@
                     "index": "4141",
                     "static": false,
                     "Transform": {
-                      "position": [0.5455905, 0.403082, 0.316538],
+                      "position": [1.0143, 0.403082, 0.3169448],
                       "rotation": [25.73553, 257.364, 179.7836],
                       "scaleFactor": 0.9999998
                     },
@@ -60564,7 +60564,7 @@
                         "index": "4142",
                         "static": false,
                         "Transform": {
-                          "position": [0.6324162, 0.2188459, 0.3352114],
+                          "position": [1.101126, 0.2188459, 0.3356183],
                           "rotation": [319.8942, 264.4002, 176.1643],
                           "scaleFactor": 0.9999999
                         },
@@ -60574,7 +60574,7 @@
                             "index": "4143",
                             "static": false,
                             "Transform": {
-                              "position": [0.5355086, 0.1020444, 0.3154222],
+                              "position": [1.004219, 0.1020444, 0.315829],
                               "rotation": [7.932103, 259.3334, 177.7086],
                               "scaleFactor": 1
                             },
@@ -60587,7 +60587,7 @@
                                 "index": "4144",
                                 "static": false,
                                 "Transform": {
-                                  "position": [0.5450156, 0.03620784, 0.3145063],
+                                  "position": [1.013726, 0.03620784, 0.3149131],
                                   "rotation": [293.0842, 71.23274, 190.1846],
                                   "scaleFactor": 0.9999999
                                 },
@@ -60597,7 +60597,7 @@
                                     "index": "4145",
                                     "static": false,
                                     "Transform": {
-                                      "position": [0.5684409, 0.02631925, 0.3176806],
+                                      "position": [1.037151, 0.02631925, 0.3180875],
                                       "rotation": [293.0842, 71.23274, 190.1846],
                                       "scaleFactor": 1
                                     }
@@ -60611,7 +60611,7 @@
                             "index": "4146",
                             "static": false,
                             "Transform": {
-                              "position": [0.5355086, 0.1020444, 0.3154222],
+                              "position": [1.004219, 0.1020444, 0.315829],
                               "rotation": [60.1839, 92.3438, 192.7838],
                               "scaleFactor": 1
                             },
@@ -60621,7 +60621,7 @@
                                 "index": "4147",
                                 "static": false,
                                 "Transform": {
-                                  "position": [0.5144479, 0.05571523, 0.293252],
+                                  "position": [0.9831578, 0.05571523, 0.2936588],
                                   "rotation": [303.9231, 76.54596, 95.58023],
                                   "scaleFactor": 0.9999999
                                 },
@@ -60631,7 +60631,7 @@
                                     "index": "4148",
                                     "static": false,
                                     "Transform": {
-                                      "position": [0.5097779, 0.0540598, 0.3233519],
+                                      "position": [0.9784878, 0.0540598, 0.3237588],
                                       "rotation": [303.9231, 76.54596, 95.58023],
                                       "scaleFactor": 1
                                     }
@@ -60649,7 +60649,7 @@
                     "index": "4149",
                     "static": false,
                     "Transform": {
-                      "position": [0.5481737, 0.4046206, 0.240592],
+                      "position": [1.016884, 0.4046206, 0.2409989],
                       "rotation": [13.52318, 276.1501, 183.5573],
                       "scaleFactor": 0.9999998
                     },
@@ -60659,7 +60659,7 @@
                         "index": "4150",
                         "static": false,
                         "Transform": {
-                          "position": [0.5969923, 0.2061494, 0.2480951],
+                          "position": [1.065702, 0.2061494, 0.248502],
                           "rotation": [340.0569, 271.3514, 179.1642],
                           "scaleFactor": 0.9999999
                         },
@@ -60669,7 +60669,7 @@
                             "index": "4151",
                             "static": false,
                             "Transform": {
-                              "position": [0.5447553, 0.0622896, 0.2470942],
+                              "position": [1.013465, 0.0622896, 0.247501],
                               "rotation": [39.79294, 272.6335, 178.7768],
                               "scaleFactor": 1
                             },
@@ -60682,7 +60682,7 @@
                                 "index": "4152",
                                 "static": false,
                                 "Transform": {
-                                  "position": [0.5872127, 0.01118545, 0.2437196],
+                                  "position": [1.055923, 0.01118545, 0.2441264],
                                   "rotation": [275.8041, 271.6931, 0.003089975],
                                   "scaleFactor": 0.9999999
                                 },
@@ -60692,7 +60692,7 @@
                                     "index": "4153",
                                     "static": false,
                                     "Transform": {
-                                      "position": [0.6126944, 0.01377667, 0.242965],
+                                      "position": [1.081404, 0.01377667, 0.2433718],
                                       "rotation": [275.8041, 271.6931, 0.003089975],
                                       "scaleFactor": 1
                                     }
@@ -60706,7 +60706,7 @@
                             "index": "4154",
                             "static": false,
                             "Transform": {
-                              "position": [0.5447553, 0.0622896, 0.2470942],
+                              "position": [1.013465, 0.0622896, 0.247501],
                               "rotation": [40.45829, 88.31717, 176.5331],
                               "scaleFactor": 1
                             },
@@ -60716,7 +60716,7 @@
                                 "index": "4155",
                                 "static": false,
                                 "Transform": {
-                                  "position": [0.5388944, 0.009454417, 0.2630805],
+                                  "position": [1.007604, 0.009454417, 0.2634873],
                                   "rotation": [283.5321, 90.20417, 271.5425],
                                   "scaleFactor": 0.9999999
                                 },
@@ -60726,7 +60726,7 @@
                                     "index": "4156",
                                     "static": false,
                                     "Transform": {
-                                      "position": [0.5379874, 0.009646607, 0.2325895],
+                                      "position": [1.006697, 0.009646607, 0.2329964],
                                       "rotation": [283.5321, 90.20417, 271.5425],
                                       "scaleFactor": 1
                                     }
@@ -60748,7 +60748,7 @@
             "index": "4157",
             "static": false,
             "Transform": {
-              "position": [0.7388102, 0.4866401, 0.2785931],
+              "position": [1.20752, 0.4866401, 0.279],
               "rotation": [0, 90, 0],
               "scaleFactor": 1
             },
@@ -60825,7 +60825,7 @@
               "scaleFactor": 1
             },
             "SkinnedMeshRenderer": {
-              "name": "Plane.001",
+              "name": "TribalPlane.001",
               "material": "TribalCharacter_Detail_diffuse"
             }
           },
@@ -61721,6 +61721,550 @@
             "Light": {
               "type": "Point",
               "color": [1, 1, 0.928, 0.122],
+              "intensity": 1,
+              "range": 1
+            }
+          }
+        ]
+      },
+      {
+        "name": "BlueRobeMale",
+        "index": "4237",
+        "static": false,
+        "Transform": {
+          "position": [1.744, 0, 0.101],
+          "rotation": [0, 90, 0],
+          "scaleFactor": 0.29
+        },
+        "Rigidbody": 100,
+        "Sing": {
+          "range": 2,
+          "light": 4278,
+          "lightIntensity": 10,
+          "maxLightRange": 8,
+          "minLightRange": 1
+        },
+        "Look": {
+          "range": 5
+        },
+        "AnimatorJS": {
+          "animationName": "SenateCharacterAnim"
+        },
+        "PlayerController": {
+        },
+        "AudioSource": {
+          "audioName": "Tone4.wav_31",
+          "loop": true,
+          "isSFX": true,
+          "is3D": true
+        },
+        "colliders": [
+          {
+            "type": "sphere",
+            "isTrigger": false,
+            "scale": 0.5,
+            "offset": [0, 0, 0]
+          }
+        ],
+        "children": [
+          {
+            "name": "bodyShape_skin_Shape0",
+            "index": "4238",
+            "static": false,
+            "Transform": {
+              "position": [1.821366, 1.626214, 0.100993],
+              "rotation": [9.334669E-06, 90, 0],
+              "scaleFactor": 0.006946224
+            },
+            "SkinnedMeshRenderer": {
+              "name": "bodyShape_skin_Shape0",
+              "material": "M_leg_hand_west"
+            }
+          },
+          {
+            "name": "bodyShape_skin_Shape2",
+            "index": "4239",
+            "static": false,
+            "Transform": {
+              "position": [1.842839, 3.56903, 0.1010035],
+              "rotation": [9.334669E-06, 90, 0],
+              "scaleFactor": 0.006946224
+            },
+            "SkinnedMeshRenderer": {
+              "name": "bodyShape_skin_Shape2",
+              "material": "M_face_west"
+            }
+          },
+          {
+            "name": "bodyShape_skin_Shape2.001",
+            "index": "4240",
+            "static": false,
+            "Transform": {
+              "position": [1.842839, 3.56903, 0.1010035],
+              "rotation": [9.334669E-06, 90, 0],
+              "scaleFactor": 0.006946224
+            },
+            "SkinnedMeshRenderer": {
+              "name": "bodyShape_skin_Shape2.001",
+              "material": "eye_1"
+            }
+          },
+          {
+            "name": "metarig",
+            "index": "4241",
+            "static": false,
+            "Transform": {
+              "position": [1.744, 0, 0.101],
+              "rotation": [270, 90, 0],
+              "scaleFactor": 1.353538
+            },
+            "children": [
+              {
+                "name": "hips",
+                "index": "4242",
+                "static": false,
+                "Transform": {
+                  "position": [1.726945, 0.3979476, 0.101],
+                  "rotation": [12.3332, 90, 6.99154E-06],
+                  "scaleFactor": 1
+                },
+                "children": [
+                  {
+                    "name": "spine",
+                    "index": "4243",
+                    "static": false,
+                    "Transform": {
+                      "position": [1.741861, 0.4661686, 0.101],
+                      "rotation": [6.065598, 90, 0],
+                      "scaleFactor": 1
+                    },
+                    "children": [
+                      {
+                        "name": "chest",
+                        "index": "4244",
+                        "static": false,
+                        "Transform": {
+                          "position": [1.748455, 0.5282269, 0.101],
+                          "rotation": [358.0089, 90, 0],
+                          "scaleFactor": 1
+                        },
+                        "children": [
+                          {
+                            "name": "neck",
+                            "index": "4245",
+                            "static": false,
+                            "Transform": {
+                              "position": [1.744138, 0.6524221, 0.101],
+                              "rotation": [16.2504, 90, 0],
+                              "scaleFactor": 1
+                            },
+                            "children": [
+                              {
+                                "name": "head",
+                                "index": "4246",
+                                "static": false,
+                                "Transform": {
+                                  "position": [1.757624, 0.6986897, 0.101],
+                                  "rotation": [1.374697, 90, 0],
+                                  "scaleFactor": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "head_end",
+                                    "index": "4247",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [1.759676, 0.7842155, 0.101],
+                                      "rotation": [1.374697, 90, 0],
+                                      "scaleFactor": 1
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "shoulder.L",
+                            "index": "4248",
+                            "static": false,
+                            "Transform": {
+                              "position": [1.775461, 0.631579, 0.1081832],
+                              "rotation": [279.9948, 180.0742, 329.4565],
+                              "scaleFactor": 1
+                            },
+                            "children": [
+                              {
+                                "name": "upper_arm.L",
+                                "index": "4249",
+                                "static": false,
+                                "Transform": {
+                                  "position": [1.738132, 0.6357497, 0.1780003],
+                                  "rotation": [355.5295, 90.00002, 90],
+                                  "scaleFactor": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "forearm.L",
+                                    "index": "4250",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [1.738132, 0.6357497, 0.2820616],
+                                      "rotation": [2.394048, 90.00002, 89.99999],
+                                      "scaleFactor": 1
+                                    },
+                                    "children": [
+                                      {
+                                        "name": "hand.L",
+                                        "index": "4251",
+                                        "static": false,
+                                        "Transform": {
+                                          "position": [1.738132, 0.6357497, 0.3927643],
+                                          "rotation": [87.96327, 288.9018, 282.431],
+                                          "scaleFactor": 1
+                                        },
+                                        "children": [
+                                          {
+                                            "name": "hand.L_end",
+                                            "index": "4252",
+                                            "static": false,
+                                            "Transform": {
+                                              "position": [1.747408, 0.6363788, 0.474452],
+                                              "rotation": [87.96327, 288.9018, 282.431],
+                                              "scaleFactor": 1
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "shoulder.R",
+                            "index": "4253",
+                            "static": false,
+                            "Transform": {
+                              "position": [1.775461, 0.631579, 0.09381676],
+                              "rotation": [279.9949, 359.9259, 30.54343],
+                              "scaleFactor": 1
+                            },
+                            "children": [
+                              {
+                                "name": "upper_arm.R",
+                                "index": "4254",
+                                "static": false,
+                                "Transform": {
+                                  "position": [1.738132, 0.6357497, 0.02399967],
+                                  "rotation": [355.5295, 90.00006, 270],
+                                  "scaleFactor": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "forearm.R",
+                                    "index": "4255",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [1.738132, 0.6357498, -0.08006161],
+                                      "rotation": [2.394055, 90.00006, 270],
+                                      "scaleFactor": 1
+                                    },
+                                    "children": [
+                                      {
+                                        "name": "hand.R",
+                                        "index": "4256",
+                                        "static": false,
+                                        "Transform": {
+                                          "position": [1.738132, 0.6357499, -0.1907643],
+                                          "rotation": [87.96308, 251.0976, 77.56822],
+                                          "scaleFactor": 1
+                                        },
+                                        "children": [
+                                          {
+                                            "name": "hand.R_end",
+                                            "index": "4257",
+                                            "static": false,
+                                            "Transform": {
+                                              "position": [1.747408, 0.636379, -0.2724521],
+                                              "rotation": [87.96308, 251.0976, 77.56822],
+                                              "scaleFactor": 1
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "thigh.L",
+                    "index": "4258",
+                    "static": false,
+                    "Transform": {
+                      "position": [1.743745, 0.4223234, 0.1394676],
+                      "rotation": [2.86097, 269.5835, 179.9792],
+                      "scaleFactor": 0.9999997
+                    },
+                    "children": [
+                      {
+                        "name": "shin.L",
+                        "index": "4259",
+                        "static": false,
+                        "Transform": {
+                          "position": [1.754097, 0.2151937, 0.1394675],
+                          "rotation": [352.7961, 270.5411, 179.9322],
+                          "scaleFactor": 1
+                        },
+                        "children": [
+                          {
+                            "name": "foot.L",
+                            "index": "4260",
+                            "static": false,
+                            "Transform": {
+                              "position": [1.732073, 0.04095735, 0.1394676],
+                              "rotation": [58.11053, 270.0048, 182.8832],
+                              "scaleFactor": 0.9999999
+                            },
+                            "Foot": {
+                              "left": true
+                            },
+                            "children": [
+                              {
+                                "name": "toe.L",
+                                "index": "4261",
+                                "static": false,
+                                "Transform": {
+                                  "position": [1.77445, 0.01459082, 0.1419776],
+                                  "rotation": [270, 270.0003, 0],
+                                  "scaleFactor": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "toe.L_end",
+                                    "index": "4262",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [1.800433, 0.01459076, 0.1419776],
+                                      "rotation": [270, 270.0003, 0],
+                                      "scaleFactor": 1
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "heel.L",
+                            "index": "4263",
+                            "static": false,
+                            "Transform": {
+                              "position": [1.732073, 0.04095735, 0.1394676],
+                              "rotation": [41.64801, 94.70152, 183.1285],
+                              "scaleFactor": 0.9999999
+                            },
+                            "children": [
+                              {
+                                "name": "heel.02.L",
+                                "index": "4264",
+                                "static": false,
+                                "Transform": {
+                                  "position": [1.737447, 0.007857904, 0.1247748],
+                                  "rotation": [271.5433, 90.00227, 89.99754],
+                                  "scaleFactor": 0.9999999
+                                },
+                                "children": [
+                                  {
+                                    "name": "heel.02.L_end",
+                                    "index": "4265",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [1.737447, 0.007857881, 0.155707],
+                                      "rotation": [271.5433, 90.00227, 89.99754],
+                                      "scaleFactor": 1
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "thigh.R",
+                    "index": "4266",
+                    "static": false,
+                    "Transform": {
+                      "position": [1.743745, 0.4223234, 0.06253244],
+                      "rotation": [2.860601, 270.4165, 180.0208],
+                      "scaleFactor": 0.9999997
+                    },
+                    "children": [
+                      {
+                        "name": "shin.R",
+                        "index": "4267",
+                        "static": false,
+                        "Transform": {
+                          "position": [1.754095, 0.2151937, 0.0625325],
+                          "rotation": [352.7965, 269.4589, 180.0678],
+                          "scaleFactor": 1
+                        },
+                        "children": [
+                          {
+                            "name": "foot.R",
+                            "index": "4268",
+                            "static": false,
+                            "Transform": {
+                              "position": [1.732072, 0.04095705, 0.06253242],
+                              "rotation": [58.11052, 269.9952, 177.1168],
+                              "scaleFactor": 0.9999999
+                            },
+                            "Foot": {
+                              "left": false
+                            },
+                            "children": [
+                              {
+                                "name": "toe.R",
+                                "index": "4269",
+                                "static": false,
+                                "Transform": {
+                                  "position": [1.774449, 0.01459064, 0.06002238],
+                                  "rotation": [270, 269.9997, 0],
+                                  "scaleFactor": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "toe.R_end",
+                                    "index": "4270",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [1.800432, 0.0145905, 0.06002237],
+                                      "rotation": [270, 269.9997, 0],
+                                      "scaleFactor": 1
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "heel.R",
+                            "index": "4271",
+                            "static": false,
+                            "Transform": {
+                              "position": [1.732072, 0.04095705, 0.06253242],
+                              "rotation": [41.64768, 85.2985, 176.8715],
+                              "scaleFactor": 0.9999999
+                            },
+                            "children": [
+                              {
+                                "name": "heel.02.R",
+                                "index": "4272",
+                                "static": false,
+                                "Transform": {
+                                  "position": [1.737447, 0.00785767, 0.07722524],
+                                  "rotation": [271.5435, 89.99798, 270.0023],
+                                  "scaleFactor": 0.9999999
+                                },
+                                "children": [
+                                  {
+                                    "name": "heel.02.R_end",
+                                    "index": "4273",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [1.737447, 0.007857717, 0.04629305],
+                                      "rotation": [271.5435, 89.99798, 270.0023],
+                                      "scaleFactor": 1
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Robe",
+            "index": "4274",
+            "static": false,
+            "Transform": {
+              "position": [1.797313, 1.69208, 0.1046582],
+              "rotation": [9.334669E-06, 90, 0],
+              "scaleFactor": 0.006946224
+            },
+            "SkinnedMeshRenderer": {
+              "name": "Robe",
+              "material": "SenateRobe"
+            }
+          },
+          {
+            "name": "Robe.001",
+            "index": "4275",
+            "static": false,
+            "Transform": {
+              "position": [1.797313, 1.69208, 0.1046582],
+              "rotation": [9.334669E-06, 90, 0],
+              "scaleFactor": 0.006946224
+            },
+            "SkinnedMeshRenderer": {
+              "name": "Robe.001",
+              "material": "SenateRobe"
+            }
+          },
+          {
+            "name": "shoes_l_Shape0",
+            "index": "4276",
+            "static": false,
+            "Transform": {
+              "position": [1.878551, 0.1235287, 0.4869379],
+              "rotation": [9.334669E-06, 90, 0],
+              "scaleFactor": 0.006946224
+            },
+            "SkinnedMeshRenderer": {
+              "name": "shoes_l_Shape0",
+              "material": "SenateShoe"
+            }
+          },
+          {
+            "name": "shoes_r_Shape1",
+            "index": "4277",
+            "static": false,
+            "Transform": {
+              "position": [1.878578, 0.1235014, -0.284939],
+              "rotation": [9.334669E-06, 90, 0],
+              "scaleFactor": 0.006946224
+            },
+            "SkinnedMeshRenderer": {
+              "name": "shoes_r_Shape1",
+              "material": "SenateShoe"
+            }
+          },
+          {
+            "name": "Light (Player3)",
+            "index": "4278",
+            "static": false,
+            "Transform": {
+              "position": [1.89828, 0.435, 0.101],
+              "rotation": [0, 90, 0],
+              "scaleFactor": 1
+            },
+            "Light": {
+              "type": "Point",
+              "color": [1, 1, 0.2279412, 0.9467546],
               "intensity": 1,
               "range": 1
             }
