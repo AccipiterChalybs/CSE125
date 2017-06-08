@@ -752,8 +752,8 @@ const Renderer  = {
     }
 
     let ax = vec3.dot(v, Renderer.c_X);
-    az *= Renderer.FrustumCulling.c_Ratio;
     d = Renderer.FrustumCulling.c_sphereFactorX * radius;
+    az *= Renderer.FrustumCulling.c_Ratio;
     if (ax > az + d || ax < -az - d) {
       return false;
     }

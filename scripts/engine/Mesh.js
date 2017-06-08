@@ -230,8 +230,9 @@ class Mesh extends Component {
 
   getSphereRadius() {
     let currentEntry = Mesh.prototype.meshMap[this.name];
-    if (!currentEntry) {return 5; }
-    return currentEntry.sphere.radius;
+    if (!currentEntry) {console.log(this.name); return 0; }
+    let scale = this.transform.getWorldScale();
+    return currentEntry.sphere.radius * scale[0];
   }
 
     static calculateBoundingSphere(vertList, meshData) {

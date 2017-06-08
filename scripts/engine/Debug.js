@@ -9,7 +9,7 @@ Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that
 Debug.debugDisplay = true;
 Debug.quickLoad = true;
 Debug.autoStart = false;
-Debug.tmp_shadowTwoSideRender = true; //Var to remind me to remove this when we get in new level geometry
+Debug.tmp_shadowTwoSideRender = false; //Var to remind me to remove this when we get in new level geometry
 
 Debug.drawColliders = false;
 

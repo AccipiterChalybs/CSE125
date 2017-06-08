@@ -136,6 +136,8 @@ class PointLight extends Light{
     Renderer.shaderList[Renderer.POINT_SHADOW_SHADER].setUniform("uP_Matrix", PointLight.prototype.shadowMatrix, UniformTypes.mat4);
     Renderer.shaderList[Renderer.POINT_SHADOW_SHADER].setUniform("uLightPosition",this.gameObject.transform.getWorldPosition(),UniformTypes.vec3);
     Renderer.shaderList[Renderer.POINT_SHADOW_SHADER].setUniform("uFarDepth", PointLight.prototype.FAR_DEPTH, UniformTypes.u1f);
+
+    Renderer.setCamInternal(Math.PI/2, 1, PointLight.prototype.NEAR_DEPTH, PointLight.prototype.FAR_DEPTH);
   }
 
   copyShadowMap() {
@@ -156,6 +158,8 @@ class PointLight extends Light{
     let target = (bake) ? this.staticFBO : this.fbo;
     if(target && target !== null && this.isShadowCaster)
     {
+      Renderer.setCamDef(this.transform.getWorldPosition(), PointLight.prototype.lookat[pass][0], PointLight.prototype.lookat[pass][1]);
+
       target[pass].bind([], false, !this.isStatic);
 
       let mat = mat4.fromTranslation(mat4.create(), vec3.scale(vec3.create(), this.gameObject.transform.getWorldPosition(), -1));
@@ -178,10 +182,10 @@ class PointLight extends Light{
     return (this.isStatic) ? ShadowPass.prototype.MODE_DYNAMIC : ShadowPass.prototype.MODE_STATIC /*TODO CHANGE*/;
   }
 }
-
+PointLight.prototype.NEAR_DEPTH = 0.1;
 //TODO change per light
 PointLight.prototype.FAR_DEPTH = 10;
-PointLight.prototype.shadowMatrix = mat4.perspective(mat4.create(), Math.PI/2, 1, 0.1, PointLight.prototype.FAR_DEPTH);
+PointLight.prototype.shadowMatrix = mat4.perspective(mat4.create(), Math.PI/2, 1, PointLight.prototype.NEAR_DEPTH, PointLight.prototype.FAR_DEPTH);
 PointLight.prototype.viewMatrixArray = [
   mat4.lookAt(mat4.create(), vec3.create(), vec3.fromValues(1,0,0), vec3.fromValues(0,-1,0)),
   mat4.lookAt(mat4.create(), vec3.create(), vec3.fromValues(-1,0,0), vec3.fromValues(0,-1,0)),
@@ -189,6 +193,14 @@ PointLight.prototype.viewMatrixArray = [
   mat4.lookAt(mat4.create(), vec3.create(), vec3.fromValues(0,-1,0), vec3.fromValues(0,0,-1)),
   mat4.lookAt(mat4.create(), vec3.create(), vec3.fromValues(0,0,1), vec3.fromValues(0,-1,0)),
   mat4.lookAt(mat4.create(), vec3.create(), vec3.fromValues(0,0,-1), vec3.fromValues(0,-1,0)),
+];
+PointLight.prototype.lookat = [
+  [vec3.fromValues(1,0,0), vec3.fromValues(0,-1,0)],
+  [vec3.fromValues(-1,0,0), vec3.fromValues(0,-1,0)],
+  [vec3.fromValues(0,1,0), vec3.fromValues(0,0,1)],
+  [vec3.fromValues(0,-1,0), vec3.fromValues(0,0,-1)],
+  [vec3.fromValues(0,0,1), vec3.fromValues(0,-1,0)],
+  [vec3.fromValues(0,0,-1), vec3.fromValues(0,-1,0)],
 ];
 PointLight.shadowSize = 256;
 
