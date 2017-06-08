@@ -46,10 +46,11 @@
 .modal-body {
   padding: 30px;
   display: flex;
+  flex-direction: column;
 }
 
-.modal-body .half-panel {
-  width: 50%;
+.modal-body .frame {
+  width: 80%;
 }
 
 .modal-body h2 {
@@ -61,6 +62,10 @@
   margin-bottom: 10px;
   display: flex;
   justify-content: flex-start;
+}
+
+.modal-row.center{
+  justify-content: center;
 }
 
 .modal-row .text {
@@ -108,7 +113,7 @@
 }
 
 .modal-row div + div {
-  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .help {
@@ -147,4 +152,9 @@
 
 #cu-msg {
   color: darkred;
+}
+
+#pickplayer .modal-row {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

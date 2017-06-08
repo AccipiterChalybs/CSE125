@@ -24,6 +24,7 @@
     <div class="col-md-4">
       <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="startGame()">START</button>
       <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="$('#options').modal('show');">OPTIONS</button>
+      <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="$('#pickplayer').modal('show');">PLAYER</button>
       <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="$('#lose').modal('show');">WIN</button>
       <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="$('#lose').modal('show');">LOSE</button>
       <button type="button" class="btn-menu btn-transparent btn-lg btn-block" onclick="quit()">QUIT</button>
@@ -75,7 +76,7 @@
     </div>
   </div>
 </div>
-<!--Lost Screen -->
+<!--Lost Screen-->
 <div class="container">
   <div class="modal fade" id="lose" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
@@ -92,7 +93,34 @@
     </div>
   </div>
 </div>
-<!--Options Screen -->
+<!--Pick Player-->
+<div class="container">
+  <div class="modal fade" id="pickplayer" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" data-dismiss="modal" type="button"><span>&times;</span></button>
+          <h1 class="modal-title">Pick Player</h1>
+        </div>
+        <div class="modal-body">
+          <div class="modal-row center" id="1">
+            <div class="btn btn-default">Player 1</div>
+          </div>
+          <div class="modal-row center" id="2">
+            <div class="btn btn-default">Player 2</div>
+          </div>
+          <div class="modal-row center" id="3">
+            <div class="btn btn-default">Player 3</div>
+          </div>
+          <div class="modal-row center" id="4">
+            <div class="btn btn-default">Player 4</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Options Screen -->
 <div class="container">
   <div class="modal fade" id="options" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
@@ -103,7 +131,7 @@
           <p id="cu-msg">Client update is on</p>
         </div>
         <div class="modal-body">
-          <div class="half-panel" id="controls">
+          <div class="frame" id="controls">
             <h2>Controls</h2>
             <div class="modal-row" id="forward">
               <div class="text"></div><div class="btn btn-default"></div>
@@ -124,7 +152,7 @@
               <div class="text"></div><div class="btn btn-default"></div>
             </div>
           </div>
-          <div class="half-panel" id="graphics">
+          <div class="frame" id="graphics">
             <h2>Graphics</h2>
             <div class="modal-row" id="point-shadows">
               <div class="text">shadows</div>

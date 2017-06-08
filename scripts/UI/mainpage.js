@@ -168,6 +168,17 @@ function handleOninputSetter(setter, e) {
   }
 }
 
+function startPickplayer() {
+  for (row of $('#pickplayer .modal-row')) {
+    const id = row.getAttribute('id');
+    row.children[0].onclick = (e) => {
+      $('#pickplayer .modal-title')[0].innerHTML = `Player ${id}`;
+      // TODO: Set something somewhere for the server
+      window.setTimeout(() => { $('#pickplayer').modal('hide'); }, 500);
+    };
+  }
+}
+
 function startOptionsGraphics() {
   $('#graphics .slider').slider();
   $('#graphics .slider').slider('disable');
@@ -212,4 +223,5 @@ function menuStart() {
     $('#options #cu-msg').show() : $('#options #cu-msg').hide();
   startOptionsControls();
   startOptionsGraphics();
+  startPickplayer();
 }
