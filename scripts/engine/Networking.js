@@ -86,3 +86,8 @@ Networking.update = function () {
   }
 };
 
+Networking.informWin = function (sceneName) {
+  let data = {sceneName: sceneName};
+  Networking.socket.emit('win', data);
+};
+

@@ -8,6 +8,6 @@ class WinEvent extends TriggerEvent{
   }
 
   triggered(){
-    Networking.socket.emit('win',{sceneName: GameEngine.sceneFile});
+    Networking.informWin(GameEngine.sceneFile);
   }
 }
