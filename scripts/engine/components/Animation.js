@@ -72,6 +72,81 @@ class Animation extends Component
       return this._currentTime[index] / currAnim.animationTime;
     }
 
+    //immediately transition to playing new animation (i.e. no blending)
+    hardUpdate(newCurrentAnim = this._currentAnimIndex, loop, restart = false) {
+      this.play(newCurrentAnim, loop, restart);
+
+      let weightSum =0;
+      for (let i=0; i<Animation.prototype._animData[this.animationName].length; ++i) {
+        if (this._currentAnimIndex === i) {
+          this._animWeight[i] = 1;
+        } else {
+          this._animWeight[i] = 0;
+        }
+
+        if (this._animWeight[i] > 0) {
+          this.updateAnim(i, 0);
+        }
+
+        weightSum+=this._animWeight[i];
+      }
+
+      let animResults = {};
+      let rootResults = vec3.create();
+
+      for (let i = 0; i < Animation.prototype._animData[this.animationName].length; ++i) {
+        for (let node of Animation.prototype._animData[this.animationName][i].boneData) {
+          if (this._animWeight[i] > 0) {
+            animResults[node.name] = animResults[node.name] || [vec3.create(), quat.create(), 0];
+            let normalizedWeight = this._animWeight[i] / weightSum;
+
+            let boneResults = this.getAnimData(node, i);
+            vec3.scale(boneResults[0], boneResults[0], normalizedWeight);
+            vec3.add(animResults[node.name][0], animResults[node.name][0], boneResults[0]);
+            if (animResults[node.name][2] > 0) {
+              quat.slerp(animResults[node.name][1], animResults[node.name][1], boneResults[1], normalizedWeight/(normalizedWeight+animResults[node.name][2]));
+            } else {
+              animResults[node.name][1] = boneResults[1];
+            }
+
+            if (this.isRoot(node)) {
+              vec3.add(rootResults, rootResults, vec3.scale(boneResults[2], boneResults[2], normalizedWeight));
+            }
+            animResults[node.name][2] += normalizedWeight;
+          }
+        }
+      }
+
+
+      for (let nodeName of Object.keys(animResults)) {
+        this.boneMap[nodeName].setPosition(animResults[nodeName][0]);
+        this.boneMap[nodeName].setRotation(animResults[nodeName][1]);
+      }
+
+      //Root Motion (need to reapply this transform's transformations (i.e. rotation & scale)
+      vec3.scale(rootResults, rootResults, this.transform.getScale()[0]);
+      vec3.transformQuat(rootResults, rootResults, this.boneMap[Animation.prototype._animMetaData[this.animationName].rootName].getParent().getWorldRotation());
+      vec3.scale(rootResults, rootResults, Animation.prototype.ANIM_ROOT_MULT);
+      //    this.transform.translate(rootResults);
+
+      let body = this.gameObject.getComponent('Collider').body;
+      /*
+       body.position.x = this.transform.getWorldPosition()[0];
+       body.position.y = this.transform.getWorldPosition()[1];
+       body.position.z = this.transform.getWorldPosition()[2];
+       */
+      let tmp = vec3.copy(vec3.create(), rootResults);
+      this.lastRootMotion = tmp;
+      body.velocity.x *= 0.1;
+      //body.velocity.y *= 0.1;
+      body.velocity.z *= 0.1;
+
+      body.velocity.x += rootResults[0];
+      //body.velocity.y += rootResults[1];
+      body.velocity.z += rootResults[2];
+      //body.applyImpulse(new CANNON.Vec3(rootResults[0], rootResults[1],rootResults[2]), body.position);
+    }
+
     updateComponent() {
       let weightSum =0;
       for (let i=0; i<Animation.prototype._animData[this.animationName].length; ++i) {
@@ -85,7 +160,7 @@ class Animation extends Component
 
 
         if (this._animWeight[i] > 0) {
-          this.updateAnim(i);
+          this.updateAnim(i, Time.deltaTime);
         }
 
         weightSum+=this._animWeight[i];
@@ -149,16 +224,17 @@ class Animation extends Component
     }
 
 
-    updateAnim(index) {
+    updateAnim(index, dt) {
       this._lastTime[index] = this._currentTime[index];
       let currentAnim = Animation.prototype._animData[this.animationName][index];
       if (this._playing[index]) {
-        this._currentTime[index] += currentAnim.tickrate * Time.deltaTime; //TODO update constant (maybe from JSON file's tickrate?)
+        this._currentTime[index] += currentAnim.tickrate * dt; //TODO update constant (maybe from JSON file's tickrate?)
         if (this._currentTime[index] >= currentAnim.animationTime) {
           if (this._looping[index]) {
             this._currentTime[index] -= currentAnim.animationTime;
           }
           else {
+            // console.log('stopp');
             this.stop(index);
           }
         }

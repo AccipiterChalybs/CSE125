@@ -14,6 +14,8 @@ class PlayerLogicState extends ObjectLogicState {
 
     this.animationGraph = null;
 
+    this.controller = null;
+
     this.componentType = 'PlayerLogicState';
   }
 

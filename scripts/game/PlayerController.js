@@ -63,6 +63,7 @@ class PlayerController extends Component {
     // game state
     this.state = new PlayerLogicState();
     this.state.status = PlayerState.default;
+    this.state.controller = this;
     this.keys = 0;
     this.injured = false;
     this.checkpoint = null;
@@ -159,7 +160,6 @@ class PlayerController extends Component {
       this._looker.look();
     }
 
-    this.state.update();
   }
 
 
@@ -177,6 +177,10 @@ class PlayerController extends Component {
     this.state.moveSpeed = Utility.moveTowards(this.state.moveSpeed, speed, PLAYER_ACCELERATION * Time.deltaTime);
 
     if (!this.state.moveSpeed) {
+      this.state.moveDot = 1; // reset
+      this.state.moveCrossY = 0;
+
+      this.state.update();
       return;
     }
 
@@ -200,13 +204,15 @@ class PlayerController extends Component {
     vec3.cross(playerXMove, playerForward, move);
     this.state.moveCrossY = playerXMove[1];
 
+    this.state.update();
 
-
-    // if (vec3.length(move) > 0.0005) {
-    //   // TODO set this.state.movedot and movecrossy instead
-    //   this.transform.setRotation(quat.create());
-    //   this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
-    // }
+    if (this.state.state.turnAmt == 0 && vec3.length(move) > 0.0005) {
+      // TODO set this.state.movedot and movecrossy instead
+      // this.transform.setRotation(quat.create());
+      // this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
+      const angle = Math.acos(moveDotPlayer) * playerXMove[1] * -1;
+      this.transform.rotateY(angle < 0.1 ? angle : 0.1); // pi/16
+    }
   }
 
   heal(){
