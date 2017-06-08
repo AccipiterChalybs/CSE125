@@ -1,0 +1,48 @@
+.tutorial-banner {
+  position: absolute;
+  top: 60vh;
+  padding: 10px 20px;
+  max-width: 400px;
+  background-color: gray;
+  color: white;
+  opacity: .6;
+  display: flex;
+  align-items: center;
+}
+
+.tutorial-banner .key-img + .text,
+.tutorial-banner .invertedT + .text {
+  margin-left: 20px;
+}
+
+.tutorial-banner .text {
+  font-size: 35px;
+}
+
+.tutorial-banner .img {
+  max-height: 50px;
+  max-width: 50px;
+}
+
+.key-img {
+  height: 50px;
+  width: 50px;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.invertedT {
+  position: relative;
+  top: 50px;
+  height: 100px;
+  width: 150px;  /* 3 times .key-img width */
+  display: flex;
+}
+
+/* i dont like how i did it - ag */
+.invertedT .key-img:first-child {
+  position: absolute;
+  top: -50px;
+  right: 50px;
+}

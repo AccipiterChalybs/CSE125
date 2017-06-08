@@ -12,12 +12,12 @@ GameEngine._loadHandles = [];   //handles of currently loading objects
 GameEngine._nextLoadHandle = 0; //next load handle to return
 GameEngine.currentScene = null;
 GameEngine._StartGame = false;
+GameEngine.sceneFile = 'assets/scenes/mainScene2.json';
 
 /** Init: starts loading objects */
 GameEngine.init = function () {
   PhysicsEngine.init();
 
-  let sceneFile = 'assets/scenes/mainScene2.json';
   let meshFiles = ['assets/scenes/Primatives.json','assets/scenes/teapots.json', 'assets/scenes/ExampleLevel.json',
     'assets/meshes/Altar.1.json',
     'assets/meshes/Altar.2.json',
@@ -116,7 +116,7 @@ GameEngine.init = function () {
       ]
     }
   };
-  GameEngine.currentScene = new GameScene(sceneFile, meshFiles, animationFiles);
+  GameEngine.currentScene = new GameScene(GameEngine.sceneFile, meshFiles, animationFiles);
 };
 
 GameEngine.ready= function () {
@@ -142,33 +142,38 @@ GameEngine.startMethod = GameEngine.ready;
 
 /** Loop: called every frame */
 GameEngine.loop = function () {
-  if (!IS_SERVER) {Debug.Profiler.newFrame(); Debug.Profiler.startTimer("UpdateLoop", 1);}
-  Time.tick();
-  Input.update();
+  if(GameEngine._started) {
+    if (!IS_SERVER) {
+      Debug.Profiler.newFrame();
+      Debug.Profiler.startTimer("UpdateLoop", 1);
+    }
+    Time.tick();
+    Input.update();
 
-  // send data
+    // send data
 
-  if (!Debug.clientUpdate){
-    Networking.update();
-  }
-  GameEngine.currentScene.update();
+    if (!Debug.clientUpdate) {
+      Networking.update();
+    }
+    GameEngine.currentScene.update();
 
-  if (Debug.clientUpdate) {
-    GameObject.prototype.SceneRoot.update();
-  }
+    if (Debug.clientUpdate) {
+      GameObject.prototype.SceneRoot.update();
+    }
 
-  GameObject.prototype.SceneRoot.updateClient();
+    GameObject.prototype.SceneRoot.updateClient();
 
 
 
-  if (!IS_SERVER) {
-    Debug.Profiler.endTimer("UpdateLoop", 1);
-    Debug.Profiler.startTimer("RenderTime", 1);
-    Renderer.loop();
-    Debug.Profiler.endTimer("RenderTime", 1);
-    Debug.update();
-    //window.setTimeout(GameEngine.loop.bind(GameEngine), 5);
-    window.requestAnimationFrame(GameEngine.loop.bind(GameEngine));
+    if (!IS_SERVER) {
+      Debug.Profiler.endTimer("UpdateLoop", 1);
+      Debug.Profiler.startTimer("RenderTime", 1);
+      Renderer.loop();
+      Debug.Profiler.endTimer("RenderTime", 1);
+      Debug.update();
+      //window.setTimeout(GameEngine.loop.bind(GameEngine), 5);
+      window.requestAnimationFrame(GameEngine.loop.bind(GameEngine));
+    }
   }
 };
 
@@ -220,5 +225,52 @@ GameEngine.updateLoadingBar = function () {
     loadText.innerText = 'Loading Progress: (' +
         (GameEngine._numLoads - GameEngine._loadHandles.length) + ' / ' + GameEngine._numLoads + ')';
 };
+
+GameEngine.stop = function (){
+  GameEngine._ready = false;      //if true, all requests have been made, and can start when they finish
+  GameEngine._started = false;    //don't restart if we happen to load something at runtime;
+
+  GameObject.prototype._nameMap = {};
+  GameObject.prototype.SceneRoot = null;
+  GameObject.prototype.SerializeMap = {};
+  GameObject.prototype.objectId = 25000;
+  // GL.clearColor(1.0, 1.0, 1.0, 1.0)
+  // GL.clear(GL.COLOR_BUFFER_BIT)
+  Debug.Profiler.data = [];
+  Debug.Profiler.map = {};
+  Debug.Profiler.index = 0;
+
+  PlayerTable.players = [];
+  PlayerTable.hate=[];
+
+  if(!IS_SERVER){
+    Howler.unload();
+  }
+}
+
+GameEngine.restart = function () {
+
+  GameEngine.stop();
+  let glCanvas = null;
+  if(!IS_SERVER) {
+    glCanvas = document.getElementsByTagName('canvas')[0];
+    if (Debug.bufferDebugMode) {
+      GL = glCanvas.getContext('webgl2', {antialias: false});
+    } else {
+      GL = glCanvas.getContext('webgl2');
+    }
+    Input.init();
+    AudioEngine.init();
+
+  }
+
+  //glCanvas.getContext("webgl") || glCanvas.getContext("experimental-webgl");
+
+  GameEngine.init();
+  if(!IS_SERVER) {
+
+    if(glCanvas && glCanvas!==null) initRenderer(glCanvas);
+  }
+}
 
 

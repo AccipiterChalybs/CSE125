@@ -27,7 +27,7 @@ class PlayerController extends Playerable{
     this._looker = null;
     this.checkpoint = null;
     this.keys = 0;
-    this.injured = true;
+    this.injured = false;
     this.forward = vec3.create(); vec3.set(this.forward, 0, 0, -1);
     this.cameraPos = vec3.create(); vec3.set(this.cameraPos, 0, 0, -1);
 
