@@ -90,7 +90,7 @@ Debug.BUFFERTYPE_SHADOW = 7;
 Debug.BUFFERTYPE_SSAO = 8;
 Debug.currentBuffer = Debug.BUFFERTYPE_NONE;
 
-Debug.currentLightIndex = 1; //TODO make this switchable with input
+Debug.currentLightIndex = 0; //TODO make this switchable with input
 
 
 Debug.displayOpen = false;
