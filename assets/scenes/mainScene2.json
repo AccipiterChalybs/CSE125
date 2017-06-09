@@ -199,6 +199,13 @@
       "animated" : true
     },
     {
+      "name": "MonsterMat",
+      "color": "assets/texture/Enemy/albedo.png",
+      "mat": "assets/texture/Enemy/mat.png",
+      "normal" : "assets/texture/Enemy/normal.png",
+      "animated" : true
+    },
+    {
       "name": "ivy_leaves_c",
       "color": "assets/texture/IvyC/ivy_leaves_c.png",
       "mat": "assets/texture/blank_mat.png",
@@ -62360,6 +62367,842 @@
               "color": [1, 1, 0.2279412, 0.9467546],
               "intensity": 1,
               "range": 1
+            }
+          }
+        ]
+      },
+      {
+        "name": "Monster",
+        "index": "4276",
+        "static": false,
+        "Transform": {
+          "position": [2.696, -0.001, 0],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "Rigidbody": 100,
+        "EvilController": {
+        },
+        "AnimatorJS": {
+          "animationName": "MonsterAnim"
+        },
+        "colliders": [
+          {
+            "type": "sphere",
+            "isTrigger": false,
+            "scale": 0.25,
+            "offset": [0, 0, 0]
+          }
+        ],
+        "children": [
+          {
+            "name": "Camera",
+            "index": "4277",
+            "static": false,
+            "Transform": {
+              "position": [2.696, -0.001, 0],
+              "rotation": [358.9055, 271.8767, 321.998],
+              "scaleFactor": 1
+            }
+          },
+          {
+            "name": "Empty",
+            "index": "4278",
+            "static": false,
+            "Transform": {
+              "position": [2.696, -0.001, 0],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 1
+            }
+          },
+          {
+            "name": "metarig",
+            "index": "4279",
+            "static": false,
+            "Transform": {
+              "position": [2.696, -0.001, 0],
+              "rotation": [270.0198, 0, 0],
+              "scaleFactor": 0.064
+            },
+            "children": [
+              {
+                "name": "hips",
+                "index": "4280",
+                "static": false,
+                "Transform": {
+                  "position": [2.696, 0.5773778, 0.02001691],
+                  "rotation": [12.33319, -1.398308E-05, -2.986732E-06],
+                  "scaleFactor": 1
+                },
+                "children": [
+                  {
+                    "name": "spine",
+                    "index": "4281",
+                    "static": false,
+                    "Transform": {
+                      "position": [2.696, 0.6769144, 0.04177982],
+                      "rotation": [6.065585, -1.373729E-05, -1.451573E-06],
+                      "scaleFactor": 1
+                    },
+                    "children": [
+                      {
+                        "name": "chest",
+                        "index": "4282",
+                        "static": false,
+                        "Transform": {
+                          "position": [2.696, 0.7674596, 0.05140132],
+                          "rotation": [357.3095, 5.356235E-13, 1.715123E-12],
+                          "scaleFactor": 1
+                        },
+                        "children": [
+                          {
+                            "name": "neck",
+                            "index": "4283",
+                            "static": false,
+                            "Transform": {
+                              "position": [2.696, 0.9015173, 0.04510146],
+                              "rotation": [6.058423, -1.37371E-05, -1.449845E-06],
+                              "scaleFactor": 1
+                            },
+                            "children": [
+                              {
+                                "name": "head",
+                                "index": "4284",
+                                "static": false,
+                                "Transform": {
+                                  "position": [2.696, 0.9504834, 0.05029851],
+                                  "rotation": [26.46906, 21.22723, 23.80541],
+                                  "scaleFactor": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "head_end",
+                                    "index": "4285",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [2.674478, 1.027594, 0.09984702],
+                                      "rotation": [26.46906, 21.22723, 23.80541],
+                                      "scaleFactor": 1
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "shoulder.L",
+                            "index": "4286",
+                            "static": false,
+                            "Transform": {
+                              "position": [2.685519, 0.879182, 0.09080356],
+                              "rotation": [284.2157, 41.257, 353.7866],
+                              "scaleFactor": 1
+                            },
+                            "children": [
+                              {
+                                "name": "upper_arm.L",
+                                "index": "4287",
+                                "static": false,
+                                "Transform": {
+                                  "position": [2.635236, 0.8831173, 0.0363391],
+                                  "rotation": [6.512699, 345.9472, 170.545],
+                                  "scaleFactor": 0.9999999
+                                },
+                                "children": [
+                                  {
+                                    "name": "forearm.L",
+                                    "index": "4288",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [2.600147, 0.6229737, -0.003057957],
+                                      "rotation": [11.00018, 6.308934, 173.4429],
+                                      "scaleFactor": 0.9999999
+                                    },
+                                    "children": [
+                                      {
+                                        "name": "hand.L",
+                                        "index": "4289",
+                                        "static": false,
+                                        "Transform": {
+                                          "position": [2.569296, 0.3990022, -0.04344866],
+                                          "rotation": [29.30279, 85.43315, 186.537],
+                                          "scaleFactor": 1
+                                        },
+                                        "children": [
+                                          {
+                                            "name": "hand.L_end",
+                                            "index": "4290",
+                                            "static": false,
+                                            "Transform": {
+                                              "position": [2.452489, 0.1862365, -0.08082592],
+                                              "rotation": [29.30279, 85.43315, 186.537],
+                                              "scaleFactor": 1
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "upper_arm.L.001",
+                                "index": "4291",
+                                "static": false,
+                                "Transform": {
+                                  "position": [2.650353, 0.792415, -0.03919464],
+                                  "rotation": [355.8819, 329.0365, 123.4835],
+                                  "scaleFactor": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "upper_arm.L.002",
+                                    "index": "4292",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [2.509425, 0.6869889, -0.1148983],
+                                      "rotation": [310.3247, 231.8478, 232.6511],
+                                      "scaleFactor": 1
+                                    },
+                                    "children": [
+                                      {
+                                        "name": "upper_arm.L.003",
+                                        "index": "4293",
+                                        "static": false,
+                                        "Transform": {
+                                          "position": [2.31289, 0.5967259, -0.036861],
+                                          "rotation": [339.5492, 251.9353, 255.0421],
+                                          "scaleFactor": 0.9999999
+                                        },
+                                        "children": [
+                                          {
+                                            "name": "upper_arm.L.003_end",
+                                            "index": "4294",
+                                            "static": false,
+                                            "Transform": {
+                                              "position": [2.170215, 0.5071779, 0.2928785],
+                                              "rotation": [339.5492, 251.9353, 255.0421],
+                                              "scaleFactor": 1
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "upper_arm.L.004",
+                                "index": "4295",
+                                "static": false,
+                                "Transform": {
+                                  "position": [2.6246, 0.8134568, -0.04494548],
+                                  "rotation": [346.8214, 341.9724, 92.76331],
+                                  "scaleFactor": 0.9999998
+                                },
+                                "children": [
+                                  {
+                                    "name": "upper_arm.L.005",
+                                    "index": "4296",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [2.485795, 0.8066214, -0.08843648],
+                                      "rotation": [304.524, 218.0221, 252.3073],
+                                      "scaleFactor": 1
+                                    },
+                                    "children": [
+                                      {
+                                        "name": "upper_arm.L.006",
+                                        "index": "4297",
+                                        "static": false,
+                                        "Transform": {
+                                          "position": [2.248439, 0.7614342, 0.01376891],
+                                          "rotation": [308.8691, 238.0921, 274.0065],
+                                          "scaleFactor": 1
+                                        },
+                                        "children": [
+                                          {
+                                            "name": "upper_arm.L.006_end",
+                                            "index": "4298",
+                                            "static": false,
+                                            "Transform": {
+                                              "position": [2.133516, 0.7719082, 0.2229293],
+                                              "rotation": [308.8691, 238.0921, 274.0065],
+                                              "scaleFactor": 1
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "upper_arm.L.007",
+                                "index": "4299",
+                                "static": false,
+                                "Transform": {
+                                  "position": [2.6482, 0.8322728, -0.04462814],
+                                  "rotation": [355.1301, 322.8073, 96.72688],
+                                  "scaleFactor": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "upper_arm.L.008",
+                                    "index": "4300",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [2.53253, 0.8153366, -0.130592],
+                                      "rotation": [309.1277, 230.8975, 230.9543],
+                                      "scaleFactor": 1
+                                    },
+                                    "children": [
+                                      {
+                                        "name": "upper_arm.L.009",
+                                        "index": "4301",
+                                        "static": false,
+                                        "Transform": {
+                                          "position": [2.345975, 0.7300027, -0.06737787],
+                                          "rotation": [315.1429, 226.1328, 265.6746],
+                                          "scaleFactor": 0.9999999
+                                        },
+                                        "children": [
+                                          {
+                                            "name": "upper_arm.L.009_end",
+                                            "index": "4302",
+                                            "static": false,
+                                            "Transform": {
+                                              "position": [2.206289, 0.7197635, 0.06324178],
+                                              "rotation": [315.1429, 226.1328, 265.6746],
+                                              "scaleFactor": 1
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "upper_arm.L.010",
+                                "index": "4303",
+                                "static": false,
+                                "Transform": {
+                                  "position": [2.681684, 0.8678752, -0.01829499],
+                                  "rotation": [344.8473, 328.6247, 86.76306],
+                                  "scaleFactor": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "upper_arm.L.011",
+                                    "index": "4304",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [2.497156, 0.879781, -0.1345981],
+                                      "rotation": [299.5088, 209.6143, 257.9503],
+                                      "scaleFactor": 0.9999998
+                                    },
+                                    "children": [
+                                      {
+                                        "name": "upper_arm.L.012",
+                                        "index": "4305",
+                                        "static": false,
+                                        "Transform": {
+                                          "position": [2.301613, 0.8583904, -0.06692261],
+                                          "rotation": [317.8721, 237.9763, 255.2661],
+                                          "scaleFactor": 0.9999999
+                                        },
+                                        "children": [
+                                          {
+                                            "name": "upper_arm.L.012_end",
+                                            "index": "4306",
+                                            "static": false,
+                                            "Transform": {
+                                              "position": [2.162862, 0.8185837, 0.08702546],
+                                              "rotation": [317.8721, 237.9763, 255.2661],
+                                              "scaleFactor": 1
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "shoulder.R",
+                            "index": "4307",
+                            "static": false,
+                            "Transform": {
+                              "position": [2.706481, 0.879182, 0.09080356],
+                              "rotation": [284.2157, 318.743, 6.213388],
+                              "scaleFactor": 1
+                            },
+                            "children": [
+                              {
+                                "name": "upper_arm.R",
+                                "index": "4308",
+                                "static": false,
+                                "Transform": {
+                                  "position": [2.756764, 0.8831173, 0.03633904],
+                                  "rotation": [6.512698, 14.05279, 189.455],
+                                  "scaleFactor": 0.9999999
+                                },
+                                "children": [
+                                  {
+                                    "name": "forearm.R",
+                                    "index": "4309",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [2.791853, 0.6229737, -0.003057957],
+                                      "rotation": [11.00018, 353.6911, 186.5571],
+                                      "scaleFactor": 0.9999999
+                                    },
+                                    "children": [
+                                      {
+                                        "name": "hand.R",
+                                        "index": "4310",
+                                        "static": false,
+                                        "Transform": {
+                                          "position": [2.822705, 0.3990022, -0.04344866],
+                                          "rotation": [30.78419, 253.4144, 184.6413],
+                                          "scaleFactor": 0.9999999
+                                        },
+                                        "children": [
+                                          {
+                                            "name": "hand.R_end",
+                                            "index": "4311",
+                                            "static": false,
+                                            "Transform": {
+                                              "position": [2.937098, 0.188715, 0.01135665],
+                                              "rotation": [30.78419, 253.4144, 184.6413],
+                                              "scaleFactor": 1
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "upper_arm.R.001",
+                                "index": "4312",
+                                "static": false,
+                                "Transform": {
+                                  "position": [2.741647, 0.792415, -0.03919464],
+                                  "rotation": [15.31898, 22.27986, 264.1808],
+                                  "scaleFactor": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "upper_arm.R.002",
+                                    "index": "4313",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [2.916074, 0.7736799, -0.1162065],
+                                      "rotation": [302.37, 25.43276, 248.3533],
+                                      "scaleFactor": 1
+                                    },
+                                    "children": [
+                                      {
+                                        "name": "upper_arm.R.003",
+                                        "index": "4314",
+                                        "static": false,
+                                        "Transform": {
+                                          "position": [3.139832, 0.728272, -0.1432903],
+                                          "rotation": [322.74, 44.65619, 218.7641],
+                                          "scaleFactor": 1
+                                        },
+                                        "children": [
+                                          {
+                                            "name": "upper_arm.R.003_end",
+                                            "index": "4315",
+                                            "static": false,
+                                            "Transform": {
+                                              "position": [3.427601, 0.4984852, -0.1818957],
+                                              "rotation": [322.74, 44.65619, 218.7641],
+                                              "scaleFactor": 1
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "upper_arm.R.004",
+                                "index": "4316",
+                                "static": false,
+                                "Transform": {
+                                  "position": [2.767401, 0.8134569, -0.04494548],
+                                  "rotation": [6.381571, 22.74308, 295.5544],
+                                  "scaleFactor": 0.9999999
+                                },
+                                "children": [
+                                  {
+                                    "name": "upper_arm.R.005",
+                                    "index": "4317",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [2.891259, 0.8758829, -0.08929551],
+                                      "rotation": [291.9597, 4.29233, 278.4713],
+                                      "scaleFactor": 1
+                                    },
+                                    "children": [
+                                      {
+                                        "name": "upper_arm.R.006",
+                                        "index": "4318",
+                                        "static": false,
+                                        "Transform": {
+                                          "position": [3.147333, 0.8903355, -0.1444599],
+                                          "rotation": [312.9368, 15.64605, 252.1646],
+                                          "scaleFactor": 1
+                                        },
+                                        "children": [
+                                          {
+                                            "name": "upper_arm.R.006_end",
+                                            "index": "4319",
+                                            "static": false,
+                                            "Transform": {
+                                              "position": [3.380756, 0.8404956, -0.1542086],
+                                              "rotation": [312.9368, 15.64605, 252.1646],
+                                              "scaleFactor": 1
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "upper_arm.R.007",
+                                "index": "4320",
+                                "static": false,
+                                "Transform": {
+                                  "position": [2.7438, 0.8322728, -0.04462808],
+                                  "rotation": [4.590906, 27.67965, 274.6618],
+                                  "scaleFactor": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "upper_arm.R.008",
+                                    "index": "4321",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [2.872315, 0.8440285, -0.1109757],
+                                      "rotation": [304.0227, 61.44676, 210.6685],
+                                      "scaleFactor": 1
+                                    },
+                                    "children": [
+                                      {
+                                        "name": "upper_arm.R.009",
+                                        "index": "4322",
+                                        "static": false,
+                                        "Transform": {
+                                          "position": [3.05907, 0.7407188, -0.1340063],
+                                          "rotation": [307.2233, 34.33917, 227.9923],
+                                          "scaleFactor": 1
+                                        },
+                                        "children": [
+                                          {
+                                            "name": "upper_arm.R.009_end",
+                                            "index": "4323",
+                                            "static": false,
+                                            "Transform": {
+                                              "position": [3.234145, 0.6631868, -0.1300095],
+                                              "rotation": [307.2233, 34.33917, 227.9923],
+                                              "scaleFactor": 1
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "upper_arm.R.010",
+                                "index": "4324",
+                                "static": false,
+                                "Transform": {
+                                  "position": [2.710316, 0.8678752, -0.01829499],
+                                  "rotation": [1.411025, 36.71556, 300.0005],
+                                  "scaleFactor": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "upper_arm.R.011",
+                                    "index": "4325",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [2.863572, 0.9770665, -0.1292379],
+                                      "rotation": [293.5925, 3.751407, 283.7615],
+                                      "scaleFactor": 1
+                                    },
+                                    "children": [
+                                      {
+                                        "name": "upper_arm.R.012",
+                                        "index": "4326",
+                                        "static": false,
+                                        "Transform": {
+                                          "position": [3.062226, 0.996872, -0.1877098],
+                                          "rotation": [307.176, 45.63993, 249.9702],
+                                          "scaleFactor": 0.9999999
+                                        },
+                                        "children": [
+                                          {
+                                            "name": "upper_arm.R.012_end",
+                                            "index": "4327",
+                                            "static": false,
+                                            "Transform": {
+                                              "position": [3.242028, 0.9531945, -0.2891995],
+                                              "rotation": [307.176, 45.63993, 249.9702],
+                                              "scaleFactor": 1
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "thigh.L",
+                    "index": "4328",
+                    "static": false,
+                    "Transform": {
+                      "position": [2.667783, 0.612943, 0.04452884],
+                      "rotation": [355.8209, 179.3703, 184.2269],
+                      "scaleFactor": 0.9999976
+                    },
+                    "children": [
+                      {
+                        "name": "shin.L",
+                        "index": "4329",
+                        "static": false,
+                        "Transform": {
+                          "position": [2.645393, 0.307478, 0.02196163],
+                          "rotation": [358.3111, 180.2912, 184.1818],
+                          "scaleFactor": 0.9999999
+                        },
+                        "children": [
+                          {
+                            "name": "foot.L",
+                            "index": "4330",
+                            "static": false,
+                            "Transform": {
+                              "position": [2.62647, 0.04930664, 0.01444521],
+                              "rotation": [58.06384, 179.9966, 182.2177],
+                              "scaleFactor": 1
+                            },
+                            "Foot": {
+                              "left": true
+                            },
+                            "children": [
+                              {
+                                "name": "toe.L",
+                                "index": "4331",
+                                "static": false,
+                                "Transform": {
+                                  "position": [2.623602, 0.0101811, 0.0772141],
+                                  "rotation": [270.0198, 180.0033, 0],
+                                  "scaleFactor": 0.9999999
+                                },
+                                "children": [
+                                  {
+                                    "name": "toe.L_end",
+                                    "index": "4332",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [2.623602, 0.0101811, 0.1156997],
+                                      "rotation": [270.0198, 180.0033, 0],
+                                      "scaleFactor": 1
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "heel.L",
+                            "index": "4333",
+                            "static": false,
+                            "Transform": {
+                              "position": [2.62647, 0.04930664, 0.01444521],
+                              "rotation": [40.27594, -0.0007124199, 176.799],
+                              "scaleFactor": 1
+                            },
+                            "children": [
+                              {
+                                "name": "heel.02.L",
+                                "index": "4334",
+                                "static": false,
+                                "Transform": {
+                                  "position": [2.644608, -0.000948483, 0.02372347],
+                                  "rotation": [274.1921, 90.00367, -0.004508225],
+                                  "scaleFactor": 0.9999999
+                                },
+                                "children": [
+                                  {
+                                    "name": "heel.02.L_end",
+                                    "index": "4335",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [2.598914, 0.0024007, 0.02372286],
+                                      "rotation": [274.1921, 90.00367, -0.004508225],
+                                      "scaleFactor": 1
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "thigh.R",
+                    "index": "4336",
+                    "static": false,
+                    "Transform": {
+                      "position": [2.724217, 0.612943, 0.04452884],
+                      "rotation": [355.821, 180.6298, 175.7731],
+                      "scaleFactor": 0.9999977
+                    },
+                    "children": [
+                      {
+                        "name": "shin.R",
+                        "index": "4337",
+                        "static": false,
+                        "Transform": {
+                          "position": [2.746607, 0.3074782, 0.02196169],
+                          "rotation": [358.3111, 179.7089, 175.8181],
+                          "scaleFactor": 0.9999999
+                        },
+                        "children": [
+                          {
+                            "name": "foot.R",
+                            "index": "4338",
+                            "static": false,
+                            "Transform": {
+                              "position": [2.765531, 0.04930677, 0.01444539],
+                              "rotation": [58.06386, 180.0034, 177.7822],
+                              "scaleFactor": 1
+                            },
+                            "Foot": {
+                              "left": false
+                            },
+                            "children": [
+                              {
+                                "name": "toe.R",
+                                "index": "4339",
+                                "static": false,
+                                "Transform": {
+                                  "position": [2.768399, 0.01018128, 0.07721422],
+                                  "rotation": [270.0198, 179.9968, 0],
+                                  "scaleFactor": 0.9999999
+                                },
+                                "children": [
+                                  {
+                                    "name": "toe.R_end",
+                                    "index": "4340",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [2.768399, 0.01018129, 0.1156999],
+                                      "rotation": [270.0198, 179.9968, 0],
+                                      "scaleFactor": 1
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "name": "heel.R",
+                            "index": "4341",
+                            "static": false,
+                            "Transform": {
+                              "position": [2.765531, 0.04930677, 0.01444539],
+                              "rotation": [40.27594, 0.0006038714, 183.2011],
+                              "scaleFactor": 1
+                            },
+                            "children": [
+                              {
+                                "name": "heel.02.R",
+                                "index": "4342",
+                                "static": false,
+                                "Transform": {
+                                  "position": [2.747393, -0.0009483005, 0.02372365],
+                                  "rotation": [274.1922, 269.996, 0.004601574],
+                                  "scaleFactor": 1
+                                },
+                                "children": [
+                                  {
+                                    "name": "heel.02.R_end",
+                                    "index": "4343",
+                                    "static": false,
+                                    "Transform": {
+                                      "position": [2.793087, 0.002400883, 0.02372305],
+                                      "rotation": [274.1922, 269.996, 0.004601574],
+                                      "scaleFactor": 1
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Plane",
+            "index": "4344",
+            "static": false,
+            "Transform": {
+              "position": [2.696, -0.001, 0],
+              "rotation": [0, 0, 0],
+              "scaleFactor": 0.064
+            },
+            "SkinnedMeshRenderer": {
+              "name": "EnemyPlane",
+              "material": "MonsterMat"
+            }
+          },
+          {
+            "name": "Point",
+            "index": "4345",
+            "static": false,
+            "Transform": {
+              "position": [2.696, -0.001, 0],
+              "rotation": [-4.325711E-06, 0, 0],
+              "scaleFactor": 1
+            }
+          },
+          {
+            "name": "Point.001",
+            "index": "4346",
+            "static": false,
+            "Transform": {
+              "position": [2.696, -0.001, 0],
+              "rotation": [-4.325711E-06, 0, 0],
+              "scaleFactor": 1
             }
           }
         ]

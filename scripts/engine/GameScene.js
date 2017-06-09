@@ -73,7 +73,7 @@ class GameScene {
     let pos = vec3.create(); vec3.set(pos, 26, 0, 18);
     let color = vec4.create(); vec4.set(color, 1, 0, 0, 1);
     let evilTeapot = Debug.drawTeapot(pos, color);
-    evilTeapot.addComponent(new EvilController());
+    //evilTeapot.addComponent(new EvilController());
 
     let container = new GameObject();
     let ids = [];

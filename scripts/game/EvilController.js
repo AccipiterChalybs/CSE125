@@ -13,6 +13,7 @@ class EvilController extends AIController{
     super();
     this.componentType = 'EvilController';
     this.movementSpeed = EVIL_MOVEMENTSPEED;
+    console.log("I am alive");
 
     this.data = {
       destination: vec3.create(),
@@ -33,10 +34,13 @@ class EvilController extends AIController{
 
   start() {
     super.start();
+    this.gameObject.getComponent('Animation').play(3, true);
   }
 
   updateComponent() {
     super.updateComponent();
+    this.transform.setRotation(quat.create());
+    this.transform.rotateY(Math.PI/2);
   }
 
   _buildBehaviorTree() {

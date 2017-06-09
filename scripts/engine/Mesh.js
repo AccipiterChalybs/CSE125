@@ -230,7 +230,8 @@ class Mesh extends Component {
 
   getSphereRadius() {
     let currentEntry = Mesh.prototype.meshMap[this.name];
-    if (!currentEntry) {console.log(this.name); return 0; }
+    if (!currentEntry) {return 0; }
+    if (this.animationRoot) {return 50000;}
     let scale = this.transform.getWorldScale();
     return currentEntry.sphere.radius * scale[0];
   }

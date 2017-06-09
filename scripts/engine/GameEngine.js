@@ -12,7 +12,7 @@ GameEngine._loadHandles = [];   //handles of currently loading objects
 GameEngine._nextLoadHandle = 0; //next load handle to return
 GameEngine.currentScene = null;
 GameEngine._StartGame = false;
-GameEngine.sceneFile = 'assets/scenes/level0.json';
+GameEngine.sceneFile = 'assets/scenes/mainScene2.json';
 
 /** Init: starts loading objects */
 GameEngine.init = function () {
@@ -55,6 +55,7 @@ GameEngine.init = function () {
     "assets/meshes/IntroHypeRoom.json",
     "assets/meshes/Ivy.1.json",
     "assets/meshes/LillyPad.1.json",
+    "assets/meshes/Monster.json",
     "assets/meshes/navmesh.json",
     "assets/meshes/octo_idle.json",
     "assets/meshes/octo_run.json",
@@ -200,6 +201,15 @@ GameEngine.init = function () {
         ['assets/meshes/senate_idle.json' , [0]],
         ['assets/meshes/senate_walking.json' , [0]],
         ['assets/meshes/senate_walking.json' , [0]]
+      ]
+    },
+    'MonsterAnim' : {
+      metaData: {root: "metarig", rootAxisLocked: [false, false, false]},
+      info: [
+        ['assets/meshes/Monster.json' , [0]],
+        ['assets/meshes/monster_idle.json' , [0]],
+        ['assets/meshes/monster_walking.json' , [0]],
+        ['assets/meshes/monster_run.json' , [0]]
       ]
     }
   };
