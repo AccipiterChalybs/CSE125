@@ -13,7 +13,6 @@ class EvilController extends AIController{
     super();
     this.componentType = 'EvilController';
     this.movementSpeed = EVIL_MOVEMENTSPEED;
-    console.log("I am alive");
 
     this.data = {
       destination: vec3.create(),
@@ -35,12 +34,32 @@ class EvilController extends AIController{
   start() {
     super.start();
     this.gameObject.getComponent('Animation').play(3, true);
+    this.a = 0;
+    this.body = this.gameObject.getComponent('Collider').body;
+    this.yRotate = 0;
+    this.moveToPosition(vec3.fromValues(0, 0, 0));
   }
 
   updateComponent() {
     super.updateComponent();
     this.transform.setRotation(quat.create());
-    this.transform.rotateY(Math.PI/2);
+    this.transform.rotateY(this.yRotate);
+  }
+
+  moveToPosition(position) {
+    if (!this.body) return;
+
+    let delta = vec3.sub(vec3.create(), position, this.transform.getPosition());
+
+    this.transform.setRotation(quat.create());
+    this.yRotate = Math.atan2(delta[2], delta[0]) + Math.PI/2;
+    this.transform.rotateY(this.yRotate);
+
+    this.transform.translate(delta);
+
+    this.body.position.x = this.transform.getWorldPosition()[0];
+    this.body.position.y = this.transform.getWorldPosition()[1];
+    this.body.position.z = this.transform.getWorldPosition()[2];
   }
 
   _buildBehaviorTree() {

@@ -48,7 +48,6 @@ class Animation extends Component
     }
 
     play ( animation, loop, restart = false) {
-      if (this.gameObject.name === 'Monster') {console.log(animation, loop, restart)}
         if (restart || animation !== this._currentAnimIndex) {
           this._currentAnimIndex = animation;
           this._currentTime[this._currentAnimIndex] = 0;
@@ -80,7 +79,6 @@ class Animation extends Component
           if (this._animWeight[i] < 0) this._animWeight[i] = 0;
         }
 
-        if (i===3) console.log(this._animWeight[i], this._currentTime[i]);
         if (this._animWeight[i] > 0) {
           this.updateAnim(i);
         }
@@ -94,8 +92,6 @@ class Animation extends Component
       for (let i = 0; i < Animation.prototype._animData[this.animationName].length; ++i) {
         for (let node of Animation.prototype._animData[this.animationName][i].boneData) {
           if (this._animWeight[i] > 0) {
-            //if (i===3) console.log(this.animationName + " " + this._currentTime[i], this);
-
             animResults[node.name] = animResults[node.name] || [vec3.create(), quat.create(), 0];
             let normalizedWeight = this._animWeight[i] / weightSum;
 
@@ -151,10 +147,8 @@ class Animation extends Component
     updateAnim(index) {
       this._lastTime[index] = this._currentTime[index];
       let currentAnim = Animation.prototype._animData[this.animationName][index];
-      if (index === 3) console.log(this._playing[index])
       if (this._playing[index]) {
-        this._currentTime[index] += currentAnim.tickrate * Time.deltaTime; //TODO update constant (maybe from JSON file's tickrate?)
-        if (index === 3) console.log(this._currentTime[index])
+        this._currentTime[index] += currentAnim.tickrate * Time.deltaTime;
         if (this._currentTime[index] >= currentAnim.animationTime) {
           if (this._looping[index]) {
             this._currentTime[index] -= currentAnim.animationTime;
@@ -170,7 +164,7 @@ class Animation extends Component
       let currentAnim = Animation.prototype._animData[this.animationName][index];
 
       let rescale = node.name==='metarig';
-      let rescale2 = this.animationName==='MonsterAnim';
+      let rescale2 = this.animationName==='MonsterAnim' && node.name === 'metarig';
 
       if (this.isRoot(node)) {
         let motion = vec3.create();

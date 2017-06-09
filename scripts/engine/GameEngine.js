@@ -204,7 +204,7 @@ GameEngine.init = function () {
       ]
     },
     'MonsterAnim' : {
-      metaData: {root: "metarig", rootAxisLocked: [false, false, false]},
+      metaData: {root: "metarig", rootAxisLocked: [true, false, true]},
       info: [
         ['assets/meshes/Monster.json' , [0]],
         ['assets/meshes/monster_idle.json' , [0]],
