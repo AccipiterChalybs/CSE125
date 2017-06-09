@@ -4,7 +4,7 @@
 
 let Debug = {};
 
-Debug.clientUpdate = true; //Run the client in standalone mode, so it doesn't need a server - good for testing!
+Debug.clientUpdate = false; //Run the client in standalone mode, so it doesn't need a server - good for testing!
 Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
 Debug.debugDisplay = true;
 Debug.quickLoad = true;
@@ -21,8 +21,11 @@ Debug.start = function() {
     if (Debug.profilerElement === null) Debug.profilerElement = document.getElementById("profilerLog");
     if (!Debug.animationStateElement) {
       Debug.animationStateElement = document.createElement('div');
-      console.log(Debug.animationStateElement);
       document.getElementById('debugContainer').appendChild(Debug.animationStateElement);
+    }
+    if (!Debug.inputElement) {
+      Debug.inputElement = document.createElement('div');
+      document.getElementById('debugContainer').appendChild(Debug.inputElement);
     }
   }
 };
@@ -36,8 +39,9 @@ Debug.update = function() {
   if (Debug.displayOpen) {
     Debug.logFPS();
     Debug.logExposure();
-    Debug.Profiler.report();
+    //Debug.Profiler.report();
     Debug.logAnimationState();
+    Debug.logInput();
   }
 
   if (Debug.bufferDebugMode) {
@@ -86,7 +90,7 @@ Debug.BUFFERTYPE_SHADOW = 7;
 Debug.BUFFERTYPE_SSAO = 8;
 Debug.currentBuffer = Debug.BUFFERTYPE_NONE;
 
-Debug.currentLightIndex = 1; //TODO make this switchable with input
+Debug.currentLightIndex = 0; //TODO make this switchable with input
 
 
 Debug.displayOpen = false;
@@ -114,14 +118,24 @@ Debug.logExposure = function() {
   Debug.exposureElement.innerText = "Exposure: " + Renderer.postPass.averageExposure;
 };
 
-Debug.logAnimationState = () => {/*
+Debug.logAnimationState = () => {
   const p = PlayerTable.currentPlayer;
   const o = PlayerTable.getPlayer();
   const ls = o.getComponent('PlayerController').state;
   const s = ls.state.name;
-  const m = ls.moveAmt;
+  const m = ls.moveSpeed.toFixed(3);
   const l = ls.status;
-  Debug.animationStateElement.innerText = `Player ${p} is ${s} with ms ${m} and status ${l}`;*/
+  const d = ls.moveDot.toFixed(3);
+  const y = ls.moveCrossY.toFixed(3);
+  Debug.animationStateElement.innerText =
+    `Player ${p} is ${s} with status ${l}:` +
+    `\n..ms ${m}\n..movedot ${d}\n..movecrossy ${y}`;
+};
+
+Debug.logInput = () => {
+  const h = Input.getAxis('horizontal');
+  const v = Input.getAxis('vertical');
+  Debug.inputElement.innerText = `Input horizontal(${h}) vertical(${v})`;
 };
 
 //Go through Debug, so easier to find and remove;

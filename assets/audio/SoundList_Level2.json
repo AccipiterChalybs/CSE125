@@ -1,5 +1,65 @@
 {
-
+  "Tone3.wav_0":{
+    "src": "assets/audio/Tone3.wav",
+    "loop": true,
+    "type": 1,
+    "space": 3
+  },"Tone4.wav_1":{
+  "src": "assets/audio/Tone4.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone2.wav_2":{
+  "src": "assets/audio/Tone2.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_3":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone4.wav_4":{
+  "src": "assets/audio/Tone4.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone2.wav_5":{
+  "src": "assets/audio/Tone2.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone3.wav_6":{
+  "src": "assets/audio/Tone3.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_7":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone2.wav_8":{
+  "src": "assets/audio/Tone2.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone3.wav_9":{
+  "src": "assets/audio/Tone3.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone1.wav_10":{
+  "src": "assets/audio/Tone1.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},"Tone4.wav_11":{
+  "src": "assets/audio/Tone4.wav",
+  "loop": true,
+  "type": 1,
+  "space": 3
+},
 
 
 

@@ -39,10 +39,13 @@ Networking.listeners = {
     console.log('network listen client_get_playerId');
     PlayerTable.currentPlayer = data.playerId;
   },
+  //TODO HELP HELP
+  //don't know what to do here - accept both I think?
   client_init: (socket, data) => {
     console.log('network listen client_init');
     Networking.socket.emit('request_playerId', { id: PlayerTable.requestId });
   },
+
   client_get_new_scene:(socket,data)=>{
     Debug.log("Baby got back");
     GameEngine.sceneFile = data.s;

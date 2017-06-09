@@ -2,19 +2,19 @@ class TutorialMovementEvent extends TriggerEvent {
   constructor() {
     super();
     this.triggerBool = false;
+    this.alreadyTriggered = false;
     this.name = 'movement';
   }
 
   updateComponentClient() {
-    if (this.triggerBool) {
+    if (this.triggerBool && !this.alreadyTriggered) {
+      this.alreadyTriggered = true;
       displayTutorialBanner(this.name);
       window.setTimeout(
         displayTutorialBanner.bind(null, this.name, false),
         5000
       );
     }
-
-    this.updateComponentClient = () => {};
   }
 
   triggered() {

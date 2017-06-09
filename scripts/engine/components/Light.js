@@ -283,6 +283,10 @@ class DirectionalLight extends Light{
       Renderer.shaderList[Renderer.SHADOW_SHADER].setUniform("uP_Matrix", DirectionalLight.prototype.shadowMatrix, UniformTypes.mat4);
       Renderer.getShader(Renderer.SHADOW_SHADER).setUniform("uV_Matrix",mat,UniformTypes.mat4);
 
+
+      Renderer.shaderList[Renderer.FORWARD_SHADOW_SHADER].setUniform("uP_Matrix", DirectionalLight.prototype.shadowMatrix, UniformTypes.mat4);
+      Renderer.getShader(Renderer.FORWARD_SHADOW_SHADER).setUniform("uV_Matrix",mat,UniformTypes.mat4);
+
     }
   }
 }

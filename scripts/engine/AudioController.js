@@ -21,14 +21,14 @@ const AudioEngine={
     },
     init: function () {
         this.soundArr = [];
-        this.loadAudio('assets/audio/SoundList.json');
+        this.loadAudio('assets/audio/SoundList_Level1.json');
     },
     playSound2d: function (sound, volume=1) {
         let soundId= AudioEngine.soundArr[sound].play();
         AudioEngine.soundArr[sound].volume(soundId,volume);
         return [sound,soundId];
     },
-    playSound3d: function (sound, volume=1, x=0, y=0, z=0, panObj={ panningModel: 'HRTF', refDistance: 0.8, rolloffFactor: 2.5, distanceModel: 'exponential' }) {
+    playSound3d: function (sound, volume=1, x=0, y=0, z=0, panObj={ panningModel: 'HRTF', refDistance: 0.6, rolloffFactor: 3, distanceModel: 'exponential' }) {
         let soundId= AudioEngine.soundArr[sound].play();
         AudioEngine.soundArr[sound].volume(soundId,volume);
         AudioEngine.soundArr[sound].pos(x, y, z, soundId);

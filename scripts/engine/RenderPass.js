@@ -186,6 +186,7 @@ class ShadowPass extends ForwardPass
       let regShader = (isPoint) ? Renderer.POINT_SHADOW_SHADER : Renderer.SHADOW_SHADER;
       let forwardShader = (isPoint) ? Renderer.FORWARD_POINT_SHADOW_SHADER : Renderer.FORWARD_SHADOW_SHADER;
       for (let mesh of Renderer.renderBuffer.deferred) {
+        if (mesh.NO_SHADOW) continue;
         if (mode === ShadowPass.prototype.MODE_DYNAMIC && mesh.gameObject.isStatic) {
           continue;
         }
