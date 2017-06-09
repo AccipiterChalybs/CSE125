@@ -188,6 +188,7 @@ const SceneLoader = {
           nodeObject.addComponent(new PlayerController(compData));
           break;
         default:
+          if(c[generalCompName] === undefined){Debug.log(generalCompName);}
           nodeObject.addComponent(new c[generalCompName](compData));
           break;
       }
