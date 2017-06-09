@@ -7,7 +7,7 @@ let Debug = {};
 Debug.clientUpdate = false; //Run the client in standalone mode, so it doesn't need a server - good for testing!
 Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
 Debug.debugDisplay = true;
-Debug.quickLoad = true;
+Debug.quickLoad = false;
 Debug.autoStart = true;
 Debug.tmp_shadowTwoSideRender = false; //Var to remind me to remove this when we get in new level geometry
 
