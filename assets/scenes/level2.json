@@ -1,6 +1,27 @@
 {
   "materialList": [
     {
+      "name": "Dry_Dirt",
+      "color": "assets/texture/dry-dirt2-albedo.png",
+      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "normal": "assets/texture/dry-dirt2-normal.png",
+      "animated": false
+    },
+    {
+      "name": "Sky018",
+      "color": "assets/texture/greasy-pan-2-albedo.yellow.png",
+      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "normal": "assets/texture/greasy-pan-2-normal.png",
+      "animated": false
+    },
+     {
+      "name": "gold-scuffed",
+      "color": "assets/texture/greasy-pan-2-albedo.yellow.png",
+      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "normal": "assets/texture/greasy-pan-2-normal.png",
+      "animated": false
+    },
+    {
       "name": "dungeon-stone1-albedo2",
       "color": "assets/texture/dungeon-stone1-albedo2.png",
       "mat": "assets/texture/dungeon-stone1-mat.png",

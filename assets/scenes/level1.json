@@ -15,6 +15,20 @@
       "animated": false
     },
     {
+      "name": "Sky018",
+      "color": "assets/texture/greasy-pan-2-albedo.yellow.png",
+      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "normal": "assets/texture/greasy-pan-2-normal.png",
+      "animated": false
+    },
+     {
+      "name": "gold-scuffed",
+      "color": "assets/texture/greasy-pan-2-albedo.yellow.png",
+      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "normal": "assets/texture/greasy-pan-2-normal.png",
+      "animated": false
+    },
+    {
       "name": "spaced-tiles1-albedo",
       "color": "assets/texture/spaced-tiles1-Unreal-Engine/spaced-tiles1-albedo.png",
       "mat": "assets/texture/spaced-tiles1-Unreal-Engine/spaced-tiles1-rough.png",
