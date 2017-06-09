@@ -34,7 +34,7 @@ class PlayerController extends Component {
     // init
     this._looker = null;
     this.checkpoint = vec3.create();
-    this.keys = 0;
+    this.keys = 1;
     this.injured = injured;
     this.forward = vec3.create(); vec3.set(this.forward, 0, 0, -1);
     this.cameraPos = vec3.create(); vec3.set(this.cameraPos, 0, 0, -1);

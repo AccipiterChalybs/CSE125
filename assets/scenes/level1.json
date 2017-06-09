@@ -43213,7 +43213,7 @@
             "events": [2695],
             "maximumOutput": 5,
             "lossRate": 1.5,
-            "timeBeforeLoss": 0
+            "timeBeforeLoss": 2
           },
           "Light": {
             "type": "Point",
@@ -43627,7 +43627,7 @@
             "events": [2695],
             "maximumOutput": 5,
             "lossRate": 1.5,
-            "timeBeforeLoss": 0
+            "timeBeforeLoss": 2
           },
           "Light": {
             "type": "Point",
