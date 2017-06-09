@@ -70,7 +70,7 @@ class GameScene {
       Renderer.directionalLight.getComponent('Light').color = vec3.fromValues(1.6, 3.2, 6.4);
     }
 
-    let pos = vec3.create(); vec3.set(pos, 26, 0, 18);
+    let pos = vec3.create(); vec3.set(pos, 40, -1, 7);
     let color = vec4.create(); vec4.set(color, 1, 0, 0, 1);
     let evilTeapot = Debug.drawTeapot(pos, color);
     evilTeapot.addComponent(new EvilController());
