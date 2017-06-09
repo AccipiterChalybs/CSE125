@@ -76,14 +76,14 @@ GameEngine.init = function () {
     "assets/meshes/Pot.2.json",
     "assets/meshes/Pot.3.json",
     "assets/meshes/Pot.4.json",
-    "assets/meshes/Railing.1.json",/*
+    "assets/meshes/Railing.1.json",
     "assets/meshes/red_left_cover_sneak.json",
     "assets/meshes/red_left_turn_90.json",
     "assets/meshes/red_looking_behind.json",
     "assets/meshes/red_right_cover_sneak.json",
     "assets/meshes/red_right_turn_90.json",
     "assets/meshes/red_running_slide.json",
-    "assets/meshes/red_running_turn_180.json", */
+    "assets/meshes/red_running_turn_180.json",
     "assets/meshes/RedRobedFemale_idle.json",
     "assets/meshes/RedRobedFemale_run.json",
     "assets/meshes/RedRobedFemale_walk.json",
@@ -135,14 +135,14 @@ GameEngine.init = function () {
     "assets/meshes/tree2_leaves.json",
     "assets/meshes/tree2_trunk.json",
     "assets/meshes/Tree3.json",
- /*   "assets/meshes/Tribal_left_cover_sneak.json",
+    "assets/meshes/Tribal_left_cover_sneak.json",
     "assets/meshes/Tribal_left_turn_90.json",
     "assets/meshes/Tribal_looking_behind.json",
     "assets/meshes/Tribal_right_cover_sneak.json",
     "assets/meshes/Tribal_right_turn_90.json",
     "assets/meshes/Tribal_running_slide.json",
     "assets/meshes/TribalCharacter_idle.json",
-    "assets/meshes/TribalCharacter_run.json",*/
+    "assets/meshes/TribalCharacter_run.json",
     "assets/meshes/TribalCharacter_walk.json",
     "assets/meshes/unitCube.json",
     "assets/meshes/Vine.1.json",
@@ -186,7 +186,14 @@ GameEngine.init = function () {
         ['assets/meshes/RedRobedFemale_idle.json' , [0]],
         ['assets/meshes/RedRobedFemale_idle.json' , [0]],
         ['assets/meshes/RedRobedFemale_walk.json' , [0]],
-        ['assets/meshes/RedRobedFemale_run.json'  , [0]]
+        ['assets/meshes/RedRobedFemale_run.json'  , [0]],
+        ['assets/meshes/red_running_turn_180.json'  , [0]],
+        ['assets/meshes/red_left_turn_90.json'  , [0]],
+        ['assets/meshes/red_right_turn_90.json'  , [0]],
+        ['assets/meshes/red_running_slide.json'  , [0]],
+        ['assets/meshes/red_looking_behind.json'  , [0]],
+        ['assets/meshes/red_left_cover_sneak.json'  , [0]],
+        ['assets/meshes/red_right_cover_sneak.json'  , [0]],
       ]
     },
     'TribalCharacterAnim' : {
@@ -195,7 +202,14 @@ GameEngine.init = function () {
         ['assets/meshes/TribalCharacter_idle.json' , [0]],
         ['assets/meshes/TribalCharacter_idle.json' , [0]],
         ['assets/meshes/TribalCharacter_walk.json' , [0]],
-        ['assets/meshes/TribalCharacter_walk.json' , [0]]
+        ['assets/meshes/TribalCharacter_run.json' , [0]],
+        ['assets/meshes/TribalCharacter_walk.json' , [0]], // turn180??
+        ['assets/meshes/Tribal_left_turn_90.json' , [0]],
+        ['assets/meshes/Tribal_right_turn_90.json' , [0]],
+        ['assets/meshes/Tribal_running_slide.json' , [0]],
+        ['assets/meshes/Tribal_looking_behind.json' , [0]],
+        ['assets/meshes/Tribal_left_cover_sneak.json' , [0]],
+        ['assets/meshes/Tribal_right_cover_sneak.json' , [0]],
       ]
     },
     'SenateCharacterAnim' : {
@@ -204,7 +218,14 @@ GameEngine.init = function () {
         ['assets/meshes/senate_idle.json' , [0]],
         ['assets/meshes/senate_idle.json' , [0]],
         ['assets/meshes/senate_walking.json' , [0]],
-        ['assets/meshes/senate_walking.json' , [0]]
+        ['assets/meshes/senate_run.json' , [0]],
+        ['assets/meshes/senate_run.json' , [0]], // turn180??
+        ['assets/meshes/senate_left_turn_90.json' , [0]],
+        ['assets/meshes/senate_right_turn_90.json' , [0]],
+        ['assets/meshes/senate_run.json' , [0]], // slide??
+        ['assets/meshes/senate_run.json' , [0]], // lookback??
+        ['assets/meshes/senate_left_strafe.json' , [0]],
+        ['assets/meshes/senate_right_strafe.json' , [0]],
       ]
     },
   };
