@@ -12,7 +12,7 @@ GameEngine._loadHandles = [];   //handles of currently loading objects
 GameEngine._nextLoadHandle = 0; //next load handle to return
 GameEngine.currentScene = null;
 GameEngine._StartGame = false;
-GameEngine.sceneFile = 'assets/scenes/level0.json';
+GameEngine.sceneFile = 'assets/scenes/level1.json';
 
 /** Init: starts loading objects */
 GameEngine.init = function () {

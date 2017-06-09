@@ -15,7 +15,7 @@ class LockEvent extends RaycastEvent{
     let pController = interactingObj.getComponent('PlayerController');
     // Debug.log(this._unlocked,pController.keys);
     if (!this._unlocked && pController && pController !== null && pController.keys > 0) {
-      // Debug.log('unlocking');
+      Debug.log('unlocking');
       let audio = this.gameObject.getComponent('AudioSource');
       if (audio && audio !== null) audio.setState(AudioState.playSound);
       this._unlocked = true;
