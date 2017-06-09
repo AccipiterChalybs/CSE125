@@ -200,9 +200,10 @@ class PlayerController extends Component {
     vec3.cross(playerXMove, playerForward, move);
     this.state.moveCrossY = playerXMove[1];
 
+    const prevTurnAmt = this.state.state.turnAmt;
     this.state.update();
 
-    if (this.state.state.turnAmt == 0 && vec3.length(move) > 0.0005) {
+    if (prevTurnAmt == 0 && this.state.state.turnAmt == 0 && vec3.length(move) > 0.0005) {
       // TODO set this.state.movedot and movecrossy instead
       // this.transform.setRotation(quat.create());
       // this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
