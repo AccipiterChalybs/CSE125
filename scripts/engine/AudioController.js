@@ -21,7 +21,7 @@ const AudioEngine={
     },
     init: function () {
         this.soundArr = [];
-        this.loadAudio('assets/audio/SoundList_Level2.json');
+        this.loadAudio('assets/audio/SoundList_Level1.json');
     },
     playSound2d: function (sound, volume=1) {
         let soundId= AudioEngine.soundArr[sound].play();

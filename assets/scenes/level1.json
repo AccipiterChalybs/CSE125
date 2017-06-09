@@ -8,6 +8,13 @@
       "animated": false
     },
     {
+      "name": "Dry_Dirt",
+      "color": "assets/texture/dry-dirt2-albedo.png",
+      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "normal": "assets/texture/dry-dirt2-normal.png",
+      "animated": false
+    },
+    {
       "name": "spaced-tiles1-albedo",
       "color": "assets/texture/spaced-tiles1-Unreal-Engine/spaced-tiles1-albedo.png",
       "mat": "assets/texture/spaced-tiles1-Unreal-Engine/spaced-tiles1-rough.png",
