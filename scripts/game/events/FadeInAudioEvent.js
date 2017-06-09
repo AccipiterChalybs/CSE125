@@ -31,7 +31,7 @@ class FadeInAudioEvent extends TriggerEvent{
       this._audioSrc.changeVolume(this._startVolume);
       this._audioSrc.setRate(this._rate);
     }else{
-      Debug.log("PlayAudioEvent is missing an audio source!! ", this);
+      // Debug.log("PlayAudioEvent is missing an audio source!! ", this);
     }
   }
 

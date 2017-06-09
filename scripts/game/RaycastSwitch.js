@@ -21,7 +21,7 @@ class RaycastSwitch extends Viewable{
         this._events.push(GameObject.prototype.SerializeMap[this._unparsedEvents[i]].getComponent("Lock"));
       }
     }
-    Debug.log(this._events);
+    // Debug.log(this._events);
 
     // this._collider = this.transform.gameObject.getComponent('Collider');
     // this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);

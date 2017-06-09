@@ -114,7 +114,7 @@ class SimonSays extends Event{
         }
       }
     } else if (this._currentTime + this._cycleDuration < Time.time) {
-      Debug.log("are we ever here");
+      // Debug.log("are we ever here");
       this._cycle = true;
       this._currentTime = Time.time;
       this._currentIndex = 0;
