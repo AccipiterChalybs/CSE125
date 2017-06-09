@@ -28,6 +28,31 @@
       "normal": "assets/texture/greasy-pan-2-normal.png",
       "animated": false
     },
+         {
+      "name": "BackdropTreelineConifer008_1K",
+      "color": "assets/texture/BackdropTreelineConifer008_1K.png",
+      "mat": "assets/texture/blank_mat.png",
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "transparent": true,
+      "animated": false
+    },
+         {
+      "name": "BackdropTreelineConifer009_1K",
+      "color": "assets/texture/BackdropTreelineConifer009_1K.png",
+      "mat": "assets/texture/blank_mat.png",
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "transparent": true,
+      "animated": false
+    },
+         {
+      "name": "OLIE_TREE_LINE_1",
+      "color": "assets/texture/OLI_TREE_LINE_1.png",
+      "mat": "assets/texture/blank_mat.png",
+      "normal": "assets/texture/tmp_blank_normal.png",
+      "transparent": true,
+      "animated": false
+    },
+
     {
       "name": "spaced-tiles1-albedo",
       "color": "assets/texture/spaced-tiles1-Unreal-Engine/spaced-tiles1-albedo.png",
