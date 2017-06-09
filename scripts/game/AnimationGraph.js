@@ -31,42 +31,85 @@ class AnimationGraph {
     AnimationGraph.prototype.graphs[graphName] = g;
   }
 
+  // return list of neighbors from adjacency matrix
+  static getNeighbors(animIdx, anim, mtx) {
+    const neighbors =
+      mtx[anim]
+      .map((val, i) => { return val ? animIdx[i] : val; })
+      .filter((val) => { return val; });
+
+    return neighbors;
+  }
+
   // pre defined player animation graph, call to load player animation
   static loadPlayerAnimationGraph() {
     /*
-    Animation indices:
-      1 - idle
-      2 - walking
+    Animation indices: */
+    const animIdx = [
+      'bind',       // 0 - not used in graph
+      'idle',       // 1
+      'walk',       // 2
+      'run',        // 3
+      'turn180',    // 4
+      'turn90L',    // 5
+      'turn90R',    // 6
+      'slide',      // 7
+      'lookBack',   // 8
+      'sneakL',     // 9
+      'sneakR'      // 10
+    ];
 
-    Logic vars required:
-      moveSpeed
-    */
-    const name = 'player';
+    const name = 'player'; // name of graph
     const g = new AnimationGraph();
 
-    const idle = new AnimationState();
-    const walking = new AnimationState();
+    // construct empty states to fill
+    const states = {};
+    animIdx.map((v) => {
+      states[v] = new AnimationState();
+    });
+    // neighbor representation
+    const neighbors = {};
+    animIdx.map((v) => {
+      neighbors[v] = { state: states[v], transition: null };
+    });
+    // adjacency matrix
+    const adjMtx = [
+    // b  i  w  r  t  t  t  s  l  s  s    // < to, from v
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // bind
+      [0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0],  // idle
+      [0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1],  // walk
+      [0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1],  // run
+      [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],  // turn180
+      [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],  // turn90L
+      [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],  // turn90R
+      [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],  // slide
+      [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // lookBack
+      [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1],  // sneakL
+      [0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0],  // sneakR
+    ];
 
-    // nodes in graph
-    const idleNode = {
-      state: idle,
-      transition: null,
+    // state data construct
+    const dataConstruct = {};
+    animIdx.map((name, i) => {
+      // replaces 1s with the names of the neighbor
+      const nbrList = adjMtx[i]
+        .map((edge, j) => { return edge ? animIdx[j] : 0; })
+        .filter((edge) => { return edge; })
+      ;
+      // put all neighbor represenations for a list of neighbors into object
+      const nbrObj = {};
+      nbrList.map((nbr) => { nbrObj[nbr] = neighbors[nbr]; });
+
+      dataConstruct[name] = AnimationState.playerDataConstruct[name](g, nbrObj);
+    });
+
+    for (let name in states) {
+      states[name].loadAnimationState(dataConstruct[name]);
     }
-    const walkingNode = {
-      state: walking,
-      transition: null,
-    }
 
-    // idle state
-    const idleData =
-      AnimationState.idleDataConstruct(g, { walking: walkingNode });
-    idle.loadAnimationState(idleData);
-    // walking state
-    const walkingData =
-      AnimationState.walkingDataConstruct(g, { idle: idleNode });
-    walking.loadAnimationState(walkingData);
+    console.log(states);
 
-    AnimationGraph.loadAnimationGraph(name, { idle, walking }, g);
+    AnimationGraph.loadAnimationGraph(name, states, g);
   }
 }
 

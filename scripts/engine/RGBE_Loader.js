@@ -225,7 +225,7 @@ RGBE_LOADER.ReadPixels_RLE = function( output, byteData,scanline_width, num_scan
 
     if ((scanline_width < 8)||(scanline_width > 0x7fff)) {
         /* run length encoding is not allowed so read flat*/
-        console.log("not rle - probably bad");
+        // console.log("not rle - probably bad");
         return RGBE_LOADER.ReadPixels(output, byteData);
     }
 
