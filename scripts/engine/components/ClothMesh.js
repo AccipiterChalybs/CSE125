@@ -3,16 +3,19 @@
  */
 class ClothMesh extends Mesh {
 
-  constructor(name) {
+  constructor({material= "ivy_leaves_c",
+                sizeX= 1,
+                sizeY= 1,
+                sizeZ= 0.2}) {
     super();
     this.componentType = "Mesh";
 
-    this.name = "Cloth001"; //TODO make this dynamic
+    this.name = "Cloth0" + (ClothMesh.prototype.currentNum++);
 
     this.startTime = 0;
-    this.sizeX = 5.0;
-    this.sizeY = 5.0;
-    this.sizeZ = 0.5;
+    this.sizeX = sizeX;
+    this.sizeY = sizeY;
+    this.sizeZ = sizeZ;
     this.width = 20;
     this.height = 10;
 
@@ -39,7 +42,7 @@ class ClothMesh extends Mesh {
                                      inputPositions[3 * i + 2]);
 
       let pinning = (-position[1]) / (this.sizeY*((this.height-1)/this.height));
-      position[2] = (1-pinning) * this.sizeZ*Math.cos(5*position[0]/this.sizeX + Time.time);
+      position[2] = (pinning) * this.sizeZ*Math.cos(5*position[0]/this.sizeX + Time.time);
 
       for (let p = 0; p < 3; ++p) {
         outputPositions[i*3 +p] = position[p];
@@ -75,7 +78,7 @@ class ClothMesh extends Mesh {
 
         this.adj[x + y * this.width] = [ptX, ptY, multiplierX, multiplierY];
 
-        staticData.push(x / (this.width-1), 1 - (y / (this.height-1)) ); //texture coordinates
+        staticData.push(x / (this.width-1), (y / (this.height-1)) ); //texture coordinates
       }
     }
 
@@ -222,3 +225,4 @@ class ClothMesh extends Mesh {
     GL.enable(GL.CULL_FACE);
   }
 }
+ClothMesh.prototype.currentNum = 0;

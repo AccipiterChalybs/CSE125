@@ -22,7 +22,7 @@ const SceneLoader = {
   ignoreComponents: ["name", "index", "static", "Kinematic", "Animator", "AnimatorJS", "SkinnedMeshRenderer",
                      "ClothMesh", "MeshFilter", "MeshRenderer",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
-  shadowLightsAvailable: 1,
+  shadowLightsAvailable: 0,
   tone: 0,
 
   loadScene: function(filename) {
@@ -151,10 +151,10 @@ const SceneLoader = {
         //  nodeObject.transform.scale(5);
           nodeObject.transform.rotateX(Math.PI/2);
         }
-        let mesh = (isCloth) ? new ClothMesh(meshName) : new Mesh(meshName);
+        let mesh = (isCloth) ? new ClothMesh(currentNode["ClothMesh"]) : new Mesh(meshName);
 
 //TEMP
-        let materialName = currentNode["MeshRenderer"] || currentNode["SkinnedMeshRenderer"].material;
+        let materialName = (isCloth)? currentNode["ClothMesh"].material : currentNode["MeshRenderer"] || currentNode["SkinnedMeshRenderer"].material;
         if (!SceneLoader.materialMap[materialName]) {
           console.log(meshName, materialName);
           materialName = 'default';
