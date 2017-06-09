@@ -39,7 +39,7 @@ class AudioSource extends Component {
 
     updateComponentClient() {
         if (this.sound === null) {
-            console.error('no sound has been set');
+            console.error('no sound has been set on ', this.gameObject);
             return;
         }
         if (this.sound3D) {

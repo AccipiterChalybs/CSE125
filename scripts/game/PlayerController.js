@@ -33,18 +33,14 @@ class PlayerController extends Component {
     super();
     // init
     this._looker = null;
-
-    // space
-    this.x = 0;
-    this.y = 0;
-    this.z = 0;
-    this.camForward = vec3.create(); vec3.set(this.camForward, 0, 0, -1);
+    this.checkpoint = vec3.create();
+    this.keys = 0;
+    this.injured = injured;
+    this.forward = vec3.create(); vec3.set(this.forward, 0, 0, -1);
     this.cameraPos = vec3.create(); vec3.set(this.cameraPos, 0, 0, -1);
 
     // input
-    this.x = 0;
-    this.z = 0;
-    this.singing = 0;
+     this.singing = 0;
     this.walking = 0;
     this.action = 0;
 
@@ -217,7 +213,7 @@ class PlayerController extends Component {
   }
 
   heal(){
-    // Debug.log("Healed");
+    // Debug.log("Healed ", this.gameObject);
     this.injured = false;
   }
 

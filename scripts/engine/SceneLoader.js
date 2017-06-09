@@ -8,6 +8,7 @@ const c = {
   SingStatueEvent, StopSingStatueEvent, StopLightEvent, PlayAudio, PlayAudioEvent,
   FadeInAudioEvent, CheckpointEvent, TutorialActionEvent, TutorialDontsingEvent, TutorialLookEvent,
   TutorialMovementEvent,TutorialSingEvent, TutorialWalkEvent,
+  FadeInAudioEvent, CheckpointEvent, LockEvent,
   AnimationGraph, AnimationState, DoorEvent, Event, EvilController, HealEvent,
   KeyEvent, Listenable, Look, ObjectLogicState, PlayerController,
   PlayerLogicState, PlayerTable, RaycastSwitch, RotateArrowKey, RotateMouse,
