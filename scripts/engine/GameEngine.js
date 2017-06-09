@@ -203,7 +203,7 @@ GameEngine.init = function () {
         ['assets/meshes/TribalCharacter_idle.json' , [0]],
         ['assets/meshes/TribalCharacter_walk.json' , [0]],
         ['assets/meshes/TribalCharacter_run.json' , [0]],
-        ['assets/meshes/TribalCharacter_walk.json' , [0]], // turn180??
+        ['assets/meshes/octo_running_turn_180.json', [1]], // turn180??
         ['assets/meshes/Tribal_left_turn_90.json' , [0]],
         ['assets/meshes/Tribal_right_turn_90.json' , [0]],
         ['assets/meshes/Tribal_running_slide.json' , [0]],
@@ -219,7 +219,7 @@ GameEngine.init = function () {
         ['assets/meshes/senate_idle.json' , [0]],
         ['assets/meshes/senate_walking.json' , [0]],
         ['assets/meshes/senate_run.json' , [0]],
-        ['assets/meshes/senate_run.json' , [0]], // turn180??
+        ['assets/meshes/octo_running_turn_180.json', [1]], // turn180??
         ['assets/meshes/senate_left_turn_90.json' , [0]],
         ['assets/meshes/senate_right_turn_90.json' , [0]],
         ['assets/meshes/senate_run.json' , [0]], // slide??
