@@ -20,7 +20,7 @@ const SceneLoader = {
   components: c,
   // Ignore these in general pass, likely because they are already handled specially
   ignoreComponents: ["name", "index", "static", "Kinematic", "Animator", "AnimatorJS", "SkinnedMeshRenderer",
-                     "ClothMesh", "MeshFilter", "MeshRenderer",
+                     "ClothMesh", "MeshFilter", "MeshRenderer", "PrefabPlaceholder",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
   shadowLightsAvailable: 0,
   tone: 0,
@@ -138,6 +138,12 @@ const SceneLoader = {
         //nodeObject.addComponent(new Mesh("Sphere_Icosphere"));
         //nodeObject.getComponent("Mesh").setMaterial(Debug.makeDefaultMaterial());
       }
+    }
+
+    if ('PrefabPlaceholder' in currentNode) {
+      let fireParticle = PrefabFactory.makeFireParticleSystem();
+      fireParticle.transform.setPosition(vec3.fromValues(0,0.9,0)); //TODO This shouldn't be hardcoded
+      nodeObject.addChild(fireParticle);
     }
 
     if (!IS_SERVER) {

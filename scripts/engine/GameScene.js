@@ -116,6 +116,7 @@ class GameScene {
 
     GameObject.prototype.SceneRoot.findComponents('Listenable', PhysicsEngine.sphereChecks);
 
+
   }
 
   update() {
@@ -130,6 +131,7 @@ class GameScene {
 
     if (!IS_SERVER) {
       Debug.Profiler.startTimer('GameLogic', 2);
+      PrefabFactory.updateClient();
       Renderer.camera.transform.getParent().getParent().gameObject.updateClient();
       if (Renderer.directionalLight) Renderer.directionalLight.updateClient();
       Debug.Profiler.endTimer('GameLogic', 2);

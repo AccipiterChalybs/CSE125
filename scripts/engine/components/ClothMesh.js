@@ -12,7 +12,7 @@ class ClothMesh extends Mesh {
 
     this.name = "Cloth0" + (ClothMesh.prototype.currentNum++);
 
-    this.startTime = 0;
+    this.startTime = Math.random() * 100;
     this.sizeX = sizeX;
     this.sizeY = sizeY;
     this.sizeZ = sizeZ;
