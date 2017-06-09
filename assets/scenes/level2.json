@@ -17,7 +17,7 @@
      {
       "name": "gold-scuffed",
       "color": "assets/texture/greasy-pan-2-albedo.yellow.png",
-      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "mat": "assets/texture/gold_mat.png",
       "normal": "assets/texture/greasy-pan-2-normal.png",
       "animated": false
     },
