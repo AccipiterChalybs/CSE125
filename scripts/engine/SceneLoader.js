@@ -6,7 +6,8 @@ const c = {
   ClientStickTo, Collider, CompoundCollider, Decal, Foot, Floor, Light, ParticleSystem,
   SphereCollider, Transform, SingingStatueController, TriggerSwitch, MoveTowardsEvent,
   SingStatueEvent, StopSingStatueEvent, StopLightEvent, PlayAudio, PlayAudioEvent,
-  FadeInAudioEvent, CheckpointEvent,
+  FadeInAudioEvent, CheckpointEvent, TutorialActionEvent, TutorialDontsingEvent, TutorialLookEvent,
+  TutorialMovementEvent,TutorialSingEvent, TutorialWalkEvent,
   AnimationGraph, AnimationState, DoorEvent, Event, EvilController, HealEvent,
   KeyEvent, Listenable, Look, ObjectLogicState, PlayerController,
   PlayerLogicState, PlayerTable, RaycastSwitch, RotateArrowKey, RotateMouse,
@@ -20,9 +21,9 @@ const SceneLoader = {
   components: c,
   // Ignore these in general pass, likely because they are already handled specially
   ignoreComponents: ["name", "index", "static", "Kinematic", "Animator", "AnimatorJS", "SkinnedMeshRenderer",
-                     "ClothMesh", "MeshFilter", "MeshRenderer",
+                     "ClothMesh", "MeshFilter", "MeshRenderer", "PrefabPlaceholder",
                      "Light", "colliders", "Transform", "Rigidbody", "children"],
-  shadowLightsAvailable: 1,
+  shadowLightsAvailable: 0,
   tone: 0,
 
   loadScene: function(filename) {
@@ -140,6 +141,12 @@ const SceneLoader = {
       }
     }
 
+    if ('PrefabPlaceholder' in currentNode) {
+      let fireParticle = PrefabFactory.makeFireParticleSystem();
+      fireParticle.transform.setPosition(vec3.fromValues(0,0.9,0)); //TODO This shouldn't be hardcoded
+      nodeObject.addChild(fireParticle);
+    }
+
     if (!IS_SERVER) {
 
       //TODO check spelling of SkinnedMeshRenderer
@@ -151,10 +158,10 @@ const SceneLoader = {
         //  nodeObject.transform.scale(5);
           nodeObject.transform.rotateX(Math.PI/2);
         }
-        let mesh = (isCloth) ? new ClothMesh(meshName) : new Mesh(meshName);
+        let mesh = (isCloth) ? new ClothMesh(currentNode["ClothMesh"]) : new Mesh(meshName);
 
 //TEMP
-        let materialName = currentNode["MeshRenderer"] || currentNode["SkinnedMeshRenderer"].material;
+        let materialName = (isCloth)? currentNode["ClothMesh"].material : currentNode["MeshRenderer"] || currentNode["SkinnedMeshRenderer"].material;
         if (!SceneLoader.materialMap[materialName]) {
           console.log(meshName, materialName);
           materialName = 'default';
