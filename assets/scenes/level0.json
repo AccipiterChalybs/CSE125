@@ -7773,7 +7773,7 @@
             "Transform": {
               "position": [21.161, -1.5, -2.42],
               "rotation": [0, 22.00817, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -8239,7 +8239,7 @@
             "Transform": {
               "position": [21.14836, -1.48829, 1.457615],
               "rotation": [0, 306.807, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -8631,7 +8631,7 @@
             "Transform": {
               "position": [21.26936, -1.5, 1.630615],
               "rotation": [0, 51.38059, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -8679,7 +8679,7 @@
             "Transform": {
               "position": [21.03136, -1.49229, 2.138615],
               "rotation": [342.6578, 4.310524, 280.2694],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -8727,7 +8727,7 @@
             "Transform": {
               "position": [22.13436, -1.41629, 2.703615],
               "rotation": [300.8427, 102.9806, 270.9418],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -8751,7 +8751,7 @@
             "Transform": {
               "position": [21.47136, -1.5, 2.326615],
               "rotation": [0, 335.591, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -8845,7 +8845,7 @@
             "Transform": {
               "position": [24.094, -1.5, 2.865],
               "rotation": [0, 222.0632, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -8917,7 +8917,7 @@
             "Transform": {
               "position": [24.22536, -1.5, 2.633615],
               "rotation": [0, 48.32885, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -9033,7 +9033,7 @@
             "Transform": {
               "position": [23.45436, -1.5, 2.653615],
               "rotation": [0, 333.6577, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -9103,7 +9103,7 @@
             "Transform": {
               "position": [23.72, -1.5, -2.789],
               "rotation": [0, 308.0891, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -9509,7 +9509,7 @@
             "Transform": {
               "position": [10.057, 0.001000226, -0.823],
               "rotation": [0, 36.74972, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -9533,7 +9533,7 @@
             "Transform": {
               "position": [7.806811, 0.001000226, -0.8138802],
               "rotation": [0, 35.3931, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -9649,7 +9649,7 @@
             "Transform": {
               "position": [10.407, 0.0009999871, 0.779],
               "rotation": [0, 50.86971, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -9673,7 +9673,7 @@
             "Transform": {
               "position": [8.291503, 0.0009999871, 0.8496273],
               "rotation": [0, 24.2922, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -9927,7 +9927,7 @@
             "Transform": {
               "position": [3.996, 0.001000047, 0.748],
               "rotation": [0, 18.13364, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -9975,7 +9975,7 @@
             "Transform": {
               "position": [5.82, 0.001000047, 0.788],
               "rotation": [0, 90.74427, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -10163,7 +10163,7 @@
             "Transform": {
               "position": [6.398, 0.001000047, 0.65],
               "rotation": [0, 40.35707, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -10187,7 +10187,7 @@
             "Transform": {
               "position": [3.587, 0.001000047, -0.723],
               "rotation": [0, 49.32829, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -10511,7 +10511,7 @@
             "Transform": {
               "position": [5.24, 0.067, -0.653],
               "rotation": [28.16145, 329.5223, 269.2803],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -10535,7 +10535,7 @@
             "Transform": {
               "position": [6.129, 0.001000047, -0.781],
               "rotation": [0, 39.15334, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -10605,7 +10605,7 @@
             "Transform": {
               "position": [8.471, 0.0009999871, 0.86],
               "rotation": [0, 318.1592, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -10653,7 +10653,7 @@
             "Transform": {
               "position": [9.997, 0.0009999871, 0.814],
               "rotation": [0, 66.11393, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -10677,7 +10677,7 @@
             "Transform": {
               "position": [9.779, 0.01800001, 0.827],
               "rotation": [356.0666, 246.8834, 86.19205],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -10701,7 +10701,7 @@
             "Transform": {
               "position": [10.328, 0.0009999871, 0.668],
               "rotation": [0, 347.1032, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11097,7 +11097,7 @@
             "Transform": {
               "position": [9.356, 0.001000226, -0.839],
               "rotation": [0, 40.44263, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11169,7 +11169,7 @@
             "Transform": {
               "position": [11.386, 0.001000166, -0.951],
               "rotation": [73.57423, 0.5148816, 353.9706],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11263,7 +11263,7 @@
             "Transform": {
               "position": [11.247, 0, 1.658],
               "rotation": [0, 0, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11287,7 +11287,7 @@
             "Transform": {
               "position": [11.247, 0, 1.918],
               "rotation": [0, 0, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11311,7 +11311,7 @@
             "Transform": {
               "position": [11.247, 0, 2.184],
               "rotation": [0, 0, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11335,7 +11335,7 @@
             "Transform": {
               "position": [11.247, 0.301, 2.064],
               "rotation": [0, 0, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11359,7 +11359,7 @@
             "Transform": {
               "position": [11.247, 0.301, 1.798],
               "rotation": [0, 0, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11383,7 +11383,7 @@
             "Transform": {
               "position": [16.25, 0, 2.802],
               "rotation": [0, 270, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11407,7 +11407,7 @@
             "Transform": {
               "position": [15.99436, 0, 2.778615],
               "rotation": [0, 270, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11431,7 +11431,7 @@
             "Transform": {
               "position": [15.724, 0, 2.802],
               "rotation": [0, 270, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11455,7 +11455,7 @@
             "Transform": {
               "position": [15.844, 0.301, 2.802],
               "rotation": [0, 270, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11479,7 +11479,7 @@
             "Transform": {
               "position": [16.09636, 0.301, 2.761616],
               "rotation": [0, 270, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11503,7 +11503,7 @@
             "Transform": {
               "position": [15.985, 0.57, -2.747],
               "rotation": [0, 270, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11527,7 +11527,7 @@
             "Transform": {
               "position": [16.11, 0.301, -2.747],
               "rotation": [0, 270, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11551,7 +11551,7 @@
             "Transform": {
               "position": [15.844, 0.301, -2.747],
               "rotation": [0, 270, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11575,7 +11575,7 @@
             "Transform": {
               "position": [15.724, 0, -2.747],
               "rotation": [0, 270, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11599,7 +11599,7 @@
             "Transform": {
               "position": [15.99, 0, -2.747],
               "rotation": [0, 270, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11623,7 +11623,7 @@
             "Transform": {
               "position": [16.25, 0, -2.747],
               "rotation": [0, 270, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11647,7 +11647,7 @@
             "Transform": {
               "position": [14.735, 0.03799999, 4.551],
               "rotation": [325.2357, 252.002, 86.60435],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11861,7 +11861,7 @@
             "Transform": {
               "position": [15.93436, 0.07971008, 2.668615],
               "rotation": [51.05742, 81.23408, 272.46],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11885,7 +11885,7 @@
             "Transform": {
               "position": [11.89336, 0.1287101, 1.867615],
               "rotation": [325.7047, 196.3241, 89.15681],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11957,7 +11957,7 @@
             "Transform": {
               "position": [21.828, -1.499, -1.996],
               "rotation": [0, 349.7237, 0],
-              "scaleFactor": 2.000001
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -11981,7 +11981,7 @@
             "Transform": {
               "position": [22.52878, -1.499, -2.046513],
               "rotation": [0, 350.3712, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12005,7 +12005,7 @@
             "Transform": {
               "position": [23.437, -1.499, 2.142],
               "rotation": [0, 343.7192, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12029,7 +12029,7 @@
             "Transform": {
               "position": [22.96136, -1.499, 2.048615],
               "rotation": [0, 347.9865, 0],
-              "scaleFactor": 2.000001
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12053,7 +12053,7 @@
             "Transform": {
               "position": [21.85436, -1.499, 2.133615],
               "rotation": [0, 318.0138, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12101,7 +12101,7 @@
             "Transform": {
               "position": [16.753, 0.001000166, -2.348],
               "rotation": [0, 354.7949, 0],
-              "scaleFactor": 2.000001
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12125,7 +12125,7 @@
             "Transform": {
               "position": [16.779, 0.001000047, -2.009],
               "rotation": [0, 4.974114, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12149,7 +12149,7 @@
             "Transform": {
               "position": [16.774, 0.301, 2.298],
               "rotation": [0, 356.6208, 0],
-              "scaleFactor": 2.000001
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12173,7 +12173,7 @@
             "Transform": {
               "position": [16.791, 0.0009999871, 1.969],
               "rotation": [0, 5.53475, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12197,7 +12197,7 @@
             "Transform": {
               "position": [16.762, 0.001000106, 2.346],
               "rotation": [0, 353.5272, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12221,7 +12221,7 @@
             "Transform": {
               "position": [11.723, 0.301, 2.714],
               "rotation": [0, 338.0103, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12293,7 +12293,7 @@
             "Transform": {
               "position": [11.249, 0.0009999871, -7.919],
               "rotation": [0, 352.5465, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12317,7 +12317,7 @@
             "Transform": {
               "position": [11.248, 0.0009999871, -7.544],
               "rotation": [0, 13.18577, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12389,7 +12389,7 @@
             "Transform": {
               "position": [11.2489, 0.301, -7.891],
               "rotation": [0, 6.324477, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12413,7 +12413,7 @@
             "Transform": {
               "position": [11.24892, 0.301, -8.321],
               "rotation": [0, 346.8892, 0],
-              "scaleFactor": 2.000001
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12437,7 +12437,7 @@
             "Transform": {
               "position": [11.249, 0.601, -8.219],
               "rotation": [0, 0, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12461,7 +12461,7 @@
             "Transform": {
               "position": [11.319, 0.601, -7.695],
               "rotation": [0, 355.5862, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12485,7 +12485,7 @@
             "Transform": {
               "position": [12.08, 0.301, 2.721],
               "rotation": [0, 357.5118, 0],
-              "scaleFactor": 2.000001
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12509,7 +12509,7 @@
             "Transform": {
               "position": [11.875, 0.601, 2.721],
               "rotation": [0, 353.0889, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12557,7 +12557,7 @@
             "Transform": {
               "position": [12.425, 0.301, 2.7],
               "rotation": [0, 3.559152, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12581,7 +12581,7 @@
             "Transform": {
               "position": [12.313, 0.601, 2.638],
               "rotation": [0, 19.15433, 0],
-              "scaleFactor": 2.000001
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12629,7 +12629,7 @@
             "Transform": {
               "position": [16.774, 0.301, 1.647],
               "rotation": [0, 6.939197, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12653,7 +12653,7 @@
             "Transform": {
               "position": [16.74, 0.301, 1.963],
               "rotation": [0, 0, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12677,7 +12677,7 @@
             "Transform": {
               "position": [16.771, 0.601, 1.902],
               "rotation": [0, 350.6992, 0],
-              "scaleFactor": 2.000001
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12701,7 +12701,7 @@
             "Transform": {
               "position": [16.754, 0.001000166, -1.653],
               "rotation": [0, 357.5685, 0],
-              "scaleFactor": 2.000001
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12749,7 +12749,7 @@
             "Transform": {
               "position": [23.316, -1.499, 1.719],
               "rotation": [0, 18.8751, 0],
-              "scaleFactor": 2.000001
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12797,7 +12797,7 @@
             "Transform": {
               "position": [21.70136, -1.499, 1.527615],
               "rotation": [0, 37.823, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12821,7 +12821,7 @@
             "Transform": {
               "position": [22.978, -1.499, -1.972],
               "rotation": [0, 18.50584, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12845,7 +12845,7 @@
             "Transform": {
               "position": [22.732, -1.499, -1.566],
               "rotation": [0, 347.3084, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12941,7 +12941,7 @@
             "Transform": {
               "position": [23.087, -1.199, 1.848],
               "rotation": [0, 0.5984165, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -12989,7 +12989,7 @@
             "Transform": {
               "position": [15.91136, 0.0009999871, -2.187385],
               "rotation": [0, 49.11223, 0],
-              "scaleFactor": 0.9999999
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -19221,7 +19221,7 @@
             "Transform": {
               "position": [21.594, -1.499, 1.249996],
               "rotation": [0, 0, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -19245,7 +19245,7 @@
             "Transform": {
               "position": [23.34288, -1.499, -1.630748],
               "rotation": [0, 0, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -19269,7 +19269,7 @@
             "Transform": {
               "position": [23.715, -1.402, -4.892],
               "rotation": [353.2425, 34.49261, 266.8648],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -19293,7 +19293,7 @@
             "Transform": {
               "position": [37.036, -1.499, -4.383],
               "rotation": [0, 0, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -19317,7 +19317,7 @@
             "Transform": {
               "position": [36.609, -1.499, -4.497],
               "rotation": [0, 302.5031, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -19341,7 +19341,7 @@
             "Transform": {
               "position": [37.85653, -1.499, -4.037322],
               "rotation": [0, 335.8768, 0],
-              "scaleFactor": 2.000001
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -19365,7 +19365,7 @@
             "Transform": {
               "position": [36.18793, -1.499, -4.06451],
               "rotation": [0, 49.20832, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -19413,7 +19413,7 @@
             "Transform": {
               "position": [36.958, -1.499, -7.975],
               "rotation": [0, 330.897, 0],
-              "scaleFactor": 2.000001
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -19437,7 +19437,7 @@
             "Transform": {
               "position": [36.233, -1.499, -7.766],
               "rotation": [0, 344.4725, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -19461,7 +19461,7 @@
             "Transform": {
               "position": [35.3133, -1.499, -4.300862],
               "rotation": [0, 354.9749, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -19577,7 +19577,7 @@
             "Transform": {
               "position": [35.83223, -1.499, -8.593947],
               "rotation": [0, 25.50457, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -20161,7 +20161,7 @@
             "Transform": {
               "position": [24.37995, -1.499, -4.103896],
               "rotation": [0, 82.3121, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -20209,7 +20209,7 @@
             "Transform": {
               "position": [23.85971, -1.499, -4.000471],
               "rotation": [0, 0.04870138, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -20233,7 +20233,7 @@
             "Transform": {
               "position": [23.62535, -1.499, -4.397359],
               "rotation": [0, 35.00807, 0],
-              "scaleFactor": 2.000001
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -25675,7 +25675,7 @@
             "Transform": {
               "position": [24.145, -1.499, -3.614],
               "rotation": [0, 311.7545, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -28337,7 +28337,7 @@
             "Transform": {
               "position": [35.407, -1.499, -8.049],
               "rotation": [0, 18.87921, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -28361,7 +28361,7 @@
             "Transform": {
               "position": [35.262, -1.499, -7.454],
               "rotation": [0, 32.96053, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -28593,7 +28593,7 @@
             "Transform": {
               "position": [36.601, -1.499, -8.754],
               "rotation": [0, 322.7299, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -28617,7 +28617,7 @@
             "Transform": {
               "position": [36.774, -1.499, -8.617],
               "rotation": [0, 52.11442, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -28665,7 +28665,7 @@
             "Transform": {
               "position": [38.38, -1.499, -8.809],
               "rotation": [0, 43.21202, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -28689,7 +28689,7 @@
             "Transform": {
               "position": [38.202, -1.499, -8.836],
               "rotation": [0, 349.5389, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -28805,7 +28805,7 @@
             "Transform": {
               "position": [37.672, -1.499, -8.806],
               "rotation": [0, 17.75355, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -28829,7 +28829,7 @@
             "Transform": {
               "position": [38.181, -1.499, -8.618],
               "rotation": [0, 300.8686, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -28899,7 +28899,7 @@
             "Transform": {
               "position": [35.244, -1.442, -4.044],
               "rotation": [17.79551, 126.0651, 266.9856],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -29063,7 +29063,7 @@
             "Transform": {
               "position": [35.576, -1.499, -3.167],
               "rotation": [0, 303.1973, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -29227,7 +29227,7 @@
             "Transform": {
               "position": [36.208, -1.499, -3.2],
               "rotation": [0, 317.6869, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -29251,7 +29251,7 @@
             "Transform": {
               "position": [36.069, -1.499, -3.36],
               "rotation": [0, 43.32842, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -29275,7 +29275,7 @@
             "Transform": {
               "position": [36.471, -1.499, -3.193],
               "rotation": [0, 26.60106, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -29529,7 +29529,7 @@
             "Transform": {
               "position": [38.085, -1.499, -3.417],
               "rotation": [0, 43.17682, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -29553,7 +29553,7 @@
             "Transform": {
               "position": [37.593, -1.499, -3.465],
               "rotation": [0, 342.3351, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -29577,7 +29577,7 @@
             "Transform": {
               "position": [37.395, -1.499, -3.217],
               "rotation": [0, 49.84889, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -29601,7 +29601,7 @@
             "Transform": {
               "position": [36.061, -1.499, -8.798],
               "rotation": [0, 310.9119, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -29625,7 +29625,7 @@
             "Transform": {
               "position": [35.826, -1.499, -7.602],
               "rotation": [0, 343.8603, 0],
-              "scaleFactor": 2.000001
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -29649,7 +29649,7 @@
             "Transform": {
               "position": [36.664, -1.499, -7.592],
               "rotation": [0, 27.27611, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -29697,7 +29697,7 @@
             "Transform": {
               "position": [36.764, -1.199, -7.827],
               "rotation": [0, 327.4386, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -29721,7 +29721,7 @@
             "Transform": {
               "position": [37.36, -1.499, -7.626],
               "rotation": [0, 39.20094, 0],
-              "scaleFactor": 2.000001
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -29769,7 +29769,7 @@
             "Transform": {
               "position": [36.851, -1.499, -3.939],
               "rotation": [0, 29.94292, 0],
-              "scaleFactor": 2.000001
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -29793,7 +29793,7 @@
             "Transform": {
               "position": [37.549, -1.499, -4.495],
               "rotation": [0, 308.2793, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -29817,7 +29817,7 @@
             "Transform": {
               "position": [37.093, -1.199, -3.921],
               "rotation": [0, 329.173, 0],
-              "scaleFactor": 2
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -29841,7 +29841,7 @@
             "Transform": {
               "position": [36.909, -1.499, -8.329],
               "rotation": [0, 0, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -29865,7 +29865,7 @@
             "Transform": {
               "position": [24.542, -1.499, -3.756],
               "rotation": [0, 0, 0],
-              "scaleFactor": 1.5
+              "scaleFactor": 1
             },
             "children": [
               {
@@ -60356,7 +60356,7 @@
         "index": "4206",
         "static": true,
         "Transform": {
-          "position": [1.631, 0.001000106, -0.005654496],
+          "position": [3.42, 0.001000106, -0.005654496],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -60377,7 +60377,7 @@
             "index": "4207",
             "static": true,
             "Transform": {
-              "position": [1.631, 0.001000106, -0.005654496],
+              "position": [3.42, 0.001000106, -0.005654496],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
@@ -60391,7 +60391,7 @@
         "index": "4208",
         "static": true,
         "Transform": {
-          "position": [5.156, 0.001000106, -0.005654496],
+          "position": [6.95, 0.001000106, -0.005654496],
           "rotation": [0, 0, 0],
           "scaleFactor": 1
         },
@@ -60412,7 +60412,7 @@
             "index": "4209",
             "static": true,
             "Transform": {
-              "position": [5.156, 0.001000106, -0.005654496],
+              "position": [6.95, 0.001000106, -0.005654496],
               "rotation": [0, 0, 0],
               "scaleFactor": 1
             },
