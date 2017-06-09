@@ -16,7 +16,7 @@ const PrefabFactory = {
   updateClient: function(){
     for(let i=0;i<PrefabFactory.tempParticles.length;i++){
       let tempParticle=  this.tempParticles[i];
-      if (!tempParticle) continue;
+      if (!tempParticle[0] || !tempParticle[0].components["ParticleSystem"]) continue;
 
       let alpha = 1-((Time.time - tempParticle[1]) / (tempParticle[2] - tempParticle[1]));
       vec4.set(tempParticle[0].components["ParticleSystem"].uColor ,1,1,1,alpha);

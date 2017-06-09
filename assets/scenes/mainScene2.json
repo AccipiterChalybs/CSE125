@@ -59512,7 +59512,7 @@
         "index": "4150",
         "static": true,
         "Transform": {
-          "position": [36, -12.49, -33.003],
+          "position": [36, -17.49, -33.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 2.5
         },
@@ -59522,7 +59522,7 @@
             "index": "4151",
             "static": true,
             "Transform": {
-              "position": [36, -12.49, -33.003],
+              "position": [36, -17.49, -33.003],
               "rotation": [270.0198, 0, 0],
               "scaleFactor": 1
             },
@@ -59536,7 +59536,7 @@
         "index": "4152",
         "static": true,
         "Transform": {
-          "position": [36, -12.49, -33.003],
+          "position": [36, -17.49, -33.003],
           "rotation": [0, 180, 180],
           "scaleFactor": 2.5
         },
@@ -59546,7 +59546,7 @@
             "index": "4153",
             "static": true,
             "Transform": {
-              "position": [36, -12.49, -33.003],
+              "position": [36, -17.49, -33.003],
               "rotation": [89.98022, 0, 0],
               "scaleFactor": 1
             },
@@ -59560,7 +59560,7 @@
         "index": "4154",
         "static": true,
         "Transform": {
-          "position": [36, -12.08, -46],
+          "position": [36, -17.08, -46],
           "rotation": [0, 180, 180],
           "scaleFactor": 2.5
         },
@@ -59570,7 +59570,7 @@
             "index": "4155",
             "static": true,
             "Transform": {
-              "position": [36, -12.08, -46],
+              "position": [36, -17.08, -46],
               "rotation": [89.98022, 0, 0],
               "scaleFactor": 1
             },
@@ -59584,7 +59584,7 @@
         "index": "4156",
         "static": true,
         "Transform": {
-          "position": [36, -12.08, -46],
+          "position": [36, -17.08, -46],
           "rotation": [0, 0, 0],
           "scaleFactor": 2.5
         },
@@ -59594,7 +59594,7 @@
             "index": "4157",
             "static": true,
             "Transform": {
-              "position": [36, -12.08, -46],
+              "position": [36, -17.08, -46],
               "rotation": [270.0198, 0, 0],
               "scaleFactor": 1
             },
@@ -59608,7 +59608,7 @@
         "index": "4158",
         "static": true,
         "Transform": {
-          "position": [36, -12.08, -50],
+          "position": [36, -17.08, -50],
           "rotation": [0, 0, 0],
           "scaleFactor": 2.5
         },
@@ -59618,7 +59618,7 @@
             "index": "4159",
             "static": true,
             "Transform": {
-              "position": [36, -12.08, -50],
+              "position": [36, -17.08, -50],
               "rotation": [270.0198, 0, 0],
               "scaleFactor": 1
             },
@@ -59632,7 +59632,7 @@
         "index": "4160",
         "static": true,
         "Transform": {
-          "position": [36, -12.08, -50],
+          "position": [36, -17.08, -50],
           "rotation": [0, 180, 180],
           "scaleFactor": 2.5
         },
@@ -59642,7 +59642,7 @@
             "index": "4161",
             "static": true,
             "Transform": {
-              "position": [36, -12.08, -50],
+              "position": [36, -17.08, -50],
               "rotation": [89.98022, 0, 0],
               "scaleFactor": 1
             },
@@ -59656,7 +59656,7 @@
         "index": "4162",
         "static": true,
         "Transform": {
-          "position": [44, -12.08, -50],
+          "position": [44, -17.08, -50],
           "rotation": [0, 180, 180],
           "scaleFactor": 2.5
         },
@@ -59666,7 +59666,7 @@
             "index": "4163",
             "static": true,
             "Transform": {
-              "position": [44, -12.08, -50],
+              "position": [44, -17.08, -50],
               "rotation": [89.98022, 0, 0],
               "scaleFactor": 1
             },
@@ -59680,7 +59680,7 @@
         "index": "4164",
         "static": true,
         "Transform": {
-          "position": [44, -12.08, -50],
+          "position": [44, -17.08, -50],
           "rotation": [0, 0, 0],
           "scaleFactor": 2.5
         },
@@ -59690,7 +59690,7 @@
             "index": "4165",
             "static": true,
             "Transform": {
-              "position": [44, -12.08, -50],
+              "position": [44, -17.08, -50],
               "rotation": [270.0198, 0, 0],
               "scaleFactor": 1
             },
@@ -59704,7 +59704,7 @@
         "index": "4166",
         "static": true,
         "Transform": {
-          "position": [44, -12.08, -46],
+          "position": [44, -17.08, -46],
           "rotation": [0, 0, 0],
           "scaleFactor": 2.5
         },
@@ -59714,7 +59714,7 @@
             "index": "4167",
             "static": true,
             "Transform": {
-              "position": [44, -12.08, -46],
+              "position": [44, -17.08, -46],
               "rotation": [270.0198, 0, 0],
               "scaleFactor": 1
             },
@@ -59728,7 +59728,7 @@
         "index": "4168",
         "static": true,
         "Transform": {
-          "position": [44, -12.08, -46],
+          "position": [44, -17.08, -46],
           "rotation": [0, 180, 180],
           "scaleFactor": 2.5
         },
@@ -59738,7 +59738,7 @@
             "index": "4169",
             "static": true,
             "Transform": {
-              "position": [44, -12.08, -46],
+              "position": [44, -17.08, -46],
               "rotation": [89.98022, 0, 0],
               "scaleFactor": 1
             },
@@ -59752,7 +59752,7 @@
         "index": "4170",
         "static": true,
         "Transform": {
-          "position": [44, -12.49, -33.003],
+          "position": [44, -17.49, -33.003],
           "rotation": [0, 180, 180],
           "scaleFactor": 2.5
         },
@@ -59762,7 +59762,7 @@
             "index": "4171",
             "static": true,
             "Transform": {
-              "position": [44, -12.49, -33.003],
+              "position": [44, -17.49, -33.003],
               "rotation": [89.98022, 0, 0],
               "scaleFactor": 1
             },
@@ -59776,7 +59776,7 @@
         "index": "4172",
         "static": true,
         "Transform": {
-          "position": [44, -9.35, -33.003],
+          "position": [44, -17.35, -33.003],
           "rotation": [0, 0, 0],
           "scaleFactor": 2.5
         },
@@ -59786,7 +59786,7 @@
             "index": "4173",
             "static": true,
             "Transform": {
-              "position": [44, -9.35, -33.003],
+              "position": [44, -17.35, -33.003],
               "rotation": [270.0198, 0, 0],
               "scaleFactor": 1
             },
@@ -59904,6 +59904,444 @@
                 "scaleY": 2,
                 "scaleZ": 0.001,
                 "offset": [0, 0, 0]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Floor (46)",
+        "index": "4181",
+        "static": true,
+        "Transform": {
+          "position": [46, -1.5, -4.003],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ground_tiled.1",
+            "index": "4182",
+            "static": true,
+            "Transform": {
+              "position": [46, -1.5, -4.003],
+              "rotation": [270, 0, 0],
+              "scaleFactor": 1
+            },
+            "MeshFilter": "Ground_tiled.1",
+            "MeshRenderer": "spaced-tiles1-albedo",
+            "colliders": [
+              {
+                "type": "box",
+                "isTrigger": false,
+                "scaleX": 2,
+                "scaleY": 2,
+                "scaleZ": 0.001,
+                "offset": [0, 0, 0]
+              }
+            ],
+            "children": [
+              {
+                "name": "Collider",
+                "index": "4183",
+                "static": true,
+                "Transform": {
+                  "position": [46, -1.999, -4.003],
+                  "rotation": [270, 0, 0],
+                  "scaleFactor": 1
+                },
+                "colliders": [
+                  {
+                    "type": "box",
+                    "isTrigger": false,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "scaleZ": 1,
+                    "offset": [0, 0, 0]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Floor (65)",
+        "index": "4184",
+        "static": true,
+        "Transform": {
+          "position": [46, -1.5, -6.003],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ground_tiled.1",
+            "index": "4185",
+            "static": true,
+            "Transform": {
+              "position": [46, -1.5, -6.003],
+              "rotation": [270, 0, 0],
+              "scaleFactor": 1
+            },
+            "MeshFilter": "Ground_tiled.1",
+            "MeshRenderer": "spaced-tiles1-albedo",
+            "colliders": [
+              {
+                "type": "box",
+                "isTrigger": false,
+                "scaleX": 2,
+                "scaleY": 2,
+                "scaleZ": 0.001,
+                "offset": [0, 0, 0]
+              }
+            ],
+            "children": [
+              {
+                "name": "Collider",
+                "index": "4186",
+                "static": true,
+                "Transform": {
+                  "position": [46, -1.999, -6.003],
+                  "rotation": [270, 0, 0],
+                  "scaleFactor": 1
+                },
+                "colliders": [
+                  {
+                    "type": "box",
+                    "isTrigger": false,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "scaleZ": 1,
+                    "offset": [0, 0, 0]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Floor (47)",
+        "index": "4187",
+        "static": true,
+        "Transform": {
+          "position": [48, -1.5, -4.003],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ground_tiled.1",
+            "index": "4188",
+            "static": true,
+            "Transform": {
+              "position": [48, -1.5, -4.003],
+              "rotation": [270, 0, 0],
+              "scaleFactor": 1
+            },
+            "MeshFilter": "Ground_tiled.1",
+            "MeshRenderer": "spaced-tiles1-albedo",
+            "colliders": [
+              {
+                "type": "box",
+                "isTrigger": false,
+                "scaleX": 2,
+                "scaleY": 2,
+                "scaleZ": 0.001,
+                "offset": [0, 0, 0]
+              }
+            ],
+            "children": [
+              {
+                "name": "Collider",
+                "index": "4189",
+                "static": true,
+                "Transform": {
+                  "position": [48, -1.999, -4.003],
+                  "rotation": [270, 0, 0],
+                  "scaleFactor": 1
+                },
+                "colliders": [
+                  {
+                    "type": "box",
+                    "isTrigger": false,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "scaleZ": 1,
+                    "offset": [0, 0, 0]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Floor (66)",
+        "index": "4190",
+        "static": true,
+        "Transform": {
+          "position": [48, -1.5, -6.003],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ground_tiled.1",
+            "index": "4191",
+            "static": true,
+            "Transform": {
+              "position": [48, -1.5, -6.003],
+              "rotation": [270, 0, 0],
+              "scaleFactor": 1
+            },
+            "MeshFilter": "Ground_tiled.1",
+            "MeshRenderer": "spaced-tiles1-albedo",
+            "colliders": [
+              {
+                "type": "box",
+                "isTrigger": false,
+                "scaleX": 2,
+                "scaleY": 2,
+                "scaleZ": 0.001,
+                "offset": [0, 0, 0]
+              }
+            ],
+            "children": [
+              {
+                "name": "Collider",
+                "index": "4192",
+                "static": true,
+                "Transform": {
+                  "position": [48, -1.999, -6.003],
+                  "rotation": [270, 0, 0],
+                  "scaleFactor": 1
+                },
+                "colliders": [
+                  {
+                    "type": "box",
+                    "isTrigger": false,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "scaleZ": 1,
+                    "offset": [0, 0, 0]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Floor (67)",
+        "index": "4193",
+        "static": true,
+        "Transform": {
+          "position": [46, -1.5, -8.003],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ground_tiled.1",
+            "index": "4194",
+            "static": true,
+            "Transform": {
+              "position": [46, -1.5, -8.003],
+              "rotation": [270, 0, 0],
+              "scaleFactor": 1
+            },
+            "MeshFilter": "Ground_tiled.1",
+            "MeshRenderer": "spaced-tiles1-albedo",
+            "colliders": [
+              {
+                "type": "box",
+                "isTrigger": false,
+                "scaleX": 2,
+                "scaleY": 2,
+                "scaleZ": 0.001,
+                "offset": [0, 0, 0]
+              }
+            ],
+            "children": [
+              {
+                "name": "Collider",
+                "index": "4195",
+                "static": true,
+                "Transform": {
+                  "position": [46, -1.999, -8.003],
+                  "rotation": [270, 0, 0],
+                  "scaleFactor": 1
+                },
+                "colliders": [
+                  {
+                    "type": "box",
+                    "isTrigger": false,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "scaleZ": 1,
+                    "offset": [0, 0, 0]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Floor (68)",
+        "index": "4196",
+        "static": true,
+        "Transform": {
+          "position": [48, -1.5, -8.003],
+          "rotation": [0, 0, 0],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Ground_tiled.1",
+            "index": "4197",
+            "static": true,
+            "Transform": {
+              "position": [48, -1.5, -8.003],
+              "rotation": [270, 0, 0],
+              "scaleFactor": 1
+            },
+            "MeshFilter": "Ground_tiled.1",
+            "MeshRenderer": "spaced-tiles1-albedo",
+            "colliders": [
+              {
+                "type": "box",
+                "isTrigger": false,
+                "scaleX": 2,
+                "scaleY": 2,
+                "scaleZ": 0.001,
+                "offset": [0, 0, 0]
+              }
+            ],
+            "children": [
+              {
+                "name": "Collider",
+                "index": "4198",
+                "static": true,
+                "Transform": {
+                  "position": [48, -1.999, -8.003],
+                  "rotation": [270, 0, 0],
+                  "scaleFactor": 1
+                },
+                "colliders": [
+                  {
+                    "type": "box",
+                    "isTrigger": false,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "scaleZ": 1,
+                    "offset": [0, 0, 0]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Wall_Ornate_3 (130)",
+        "index": "4199",
+        "static": true,
+        "Transform": {
+          "position": [47, -1.5, -6],
+          "rotation": [0, 270, 0],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Wall_ornate.3",
+            "index": "4200",
+            "static": true,
+            "Transform": {
+              "position": [47, -1.5, -6],
+              "rotation": [270, 270, 0],
+              "scaleFactor": 0.535
+            },
+            "MeshFilter": "Wall_ornate.3",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "isTrigger": false,
+                "scaleX": 3.728509,
+                "scaleY": 0.7680848,
+                "scaleZ": 5.726395,
+                "offset": [0, 0.2861431, 2.863198]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Wall_Ornate_3 (131)",
+        "index": "4201",
+        "static": true,
+        "Transform": {
+          "position": [46, -1.5, -5],
+          "rotation": [0, 180, 0],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Wall_ornate.3",
+            "index": "4202",
+            "static": true,
+            "Transform": {
+              "position": [46, -1.5, -5],
+              "rotation": [270, 180, 0],
+              "scaleFactor": 0.535
+            },
+            "MeshFilter": "Wall_ornate.3",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "isTrigger": false,
+                "scaleX": 3.728509,
+                "scaleY": 0.7680848,
+                "scaleZ": 5.726395,
+                "offset": [0, 0.2861431, 2.863198]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Wall_Ornate_3 (132)",
+        "index": "4203",
+        "static": true,
+        "Transform": {
+          "position": [46, -1.5, -7],
+          "rotation": [0, 180, 0],
+          "scaleFactor": 1
+        },
+        "children": [
+          {
+            "name": "Wall_ornate.3",
+            "index": "4204",
+            "static": true,
+            "Transform": {
+              "position": [46, -1.5, -7],
+              "rotation": [270, 180, 0],
+              "scaleFactor": 0.535
+            },
+            "MeshFilter": "Wall_ornate.3",
+            "MeshRenderer": "dungeon-stone1-albedo2",
+            "colliders": [
+              {
+                "type": "box",
+                "isTrigger": false,
+                "scaleX": 3.728509,
+                "scaleY": 0.7680848,
+                "scaleZ": 5.726395,
+                "offset": [0, 0.2861431, 2.863198]
               }
             ]
           }
