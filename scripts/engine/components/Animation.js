@@ -234,6 +234,7 @@ class Animation extends Component
             this._currentTime[index] -= currentAnim.animationTime;
           }
           else {
+            // console.log('stopp');
             this.stop(index);
           }
         }
