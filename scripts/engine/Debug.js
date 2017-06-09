@@ -4,17 +4,29 @@
 
 let Debug = {};
 
-Debug.clientUpdate = false; //Run the client in standalone mode, so it doesn't need a server - good for testing!
+Debug.clientUpdate = true; //Run the client in standalone mode, so it doesn't need a server - good for testing!
 Debug.bufferDebugMode = true; //Sets the OpenGL Context to not use MSAA, so that buffers can be blitted to the screen
-Debug.debugDisplay = true;
-Debug.quickLoad = false;
+Debug.debugDisplay = true
+Debug.quickLoad = true;
 Debug.autoStart = false;
 Debug.tmp_shadowTwoSideRender = true; //Var to remind me to remove this when we get in new level geometry
+
+Debug.drawColliders = false;
+
 
 Debug.start = function() {
   if (Debug.debugDisplay) {
     if (Debug.fpsElement === null) Debug.fpsElement = document.getElementById("fpsLog");
     if (Debug.exposureElement === null) Debug.exposureElement = document.getElementById("exposureLog");
+    if (Debug.profilerElement === null) Debug.profilerElement = document.getElementById("profilerLog");
+    if (!Debug.animationStateElement) {
+      Debug.animationStateElement = document.createElement('div');
+      document.getElementById('debugContainer').appendChild(Debug.animationStateElement);
+    }
+    if (!Debug.inputElement) {
+      Debug.inputElement = document.createElement('div');
+      document.getElementById('debugContainer').appendChild(Debug.inputElement);
+    }
   }
 };
 
@@ -27,6 +39,9 @@ Debug.update = function() {
   if (Debug.displayOpen) {
     Debug.logFPS();
     Debug.logExposure();
+    //Debug.Profiler.report();
+    Debug.logAnimationState();
+    Debug.logInput();
   }
 
   if (Debug.bufferDebugMode) {
@@ -55,7 +70,7 @@ Debug.update = function() {
       Debug.currentBuffer = Debug.BUFFERTYPE_SHADOW;
     }
     if (Input.getAxis("debugButton_Buffer9")) {
-      Debug.currentBuffer = 0;
+      Debug.currentBuffer = Debug.BUFFERTYPE_SSAO;
     }
     if (Input.getAxis("debugButton_Buffer0")) {
       Debug.currentBuffer = 0;
@@ -72,6 +87,7 @@ Debug.BUFFERTYPE_ROUGH = 4;
 Debug.BUFFERTYPE_METAL = 5;
 Debug.BUFFERTYPE_BLOOM = 6;
 Debug.BUFFERTYPE_SHADOW = 7;
+Debug.BUFFERTYPE_SSAO = 8;
 Debug.currentBuffer = Debug.BUFFERTYPE_NONE;
 
 Debug.currentLightIndex = 1; //TODO make this switchable with input
@@ -80,6 +96,7 @@ Debug.currentLightIndex = 1; //TODO make this switchable with input
 Debug.displayOpen = false;
 Debug.fpsElement = null;
 Debug.exposureElement = null;
+Debug.profilerElement = null;
 Debug.lastTime=-1;
 Debug.frames=0;
 Debug.logFPS = function() {
@@ -88,8 +105,7 @@ Debug.logFPS = function() {
   let current = new Date().getTime();
   let duration = (current - Debug.lastTime) / 1000.0;
   if (duration >= 1) {
-    console.log(Debug.frames);
-    let fpsString = "FPS: " + Math.floor(Debug.frames/duration);
+    let fpsString = "FPS: " + Math.floor(Debug.frames/duration) + " " + Debug.frames;
     Debug.fpsElement.innerText = fpsString;
 
     Debug.frames = 0;
@@ -102,14 +118,34 @@ Debug.logExposure = function() {
   Debug.exposureElement.innerText = "Exposure: " + Renderer.postPass.averageExposure;
 };
 
+Debug.logAnimationState = () => {
+  const p = PlayerTable.currentPlayer;
+  const o = PlayerTable.getPlayer();
+  const ls = o.getComponent('PlayerController').state;
+  const s = ls.state.name;
+  const m = ls.moveSpeed.toFixed(3);
+  const l = ls.status;
+  const d = ls.moveDot.toFixed(3);
+  const y = ls.moveCrossY.toFixed(3);
+  Debug.animationStateElement.innerText =
+    `Player ${p} is ${s} with status ${l}:` +
+    `\n..ms ${m}\n..movedot ${d}\n..movecrossy ${y}`;
+};
+
+Debug.logInput = () => {
+  const h = Input.getAxis('horizontal');
+  const v = Input.getAxis('vertical');
+  Debug.inputElement.innerText = `Input horizontal(${h}) vertical(${v})`;
+};
 
 //Go through Debug, so easier to find and remove;
 Debug.log = console.log;
 Debug.error = console.error;
 
-Debug.assert = function(shouldBeTrue) {
+Debug.assert = function(shouldBeTrue, message) {
   if (shouldBeTrue === false) {
-    throw new Error("Assertion Failed");
+    if (!message) message = '';
+    throw new Error("Assertion Failed" + message);
   }
 };
 
@@ -279,11 +315,122 @@ Debug.drawTeapot = function(pos, color = null) {
 
   teapot.transform.setPosition(pos);
   teapot.transform.setRotation(rotation);
+  teapot.transform.scale(0.05);
+
+  GameObject.prototype.SceneRoot.addChild(teapot);
+
+  return teapot;
+};
+
+Debug.drawCollider = function(name, pos, color = null) {
+  if (!Debug.drawColliders) return null;
+  let rotation = quat.create();
+  quat.rotateX(rotation, rotation, -Math.PI/2);
+
+  name = (name === 'sphere') ? 'Sphere_Icosphere' : 'Cube';
+
+  let teapot = new GameObject();
+
+  if (!IS_SERVER) {
+    let mesh = new Mesh(name);
+    let mat = new Material(Renderer.getShader(Renderer.FORWARD_PBR_SHADER), true);
+
+    if (color === null) {
+      color = vec4.create();
+      vec4.set(color, 1, 0.5, 0.1, 1);
+    }
+    mat.setTexture(MaterialTexture.COLOR, Texture.makeColorTex(color));
+
+    vec4.set(color, 0.5, 0.5, 1, 1);
+    mat.setTexture(MaterialTexture.NORMAL, Texture.makeColorTex(color));
+
+    vec4.set(color, 1, 0, 0.25, 1); //metalness, blank, roughness
+    mat.setTexture(MaterialTexture.MAT, Texture.makeColorTex(color));
+
+    mesh.setMaterial(mat);
+    teapot.addComponent(mesh);
+  }
+
+  teapot.transform.setPosition(pos);
+  teapot.transform.setRotation(rotation);
   teapot.transform.scale((.05));
 
   GameObject.prototype.SceneRoot.addChild(teapot);
 
   return teapot;
+};
+
+
+Debug.Profiler = {data:[], map:{}, index:0};
+Debug.Profiler.newFrame = function() {
+  Debug.Profiler.index = 0;
+};
+
+Debug.Profiler.startTimer = function(name, level) {
+  if (!Debug.Profiler.data[name]) Debug.Profiler.data[name] = {};
+  Debug.Profiler.data[name].level = level;
+  Debug.Profiler.data[name].start = new Date().getTime();
+
+  Debug.Profiler.data[name].active = true;
+  Debug.Profiler.data[name].uniforms = 0;
+  Debug.Profiler.data[name].shaderUses = 0;
+  Debug.Profiler.data[name].draws = 0;
+
+  Debug.Profiler.map[Debug.Profiler.index] = name;
+  Debug.Profiler.index++;
+};
+
+Debug.Profiler.endTimer = function(name) {
+  Debug.Profiler.data[name].active = false;
+  Debug.Profiler.data[name].time = new Date().getTime() - Debug.Profiler.data[name].start;
+};
+
+Debug.Profiler.setUniform = function() {
+  if (Debug.Profiler.index > 0) {
+    let checkIndex = Debug.Profiler.index - 1;
+    while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
+      checkIndex--;
+      if (checkIndex < 0) { console.log("ERR: stage not found!"); return; }
+    }
+    Debug.Profiler.data[Debug.Profiler.map[checkIndex]].uniforms++;
+  }
+};
+
+Debug.Profiler.useShader = function() {
+  if (Debug.Profiler.index > 0) {
+    let checkIndex = Debug.Profiler.index - 1;
+    while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
+      checkIndex--;
+      if (checkIndex < 0) { console.log("ERR: stage not found!"); return; }
+    }
+    Debug.Profiler.data[Debug.Profiler.map[checkIndex]].shaderUses++;
+  }
+};
+
+Debug.Profiler.drawCall = function() {
+  if (Debug.Profiler.index > 0) {
+    let checkIndex = Debug.Profiler.index - 1;
+    while (!Debug.Profiler.data[Debug.Profiler.map[checkIndex]].active) {
+      checkIndex--;
+      if (checkIndex < 0) { console.log("ERR: stage not found!"); return; }
+    }
+    Debug.Profiler.data[Debug.Profiler.map[checkIndex]].draws++;
+  }
+};
+
+Debug.Profiler.report = function() {
+  let mainStr = '';
+  for (let i=0; i<Debug.Profiler.index; ++i) {
+    let currentProfile = Debug.Profiler.data[Debug.Profiler.map[i]];
+    let str = '|';
+    for (let space=0; space < currentProfile.level; space++) {
+      str += '__';
+    }
+    str += "["+Debug.Profiler.map[i] + "]: T " + currentProfile.time + " /U "
+           + currentProfile.uniforms + " /S " + currentProfile.shaderUses + " /D" + currentProfile.draws;
+    mainStr += str + '\n';
+  }
+  Debug.profilerElement.innerText = mainStr;
 };
 
 

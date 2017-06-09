@@ -3,23 +3,25 @@
  */
 class ParticleSystem extends Component {
 
-  constructor(additive = false, parameters) {
+  constructor({additive = false, texture = Texture.makeColorTex(vec4.fromValues(1,1,1,1)),
+    number = 1000, duration = [0.5, 2.5], velocity = [[-1,0,-1],[1,2,1]], gravity = -1,
+    startSize = [0.064, 0.128], endSize = [0.016, 0.032],
+    startColor = [[25,0,0,0.5],[25,25,1,0.5]], endColor = [[0,0,0,0],[0,0,0,0]]}) {
     super();
     this.componentType = "ParticleSystem";
 
     this.additive = additive;
 
-    if (parameters === undefined) parameters = {};
-    this.texture = (parameters.texture !== undefined) ? parameters.texture : Texture.makeColorTex(vec4.fromValues(1,1,1,1));
-    this.numParticles = (parameters.number !== undefined) ? parameters.number : 1000;
-    this.duration = (parameters.duration !== undefined) ? parameters.duration : [0.5, 2.5];
+    this.texture =  texture;
+    this.numParticles =  number;
+    this.duration =  duration;
 
-    this.velocity = (parameters.velocity !== undefined) ? parameters.velocity : [[-1,0,-1],[1,2,1]];
-    this.gravity = (parameters.gravity !== undefined) ? parameters.gravity : -1;
-    this.startSize = (parameters.startSize !== undefined) ? parameters.startSize : [0.064, 0.128];
-    this.endSize = (parameters.endSize !== undefined) ? parameters.endSize : [0.016, 0.032];
-    this.startColor = (parameters.startColor !== undefined) ? parameters.startColor : [[25,0,0,0.5],[25,25,1,0.5]];
-    this.endColor = (parameters.endColor !== undefined) ? parameters.endColor : [[0,0,0,0],[0,0,0,0]];
+    this.velocity =  velocity;
+    this.gravity =  gravity;
+    this.startSize =  startSize;
+    this.endSize =  endSize;
+    this.startColor =  startColor;
+    this.endColor =  endColor;
 
 
     this._meshData = {};

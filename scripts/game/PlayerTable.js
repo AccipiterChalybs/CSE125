@@ -1,38 +1,33 @@
 const PlayerTable = {
   currentPlayer: 0,
   players: [],
+  hate: [],
   addPlayer: function (gameObject) {
     PlayerTable.players.push(gameObject);
+    PlayerTable.hate.push(0);
   },
 
   getPlayer: function () {
     return PlayerTable.players[PlayerTable.currentPlayer];
   },
 
-  serialize: function () {
-    let data = {};
-    for (let i = 0; i < PlayerTable.players.length; i++) {
-      data[i] = {};
-      let pController = PlayerTable.players[i].getComponent('PlayerController');
-      data[i].a = pController.action;
-      data[i].s = pController.singing;
-      data[i].st = pController._nextSingTime;
-      data[i].i = pController.injured;
-      data[i].k = pController.keys;
+  getPlayerID: function(playerObj){
+    for(let i = 0; i < PlayerTable.players.length; ++i){
+      if(PlayerTable.players[i] === playerObj) {
+        return i;
+      }
     }
 
-    return data;
+    return -1;
   },
 
-  applySerialize: function (data) {
-    for (let i = 0; i < PlayerTable.players.length; i++) {
-      let pController = PlayerTable.players[i].getComponent('PlayerController');
-      // Debug.log(pController);
-      pController.action = data[i].a;
-      pController.singing = data[i].s;
-      pController.injured = data[i].i;
-      pController.keys = data[i].k;
-      pController._nextSingTime = data[i].st;
-    }
+  increaseHate : function(playerID, amt){
+    PlayerTable.hate[playerID] += amt;
   },
+
+  resetHate : function(){
+    for(let i = 0; i < PlayerTable.hate.length; ++i){
+      PlayerTable.hate[i] = 0;
+    }
+  }
 };

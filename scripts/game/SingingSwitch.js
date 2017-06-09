@@ -2,65 +2,47 @@
  * Created by Stephen on 5/2/2017.
  */
 
-const SWITCH_CHARGE_RATE = 5; // per second
-const SWITCH_LOSS_RATE = 0.5; // per second
-const TIME_BEFORE_LOSS = 3;
-
 class SingingSwitch extends Listenable {
-  constructor(event, activationLevel) {
+  constructor(params = {events : null, maximumOutput: 5, lossRate: 0.5, timeBeforeLoss: 2}) {
     super();
-    this._event = event;
-    this.activationLevel = activationLevel;
-    this.charged = false;
+    this._events = [];
+    this._unparsedEvents = params.events;
+
+    this.maximumOutput = params.maximumOutput;
+    this.lossRate = params.lossRate;
+    this.timeBeforeLoss = params.timeBeforeLoss;
 
     this._lastSingTime = 0;
-    this._currentCharge = 0;
+    this._currentOutput = 0;
+    this._lock = null;
   }
 
   start() {
-    this._collider = this.transform.gameObject.getComponent('Collider');
-    //this._singer = this.transform.gameObject.getComponent("Sing");
-    this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);
-    this._collider.setFreezeRotation(true);
+    this._lock = this.transform.gameObject.getComponent('Lock');
+    for(let i = 0; i < this._unparsedEvents.length; ++i){
+      this._events.push(GameObject.prototype.SerializeMap[this._unparsedEvents[i]].getComponent("Event"));
+    }
   }
 
   updateComponent() {
-    if (this.charged === false || Time.time - this._lastSingTime >= TIME_BEFORE_LOSS) {
-      this._currentCharge = Utility.moveTowards(this._currentCharge, 0, SWITCH_LOSS_RATE * Time.deltaTime);
-      this._event.setCurrentState(EventState.discharging);
+    if(!(this._lock && this._lock !== null) || this._lock._unlocked ) {
+      if (Time.time - this._lastSingTime >= this.timeBeforeLoss) {
+        this._currentOutput = Utility.moveTowards(this._currentOutput, 0, this.lossRate * Time.deltaTime);
+      } else {
+        this._currentOutput = Utility.moveTowards(this._currentOutput, this.maximumOutput, Time.deltaTime);
+      }
+
+      for (let event of this._events) {
+        event.charge(this._currentOutput);
+      }
     }
-
-    if (Time.time <= this._lastSingTime + 0.1) {
-      this._currentCharge = Utility.moveTowards(this._currentCharge, this.activationLevel, SWITCH_CHARGE_RATE * Time.deltaTime);
-      this._event.setCurrentState(EventState.charging);
-    }
-
-    if (this.charged === false && this._currentCharge > this.activationLevel - 0.01) {
-      this.fullyCharged();
-    } else if (this.charged === true && Time.time - this._lastSingTime >= TIME_BEFORE_LOSS) {
-      this.uncharged();
-    }
-
-    this.transform.setScale(this._currentCharge / 100 + 0.02);
-  }
-
-  uncharged() {
-    Debug.log('I became uncharged');
-    this._event.setCurrentState(EventState.uncharged);
-    this.charged = false;
-  }
-
-  fullyCharged() {
-    Debug.log('I am charged!');
-    this._event.setCurrentState(EventState.charged);
-    this.charged = true;
   }
 
   listen(interactingObj) {
 
     let singer = interactingObj.getComponent('Sing');
 
-    //console.log(player, " is interacting with me. ", this.gameObject);
+    // console.log("player is interacting with me. ", this.gameObject);
     if (singer && singer !== null) {
       this._lastSingTime = Time.time;
     }

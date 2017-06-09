@@ -5,69 +5,112 @@
 const REGULAR_SPEED = 4;
 const WALK_SPEED = 2;
 const SING_SPEED = 0.8;
-const PLAYER_ACCELERATION = 4;
-const COOLDOWN_SINGING = 0.1;   // In seconds
+const PLAYER_ACCELERATION = 20;
 const CHAR_NAME = "CAIN"; // CUZ I GOT 1 KEY and 0 bombs
+const COOLDOWN_SINGING = 0.1;   // In seconds
+
+const HATE_SING = 1;
 
 const PlayerState = {
   default: "default",
   walking: "walking",
   singing: "singing",
   noControl: "noControl",
-  cantMove: "cantMove"
+  cantMove: "cantMove",
+  dead: "dead"
+};
+
+const PlayerStateSpeed = {
+  default: REGULAR_SPEED,
+  walking: WALK_SPEED,
+  singing: SING_SPEED,
 };
 
 // Requires a collider, sing
-class PlayerController extends Component{
+class PlayerController extends Component {
   constructor(){
     super();
-    this.componentType = "PlayerController";
-    this.movementSpeed = REGULAR_SPEED;
+    // init
+    this._looker = null;
+
+    // space
+    this.playerForward = vec3.create(); // player model direction
+
+    // input
     this.x = 0;
-    this.y = 0;
     this.z = 0;
     this.singing = 0;
     this.walking = 0;
     this.action = 0;
-    this.forward = vec3.create(); vec3.set(this.forward,0,0,-1);
-    this.keys = 0;
 
-    this._collider = null;
+    // physics
+    this._colliders = [];
+
+    // singing
     this._singer = null;
     this._singingSrc = null;
     this._nextSingTime = 0;
     this._lastSingInput = 0;
-    this._currentState = PlayerState.default;
+    this._singingCooldown = COOLDOWN_SINGING;
+
+    // game state
+    this.state = new PlayerLogicState();
+    this.state.status = PlayerState.default;
+    this.state.controller = this;
+    this.keys = 0;
     this.injured = true;
+    this.forward = vec3.create(); vec3.set(this.forward, 0, 0, -1);
+    this.cameraPos = vec3.create(); vec3.set(this.cameraPos, 0, 0, -1);
+
+    // meta
+    this.componentType = 'PlayerController';
   }
 
-  start(){
-    this._collider = this.transform.gameObject.getComponent("Collider");
-    this._singer = this.transform.gameObject.getComponent("Sing");
+  start() {
+    // object refs
+    this._singer = this.transform.gameObject.getComponent('Sing');
     this._looker = this.transform.gameObject.getComponent("Look");
-    this._collider.setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
-    this._collider.setFreezeRotation(true);
+
+    // physics init
+    this.transform.gameObject.getComponent('Collider').setLayer(FILTER_PLAYER);
+    this.transform.gameObject.findComponents('Collider', this._colliders);
+    for(let i = 0; i < this._colliders.length; ++i) {
+      this._colliders[i].setPhysicsMaterial(PhysicsEngine.materials.playerMaterial);
+      this._colliders[i].setFreezeRotation(true);
+    }
+
+    // game state
+    this.checkpoint = this.transform.getWorldPosition();
+
+    // network
+    this.gameObject.addComponentToSerializeableList(this);
+
+    // start anim
+    this.state.start(this.gameObject);
   }
 
   startClient(){
-    this._singingSrc = this.transform.gameObject.getComponent("AudioSource");
+    this.gameObject.addComponentToSerializeableList(this);
+    this._singingSrc = this.transform.gameObject.getComponent('AudioSource');
   }
 
   updateComponentClient(){
-    if(!this.injured&& this.singing === 1 && Time.time >= this._nextSingTime) {
-      this._singingSrc.resumeSound();
-    }else{
-      this._singingSrc.pauseSound();
-    }
   }
 
   updateComponent(){
-    if(this._currentState === PlayerState.noControl)
+    if (this.state.status === PlayerState.dead) {
+      Debug.log('INSIDE DEAD');
+      this.transform.setWorldPosition(this.checkpoint);
+      this.state.status = PlayerState.default;
       return;
+    }
+
+    if (this.state.status === PlayerState.noControl) {
+      return;
+    }
 
     // Add if loop to enable client side testing w/o server
-    if(Debug.clientUpdate && !IS_SERVER)
-    {
+    if (Debug.clientUpdate && !IS_SERVER) {
       this.x = Input.getAxis('horizontal');
       this.z = Input.getAxis('vertical');
       this.walking = Input.getAxis('walk');
@@ -75,75 +118,149 @@ class PlayerController extends Component{
       this.action = Input.getAxis("action");
 
       this.forward = Renderer.camera.transform.getForward();
+      this.cameraPos = Renderer.camera.transform.getWorldPosition();
     }
 
-    if(this.singing === 0 && this._lastSingInput === 1){
-      this._nextSingTime = Time.time + COOLDOWN_SINGING;
-      // if(!IS_SERVER) this._singingSrc.pauseSound();
+    if (this.singing === 0 && this._lastSingInput === 1) {
+      this._nextSingTime = Time.time + this._singingCooldown;
     }
 
     this._lastSingInput = this.singing;
 
-    if(this._currentState === PlayerState.cantMove){
+    if (this.state.status === PlayerState.cantMove){
 
-    }else if(!this.injured && this.singing === 1 && Time.time >= this._nextSingTime) {
-      this._currentState = PlayerState.singing;
+    } else if (!this.injured && this.singing === 1 && Time.time >= this._nextSingTime) {
+      this.state.status = PlayerState.singing;
       //if !injured
-      this._singer.sing();
+
       // if(!IS_SERVER) this._singingSrc.resumeSound();
-      //
-    }else if(this.walking === 1){
-      this._currentState = PlayerState.walking;
-    }else{
-      this._currentState = PlayerState.default;
+    } else if (this.walking === 1) {
+      this.state.status = PlayerState.walking;
+    } else {
+      this.state.status = PlayerState.default;
     }
 
-    if(this._currentState !== PlayerState.cantMove) {
+    if(this.state.status !== PlayerState.cantMove) {
       this.movement();
     }
 
-    if(this.action === 1){
+    if(this.state.status === PlayerState.singing) {
+      PlayerTable.increaseHate(PlayerTable.currentPlayer, HATE_SING);
+      this._singer.sing();
+    }else{
+      this._singer.quiet();
+    }
+
+    if(this.action === 1) {
       this._looker.look();
     }
+
   }
 
 
-  movement(){
-    if(this._currentState === PlayerState.singing){
-      this.movementSpeed = Utility.moveTowards(this.movementSpeed, SING_SPEED, 4 * PLAYER_ACCELERATION * Time.deltaTime);
-    } else if(this._currentState === PlayerState.walking){
-      this.movementSpeed = Utility.moveTowards(this.movementSpeed, WALK_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
-    } else if(this._currentState === PlayerState.default){
-      this.movementSpeed = Utility.moveTowards(this.movementSpeed, REGULAR_SPEED, PLAYER_ACCELERATION * Time.deltaTime);
+  movement() {
+    let speed = this.state.moveSpeed;
+    if (this.singing) {
+      speed = SING_SPEED;
+    } else if (this.walking) {
+      speed = WALK_SPEED;
+    } else if (!(this.x || this.z)) {
+      speed = 0;
+    } else {
+      speed = REGULAR_SPEED;
+    }
+    this.state.moveSpeed = Utility.moveTowards(this.state.moveSpeed, speed, PLAYER_ACCELERATION * Time.deltaTime);
+
+    if (!this.state.moveSpeed) {
+      this.state.moveDot = 1; // reset
+      this.state.moveCrossY = 0;
+
+      this.state.update();
+      return;
     }
 
-    let up = vec3.create(); vec3.set(up, 0, 1, 0);
-    let move = vec3.create();
-    let moveX = vec3.create(); vec3.cross(moveX, this.forward, up);
-    let moveZ = vec3.create(); vec3.cross(moveZ, up, moveX);
+    const up = vec3.create(); vec3.set(up, 0, 1, 0);
+    const moveX = vec3.create(); vec3.cross(moveX, this.forward, up);
+    const moveZ = vec3.create(); vec3.cross(moveZ, up, moveX);
     vec3.normalize(moveX, moveX);
     vec3.normalize(moveZ, moveZ);
-    vec3.scale(moveX, moveX, this.x * this.movementSpeed);
-    vec3.scale(moveZ, moveZ, this.z * this.movementSpeed);
+    vec3.scale(moveX, moveX, this.x);
+    vec3.scale(moveZ, moveZ, this.z);
+    const move = vec3.create();
     vec3.add(move, moveX, moveZ);
     vec3.normalize(move, move);
-    vec3.scale(move, move, this.movementSpeed);
+    // vec3.scale(move, move, this.state.moveSpeed);
 
-    let body = this._collider.body;
-    body.velocity.x = move[0];
-    body.velocity.z = move[2];
-    //col.setRotation(this.forward);
+    const playerForward = this.transform.getForward();
+    vec3.normalize(playerForward, playerForward);
+    const moveDotPlayer = -vec3.dot(move, playerForward);
+    this.state.moveDot = moveDotPlayer;
+    const playerXMove = vec3.create();
+    vec3.cross(playerXMove, playerForward, move);
+    this.state.moveCrossY = playerXMove[1];
+
+    this.state.update();
+
+    if (this.state.state.turnAmt == 0 && vec3.length(move) > 0.0005) {
+      // TODO set this.state.movedot and movecrossy instead
+      // this.transform.setRotation(quat.create());
+      // this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
+      const angle = Math.acos(moveDotPlayer) * playerXMove[1] * -1;
+      this.transform.rotateY(angle < 0.1 ? angle : 0.1); // pi/16
+    }
   }
 
-  sing(){
-    // console.log("singing!");
+  heal(){
+    // Debug.log("Healed");
+    this.injured = false;
   }
+
+  takeDamage(){
+    if(this.injured === true){
+      this.die();
+      return;
+    }
+
+    Debug.log("ow");
+
+    this.injured = true;
+  }
+
+  die(){
+    Debug.log("I die.");
+  }
+
 
   getCurrentState(){
-    return this._currentState;
+    return this.state.status;
   }
 
-  setCurrentState(newState){
-    this._currentState = newState;
+  setCurrentState(newState) {
+    this.state.status = newState;
+  }
+
+  // eg slide, happens once
+  triggerAnimation(animState) {
+    this.state.setTrigger(animName);
+  }
+
+  serialize() {
+    const data = {
+      a: this.action,
+      s: this.singing,
+      st: this._nextSingTime,
+      i: this.injured,
+      k: this.keys,
+    };
+    return data;
+  }
+
+  applySerializedData(data) {
+    // Debug.log(this);
+    this.action = data.a;
+    this.singing = data.s;
+    this._nextSingTime = data.st;
+    this.injured = data.i;
+    this.keys = data.k;
   }
 }

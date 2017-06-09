@@ -17,6 +17,7 @@ class Shader {
         this.vertexSource = vertex;
         this.fragmentSource = fragment;
         this.loadId = GameEngine.registerLoading();
+        this.uniformLocationMap = {};
         this.reload();
     }
 
@@ -24,8 +25,13 @@ class Shader {
     //TODO look at UBO (uniform buffer objects) - could perhaps do global sets (e.g. projection matrix, view matrix, etc.)
     setUniform(name, value, type) {
         if (this.id === -1) return;
+        Debug.Profiler.setUniform();
 
-        let location = GL.getUniformLocation(this.id, name);
+        if (! (name in this.uniformLocationMap)) {
+            this.uniformLocationMap[name] = GL.getUniformLocation(this.id, name);
+            Debug.assert(this.uniformLocationMap[name] !== -1)
+        }
+        let location = this.uniformLocationMap[name];
         if (Renderer.getCurrentShader() !== this) this.use();
         switch (type) {
             case UniformTypes.u1i:
@@ -54,6 +60,7 @@ class Shader {
 
 
     use() {
+        Debug.Profiler.useShader();
         GL.useProgram(this.id);
         Renderer._setCurrentShader(this);
     }

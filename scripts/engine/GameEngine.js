@@ -16,7 +16,112 @@ GameEngine._StartGame = false;
 /** Init: starts loading objects */
 GameEngine.init = function () {
   PhysicsEngine.init();
-  GameEngine.currentScene = new GameScene(['assets/scenes/Primatives.json','assets/scenes/teapots.json', 'assets/scenes/ExampleLevel.json']);
+
+  let sceneFile = 'assets/scenes/mainScene2.json';
+  let meshFiles = ['assets/scenes/Primatives.json','assets/scenes/teapots.json', 'assets/scenes/ExampleLevel.json',
+    'assets/meshes/Altar.1.json',
+    'assets/meshes/Altar.2.json',
+    'assets/meshes/AxisTest.json',
+    'assets/meshes/Block.Large.1.json',
+    'assets/meshes/Block.Large.2.json',
+    'assets/meshes/Block.Small.1.json',
+    'assets/meshes/Block.Small.2.json',
+    'assets/meshes/Ceiling.1.json',
+    'assets/meshes/Ceiling.2.json',
+    'assets/meshes/Ceiling.3.json',
+    'assets/meshes/Ceiling.large.1.json',
+    'assets/meshes/Ceiling.large.2.json',
+    'assets/meshes/Door.1.json',
+    'assets/meshes/Door.2.json',
+    'assets/meshes/DoorFrame.1.json',
+    'assets/meshes/DoorFrame.2.json',
+    'assets/meshes/DoorFrame.3.json',
+    'assets/meshes/DoorFrame.4.json',
+    'assets/meshes/FloorTiles.1.json',
+    'assets/meshes/FloorTiles.2.json',
+    'assets/meshes/FloorTiles.3.json',
+    'assets/meshes/Ground_tiled.1.json',
+    'assets/meshes/Ivy.1.json',
+    'assets/meshes/LillyPad.1.json',
+    'assets/meshes/navmesh.json',
+    'assets/meshes/octo_idle.json',
+    'assets/meshes/octo_run.json',
+    'assets/meshes/octo_walking.json',
+    'assets/meshes/Pebble.1.json',
+    'assets/meshes/Pebble.2.json',
+    'assets/meshes/Pebble.3.json',
+    'assets/meshes/Pillar_round.1.json',
+    'assets/meshes/Pillar_round.2.json',
+    'assets/meshes/Pillar_round.3.json',
+    'assets/meshes/Pillar_square.1.json',
+    'assets/meshes/Pillar_square.2.json',
+    'assets/meshes/Plant.1.json',
+    'assets/meshes/Plant.2.json',
+    'assets/meshes/Plant.3.json',
+    'assets/meshes/Pot.1.json',
+    'assets/meshes/Pot.2.json',
+    'assets/meshes/Railing.1.json',
+    'assets/meshes/Rock.1.json',
+    'assets/meshes/Rock.2.json',
+    'assets/meshes/Rock.3.json',
+    'assets/meshes/Rock.4.json',
+    'assets/meshes/Roots.1.json',
+   // 'assets/meshes/SetPiece1.json',
+    'assets/meshes/SetPiece1_Ceiling.json',
+    //'assets/meshes/SetPiece1_Ground.json',
+    'assets/meshes/SetPiece1_Pillars.json',
+    'assets/meshes/SetPiece1_Sculptures.json',
+    'assets/meshes/Skeleton.1.json',
+    'assets/meshes/Skeleton.2.json',
+    'assets/meshes/Stalactite.1.json',
+    'assets/meshes/Stalactite.2.json',
+    'assets/meshes/Statue.1.json',
+    'assets/meshes/Statue.2.json',
+    'assets/meshes/Statue.3.json',
+    'assets/meshes/Step.1.json',
+    //'assets/meshes/Tree.1.json',
+    //'assets/meshes/Tree.2.json',
+    'assets/meshes/unitCube.json',
+    'assets/meshes/Vine.1.json',
+    'assets/meshes/Vine.2.json',
+    'assets/meshes/Vine.3.json',
+    'assets/meshes/Vine.4.json',
+    'assets/meshes/RedRobedFemale_idle.json',
+    'assets/meshes/RedRobedFemale_walk.json',
+    'assets/meshes/RedRobedFemale_run.json',
+    'assets/meshes/walking.json',
+    'assets/meshes/Wall_ornate.1.json',
+    'assets/meshes/Wall_ornate.2.json',
+    'assets/meshes/Wall_ornate.3.json',
+    'assets/meshes/Wall_rock.1.json',
+    'assets/meshes/Wall_rock.2.json',
+    'assets/meshes/Wall_rock.3.json',
+    'assets/meshes/Wall_simple.1.json'];
+  let animationFiles = {
+    'OctopusCharacterAnim' : {
+      metaData: {root: "metarig", rootAxisLocked: [true, true, false]},
+      info: [
+        ['assets/meshes/octo_idle.json', [0, 1]],
+        ['assets/meshes/octo_walking.json', [1]],
+        ['assets/meshes/octo_run.json', [1]],
+        ['assets/meshes/octo_running_turn_180.json', [1]],
+        ['assets/meshes/octo_left_turn_90.json', [1]],
+        ['assets/meshes/octo_right_turn_90.json', [1]],
+        ['assets/meshes/octo_running_slide.json', [1]],
+        ['assets/meshes/octo_looking_behind.json', [1]]
+      ]
+    },
+    'RedRobesCharacterAnim' : {
+      metaData: {root: "hips", rootAxisLocked: [true, false, true]},
+      info: [
+        ['assets/meshes/RedRobedFemale_idle.json' , [0]],
+        ['assets/meshes/RedRobedFemale_idle.json' , [0]],
+        ['assets/meshes/RedRobedFemale_walk.json' , [0]],
+        ['assets/meshes/RedRobedFemale_run.json' , [0]]
+      ]
+    }
+  };
+  GameEngine.currentScene = new GameScene(sceneFile, meshFiles, animationFiles);
 };
 
 GameEngine.ready= function () {
@@ -42,11 +147,11 @@ GameEngine.startMethod = GameEngine.ready;
 
 /** Loop: called every frame */
 GameEngine.loop = function () {
+  if (!IS_SERVER) {Debug.Profiler.newFrame(); Debug.Profiler.startTimer("UpdateLoop", 1);}
   Time.tick();
   Input.update();
 
   // send data
-  // Debug.log(GameObject.prototype.SceneRoot.transform.children[2].position);
 
   if (!Debug.clientUpdate){
     Networking.update();
@@ -62,8 +167,12 @@ GameEngine.loop = function () {
 
 
   if (!IS_SERVER) {
+    Debug.Profiler.endTimer("UpdateLoop", 1);
+    Debug.Profiler.startTimer("RenderTime", 1);
     Renderer.loop();
+    Debug.Profiler.endTimer("RenderTime", 1);
     Debug.update();
+    //window.setTimeout(GameEngine.loop.bind(GameEngine), 5);
     window.requestAnimationFrame(GameEngine.loop.bind(GameEngine));
   }
 };

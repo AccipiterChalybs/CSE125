@@ -3,3 +3,4 @@
 **/.idea/watcherTasks.xml
 *.DS_Store
 /scripts/generated/
+/node_modules/

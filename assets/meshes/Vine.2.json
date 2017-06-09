@@ -1,0 +1,284 @@
+{
+	 "rootnode": {
+		 "name": "RootNode"
+		,"transformation": [
+			 1
+			,0
+			,0
+			,0
+			,0
+			,1
+			,0
+			,0
+			,0
+			,0
+			,1
+			,0
+			,0
+			,0
+			,0
+			,1
+		]
+		,"children": [
+			{
+				 "name": "Decal_vine.2"
+				,"transformation": [
+					 100
+					,0
+					,0
+					,867.294
+					,0
+					,-1.62921e-005
+					,100
+					,284.964
+					,0
+					,-100
+					,-1.62921e-005
+					,-217.246
+					,0
+					,0
+					,0
+					,1
+				]
+				,"meshes": [
+					 0
+				]
+			}
+		]
+	}
+	,"flags": 8
+	,"meshes": [
+		{
+			 "name": "swampcanopytree01_vines.alpha.001"
+			,"materialindex": 0
+			,"primitivetypes": 4
+			,"vertices": [
+				 0
+				,-0.0909427
+				,-2.9434
+				,1.49775
+				,0.192645
+				,-2.9434
+				,1.49775
+				,0.192645
+				,0
+				,0
+				,-0.0909429
+				,0
+				,-1.49775
+				,0.192645
+				,-2.9434
+				,-1.49775
+				,0.192645
+				,0
+			]
+			,"normals": [
+				 0
+				,-1
+				,0
+				,0.18601
+				,-0.982513
+				,0
+				,0.18601
+				,-0.982513
+				,0
+				,0
+				,-1
+				,0
+				,-0.18601
+				,-0.982513
+				,0
+				,-0.18601
+				,-0.982513
+				,0
+			]
+			,"tangents": [
+				 1
+				,0
+				,0
+				,0.982547
+				,0.186017
+				,0
+				,0.982547
+				,0.186017
+				,0
+				,1
+				,0
+				,0
+				,0.982547
+				,-0.186017
+				,0
+				,0.982547
+				,-0.186017
+				,0
+			]
+			,"bitangents": [
+				 0
+				,0
+				,-1
+				,7.40178e-009
+				,1.40409e-009
+				,-1
+				,7.86439e-009
+				,1.49184e-009
+				,-1
+				,0
+				,0
+				,-1
+				,-8.327e-009
+				,1.5796e-009
+				,-1
+				,-8.327e-009
+				,1.5796e-009
+				,-1
+			]
+			,"numuvcomponents": [
+				 2
+			]
+			,"texturecoords": [
+				[
+					 0.5
+					,0
+					,1
+					,0
+					,1
+					,1
+					,0.5
+					,1
+					,0
+					,0
+					,0
+					,1
+				]
+			]
+			,"faces": [
+				[
+					 0
+					,1
+					,2
+				]
+				,[
+					 0
+					,2
+					,3
+				]
+				,[
+					 4
+					,0
+					,3
+				]
+				,[
+					 4
+					,3
+					,5
+				]
+			]
+		}
+	]
+	,"materials": [
+		{
+			 "properties": [
+				{
+					 "key": "?mat.name"
+					,"semantic": 0
+					,"index": 0
+					,"type": 3
+					,"value": "Vine.2"
+				}
+				,{
+					 "key": "$clr.diffuse"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0.64
+						,0.64
+						,0.64
+					]
+				}
+				,{
+					 "key": "$clr.emissive"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,0
+					]
+				}
+				,{
+					 "key": "$clr.ambient"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,0
+					]
+				}
+				,{
+					 "key": "$clr.specular"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,0
+					]
+				}
+				,{
+					 "key": "$mat.opacity"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": 0
+				}
+				,{
+					 "key": "$mat.shinpercent"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": 9.60784
+				}
+				,{
+					 "key": "$mat.shininess"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": 9.60784
+				}
+				,{
+					 "key": "$tex.file"
+					,"semantic": 1
+					,"index": 0
+					,"type": 3
+					,"value": "/Users/johnpallag/Downloads/snktmpvine.alpha.png"
+				}
+				,{
+					 "key": "$tex.uvtrafo"
+					,"semantic": 1
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,1
+						,1
+						,0
+					]
+				}
+				,{
+					 "key": "$tex.uvwsrc"
+					,"semantic": 1
+					,"index": 0
+					,"type": 4
+					,"value": 0
+				}
+			]
+		}
+	]
+}
+

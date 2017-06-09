@@ -98,7 +98,7 @@ void main () {
   if(albedo.xyz == vec3(0.0)) discard; //TODO does this actually provide a performance boost?
   vec4 pos = texture(posTex, screenTexCoord);
   vec4 normal = texture(normalTex, screenTexCoord);
-  vec3 mat = vec3(normal.w, pos.w, normal.w);
+  vec3 mat = vec3(normal.a, pos.w, 0.0);
   //pos = uIV_Matrix * vec4(pos.xyz, 1.0); //TODO do we need these two lines?
   //pos /= pos.w;
   normal.xyz = normal.xyz * 2.0 - 1.0;
@@ -139,8 +139,8 @@ void main () {
           ldist -= max(0.01 * (1.0 - clamp(dot(normal.xyz, lightDir), 0.0, 1.0)), 0.01);
 		  //ldist = min(ldist, 0.9999);
 
-          shadow = 0.0;
-		  for(int i = 0; i < 4; i++) {
+          shadow = 1.0;
+/*		  for(int i = 0; i < 4; i++) {
 			vec3 offset = vec3(poissonDisk[i] * (ldist * uFarDepth / 2000.0), 0.0);
 			vec3 dir = normalize(-lightDir);
 			vec3 right = cross((dir + vec3(0.001, 0, 0)), vec3(0,1,0));
@@ -152,7 +152,10 @@ void main () {
             shadow += textureShadowCube(ldist,  uv );
 		  }
 		  shadow /= 4.0;
+*/
 
+          frag_color = vec4(uLightColor, 1.0);
+          return;
 
 		  //Spherical light algorithm from http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
 		  float sphereRadius = uLightSize;

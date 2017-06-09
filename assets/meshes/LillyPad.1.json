@@ -1,0 +1,300 @@
+{
+	 "rootnode": {
+		 "name": "RootNode"
+		,"transformation": [
+			 1
+			,0
+			,0
+			,0
+			,0
+			,1
+			,0
+			,0
+			,0
+			,0
+			,1
+			,0
+			,0
+			,0
+			,0
+			,1
+		]
+		,"children": [
+			{
+				 "name": "LilyPad"
+				,"transformation": [
+					 23.2478
+					,0
+					,0
+					,329.238
+					,0
+					,-3.78754e-006
+					,23.2478
+					,12.8482
+					,0
+					,-23.2478
+					,-3.78754e-006
+					,65.2228
+					,0
+					,0
+					,0
+					,1
+				]
+				,"meshes": [
+					 0
+				]
+			}
+		]
+	}
+	,"flags": 8
+	,"meshes": [
+		{
+			 "name": "lily"
+			,"materialindex": 0
+			,"primitivetypes": 4
+			,"vertices": [
+				 1
+				,1
+				,0
+				,-1
+				,1
+				,0
+				,-1
+				,-1
+				,0
+				,1
+				,-1
+				,0
+			]
+			,"normals": [
+				 0
+				,0
+				,1
+				,0
+				,0
+				,1
+				,0
+				,0
+				,1
+				,0
+				,0
+				,1
+			]
+			,"tangents": [
+				 -1
+				,5.96047e-008
+				,0
+				,-1
+				,1.19209e-007
+				,0
+				,-1
+				,5.96047e-008
+				,0
+				,-1
+				,5.96047e-008
+				,0
+			]
+			,"bitangents": [
+				 -2.98023e-008
+				,1
+				,0
+				,1.78814e-007
+				,1
+				,0
+				,-2.98023e-008
+				,1
+				,0
+				,-2.98023e-008
+				,1
+				,0
+			]
+			,"numuvcomponents": [
+				 2
+			]
+			,"texturecoords": [
+				[
+					 0
+					,8.9407e-008
+					,1
+					,0
+					,1
+					,1
+					,2.98023e-008
+					,1
+				]
+			]
+			,"faces": [
+				[
+					 0
+					,1
+					,2
+				]
+				,[
+					 0
+					,2
+					,3
+				]
+			]
+		}
+	]
+	,"materials": [
+		{
+			 "properties": [
+				{
+					 "key": "?mat.name"
+					,"semantic": 0
+					,"index": 0
+					,"type": 3
+					,"value": "lily"
+				}
+				,{
+					 "key": "$clr.diffuse"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0.64
+						,0.64
+						,0.64
+					]
+				}
+				,{
+					 "key": "$clr.emissive"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,0
+					]
+				}
+				,{
+					 "key": "$clr.ambient"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,0
+					]
+				}
+				,{
+					 "key": "$clr.specular"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0.293478
+						,0.293478
+						,0.293478
+					]
+				}
+				,{
+					 "key": "$mat.opacity"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": 0
+				}
+				,{
+					 "key": "$mat.shinpercent"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": 9.60784
+				}
+				,{
+					 "key": "$mat.shininess"
+					,"semantic": 0
+					,"index": 0
+					,"type": 1
+					,"value": 9.60784
+				}
+				,{
+					 "key": "$tex.file"
+					,"semantic": 1
+					,"index": 0
+					,"type": 3
+					,"value": "/Users/johnpallag/Downloads/59269_Low-poly_foliage/textures/lily-c.png"
+				}
+				,{
+					 "key": "$tex.uvtrafo"
+					,"semantic": 1
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,1
+						,1
+						,0
+					]
+				}
+				,{
+					 "key": "$tex.uvwsrc"
+					,"semantic": 1
+					,"index": 0
+					,"type": 4
+					,"value": 0
+				}
+				,{
+					 "key": "$tex.file"
+					,"semantic": 2
+					,"index": 0
+					,"type": 3
+					,"value": "/Users/johnpallag/Downloads/59269_Low-poly_foliage/textures/lily-c.png"
+				}
+				,{
+					 "key": "$tex.uvtrafo"
+					,"semantic": 2
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,1
+						,1
+						,0
+					]
+				}
+				,{
+					 "key": "$tex.uvwsrc"
+					,"semantic": 2
+					,"index": 0
+					,"type": 4
+					,"value": 0
+				}
+				,{
+					 "key": "$tex.file"
+					,"semantic": 6
+					,"index": 0
+					,"type": 3
+					,"value": "/Users/johnpallag/Downloads/59269_Low-poly_foliage/textures/lily-n.png"
+				}
+				,{
+					 "key": "$tex.uvtrafo"
+					,"semantic": 6
+					,"index": 0
+					,"type": 1
+					,"value": [
+						 0
+						,0
+						,1
+						,1
+						,0
+					]
+				}
+				,{
+					 "key": "$tex.uvwsrc"
+					,"semantic": 6
+					,"index": 0
+					,"type": 4
+					,"value": 0
+				}
+			]
+		}
+	]
+}
+

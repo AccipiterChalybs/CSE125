@@ -6,7 +6,7 @@
 
 class Framebuffer {
 
-    constructor(w, h, numColorTexture, accessibleDepth, hdrEnabled, colorFormats = null, manualSetup = false) {
+    constructor(w, h, numColorTexture, accessibleDepth, hdrEnabled, colorFormats = null, manualSetup = false, stencil = false) {
         //this.id = 0;
         this.accessibleDepth = accessibleDepth;
         //this.colorTex = [];
@@ -16,6 +16,8 @@ class Framebuffer {
         this.hdrEnabled = hdrEnabled;
         this.width = w;
         this.height = h;
+
+        this.stencil = stencil;
 
         //static meshdata
         //static bool loaded
@@ -34,26 +36,30 @@ class Framebuffer {
           }
 
         if (!manualSetup) {
-          for (let x = 0; x < this.numColorTex; ++x) {
-            this._addColorTexture(x);
-          }
-
-          if (this.accessibleDepth) {
-            this._addDepthTexture();
-          } else {
-            this._addDepthBuffer();
-          }
-
-          GL.bindFramebuffer(GL.FRAMEBUFFER, null);
+            this.initializeFramebuffer();
         }
+    }
+
+    initializeFramebuffer() {
+      for (let x = 0; x < this.numColorTex; ++x) {
+        this._addColorTexture(x);
+      }
+
+      if (this.accessibleDepth) {
+        this._addDepthTexture();
+      } else {
+        this._addDepthBuffer(this.stencil);
+      }
+
+      GL.bindFramebuffer(GL.FRAMEBUFFER, null);
     }
 
     deleteTextures() {
         for (let t=0; t<this.numColorTex; ++t) {
-            GL.deleteTextures(this.colorTex[t]);
+            GL.deleteTexture(this.colorTex[t]);
         }
         if (this.accessibleDepth) {
-            GL.deleteTextures(this.depthTex);
+            GL.deleteTexture(this.depthTex);
         } else {
             GL.deleteRenderbuffer(this.depthTex);
         }
@@ -66,37 +72,36 @@ class Framebuffer {
         this.deleteTextures();
 
         GL.bindFramebuffer(GL.FRAMEBUFFER, this.id);
-        for (let x = 0; x < this.numColorTex; ++x) {
-            this._addColorTexture(x);
-        }
+        this.initializeFramebuffer();
+    }
 
-        if (this.accessibleDepth) {
-            this._addDepthTexture();
-        } else {
-            this._addDepthBuffer();
+    static resizeRenderDimensions(updatePerspective, width, height) {
+      if (Renderer.lastWidth !== width || Renderer.lastHeight !== height) {
+        GL.viewport(0, 0, width, height);
+
+        if (updatePerspective) {
+          let perspective = mat4.create();
+          mat4.perspective(perspective, Renderer.camera.getFOV(), width / height, Renderer.NEAR_DEPTH, Renderer.FAR_DEPTH);
+          Renderer._updatePerspective(perspective); //fairly expensive, hence why we try to skip all of this if already set
         }
-        GL.bindFramebuffer(GL.FRAMEBUFFER, null);
+        Renderer.lastWidth = width;
+        Renderer.lastHeight = height;
+      }
     }
 
     //note buffersToDraw should be an array of COLOR_ATTACHMENTX
-    bind(buffersToDraw) {
+    bind(buffersToDraw, resize = true, clear = true) {
         GL.bindFramebuffer(GL.FRAMEBUFFER, this.id);
         GL.drawBuffers(buffersToDraw);
-        GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
+        if (clear) GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
 
-        //TODO use Renderer.resize()?
-        GL.viewport(0, 0, this.width, this.height);
-        let perspective = mat4.create();
-        mat4.perspective(perspective, Renderer.camera.getFOV(), this.width/this.height, Renderer.NEAR_DEPTH, Renderer.FAR_DEPTH);
-        Renderer._updatePerspective(perspective);
+        Framebuffer.resizeRenderDimensions(resize, this.width, this.height);
     }
 
-    unbind() {
+    static unbind() {
         GL.bindFramebuffer(GL.FRAMEBUFFER, null);
-        GL.viewport(0, 0, Renderer.getWindowWidth(), Renderer.getWindowHeight());
-        let perspective = mat4.create();
-        mat4.perspective(perspective, Renderer.camera.getFOV(),Renderer.getWindowWidth()/Renderer.getWindowHeight(), Renderer.NEAR_DEPTH, Renderer.FAR_DEPTH);
-        Renderer._updatePerspective(perspective);
+
+        Framebuffer.resizeRenderDimensions(true, Renderer.getWindowWidth(), Renderer.getWindowHeight());
     }
 
     bindTexture(slot, index) {
@@ -204,11 +209,17 @@ class Framebuffer {
         GL.framebufferTexture2D(GL.FRAMEBUFFER, GL.DEPTH_ATTACHMENT, GL.TEXTURE_2D, this.depthTex, 0);
     }
 
-    _addDepthBuffer() {
+    _addDepthBuffer(stencil) {
         this.depthTex = GL.createRenderbuffer();
         GL.bindRenderbuffer(GL.RENDERBUFFER, this.depthTex);
-        GL.renderbufferStorage(GL.RENDERBUFFER, GL.DEPTH_COMPONENT16, this.width, this.height);
-        GL.framebufferRenderbuffer(GL.FRAMEBUFFER, GL.DEPTH_ATTACHMENT, GL.RENDERBUFFER, this.depthTex);
+        if (stencil) {
+          GL.renderbufferStorage(GL.RENDERBUFFER, GL.DEPTH24_STENCIL8, this.width, this.height);
+          GL.framebufferRenderbuffer(GL.FRAMEBUFFER, GL.DEPTH_ATTACHMENT, GL.RENDERBUFFER, this.depthTex);
+          GL.framebufferRenderbuffer(GL.FRAMEBUFFER, GL.STENCIL_ATTACHMENT, GL.RENDERBUFFER, this.depthTex);
+        }else {
+          GL.renderbufferStorage(GL.RENDERBUFFER, GL.DEPTH_COMPONENT16, this.width, this.height);
+          GL.framebufferRenderbuffer(GL.FRAMEBUFFER, GL.DEPTH_ATTACHMENT, GL.RENDERBUFFER, this.depthTex);
+        }
     }
 
     static generateCubeMapArray(width, height, depthOnly) {
@@ -220,6 +231,8 @@ class Framebuffer {
       GL.activeTexture(GL.TEXTURE0);
       let cubeTex = GL.createTexture();
       GL.bindTexture(GL.TEXTURE_CUBE_MAP, cubeTex);
+      GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_WRAP_S, GL.CLAMP_TO_EDGE);
+      GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_WRAP_T, GL.CLAMP_TO_EDGE);
       GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MIN_FILTER, GL.NEAREST);
       GL.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MAG_FILTER, GL.NEAREST);
 

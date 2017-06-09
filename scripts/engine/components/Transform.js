@@ -89,17 +89,7 @@ class Transform extends Component
         {
             this.transformMatrix = mat4.create();
 
-
-            // Translation
-            mat4.translate(this.transformMatrix, this.transformMatrix, this.position);
-
-            // Rotation
-            let rotationMat = mat4.create();
-            mat4.fromQuat(rotationMat, this.rotation);
-            mat4.multiply(this.transformMatrix, this.transformMatrix, rotationMat);
-
-            // Scale
-            mat4.scale(this.transformMatrix, this.transformMatrix, this.scaleFactor);
+            mat4.fromRotationTranslationScale(this.transformMatrix, this.rotation, this.position, this.scaleFactor);
 
             let parMat = (this._parent !== null) ? this._parent.getTransformMatrix() : mat4.create();
             mat4.multiply(this.transformMatrix, parMat, this.transformMatrix);
@@ -143,6 +133,12 @@ class Transform extends Component
         vec3.set(this.scaleFactor,s,s,s);
     }
 
+    setWorldPosition(pos) {
+        this.setDirty();
+        let invParentTransform = mat4.create(); mat4.invert(invParentTransform, this._parent.getTransformMatrix());
+        vec3.transformMat4(this.position, pos, invParentTransform);
+    }
+
     getWorldPosition()
     {
         if(this.worldPosDirty)
@@ -171,6 +167,26 @@ class Transform extends Component
         }
 
         return this.cachedWorldScale;
+    }
+
+    setWorldRotation(rotation) {
+      this.setDirty();
+      if (!this._parent || this._parent === null) {
+          this.setRotation(rotation);
+          return;
+      }
+      let parentRotation = quat.copy(quat.create(),this._parent.getWorldRotation());
+      quat.normalize(parentRotation, parentRotation);
+      quat.invert(parentRotation, parentRotation);
+      quat.multiply(this.rotation, parentRotation, rotation);
+    }
+
+    getWorldRotation() {
+        if (this._parent && this._parent !== null) {
+          return quat.multiply(quat.create(), this._parent.getWorldRotation(), this.rotation);
+        } else {
+            return this.rotation;
+        }
     }
 
     getForward()
@@ -203,20 +219,22 @@ class Transform extends Component
     }
 
     applySerializedData(data) {
-        this.setDirty();
-        this.position = data.p;
-        this.rotation = data.r;
-        this.scaleFactor[0] = this.scaleFactor[1] = this.scaleFactor[2] = data.s;
-        // let index=0;
-        // for (let child of this.children) {
-        //     Debug.assert(index < data.c.length);
-        //
-        //     if(index < data.c.length)
-        //     {
-        //       child.applySerializedData(data.c[index]);
-        //     }
-        //
-        //     ++index;
-        // }
+        if(data && data !== null) {
+          this.setDirty();
+          this.position = data.p;
+          this.rotation = data.r;
+          this.scaleFactor[0] = this.scaleFactor[1] = this.scaleFactor[2] = data.s;
+          // let index=0;
+          // for (let child of this.children) {
+          //     Debug.assert(index < data.c.length);
+          //
+          //     if(index < data.c.length)
+          //     {
+          //       child.applySerializedData(data.c[index]);
+          //     }
+          //
+          //     ++index;
+          // }
+        }
     }
 }
