@@ -290,7 +290,7 @@ class DirectionalLight extends Light{
     }
   }
 }
-DirectionalLight.prototype.shadowMatrix = mat4.ortho(mat4.create(), -25, 25, -25, 25, -25, 25);
+DirectionalLight.prototype.shadowMatrix = mat4.ortho(mat4.create(), -50, 25, -50, 50, -25, 50);
 
 class SpotLight extends Light{
     constructor(){

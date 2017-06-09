@@ -21,7 +21,7 @@
 		]
 		,"children": [
 			{
-				 "name": "Plane"
+				 "name": "ValleyPlane"
 				,"transformation": [
 					 1
 					,0
@@ -49,7 +49,7 @@
 	,"flags": 8
 	,"meshes": [
 		{
-			 "name": "Plane.003"
+			 "name": "ValleyPlane"
 			,"materialindex": 0
 			,"primitivetypes": 4
 			,"vertices": [
