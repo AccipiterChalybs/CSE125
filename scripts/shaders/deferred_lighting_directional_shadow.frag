@@ -88,7 +88,7 @@ void main () {
   lightDist = 0.0;
 
   //TODO might want to change settings later
-  shadowPos.z -= max(0.005 * (1.0 - clamp(dot(normal.xyz, lightDir), 1.0, 0.0)), 0.005);
+  shadowPos.z -= max(0.002 * (1.0 - clamp(dot(normal.xyz, lightDir), 1.0, 0.0)), 0.002);
   shadowPos.z = min(shadowPos.z, 0.9999);
   vec2 texelSize = 1.0 / vec2(textureSize(shadowTex, 0));
   vec2 size = vec2(textureSize(shadowTex, 0));

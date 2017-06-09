@@ -203,6 +203,14 @@
       "normal": "assets/texture/IvyC/ivy_leaves_n2.png",
       "transparent": true,
       "animated": false
+    },
+    {
+      "name": "banner",
+      "color": "assets/texture/Banners/banner.png",
+      "mat": "assets/texture/blank_mat.png",
+      "normal" : "assets/texture/tmp_blank_normal.png",
+      "transparent" : true,
+      "animated" : false
     }
   ],
   "hierarchy":
