@@ -5,7 +5,6 @@ class Playerable extends Component{
   constructor(params = {singingCooldown: COOLDOWN_SINGING}) {
     super();
     this.componentType = "PlayerController";
-    this.movementSpeed = REGULAR_SPEED;
     this.x = 0;
     this.y = 0;
     this.z = 0;

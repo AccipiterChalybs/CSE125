@@ -20,8 +20,9 @@ class GameScene {
         for (let loadIndex of animInfo[1]) {
           indexMap[loadIndex] = index++;
         }
-
         ObjectLoader.loadAnimation(animationName, animInfo[0], indexMap, animationFiles[animationName].metaData);
+        // console.log(`${animFilename} loaded in ...`);
+        // console.log(indexMap);
       }
     }
 
@@ -116,6 +117,7 @@ class GameScene {
 
     GameObject.prototype.SceneRoot.findComponents('Listenable', PhysicsEngine.sphereChecks);
 
+
   }
 
   update() {
@@ -130,6 +132,7 @@ class GameScene {
 
     if (!IS_SERVER) {
       Debug.Profiler.startTimer('GameLogic', 2);
+      PrefabFactory.updateClient();
       Renderer.camera.transform.getParent().getParent().gameObject.updateClient();
       if (Renderer.directionalLight) Renderer.directionalLight.updateClient();
       Debug.Profiler.endTimer('GameLogic', 2);
