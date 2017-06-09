@@ -24,7 +24,7 @@ class KeyEvent extends RaycastEvent{
     if (player && player !== null) {
       this.transform.scale(.001);
       player.keys++;
-      player._currentState = PlayerState.dead;
+      player.setCurrentState(PlayerState.dead);
       this.transform.gameObject.getComponent('Collider').setLayer(FILTER_DEFAULT);
       let audio = this.gameObject.getComponent("AudioSource");
       if(audio && audio!==null) audio.setState(AudioState.playSound);

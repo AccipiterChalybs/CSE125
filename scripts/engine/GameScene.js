@@ -20,8 +20,9 @@ class GameScene {
         for (let loadIndex of animInfo[1]) {
           indexMap[loadIndex] = index++;
         }
-
         ObjectLoader.loadAnimation(animationName, animInfo[0], indexMap, animationFiles[animationName].metaData);
+        // console.log(`${animFilename} loaded in ...`);
+        // console.log(indexMap);
       }
     }
 
