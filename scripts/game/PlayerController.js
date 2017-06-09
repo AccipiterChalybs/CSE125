@@ -203,8 +203,10 @@ class PlayerController extends Component {
 
     if (this.state.state.turnAmt == 0 && vec3.length(move) > 0.0005) {
       // TODO set this.state.movedot and movecrossy instead
-      this.transform.setRotation(quat.create());
-      this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
+      // this.transform.setRotation(quat.create());
+      // this.transform.rotateY(Math.atan2(-move[2], move[0]) - Math.PI / 2);
+      const angle = Math.acos(moveDotPlayer) * playerXMove[1] * -1;
+      this.transform.rotateY(angle < 0.1 ? angle : 0.1); // pi/16
     }
   }
 

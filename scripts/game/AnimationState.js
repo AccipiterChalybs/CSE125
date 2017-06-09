@@ -138,8 +138,8 @@ class AnimationState {
 
   // use this to set next state, does the boilerplate stuff
   playState(objState, nextState) {
-    if (objState.state)
-      console.log(`${objState.state.name} => ${nextState.name}:${nextState.loops}`);
+    // if (objState.state)
+    //   console.log(`${objState.state.name} => ${nextState.name}:${nextState.loops}`);
 
     objState.state = nextState;
     objState.nextState = null;
