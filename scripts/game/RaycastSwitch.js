@@ -12,10 +12,16 @@ class RaycastSwitch extends Viewable{
     for(let i = 0; i < this._unparsedEvents.length; ++i){
       // Debug.log(GameObject.prototype.SerializeMap[events[i]]);
       // Debug.log(this._unparsedEvents[i]);
-      GameObject.prototype.SerializeMap[this._unparsedEvents[i]].getComponent("Event")
-      this._events.push(GameObject.prototype.SerializeMap[this._unparsedEvents[i]].getComponent("Event"));
+      let newEvent = GameObject.prototype.SerializeMap[this._unparsedEvents[i]].getComponent("Event");
+      if(newEvent && newEvent !== null) {
+        this._events.push(newEvent);
+      }
+      let newLock = GameObject.prototype.SerializeMap[this._unparsedEvents[i]].getComponent("Lock");
+      if(newLock && newLock !== null) {
+        this._events.push(GameObject.prototype.SerializeMap[this._unparsedEvents[i]].getComponent("Lock"));
+      }
     }
-    // Debug.log(this._events);
+    Debug.log(this._events);
 
     // this._collider = this.transform.gameObject.getComponent('Collider');
     // this._collider.setPhysicsMaterial(PhysicsEngine.materials.basicMaterial);

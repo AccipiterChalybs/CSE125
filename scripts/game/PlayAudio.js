@@ -5,6 +5,7 @@
 class PlayAudio extends Component{
   constructor({volume, rate}){
     super();
+    this.componentType = 'PlayAudio';
 
     this._volume = volume;
     this._rate = rate;
