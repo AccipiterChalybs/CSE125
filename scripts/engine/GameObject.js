@@ -263,21 +263,22 @@ class GameObject {
   }
 
   serialize() {
-    let data = {};
-    for (let serializable of this.serializableList) {
-      let comp = this.getComponent(serializable).serialize();
-      if (comp && comp !== null)
-        data[serializable] = comp;
-    }
+	let data = {};
+	for (let serializable of this.serializableList) {
+	  let comp = this.getComponent(serializable).serialize();
+	  if (comp && comp !== null)
+		data[serializable] = comp;
+	}
 
-    if (this.transform.serializeDirty)
-    {
-      // TODO add back in after serialize/applySerialization is implemented in components
-      data['Transform'] = this.transform.serialize();
-    }
+	if (!this.isStatic && this.transform.serializeDirty)
+	{
+	  // TODO add back in after serialize/applySerialization is implemented in components
+	  data['Transform'] = this.transform.serialize();
+	}
 
-    if (Object.keys(data).length > 0) return data;
 
+	if (Object.keys(data).length > 0) return data;
+		
     return null;
   }
 

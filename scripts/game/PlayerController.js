@@ -34,7 +34,7 @@ class PlayerController extends Component {
     // init
     this._looker = null;
     this.checkpoint = vec3.create();
-    this.keys = 0;
+    this.keys = 1;
     this.injured = injured;
     this.forward = vec3.create(); vec3.set(this.forward, 0, 0, -1);
     this.cameraPos = vec3.create(); vec3.set(this.cameraPos, 0, 0, -1);
@@ -119,7 +119,7 @@ class PlayerController extends Component {
       this.action = Input.getAxis("action");
 
       this.cameraPos = Renderer.camera.transform.getWorldPosition();
-      this.camForward = Renderer.camera.transform.getForward();
+      this.forward = Renderer.camera.transform.getForward();
     }
 
     if (this.singing === 0 && this._lastSingInput === 1) {
@@ -181,7 +181,7 @@ class PlayerController extends Component {
     }
 
     const up = vec3.create(); vec3.set(up, 0, 1, 0);
-    const moveX = vec3.create(); vec3.cross(moveX, this.camForward, up);
+    const moveX = vec3.create(); vec3.cross(moveX, this.forward, up);
     const moveZ = vec3.create(); vec3.cross(moveZ, up, moveX);
     vec3.normalize(moveX, moveX);
     vec3.normalize(moveZ, moveZ);

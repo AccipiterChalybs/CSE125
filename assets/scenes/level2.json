@@ -1,6 +1,27 @@
 {
   "materialList": [
     {
+      "name": "Dry_Dirt",
+      "color": "assets/texture/dry-dirt2-albedo.png",
+      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "normal": "assets/texture/dry-dirt2-normal.png",
+      "animated": false
+    },
+    {
+      "name": "Sky018",
+      "color": "assets/texture/greasy-pan-2-albedo.yellow.png",
+      "mat": "assets/texture/dungeon-stone1-mat.png",
+      "normal": "assets/texture/greasy-pan-2-normal.png",
+      "animated": false
+    },
+     {
+      "name": "gold-scuffed",
+      "color": "assets/texture/greasy-pan-2-albedo.yellow.png",
+      "mat": "assets/texture/gold_mat.png",
+      "normal": "assets/texture/greasy-pan-2-normal.png",
+      "animated": false
+    },
+    {
       "name": "dungeon-stone1-albedo2",
       "color": "assets/texture/dungeon-stone1-albedo2.png",
       "mat": "assets/texture/dungeon-stone1-mat.png",
@@ -49453,7 +49474,7 @@
               "static": true,
               "Transform": {
                 "position": [-26.89272, -0.001533508, 43.84506],
-                "rotation": [44.91721, 92.7251, 79.36218],
+                "rotation": [44.91721, 92.72511, 79.36218],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -49463,7 +49484,7 @@
                   "static": true,
                   "Transform": {
                     "position": [-26.89272, -0.001533508, 43.84506],
-                    "rotation": [44.91722, 92.72511, 79.36218],
+                    "rotation": [44.91722, 92.72511, 79.36219],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -50561,7 +50582,7 @@
                   "static": true,
                   "Transform": {
                     "position": [-14.4369, -0.001533508, 58.85464],
-                    "rotation": [44.91722, 305.4511, 79.36219],
+                    "rotation": [44.91721, 305.4511, 79.36219],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -52877,7 +52898,7 @@
                   "static": true,
                   "Transform": {
                     "position": [-30.20132, -0.001533508, 62.16508],
-                    "rotation": [44.91722, 56.54983, 79.36219],
+                    "rotation": [44.91721, 56.54982, 79.36218],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -54397,7 +54418,7 @@
               "static": true,
               "Transform": {
                 "position": [-31.81762, -0.001533508, 63.52533],
-                "rotation": [44.91721, 163.5436, 79.36218],
+                "rotation": [44.91722, 163.5436, 79.36217],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -54407,7 +54428,7 @@
                   "static": true,
                   "Transform": {
                     "position": [-31.81762, -0.001533508, 63.52533],
-                    "rotation": [44.91721, 163.5436, 79.36218],
+                    "rotation": [44.91722, 163.5436, 79.36218],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -55567,7 +55588,7 @@
               "static": true,
               "Transform": {
                 "position": [5.513992, -0.001533508, 44.13993],
-                "rotation": [44.91721, 10.5689, 79.36218],
+                "rotation": [44.91722, 10.56889, 79.36218],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -56677,7 +56698,7 @@
               "static": true,
               "Transform": {
                 "position": [15.12443, -0.001533508, 39.92573],
-                "rotation": [44.91722, 98.91138, 79.36219],
+                "rotation": [44.91721, 98.91138, 79.36219],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -56687,7 +56708,7 @@
                   "static": true,
                   "Transform": {
                     "position": [15.12443, -0.001533508, 39.92573],
-                    "rotation": [44.91721, 98.9114, 79.36219],
+                    "rotation": [44.91721, 98.91139, 79.36219],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -57703,7 +57724,7 @@
               "static": true,
               "Transform": {
                 "position": [24.23874, -0.001533508, 65.82916],
-                "rotation": [44.91722, 273.3418, 79.36219],
+                "rotation": [44.91721, 273.3418, 79.36218],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -57713,7 +57734,7 @@
                   "static": true,
                   "Transform": {
                     "position": [24.23874, -0.001533508, 65.82916],
-                    "rotation": [44.91722, 273.3418, 79.36219],
+                    "rotation": [44.91721, 273.3418, 79.36218],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -58945,7 +58966,7 @@
               "static": true,
               "Transform": {
                 "position": [31.76873, -0.001533508, 57.55916],
-                "rotation": [44.91721, 273.3418, 79.36218],
+                "rotation": [44.91722, 273.3418, 79.36219],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -58955,7 +58976,7 @@
                   "static": true,
                   "Transform": {
                     "position": [31.76873, -0.001533508, 57.55916],
-                    "rotation": [44.91721, 273.3418, 79.36218],
+                    "rotation": [44.91722, 273.3418, 79.36219],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -60005,7 +60026,7 @@
                   "static": true,
                   "Transform": {
                     "position": [36.65153, -0.001533508, 45.97704],
-                    "rotation": [44.91722, 324.1354, 79.36219],
+                    "rotation": [44.91721, 324.1354, 79.36219],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -61093,7 +61114,7 @@
               "static": true,
               "Transform": {
                 "position": [14.36339, -0.001533508, 49.58113],
-                "rotation": [44.91722, 185.3228, 79.36219],
+                "rotation": [44.91721, 185.3228, 79.3622],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -61103,7 +61124,7 @@
                   "static": true,
                   "Transform": {
                     "position": [14.36339, -0.001533508, 49.58113],
-                    "rotation": [44.91722, 185.3228, 79.3622],
+                    "rotation": [44.91721, 185.3228, 79.3622],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -62239,7 +62260,7 @@
               "static": true,
               "Transform": {
                 "position": [5.487663, -0.001533508, 59.64962],
-                "rotation": [44.91722, 279.7315, 79.36218],
+                "rotation": [44.91721, 279.7315, 79.36218],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -63577,7 +63598,7 @@
               "static": true,
               "Transform": {
                 "position": [21.76766, -0.001533508, 77.82962],
-                "rotation": [44.91721, 279.7315, 79.36218],
+                "rotation": [44.91722, 279.7315, 79.36218],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -64603,7 +64624,7 @@
               "static": true,
               "Transform": {
                 "position": [23.23603, -0.001533508, 75.50416],
-                "rotation": [44.91722, 340.2597, 79.36218],
+                "rotation": [44.91721, 340.2597, 79.36218],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -64613,7 +64634,7 @@
                   "static": true,
                   "Transform": {
                     "position": [23.23603, -0.001533508, 75.50416],
-                    "rotation": [44.91722, 340.2597, 79.36218],
+                    "rotation": [44.91721, 340.2597, 79.36219],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -66655,7 +66676,7 @@
               "static": true,
               "Transform": {
                 "position": [-5.321869, -0.001533508, 55.34027],
-                "rotation": [44.9172, 316.6188, 79.36218],
+                "rotation": [44.91721, 316.6188, 79.36218],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -66665,7 +66686,7 @@
                   "static": true,
                   "Transform": {
                     "position": [-5.321869, -0.001533508, 55.34027],
-                    "rotation": [44.91721, 316.6189, 79.3622],
+                    "rotation": [44.91721, 316.6188, 79.36218],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -67717,7 +67738,7 @@
               "static": true,
               "Transform": {
                 "position": [-25.17417, -0.001533508, 71.49294],
-                "rotation": [44.91721, 175.2066, 79.36217],
+                "rotation": [44.91722, 175.2066, 79.36218],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -67727,7 +67748,7 @@
                   "static": true,
                   "Transform": {
                     "position": [-25.17417, -0.001533508, 71.49294],
-                    "rotation": [44.91721, 175.2066, 79.36218],
+                    "rotation": [44.91722, 175.2066, 79.36218],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -69055,7 +69076,7 @@
               "static": true,
               "Transform": {
                 "position": [-21.64417, -0.001533508, 85.73294],
-                "rotation": [44.91722, 175.2066, 79.36218],
+                "rotation": [44.91721, 175.2066, 79.36217],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -69065,7 +69086,7 @@
                   "static": true,
                   "Transform": {
                     "position": [-21.64417, -0.001533508, 85.73294],
-                    "rotation": [44.91722, 175.2066, 79.36218],
+                    "rotation": [44.91721, 175.2066, 79.36218],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -70117,7 +70138,7 @@
               "static": true,
               "Transform": {
                 "position": [-19.81417, -0.001533508, 93.78294],
-                "rotation": [44.91721, 175.2066, 79.36217],
+                "rotation": [44.91722, 175.2066, 79.36218],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -70127,7 +70148,7 @@
                   "static": true,
                   "Transform": {
                     "position": [-19.81417, -0.001533508, 93.78294],
-                    "rotation": [44.91721, 175.2066, 79.36218],
+                    "rotation": [44.91722, 175.2066, 79.36218],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -71239,7 +71260,7 @@
               "static": true,
               "Transform": {
                 "position": [-18.49078, -0.001533508, 94.76703],
-                "rotation": [44.91722, 242.8064, 79.36219],
+                "rotation": [44.91722, 242.8064, 79.36218],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -72265,7 +72286,7 @@
               "static": true,
               "Transform": {
                 "position": [-15.10108, -0.001533508, 88.03542],
-                "rotation": [44.91721, 254.2224, 79.36218],
+                "rotation": [44.91721, 254.2224, 79.3622],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -72275,7 +72296,7 @@
                   "static": true,
                   "Transform": {
                     "position": [-15.10108, -0.001533508, 88.03542],
-                    "rotation": [44.91722, 254.2224, 79.36219],
+                    "rotation": [44.91721, 254.2224, 79.3622],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -73291,7 +73312,7 @@
               "static": true,
               "Transform": {
                 "position": [-13.78757, -0.001533508, 76.54446],
-                "rotation": [44.91721, 188.9936, 79.36219],
+                "rotation": [44.91721, 188.9936, 79.36218],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -74317,7 +74338,7 @@
               "static": true,
               "Transform": {
                 "position": [-1.697056, -0.001533508, 64.95773],
-                "rotation": [44.9172, 99.97325, 79.36217],
+                "rotation": [44.91721, 99.97325, 79.36219],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -74327,7 +74348,7 @@
                   "static": true,
                   "Transform": {
                     "position": [-1.697056, -0.001533508, 64.95773],
-                    "rotation": [44.9172, 99.97326, 79.36219],
+                    "rotation": [44.91722, 99.97326, 79.36219],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -75343,7 +75364,7 @@
               "static": true,
               "Transform": {
                 "position": [3.702984, -0.001533508, 66.532],
-                "rotation": [44.91722, 11.56194, 79.36218],
+                "rotation": [44.91721, 11.56194, 79.36217],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -76369,7 +76390,7 @@
               "static": true,
               "Transform": {
                 "position": [17.61298, -0.001533508, 85.892],
-                "rotation": [44.91721, 11.56194, 79.36217],
+                "rotation": [44.91722, 11.56194, 79.36218],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -77395,7 +77416,7 @@
               "static": true,
               "Transform": {
                 "position": [14.76611, -0.001533508, 101.4683],
-                "rotation": [44.91722, 276.0526, 79.36217],
+                "rotation": [44.91721, 276.0526, 79.36218],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -78421,7 +78442,7 @@
               "static": true,
               "Transform": {
                 "position": [12.0151, -0.001533508, 100.4274],
-                "rotation": [44.9172, 207.9424, 79.36218],
+                "rotation": [44.9172, 207.9424, 79.36217],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -78431,7 +78452,7 @@
                   "static": true,
                   "Transform": {
                     "position": [12.0151, -0.001533508, 100.4274],
-                    "rotation": [44.91722, 207.9424, 79.36218],
+                    "rotation": [44.91721, 207.9424, 79.36217],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -79457,7 +79478,7 @@
                   "static": true,
                   "Transform": {
                     "position": [-6.840782, -0.001533508, 95.86867],
-                    "rotation": [44.91722, 181.6901, 79.36219],
+                    "rotation": [44.91721, 181.6901, 79.36219],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -80483,7 +80504,7 @@
                   "static": true,
                   "Transform": {
                     "position": [-3.846365, -0.001533508, 99.60406],
-                    "rotation": [44.91721, 178.495, 79.36218],
+                    "rotation": [44.91722, 178.495, 79.36219],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -81499,7 +81520,7 @@
               "static": true,
               "Transform": {
                 "position": [2.174313, -0.001533508, 101.2857],
-                "rotation": [44.91721, 273.4745, 79.36218],
+                "rotation": [44.91721, 273.4745, 79.36219],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -81509,7 +81530,7 @@
                   "static": true,
                   "Transform": {
                     "position": [2.174313, -0.001533508, 101.2857],
-                    "rotation": [44.91722, 273.4745, 79.36219],
+                    "rotation": [44.91721, 273.4745, 79.36218],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -82525,7 +82546,7 @@
               "static": true,
               "Transform": {
                 "position": [-12.64601, -0.001533508, 43.96994],
-                "rotation": [44.91722, 10.56889, 79.36218],
+                "rotation": [44.91721, 10.5689, 79.36218],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -91775,7 +91796,7 @@
               "static": true,
               "Transform": {
                 "position": [25.26306, -0.001533508, 64.15115],
-                "rotation": [44.91721, 342.8919, 79.36218],
+                "rotation": [44.91722, 342.8919, 79.36218],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -91785,7 +91806,7 @@
                   "static": true,
                   "Transform": {
                     "position": [25.26306, -0.001533508, 64.15115],
-                    "rotation": [44.91721, 342.8919, 79.36219],
+                    "rotation": [44.91722, 342.8919, 79.36219],
                     "scaleFactor": 0.04
                   },
                   "MeshFilter": "Pot.3",
@@ -106315,7 +106336,7 @@
               "static": true,
               "Transform": {
                 "position": [17.20299, -0.001533508, 87.93964],
-                "rotation": [44.91721, 298.919, 79.36219],
+                "rotation": [44.91721, 298.919, 79.36218],
                 "scaleFactor": 1.2
               },
               "children": [
@@ -111633,7 +111654,7 @@
             "scaleFactor": 1
           },
           "SkinnedMeshRenderer": {
-            "name": "Plane.001",
+            "name": "TribalPlane.001",
             "material": "TribalCharacter_Detail_diffuse"
           }
         },
