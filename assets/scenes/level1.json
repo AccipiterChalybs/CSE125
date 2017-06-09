@@ -81265,7 +81265,7 @@
                 "rotation": [270.0198, 0, 0],
                 "scaleFactor": 1.666667
               },
-              "MeshFilter": "Plane",
+              "MeshFilter": "ValleyPlane",
               "MeshRenderer": "carvedlimestoneground1_Base_Color"
             },
             {
