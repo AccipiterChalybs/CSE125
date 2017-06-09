@@ -8,6 +8,7 @@ const SING_SPEED = 0.8;
 const PLAYER_ACCELERATION = 4;
 const CHAR_NAME = "CAIN"; // CUZ I GOT 1 KEY and 0 bombs
 const COOLDOWN_SINGING = 0.1;   // In seconds
+const TIME_TO_RESPAWN = 3;
 
 const HATE_SING = 1;
 
@@ -22,25 +23,29 @@ const PlayerState = {
 
 // Requires a collider, sing
 class PlayerController extends Playerable{
-  constructor(){
+  constructor({injured}){
     super({singingCooldown: COOLDOWN_SINGING});
     this._looker = null;
-    this.checkpoint = null;
+    this.checkpoint = vec3.create();
     this.keys = 0;
-    this.injured = true;
+    this.injured = injured;
     this.forward = vec3.create(); vec3.set(this.forward, 0, 0, -1);
     this.cameraPos = vec3.create(); vec3.set(this.cameraPos, 0, 0, -1);
 
     this.state = new PlayerLogicState();
     this.state.status = 'default';
     this.state.moveSpeed = REGULAR_SPEED;
+
+    this._respawnTime = 0;
+    this._collider = null;
   }
 
   start(){
     super.start();
     this._looker = this.transform.gameObject.getComponent("Look");
     this.state.start(this.gameObject);
-    this.transform.gameObject.getComponent("Collider").setLayer(FILTER_PLAYER);
+    this._collider = this.transform.gameObject.getComponent("Collider");
+    this._collider.setLayer(FILTER_PLAYER);
     this.checkpoint = this.transform.getWorldPosition();
 
   }
@@ -53,13 +58,14 @@ class PlayerController extends Playerable{
   }
 
   updateComponent(){
-    if(this._currentState === PlayerState.dead){
+    if(this.getCurrentState() === PlayerState.dead){
       Debug.log('INSIDE DEAD');
-      this.transform.setWorldPosition(this.checkpoint);
-      this._currentState = PlayerState.default;
+      if(Time.time > this._respawnTime){
+        this.respawn();
+      }
       return;
     }
-    if(this._currentState === PlayerState.noControl)
+    if(this.getCurrentState() === PlayerState.noControl)
       return;
 
     // Add if loop to enable client side testing w/o server
@@ -157,7 +163,7 @@ class PlayerController extends Playerable{
   }
 
   takeDamage(){
-    if(this.injured === true){
+    if(this.injured === true && this.getCurrentState() !== PlayerState.dead){
       this.die();
       return;
     }
@@ -169,6 +175,16 @@ class PlayerController extends Playerable{
 
   die(){
     Debug.log("I die.");
+    this.setCurrentState(PlayerState.dead);
+    this._respawnTime = Time.time + TIME_TO_RESPAWN;
+  }
+
+  respawn(){
+    // Debug.log("respawned at ", this.checkpoint);
+    this.transform.setWorldPosition(this.checkpoint);
+    this._collider.body.position.set(this.checkpoint[0], this.checkpoint[1], this.checkpoint[2]);
+    this.setCurrentState(PlayerState.default);
+    this.injured = false;
   }
 
 
@@ -178,7 +194,6 @@ class PlayerController extends Playerable{
 
   setCurrentState(newState){
     this.state.status = newState;
-    return data;
   }
 
   serialize() {

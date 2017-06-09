@@ -133,6 +133,7 @@ class GameObject {
   }
 
   findComponents(type, componentList) {
+    // Debug.log(type,"Find Components");
     if (this.components[type] && this.components[type] !== null) {
       componentList.push(this.components[type]);
     }

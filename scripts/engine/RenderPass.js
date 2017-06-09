@@ -135,7 +135,7 @@ class ShadowPass extends ForwardPass
           caster.prepShadowMap(true);
           for (let f=0; f<6; ++f) {
             caster.bindShadowMap(f, true);
-            this._drawMeshes(true, ShadowPass.prototype.MODE_STATIC);
+            this._drawMeshes(true, ShadowPass.prototype.MODE_STATIC, true);
           }
         } else {
           //No baking needed
@@ -167,13 +167,13 @@ class ShadowPass extends ForwardPass
               caster.prepShadowMap(false);
               for (let f=0; f<6; ++f) {
                 caster.bindShadowMap(f, false);
-                this._drawMeshes(true, caster.getShadowMode());
+                this._drawMeshes(true, caster.getShadowMode(), false, caster.range);
               }
               Debug.Profiler.endTimer("PointShadow "+lightIndex, 3);
             } else {
               Debug.Profiler.startTimer("DirShadow "+lightIndex, 3);
               caster.bindShadowMap(0, false);
-              this._drawMeshes(false, ShadowPass.prototype.MODE_ALL);
+              this._drawMeshes(false, ShadowPass.prototype.MODE_ALL, false, caster.range);
               Debug.Profiler.endTimer("DirShadow "+lightIndex, 3);
             }
             lightIndex++;
@@ -181,7 +181,7 @@ class ShadowPass extends ForwardPass
       Debug.Profiler.endTimer("ShadowPass", 2);
     }
 
-    _drawMeshes(isPoint, mode) {
+    _drawMeshes(isPoint, mode, bake=false, range=5) {
       let animShader = (isPoint) ? Renderer.POINT_SHADOW_SHADER_ANIM : Renderer.SHADOW_SHADER_ANIM;
       let regShader = (isPoint) ? Renderer.POINT_SHADOW_SHADER : Renderer.SHADOW_SHADER;
       let forwardShader = (isPoint) ? Renderer.FORWARD_POINT_SHADOW_SHADER : Renderer.FORWARD_SHADOW_SHADER;
@@ -192,6 +192,11 @@ class ShadowPass extends ForwardPass
         if (mode === ShadowPass.prototype.MODE_STATIC && !mesh.gameObject.isStatic) {
           continue;
         }
+
+        if (isPoint && !bake && vec3.length(vec3.subtract(vec3.create(),
+            Renderer.FrustumCulling.camWorldPos,mesh.getSphereCenter()))> Math.min(range,PointLight.prototype.FAR_DEPTH)+mesh.getSphereRadius()) continue;
+        if (isPoint && !bake && (!Renderer.sphereInFrustum(mesh.getSphereCenter(), mesh.getSphereRadius()))) {continue;}
+
 
         let mat = mesh.material;
         let s = null;
@@ -251,7 +256,9 @@ class DeferredPrePass extends RenderPass
 
     let buffers = [GL.COLOR_ATTACHMENT0, GL.COLOR_ATTACHMENT1, GL.COLOR_ATTACHMENT2];
     this.buffers.bind(buffers);
+    Renderer.prepareMainFrustumCulling();
     for (let mesh of Renderer.renderBuffer.deferred) {
+      if (!Renderer.sphereInFrustum(mesh.getSphereCenter(), mesh.getSphereRadius())) {continue;}
       mesh.material.bind();
       mesh.draw();
     }

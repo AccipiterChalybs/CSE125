@@ -96,7 +96,9 @@ function toggleShadows(lightList, update, e) {
 function loadOptionsGraphics() {
   const graphics = $('#graphics');
   graphics.css('opacity', '1');
-  $('#graphics .slider').slider('enable');
+
+  // =========== point shadows ===============
+  const pointShadows = graphics.find('#point-shadows');
 
   const lightList = [];
   GameObject.prototype.SceneRoot.findComponents('Light', lightList);
@@ -105,23 +107,29 @@ function loadOptionsGraphics() {
   const onPointLightList =
     pointLightList.filter((l) => { return l.isShadowCaster; });
 
-
-  const countTxt = graphics.find('#count');
-  const toggleBtn = graphics.find('.toggle');
-  const slider = graphics.find('.slider');
+  const countTxt = pointShadows.find('#count');
+  const toggleBtn = pointShadows.find('.toggle');
+  const sliderDiv = pointShadows.find('.slider');
+  sliderDiv.slider('enable');
 
   countTxt[0].innerHTML = `${onPointLightList.length}/${lightList.length}`;
   toggleBtn[0].onclick =
     toggleShadows.bind(
       toggleBtn[0],
       pointLightList,
-      slider.slider.bind(slider, 'option', 'value') // current update function
+      sliderDiv.slider.bind(sliderDiv, 'option', 'value') // update function
     );
-  slider.slider('option', 'max', lightList.length);
-  slider.slider('option', 'value', onPointLightList.length);
-  slider.on('slidechange',
+  sliderDiv.slider('option', 'max', lightList.length);
+  sliderDiv.slider('option', 'value', onPointLightList.length);
+  sliderDiv.on('slidechange',
     handleSliderChange.bind(null, countTxt[0], pointLightList)
   );
+
+  // =========== gamma/exposure ===============
+  const gammaInp = graphics.find('#gamma input');
+  const exposureInp = graphics.find('#exposure input');
+  gammaInp[0].disabled = false;
+  exposureInp[0].disabled = false;
 }
 
 function handleSliderChange(helpEle, lightList, e, ui) {
@@ -138,15 +146,69 @@ function handleSliderChange(helpEle, lightList, e, ui) {
   }
 }
 
+function handleOninputSetter(setter, e) {
+  if (this.value.length > 3) {
+    this.value = this.value.slice(0, 3);
+  }
+
+  const valid = ['1','2','3','4','5','6','7','8','9','0','.','-'];
+  if (valid.indexOf(this.value[this.value.length - 1]) < 0) {
+    this.value = this.value.slice(0, this.value.length - 1);
+  }
+
+  if (parseFloat(this.value)) {
+    setter(this.value);
+  }
+}
+
+function startPickplayer() {
+  for (row of $('#pickplayer .modal-row')) {
+    const id = row.getAttribute('id');
+    row.children[0].onclick = (e) => {
+      const title = $('#pickplayer .modal-title');
+      title[0].innerHTML = `Player ${id}`;
+      title[0].classList.add('highlight');
+      PlayerTable.requestId = parseInt(id);
+      window.setTimeout(
+        () => {
+          $('#pickplayer').modal('hide');
+          title[0].classList.remove('highlight');
+        },
+        700
+      );
+    };
+  }
+}
+
 function startOptionsGraphics() {
   $('#graphics .slider').slider();
   $('#graphics .slider').slider('disable');
   const countEle = $('#graphics .help#count')[0];
   countEle.innerHTML = '0/0';
+
+  const gammaInp = $('#graphics #gamma input');
+  gammaInp[0].oninput =
+    handleOninputSetter.bind(gammaInp[0], Renderer.setGamma);
+  gammaInp[0].onclick = (e) => { e.stopPropagation(); };
+
+  const exposureInp = $('#graphics #exposure input');
+  exposureInp[0].oninput =
+    handleOninputSetter.bind(exposureInp[0], Renderer.setExposure);
+  exposureInp[0].onclick = (e) => { e.stopPropagation(); };
+
+  gammaInp[0].disabled = true;
+  exposureInp[0].disabled = true;
+}
+
+function startOptionsControls() {
+  loadOptionsControls();
 }
 
 function openOptionsModal() {
   $('#options').modal('show');
+  Debug.clientUpdate ?
+    $('#options #cu-msg').show() : $('#options #cu-msg').hide();
+  loadOptionsControls();
   loadOptionsGraphics();
 }
 
@@ -158,6 +220,9 @@ function menuStart() {
   if(Debug.autoStart){
       startGame();
   }
-  loadOptionsControls();
+  Debug.clientUpdate ?
+    $('#options #cu-msg').show() : $('#options #cu-msg').hide();
+  startOptionsControls();
   startOptionsGraphics();
+  startPickplayer();
 }

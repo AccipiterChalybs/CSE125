@@ -20,6 +20,7 @@ const AudioEngine={
         GameEngine.completeLoading(loadId);
     },
     init: function () {
+        this.soundArr = [];
         this.loadAudio('assets/audio/SoundList.json');
     },
     playSound2d: function (sound, volume=1) {

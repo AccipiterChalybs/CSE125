@@ -164,6 +164,7 @@ class ClothMesh extends Mesh {
     let meshData = {};
     meshData.vaoHandle = this.vao;
     meshData.indexSize = indices.length;
+    meshData.sphere = {center: vec3.create(), radius: this.sizeX};
 
     Mesh.prototype.meshMap[this.name] = meshData;
   }
