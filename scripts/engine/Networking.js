@@ -25,7 +25,7 @@ Networking.listeners = {
     // console.log(data.transformTree.c[1].c[58].p);
     //GameObject.prototype.SceneRoot.applySerializedData(data.transformTree);
     // Debug.log(data.gameObjectTree[36]);
-    if( GameEngine._started ) {
+    if(GameEngine._started) {
       for (let key in data.gameObjectTree) {
         if (key in GameObject.prototype.SerializeMap) {
           GameObject.prototype.SerializeMap[key].transform.applySerializedData(data.gameObjectTree[key]['Transform']);
@@ -34,11 +34,20 @@ Networking.listeners = {
       }
     }
     // PlayerTable.applySerialize(data.players);
-
   },
   client_get_playerId: (socket, data)=> {
+    console.log('network listen client_get_playerId');
     PlayerTable.currentPlayer = data.playerId;
   },
+  client_init: (socket, data) => {
+    console.log('network listen client_init');
+    Networking.socket.emit('request_playerId', { id: PlayerTable.requestId });
+  },
+  client_get_new_scene:(socket,data)=>{
+    Debug.log("Baby got back");
+    GameEngine.sceneFile = data.s;
+    GameEngine.restart();
+  }
 };
 
 Networking.init = function () {
@@ -47,14 +56,17 @@ Networking.init = function () {
 };
 
 Networking.update = function () {
-  let data = {};
-  data.h = Input.getAxis('horizontal');
-  data.v = Input.getAxis('vertical');
-  data.f = Renderer.camera.transform.getForward();
-  data.c = Renderer.camera.transform.getWorldPosition();
-  data.s = Input.getAxis('sing');
-  data.w = Input.getAxis('walk');
-  data.a = Input.getAxis('action');
-  Networking.socket.emit('server_input_data', data);
+  if(GameEngine._started) {
+
+    let data = {};
+    data.h = Input.getAxis('horizontal');
+    data.v = Input.getAxis('vertical');
+    data.f = Renderer.camera.transform.getForward();
+    data.c = Renderer.camera.transform.getWorldPosition();
+    data.s = Input.getAxis('sing');
+    data.w = Input.getAxis('walk');
+    data.a = Input.getAxis('action');
+    Networking.socket.emit('server_input_data', data);
+  }
 };
 

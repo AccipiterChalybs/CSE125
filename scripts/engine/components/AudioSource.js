@@ -8,19 +8,23 @@ const AudioState = {
 class AudioSource extends Component {
     constructor({audioName}) {
         super();
-        this.componentType = 'AudioSource';
+       this.componentType = 'AudioSource';
         this.state = AudioState.noSound;
         this.queue = [];
         this.sound3D = false;
         this.sound = null;
         if(!IS_SERVER) {
-          if (AudioEngine.soundArr[audioName].G_SSpace === 3) {
-            this.sound3D = true;
-            this.sound = AudioEngine.playSound3d(audioName);
+          if (AudioEngine.soundArr[audioName] === undefined) {
+            Debug.log(audioName + " is not in the SoundList.");
           } else {
-            this.sound = AudioEngine.playSound2d(audioName);
+            if (AudioEngine.soundArr[audioName].G_SSpace === 3) {
+              this.sound3D = true;
+              this.sound = AudioEngine.playSound3d(audioName);
+            } else {
+              this.sound = AudioEngine.playSound2d(audioName);
+            }
+            AudioEngine.stopAudio(this.sound[0], this.sound[1])
           }
-          AudioEngine.stopAudio(this.sound[0], this.sound[1])
         }
     }
 

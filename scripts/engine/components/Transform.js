@@ -16,7 +16,7 @@ class Transform extends Component
         this.cachedWorldPos = vec3.create();
         this.worldPosDirty = true;
         this.cachedWorldScale = vec3.create();
-        this.worldScaleDirty = null;
+        this.worldScaleDirty = false;
         this.cachedForwardVec = vec3.create();
         this.worldForwardDirty = true;
         this.serializeDirty = true;
@@ -157,16 +157,19 @@ class Transform extends Component
 
     getWorldScale()
     {
-        if(this.worldScaleDirty)
-        {
-            let scaleVector = vec3.create();
+           /* let scaleVector = vec3.create();
             let transformMatrix = this.getTransformMatrix();
             vec3.set(scaleVector, transformMatrix[0][0], transformMatrix[0][1], transformMatrix[0][2]);
             this.cachedWorldScale = vec3.length(scaleVector);
-            this.worldScaleDirty = false;
-        }
 
-        return this.cachedWorldScale;
+            this.worldScaleDirty = false;*/
+
+      //TODO should probably cache, but was having issues
+          if (this._parent && this._parent !== null) {
+            return vec3.multiply(this.cachedWorldScale, this._parent.getWorldScale(), this.getScale());
+          } else {
+            return this.getScale();
+          }
     }
 
     setWorldRotation(rotation) {

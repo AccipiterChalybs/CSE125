@@ -28,6 +28,7 @@ const JsonLoader = {
 
             getJSON(url,
                 function(err, data) {
+                    if (data === null) {console.error(func);Debug.assert(false);}
                     if (err !== null) alert("ERROR loading json: " + err);
                     else func(data);
                 });

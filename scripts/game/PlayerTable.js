@@ -1,5 +1,6 @@
 const PlayerTable = {
   currentPlayer: 0,
+  requestId: -1,
   players: [],
   hate: [],
   addPlayer: function (gameObject) {

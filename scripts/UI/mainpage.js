@@ -82,22 +82,14 @@ function loadOptionsControls() {
   }
 }
 
-function toggleShadows(lightList, e) {
+function toggleShadows(lightList, update, e) {
   e.stopPropagation();
   if (this.innerHTML === 'Off') {
     this.innerHTML = 'On';
-    for (let light of lightList) {
-      if (light) {
-        light.isShadowCaster = true;
-      }
-    }
+    update(lightList.length);
   } else {
     this.innerHTML = 'Off';
-    for (let light of lightList) {
-      if (light) {
-        light.isShadowCaster = false;
-      }
-    }
+    update(0);
   }
 }
 
@@ -105,20 +97,118 @@ function loadOptionsGraphics() {
   const graphics = $('#graphics');
   graphics.css('opacity', '1');
 
+  // =========== point shadows ===============
+  const pointShadows = graphics.find('#point-shadows');
+
   const lightList = [];
   GameObject.prototype.SceneRoot.findComponents('Light', lightList);
   const pointLightList =
-    lightList.map((l) => { return l instanceof PointLight; });
+    lightList.filter((l) => { return l instanceof PointLight; });
+  const onPointLightList =
+    pointLightList.filter((l) => { return l.isShadowCaster; });
 
-  const toggleBtn = graphics.find('.toggle');
-  toggleBtn[0].onclick = toggleShadows.bind(toggleBtn[0], pointLightList);
+  const countTxt = pointShadows.find('#count');
+  const toggleBtn = pointShadows.find('.toggle');
+  const sliderDiv = pointShadows.find('.slider');
+  sliderDiv.slider('enable');
 
-  const slider = graphics.find('.slider');
-  slider[0].innerHTML = `${lightList.length}`;
+  countTxt[0].innerHTML = `${onPointLightList.length}/${lightList.length}`;
+  toggleBtn[0].onclick =
+    toggleShadows.bind(
+      toggleBtn[0],
+      pointLightList,
+      sliderDiv.slider.bind(sliderDiv, 'option', 'value') // update function
+    );
+  sliderDiv.slider('option', 'max', lightList.length);
+  sliderDiv.slider('option', 'value', onPointLightList.length);
+  sliderDiv.on('slidechange',
+    handleSliderChange.bind(null, countTxt[0], pointLightList)
+  );
+
+  // =========== gamma/exposure ===============
+  const gammaInp = graphics.find('#gamma input');
+  const exposureInp = graphics.find('#exposure input');
+  gammaInp[0].disabled = false;
+  exposureInp[0].disabled = false;
+}
+
+function handleSliderChange(helpEle, lightList, e, ui) {
+  const s = helpEle.innerHTML;
+  const max = s.slice(s.search('/') + 1);
+  helpEle.innerHTML = `${ui.value}/${max}`;
+
+  let c = 0;
+  for (let light of lightList) {
+    if (light) {
+      light.isShadowCaster = c < ui.value;
+      c += 1;
+    }
+  }
+}
+
+function handleOninputSetter(setter, e) {
+  if (this.value.length > 3) {
+    this.value = this.value.slice(0, 3);
+  }
+
+  const valid = ['1','2','3','4','5','6','7','8','9','0','.','-'];
+  if (valid.indexOf(this.value[this.value.length - 1]) < 0) {
+    this.value = this.value.slice(0, this.value.length - 1);
+  }
+
+  if (parseFloat(this.value)) {
+    setter(this.value);
+  }
+}
+
+function startPickplayer() {
+  for (row of $('#pickplayer .modal-row')) {
+    const id = row.getAttribute('id');
+    row.children[0].onclick = (e) => {
+      const title = $('#pickplayer .modal-title');
+      title[0].innerHTML = `Player ${id}`;
+      title[0].classList.add('highlight');
+      PlayerTable.requestId = parseInt(id);
+      window.setTimeout(
+        () => {
+          $('#pickplayer').modal('hide');
+          title[0].classList.remove('highlight');
+        },
+        700
+      );
+    };
+  }
+}
+
+function startOptionsGraphics() {
+  $('#graphics .slider').slider();
+  $('#graphics .slider').slider('disable');
+  const countEle = $('#graphics .help#count')[0];
+  countEle.innerHTML = '0/0';
+
+  const gammaInp = $('#graphics #gamma input');
+  gammaInp[0].oninput =
+    handleOninputSetter.bind(gammaInp[0], Renderer.setGamma);
+  gammaInp[0].onclick = (e) => { e.stopPropagation(); };
+
+  const exposureInp = $('#graphics #exposure input');
+  exposureInp[0].oninput =
+    handleOninputSetter.bind(exposureInp[0], Renderer.setExposure);
+  exposureInp[0].onclick = (e) => { e.stopPropagation(); };
+
+  gammaInp[0].disabled = true;
+  exposureInp[0].disabled = true;
+}
+
+function startOptionsControls() {
+  loadOptionsControls();
 }
 
 function openOptionsModal() {
   $('#options').modal('show');
+  Debug.clientUpdate ?
+    $('#options #cu-msg').show() : $('#options #cu-msg').hide();
+  loadOptionsControls();
   loadOptionsGraphics();
 }
 
@@ -130,5 +220,9 @@ function menuStart() {
   if(Debug.autoStart){
       startGame();
   }
-  loadOptionsControls();
+  Debug.clientUpdate ?
+    $('#options #cu-msg').show() : $('#options #cu-msg').hide();
+  startOptionsControls();
+  startOptionsGraphics();
+  startPickplayer();
 }

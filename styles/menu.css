@@ -46,10 +46,11 @@
 .modal-body {
   padding: 30px;
   display: flex;
+  flex-direction: column;
 }
 
-.modal-body .half-panel {
-  width: 50%;
+.modal-body .frame {
+  width: 80%;
 }
 
 .modal-body h2 {
@@ -63,6 +64,10 @@
   justify-content: flex-start;
 }
 
+.modal-row.center{
+  justify-content: center;
+}
+
 .modal-row .text {
   height: 100%;
   display: inline-block;
@@ -70,9 +75,17 @@
   width: 120px;
 }
 
+.modal-row .slider {
+  margin-top: 4px;
+  display: inline-block;
+  text-align: right;
+  width: 120px;
+}
+
+
 .modal-row .text::after {
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
 /*  content: "|";*/
   content: "";
 }
@@ -85,10 +98,6 @@
   opacity: .7;
 }
 
-.modal-row .btn + .btn {
-  margin-left: 20px;
-}
-
 .modal-row .btn:active,
 .modal-row .btn:focus,
 .modal-row .btn.focus {
@@ -97,8 +106,23 @@
   outline: 0;
 }
 
+.modal-row input.number {
+  width: 50px;
+  background-color: white;
+  color: black;
+}
+
+.modal-row div + div {
+  margin-right: 10px;
+}
+
+.help {
+  display: inline;
+}
+
 .lose-screen {
   height: 60vh;
+  width: 100%;
 }
 
 .lose-screen .lose-text {
@@ -124,4 +148,26 @@
 
 #graphics {
   opacity: .3;
+}
+
+#cu-msg {
+  color: darkred;
+}
+
+#pickplayer .modal-row {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+@keyframes highlight {
+  0% {
+    text-shadow: 0 0 20px #ffff99; /* lovely yellow colour */
+  }
+  100% {
+    text-shadow: 0 0 1px #ffff99;
+  }
+}
+
+.highlight {
+  animation: highlight 1s;
 }

@@ -112,11 +112,14 @@ class Mesh extends Component {
             }
         }
 
+        let vertList = [];
 
         for (let i = 0; i < mesh.vertices.length/3; ++i) {
             for (let p = 0; p < Mesh.prototype.POSITION_COUNT; ++p) {
                 megaArray.push(mesh.vertices[i*3 + p]);
             }
+            vertList.push(vec3.fromValues(mesh.vertices[i*3],
+              mesh.vertices[i*3+1],mesh.vertices[i*3+2]));
             for (let p = 0; p < Mesh.prototype.NORMAL_COUNT; ++p) {
                 megaArray.push(mesh.normals[i*3 + p]);
             }
@@ -213,7 +216,42 @@ class Mesh extends Component {
         meshData.vaoHandle = vao;
         meshData.indexSize = indexArray.length;
 
+        Mesh.calculateBoundingSphere(vertList, meshData);
+
         Mesh.prototype.meshMap[name] = meshData;
+    }
+
+    getSphereCenter() {
+      let currentEntry = Mesh.prototype.meshMap[this.name];
+      if (!currentEntry) {return this.transform.getWorldPosition(); }
+      let center = vec3.transformMat4(vec3.create(), currentEntry.sphere.center, this.transform.getTransformMatrix());
+        return center;
+    }
+
+  getSphereRadius() {
+    let currentEntry = Mesh.prototype.meshMap[this.name];
+    if (!currentEntry) {console.log(this.name); return 0; }
+    let scale = this.transform.getWorldScale();
+    return currentEntry.sphere.radius * scale[0];
+  }
+
+    static calculateBoundingSphere(vertList, meshData) {
+        let rLength = 1.0/vertList.length;
+        let avgPos = vec3.create();
+        let tmp = vec3.create();
+        for (let vert of vertList) {
+            vec3.add(avgPos, avgPos, vec3.scale(tmp, vert, rLength));
+        }
+
+        let bestDistance = 0.0;
+        for (let vert of vertList) {
+            let distance = vec3.distance(avgPos, vert)
+            if (distance > bestDistance) {
+                bestDistance = distance;
+            }
+        }
+
+        meshData.sphere = {center: avgPos, radius: bestDistance};
     }
 }
 

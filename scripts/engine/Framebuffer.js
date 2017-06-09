@@ -163,6 +163,7 @@ class Framebuffer {
         let type = -1;
         let isHDR = false;
         switch (this.colorFormats[index]) {
+          case GL.RGB:
           case GL.RGBA8:
           case GL.RGBA:
               type = GL.UNSIGNED_BYTE;
@@ -181,7 +182,6 @@ class Framebuffer {
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_WRAP_S, GL.CLAMP_TO_EDGE);
         GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_WRAP_T, GL.CLAMP_TO_EDGE);
 
-        //TODO make sure the addition works ok with the extension
         GL.framebufferTexture2D(GL.FRAMEBUFFER, GL.COLOR_ATTACHMENT0 + index, GL.TEXTURE_2D, this.colorTex[index], 0 );
 
 
