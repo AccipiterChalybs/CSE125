@@ -349,12 +349,17 @@ GameEngine.restart = function () {
     Input.init();
     AudioEngine.init();
 
+
   }
 
   //glCanvas.getContext("webgl") || glCanvas.getContext("experimental-webgl");
 
   GameEngine.init();
   if(!IS_SERVER) {
+
+    if(!Debug.clientUpdate){
+      Networking.registerListeners(Networking.socket, Networking.serverListener);
+    }
 
     if(glCanvas && glCanvas!==null) initRenderer(glCanvas);
   }

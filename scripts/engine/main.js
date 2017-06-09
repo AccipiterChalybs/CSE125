@@ -21,6 +21,10 @@ function initialize() {
   if (!Debug.clientUpdate)
   {
     Networking.init();
+    if(!Debug.clientUpdate){
+      Networking.registerListeners(Networking.socket, Networking.serverListener);
+    }
+
   }
 
   initRenderer(glCanvas);

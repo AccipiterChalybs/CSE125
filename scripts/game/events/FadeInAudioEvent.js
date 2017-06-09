@@ -18,6 +18,9 @@ class FadeInAudioEvent extends TriggerEvent{
     this._startVolume = 0;
     this._endTime = 0;
     this._triggerClient=false;
+
+    this.serializeDirty=true;
+    this.state = TriggerEventState.rest;
   }
 
   start() {
@@ -36,6 +39,16 @@ class FadeInAudioEvent extends TriggerEvent{
   }
 
   updateComponent(){
+    switch (this.state){
+      case TriggerEventState.trigger:
+        this._triggerClient=true;
+        this.setState(TriggerEventState.untrigger);
+        break;
+      case TriggerEventState.untrigger:
+        this._triggerClient=false;
+        this.setState(TriggerEventState.rest);
+        break;
+    }
   }
 
   updateComponentClient(){
@@ -70,10 +83,13 @@ class FadeInAudioEvent extends TriggerEvent{
   }
 
   serialize(){
-    let data = {};
-    data.t = this._triggerClient;
-    this._triggerClient = false;
-    return data;
+    if(this.serializeDirty) {
+      let data = {};
+      data.t = this._triggerClient;
+      this.serializeDirty = false;
+      return data;
+    }
+    return null;
 
   }
 
@@ -81,5 +97,10 @@ class FadeInAudioEvent extends TriggerEvent{
     if(!!data.t){
       this.triggeredClient();
     }
+  }
+
+  setState(state){
+    this.state = state;
+    this.serializeDirty = true;
   }
 }

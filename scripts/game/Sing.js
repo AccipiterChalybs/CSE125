@@ -21,10 +21,11 @@ class Sing extends Component{
     this._pointLight = null;
     this._lightIndex = params.light;
     this._audioSrc = null;
+    this.serializeDirty=true;
   }
 
   start(){
-    this.gameObject.addComponentToSerializeableList(this);
+    // this.gameObject.addComponentToSerializeableList(this);
     this._audioSrc = this.transform.gameObject.getComponent('AudioSource');
     this._pointLight = GameObject.prototype.SerializeMap[this._lightIndex].getComponent("Light");
     if(this._pointLight && this._pointLight !== null) {
@@ -34,7 +35,7 @@ class Sing extends Component{
   }
 
   startClient() {
-    this.gameObject.addComponentToSerializeableList(this);
+    // this.gameObject.addComponentToSerializeableList(this);
   }
 
   updateComponent(){
@@ -63,7 +64,7 @@ class Sing extends Component{
   sing(){
     // Debug.log("singing with range: ", this.range);
     this._singing = 1;
-
+    this.serializeDirty =true;
 
 
     let hitColliders = PhysicsEngine.overlapSphere(this.transform.getWorldPosition(), this.range);
@@ -81,12 +82,15 @@ class Sing extends Component{
   }
 
   serialize() {
-    let data = {};
-    data.s = this._singing;
-    return data;
+    // if(this.serializeDirty) {
+    //   let data = {};
+    //   data.s = this._singing;
+    //   return data;
+    // }
+    // return null;
   }
 
   applySerializedData(data) {
-    this._singing = data.s;
+    // this._singing = data.s;
   }
 }
