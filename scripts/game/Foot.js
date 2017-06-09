@@ -26,6 +26,7 @@ class Foot extends Component {
         this.footstep(result.collider, distance);
       }
     }
+
   }
 
   footstep(otherCollider, distance) {
@@ -51,6 +52,13 @@ class Foot extends Component {
       footstepDecal.transform.rotateY(yAngle + Math.PI / 2);
       footstepDecal.transform.rotateX(-Math.PI / 2);
       GameObject.prototype.SceneRoot.addChild(footstepDecal);
+    }else if(surfaceType === 'hard'){
+      let dustParticle = PrefabFactory.makeDustParticleSystem(true,5);
+      let floorPos = vec3.fromValues(0, -distance, 0);
+      vec3.add(floorPos, this.transform.getWorldPosition(), floorPos);
+      dustParticle.transform.setPosition(floorPos);
+      GameObject.prototype.SceneRoot.addChild(dustParticle);
+
     }
   }
 

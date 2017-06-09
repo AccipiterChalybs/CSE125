@@ -8,6 +8,9 @@ uniform mat4 uM_Matrix;
 uniform mat4 uV_Matrix;
 uniform mat4 uP_Matrix;
 
+uniform vec3 minPos;
+uniform vec3 maxPos;
+
 // Updates differently per version
 uniform vec3 emitterPos;
 uniform vec3 emitterVelocity;
@@ -57,7 +60,8 @@ void main()
 	texCoord.y = float(int(corner > 1u));
 	
 	// Init
-	pos = vec4(emitterPos, 1.0);
+	vec3 offset = range(minPos, maxPos);
+	pos = vec4(emitterPos + offset, 1.0);
 	t = mod(elapsedTime, duration);
 
 

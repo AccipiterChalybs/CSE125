@@ -6,7 +6,8 @@ class ParticleSystem extends Component {
   constructor({additive = false, texture = Texture.makeColorTex(vec4.fromValues(1,1,1,1)),
     number = 1000, duration = [0.5, 2.5], velocity = [[-1,0,-1],[1,2,1]], gravity = -1,
     startSize = [0.064, 0.128], endSize = [0.016, 0.032],
-    startColor = [[25,0,0,0.5],[25,25,1,0.5]], endColor = [[0,0,0,0],[0,0,0,0]]}) {
+    startColor = [[25,0,0,0.5],[25,25,1,0.5]], endColor = [[0,0,0,0],[0,0,0,0]],
+              startPos = [[0,0,0],[0,0,0]], uColor=[1,1,1,1]}) {
     super();
     this.componentType = "ParticleSystem";
 
@@ -22,6 +23,10 @@ class ParticleSystem extends Component {
     this.endSize =  endSize;
     this.startColor =  startColor;
     this.endColor =  endColor;
+
+    this.startPos = startPos;
+
+    this.uColor = uColor;
 
 
     this._meshData = {};
@@ -72,6 +77,10 @@ class ParticleSystem extends Component {
     Renderer.currentShader.setUniform("maxStartSize", this.startSize[1], UniformTypes.u1f);
     Renderer.currentShader.setUniform("minEndSize", this.endSize[0], UniformTypes.u1f);
     Renderer.currentShader.setUniform("maxEndSize", this.endSize[1], UniformTypes.u1f);
+    Renderer.currentShader.setUniform("minPos", this.startPos[0], UniformTypes.vec3);
+    Renderer.currentShader.setUniform("maxPos", this.startPos[1], UniformTypes.vec3);
+
+    Renderer.currentShader.setUniform("uColor", this.uColor, UniformTypes.vec4);
   }
 
   _genParticles() {
