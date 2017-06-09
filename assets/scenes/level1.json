@@ -83395,6 +83395,9 @@
       "name": "GiantFloor",
       "index": "5364",
       "static": true,
+	  "Floor":{
+		"surfaceType":"soft"  
+	  },
       "Transform": {
         "position": [55.4, 0, 19.7],
         "rotation": [270.0198, 0, 0],
@@ -83411,7 +83414,7 @@
             "scaleFactor": 0.02
           },
           "MeshFilter": "Ground",
-          "MeshRenderer": "spaced-tiles1-albedo"
+          "MeshRenderer": "Dry_Dirt"
         },
         {
           "name": "Collider",
