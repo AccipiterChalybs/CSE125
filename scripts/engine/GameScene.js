@@ -74,7 +74,7 @@ class GameScene {
     let pos = vec3.create(); vec3.set(pos, 40, -1, 7);
     let color = vec4.create(); vec4.set(color, 1, 0, 0, 1);
     let evilTeapot = Debug.drawTeapot(pos, color);
-    evilTeapot.addComponent(new EvilController());
+    //evilTeapot.addComponent(new EvilController());
 
     GameObject.prototype.SceneRoot.findComponents('Listenable', PhysicsEngine.sphereChecks);
 

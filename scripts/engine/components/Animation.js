@@ -27,8 +27,9 @@ class Animation extends Component
       for (let i=0; i<Animation.prototype._animData[this.animationName].length; ++i) {
         this._currentTime[i] = 0;
         this._lastTime[i] = 0;
-        this._playing[i] = false;
-        this._looping[i] = false;
+        //TODO alternative way to initialize? Can't do it here - may clobber other changes
+        //this._playing[i] = false;
+        //this._looping[i] = false;
         this._animWeight[i] = 0;
       }
 
@@ -158,7 +159,6 @@ class Animation extends Component
           if (this._animWeight[i] < 0) this._animWeight[i] = 0;
         }
 
-
         if (this._animWeight[i] > 0) {
           this.updateAnim(i, Time.deltaTime);
         }
@@ -243,19 +243,23 @@ class Animation extends Component
 
     getAnimData(node, index) {
       let currentAnim = Animation.prototype._animData[this.animationName][index];
+
+      let rescale = node.name==='metarig';
+      let rescale2 = this.animationName==='MonsterAnim' && node.name === 'metarig';
+
       if (this.isRoot(node)) {
         let motion = vec3.create();
         let newPosition = null;
         if (this._lastTime[index] > this._currentTime[index]) {
-          let lastPosition = Animation._interpolateKeyframes(node.keyframes.position, this._lastTime[index], node.name==='metarig');
-          newPosition = Animation._interpolateKeyframes(node.keyframes.position, currentAnim.animationTime-0.1, node.name==='metarig');
+          let lastPosition = Animation._interpolateKeyframes(node.keyframes.position, this._lastTime[index], rescale, rescale2);
+          newPosition = Animation._interpolateKeyframes(node.keyframes.position, currentAnim.animationTime-0.1, rescale, rescale2);
           vec3.subtract(motion, newPosition, lastPosition);
-          lastPosition = Animation._interpolateKeyframes(node.keyframes.position, 0, node.name==='metarig');
-          newPosition = Animation._interpolateKeyframes(node.keyframes.position, this._currentTime[index], node.name==='metarig');
+          lastPosition = Animation._interpolateKeyframes(node.keyframes.position, 0, rescale, rescale2);
+          newPosition = Animation._interpolateKeyframes(node.keyframes.position, this._currentTime[index], rescale, rescale2);
           vec3.add(motion, motion, vec3.subtract(vec3.create(), newPosition, lastPosition));
         } else {
-          let lastPosition = Animation._interpolateKeyframes(node.keyframes.position, this._lastTime[index], node.name==='metarig');
-          newPosition = Animation._interpolateKeyframes(node.keyframes.position, this._currentTime[index], node.name==='metarig');
+          let lastPosition = Animation._interpolateKeyframes(node.keyframes.position, this._lastTime[index], rescale, rescale2);
+          newPosition = Animation._interpolateKeyframes(node.keyframes.position, this._currentTime[index], rescale, rescale2);
           vec3.subtract(motion, newPosition, lastPosition);
         }
         for (let rootAxis=0; rootAxis<3; ++rootAxis) {
@@ -271,7 +275,7 @@ class Animation extends Component
                 Animation._interpolateQuaternions(node.keyframes.rotation, this._currentTime[index]),
                 motion];
       } else {
-        return [Animation._interpolateKeyframes(node.keyframes.position, this._currentTime[index], node.name==='metarig'),
+        return [Animation._interpolateKeyframes(node.keyframes.position, this._currentTime[index], rescale),
                 Animation._interpolateQuaternions(node.keyframes.rotation, this._currentTime[index])];
       }
     }
@@ -286,7 +290,7 @@ class Animation extends Component
 
 
     //data = pair(float, vec3)[]
-    static _interpolateKeyframes(data, time, rescale) {
+    static _interpolateKeyframes(data, time, rescale, rescale2 = false) {
         let positionIndex = 0;
         let numPositions = data.length;
         let currentPosition = vec3.create();
@@ -308,6 +312,10 @@ class Animation extends Component
         if (rescale) {
           vec3.scale(currentPosition, currentPosition, 0.01);
         }
+
+      if (rescale2) {
+        vec3.scale(currentPosition, currentPosition, 0.0064);
+      }
 
         return currentPosition;
     }

@@ -14,7 +14,7 @@ class MoveToPoint extends BehaviorTreeLeaf{
   updateNode(){
     let currPos = this.ai.transform.getPosition();
     let newPos = Utility.vec3.moveTowards(currPos, this.destination, Time.deltaTime * this.moveSpeed);
-    this.ai.transform.setPosition(newPos);
+    this.ai.transform.getComponent('EvilController').moveToPosition(newPos);
 
     // console.log(this.ai);
     // console.log("currPos: ", currPos);

@@ -34,10 +34,28 @@ class EvilController extends AIController{
 
   start() {
     super.start();
+    this.gameObject.getComponent('Animation').play(3, true);
+    //this.moveToPosition(vec3.fromValues(0, 0, 0));
+    this.yRotate = 0;
   }
 
   updateComponent() {
+    this.transform.setRotation(quat.create());
+    this.transform.rotateY(this.yRotate);
     super.updateComponent();
+  }
+
+  moveToPosition(position) {
+    //this.transform.setPosition(position);
+
+    let delta = vec3.sub(vec3.create(), position, this.transform.getPosition());
+
+    this.transform.setRotation(quat.create());
+    this.yRotate = Math.atan2(delta[2], delta[0]) + Math.PI/2;
+    this.transform.rotateY(this.yRotate);
+    console.log(this.yRotate);
+
+    //this.transform.translate(delta);
   }
 
   _buildBehaviorTree() {

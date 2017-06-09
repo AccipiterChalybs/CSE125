@@ -81,6 +81,8 @@ class PlayerController extends Component {
       this._colliders[i].setFreezeRotation(true);
     }
 
+    this._collider = this._colliders[0];
+
     // game state
     this.checkpoint = this.transform.getWorldPosition();
 
