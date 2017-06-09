@@ -317,7 +317,7 @@ class AnimationState {
 
     static slideDataConstruct(parentGraph, neighbors) {
     const animationIndex = 7;
-    const mame = 'slide';
+    const name = 'slide';
     const isSatisfied = (objState) => {
       // expects on trigger
     };
@@ -388,7 +388,7 @@ class AnimationState {
 
     const data = {
       parentGraph,
-      name,
+      stateName,
       animationIndex,
       neighbors,
       isSatisfied,
