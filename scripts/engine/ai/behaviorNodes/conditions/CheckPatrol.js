@@ -9,9 +9,11 @@ class CheckPatrol extends BehaviorTreeLeaf{
     updateNode(){
         if(this.ai.data["patrol"]===true){
             this._currentState=BehaviorState.success;
+            //console.log("welcome to the patrol")
         }
         else{
             this._currentState=BehaviorState.failure;
+            //console.log("fuck");
         }
         return this._currentState;
     }

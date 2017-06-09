@@ -26,6 +26,7 @@ class RayCastPlayer extends BehaviorTreeLeaf{
             //console.log("hello world");
             this._currentState=BehaviorState.failure;
             //this.ai.data['destination'] = null;
+            //console.log("Not Found");
         }
         else {
             this._currentState = BehaviorState.success

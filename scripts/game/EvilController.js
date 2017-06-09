@@ -89,9 +89,11 @@ class EvilController extends AIController{
       let patrol = new ConcurrentSelector("Patrol The Mojave Wasteland");
       let origin = vec3.create(); vec3.set(origin, 36, 0, -27);
       patrol.addNode(new CheckPatrol(this));
-      patrol.addNode(new MoveToPoint(this, origin,EVIL_MOVEMENTSPEED/5));
+      patrol.addNode(new CountdownTimer(this,30));
+      patrol.addNode(new PickRandomPlayer(this));
+      patrol.addNode(new SetDestinationPlayer(this));
+      patrol.addNode(new MoveToDestination(this,EVIL_MOVEMENTSPEED/5));
       root.addNode(patrol);
-
       // let pickPlayer = new ConcurrentSelector('pickPlayer');
     // pickPlayer.addNode(new CountdownTimer(this, 5));
     // pickPlayer.addNode(new PickRandomPlayer(this));

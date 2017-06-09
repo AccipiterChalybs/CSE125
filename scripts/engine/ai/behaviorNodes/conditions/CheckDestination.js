@@ -9,7 +9,7 @@ class CheckDestination extends BehaviorTreeLeaf{
             let tempAI = this.ai;
             setTimeout(function () {
                 tempAI.data['patrol']=true;
-            },5000);
+            },3000);
         }
         else{
             this._currentState=BehaviorState.success;

@@ -11,10 +11,12 @@ class MoveToDestination extends BehaviorTreeLeaf{
   }
 
   updateNode(){
+    console.log(this.ai.data["destination"]);
     if(this.ai.data["destination"]!==null) {
         let currPos = this.ai.transform.getPosition();
         let newPos = Utility.vec3.moveTowards(currPos, this.ai.data["destination"], Time.deltaTime * this.moveSpeed);
         this.ai.transform.setPosition(newPos);
+        console.log("MAGA");
     }
     return this._currentState;
   }
