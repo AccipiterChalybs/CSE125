@@ -8,7 +8,7 @@ Networking.registerListeners = function (socket, listeners) {
 
     ((realMethod) => {
       socket.on(realMethod, (data) => {
-       // console.log(`RECEIVED ${realMethod}`);
+        // console.log(`RECEIVED ${realMethod}`);
         listeners[realMethod](socket, data);
       });
     })(method);
@@ -21,19 +21,42 @@ Networking.createClientSocket = function (namespace) {
 };
 
 Networking.listeners = {
+
+  client_get_playerId: (socket, data)=> {
+    console.log('network listen client_get_playerId');
+    PlayerTable.currentPlayer = data.playerId;
+  },
+
+  client_init: (socket, data) => {
+    console.log('network listen client_init');
+    Networking.socket.emit('request_playerId', { id: PlayerTable.requestId });
+  },
+
+  client_get_new_scene: (socket, data)=> {
+    Debug.log('Baby got back');
+    GameEngine.sceneFile = data.s;
+    GameEngine.restart();
+  },
+};
+
+Networking.serverListener = {
+
   client_updated_scene: (socket, data)=> {
     // console.log(data.transformTree.c[1].c[58].p);
     //GameObject.prototype.SceneRoot.applySerializedData(data.transformTree);
     // Debug.log(data.gameObjectTree[36]);
-    if(GameEngine._started) {
+
+    if(GameEngine._started && !Debug.clientUpdate) {
       for (let key in data.gameObjectTree) {
-        if (key in GameObject.prototype.SerializeMap) {
-          GameObject.prototype.SerializeMap[key].transform.applySerializedData(data.gameObjectTree[key]['Transform']);
-          GameObject.prototype.SerializeMap[key].applySerializedData(data.gameObjectTree[key]);
+        let gameobject = GameObject.prototype.SerializeMap[key];
+        if (gameobject && gameobject !== null) {
+          gameobject.transform.applySerializedData(data.gameObjectTree[key]['Transform']);
+          gameobject.applySerializedData(data.gameObjectTree[key]);
         }
       }
+      // Debug.log(Date.now()-t);
     }
-    // PlayerTable.applySerialize(data.players);
+
   },
   client_get_playerId: (socket, data)=> {
     console.log('network listen client_get_playerId');
@@ -49,6 +72,7 @@ Networking.listeners = {
   client_get_new_scene:(socket,data)=>{
     Debug.log("Baby got back");
     GameEngine.sceneFile = data.s;
+    Debug.clientUpdate = data.c;
     GameEngine.restart();
   }
 };
@@ -59,7 +83,7 @@ Networking.init = function () {
 };
 
 Networking.update = function () {
-  if(GameEngine._started) {
+  if (GameEngine._started) {
 
     let data = {};
     data.h = Input.getAxis('horizontal');
@@ -71,5 +95,10 @@ Networking.update = function () {
     data.a = Input.getAxis('action');
     Networking.socket.emit('server_input_data', data);
   }
+};
+
+Networking.informWin = function (sceneName) {
+  let data = {sceneName: sceneName};
+  Networking.socket.emit('win', data);
 };
 

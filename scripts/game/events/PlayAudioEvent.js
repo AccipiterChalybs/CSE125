@@ -1,6 +1,11 @@
 /**
  * Created by Stephen on 6/5/2017.
  */
+const TriggerEventState = {
+  trigger: 0,
+  untrigger: 1,
+  rest: 2,
+};
 
 class PlayAudioEvent extends TriggerEvent{
   constructor(params = {delay: 0, volume: 1, rate: 1}) {
@@ -13,6 +18,9 @@ class PlayAudioEvent extends TriggerEvent{
     this._rate = params.rate;
     this._audioSrc = null;
     this._triggerClient=false;
+
+    this.serializeDirty=true;
+    this.state = TriggerEventState.rest;
   }
 
   start() {
@@ -32,9 +40,18 @@ class PlayAudioEvent extends TriggerEvent{
     }
   }
 
-  updateComponent(){
+  updateComponent() {
+    switch (this.state){
+      case TriggerEventState.trigger:
+        this._triggerClient=true;
+        this.setState(TriggerEventState.untrigger);
+        break;
+      case TriggerEventState.untrigger:
+        this._triggerClient=false;
+        this.setState(TriggerEventState.rest);
+        break;
+    }
   }
-
   updateComponentClient(){
     if(this.activated && Time.time >= this._timeToStart ) {
       if(this._audioSrc && this._audioSrc !== null) {
@@ -50,6 +67,7 @@ class PlayAudioEvent extends TriggerEvent{
 
   triggered(){
     this._triggerClient=true;
+    this.serializeDirty = true;
     if(Debug.clientUpdate){
       this.triggeredClient();
     }
@@ -62,10 +80,13 @@ class PlayAudioEvent extends TriggerEvent{
   }
 
   serialize(){
-    let data = {};
-    data.t = this._triggerClient;
-    this._triggerClient = false;
-    return data;
+    if(this.serializeDirty) {
+      let data = {};
+      data.t = this._triggerClient;
+      this.serializeDirty = false;
+      return data;
+    }
+    return null;
 
   }
 
@@ -73,5 +94,10 @@ class PlayAudioEvent extends TriggerEvent{
     if(!!data.t){
       this.triggeredClient();
     }
+  }
+
+  setState(state){
+    this.state = state;
+    this.serializeDirty = true;
   }
 }

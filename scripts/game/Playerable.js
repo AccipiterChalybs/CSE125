@@ -74,5 +74,6 @@ class Playerable extends Component{
     this.action = data.a;
     this.singing = data.s;
     this._nextSingTime = data.st;
+
   }
 }
