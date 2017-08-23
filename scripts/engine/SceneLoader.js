@@ -156,7 +156,8 @@ const SceneLoader = {
         let isCloth = "ClothMesh" in currentNode;
         let meshName = (isCloth) ? "TEST" : currentNode["MeshFilter"] || currentNode["SkinnedMeshRenderer"].name;
         if (meshName === 'Plane' || meshName === 'Cube' || meshName === 'Sphere' || meshName === 'Capsule') {
-          console.log(meshName = 'SceneLoader');
+          console.log(nodeObject.name);
+          console.log(meshName = 'Cube');
         //  nodeObject.transform.scale(5);
           nodeObject.transform.rotateX(Math.PI/2);
         }

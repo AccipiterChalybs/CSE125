@@ -23,7 +23,6 @@ class Inverter extends BehaviorTreeNode{
         this._currentState = childState;
         break;
     }
-
     return this._currentState;
   }
 }

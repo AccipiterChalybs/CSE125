@@ -39,7 +39,7 @@ class AudioSource extends Component {
 
     updateComponentClient() {
         if (this.sound === null) {
-            console.error('no sound has been set on ', this.gameObject);
+            //console.error('no sound has been set');
             return;
         }
         if (this.sound3D) {
@@ -98,7 +98,7 @@ class AudioSource extends Component {
     //Sound Stuff
     playSound() {
         if (this.sound === null) {
-            console.error('no sound has been set');
+            //console.error('no sound has been set');
             return;
         }
         AudioEngine.resumeAudio(this.sound[0], this.sound[1]);
@@ -107,7 +107,7 @@ class AudioSource extends Component {
     // volume: 0 - 1
     changeVolume(volume) {
         if (this.sound === null) {
-            console.error('no sound has been set');
+            //console.error('no sound has been set');
             return;
         }
         AudioEngine.setVolume(this.sound[0], this.sound[1],volume);
